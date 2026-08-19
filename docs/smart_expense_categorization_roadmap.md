@@ -1,0 +1,330 @@
+# Smart Expense Categorization – AI/ML Roadmap and Technical Status
+
+## 1. Overview
+
+The Smart Expense Categorization workstream aims to automatically classify user expenses into appropriate categories using machine learning.
+
+The current work has progressed from planning and preprocessing requirements to a small baseline ML experiment, use-case documentation, and integration preparation.
+
+The current baseline approach uses TF-IDF text features with Logistic Regression.
+
+---
+
+## 2. Completed
+
+### Day 15 – Planning
+
+Completed the initial Smart Expense Categorization planning work.
+
+The planning work defined:
+
+- Expense-data preprocessing requirements.
+- Candidate input features.
+- A simple baseline-model approach.
+- Initial model input considerations.
+- Expected development requirements.
+
+**Documentation:**
+
+`docs/smart_expense_categorization_plan.md`
+
+---
+
+### Day 16 – AI Prototype / POC
+
+Implemented preprocessing and a small baseline experiment.
+
+**Implementation files:**
+
+- `src/expense_categorization/preprocessing.py`
+- `src/expense_categorization/baseline_experiment.py`
+
+The preprocessing component supports:
+
+- Expense description cleaning.
+- Lowercase normalization.
+- Whitespace normalization.
+- Merchant normalization.
+- Amount validation.
+- Duplicate handling.
+
+The baseline experiment uses:
+
+```text
+Expense Description + Merchant
+            |
+            v
+          TF-IDF
+            |
+            v
+  Logistic Regression
+            |
+            v
+   Predicted Category
+```
+Observed baseline accuracy: 80%
+
+The result is an initial proof-of-concept result only because the sample dataset is very small.
+
+### Day 17 – AI Use Case Documentation
+
+Documented the Smart Expense Categorization use case including:
+
+Problem statement.
+Proposed AI solution.
+Required input data.
+Processing/model approach.
+Expected output.
+HisabDo integration point.
+Testing and evaluation approach.
+Risks and limitations.
+
+Documentation:
+
+docs/smart_expense_categorization_use_case.md
+
+ ### Day 18 – Integration Preparation
+
+Prepared sample expense-category payloads and integration notes.
+
+Sample payload file:
+
+data/expense_category_sample_payloads.json
+
+Integration documentation:
+
+docs/smart_expense_integration_notes.md
+
+The sample payloads cover:
+
+Valid expense requests.
+Missing description.
+Negative amount.
+Missing merchant.
+Invalid amount type.
+
+The integration notes also document:
+
+Request structure.
+Expected response.
+Input validation rules.
+Error-handling considerations.
+Security/privacy requirements.
+Dependencies.
+Known blockers.
+## 3. In Progress
+
+The following work remains in progress:
+
+Integration of the baseline model with the prediction API.
+Validation of the final API request/response contract.
+Testing the model with a larger and more representative dataset.
+Evaluation of additional candidate input features.
+End-to-end integration testing with the HisabDo application.
+
+The current baseline is considered a prototype and not a production-ready model.
+
+## 4. Pending
+
+The following items are pending:
+
+Connect the preprocessing/model pipeline to the prediction API.
+Finalize the API request and response schema.
+Evaluate the model using a larger approved dataset.
+Improve model performance using additional relevant features if justified.
+Perform broader testing and error analysis.
+Complete application-level integration.
+Perform end-to-end testing.
+Confirm production-readiness requirements.
+## 5. Current Baseline Results
+
+The current baseline experiment achieved:
+
+Accuracy: 80%
+
+on the small sample test set.
+
+The classification report showed:
+
+Category	Precision	Recall	F1-score
+Entertainment	1.00	1.00	1.00
+Food	0.50	1.00	0.67
+Healthcare	1.00	0.50	0.67
+Transportation	1.00	1.00	1.00
+
+These results should not be treated as representative production performance because the dataset is intentionally small and used only for prototype validation.
+
+A larger and more representative dataset is required for meaningful model evaluation.
+
+## 6. Blockers
+GitHub Repository Access
+
+The feature branch was created locally and the Day 15–18 work has been committed locally.
+
+However, pushing the branch to the shared GitHub repository currently results in a permission error:
+
+403 Permission denied
+
+The repository access/permissions issue must be resolved before the branch can be pushed and a Pull Request can be opened.
+
+Dataset Availability
+
+A larger approved dataset is required for reliable model evaluation.
+
+Only safe synthetic/sample data should be used until an approved real dataset and privacy/storage approach are confirmed.
+
+API Integration
+
+The final prediction API contract and integration with the application are handled by the relevant API/integration owners and are still pending.
+
+## 7. Testing Status
+Completed
+Preprocessing component execution.
+Baseline model execution.
+Sample-data validation.
+Classification evaluation using accuracy, precision, recall, and F1-score.
+Basic input validation scenarios.
+Pending
+Testing with a larger dataset.
+Additional edge-case testing.
+API endpoint testing.
+End-to-end application integration testing.
+Production-level evaluation.
+## 8. Documentation Status
+
+Completed documentation includes:
+
+docs/smart_expense_categorization_plan.md
+docs/smart_expense_categorization_use_case.md
+docs/smart_expense_integration_notes.md
+docs/smart_expense_categorization_roadmap.md
+
+Implementation documentation and experiment evidence are linked to the corresponding source files.
+
+## 9. GitHub / PR Status
+
+The Smart Expense Categorization work is being developed on the feature branch:
+
+feature/joyce-smart-expense-plan
+
+Local commits completed so far include:
+
+Day 15 planning commit.
+Day 16 preprocessing/baseline commit.
+Day 17 use-case documentation commit.
+Day 18 integration preparation commit.
+
+The branch has not yet been successfully pushed to the shared repository because of the current GitHub permission/403 blocker.
+
+Once repository access is resolved:
+
+Push the feature branch.
+Verify all related commits and files.
+Open a Pull Request to main.
+Request Team Lead review.
+Address review comments if required.
+Merge only after approval.
+## 10. Next Steps Toward Day 30
+
+The planned next steps are:
+
+#### Step 1 – Resolve Repository Access
+
+Resolve the GitHub permission issue and push the feature branch.
+
+#### Step 2 – Complete API Integration
+
+Connect the preprocessing and baseline model to the prediction API.
+
+#### Step 3 – Improve Dataset
+
+Replace or extend the small prototype sample with a larger approved dataset.
+
+#### Step 4 – Improve Features
+
+Evaluate whether additional features such as:
+
+Amount
+Date/time
+Payment method
+Currency
+Merchant information
+
+improve classification performance.
+
+#### Step 5 – Evaluate the Model
+
+Run broader evaluation using:
+
+Accuracy
+Precision
+Recall
+F1-score
+Confusion matrix
+Edge-case analysis
+#### Step 6 – End-to-End Testing
+
+Validate the following flow:
+```
+HisabDo Application
+        |
+        v
+Backend/API
+        |
+        v
+Expense Categorization Service
+        |
+        v
+Preprocessing
+        |
+        v
+ML Model
+        |
+        v
+Validated Prediction
+        |
+        v
+HisabDo Application
+```
+#### Step 7 – Production Readiness
+
+Before production use, confirm:
+
+Approved dataset and privacy approach.
+Stable API contract.
+Input validation.
+Error handling.
+Model evaluation.
+Logging and monitoring requirements.
+Security requirements.
+Performance and latency requirements.
+## 11. Remaining Smart Expense Categorization Work
+
+The remaining work for the Smart Expense Categorization stream includes:
+
+Final API integration.
+Larger approved dataset preparation.
+Model evaluation on representative data.
+Feature improvement.
+Edge-case testing.
+End-to-end testing.
+Application integration.
+Production-readiness validation.
+
+The current preprocessing and baseline implementation provides the initial ML foundation for these next stages.
+
+## 12. Current Status Summary
+Area	Status
+Planning	Completed
+Preprocessing	Completed
+Baseline ML experiment	Completed
+Initial evaluation	Completed
+Use-case documentation	Completed
+Integration payload preparation	Completed
+API integration	Pending
+Larger dataset	Pending
+Advanced evaluation	Pending
+Application integration	Pending
+End-to-end testing	Pending
+GitHub push	Blocked by repository permissions
+Pull Request	Pending GitHub access
