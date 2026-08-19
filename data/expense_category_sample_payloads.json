@@ -1,0 +1,62 @@
+{
+  "valid_payloads": [
+    {
+      "expense_description": "Uber trip",
+      "merchant": "Uber",
+      "amount": 250.0,
+      "currency": "EGP",
+      "payment_method": "card"
+    },
+    {
+      "expense_description": "Pizza restaurant",
+      "merchant": "Pizza Hut",
+      "amount": 220.0,
+      "currency": "EGP",
+      "payment_method": "cash"
+    },
+    {
+      "expense_description": "Pharmacy medicine",
+      "merchant": "Local Pharmacy",
+      "amount": 300.0,
+      "currency": "EGP",
+      "payment_method": "card"
+    },
+    {
+      "expense_description": "Netflix monthly subscription",
+      "merchant": "Netflix",
+      "amount": 250.0,
+      "currency": "EGP",
+      "payment_method": "card"
+    }
+  ],
+  "validation_examples": [
+    {
+      "case": "Missing description",
+      "expense_description": "",
+      "merchant": "Uber",
+      "amount": 250.0,
+      "expected": "Reject or require valid expense description"
+    },
+    {
+      "case": "Negative amount",
+      "expense_description": "Uber trip",
+      "merchant": "Uber",
+      "amount": -100.0,
+      "expected": "Reject invalid amount"
+    },
+    {
+      "case": "Missing merchant",
+      "expense_description": "Pizza restaurant",
+      "merchant": "",
+      "amount": 220.0,
+      "expected": "Allow with description or apply validation rule"
+    },
+    {
+      "case": "Invalid amount type",
+      "expense_description": "Pharmacy medicine",
+      "merchant": "Local Pharmacy",
+      "amount": "invalid",
+      "expected": "Reject invalid amount"
+    }
+  ]
+}
