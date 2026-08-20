@@ -23,7 +23,6 @@ from ..financial_assistant import engine as engine_mod
 from ..financial_assistant import intents as intent_mod
 from ..financial_assistant import knowledge_base as kb
 from ..financial_assistant import llm as llm_mod
-from ..financial_assistant import transactions as tr
 from .schemas import (
     ChatRequest,
     ChatResponse,

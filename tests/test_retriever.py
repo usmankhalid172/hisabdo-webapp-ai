@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import datetime as dt
 import unittest
 
 from src.financial_assistant import knowledge_base as kb
