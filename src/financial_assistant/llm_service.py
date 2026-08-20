@@ -3,10 +3,10 @@
 HisabDo AI Financial Assistant — LLM request/response layer.
 
 Owner: Muhammad Hamza Nawaz
-Day: 15 (initial implementation) -> Day 20 (finalize validation, error
-handling, fallback behavior, and production-readiness notes)
+Day: 15 Initial LLM request/response validation and error-handling implementation
 
-Scope of this module (per Day 20 task description):
+
+Scope of this module:
     - Define the LLM request flow
     - Validate request inputs
     - Validate returned responses where applicable
