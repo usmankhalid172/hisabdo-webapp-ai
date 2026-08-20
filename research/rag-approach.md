@@ -1,6 +1,6 @@
 # RAG Approach — AI Financial Assistant
 
-**Branch:** `feature/ai-financial-assistant-chatbot`
+**Branch:** `feature/ahmedali-ghori-ai-chatbot`
 **Aligned with:** `feature/farheen-fatima-rag-ml-research-day15` (team RAG research).
 
 ---

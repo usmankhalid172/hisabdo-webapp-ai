@@ -1,6 +1,6 @@
 # AI Financial Assistant / Chatbot — Implementation Notes
 
-**Branch** : `feature/ai-financial-assistant-chatbot`
+**Branch** : `feature/ahmedali-ghori-ai-chatbot`
 **Workstream** : AI Financial Assistant / Chatbot (RAG / NLP)
 
 This document records what was built, which required use cases work today,

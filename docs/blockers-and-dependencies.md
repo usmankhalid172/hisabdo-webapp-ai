@@ -1,6 +1,6 @@
 # Technical Dependencies & Blockers
 
-Status date: 2026-08-20 · Branch `feature/ai-financial-assistant-chatbot`
+Status date: 2026-08-20 · Branch `feature/ahmedali-ghori-ai-chatbot`
 
 ---
 
@@ -28,7 +28,7 @@ Status date: 2026-08-20 · Branch `feature/ai-financial-assistant-chatbot`
 ---
 
 ## 2. Repository/team process dependencies
-- Branch naming per `CONTRIBUTING.md`: `feature/ai-financial-assistant-chatbot`.
+- Branch naming per `CONTRIBUTING.md`: `feature/ahmedali-ghori-ai-chatbot`.
 - PR base branch: `main` (Team Lead review required before merge).
 - Related team assets this build aligns with (not merged yet on `main` at the
   time of writing):
@@ -46,6 +46,24 @@ Status date: 2026-08-20 · Branch `feature/ai-financial-assistant-chatbot`
 | 3 | No `pytest` in the dev environment | `pytest`-style tests could not run | Tests are written with stdlib `unittest`; all 40 pass with `python -m unittest discover -s tests -t .` |
 | 4 | Production user financial data not yet approved for repo | Cannot validate against real data | Uses synthetic sample data only (`data/sample_transactions.csv`), consistent with `data/README.md`. |
 | 5 | RAG is keyword+metadata baseline (no embeddings/reranker) | Retrieval quality for paraphrases/typos is limited | Recorded in `research/rag-approach.md` as the next experiment (embeddings, hybrid search, reranking). |
+| 6 | **GitHub push blocked (403)** | Feature branch could not be pushed | Exact error below. Per `CONTRIBUTING.md`, report to Team Leads: the authenticated account must be added as a collaborator on `usmankhalid172/hisabdo-webapp-ai`. |
+
+### GitHub 403 evidence (recorded 2026-08-20)
+
+```
+$ git push -u origin feature/ahmedali-ghori-ai-chatbot
+remote: Permission to usmankhalid172/hisabdo-webapp-ai.git denied to AHMEDALIGHORI.
+fatal: unable to access 'https://github.com/usmankhalid172/hisabdo-webapp-ai.git/':
+The requested URL returned error: 403
+```
+
+- GitHub username used by the local credential: `AHMEDALIGHORI`
+- `gh auth status`: logged in as `AHMEDALIGHORI` (scopes: gist, read:org, repo, workflow)
+- Once write access is granted, run:
+
+```bash
+git push -u origin feature/ahmedali-ghori-ai-chatbot
+```
 
 ---
 
