@@ -1,5 +1,6 @@
 ==========================================================================
 TERMINAL EVIDENCE - AI Financial Assistant / Chatbot - RAG flow
+Captured: 2026-08-21 (verified run) - 63/63 tests pass
 ==========================================================================
 
 --- MockMonthly Expense Query ---
