@@ -7,7 +7,7 @@ The Smart Expense Categorization feature aims to automatically predict a categor
 Examples of expense categories may include:
 
 - Food
-- Transportation
+- Transport
 - Shopping
 - Bills & Utilities
 - Healthcare
@@ -289,7 +289,7 @@ Amount: 250
 the model may return:
 
 ```text
-Predicted Category: Transportation
+Predicted Category: Transport
 ```
 
 The exact prediction will depend on the training dataset and learned model parameters.

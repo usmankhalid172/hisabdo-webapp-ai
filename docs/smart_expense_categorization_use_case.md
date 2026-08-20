@@ -11,7 +11,7 @@ The Smart Expense Categorization feature aims to automatically predict an approp
 The initial categories used in the baseline experiment are:
 
 - Food
-- Transportation
+- Transport
 - Healthcare
 - Entertainment
 

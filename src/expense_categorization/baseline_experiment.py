@@ -54,15 +54,15 @@ data = pd.DataFrame(
             250
         ],
         "category": [
-            "Transportation",
-            "Transportation",
+            "Transport",
+            "Transport",
             "Food",
             "Food",
             "Healthcare",
             "Healthcare",
             "Entertainment",
             "Entertainment",
-            "Transportation",
+            "Transport",
             "Food",
             "Healthcare",
             "Entertainment"
