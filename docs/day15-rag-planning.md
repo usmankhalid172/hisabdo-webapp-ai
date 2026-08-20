@@ -1,8 +1,3 @@
-Absolutely. Below is the **complete, clean Markdown file**. You can copy everything inside the code block directly into:
-
-`docs/day15-rag-planning.md`
-
-````markdown
 # Day 15 — RAG & Knowledge Base Planning
 
 ## HisabDo AI Financial Assistant
