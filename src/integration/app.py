@@ -1,0 +1,105 @@
+"""FastAPI application for the HisabDo AI Financial Assistant.
+
+Run from the repository root:
+
+    uvicorn src.integration.app:app --reload --port 8000
+
+Endpoints:
+- GET  /health   : service + dependency status
+- POST /chat     : run the assistant pipeline (with full evidence trace)
+- POST /intents  : inspect intent detection only
+
+The assistant pipeline itself is offline/deterministic; an API key is only
+needed for the optional LLM polish step and is never required.
+"""
+
+from __future__ import annotations
+
+import datetime as dt
+
+from fastapi import FastAPI, HTTPException
+
+from ..financial_assistant import engine as engine_mod
+from ..financial_assistant import intents as intent_mod
+from ..financial_assistant import knowledge_base as kb
+from ..financial_assistant import llm as llm_mod
+from ..financial_assistant import transactions as tr
+from .schemas import (
+    ChatRequest,
+    ChatResponse,
+    ErrorResponse,
+    HealthResponse,
+    IntentInfo,
+    RetrievedEvidence,
+)
+
+app = FastAPI(
+    title="HisabDo AI Financial Assistant API",
+    description="Offline-first chatbot with RAG knowledge-base support.",
+    version="0.1.0",
+)
+
+# A single shared assistant instance (stateless per request).
+_ASSISTANT = None
+
+
+def get_assistant():
+    global _ASSISTANT
+    if _ASSISTANT is None:
+        _ASSISTANT = engine_mod.FinancialAssistant()
+    return _ASSISTANT
+
+
+@app.get("/health", response_model=HealthResponse,
+         responses={500: {"model": ErrorResponse}})
+def health():
+    assistant = get_assistant()
+    kbs = kb.load_knowledge_base()
+    return HealthResponse(
+        status="ok",
+        intents_supported=list(intent_mod.SUPPORTED_INTENTS),
+        knowledge_base_chunks=len(kbs),
+        transactions_loaded=len(assistant.transactions),
+        llm_available=llm_mod.llm_available(),
+    )
+
+
+@app.post("/intents", response_model=IntentInfo)
+def detect_intent_ep(request: ChatRequest):
+    result = intent_mod.detect_intent(request.question)
+    return IntentInfo(
+        intent=result.intent,
+        confidence=round(result.confidence, 2),
+        period=result.period,
+        category=result.category,
+        matched=result.matched,
+    )
+
+
+@app.post("/chat", response_model=ChatResponse)
+def chat(request: ChatRequest):
+    assistant = get_assistant()
+    if request.reference_date:
+        try:
+            reference = dt.date.fromisoformat(request.reference_date)
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail="reference_date must be YYYY-MM-DD") from exc
+        assistant.reference_date = reference
+    result = assistant.ask(request.question)
+    return ChatResponse(
+        question=result.question,
+        intent=result.intent,
+        confidence=result.confidence,
+        response=result.response,
+        period=result.period,
+        category=result.category,
+        facts=result.facts,
+        retrieved=[
+            RetrievedEvidence(title=r.chunk.title, score=r.score, text=r.chunk.text)
+            for r in result.retrieved
+        ],
+        validation=result.validation,
+        validation_notes=result.validation_notes,
+        llm_used=result.llm_used,
+        matched=result.matched,
+    )
