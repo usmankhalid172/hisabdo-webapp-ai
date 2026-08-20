@@ -75,6 +75,15 @@ class AssistantUseCaseTests(unittest.TestCase):
         self.assertEqual(result.intent, "MONTHLY_EXPENSE")
         self.assertNotIn("PKR", result.response)
 
+    def test_highest_category_empty_month(self):
+        # Regression for Bug B: a month with no transactions must produce a
+        # clean 'no data' message, not "? at PKR 0.00".
+        result = self.assistant.ask("What is my highest spending category "
+                                    "in January 2025?")
+        self.assertEqual(result.intent, "HIGHEST_CATEGORY")
+        self.assertNotIn("?", result.response)
+        self.assertIn("could not find any", result.response.lower())
+
 
 if __name__ == "__main__":
     unittest.main()

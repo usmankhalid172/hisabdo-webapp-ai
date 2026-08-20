@@ -20,8 +20,7 @@ from typing import Optional
 
 def llm_available() -> bool:
     """True if an OpenAI-compatible API key is configured."""
-    return bool(os.environ.get("OPENAI_API_KEY") or
-                os.environ.get("OPENAI_COMPAT_BASE_URL"))
+    return bool(os.environ.get("OPENAI_API_KEY"))
 
 
 def _api_key() -> Optional[str]:

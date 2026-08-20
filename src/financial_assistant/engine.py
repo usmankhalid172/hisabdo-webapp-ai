@@ -98,7 +98,7 @@ class FinancialAssistant:
         elif turn.intent == "THANKS":
             turn.response = responders.respond_thanks()
         elif turn.intent == "AMBIGUOUS":
-            turn.response = responders.respond_ambiguous(question)
+            turn.response = responders.respond_ambiguous()
         else:  # UNSUPPORTED / default
             turn.response = responders.respond_unsupported()
 
@@ -117,23 +117,30 @@ class FinancialAssistant:
     # Intent handlers
     # ------------------------------------------------------------------ #
     def _handle_monthly(self, turn: AssistantResult) -> None:
-        period, resolved = self._resolved_period(turn.period)
+        period = turn.period
         if period is None:
-            turn.response = responders.respond_ambiguous(turn.question)
+            turn.response = responders.respond_ambiguous()
+            return
+        if turn.category:
+            total = tr.category_total_for_period(self.transactions, period,
+                                                 turn.category)
+            summary = {"period": period, "category": turn.category, "total": total}
+            turn.facts = summary
+            turn.response = responders.respond_category_expense(summary)
             return
         summary = tr.summary_for_period(self.transactions, period)
         turn.period = period
         turn.facts = summary
         if not summary["categories"]:
             turn.response = (
-                f"I could not find any transactions for {responders._fmt_month(period)}. "
-                "Try another month."
+                f"I could not find any transactions for "
+                f"{responders._fmt_month(period)}. Try another month."
             )
             return
         turn.response = responders.respond_monthly_expense(summary)
 
     def _handle_highest(self, turn: AssistantResult) -> None:
-        period, resolved = self._resolved_period(turn.period)
+        period = turn.period
         top = tr.highest_category_for_period(self.transactions, period)
         turn.period = period
         facts = dict(top or {})
@@ -143,14 +150,9 @@ class FinancialAssistant:
         turn.response = responders.respond_highest_category(facts)
 
     def _handle_summary(self, turn: AssistantResult) -> None:
-        period, resolved = self._resolved_period(turn.period)
+        period = turn.period
         if period is None:
-            resolved_period = self._current_month_prefix()
-            summary = tr.summary_for_period(self.transactions, resolved_period)
-            turn.period = resolved_period
-            turn.facts = summary
-            turn.response = responders.respond_spending_summary(summary)
-            return
+            period = self._current_month_prefix()
         summary = tr.summary_for_period(self.transactions, period)
         turn.period = period
         turn.facts = summary
@@ -163,7 +165,8 @@ class FinancialAssistant:
         turn.facts = {"source": "data/saving_tips.md",
                       "retrieved": [rc.chunk.title for rc in turn.retrieved]}
         turn.response = responders.respond_saving_tip(turn.retrieved, turn.question)
-# ------------------------------------------------------------------ #
+
+    # ------------------------------------------------------------------ #
     # Period helpers
     # ------------------------------------------------------------------ #
     def _current_month_prefix(self) -> str:
@@ -177,25 +180,15 @@ class FinancialAssistant:
             month -= 1
         return dt.date(year, month, 1).strftime("%Y-%m")
 
-    def _resolved_period(self, detected_period: Optional[str]):
-        """Return (period, resolved_source) for a detected period.
-
-        Explicit periods like ``2026-07`` pass through unchanged and are
-        returned as explicit. ``None`` means no period was resolved.
-        """
-        if detected_period:
-            return detected_period, "explicit"
-        return None, "unknown"
-
     def _enrich_period(self, detected: IntentResult, turn: AssistantResult) -> None:
         """Resolve relative phrases to a concrete month prefix.
 
         Handles 'this month' / 'last month' against the configured reference
-        date, and bare month names (e.g. "in july") using the
-        reference year.
+        date, and bare month names (e.g. "in july") using the reference year.
+        An explicit year in the question (e.g. "January 2025") is honoured.
         """
         norm = intent_mod._normalise(turn.question)
-        period = detected.period
+        period = detected.period or intent_mod.detect_month(norm)
         if period is None and "last month" in norm:
             period = self._last_month_prefix()
         elif period is None and ("this month" in norm or "monthly" in norm):

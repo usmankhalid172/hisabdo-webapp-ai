@@ -110,6 +110,23 @@ def _normalise(text: str) -> str:
     return " ".join(cleaned.split())
 
 
+def _looks_like_greeting(norm: str) -> bool:
+    """True for simple greeting phrases (handles bare ``hi``)."""
+    greetings = ("hello", "hey", "hi", "good morning", "good afternoon",
+                 "good evening", "salutations")
+    for word in greetings:
+        if word in norm:
+            # For short words like "hi" only accept whole-word matches so
+            # words like "this"/"whose" are not treated as greetings.
+            if len(word) <= 3:
+                tokens = norm.split()
+                if word in tokens or any(t.startswith(word + "'") for t in tokens):
+                    return True
+            else:
+                return True
+    return False
+
+
 def detect_month(text_norm: str) -> Optional[str]:
     """Return an ISO ``YYYY-MM`` for an explicit month, if found.
 
@@ -152,6 +169,8 @@ def detect_category(text_norm: str) -> Optional[str]:
         if alias in text_norm:
             return canonical
     return None
+
+
 def detect_intent(question: str) -> IntentResult:
     """Classify ``question`` into an IntentResult.
 
@@ -162,8 +181,7 @@ def detect_intent(question: str) -> IntentResult:
     if not norm:
         return IntentResult(intent="UNSUPPORTED", confidence=0.9, matched=["empty"])
 
-    if any(w in norm for w in ("hello", "hi ", "hey", "good morning",
-                               "good afternoon", "good evening")):
+    if _looks_like_greeting(norm):
         return IntentResult(intent="GREETING", confidence=0.95, matched=["greeting"])
     if "help" in norm:
         return IntentResult(intent="HELP", confidence=0.9, matched=["help"])
@@ -189,12 +207,27 @@ def detect_intent(question: str) -> IntentResult:
                             category=category,
                             matched=["summary anchor", f"category={category}"])
 
-    # --- MONTHLY_EXPENSE ---
+        # --- MONTHLY_EXPENSE ---
     if any(anchor in norm for anchor in _PERIOD_ANCHORS):
         period = detect_month(norm)
-        return IntentResult(intent="MONTHLY_EXPENSE", confidence=0.8,
-                            period=period,
-                            matched=["period anchor", f"period={period}"])
+        category = detect_category(norm)  # optional "how much did I spend on X in July?"
+        return IntentResult(intent="MONTHLY_EXPENSE", confidence=0.75,
+                            period=period, category=category,
+                            matched=["period anchor", f"period={period}",
+                                     f"category={category}"])
+
+    # --- Category-scoped query (e.g. "What did I spend on groceries?") ---
+    category = detect_category(norm)
+    spend_marker = any(w in norm for w in ("spend", "spent", "expense",
+                                           "expenses", "cost", "costs"))
+    if category and spend_marker and "summary" not in norm \
+            and "breakdown" not in norm and not any(
+                a in norm for a in _HIGHEST_ANCHORS):
+        period = detect_month(norm)
+        return IntentResult(intent="MONTHLY_EXPENSE", confidence=0.7,
+                            period=period, category=category,
+                            matched=["category scoped", f"category={category}",
+                                     f"period={period}"])
 
     # --- AMBIGUOUS ---
     financial_marker = any(

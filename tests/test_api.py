@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import datetime as dt
 import unittest
 
 from fastapi.testclient import TestClient
@@ -49,6 +50,27 @@ class ApiTests(unittest.TestCase):
             json={"question": "How much did I spend?", "reference_date": "not-a-date"},
         )
         self.assertEqual(response.status_code, 422)
+
+    def test_reference_date_does_not_leak_into_shared_state(self):
+        # Regression for Bug C: a request with an explicit reference_date must
+        # not mutate the shared assistant instance used by later requests.
+        ref = self.client.post(
+            "/chat",
+            json={"question": "How much did I spend last month?",
+                  "reference_date": "2020-01-01"},
+        ).json()
+        self.assertEqual(ref["period"], "2019-12")
+        normal = self.client.post(
+            "/chat",
+            json={"question": "How much did I spend last month?"},
+        ).json()
+        # The default reference date is "today"; last month must NOT be the
+        # leaked 2019-12 from the previous request.
+        today = dt.date.today()
+        year, month = today.year, today.month
+        expected = f"{year-1}-12" if month == 1 else f"{year}-{month-1:02d}"
+        self.assertEqual(normal["period"], expected)
+        self.assertNotEqual(normal["period"], "2019-12")
 
 
 if __name__ == "__main__":

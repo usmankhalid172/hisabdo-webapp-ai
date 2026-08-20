@@ -43,8 +43,16 @@ app = FastAPI(
 _ASSISTANT = None
 
 
-def get_assistant():
+def get_assistant(reference_date=None):
+    """Return a shared stateless assistant (or one bound to ``reference_date``).
+
+    The shared instance is never mutated; when a request supplies a reference
+    date we build a separate instance so concurrent requests cannot race on
+    shared state.
+    """
     global _ASSISTANT
+    if reference_date is not None:
+        return engine_mod.FinancialAssistant(reference_date=reference_date)
     if _ASSISTANT is None:
         _ASSISTANT = engine_mod.FinancialAssistant()
     return _ASSISTANT
@@ -78,13 +86,14 @@ def detect_intent_ep(request: ChatRequest):
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest):
-    assistant = get_assistant()
+    reference = None
     if request.reference_date:
         try:
             reference = dt.date.fromisoformat(request.reference_date)
         except ValueError as exc:
-            raise HTTPException(status_code=422, detail="reference_date must be YYYY-MM-DD") from exc
-        assistant.reference_date = reference
+            raise HTTPException(status_code=422,
+                                detail="reference_date must be YYYY-MM-DD") from exc
+    assistant = get_assistant(reference)
     result = assistant.ask(request.question)
     return ChatResponse(
         question=result.question,

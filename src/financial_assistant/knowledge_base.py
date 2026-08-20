@@ -39,10 +39,6 @@ class Chunk:
     tags: List[str] = None
 
 
-def _strip_md(text: str) -> str:
-    return text.strip().strip("*").strip()
-
-
 def load_knowledge_base(path=None) -> List[Chunk]:
     """Load the markdown corpus and split it into chunks by ``## `` section."""
     path = path or DEFAULT_SOURCE

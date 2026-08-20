@@ -12,10 +12,8 @@ The core module deliberately uses only the standard library (``csv``,
 from __future__ import annotations
 
 import csv
-import datetime as dt
 from collections import defaultdict
 from pathlib import Path
-from typing import Optional, Sequence
 
 DataDirectory = Path(__file__).resolve().parent.parent.parent / "data"
 
@@ -60,6 +58,14 @@ def _period_prefix(period: str) -> str:
 def _in_period(txn: Transaction, period: str) -> bool:
     """True if the transaction date falls in the ``YYYY-MM`` period."""
     return txn.date.startswith(_period_prefix(period))
+
+
+def category_total_for_period(transactions: list, period: str,
+                              category: str) -> float:
+    """Total spending in ``period`` for a single ``category``."""
+    return round(
+        sum(t.amount for t in transactions
+            if _in_period(t, period) and t.category == category), 2)
 
 
 def total_for_period(transactions: list, period: str) -> float:

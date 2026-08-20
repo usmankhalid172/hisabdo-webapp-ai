@@ -10,9 +10,6 @@ from __future__ import annotations
 
 from typing import List
 
-from . import transactions as tr
-from .intents import IntentResult
-from .knowledge_base import Chunk
 from .retriever import RetrievedChunk
 
 
@@ -41,13 +38,31 @@ def respond_monthly_expense(facts: dict) -> str:
     )
 
 
+def respond_category_expense(facts: dict) -> str:
+    """Respond for a category-scoped monthly query (e.g. spending on groceries)."""
+    period = facts.get("period", "")
+    category = facts.get("category", "")
+    total = facts.get("total", 0.0)
+    return (
+        f"Your spending on {category} in {_fmt_month(period)} was "
+        f"{_money(total)}."
+    )
+
+
 def respond_highest_category(facts: dict) -> str:
-    if not facts:
+    if not facts.get("category"):
+        # No category is only expected when no transactions matched the period.
+        if facts.get("period"):
+            return (
+                f"I could not find any transactions for "
+                f"{_fmt_month(facts['period'])}, so I cannot determine the "
+                "highest spending category. Please try another month."
+            )
         return (
             "I could not find any transactions for that period, so I cannot "
             "determine the highest spending category. Please try another month."
         )
-    category = facts.get("category", "?")
+    category = facts.get("category")
     amount = facts.get("amount", 0.0)
     period = facts.get("period")
     scope = f"in {_fmt_month(period)}" if period else "over the available data"
@@ -92,7 +107,7 @@ def respond_saving_tip(retrieved: List[RetrievedChunk], query: str) -> str:
 
 
 # Intent-specific safe handling.
-def respond_ambiguous(question: str) -> str:
+def respond_ambiguous() -> str:
     return (
         "Could you tell me which time period you mean? For example: "
         "'How much did I spend this month?', 'What did I spend in July?', "
