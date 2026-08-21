@@ -39,7 +39,7 @@ feature/niha-batool-ai-service-architecture-day15
 Create the branch:
 
 ```bash
-git checkout -b feature/your-name-task-name
+git checkout -b feature/your-name-task-name-dayXX
 ```
 
 ## 4. Work Only on Your Assigned Task
@@ -106,7 +106,7 @@ Do not merge your own Pull Request unless a Team Lead confirms it.
 Return to your branch:
 
 ```bash
-git checkout -b feature/abdullah-javed-ai-chatbot-day16
+git checkout feature/your-name-task-name-dayXX
 ```
 
 If `main` has been updated and you need the latest changes:
