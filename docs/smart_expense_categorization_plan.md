@@ -7,12 +7,14 @@ The Smart Expense Categorization feature aims to automatically predict a categor
 Examples of expense categories may include:
 
 - Food
+- Groceries
 - Transport
-- Shopping
-- Bills & Utilities
+- Utilities
 - Healthcare
+- Shopping
 - Entertainment
 - Education
+- Bills
 - Other
 
 The purpose of this document is to define the initial data preprocessing requirements, candidate input features, and a simple baseline machine-learning approach.
