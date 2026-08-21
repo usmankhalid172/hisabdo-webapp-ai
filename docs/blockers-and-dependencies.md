@@ -1,6 +1,7 @@
 # Technical Dependencies & Blockers
 
-Status date: 2026-08-20 · Branch `feature/ahmedali-ghori-ai-chatbot`
+Status date: 2026-08-21 · Branches `feature/ahmedali-ghori-ai-chatbot` /
+`feature/ahmedali-ghori-chatbot-poc-finalize-day-20`
 
 ---
 
@@ -48,7 +49,7 @@ Status date: 2026-08-20 · Branch `feature/ahmedali-ghori-ai-chatbot`
 | 5 | RAG is keyword+metadata baseline (no embeddings/reranker) | Retrieval quality for paraphrases/typos is limited | Recorded in `research/rag-approach.md` as the next experiment (embeddings, hybrid search, reranking). |
 | 6 | **GitHub push blocked (403)** | Feature branch could not be pushed | Exact error below. Per `CONTRIBUTING.md`, report to Team Leads: the authenticated account must be added as a collaborator on `usmankhalid172/hisabdo-webapp-ai`. |
 
-### GitHub 403 evidence (recorded 2026-08-20)
+### GitHub 403 evidence (recorded 2026-08-20, re-verified 2026-08-21)
 
 ```
 $ git push -u origin feature/ahmedali-ghori-ai-chatbot
@@ -56,6 +57,11 @@ remote: Permission to usmankhalid172/hisabdo-webapp-ai.git denied to AHMEDALIGHO
 fatal: unable to access 'https://github.com/usmankhalid172/hisabdo-webapp-ai.git/':
 The requested URL returned error: 403
 ```
+
+Re-check on 2026-08-21 (push attempt for the same branch) still returned
+**403: Permission denied to AHMEDALIGHORI** — the blocker is unresolved; all
+chatbot commits (Days 15-20, incl. `feature/ahmedali-ghori-chatbot-poc-finalize-day-20`)
+remain local. Day 19/20 status docs record the same blocker.
 
 - GitHub username used by the local credential: `AHMEDALIGHORI`
 - `gh auth status`: logged in as `AHMEDALIGHORI` (scopes: gist, read:org, repo, workflow)
