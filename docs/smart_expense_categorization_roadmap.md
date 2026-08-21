@@ -148,26 +148,25 @@ The 80% accuracy does not represent the final model performance and should not b
 
 The classification report showed:
 
-| Category | Precision | Recall | F1-score |
-|----------|-----------|--------|----------|
-| Entertainment | 1.00 | 1.00 | 1.00 |
-| Food | 0.50 | 1.00 | 0.67 |
-| Healthcare | 1.00 | 0.50 | 0.67 |
-| Transport | 1.00 | 1.00 | 1.00 |
+| Category      | Precision | Recall | F1-score |
+| ------------- | --------: | -----: | -------: |
+| Entertainment |      0.50 |   1.00 |     0.67 |
+| Food          |      1.00 |   1.00 |     1.00 |
+| Healthcare    |      1.00 |   0.50 |     0.67 |
+| Transport     |      1.00 |   1.00 |     1.00 |
 
 A larger and more representative approved dataset is required for meaningful model evaluation.
 
 ## 6. Blockers
-GitHub Repository Access
 
-The feature branch was created locally and the Day 15–18 work has been committed locally.
 
-However, pushing the branch to the shared GitHub repository currently results in a permission error:
+### GitHub Status
 
-403 Permission denied
+The previous GitHub permission issue (403) has been resolved.
 
-The repository access/permissions issue must be resolved before the branch can be pushed and a Pull Request can be opened.
+The feature branch has been successfully pushed to the shared repository, and Pull Request #5 is currently under Team Lead review.
 
+No GitHub access blocker remains. 
 Dataset Availability
 
 A larger approved dataset is required for reliable model evaluation.
@@ -215,7 +214,6 @@ Day 16 preprocessing/baseline commit.
 Day 17 use-case documentation commit.
 Day 18 integration preparation commit.
 
-The branch has not yet been successfully pushed to the shared repository because of the current GitHub permission/403 blocker.
 
 Once repository access is resolved:
 
@@ -229,10 +227,9 @@ Merge only after approval.
 
 The planned next steps are:
 
-#### Step 1 – Resolve Repository Access
+#### Step 1 – Complete the review process 
 
-Resolve the GitHub permission issue and push the feature branch.
-
+Complete the review process and merge PR #5 after approval.
 #### Step 2 – Complete API Integration
 
 Connect the preprocessing and baseline model to the prediction API.
@@ -327,8 +324,8 @@ Larger dataset	Pending
 Advanced evaluation	Pending
 Application integration	Pending
 End-to-end testing	Pending
-GitHub push	Blocked by repository permissions
-Pull Request	Pending GitHub access
+GitHub push — Completed
+Pull Request — Open (PR #5) / Under Team Lead Review
 ---
 
 ## Day 19 Evidence
