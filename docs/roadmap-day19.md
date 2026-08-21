@@ -25,7 +25,8 @@
 
 ## 2. What is in progress
 
-- Repository push/PR creation — blocked on GitHub 403 (see section 4).
+- Repository push/PR creation — was blocked on GitHub 403 (see section 4);
+  **resolved 2026-08-21** (branches pushed, PR #18 open).
 - Team alignment with Rameesha (prompts/test cases), Farheen (RAG research),
   Niha (AI service boundaries) — documents align; live merge pending review.
 
@@ -43,7 +44,7 @@
 
 | # | Blocker | Status / action |
 |---|---|---|
-| 1 | **GitHub push 403** (re-checked 2026-08-21, still denied for `AHMEDALIGHORI`) | Report to Team Leads; account must be added as collaborator on `usmankhalid172/hisabdo-webapp-ai` |
+| 1 | ~~**GitHub push 403**~~ (re-checked 2026-08-21, then **resolved later that day**: access granted) | ~~Report to Team Leads~~ Done — branches pushed, PR #18 open to `main` |
 | 2 | No OpenAI API key in dev env | Not blocking — deterministic pipeline is primary, fully tested |
 | 3 | Port 8000 conflict locally | Workaround: `--port 8010` |
 | 4 | Keyword+tag retrieval is the baseline | Embedding path scaffolded in `rag.py`; Day-30 experiment |
@@ -65,9 +66,10 @@ Full details: `docs/blockers-and-dependencies.md`.
 
 ## 6. Roadmap toward Day 30
 
-1. **Get push access unblocked** (Team Leads) → push branches, open PRs
-   (`feature/ahmedali-ghori-ai-chatbot`,
-   `feature/ahmedali-ghori-chatbot-poc-finalize-day-20`).
+1. ~~**Get push access unblocked**~~ — **DONE 2026-08-21**: access granted,
+   day-based branches pushed (`feature/ahmedali-ghori-chatbot-rag-day-15` ...
+   `feature/ahmedali-ghori-chatbot-poc-finalize-day-20`) and review PR #18
+   opened to `main`.
 2. Implement budgets + remaining-budget answering (new dataset + intent +
    responders + tests).
 3. Add history-listing and month/category comparison intents.
@@ -85,5 +87,14 @@ Full details: `docs/blockers-and-dependencies.md`.
 - `main` (local) additionally contains `5812d64` (lint fixes).
 - `feature/ahmedali-ghori-chatbot-poc-finalize-day-20` (this branch) —
   Day 17-20 completion docs + status.
-- Remote status: **nothing pushed yet** — 403 blocker prevents it (see
+- Day-based branches pushed on 2026-08-21 (Day 15 → Day 20, cumulative):
+  `feature/ahmedali-ghori-chatbot-rag-day-15`,
+  `feature/ahmedali-ghori-chatbot-rag-day-16`,
+  `feature/ahmedali-ghori-financial-assistant-use-cases-day-17`,
+  `feature/ahmedali-ghori-chatbot-rag-integration-day-18`,
+  `feature/ahmedali-ghori-chatbot-roadmap-day-19`,
+  `feature/ahmedali-ghori-chatbot-poc-finalize-day-20`.
+- Remote status: review PR
+  [#18](https://github.com/usmankhalid172/hisabdo-webapp-ai/pull/18) open to
+  `main` from the Day-20 branch (403 blocker resolved — see
   `docs/blockers-and-dependencies.md` section 3).

@@ -94,9 +94,11 @@ prove grounding (no hallucinated figures).
 
 ## 6. Integration blockers / dependencies
 
-1. **GitHub push still blocked (403)** on 2026-08-21 — branch/PR cannot be
-   created remotely until the Team Leads add the collaborator account. All
-   work is committed locally.
+1. ~~**GitHub push blocked (403)**~~ — **RESOLVED 2026-08-21**: write access
+   granted; day-based branches pushed and review PR
+   [#18](https://github.com/usmankhalid172/hisabdo-webapp-ai/pull/18) is open
+   to `main` (Team Lead merge approval pending). Historical 403 evidence kept
+   in `docs/blockers-and-dependencies.md`.
 2. **AI service boundaries** — `src/integration/` is the agreed shared layer;
    no secrets/env-specific config are hard-coded there.
 3. **Retrieval quality** — keyword+tag baseline; embeddings/rerank planned for

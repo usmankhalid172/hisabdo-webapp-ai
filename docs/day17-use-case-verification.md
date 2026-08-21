@@ -65,9 +65,10 @@ All of the above also pass as API requests via `POST /chat` (see
 
 ## 5. Blockers
 
-1. **GitHub push blocked (403)** — still active on 2026-08-21; see
-   `docs/blockers-and-dependencies.md` (section 3) for exact error and
-   required action (account must be added as collaborator).
+1. ~~**GitHub push blocked (403)**~~ — was active on 2026-08-21; **resolved
+   later that day** (access granted, branches pushed, PR #18 open); see
+   `docs/blockers-and-dependencies.md` (section 3) for historical error and
+   resolution.
 2. **No OpenAI API key** in dev environment — live LLM path not exercised;
    deterministic pipeline is the primary flow and fully tested.
 3. **Port 8000 occupied** by another local app during earlier testing — used

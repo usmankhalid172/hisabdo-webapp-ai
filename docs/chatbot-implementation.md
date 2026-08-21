@@ -75,7 +75,10 @@ Reference date for relative periods is configurable (`FinancialAssistant(referen
 
 ## 3. Evidence produced (this branch)
 
-- **Unit/integration tests**: `python -m unittest discover -s tests -t . -v` → **40/40 OK**.
+- **Unit/integration tests**: `python -m unittest discover -s tests -t . -v`.
+  **40/40 OK** was the earlier **Day 15-16 snapshot**; after the Day 16-20
+  additions (API tests, processor/RAG/vector-retriever tests) the current
+  suite is **63/63 OK**.
 - **Sample queries + responses**: `python scripts/run_verification.py` (terminal output below).
 - **Live API**: `python scripts/run_api_server.py --port 8010`; `curl http://127.0.0.1:8010/health`
   and `curl -X POST .../chat -d '{"question": ...}'`.
@@ -98,10 +101,17 @@ A: Here are some saving tips I found in my knowledge base:
    Note: these are general suggestions ... not personalised financial advice.
 ```
 
-Test results (trailing summary):
+Test results (trailing summary — Day 15-16 snapshot at time of writing):
 
 ```
 Ran 40 tests in 0.073s
+OK
+```
+
+Current suite (after Day 16-20 additions, re-verified 2026-08-21):
+
+```
+Ran 63 tests in 0.127s
 OK
 ```
 

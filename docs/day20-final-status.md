@@ -39,7 +39,9 @@ Evidence files:
 
 ## 3. What remains (recorded)
 
-1. Push branches and open PRs — blocked (section 4, #1).
+1. ~~Push branches and open PR~~ — **DONE 2026-08-21**: all day-based
+   branches pushed; review PR #18 open (`MERGEABLE`), awaiting Team Lead
+   merge approval.
 2. Budgets & remaining-budget queries (needs budget dataset).
 3. Transaction-history listing and month/category comparisons.
 4. Embedding/vector retrieval + hybrid rerank (scaffold exists in `rag.py`).
@@ -50,7 +52,7 @@ Evidence files:
 
 | # | Blocker | Impact | Action |
 |---|---|---|---|
-| 1 | **GitHub push denied (403)** — re-verified today; `AHMEDALIGHORI` not a collaborator on `usmankhalid172/hisabdo-webapp-ai` | Branches/PRs cannot be created remotely; all 10+ commits remain local | Team Leads must add the account (or provide a token with repo scope); exact error in `docs/blockers-and-dependencies.md` |
+| 1 | ~~GitHub push denied (403)~~ — **RESOLVED 2026-08-21**: collaborator write access granted; branches pushed and PR #18 created (supersedes closed PR #17) | None anymore (was: branches/PRs could not be created remotely) | Closed; historical error text kept in `docs/blockers-and-dependencies.md` |
 | 2 | No OpenAI API key in dev environment | Optional LLM-polish path not exercised live | Not blocking; deterministic flow is primary; validate later with a mocked provider test |
 | 3 | Keyword+tag retrieval baseline | Lower retrieval quality for paraphrases | Embeddings/rerank planned as Day-30 experiment |
 | 4 | Budget dataset absent | Budget use cases blocked | Create/obtain budget dataset |
@@ -58,18 +60,22 @@ Evidence files:
 
 ## 5. GitHub workflow status
 
-- Local branch: `feature/ahmedali-ghori-chatbot-poc-finalize-day-20`
-  (from `main`, which contains all chatbot commits).
+- Branches pushed to `usmankhalid172/hisabdo-webapp-ai` (day-based naming):
+  - Day 15: `feature/ahmedali-ghori-chatbot-rag-day-15`
+  - Day 16: `feature/ahmedali-ghori-chatbot-rag-day-16`
+  - Day 17: `feature/ahmedali-ghori-financial-assistant-use-cases-day-17`
+  - Day 18: `feature/ahmedali-ghori-chatbot-rag-integration-day-18`
+  - Day 19: `feature/ahmedali-ghori-chatbot-roadmap-day-19`
+  - Day 20: `feature/ahmedali-ghori-chatbot-poc-finalize-day-20` (cumulative)
 - Commits: `c07217a` (chatbot impl), `7dc9f75` (docs/matrix), `ff26c3a`
-  (403 record), `1fba2b2` (Day 16 features), `5812d64` (lint fixes), plus
-  this branch's commits (Day 17-20 docs).
-- **PR:** not yet created — push is blocked by 403. Will open PR to `main`
-  for Team Lead review as soon as write access is granted.
+  (403 record), `1fba2b2` (Day 16 features), `5812d64` (lint fixes),
+  per-day docs commits, plus merge of latest `main`.
+- **PR:** [#18](https://github.com/usmankhalid172/hisabdo-webapp-ai/pull/18)
+  → `main`, state OPEN / MERGEABLE, awaiting Team Lead review (not merged by
+  author). Supersedes closed PR #17.
 - No secrets/keys committed: `.env.example` contains a fake placeholder only.
 
 ## 6. Next step
 
-Request write access via Team Leads, then `git push -u origin
-feature/ahmedali-ghori-chatbot-poc-finalize-day-20` (and the chatbot branch),
-open the PR to `main`, and continue the Day-30 roadmap items in
-`docs/roadmap-day19.md`.
+Final merge-readiness check with the Team Leads on PR #18; after merge,
+continue the Day-30 roadmap items in `docs/roadmap-day19.md`.
