@@ -1,11 +1,15 @@
 ==========================================================================
 TERMINAL EVIDENCE - AI Financial Assistant / Chatbot - RAG flow
-Captured: 2026-08-21 (verified run) - 63/63 tests pass
+Captured: 2026-08-21 (63/63 tests pass)
+Note: transaction categories aligned with shared Smart Expense taxonomy (Food, Healthcare)
+==========================================================================
+==========================================================================
+TERMINAL EVIDENCE - AI Financial Assistant / Chatbot - RAG flow
 ==========================================================================
 
 --- MockMonthly Expense Query ---
 Q          : How much did I spend this month?
-intent     : MONTHLY_EXPENSE  (confidence=0.8)
+intent     : MONTHLY_EXPENSE  (confidence=0.75)
 period     : 2026-08
 retrieved  : []
 validation : pass []
@@ -13,7 +17,7 @@ answer     : Your total spending for August 2026 was PKR 410.35 across 10 transa
 
 --- MockMonthly Expense Query ---
 Q          : What was my total spending last month?
-intent     : MONTHLY_EXPENSE  (confidence=0.8)
+intent     : MONTHLY_EXPENSE  (confidence=0.75)
 period     : 2026-07
 retrieved  : []
 validation : pass []
@@ -35,11 +39,11 @@ retrieved  : []
 validation : pass []
 answer     : Here is your spending summary for July 2026 (total PKR 610.44):
 - Groceries: PKR 215.75
-- Dining Out: PKR 113.00
+- Food: PKR 113.00
 - Entertainment: PKR 103.99
 - Utilities: PKR 89.50
 - Transport: PKR 55.00
-- Health: PKR 33.20
+- Healthcare: PKR 33.20
 
 --- Saving-Tip Request ---
 Q          : How can I save money?
@@ -82,7 +86,7 @@ SUMMARY - not-yet-supported use cases (blocker/evidence):
 ==========================================================================
 API EVIDENCE - POST /chat (sample responses)
 
-POST /chat body={'question': 'How much did I spend this month?', 'intent': 'MONTHLY_EXPENSE', 'confidence': 0.8, 'response': 'Your total spending for August 2026 was PKR 410.35 across 10 transactions.', 'period': '2026-08', 'category': None, 'facts': {'period': '2026-08', 'total': 410.35, 'count': 10, 'categories': {'Groceries': 155.55, 'Dining Out': 98.5, 'Utilities': 57.0, 'Transport': 47.9, 'Health': 26.4, 'Entertainment': 25.0}}, 'retrieved': [], 'validation': 'pass', 'validation_notes': [], 'llm_used': False, 'matched': ['period anchor', 'period=None']}
+POST /chat body={'question': 'How much did I spend this month?', 'intent': 'MONTHLY_EXPENSE', 'confidence': 0.75, 'response': 'Your total spending for August 2026 was PKR 410.35 across 10 transactions.', 'period': '2026-08', 'category': None, 'facts': {'period': '2026-08', 'total': 410.35, 'count': 10, 'categories': {'Groceries': 155.55, 'Food': 98.5, 'Utilities': 57.0, 'Transport': 47.9, 'Healthcare': 26.4, 'Entertainment': 25.0}}, 'retrieved': [], 'validation': 'pass', 'validation_notes': [], 'llm_used': False, 'matched': ['period anchor', 'period=None', 'category=None']}
 
 POST /chat body={'question': 'Which category did I spend the most on?', 'intent': 'HIGHEST_CATEGORY', 'confidence': 0.85, 'response': 'Your highest spending category over the available data was Groceries at PKR 583.30.', 'period': None, 'category': None, 'facts': {'category': 'Groceries', 'amount': 583.3, 'count': 11}, 'retrieved': [], 'validation': 'pass', 'validation_notes': [], 'llm_used': False, 'matched': ['highest anchor', 'category=None']}
 

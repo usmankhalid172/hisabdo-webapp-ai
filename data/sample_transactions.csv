@@ -1,38 +1,38 @@
 date,category,description,amount
 2026-06-02,Groceries,Supermarket weekly shop,62.50
 2026-06-05,Transport,Metro monthly pass,30.00
-2026-06-07,Dining Out,Coffee dinner,8.75
+2026-06-07,Food,Coffee dinner,8.75
 2026-06-09,Utilities,Electricity bill,55.00
 2026-06-10,Groceries,Vegetable market,41.20
 2026-06-13,Transport,Fuel fill-up,22.00
 2026-06-15,Entertainment,Movie tickets,24.00
 2026-06-18,Groceries,Supermarket weekly shop,58.40
-2026-06-20,Dining Out,Restaurant dinner,32.90
+2026-06-20,Food,Restaurant dinner,32.90
 2026-06-22,Utilities,Internet bill,40.00
 2026-06-25,Groceries,Supermarket,49.90
 2026-06-28,Transport,Car ride,14.50
 2026-06-30,Entertainment,Streaming subscription,15.99
 2026-07-03,Groceries,Supermarket weekly shop,67.80
 2026-07-05,Utilities,Water bill,28.50
-2026-07-07,Dining Out,Restaurant lunch,45.00
+2026-07-07,Food,Restaurant lunch,45.00
 2026-07-09,Groceries,Local market,39.90
 2026-07-11,Entertainment,Concert ticket,88.00
 2026-07-13,Transport,Fuel fill-up,25.00
-2026-07-15,Dining Out,Takeaway dinner,22.40
+2026-07-15,Food,Takeaway dinner,22.40
 2026-07-17,Utilities,Electricity bill,61.00
 2026-07-19,Groceries,Weekly shop,55.30
-2026-07-21,Health,Pharmacy purchase,33.20
+2026-07-21,Healthcare,Pharmacy purchase,33.20
 2026-07-24,Transport,Metro top-up,30.00
-2026-07-26,Dining Out,Movie and snacks,45.60
+2026-07-26,Food,Movie and snacks,45.60
 2026-07-28,Entertainment,Streaming subscription,15.99
 2026-07-30,Groceries,Supermarket,52.75
 2026-08-02,Groceries,Supermarket,59.20
 2026-08-04,Utilities,Electricity bill,57.00
-2026-08-06,Dining Out,Lunch meeting,38.50
+2026-08-06,Food,Lunch meeting,38.50
 2026-08-08,Groceries,Vegetable market,44.60
 2026-08-10,Transport,Fuel fill-up,28.00
-2026-08-12,Health,Pharmacy,26.40
-2026-08-14,Dining Out,Coffee with friends,60.00
+2026-08-12,Healthcare,Pharmacy,26.40
+2026-08-14,Food,Coffee with friends,60.00
 2026-08-15,Groceries,Supermarket,51.75
 2026-08-17,Transport,Ride sharing,19.90
 2026-08-18,Entertainment,Cinema,25.00

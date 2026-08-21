@@ -24,15 +24,15 @@ import re
 from dataclasses import dataclass, field
 from typing import Optional
 
-# Category keywords -> canonical category names.
+# Category keywords -> canonical category names (shared Smart Expense taxonomy).
 _CATEGORY_ALIASES = {
     "groceries": "Groceries",
     "grocery": "Groceries",
-    "dining": "Dining Out",
-    "dining out": "Dining Out",
-    "restaurant": "Dining Out",
-    "eating out": "Dining Out",
-    "food": "Dining Out",
+    "dining": "Food",
+    "dining out": "Food",
+    "restaurant": "Food",
+    "eating out": "Food",
+    "food": "Food",
     "transport": "Transport",
     "transportation": "Transport",
     "fuel": "Transport",
@@ -46,9 +46,10 @@ _CATEGORY_ALIASES = {
     "electricity": "Utilities",
     "water": "Utilities",
     "gas": "Utilities",
-    "health": "Health",
-    "pharmacy": "Health",
-    "medical": "Health",
+    "health": "Healthcare",
+    "healthcare": "Healthcare",
+    "pharmacy": "Healthcare",
+    "medical": "Healthcare",
 }
 
 # Month names -> zero-padded month number.

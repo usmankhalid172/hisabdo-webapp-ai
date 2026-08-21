@@ -13,7 +13,7 @@ class ValidationTests(unittest.TestCase):
         "period": "2026-07",
         "total": 100.0,
         "count": 3,
-        "categories": {"Groceries": 60.0, "Dining Out": 40.0},
+        "categories": {"Groceries": 60.0, "Food": 40.0},
     }
 
     def test_grounded_response_passes(self):

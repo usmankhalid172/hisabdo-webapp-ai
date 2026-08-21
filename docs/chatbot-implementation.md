@@ -55,7 +55,7 @@ Reference date for relative periods is configurable (`FinancialAssistant(referen
 | 1 | Monthly expense query | ✅ **WORKS** | "How much did I spend this month?" | "Your total spending for August 2026 was PKR 410.35 across 10 transactions." |
 | 2 | Monthly expense query | ✅ **WORKS** | "What was my total spending last month?" | "Your total spending for July 2026 was PKR 610.44 across 14 transactions." |
 | 3 | Highest spending category | ✅ **WORKS** | "Which category did I spend the most on?" | "Your highest spending category over the available data was Groceries at PKR 583.30." |
-| 4 | Spending-summary questions | ✅ **WORKS** | "Give me a spending summary for July" | Bullet breakdown: Groceries 215.75, Dining Out 113.00, Entertainment 103.99, Utilities 89.50, Transport 55.00, Health 33.20 (total 610.44) |
+| 4 | Spending-summary questions | ✅ **WORKS** | "Give me a spending summary for July" | Bullet breakdown: Groceries 215.75, Food 113.00, Entertainment 103.99, Utilities 89.50, Transport 55.00, Healthcare 33.20 (total 610.44) |
 | 5 | Saving-tip requests | ✅ **WORKS** | "How can I save money?" | Returns 2 retrieved KB chunks (retrieval scores > threshold) with a disclaimer |
 | 6 | Saving-tip requests | ✅ **WORKS** | "Give me saving tips" | Returns retrieved "Budgeting to save money" chunk text |
 | 7 | Out-of-scope question | ✅ safe fallback | "Tell me a joke" | "I am a financial assistant and can only help with …" |

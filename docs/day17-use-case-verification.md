@@ -27,7 +27,7 @@ Knowledge base: `data/saving_tips.md` (5 chunks, tag metadata).
 | 1 | Monthly expense (this month) | "How much did I spend this month?" | "Your total spending for August 2026 was PKR 410.35 across 10 transactions." |
 | 2 | Monthly expense (last month) | "What was my total spending last month?" | "Your total spending for July 2026 was PKR 610.44 across 14 transactions." |
 | 3 | Highest spending category | "Which category did I spend the most on?" | "Your highest spending category over the available data was Groceries at PKR 583.30." |
-| 4 | Spending summary | "Give me a spending summary for July" | Bullet breakdown per category (Groceries 215.75, Dining Out 113.00, ...) total PKR 610.44 |
+| 4 | Spending summary | "Give me a spending summary for July" | Bullet breakdown per category (Groceries 215.75, Food 113.00, ...) total PKR 610.44 |
 | 5 | Saving-tip request | "How can I save money?" | 2 retrieved KB chunks: "Reduce dining-out costs to save", "Cut grocery spending to save" + disclaimer |
 | 6 | Saving-tip request (alternate) | "Give me saving tips" | Retrieved "Budgeting to save money" chunk + disclaimer |
 | 7 | Out-of-scope question | "Tell me a joke" | Safe fallback: "I am a financial assistant and can only help with questions about your expenses..." |
