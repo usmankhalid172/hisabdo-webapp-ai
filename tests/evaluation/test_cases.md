@@ -45,7 +45,7 @@ The test cases are designed to check:
 **Feature:** Smart Expense Categorization  
 **Test Type:** Functional  
 **Input:** `Bought groceries from supermarket`  
-**Expected Result:** Expense should be categorized as `Food & Groceries`  
+**Expected Result:** Expense should be categorized as `Groceries
 **Actual Result:** To be recorded during testing  
 **Status:** To be recorded  
 **Evidence:** Screenshot/API response  
@@ -58,7 +58,7 @@ The test cases are designed to check:
 **Feature:** Smart Expense Categorization  
 **Test Type:** Functional  
 **Input:** `Petrol for car`  
-**Expected Result:** Expense should be categorized as `Transportation`  
+**Expected Result:** Expense should be categorized as `Transport
 **Actual Result:** To be recorded during testing  
 **Status:** To be recorded  
 **Evidence:** Screenshot/API response  
@@ -66,16 +66,16 @@ The test cases are designed to check:
 
 ---
 
-### TC-EXP-003 — Valid Healthcare Expense
+### TC-EXP-003 — Valid Education Expense
 
 **Feature:** Smart Expense Categorization  
 **Test Type:** Functional  
-**Input:** `Purchased medicine from pharmacy`  
-**Expected Result:** Expense should be categorized as `Healthcare`  
+**Input:** `Paid university tuition fee`  
+**Expected Result:** Expense should be categorized as `Education`  
 **Actual Result:** To be recorded during testing  
 **Status:** To be recorded  
 **Evidence:** Screenshot/API response  
-**Notes:** Tests healthcare-related terminology.
+**Notes:** Tests education-related terminology.
 
 ---
 
