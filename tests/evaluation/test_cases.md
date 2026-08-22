@@ -45,7 +45,7 @@ The test cases are designed to check:
 **Feature:** Smart Expense Categorization  
 **Test Type:** Functional  
 **Input:** `Bought groceries from supermarket`  
-**Expected Result:** Expense should be categorized as `Groceries
+**Expected Result:** Expense should be categorized as `Groceries`
 **Actual Result:** To be recorded during testing  
 **Status:** To be recorded  
 **Evidence:** Screenshot/API response  
@@ -58,7 +58,7 @@ The test cases are designed to check:
 **Feature:** Smart Expense Categorization  
 **Test Type:** Functional  
 **Input:** `Petrol for car`  
-**Expected Result:** Expense should be categorized as `Transport
+**Expected Result:** Expense should be categorized as `Transport`
 **Actual Result:** To be recorded during testing  
 **Status:** To be recorded  
 **Evidence:** Screenshot/API response  
