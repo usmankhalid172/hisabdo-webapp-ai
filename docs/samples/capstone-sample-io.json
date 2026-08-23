@@ -37,7 +37,7 @@
             "period=None",
             "category=None"
           ],
-          "latency_ms": 0.6
+          "latency_ms": 0.3
         }
       },
       {
@@ -73,7 +73,7 @@
             "period=None",
             "category=None"
           ],
-          "latency_ms": 0.3
+          "latency_ms": 0.2
         }
       },
       {
@@ -103,7 +103,7 @@
             "highest anchor",
             "category=None"
           ],
-          "latency_ms": 0.5
+          "latency_ms": 0.2
         }
       },
       {
@@ -138,7 +138,7 @@
             "summary anchor",
             "category=None"
           ],
-          "latency_ms": 0.4
+          "latency_ms": 0.2
         }
       },
       {
@@ -174,7 +174,7 @@
           "matched": [
             "saving anchor"
           ],
-          "latency_ms": 0.2
+          "latency_ms": 0.1
         }
       },
       {
@@ -199,7 +199,7 @@
           "matched": [
             "no match"
           ],
-          "latency_ms": 0.1
+          "latency_ms": 0.0
         }
       }
     ],
@@ -241,7 +241,7 @@
             "category=None"
           ],
           "status": "ok",
-          "latency_ms": 2.8
+          "latency_ms": 0.4
         }
       },
       {
@@ -281,7 +281,7 @@
             "category=None"
           ],
           "status": "ok",
-          "latency_ms": 2.5
+          "latency_ms": 0.3
         }
       },
       {
@@ -311,7 +311,7 @@
             "category=None"
           ],
           "status": "ok",
-          "latency_ms": 2.5
+          "latency_ms": 0.2
         }
       },
       {
@@ -350,7 +350,7 @@
             "category=None"
           ],
           "status": "ok",
-          "latency_ms": 2.7
+          "latency_ms": 0.3
         }
       },
       {
@@ -386,7 +386,7 @@
             "saving anchor"
           ],
           "status": "ok",
-          "latency_ms": 2.3
+          "latency_ms": 0.3
         }
       },
       {

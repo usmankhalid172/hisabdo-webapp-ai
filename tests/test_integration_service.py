@@ -140,6 +140,19 @@ class AssistantServiceTests(unittest.TestCase):
         with self.assertRaises(ServiceInputError):
             self.service.ask("   ")
 
+    def test_none_question_raises(self):
+        with self.assertRaises(ServiceInputError):
+            self.service.ask(None)
+
+    def test_invalid_reference_date_raises(self):
+        with self.assertRaises(ServiceInputError):
+            self.service.ask("How much did I spend this month?",
+                             reference_date="not-a-date")
+
+    def test_non_string_reference_date_raises(self):
+        with self.assertRaises(ServiceInputError):
+            self.service.ask("How much did I spend this month?",
+                             reference_date=20260820)
 
 
 class AssistantEndpointTests(unittest.TestCase):
@@ -218,18 +231,4 @@ class AssistantEndpointTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-    def test_none_question_raises(self):
-        with self.assertRaises(ServiceInputError):
-            self.service.ask(None)
-
-    def test_invalid_reference_date_raises(self):
-        with self.assertRaises(ServiceInputError):
-            self.service.ask("How much did I spend this month?",
-                             reference_date="not-a-date")
-
-    def test_non_string_reference_date_raises(self):
-        with self.assertRaises(ServiceInputError):
-            self.service.ask("How much did I spend this month?",
-                             reference_date=20260820)
 

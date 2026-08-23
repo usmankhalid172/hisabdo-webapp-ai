@@ -53,7 +53,7 @@ Verified on 2026-08-23 (Python 3.14.5 venv):
 
 | Check | Result |
 |---|---|
-| Full unit/API suite | **84/84 pass** (`python -m unittest discover -s tests -t .`) — 63 baseline + 21 new integration tests |
+| Full unit/API suite | **87/87 pass** (`python -m unittest discover -s tests -t .`) — 63 baseline + 24 integration/service tests, including `None` question and invalid reference-date validation |
 | Lint (`pyflakes` over `src tests scripts`) | **clean** (exit 0) |
 | `scripts/run_capstone_verification.py` | both scenarios pass; every query returns `status: ok`, `validation: pass`, latency recorded; **empty stderr** |
 | Regression guard | legacy POC routes `GET /health`, `POST /chat`, `POST /intents` unchanged; their original tests still pass |
@@ -111,6 +111,8 @@ Example (HTTP):
 - Added: `src/integration/service.py`, `tests/test_integration_service.py`,
   `scripts/run_capstone_verification.py`, `docs/capstone-integration.md`,
   `docs/samples/capstone-sample-io.json`
+- Corrected: moved three validation tests that were unreachable after
+  `unittest.main()` into `AssistantServiceTests`, so they now execute in CI.
 - Modified: `src/integration/app.py` (+2 versioned endpoints),
   `src/integration/schemas.py` (+2 response models), `docs/README.md` (index),
   `docs/blockers-and-dependencies.md` (dependency record),
