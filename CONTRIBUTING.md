@@ -23,22 +23,23 @@ git pull origin main
 Use this format:
 
 ```text
-feature/your-name-task-name
+feature/your-name-task-name-dayXX
 ```
 
 Examples:
 
 ```text
-feature/ahmed-ali-ghori-ai-chatbot
-feature/mehar-ali-expense-model
-feature/niha-batool-ai-service
-feature/rimsha-mushtaq-model-testing
+feature/rameesha-zafar-financial-assistant-prompts
+feature/mehar-ali-expense-categorization-day16
+feature/rimsha-mushtaq-model-evaluation-day16
+feature/faiza-asif-rag-retrieval-day16
+feature/niha-batool-ai-service-architecture-day15
 ```
 
 Create the branch:
 
 ```bash
-git checkout -b feature/your-name-task-name
+git checkout -b feature/your-name-task-name-dayXX
 ```
 
 ## 4. Work Only on Your Assigned Task
@@ -105,7 +106,7 @@ Do not merge your own Pull Request unless a Team Lead confirms it.
 Return to your branch:
 
 ```bash
-git checkout feature/your-name-task-name
+git checkout feature/your-name-task-name-dayXX
 ```
 
 If `main` has been updated and you need the latest changes:
