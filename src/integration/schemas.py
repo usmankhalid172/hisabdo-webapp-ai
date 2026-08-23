@@ -57,3 +57,20 @@ class HealthResponse(BaseModel):
 
 class ErrorResponse(BaseModel):
     detail: str
+
+
+class AssistantQueryResponse(ChatResponse):
+    """App-layer query response: pipeline trace + service status/latency.
+
+    Returned by ``POST /v1/assistant/query`` (capstone integration flow).
+    """
+    status: str = "ok"
+    latency_ms: float = 0.0
+
+
+class ServiceHealthResponse(HealthResponse):
+    """App-layer health payload: adds service identity and data source."""
+    status: str = "ok"
+    service: str
+    version: str
+    data_source: str

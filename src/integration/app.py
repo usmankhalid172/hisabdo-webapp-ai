@@ -5,9 +5,11 @@ Run from the repository root:
     uvicorn src.integration.app:app --reload --port 8000
 
 Endpoints:
-- GET  /health   : service + dependency status
-- POST /chat     : run the assistant pipeline (with full evidence trace)
-- POST /intents  : inspect intent detection only
+- GET  /health               : service + dependency status (POC surface)
+- POST /chat                 : run the assistant pipeline (POC surface)
+- POST /intents              : inspect intent detection only
+- GET  /v1/assistant/health  : app-facing health via AssistantService
+- POST /v1/assistant/query   : app-facing chatbot/RAG query via AssistantService
 
 The assistant pipeline itself is offline/deterministic; an API key is only
 needed for the optional LLM polish step and is never required.
@@ -24,13 +26,16 @@ from ..financial_assistant import intents as intent_mod
 from ..financial_assistant import knowledge_base as kb
 from ..financial_assistant import llm as llm_mod
 from .schemas import (
+    AssistantQueryResponse,
     ChatRequest,
     ChatResponse,
     ErrorResponse,
     HealthResponse,
     IntentInfo,
     RetrievedEvidence,
+    ServiceHealthResponse,
 )
+from .service import AssistantService, ServiceInputError
 
 app = FastAPI(
     title="HisabDo AI Financial Assistant API",
@@ -111,3 +116,34 @@ def chat(request: ChatRequest):
         llm_used=result.llm_used,
         matched=result.matched,
     )
+
+
+# ---------------------------------------------------------------------- #
+# Capstone integration surface (application/service layer -> AI service)
+# ---------------------------------------------------------------------- #
+_SERVICE = None
+
+
+def get_service() -> AssistantService:
+    """Shared application-facing service instance (lazy singleton)."""
+    global _SERVICE
+    if _SERVICE is None:
+        _SERVICE = AssistantService()
+    return _SERVICE
+
+
+@app.get("/v1/assistant/health", response_model=ServiceHealthResponse,
+         responses={500: {"model": ErrorResponse}})
+def assistant_health():
+    """Application-facing health check through the service adapter."""
+    return get_service().health()
+
+
+@app.post("/v1/assistant/query", response_model=AssistantQueryResponse,
+          responses={422: {"model": ErrorResponse}})
+def assistant_query(request: ChatRequest):
+    """Application-facing chatbot/RAG query through the service adapter."""
+    try:
+        return get_service().ask(request.question, request.reference_date)
+    except ServiceInputError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc

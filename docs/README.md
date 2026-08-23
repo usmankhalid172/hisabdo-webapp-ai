@@ -23,5 +23,7 @@ Separate confirmed management requirements from Team Lead recommendations and as
 | `integration-service-flow.md` | Day 18: AI service integration flow, endpoints, schemas |
 | `roadmap-day19.md` | Day 19: technical status + roadmap to Day 30 |
 | `day20-final-status.md` | Day 20: finalized POC + remaining blockers |
+| `capstone-integration.md` | Day 21: capstone integration adapter, `/v1/assistant/*` endpoints, verification |
+| `samples/capstone-sample-io.json` | Sample request/response pairs for the integrated flow |
 | `blockers-and-dependencies.md` | Dependencies, blockers, GitHub 403 evidence |
 | `evidence/terminal-and-api-output.txt` | Terminal/API verification traces |

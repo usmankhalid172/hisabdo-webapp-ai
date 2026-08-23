@@ -86,7 +86,13 @@ git push -u origin feature/ahmedali-ghori-ai-chatbot
 2. Transaction-history listing and month/category comparisons.
 3. Multi-turn conversation memory.
 4. Vector/embedding retrieval + hybrid search + rerank (after baseline evaluation).
-5. API integration with the HisabDo application backend (real data schema).
+5. ~~API integration with the HisabDo application backend (real data schema)~~ —
+   **Day-21 update (2026-08-23)**: the application/service-layer connection is
+   implemented and verified (`AssistantService` adapter + versioned
+   `/v1/assistant/*` endpoints; see `docs/capstone-integration.md`). What
+   still remains is only the **production data-schema/data-feed approval**
+   before live cutover; the adapter already accepts backend-shaped records
+   (`injected_records`) and CSV paths today.
 
 ---
 

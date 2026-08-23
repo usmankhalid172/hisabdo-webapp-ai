@@ -4,8 +4,13 @@ from __future__ import annotations
 
 import datetime as dt
 import unittest
+import warnings
 
-from fastapi.testclient import TestClient
+warnings.filterwarnings(
+    "ignore",
+    message=r"Using .httpx. with .starlette\.testclient. is deprecated",
+)
+from fastapi.testclient import TestClient  # noqa: E402
 
 from src.integration.app import app
 

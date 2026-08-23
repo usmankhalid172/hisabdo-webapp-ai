@@ -7,12 +7,18 @@ from __future__ import annotations
 
 import datetime as dt
 import sys
+import warnings
 
 sys.path.insert(0, ".")
 
-from src.financial_assistant.engine import FinancialAssistant
-from src.integration.app import app
-from fastapi.testclient import TestClient
+warnings.filterwarnings(
+    "ignore",
+    message=r"Using .httpx. with .starlette\.testclient. is deprecated",
+)
+from fastapi.testclient import TestClient  # noqa: E402
+
+from src.financial_assistant.engine import FinancialAssistant  # noqa: E402
+from src.integration.app import app  # noqa: E402
 
 QUERIES = [
     "How much did I spend this month?",
