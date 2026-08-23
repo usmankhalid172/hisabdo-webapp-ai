@@ -1,0 +1,82 @@
+{
+  "classification_samples": [
+    {
+      "expense_description": "Uber trip to university",
+      "merchant": "Uber",
+      "amount": 250.0,
+      "currency": "EGP",
+      "payment_method": "card"
+    },
+    {
+      "expense_description": "Bought vegetables for home",
+      "merchant": "Carrefour",
+      "amount": 315.0,
+      "currency": "EGP",
+      "payment_method": "cash"
+    },
+    {
+      "expense_description": "Monthly electricity bill",
+      "merchant": "Electricity Company",
+      "amount": 450.0,
+      "currency": "EGP",
+      "payment_method": "card"
+    },
+    {
+      "expense_description": "Pharmacy medicine",
+      "merchant": "Local Pharmacy",
+      "amount": 300.0,
+      "currency": "EGP",
+      "payment_method": "card"
+    },
+    {
+      "expense_description": "Notebook and pens for university",
+      "merchant": "Stationery Store",
+      "amount": 180.0,
+      "currency": "EGP",
+      "payment_method": "cash"
+    }
+  ],
+  "prediction_samples": [
+    {
+      "expense_description": "Cinema ticket",
+      "merchant": "Cinema",
+      "amount": 180.0,
+      "currency": "EGP",
+      "payment_method": "card"
+    },
+    {
+      "expense_description": "Bus fare",
+      "merchant": "Public Transport",
+      "amount": 25.0,
+      "currency": "EGP",
+      "payment_method": "cash"
+    },
+    {
+      "expense_description": "Doctor consultation",
+      "merchant": "Medical Clinic",
+      "amount": 500.0,
+      "currency": "EGP",
+      "payment_method": "card"
+    }
+  ],
+  "chatbot_samples": [
+    {
+      "user_message": "I spent 250 EGP on an Uber trip.",
+      "expense_description": "Uber trip",
+      "amount": 250.0,
+      "currency": "EGP"
+    },
+    {
+      "user_message": "I paid 450 EGP for my electricity bill.",
+      "expense_description": "Electricity bill",
+      "amount": 450.0,
+      "currency": "EGP"
+    },
+    {
+      "user_message": "I bought medicine from the pharmacy for 300 EGP.",
+      "expense_description": "Pharmacy medicine",
+      "amount": 300.0,
+      "currency": "EGP"
+    }
+  ]
+}
