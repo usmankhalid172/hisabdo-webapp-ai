@@ -1,0 +1,13 @@
+description,expected_category,test_type
+KFC dinner,Food,normal
+Uber ride to university,Transport,normal
+Electricity bill payment,Utilities,normal
+Pharmacy medicine,Healthcare,normal
+Bought groceries from Imtiaz,Groceries,realistic
+Netflix monthly subscription,Bills,realistic
+New laptop purchase,Shopping,realistic
+University tuition payment,Education,realistic
+Concert ticket,Entertainment,realistic
+Random xyz qwerty,Other,edge_case
+Payment made,,edge_case
+Dinner,,edge_case

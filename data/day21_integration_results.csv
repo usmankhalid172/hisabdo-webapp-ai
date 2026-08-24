@@ -1,0 +1,13 @@
+description,expected_category,test_type,predicted_category,confidence,accepted,correct,error
+KFC dinner,Food,normal,Food,0.332728432644598,False,True,
+Uber ride to university,Transport,normal,Transport,0.46345802888754367,False,True,
+Electricity bill payment,Utilities,normal,Utilities,0.7411391187251984,True,True,
+Pharmacy medicine,Healthcare,normal,Healthcare,0.47959786215236416,False,True,
+Bought groceries from Imtiaz,Groceries,realistic,Shopping,0.44100217163160027,False,False,
+Netflix monthly subscription,Bills,realistic,Bills,0.2584747495062463,False,True,
+New laptop purchase,Shopping,realistic,Other,0.24990139446471116,False,False,
+University tuition payment,Education,realistic,Education,0.42472140095360655,False,True,
+Concert ticket,Entertainment,realistic,Entertainment,0.5552455140070807,True,True,
+Random xyz qwerty,Other,edge_case,Other,0.21035852099254065,False,True,
+Payment made,,edge_case,Bills,0.3817930019885623,False,False,
+Dinner,,edge_case,Food,0.332728432644598,False,False,
