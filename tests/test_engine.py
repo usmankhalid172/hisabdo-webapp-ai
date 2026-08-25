@@ -54,6 +54,17 @@ class AssistantUseCaseTests(unittest.TestCase):
         self.assertNotIn("retrieved chunk", result.response)  # grounded text
         self.assertEqual(result.validation, "pass")
 
+    def test_recurring_expenses_fetches_help_document(self):
+        # Task 15-25: a recurring-expenses question must fetch the matching
+        # help-document section via RAG and answer without any fallback error.
+        result = self.assistant.ask("How do I manage recurring expenses?")
+        self.assertEqual(result.intent, "SAVING_TIP")
+        self.assertGreater(len(result.retrieved), 0)
+        titles = [rc.chunk.title for rc in result.retrieved]
+        self.assertIn("Managing recurring expenses", titles)
+        self.assertIn("recurring", result.response.lower())
+        self.assertEqual(result.validation, "pass")
+
     def test_unsupported_question(self):
         result = self.assistant.ask("Tell me a joke")
         self.assertEqual(result.intent, "UNSUPPORTED")

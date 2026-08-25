@@ -90,6 +90,16 @@ _SAVING_ANCHORS = (
     "reduce expenses", "ways to save", "how to save",
 )
 
+# Anchor words for knowledge-base help topics (e.g. recurring expenses).
+# Checked AFTER the financial-intent anchors so a query like
+# "how much did I spend on subscriptions this month?" still routes to
+# MONTHLY_EXPENSE; these only catch questions that would otherwise be
+# ambiguous/unsupported but match a known knowledge-base topic.
+_KNOWLEDGE_ANCHORS = (
+    "recurring expense", "recurring cost", "recurring payment", "recurring",
+    "subscription", "monthly bill", "fixed expenses",
+)
+
 
 @dataclass
 class IntentResult:
@@ -229,6 +239,14 @@ def detect_intent(question: str) -> IntentResult:
                             period=period, category=category,
                             matched=["category scoped", f"category={category}",
                                      f"period={period}"])
+
+    # --- Knowledge-base help topics (e.g. "How do I manage recurring
+    #     expenses?") -> route to the RAG-backed SAVING_TIP flow so the
+    #     assistant fetches relevant help-document sections instead of
+    #     answering with a clarification or out-of-scope fallback.
+    if any(anchor in norm for anchor in _KNOWLEDGE_ANCHORS):
+        return IntentResult(intent="SAVING_TIP", confidence=0.7,
+                            matched=["knowledge anchor"])
 
     # --- AMBIGUOUS ---
     financial_marker = any(

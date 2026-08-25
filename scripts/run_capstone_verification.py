@@ -64,6 +64,8 @@ SAMPLE_QUERIES = [
     ("Spending summary (explicit month)",
      "Give me a spending summary for July 2026", REFERENCE_DATE),
     ("Saving tip via RAG retrieval", "Give me saving tips", None),
+    ("Recurring-expenses help via RAG",
+     "How do I manage recurring expenses?", None),
     ("Out-of-scope safe fallback", "Tell me a joke (unsupported check)",
      None),
 ]

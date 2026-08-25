@@ -62,6 +62,24 @@ class IntentDetectionTests(unittest.TestCase):
         r = detect_intent("Give me saving tips")
         self.assertEqual(r.intent, "SAVING_TIP")
 
+    def test_recurring_expenses_routes_to_knowledge_flow(self):
+        # Task 15-25: help-document questions about recurring expenses must
+        # reach the RAG-backed flow instead of falling back to AMBIGUOUS.
+        r = detect_intent("How do I manage recurring expenses?")
+        self.assertEqual(r.intent, "SAVING_TIP")
+        self.assertIn("knowledge anchor", r.matched)
+
+    def test_subscription_question_routes_to_knowledge_flow(self):
+        r = detect_intent("What should I know about subscriptions?")
+        self.assertEqual(r.intent, "SAVING_TIP")
+
+    def test_category_period_query_still_monthly_despite_subscription_word(self):
+        # A concrete financial query mentioning "subscription" must keep the
+        # MONTHLY_EXPENSE route (knowledge anchors are lower priority).
+        r = detect_intent("How much did I spend on subscriptions this month?")
+        self.assertEqual(r.intent, "MONTHLY_EXPENSE")
+        self.assertIn("period anchor", r.matched)
+
     def test_greeting(self):
         r = detect_intent("hello!")
         self.assertEqual(r.intent, "GREETING")

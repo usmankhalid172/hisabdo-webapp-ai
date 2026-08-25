@@ -27,6 +27,8 @@ _SECTION_TAGS = {
     "Reduce dining-out costs to save": ["dining", "restaurant", "cook", "save"],
     "Cut grocery spending to save": ["grocery", "groceries", "shopping", "save"],
     "Reduce transport and fuel to save": ["transport", "fuel", "car", "save"],
+    "Managing recurring expenses": ["recurring", "subscription", "bill",
+                                    "expense", "save"],
 }
 
 

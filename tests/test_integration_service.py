@@ -196,6 +196,22 @@ class AssistantEndpointTests(unittest.TestCase):
         self.assertEqual(payload["intent"], "SAVING_TIP")
         self.assertGreater(len(payload["retrieved"]), 0)
 
+    def test_v1_query_recurring_expenses_fetches_document_without_crash(self):
+        # Task 15-25: the API route must fetch the relevant help-document
+        # section for a recurring-expenses query and return 200 (no crash).
+        response = self.client.post(
+            "/v1/assistant/query",
+            json={"question": "How do I handle recurring expenses?"},
+        )
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["intent"], "SAVING_TIP")
+        self.assertEqual(payload["validation"], "pass")
+        titles = [item["title"] for item in payload["retrieved"]]
+        self.assertIn("Managing recurring expenses", titles)
+        self.assertIn("latency_ms", payload)
+
     def test_v1_query_invalid_reference_date_maps_to_422(self):
         response = self.client.post(
             "/v1/assistant/query",

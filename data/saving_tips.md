@@ -17,3 +17,6 @@ Grocery costs can be lowered by planning meals in advance, writing a shopping li
 
 ## Reduce transport and fuel to save
 Transport spending decreases when you combine errands into fewer trips, use metro passes instead of ride-hailing, and keep the car tyres inflated for better fuel use. Carpooling and choosing cheaper fuel stations are effective low-effort ways to save. Choose walking or cycling for short distance trips.
+
+## Managing recurring expenses
+Recurring expenses are charges that repeat on a schedule, such as rent, utilities, internet, and streaming subscriptions. List every recurring item once with its due date and amount so payments never surprise you at the end of the month. Review subscriptions quarterly and cancel the ones you no longer use, since small monthly charges add up over a year. Setting payment reminders or automating bills avoids late fees, and negotiating rates or switching providers can lower these fixed costs over time.

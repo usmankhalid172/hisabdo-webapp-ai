@@ -74,7 +74,7 @@ prove grounding (no hallucinated figures).
 ## 4. Retrieval / RAG dependencies
 
 - `knowledge_base.py` — loads `data/saving_tips.md`, chunks on `##` headings,
-  attaches `tags` metadata (5 chunks).
+  attaches `tags` metadata (6 chunks incl. recurring-expenses help topic).
 - `retriever.py` — keyword-overlap + tag-score retrieval (top-K default 3,
   `min_score` floor). Returns empty when nothing is relevant → safe fallback.
 - `rag.py` — retriever abstraction and wiring (default keyword retriever;

@@ -16,7 +16,7 @@ verified through the deterministic offline pipeline (no LLM/API required) and
 through the FastAPI `POST /chat` endpoint.
 
 Reference data: `data/sample_transactions.csv` (synthetic, June-August 2026).
-Knowledge base: `data/saving_tips.md` (5 chunks, tag metadata).
+Knowledge base: `data/saving_tips.md` (6 chunks incl. "Managing recurring expenses", tag metadata).
 
 ---
 

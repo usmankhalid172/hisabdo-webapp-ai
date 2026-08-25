@@ -33,6 +33,24 @@ HisabDo App / Backend
   <- plain JSON consumed by the application
 ```
 
+## 1b. Help-document retrieval for recurring expenses (Task 15-25)
+
+Knowledge questions such as "How do I manage recurring expenses?" now fetch
+the matching help-document section from the knowledge base through the same
+RAG flow:
+
+- New KB chunk: `Managing recurring expenses` in `data/saving_tips.md`
+  (tags: recurring, subscription, bill, expense, save) — KB is now **6 chunks**.
+- New intent routing in `intents.py` (`_KNOWLEDGE_ANCHORS`, matched label
+  `knowledge anchor`): checked AFTER all financial intents, so concrete
+  queries like "How much did I spend on subscriptions this month?" still
+  route to MONTHLY_EXPENSE; only otherwise ambiguous/unsupported knowledge
+  questions route to the RAG-backed flow.
+- Verified end to end (adapter + HTTP): retrieved section title returned,
+  `validation: pass`, no crash; graceful 422 on invalid input unchanged.
+- Evidence: `docs/evidence/task15-25-rag-backend-log.txt`,
+  `docs/evidence/task15-25-live-api-log.txt`.
+
 ## 2. Data-source connection (backend hand-over path)
 
 `AssistantService(transactions_source=...)` accepts three sources so the
