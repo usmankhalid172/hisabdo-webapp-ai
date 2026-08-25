@@ -224,16 +224,20 @@ def get_fallback_response(reason: str) -> str:
 # LLM call
 # ---------------------------------------------------------------------------
 
-def _call_llm_api(
-    user_question: str,
+def _call_llm_api_with_messages(
+    messages: list,
     config: LLMConfig,
     client: Optional[OpenAI] = None,
 ) -> str:
     """
-    Makes a single call to the LLM API. Raises LLMRequestError on any
-    failure (timeout, connection error, API error). No retry logic here —
-    retries are handled by the caller so behavior is easy to reason about
-    and test.
+    Makes a single call to the LLM API with a caller-supplied message list.
+
+    Day 23-24 addition: extracted from `_call_llm_api` so the RAG/prompt-chain
+    module (`rag_prompt_chain.py`) can reuse the exact same tested
+    timeout/rate-limit/error handling with a grounded (context-injected)
+    message list, instead of duplicating this logic. `_call_llm_api` below
+    is now a thin wrapper that builds the standard 2-message list and
+    delegates here — its external behavior is unchanged.
     """
     client = client or _get_client()
 
@@ -241,10 +245,7 @@ def _call_llm_api(
         response = client.chat.completions.create(
             model=config.model,
             timeout=config.timeout_seconds,
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": user_question},
-            ],
+            messages=messages,
         )
     except APITimeoutError as exc:
         raise LLMRequestError(f"LLM request timed out after {config.timeout_seconds}s") from exc
@@ -262,6 +263,26 @@ def _call_llm_api(
 
     if content is None:
         raise LLMRequestError("LLM response contained no message content.")
+
+    return content
+
+
+def _call_llm_api(
+    user_question: str,
+    config: LLMConfig,
+    client: Optional[OpenAI] = None,
+) -> str:
+    """
+    Makes a single call to the LLM API using the standard system prompt and
+    a plain user question. Raises LLMRequestError on any failure (timeout,
+    connection error, API error). No retry logic here — retries are handled
+    by the caller so behavior is easy to reason about and test.
+    """
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": user_question},
+    ]
+    return _call_llm_api_with_messages(messages, config, client=client)
 
     return content
 
