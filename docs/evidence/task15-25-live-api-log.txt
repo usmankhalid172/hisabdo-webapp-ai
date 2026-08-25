@@ -1,0 +1,31 @@
+==========================================================================
+TASK 15-25 LIVE API EVIDENCE - recurring-expenses RAG over real HTTP
+Server: http://127.0.0.1:8022  (started 2026-08-26T01:13:59)
+==========================================================================
+--- GET /v1/assistant/health ---
+{
+    "status":  "ok",
+    "intents_supported":  [
+                              "MONTHLY_EXPENSE",
+                              "HIGHEST_CATEGORY",
+                              "SPENDING_SUMMARY",
+                              "SAVING_TIP"
+                          ],
+    "knowledge_base_chunks":  6,
+    "transactions_loaded":  37,
+    "llm_available":  false,
+    "service":  "hisabdo-ai-assistant",
+    "version":  "0.1.0",
+    "data_source":  "default_csv"
+}
+
+--- POST /v1/assistant/query (recurring expenses) ---
+status       : ok
+intent       : SAVING_TIP
+validation   : pass
+retrieved    : Managing recurring expenses
+response     : Here are some saving tips I found in my knowledge base:
+- Managing recurring expenses: Recurring expenses are charges that repeat on a schedule, such as rent, utilities, internet, and streaming subscriptions. List every recurring item once with its due date and amount so payments never surprise you at the end of the month. Review subscriptions quarterly and cancel the ones you no longer use, since small monthly charges add up over a year. Setting payment reminders or automating bills avoids late fees, and negotiating rates or switching providers can lower these fixed costs over time.
+Note: these are general suggestions from the HisabDo knowledge base, not personalised financial advice.
+
+--- empty-question graceful error -> HTTP 422 (no crash) ---

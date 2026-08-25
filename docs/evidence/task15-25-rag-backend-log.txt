@@ -1,0 +1,123 @@
+==========================================================================
+TASK 15-25 EVIDENCE - Chatbot/RAG backend integration (capstone scenarios)
+Captured: 2026-08-26 - 92/92 tests pass
+Includes recurring-expenses help-document retrieval (KB now 6 chunks)
+==========================================================================
+==========================================================================
+SCENARIO A - IN-PROCESS AssistantService (injected backend records)
+==========================================================================
+
+health() -> {"status": "ok", "service": "hisabdo-ai-assistant", "version": "0.1.0", "intents_supported": ["MONTHLY_EXPENSE", "HIGHEST_CATEGORY", "SPENDING_SUMMARY", "SAVING_TIP"], "knowledge_base_chunks": 6, "transactions_loaded": 4, "llm_available": false, "data_source": "injected_records"}
+
+--- Monthly expense (this month) ---
+request    : {"question": "How much did I spend this month?", "reference_date": "2026-08-20"}
+status     : ok  intent=MONTHLY_EXPENSE period=2026-08 latency=0.3ms
+validation : pass
+response   : Your total spending for August 2026 was PKR 57.00 across 1 transactions.
+
+--- Last-month total ---
+request    : {"question": "What was my total spending last month?", "reference_date": "2026-08-20"}
+status     : ok  intent=MONTHLY_EXPENSE period=2026-07 latency=0.2ms
+validation : pass
+response   : Your total spending for July 2026 was PKR 125.25 across 3 transactions.
+
+--- Highest spending category ---
+request    : {"question": "What is my highest spending category?"}
+status     : ok  intent=HIGHEST_CATEGORY period=None latency=0.2ms
+validation : pass
+response   : Your highest spending category over the available data was Groceries at PKR 99.75.
+
+--- Spending summary (explicit month) ---
+request    : {"question": "Give me a spending summary for July 2026", "reference_date": "2026-08-20"}
+status     : ok  intent=SPENDING_SUMMARY period=2026-07 latency=0.2ms
+validation : pass
+response   : Here is your spending summary for July 2026 (total PKR 125.25):
+- Groceries: PKR 99.75
+- Transport: PKR 25.50
+
+--- Saving tip via RAG retrieval ---
+request    : {"question": "Give me saving tips"}
+status     : ok  intent=SAVING_TIP period=None latency=0.1ms
+validation : pass
+response   : Here are some saving tips I found in my knowledge base:
+- Budgeting money: Budgeting means planning your spending before the month begins. A simple method is to set a spending limit for each category, such as groceries, dining, transport, and entertainment. Track every transaction so you can compare your actual spending with your plan at the end of the month. Keeping a budget helps you avoid overspending, saves money, and makes it easier to reach a saving goal.
+Note: these are general suggestions from the HisabDo knowledge base, not personalised financial advice.
+
+--- Recurring-expenses help via RAG ---
+request    : {"question": "How do I manage recurring expenses?"}
+status     : ok  intent=SAVING_TIP period=None latency=0.1ms
+validation : pass
+response   : Here are some saving tips I found in my knowledge base:
+- Managing recurring expenses: Recurring expenses are charges that repeat on a schedule, such as rent, utilities, internet, and streaming subscriptions. List every recurring item once with its due date and amount so payments never surprise you at the end of the month. Review subscriptions quarterly and cancel the ones you no longer use, since small monthly charges add up over a year. Setting payment reminders or automating bills avoids late fees, and negotiating rates or switching providers can lower these fixed costs over time.
+Note: these are general suggestions from the HisabDo knowledge base, not personalised financial advice.
+
+--- Out-of-scope safe fallback ---
+request    : {"question": "Tell me a joke (unsupported check)"}
+status     : ok  intent=UNSUPPORTED period=None latency=0.0ms
+validation : pass
+response   : I am a financial assistant and can only help with questions about your expenses, spending summaries, and saving tips. Ask me for help if you would like examples of what I can do.
+
+==========================================================================
+SCENARIO B - HTTP FLOW (/v1/assistant/*)
+==========================================================================
+
+GET /v1/assistant/health -> 200 {"status": "ok", "intents_supported": ["MONTHLY_EXPENSE", "HIGHEST_CATEGORY", "SPENDING_SUMMARY", "SAVING_TIP"], "knowledge_base_chunks": 6, "transactions_loaded": 37, "llm_available": false, "service": "hisabdo-ai-assistant", "version": "0.1.0", "data_source": "default_csv"}
+
+--- Monthly expense (this month) ---
+POST /v1/assistant/query -> 200
+request    : {"question": "How much did I spend this month?", "reference_date": "2026-08-20"}
+status     : ok  intent=MONTHLY_EXPENSE period=2026-08 latency=2.7ms
+validation : pass
+response   : Your total spending for August 2026 was PKR 410.35 across 10 transactions.
+
+--- Last-month total ---
+POST /v1/assistant/query -> 200
+request    : {"question": "What was my total spending last month?", "reference_date": "2026-08-20"}
+status     : ok  intent=MONTHLY_EXPENSE period=2026-07 latency=2.8ms
+validation : pass
+response   : Your total spending for July 2026 was PKR 610.44 across 14 transactions.
+
+--- Highest spending category ---
+POST /v1/assistant/query -> 200
+request    : {"question": "What is my highest spending category?"}
+status     : ok  intent=HIGHEST_CATEGORY period=None latency=2.7ms
+validation : pass
+response   : Your highest spending category over the available data was Groceries at PKR 583.30.
+
+--- Spending summary (explicit month) ---
+POST /v1/assistant/query -> 200
+request    : {"question": "Give me a spending summary for July 2026", "reference_date": "2026-08-20"}
+status     : ok  intent=SPENDING_SUMMARY period=2026-07 latency=3.4ms
+validation : pass
+response   : Here is your spending summary for July 2026 (total PKR 610.44):
+- Groceries: PKR 215.75
+- Food: PKR 113.00
+- Entertainment: PKR 103.99
+- Utilities: PKR 89.50
+- Transport: PKR 55.00
+- Healthcare: PKR 33.20
+
+--- Saving tip via RAG retrieval ---
+POST /v1/assistant/query -> 200
+request    : {"question": "Give me saving tips"}
+status     : ok  intent=SAVING_TIP period=None latency=2.7ms
+validation : pass
+response   : Here are some saving tips I found in my knowledge base:
+- Budgeting money: Budgeting means planning your spending before the month begins. A simple method is to set a spending limit for each category, such as groceries, dining, transport, and entertainment. Track every transaction so you can compare your actual spending with your plan at the end of the month. Keeping a budget helps you avoid overspending, saves money, and makes it easier to reach a saving goal.
+Note: these are general suggestions from the HisabDo knowledge base, not personalised financial advice.
+
+--- Recurring-expenses help via RAG ---
+POST /v1/assistant/query -> 200
+request    : {"question": "How do I manage recurring expenses?"}
+status     : ok  intent=SAVING_TIP period=None latency=3.4ms
+validation : pass
+response   : Here are some saving tips I found in my knowledge base:
+- Managing recurring expenses: Recurring expenses are charges that repeat on a schedule, such as rent, utilities, internet, and streaming subscriptions. List every recurring item once with its due date and amount so payments never surprise you at the end of the month. Review subscriptions quarterly and cancel the ones you no longer use, since small monthly charges add up over a year. Setting payment reminders or automating bills avoids late fees, and negotiating rates or switching providers can lower these fixed costs over time.
+Note: these are general suggestions from the HisabDo knowledge base, not personalised financial advice.
+
+--- Out-of-scope safe fallback ---
+POST /v1/assistant/query -> 200
+request    : {"question": "Tell me a joke (unsupported check)"}
+status     : ok  intent=UNSUPPORTED period=None latency=0.1ms
+validation : pass
+response   : I am a financial assistant and can only help with questions about your expenses, spending summaries, and saving tips. Ask me for help if you would like examples of what I can do.

@@ -1,0 +1,419 @@
+{
+  "generated_by": "scripts/run_capstone_verification.py",
+  "service": "hisabdo-ai-assistant 0.1.0",
+  "generated_on": "2026-08-23",
+  "note": "Sample inputs/outputs for the capstone-integrated chatbot/RAG flow (Day 21).",
+  "scenarios": {
+    "in_process_adapter": [
+      {
+        "scenario": "in_process_adapter",
+        "label": "Monthly expense (this month)",
+        "request": {
+          "question": "How much did I spend this month?",
+          "reference_date": "2026-08-20"
+        },
+        "response": {
+          "status": "ok",
+          "question": "How much did I spend this month?",
+          "intent": "MONTHLY_EXPENSE",
+          "confidence": 0.75,
+          "response": "Your total spending for August 2026 was PKR 57.00 across 1 transactions.",
+          "period": "2026-08",
+          "category": null,
+          "facts": {
+            "period": "2026-08",
+            "total": 57.0,
+            "count": 1,
+            "categories": {
+              "Utilities": 57.0
+            }
+          },
+          "retrieved": [],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "period anchor",
+            "period=None",
+            "category=None"
+          ],
+          "latency_ms": 0.3
+        }
+      },
+      {
+        "scenario": "in_process_adapter",
+        "label": "Last-month total",
+        "request": {
+          "question": "What was my total spending last month?",
+          "reference_date": "2026-08-20"
+        },
+        "response": {
+          "status": "ok",
+          "question": "What was my total spending last month?",
+          "intent": "MONTHLY_EXPENSE",
+          "confidence": 0.75,
+          "response": "Your total spending for July 2026 was PKR 125.25 across 3 transactions.",
+          "period": "2026-07",
+          "category": null,
+          "facts": {
+            "period": "2026-07",
+            "total": 125.25,
+            "count": 3,
+            "categories": {
+              "Groceries": 99.75,
+              "Transport": 25.5
+            }
+          },
+          "retrieved": [],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "period anchor",
+            "period=None",
+            "category=None"
+          ],
+          "latency_ms": 0.2
+        }
+      },
+      {
+        "scenario": "in_process_adapter",
+        "label": "Highest spending category",
+        "request": {
+          "question": "What is my highest spending category?"
+        },
+        "response": {
+          "status": "ok",
+          "question": "What is my highest spending category?",
+          "intent": "HIGHEST_CATEGORY",
+          "confidence": 0.85,
+          "response": "Your highest spending category over the available data was Groceries at PKR 99.75.",
+          "period": null,
+          "category": null,
+          "facts": {
+            "category": "Groceries",
+            "amount": 99.75,
+            "count": 2
+          },
+          "retrieved": [],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "highest anchor",
+            "category=None"
+          ],
+          "latency_ms": 0.2
+        }
+      },
+      {
+        "scenario": "in_process_adapter",
+        "label": "Spending summary (explicit month)",
+        "request": {
+          "question": "Give me a spending summary for July 2026",
+          "reference_date": "2026-08-20"
+        },
+        "response": {
+          "status": "ok",
+          "question": "Give me a spending summary for July 2026",
+          "intent": "SPENDING_SUMMARY",
+          "confidence": 0.8,
+          "response": "Here is your spending summary for July 2026 (total PKR 125.25):\n- Groceries: PKR 99.75\n- Transport: PKR 25.50",
+          "period": "2026-07",
+          "category": null,
+          "facts": {
+            "period": "2026-07",
+            "total": 125.25,
+            "count": 3,
+            "categories": {
+              "Groceries": 99.75,
+              "Transport": 25.5
+            }
+          },
+          "retrieved": [],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "summary anchor",
+            "category=None"
+          ],
+          "latency_ms": 0.2
+        }
+      },
+      {
+        "scenario": "in_process_adapter",
+        "label": "Saving tip via RAG retrieval",
+        "request": {
+          "question": "Give me saving tips"
+        },
+        "response": {
+          "status": "ok",
+          "question": "Give me saving tips",
+          "intent": "SAVING_TIP",
+          "confidence": 0.9,
+          "response": "Here are some saving tips I found in my knowledge base:\n- Budgeting money: Budgeting means planning your spending before the month begins. A simple method is to set a spending limit for each category, such as groceries, dining, transport, and entertainment. Track every transaction so you can compare your actual spending with your plan at the end of the month. Keeping a budget helps you avoid overspending, saves money, and makes it easier to reach a saving goal.\nNote: these are general suggestions from the HisabDo knowledge base, not personalised financial advice.",
+          "period": null,
+          "category": null,
+          "facts": {
+            "source": "data/saving_tips.md",
+            "retrieved": [
+              "Budgeting to save money"
+            ]
+          },
+          "retrieved": [
+            {
+              "title": "Budgeting to save money",
+              "score": 0.2965,
+              "text": "Budgeting means planning your spending before the month begins. A simple method is to set a spending limit for each category, such as groceries, dining, transport, and entertainment. Track every transaction so you can compare your actual spending with your plan at the end of the month. Keeping a budget helps you avoid overspending, saves money, and makes it easier to reach a saving goal."
+            }
+          ],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "saving anchor"
+          ],
+          "latency_ms": 0.1
+        }
+      },
+      {
+        "scenario": "in_process_adapter",
+        "label": "Out-of-scope safe fallback",
+        "request": {
+          "question": "Tell me a joke (unsupported check)"
+        },
+        "response": {
+          "status": "ok",
+          "question": "Tell me a joke (unsupported check)",
+          "intent": "UNSUPPORTED",
+          "confidence": 0.5,
+          "response": "I am a financial assistant and can only help with questions about your expenses, spending summaries, and saving tips. Ask me for help if you would like examples of what I can do.",
+          "period": null,
+          "category": null,
+          "facts": {},
+          "retrieved": [],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "no match"
+          ],
+          "latency_ms": 0.0
+        }
+      }
+    ],
+    "http_api": [
+      {
+        "scenario": "http_api",
+        "label": "Monthly expense (this month)",
+        "request": {
+          "question": "How much did I spend this month?",
+          "reference_date": "2026-08-20"
+        },
+        "response": {
+          "question": "How much did I spend this month?",
+          "intent": "MONTHLY_EXPENSE",
+          "confidence": 0.75,
+          "response": "Your total spending for August 2026 was PKR 410.35 across 10 transactions.",
+          "period": "2026-08",
+          "category": null,
+          "facts": {
+            "period": "2026-08",
+            "total": 410.35,
+            "count": 10,
+            "categories": {
+              "Groceries": 155.55,
+              "Food": 98.5,
+              "Utilities": 57.0,
+              "Transport": 47.9,
+              "Healthcare": 26.4,
+              "Entertainment": 25.0
+            }
+          },
+          "retrieved": [],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "period anchor",
+            "period=None",
+            "category=None"
+          ],
+          "status": "ok",
+          "latency_ms": 0.4
+        }
+      },
+      {
+        "scenario": "http_api",
+        "label": "Last-month total",
+        "request": {
+          "question": "What was my total spending last month?",
+          "reference_date": "2026-08-20"
+        },
+        "response": {
+          "question": "What was my total spending last month?",
+          "intent": "MONTHLY_EXPENSE",
+          "confidence": 0.75,
+          "response": "Your total spending for July 2026 was PKR 610.44 across 14 transactions.",
+          "period": "2026-07",
+          "category": null,
+          "facts": {
+            "period": "2026-07",
+            "total": 610.44,
+            "count": 14,
+            "categories": {
+              "Groceries": 215.75,
+              "Food": 113.0,
+              "Entertainment": 103.99,
+              "Utilities": 89.5,
+              "Transport": 55.0,
+              "Healthcare": 33.2
+            }
+          },
+          "retrieved": [],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "period anchor",
+            "period=None",
+            "category=None"
+          ],
+          "status": "ok",
+          "latency_ms": 0.3
+        }
+      },
+      {
+        "scenario": "http_api",
+        "label": "Highest spending category",
+        "request": {
+          "question": "What is my highest spending category?"
+        },
+        "response": {
+          "question": "What is my highest spending category?",
+          "intent": "HIGHEST_CATEGORY",
+          "confidence": 0.85,
+          "response": "Your highest spending category over the available data was Groceries at PKR 583.30.",
+          "period": null,
+          "category": null,
+          "facts": {
+            "category": "Groceries",
+            "amount": 583.3,
+            "count": 11
+          },
+          "retrieved": [],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "highest anchor",
+            "category=None"
+          ],
+          "status": "ok",
+          "latency_ms": 0.2
+        }
+      },
+      {
+        "scenario": "http_api",
+        "label": "Spending summary (explicit month)",
+        "request": {
+          "question": "Give me a spending summary for July 2026",
+          "reference_date": "2026-08-20"
+        },
+        "response": {
+          "question": "Give me a spending summary for July 2026",
+          "intent": "SPENDING_SUMMARY",
+          "confidence": 0.8,
+          "response": "Here is your spending summary for July 2026 (total PKR 610.44):\n- Groceries: PKR 215.75\n- Food: PKR 113.00\n- Entertainment: PKR 103.99\n- Utilities: PKR 89.50\n- Transport: PKR 55.00\n- Healthcare: PKR 33.20",
+          "period": "2026-07",
+          "category": null,
+          "facts": {
+            "period": "2026-07",
+            "total": 610.44,
+            "count": 14,
+            "categories": {
+              "Groceries": 215.75,
+              "Food": 113.0,
+              "Entertainment": 103.99,
+              "Utilities": 89.5,
+              "Transport": 55.0,
+              "Healthcare": 33.2
+            }
+          },
+          "retrieved": [],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "summary anchor",
+            "category=None"
+          ],
+          "status": "ok",
+          "latency_ms": 0.3
+        }
+      },
+      {
+        "scenario": "http_api",
+        "label": "Saving tip via RAG retrieval",
+        "request": {
+          "question": "Give me saving tips"
+        },
+        "response": {
+          "question": "Give me saving tips",
+          "intent": "SAVING_TIP",
+          "confidence": 0.9,
+          "response": "Here are some saving tips I found in my knowledge base:\n- Budgeting money: Budgeting means planning your spending before the month begins. A simple method is to set a spending limit for each category, such as groceries, dining, transport, and entertainment. Track every transaction so you can compare your actual spending with your plan at the end of the month. Keeping a budget helps you avoid overspending, saves money, and makes it easier to reach a saving goal.\nNote: these are general suggestions from the HisabDo knowledge base, not personalised financial advice.",
+          "period": null,
+          "category": null,
+          "facts": {
+            "source": "data/saving_tips.md",
+            "retrieved": [
+              "Budgeting to save money"
+            ]
+          },
+          "retrieved": [
+            {
+              "title": "Budgeting to save money",
+              "score": 0.2965,
+              "text": "Budgeting means planning your spending before the month begins. A simple method is to set a spending limit for each category, such as groceries, dining, transport, and entertainment. Track every transaction so you can compare your actual spending with your plan at the end of the month. Keeping a budget helps you avoid overspending, saves money, and makes it easier to reach a saving goal."
+            }
+          ],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "saving anchor"
+          ],
+          "status": "ok",
+          "latency_ms": 0.3
+        }
+      },
+      {
+        "scenario": "http_api",
+        "label": "Out-of-scope safe fallback",
+        "request": {
+          "question": "Tell me a joke (unsupported check)"
+        },
+        "response": {
+          "question": "Tell me a joke (unsupported check)",
+          "intent": "UNSUPPORTED",
+          "confidence": 0.5,
+          "response": "I am a financial assistant and can only help with questions about your expenses, spending summaries, and saving tips. Ask me for help if you would like examples of what I can do.",
+          "period": null,
+          "category": null,
+          "facts": {},
+          "retrieved": [],
+          "validation": "pass",
+          "validation_notes": [],
+          "llm_used": false,
+          "matched": [
+            "no match"
+          ],
+          "status": "ok",
+          "latency_ms": 0.1
+        }
+      }
+    ]
+  }
+}
