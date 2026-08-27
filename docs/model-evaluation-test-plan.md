@@ -110,3 +110,76 @@ The following evidence should be maintained during implementation:
 ## 8. Future Improvement
 
 Evaluation results will be used to improve the Smart Expense Categorization model through better data quality, additional training examples, feature improvements, and model/hyperparameter tuning where appropriate.
+## 9. Day 17 Realistic Scenario Evaluation
+Dataset and Model
+
+Model: TF-IDF + Logistic Regression
+Training rows: 397
+Testing rows: 103
+Unique descriptions: 200
+Description overlap between training and testing: 0
+
+Overall Evaluation Metrics
+
+Metric	Result
+Accuracy	78.64%
+Precision (weighted)	85.92%
+Recall (weighted)	78.64%
+F1-score (weighted)	79.03%
+
+Normal Test Cases
+
+Test Input	Expected	Predicted	Result
+Bought vegetables from grocery store	Groceries	Groceries	Correct
+Paid electricity bill	Utilities	Utilities	Correct
+Had lunch at a restaurant	Food	Food	Correct
+Paid university tuition fee	Education	Education	Correct
+Bought medicine from pharmacy	Healthcare	Healthcare	Correct
+Uber ride to work	Transport	Transport	Correct
+Bought a new shirt online	Shopping	Shopping	Correct
+Movie theater ticket	Entertainment	Entertainment	Correct
+Paid internet bill	Bills	Bills	Correct
+
+Normal test result: 9/9 correct.
+
+Ambiguous Test Cases
+
+Test Input	Model Prediction	Observation
+Payment for electricity and groceries	Utilities	Contains multiple possible categories; prediction is context-dependent.
+Apple	Healthcare	Ambiguous because the input does not clearly describe an expense.
+Spotify subscription	Bills	Could reasonably be Entertainment depending on category definition.
+Netflix subscription	Bills	Could reasonably be Entertainment depending on category definition.
+
+Edge-Case Test Cases
+
+Test Input	Model Prediction	Observation
+123456789	Healthcare	Invalid/non-expense input was still assigned a category.
+xyz random payment	Bills	Unclear input was still assigned a category.
+!!!	Healthcare	Invalid input was still assigned a category.
+Empty input	Healthcare	Empty input was still assigned a category.
+
+Error Analysis
+
+The main observed error patterns were:
+
+Ambiguous descriptions: Inputs such as Apple do not provide enough context to determine the correct expense category.
+Subscription category confusion: Spotify and Netflix were classified as Bills, although they may reasonably belong to Entertainment depending on the application's category definition.
+Invalid input handling: Numeric, meaningless, punctuation-only, and empty inputs were still assigned categories.
+Category-level weakness: The evaluation showed lower recall for Entertainment (0.55) and lower precision for Groceries (0.33).
+
+Improvement Recommendations
+
+Add more representative examples for Groceries and Entertainment.
+Define clearer rules for subscription-related categories.
+Add input validation before sending descriptions to the classifier.
+Reject empty, numeric-only, punctuation-only, or meaningless descriptions.
+Add confidence-based handling for uncertain predictions.
+Expand the test dataset with more realistic and ambiguous transactions.
+
+Evaluation Status
+
+Completed. The Smart Expense Categorization model was successfully trained and evaluated using the available dataset. Normal, ambiguous, and edge-case scenarios were tested, and error patterns were documented.
+
+Confusion Matrix
+
+A confusion matrix was generated from the 103-record test set and confirms the observed category-level error patterns.
