@@ -1,0 +1,95 @@
+==========================================================================
+TERMINAL EVIDENCE - AI Financial Assistant / Chatbot - RAG flow
+Captured: 2026-08-21 (63/63 tests pass)
+Note: transaction categories aligned with shared Smart Expense taxonomy (Food, Healthcare)
+==========================================================================
+==========================================================================
+TERMINAL EVIDENCE - AI Financial Assistant / Chatbot - RAG flow
+==========================================================================
+
+--- MockMonthly Expense Query ---
+Q          : How much did I spend this month?
+intent     : MONTHLY_EXPENSE  (confidence=0.75)
+period     : 2026-08
+retrieved  : []
+validation : pass []
+answer     : Your total spending for August 2026 was PKR 410.35 across 10 transactions.
+
+--- MockMonthly Expense Query ---
+Q          : What was my total spending last month?
+intent     : MONTHLY_EXPENSE  (confidence=0.75)
+period     : 2026-07
+retrieved  : []
+validation : pass []
+answer     : Your total spending for July 2026 was PKR 610.44 across 14 transactions.
+
+--- Highest Spending Category ---
+Q          : What is my highest spending category?
+intent     : HIGHEST_CATEGORY  (confidence=0.85)
+period     : None
+retrieved  : []
+validation : pass []
+answer     : Your highest spending category over the available data was Groceries at PKR 583.30.
+
+--- Spending-Summary Question ---
+Q          : Give me a spending summary for July
+intent     : SPENDING_SUMMARY  (confidence=0.8)
+period     : 2026-07
+retrieved  : []
+validation : pass []
+answer     : Here is your spending summary for July 2026 (total PKR 610.44):
+- Groceries: PKR 215.75
+- Food: PKR 113.00
+- Entertainment: PKR 103.99
+- Utilities: PKR 89.50
+- Transport: PKR 55.00
+- Healthcare: PKR 33.20
+
+--- Saving-Tip Request ---
+Q          : How can I save money?
+intent     : SAVING_TIP  (confidence=0.9)
+period     : None
+retrieved  : ['Reduce dining-out costs to save', 'Cut grocery spending to save']
+validation : pass []
+answer     : Here are some saving tips I found in my knowledge base:
+- Reduce dining-out costs: Dining out is often a large and easy-to-reduce expense. You can cook more meals at home, reduce how often you eat from restaurants, and set a fixed dining budget each week. Ordering water instead of drinks and splitting meals are simple ways to save money without changing your lifestyle in a big way.
+- Cut grocery spending: Grocery costs can be lowered by planning meals in advance, writing a shopping list, and buying only what is on the list. Compare prices between stores, use discounts and coupons, and buy in bulk only when the unit price is lower. Save money by avoiding shopping while hungry, because it usually leads to extra and unplanned items.
+Note: these are general suggestions from the HisabDo knowledge base, not personalised financial advice.
+
+--- Saving-Tip Request ---
+Q          : Give me saving tips
+intent     : SAVING_TIP  (confidence=0.9)
+period     : None
+retrieved  : ['Budgeting to save money']
+validation : pass []
+answer     : Here are some saving tips I found in my knowledge base:
+- Budgeting money: Budgeting means planning your spending before the month begins. A simple method is to set a spending limit for each category, such as groceries, dining, transport, and entertainment. Track every transaction so you can compare your actual spending with your plan at the end of the month. Keeping a budget helps you avoid overspending, saves money, and makes it easier to reach a saving goal.
+Note: these are general suggestions from the HisabDo knowledge base, not personalised financial advice.
+
+--- Out-of-scope (blocker evidence) ---
+Q          : Tell me a joke (unsupported check)
+intent     : UNSUPPORTED  (confidence=0.5)
+period     : None
+retrieved  : []
+validation : pass []
+answer     : I am a financial assistant and can only help with questions about your expenses, spending summaries, and saving tips. Ask me for help if you would like examples of what I can do.
+==========================================================================
+SUMMARY - supported use cases (work / status):
+  [OK] MockMonthly Expense Query
+  [OK] MockMonthly Expense Query
+  [OK] Highest Spending Category
+  [OK] Spending-Summary Question
+  [OK] Saving-Tip Request
+  [OK] Saving-Tip Request
+SUMMARY - not-yet-supported use cases (blocker/evidence):
+  [UNSUPPORTED] Out-of-scope (blocker evidence)
+==========================================================================
+API EVIDENCE - POST /chat (sample responses)
+
+POST /chat body={'question': 'How much did I spend this month?', 'intent': 'MONTHLY_EXPENSE', 'confidence': 0.75, 'response': 'Your total spending for August 2026 was PKR 410.35 across 10 transactions.', 'period': '2026-08', 'category': None, 'facts': {'period': '2026-08', 'total': 410.35, 'count': 10, 'categories': {'Groceries': 155.55, 'Food': 98.5, 'Utilities': 57.0, 'Transport': 47.9, 'Healthcare': 26.4, 'Entertainment': 25.0}}, 'retrieved': [], 'validation': 'pass', 'validation_notes': [], 'llm_used': False, 'matched': ['period anchor', 'period=None', 'category=None']}
+
+POST /chat body={'question': 'Which category did I spend the most on?', 'intent': 'HIGHEST_CATEGORY', 'confidence': 0.85, 'response': 'Your highest spending category over the available data was Groceries at PKR 583.30.', 'period': None, 'category': None, 'facts': {'category': 'Groceries', 'amount': 583.3, 'count': 11}, 'retrieved': [], 'validation': 'pass', 'validation_notes': [], 'llm_used': False, 'matched': ['highest anchor', 'category=None']}
+
+POST /chat body={'question': 'Give me saving tips', 'intent': 'SAVING_TIP', 'confidence': 0.9, 'response': 'Here are some saving tips I found in my knowledge base:\n- Budgeting money: Budgeting means planning your spending before the month begins. A simple method is to set a spending limit for each category, such as groceries, dining, transport, and entertainment. Track every transaction so you can compare your actual spending with your plan at the end of the month. Keeping a budget helps you avoid overspending, saves money, and makes it easier to reach a saving goal.\nNote: these are general suggestions from the HisabDo knowledge base, not personalised financial advice.', 'period': None, 'category': None, 'facts': {'source': 'data/saving_tips.md', 'retrieved': ['Budgeting to save money']}, 'retrieved': [{'title': 'Budgeting to save money', 'score': 0.2965, 'text': 'Budgeting means planning your spending before the month begins. A simple method is to set a spending limit for each category, such as groceries, dining, transport, and entertainment. Track every transaction so you can compare your actual spending with your plan at the end of the month. Keeping a budget helps you avoid overspending, saves money, and makes it easier to reach a saving goal.'}], 'validation': 'pass', 'validation_notes': [], 'llm_used': False, 'matched': ['saving anchor']}
+
+GET /health -> {'status': 'ok', 'intents_supported': ['MONTHLY_EXPENSE', 'HIGHEST_CATEGORY', 'SPENDING_SUMMARY', 'SAVING_TIP'], 'knowledge_base_chunks': 5, 'transactions_loaded': 37, 'llm_available': False}
