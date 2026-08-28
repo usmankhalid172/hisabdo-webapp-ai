@@ -23,19 +23,34 @@ class VersionResponse(BaseModel):
 
 # ---------- §6.1 Chatbot ----------
 
+class ChatHistoryEntry(BaseModel):
+    """One prior turn supplied by the caller for context.
+
+    ``role`` is one of ``user`` / ``assistant``; ``content`` is the turn text.
+    Typed (instead of a bare ``dict``) so malformed history payloads are
+    rejected by Pydantic rather than silently passed through (Task 27 payload
+    formatting fix).
+    """
+    role: str = Field(..., pattern=r"^(user|assistant)$")
+    content: str = Field(..., min_length=1)
+
+
 class ChatbotRequest(BaseModel):
     user_id: str
     message: str = Field(min_length=1)
     conversation_id: str
-    history: list[dict] = Field(default_factory=list)
+    history: list[ChatHistoryEntry] = Field(default_factory=list)
 
 
 class ChatbotResponse(BaseModel):
     reply: str
     conversation_id: str
+    user_id: Optional[str] = None     # echoed back for session identity
     intent: Optional[str] = None
     tokens_used: Optional[int] = None
-    source: str  # "rag" | "backend_financial_api" | "llm_general" — POC transparency, not in Day 15 contract
+    model: Optional[str] = None       # provider/model that answered (demo visibility)
+    matched_context: Optional[str] = None  # retrieved doc title when source=="rag"
+    source: str  # "rag" | "backend_financial_api" | "llm_general" | "backend_unavailable" — POC transparency, not in Day 15 contract
 
 
 # ---------- §6.2 Expense categorization ----------
