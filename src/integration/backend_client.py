@@ -12,6 +12,7 @@ once the contract lands — the interface (`get_user_financial_summary`)
 is what the rest of the code depends on.
 """
 from abc import ABC, abstractmethod
+from functools import lru_cache
 
 
 class BackendClient(ABC):
@@ -35,6 +36,12 @@ class MockBackendClient(BackendClient):
         }
 
 
+@lru_cache(maxsize=1)
 def get_backend_client() -> BackendClient:
-    # Single seam to swap in a real HTTP-based client later.
+    """Return a process-wide singleton backend client.
+
+    Cached (Task 27 backend-to-service layer optimization) so the client is
+    built once and reused across requests instead of reconstructed on every
+    chatbot call. Single seam to swap in a real HTTP-based client later.
+    """
     return MockBackendClient()

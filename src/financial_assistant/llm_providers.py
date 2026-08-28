@@ -24,6 +24,12 @@ class LLMProvider(ABC):
         """Returns (reply_text, tokens_used_or_None)."""
         ...
 
+    @property
+    @abstractmethod
+    def model_name(self) -> str:
+        """Human-readable provider/model label surfaced in the chatbot reply
+        payload for demo visibility (Task 27)."""
+
 
 class MockLLMProvider(LLMProvider):
     """Deterministic, offline provider used as the Day 16 POC default.
@@ -33,6 +39,8 @@ class MockLLMProvider(LLMProvider):
     full request path (validation -> prompt building -> "model" call ->
     post-processing) and to keep tests deterministic.
     """
+
+    model_name = "mock-llm"
 
     def generate_reply(self, message: str, context: str | None = None) -> tuple[str, int | None]:
         if context:
@@ -60,6 +68,8 @@ class AnthropicLLMProvider(LLMProvider):
                 status_code=500,
             )
         self._api_key = settings.anthropic_api_key
+
+    model_name = "anthropic:claude-sonnet-4-6"
 
     def generate_reply(self, message: str, context: str | None = None) -> tuple[str, int | None]:
         system = (
@@ -101,6 +111,8 @@ class OpenAILLMProvider(LLMProvider):
                 status_code=500,
             )
         self._api_key = settings.openai_api_key
+
+    model_name = "openai:gpt-4o-mini"
 
     def generate_reply(self, message: str, context: str | None = None) -> tuple[str, int | None]:
         prompt = f"Context:\n{context}\n\nUser question: {message}" if context else message

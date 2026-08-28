@@ -75,6 +75,23 @@ def _safe_llm_reply(provider, message: str, context: str | None) -> tuple[str, i
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     provider = get_llm_provider()
 
+    # Common payload that makes the reply self-describing for the caller:
+    # user_id (session identity), model (which provider answered). These are
+    # filled in on every path; ``matched_context`` is only set for RAG.
+    def base(intent: str, source: str, reply: str,
+             tokens: int | None, context_title: str | None = None) -> ChatbotResponse:
+        return ChatbotResponse(
+            reply=reply,
+            conversation_id=request.conversation_id,
+            user_id=request.user_id,
+            intent=intent,
+            tokens_used=tokens,
+            # model is optional metadata; be resilient to stub/failing providers.
+            model=getattr(provider, "model_name", None),
+            matched_context=context_title,
+            source=source,
+        )
+
     if _is_own_financial_data_query(request.message):
         # Authoritative data path — never touches the RAG knowledge base.
         # If the backend financial API is unavailable, degrade gracefully
@@ -88,21 +105,11 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
                            request.user_id, exc)
             reply, tokens = _safe_llm_reply(
                 provider, request.message, context=None)
-            return ChatbotResponse(
-                reply=reply,
-                conversation_id=request.conversation_id,
-                intent="own_financial_data",
-                tokens_used=tokens,
-                source="backend_unavailable",
-            )
+            return base("own_financial_data", "backend_unavailable",
+                        reply, tokens)
         reply, tokens = _safe_llm_reply(provider, request.message, context=context)
-        return ChatbotResponse(
-            reply=reply,
-            conversation_id=request.conversation_id,
-            intent="own_financial_data",
-            tokens_used=tokens,
-            source="backend_financial_api",
-        )
+        return base("own_financial_data", "backend_financial_api",
+                    reply, tokens)
 
     # Document-context (RAG) fetch. A failure to read the knowledge base,
     # or a retrieve() error, must never crash the backend: on any retrieval
@@ -116,19 +123,8 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     if matches:
         context = matches[0]["text"]
         reply, tokens = _safe_llm_reply(provider, request.message, context=context)
-        return ChatbotResponse(
-            reply=reply,
-            conversation_id=request.conversation_id,
-            intent="product_faq",
-            tokens_used=tokens,
-            source="rag",
-        )
+        return base("product_faq", "rag", reply, tokens,
+                    context_title=matches[0].get("title"))
 
     reply, tokens = _safe_llm_reply(provider, request.message, context=None)
-    return ChatbotResponse(
-        reply=reply,
-        conversation_id=request.conversation_id,
-        intent="general",
-        tokens_used=tokens,
-        source="llm_general",
-    )
+    return base("general", "llm_general", reply, tokens)
