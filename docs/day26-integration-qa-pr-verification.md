@@ -308,3 +308,98 @@ PR verification is being performed sequentially. Each PR is tested and documente
 **QA Report:**
 
 `docs/day26-integration-qa-pr-verification.md`
+
+---
+
+## PR #74 - Task 26 RAG Backend Integration QA
+
+**PR:** #74
+**Branch:** `qa-pr-74`
+**Author:** Syeda Isma Nazir
+**QA Role:** Integration QA / PR Verification
+**Task:** Day 26 - Chatbot/RAG Backend Integration
+
+### Scope Verified
+
+PR #74 integrates and hardens the Chatbot/RAG backend at the application service layer.
+
+The following changes were reviewed:
+
+- Added Task 26 live API verification evidence.
+- Added the live API verification script.
+- Reorganized the RAG implementation into the `rag` package.
+- Added FAQ handling.
+- Updated the financial assistant service layer.
+- Added Task 26 chatbot robustness tests.
+- Removed the previous standalone `rag.py` implementation in favor of the RAG package structure.
+
+### Repository and Conflict Checks
+
+The PR branch was fetched and checked against `origin/main`.
+
+- Working tree: Clean
+- Merge conflicts: None detected
+- Conflict-marker search: No conflict markers found
+- PR branch successfully checked out as `qa-pr-74`
+
+### Compilation Check
+
+Command executed:
+
+```text
+.venv\Scripts\python.exe -m compileall src tests scripts
+```
+
+### Compilation Result
+
+**Result: PASS**
+
+All files under `src`, `tests`, and `scripts` compiled successfully. No Python syntax or compilation errors were detected.
+
+### Automated Test Verification
+
+#### Task 26 Chatbot Robustness Tests
+
+Command executed:
+
+```text
+.venv\Scripts\python.exe -m pytest tests/test_task26_chatbot_robustness.py -q
+```
+
+Result:
+
+```text
+7 passed, 1 warning
+```
+
+The warning was a Starlette deprecation warning for `HTTP_422_UNPROCESSABLE_ENTITY`. It did not cause a test failure.
+
+#### Chatbot and Retrieval Regression Tests
+
+Command executed:
+
+```text
+.venv\Scripts\python.exe -m pytest tests/test_chatbot.py tests/test_retrieval.py -q
+```
+
+Result:
+
+```text
+6 passed
+```
+
+### Functional QA Result
+
+PR #74 passed the Task 26-specific chatbot and RAG backend verification.
+
+The chatbot robustness scenarios passed successfully, including validation of invalid/empty input handling and live endpoint behavior. The chatbot and retrieval regression tests also passed without failures.
+
+A single non-blocking Starlette deprecation warning was reported during the robustness test run.
+
+### Final QA Decision
+
+**Status: APPROVED**
+
+PR #74 was approved for Task 26 QA because the relevant chatbot/RAG integration tests passed and no major functional or integration issue was identified.
+
+The unrelated full-suite failures/errors associated with the missing expense-categorization model artifact were treated as out-of-scope for PR #74 because the Task 26 chatbot robustness and chatbot/retrieval tests passed successfully.
