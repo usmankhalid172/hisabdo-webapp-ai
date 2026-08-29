@@ -1,0 +1,14 @@
+# Requirements for src/financial_assistant/
+#
+# Added Day 27, in response to a QA observation on the Day 23-24 PR
+# (branch qa/task23-24-hamza, Syeda Isma Nazir): the module imports
+# `openai` but the repo had no requirements.txt pinning it, so tests
+# only passed because the QA environment happened to already have it
+# installed. This file closes that reproducibility gap for this module.
+#
+# Scope: only what src/financial_assistant/*.py and its tests actually
+# import. Does not attempt to cover the rest of the repo (other
+# members' modules may have their own requirements).
+
+openai>=3.0,<4.0
+pytest>=7.0
