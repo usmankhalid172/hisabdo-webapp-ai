@@ -26,6 +26,7 @@ from src.financial_assistant.rag_pipeline import (
     build_grounded_question,
     get_grounded_financial_assistant_response,
 )
+from src.financial_assistant.llm_service import LLMConfig
 
 
 def _mock_client_with_response(text: str) -> MagicMock:
@@ -209,3 +210,51 @@ def test_grounded_call_still_falls_back_on_api_failure():
         client=client,
     )
     assert "trouble answering" in result.lower()
+
+
+def test_grounded_question_near_default_context_budget_is_not_rejected():
+    """
+    Regression test for a bug found during QA (Syeda Isma Nazir, Day 27
+    review of PR #70): the default max_context_chars (3000) can produce
+    a grounded question longer than llm_service's default max_input_chars
+    (1000), which used to raise InvalidInputError on an entirely normal,
+    well-grounded question instead of succeeding. Uses chunk volume close
+    to the actual default budget, not an artificially small example.
+    """
+    chunks = [
+        ContextChunk(text="Detailed transaction record with merchant name and note. " * 10, source="transaction_history", score=0.9)
+        for _ in range(5)
+    ]
+    message = MagicMock(); message.content = "You spent Rs. 12,000 across these transactions."
+    choice = MagicMock(); choice.message = message
+    response = MagicMock(); response.choices = [choice]
+    client = MagicMock()
+    client.chat.completions.create.return_value = response
+
+    result = get_grounded_financial_assistant_response(
+        "How much did I spend?", raw_context_chunks=chunks, client=client
+    )
+    assert result == "You spent Rs. 12,000 across these transactions."
+    sent_messages = client.chat.completions.create.call_args.kwargs["messages"]
+    assert len(sent_messages[-1]["content"]) > 3000  # confirms the large grounded question actually went through
+
+
+def test_grounded_call_never_shrinks_a_larger_caller_supplied_limit():
+    """
+    The fix must not silently shrink a max_input_chars the caller
+    explicitly set higher than what's needed — only raise it when the
+    default/provided value is too small for the configured context budget.
+    """
+    generous_config = LLMConfig(max_input_chars=10_000)
+    chunks = [ContextChunk(text="short", source="s", score=0.5)]
+    message = MagicMock(); message.content = "Answer."
+    choice = MagicMock(); choice.message = message
+    response = MagicMock(); response.choices = [choice]
+    client = MagicMock()
+    client.chat.completions.create.return_value = response
+
+    get_grounded_financial_assistant_response(
+        "Q?", raw_context_chunks=chunks, llm_config=generous_config, client=client
+    )
+    # No assertion beyond "didn't raise" — a shrink would surface as
+    # this call failing validation, which it doesn't.

@@ -42,7 +42,7 @@ optionally `source` (str) and `score` (float) attributes/keys.
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Iterable, List, Optional, Union
 
 from .llm_service import (
@@ -230,6 +230,30 @@ def get_grounded_financial_assistant_response(
         sum(len(c.text) for c in prepared),
     )
 
+    # Bug found during QA (Syeda Isma Nazir, Day 27 review of PR #70):
+    # llm_service.py's default max_input_chars (1000) is a cost/abuse
+    # control sized for a plain typed question — it was never meant to
+    # also bound a context-plus-question string, and this pipeline's own
+    # default max_context_chars (3000) can legitimately exceed it, so a
+    # well-grounded, entirely normal question could be silently rejected
+    # by InvalidInputError instead of succeeding. Reproduced: 5 chunks
+    # near the default char budget produces a ~3037-char grounded
+    # question against a 1000-char limit.
+    #
+    # Fix: derive an effective input-length limit for *this grounded
+    # call only* that's guaranteed to fit the configured context budget
+    # plus room for the question itself and formatting overhead. This
+    # never shrinks a caller-supplied llm_config.max_input_chars that's
+    # already large enough, and leaves llm_service.py's ungrounded
+    # default (1000) completely untouched for plain-question callers.
+    formatting_overhead = 200  # headers/labels/newlines added by format_context_block
+    required_input_chars = pipeline_config.max_context_chars + formatting_overhead + len(user_question)
+    effective_llm_config = (
+        replace(llm_config, max_input_chars=required_input_chars)
+        if llm_config.max_input_chars < required_input_chars
+        else llm_config
+    )
+
     return get_financial_assistant_response(
-        grounded_question, config=llm_config, client=client
+        grounded_question, config=effective_llm_config, client=client
     )
