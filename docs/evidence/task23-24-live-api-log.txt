@@ -1,0 +1,59 @@
+==========================================================================
+TASK 23-24 LIVE API EVIDENCE - real HTTP calls against uvicorn server
+Server: http://127.0.0.1:8021  (started 2026-08-26T01:00:38, pid 18752)
+==========================================================================
+
+--- GET /health ---
+{
+    "status":  "ok",
+    "intents_supported":  [
+                              "MONTHLY_EXPENSE",
+                              "HIGHEST_CATEGORY",
+                              "SPENDING_SUMMARY",
+                              "SAVING_TIP"
+                          ],
+    "knowledge_base_chunks":  5,
+    "transactions_loaded":  37,
+    "llm_available":  false
+}
+
+--- POST /v1/assistant/query (valid monthly) ---
+{
+    "status":  "ok",
+    "intent":  "MONTHLY_EXPENSE",
+    "confidence":  0.75,
+    "response":  "Your total spending for August 2026 was PKR 410.35 across 10 transactions.",
+    "period":  "2026-08",
+    "latency_ms":  2.6
+}
+
+--- POST /v1/assistant/query (saving tips, RAG) ---
+{
+    "status":  "ok",
+    "intent":  "SAVING_TIP",
+    "response":  "Here are some saving tips I found in my knowledge base:\n- Reduce dining-out costs: Dining out is often a large and easy-to-reduce expense. You can cook more meals at home, reduce how often you eat from restaurants, and set a fixed dining budget each week. Ordering water instead of drinks and splitting meals are simple ways to save money without changing your lifestyle in a big way.\n- Cut grocery spending: Grocery costs can be lowered by planning meals in advance, writing a shopping list, and buying only what is on the list. Compare prices between stores, use discounts and coupons, and buy in bulk only when the unit price is lower. Save money by avoiding shopping while hungry, because it usually leads to extra and unplanned items.\nNote: these are general suggestions from the HisabDo knowledge base, not personalised financial advice.",
+    "retrieved_titles":  "Reduce dining-out costs to save, Cut grocery spending to save"
+}
+
+--- GET /v1/assistant/health ---
+{
+    "status":  "ok",
+    "intents_supported":  [
+                              "MONTHLY_EXPENSE",
+                              "HIGHEST_CATEGORY",
+                              "SPENDING_SUMMARY",
+                              "SAVING_TIP"
+                          ],
+    "knowledge_base_chunks":  5,
+    "transactions_loaded":  37,
+    "llm_available":  false,
+    "service":  "hisabdo-ai-assistant",
+    "version":  "0.1.0",
+    "data_source":  "default_csv"
+}
+
+--- POST /v1/assistant/query (empty question -> graceful error) ---
+HTTP 422
+
+--- POST /v1/assistant/query (bad reference_date -> graceful error) ---
+HTTP 422
