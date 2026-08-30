@@ -122,3 +122,12 @@ print("Baseline Accuracy:", accuracy)
 print()
 print("Classification Report:")
 print(classification_report(y_test, predictions))
+print()
+print("Test Predictions:")
+
+for text, actual, predicted in zip(X_test, y_test, predictions):
+    status = "Correct" if actual == predicted else "INCORRECT"
+    print(
+        f"Input: {text} | Expected: {actual} | "
+        f"Predicted: {predicted} | Result: {status}"
+    )

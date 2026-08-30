@@ -1,0 +1,40 @@
+description,merchant,amount,category
+"Grocery shopping at Metro",Metro Cash & Carry,4500,Groceries
+"Weekly vegetables and fruits",Sabzi Mandi,1200,Groceries
+"Milk, eggs and bread",Corner Store,650,Groceries
+"Monthly grocery run",Imtiaz Super Market,6200,Groceries
+"Ride to office",Careem,350,Transport
+"Uber to airport",Uber,1800,Transport
+"Fuel for car",Total Parco Petrol Pump,5000,Transport
+"Bus fare",Daewoo Express,900,Transport
+"Parking fee",City Parking,100,Transport
+"Electricity bill payment",LESCO,7200,Utilities
+"Gas bill",SNGPL,3100,Utilities
+"Internet bill",PTCL,2500,Utilities
+"Mobile balance top-up",Jazz,1000,Utilities
+"Water bill",WASA,800,Utilities
+"New shoes",Bata,3200,Shopping
+"Clothes shopping",Khaadi,8500,Shopping
+"Mobile phone case",Daraz,600,Shopping
+"Laptop bag",Amazon,4200,Shopping
+"Movie tickets",Cinepax,1600,Entertainment
+"Netflix subscription",Netflix,1100,Entertainment
+"Concert tickets",Ticketwala,5000,Entertainment
+"Gaming subscription",PlayStation Store,2200,Entertainment
+"Doctor consultation",City Hospital,2500,Health
+"Pharmacy purchase",D. Watson,1400,Health
+"Dental checkup",Smile Dental Clinic,3500,Health
+"Gym membership",Gold's Gym,4000,Health
+"Lunch with colleagues",Cafe Aylanto,2100,Dining
+"Dinner at restaurant",Kolachi Restaurant,5600,Dining
+"Coffee",Espresso Lounge,450,Dining
+"Fast food order",McDonald's,850,Dining
+"Tuition fee payment",Beaconhouse School,15000,Education
+"Online course subscription",Coursera,3000,Education
+"Books purchase",Liberty Books,2200,Education
+"Rent payment",Landlord Transfer,35000,Housing
+"Home maintenance",Local Contractor,4800,Housing
+"Furniture purchase",Interwood,22000,Housing
+"Miscellaneous cash withdrawal",ATM Withdrawal,5000,Other
+"Bank service charges",Bank Fee,150,Other
+"Donation",Edhi Foundation,1000,Other
