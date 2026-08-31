@@ -1,0 +1,32 @@
+[
+  {
+    "id": "faq-001",
+    "title": "What is HisabDo?",
+    "text": "HisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going."
+  },
+  {
+    "id": "faq-002",
+    "title": "How does automatic expense categorization work?",
+    "text": "When you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions. If the model isn't confident, the expense is flagged for you to confirm or correct the category instead of being applied automatically."
+  },
+  {
+    "id": "faq-003",
+    "title": "Is my financial data used to train the shared AI model?",
+    "text": "No individual user's raw financial data is used as a knowledge source for the chatbot. Chatbot answers about your own balance, expenses, or revenue are always pulled live from your account through the backend, not from any shared knowledge base."
+  },
+  {
+    "id": "faq-004",
+    "title": "What is a cash flow statement?",
+    "text": "A cash flow statement is a financial report that shows the money moving in and out of a business over a period of time, split into operating, investing, and financing activities. It helps you see whether a business is generating enough cash to sustain itself."
+  },
+  {
+    "id": "faq-005",
+    "title": "How do I export my expenses?",
+    "text": "You can export your recorded expenses as a CSV or PDF report from the Reports section of the app, filtered by date range, category, or tag."
+  },
+  {
+    "id": "faq-006",
+    "title": "What's the difference between profit and cash flow?",
+    "text": "Profit is revenue minus expenses over a period, based on accounting rules, while cash flow is the actual movement of money in and out of your accounts. A business can be profitable on paper while still running low on cash if customers haven't paid yet."
+  }
+]

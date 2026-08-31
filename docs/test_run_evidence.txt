@@ -1,0 +1,64 @@
+$ pytest tests/ -v
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.3, pluggy-1.6.0
+collected 18 items
+
+tests/test_categorization.py::test_rule_based_predict_hits_known_keyword PASSED
+tests/test_categorization.py::test_rule_based_predict_returns_none_for_unmatched_text PASSED
+tests/test_categorization.py::test_categorize_service_uses_rule_based_when_available PASSED
+tests/test_categorization.py::test_categorize_service_falls_back_to_ml_model PASSED
+tests/test_categorization.py::test_categorize_endpoint_returns_valid_shape PASSED
+tests/test_categorization.py::test_categorize_batch_endpoint PASSED
+tests/test_chatbot.py::test_own_financial_data_query_uses_backend_not_rag PASSED
+tests/test_chatbot.py::test_product_faq_query_uses_rag PASSED
+tests/test_chatbot.py::test_unrelated_query_falls_back_to_general PASSED
+tests/test_chatbot.py::test_chatbot_endpoint_returns_valid_shape PASSED
+tests/test_health_version.py::test_health_is_public_and_ok PASSED
+tests/test_health_version.py::test_version_returns_service_info PASSED
+tests/test_health_version.py::test_protected_endpoint_rejects_missing_token PASSED
+tests/test_health_version.py::test_protected_endpoint_accepts_valid_token PASSED
+tests/test_health_version.py::test_correlation_id_echoed_back PASSED
+tests/test_integration_api.py::test_error_format_is_consistent_on_validation_failure PASSED
+tests/test_integration_api.py::test_openapi_schema_is_available PASSED
+tests/test_integration_api.py::test_full_flow_chatbot_then_categorize PASSED
+
+======================== 18 passed in 0.08s ========================
+
+
+$ curl -s http://localhost:8000/api/v1/health
+{"status":"ok"}
+
+$ curl -s http://localhost:8000/api/v1/version
+{"service":"hisabdo-ai-service","version":"0.1.0-poc","model_provider":"mock"}
+
+$ curl -s -X POST http://localhost:8000/api/v1/categorize \
+    -d '{"description":"Grocery shopping at Metro","merchant":"Metro","amount":4500}'
+  # no token -> 401
+{"error_code":"UNAUTHORIZED_SERVICE","message":"Missing or invalid internal service token","request_id":"a0428d26-9967-44ab-bd4e-04d9fc068f46"}
+
+$ curl -s -X POST http://localhost:8000/api/v1/categorize \
+    -H "X-Internal-Token: change-me-dev-token" \
+    -d '{"description":"Grocery shopping at Metro","merchant":"Metro","amount":4500}'
+{"category":"Groceries","confidence":0.95,"alternative_categories":[],"needs_confirmation":false,"method":"rule_based"}
+
+$ curl -s -X POST http://localhost:8000/api/v1/categorize \
+    -H "X-Internal-Token: change-me-dev-token" \
+    -d '{"description":"Payment for annual subscription renewal","amount":1500}'
+{"category":"Transport","confidence":0.1315,"alternative_categories":["Utilities","Entertainment"],"needs_confirmation":true,"method":"ml_model"}
+  # low confidence -> needs_confirmation true, correctly flagged instead of auto-applied (Day 15 §6.2)
+
+$ curl -s -X POST http://localhost:8000/api/v1/chatbot \
+    -H "X-Internal-Token: change-me-dev-token" \
+    -d '{"user_id":"user-1","message":"How does automatic expense categorization work?","conversation_id":"c1","history":[]}'
+{"reply":"Based on HisabDo's docs: When you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions...","conversation_id":"c1","intent":"product_faq","tokens_used":60,"source":"rag"}
+
+$ curl -s -X POST http://localhost:8000/api/v1/chatbot \
+    -H "X-Internal-Token: change-me-dev-token" \
+    -d '{"user_id":"user-1","message":"What is my balance right now?","conversation_id":"c2","history":[]}'
+{"reply":"Based on HisabDo's docs: Balance: 45230.5 PKR. Expenses this month: 18420.0 PKR. ...","conversation_id":"c2","intent":"own_financial_data","tokens_used":30,"source":"backend_financial_api"}
+  # correctly routed to mocked backend, NOT the FAQ/RAG index (Day 15 §6.1 boundary)
+
+$ cat server.log   (structured JSON logs, one line per request)
+{"timestamp": "2026-08-21T19:10:42+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "cb94ae12-342b-415a-8086-23fe60a7e481", "path": "/api/v1/health", "method": "GET", "status_code": 200, "duration_ms": 1.03}
+{"timestamp": "2026-08-21T19:10:42+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "76062d1d-27b2-4374-89eb-f94eb055da7c", "path": "/api/v1/categorize", "method": "POST", "status_code": 200, "duration_ms": 2.33}
+{"timestamp": "2026-08-21T19:10:42+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "e7c907a9-479e-4e21-be19-18eb4b6339e2", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 4.71}
