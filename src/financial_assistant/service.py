@@ -12,7 +12,7 @@ import re
 from ..integration.backend_client import get_backend_client
 from ..schemas import ChatbotRequest, ChatbotResponse
 from .llm_providers import get_llm_provider
-from .rag import get_retriever
+from .faq_rag import get_retriever
 
 # Deliberately simple keyword intent check — good enough for a POC boundary
 # demonstration; a production version would use a real intent classifier.
