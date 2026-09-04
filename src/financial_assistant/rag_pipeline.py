@@ -143,6 +143,20 @@ def prepare_context(
             if c.score is None or c.score >= config.min_chunk_score
         ]
 
+    # Day 28 addition: drop exact-duplicate chunk text before ranking/capping.
+    # A retriever can legitimately return the same underlying content twice
+    # (e.g. matched by more than one query term, or indexed more than once) —
+    # keeping both wastes prompt budget on redundant text. Keeps the
+    # highest-scored occurrence of each unique text; order among
+    # equal-score duplicates follows the original retrieval order.
+    seen_text: set = set()
+    deduplicated: List[ContextChunk] = []
+    for chunk in sorted(normalized, key=lambda c: (c.score is None, -(c.score or 0.0))):
+        if chunk.text not in seen_text:
+            seen_text.add(chunk.text)
+            deduplicated.append(chunk)
+    normalized = deduplicated
+
     # Highest-score first; chunks with no score keep their original
     # relative order and sort after scored chunks.
     normalized.sort(key=lambda c: (c.score is None, -(c.score or 0.0)))

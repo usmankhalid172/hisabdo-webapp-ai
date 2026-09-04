@@ -212,6 +212,41 @@ def test_grounded_call_still_falls_back_on_api_failure():
     assert "trouble answering" in result.lower()
 
 
+def test_exact_duplicate_chunk_text_is_deduplicated_keeping_higher_score():
+    """
+    Day 28: a retriever can legitimately return the same underlying
+    content twice (matched by multiple query terms, indexed more than
+    once, etc.) — keeping both wastes prompt budget on redundant text.
+    Confirms the duplicate is dropped and the higher-scored occurrence
+    of the two is the one kept.
+    """
+    chunks = [
+        ContextChunk(text="Groceries at Al-Fatah", source="a", score=0.5),
+        ContextChunk(text="Groceries at Al-Fatah", source="b", score=0.9),
+        ContextChunk(text="Electricity bill", source="c", score=0.3),
+    ]
+    result = prepare_context(chunks)
+    assert len(result) == 2
+    grocery_chunk = next(c for c in result if c.text == "Groceries at Al-Fatah")
+    assert grocery_chunk.source == "b"  # the higher-scored duplicate survived
+    assert grocery_chunk.score == 0.9
+
+
+def test_near_duplicate_chunks_with_different_text_are_both_kept():
+    """
+    Guardrail: dedup must be exact-text-match only — chunks that are
+    merely similar (different transactions, same category/merchant)
+    must NOT be collapsed, since that would silently drop real,
+    distinct information.
+    """
+    chunks = [
+        ContextChunk(text="2026-08-01: Al-Fatah — Rs. 1,500.00 (groceries)", source="s", score=0.8),
+        ContextChunk(text="2026-08-08: Al-Fatah — Rs. 1,500.00 (groceries)", source="s", score=0.7),
+    ]
+    result = prepare_context(chunks)
+    assert len(result) == 2
+
+
 def test_grounded_question_near_default_context_budget_is_not_rejected():
     """
     Regression test for a bug found during QA (Syeda Isma Nazir, Day 27
@@ -222,8 +257,12 @@ def test_grounded_question_near_default_context_budget_is_not_rejected():
     to the actual default budget, not an artificially small example.
     """
     chunks = [
-        ContextChunk(text="Detailed transaction record with merchant name and note. " * 10, source="transaction_history", score=0.9)
-        for _ in range(5)
+        ContextChunk(
+            text=f"Transaction record {i}: merchant name and descriptive note here. " * 10,
+            source="transaction_history",
+            score=0.9 - i * 0.01,
+        )
+        for i in range(5)
     ]
     message = MagicMock(); message.content = "You spent Rs. 12,000 across these transactions."
     choice = MagicMock(); choice.message = message
