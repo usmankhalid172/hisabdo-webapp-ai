@@ -1,0 +1,35 @@
+[
+  {
+    "id": "doctor_001",
+    "name": "Dr. Ahmed Khan",
+    "specialty": "Dermatology",
+    "qualifications": "MBBS, FCPS Dermatology",
+    "schedule": {
+      "Monday": "10:00 AM - 2:00 PM",
+      "Wednesday": "10:00 AM - 2:00 PM",
+      "Friday": "2:00 PM - 6:00 PM"
+    }
+  },
+  {
+    "id": "doctor_002",
+    "name": "Dr. Sara Malik",
+    "specialty": "Cardiology",
+    "qualifications": "MBBS, FCPS Cardiology",
+    "schedule": {
+      "Tuesday": "9:00 AM - 1:00 PM",
+      "Thursday": "9:00 AM - 1:00 PM",
+      "Saturday": "10:00 AM - 2:00 PM"
+    }
+  },
+  {
+    "id": "doctor_003",
+    "name": "Dr. Hamza Ali",
+    "specialty": "General Medicine",
+    "qualifications": "MBBS, FCPS Medicine",
+    "schedule": {
+      "Monday": "3:00 PM - 7:00 PM",
+      "Wednesday": "3:00 PM - 7:00 PM",
+      "Saturday": "3:00 PM - 7:00 PM"
+    }
+  }
+]
