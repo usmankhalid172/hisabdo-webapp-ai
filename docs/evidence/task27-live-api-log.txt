@@ -1,0 +1,15 @@
+==========================================================================
+TASK 27 LIVE API EVIDENCE - finalized chatbot/RAG payload
+Server: http://127.0.0.1:51271  (started 2026-08-28T22:16:59)
+==========================================================================
+[PASS] endpoint connection / server readiness
+[PASS] RAG reply carries user_id echo + model + matched_context | source=rag user_id=user-27 model=mock-llm ctx=What is a cash flow statement?
+[PASS] own-financial-data reply user_id + model, no context | source=backend_financial_api model=mock-llm
+[PASS] general reply user_id + model, no context | source=llm_general model=mock-llm
+[PASS] typed history (valid role/content) accepted
+[PASS] typed history bad role -> 422 (no crash)
+[PASS] typed history empty content -> 422 (no crash)
+[PASS] server still healthy after all cases
+==========================================================================
+TASK 27 RESULT: ALL CHECKS PASSED
+==========================================================================

@@ -1,0 +1,41 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\user\Desktop\AL And ML Intership HisabD\hisabdo-webapp-ai\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\user\Desktop\AL And ML Intership HisabD\hisabdo-webapp-ai
+plugins: anyio-4.14.2
+collecting ... collected 25 items
+
+tests/test_chatbot.py::test_own_financial_data_query_uses_backend_not_rag PASSED [  4%]
+tests/test_chatbot.py::test_product_faq_query_uses_rag PASSED            [  8%]
+tests/test_chatbot.py::test_unrelated_query_falls_back_to_general PASSED [ 12%]
+tests/test_chatbot.py::test_chatbot_endpoint_returns_valid_shape PASSED  [ 16%]
+tests/test_task26_chatbot_robustness.py::test_scenario_rag_retriever_failure_falls_back_without_crash PASSED [ 20%]
+tests/test_task26_chatbot_robustness.py::test_scenario_empty_corpus_falls_back_without_crash PASSED [ 24%]
+tests/test_task26_chatbot_robustness.py::test_scenario_missing_corpus_falls_back_without_crash PASSED [ 28%]
+tests/test_task26_chatbot_robustness.py::test_scenario_backend_api_failure_surfaces_backend_unavailable PASSED [ 32%]
+tests/test_task26_chatbot_robustness.py::test_scenario_llm_provider_failure_falls_back_without_crash PASSED [ 36%]
+tests/test_task26_chatbot_robustness.py::test_scenario_live_endpoint_returns_graceful_response PASSED [ 40%]
+tests/test_task26_chatbot_robustness.py::test_scenario_live_endpoint_empty_message_is_422_not_crash PASSED [ 44%]
+tests/test_integration_api.py::test_error_format_is_consistent_on_validation_failure PASSED [ 48%]
+tests/test_integration_api.py::test_openapi_schema_is_available PASSED   [ 52%]
+tests/test_integration_api.py::test_full_flow_chatbot_then_categorize PASSED [ 56%]
+tests/test_retrieval.py::test_retriever_returns_relevant_result PASSED   [ 60%]
+tests/test_retrieval.py::test_retriever_handles_empty_query PASSED       [ 64%]
+tests/test_task27_payload_and_optimization.py::test_rag_reply_echoes_user_id_model_and_matched_context PASSED [ 68%]
+tests/test_task27_payload_and_optimization.py::test_general_reply_still_sets_user_id_model_no_context PASSED [ 72%]
+tests/test_task27_payload_and_optimization.py::test_own_financial_data_reply_echoes_user_id_and_model PASSED [ 76%]
+tests/test_task27_payload_and_optimization.py::test_valid_history_entries_are_accepted PASSED [ 80%]
+tests/test_task27_payload_and_optimization.py::test_invalid_history_role_is_rejected PASSED [ 84%]
+tests/test_task27_payload_and_optimization.py::test_empty_history_content_is_rejected PASSED [ 88%]
+tests/test_task27_payload_and_optimization.py::test_backend_client_is_a_process_wide_singleton PASSED [ 92%]
+tests/test_task27_payload_and_optimization.py::test_retriever_is_a_process_wide_singleton PASSED [ 96%]
+tests/test_task27_payload_and_optimization.py::test_retriever_matrix_is_built_once_and_reused PASSED [100%]
+
+============================== warnings summary ===============================
+tests/test_task26_chatbot_robustness.py::test_scenario_live_endpoint_empty_message_is_422_not_crash
+tests/test_integration_api.py::test_error_format_is_consistent_on_validation_failure
+  C:\Users\user\Desktop\AL And ML Intership HisabD\hisabdo-webapp-ai\venv\Lib\site-packages\starlette\_exception_handler.py:59: StarletteDeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.
+    response = await handler(conn, exc)  # type: ignore[arg-type]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 25 passed, 2 warnings in 0.19s ========================
