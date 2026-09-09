@@ -4,6 +4,7 @@ HisabDo AI Financial Assistant — LLM request/response layer.
 
 Owner: Muhammad Hamza Nawaz
 Day: 15 Initial LLM request/response validation and error-handling implementation
+Day: 21-22 Rate-limit-specific handling and inconsistent-response detection added
 
 
 Scope of this module:
@@ -34,7 +35,7 @@ import logging
 from dataclasses import dataclass
 from typing import Optional
 
-from openai import OpenAI, APITimeoutError, APIError, APIConnectionError
+from openai import OpenAI, APITimeoutError, APIError, APIConnectionError, RateLimitError
 
 from .prompts import SYSTEM_PROMPT
 
@@ -52,6 +53,7 @@ class LLMConfig:
     max_retries: int = 1  # one retry on transient failure, then fallback
     max_input_chars: int = 1000
     min_input_chars: int = 1
+    rate_limit_backoff_seconds: float = 3.0  # longer than the default 1s backoff
 
 
 DEFAULT_CONFIG = LLMConfig()
@@ -92,6 +94,20 @@ class InvalidResponseError(FinancialAssistantError):
 
 class LLMRequestError(FinancialAssistantError):
     """Raised when the LLM API call itself fails (timeout, API error, etc.)."""
+
+
+class LLMRateLimitError(LLMRequestError):
+    """
+    Raised specifically when the provider returns a rate-limit response.
+
+    Kept as a subclass of LLMRequestError (Day 21-22 addition) so it is
+    still caught anywhere the base class is already handled, but callers
+    that want rate-limit-specific behavior (e.g. a longer backoff, or
+    surfacing a distinct "please slow down" status upstream) can catch
+    it separately. Addresses the rate-limit gap flagged in the Day 19
+    readiness doc, where a 429 was previously treated identically to any
+    other API error.
+    """
 
 
 # ---------------------------------------------------------------------------
@@ -137,22 +153,51 @@ _LEAK_INDICATORS = (
 )
 
 
-def validate_llm_response(raw_response: str) -> str:
+def validate_llm_response(raw_response: str, user_question: Optional[str] = None) -> str:
     """
     Validates the raw text returned by the LLM before it is passed back
     to the caller. Raises InvalidResponseError on failure.
+
+    `user_question` is optional and only used for the echo check below —
+    existing callers that don't pass it still get every other check.
     """
     if not raw_response or not raw_response.strip():
         raise InvalidResponseError("LLM returned an empty response.")
 
-    lowered = raw_response.lower()
+    cleaned = raw_response.strip()
+
+    lowered = cleaned.lower()
     for indicator in _LEAK_INDICATORS:
         if indicator in lowered:
             raise InvalidResponseError(
                 "LLM response appears to leak internal system instructions."
             )
 
-    return raw_response.strip()
+    # --- Day 21-22 additions: inconsistent-response detection -------------
+    # Flagged during Day 17 use-case validation: a model can return text
+    # that is technically non-empty and leak-free but still not a usable
+    # answer. These checks catch the two most common degenerate shapes
+    # without being strict enough to reject legitimate short answers
+    # (e.g. "$85." is a valid, useful response and must not be rejected).
+
+    # 1. Bare echo of the user's question, with no actual content added.
+    if user_question is not None:
+        normalized_response = lowered.rstrip("?.! ")
+        normalized_question = user_question.strip().lower().rstrip("?.! ")
+        if normalized_question and normalized_response == normalized_question:
+            raise InvalidResponseError(
+                "LLM response is a bare echo of the user's question."
+            )
+
+    # 2. Response is only punctuation/whitespace-equivalent (e.g. "...",
+    #    "-", "N/A" with nothing else) — not caught by the empty check
+    #    above since these are non-empty strings.
+    if not any(char.isalnum() for char in cleaned):
+        raise InvalidResponseError(
+            "LLM response contains no usable content (punctuation/symbols only)."
+        )
+
+    return cleaned
 
 
 # ---------------------------------------------------------------------------
@@ -179,16 +224,20 @@ def get_fallback_response(reason: str) -> str:
 # LLM call
 # ---------------------------------------------------------------------------
 
-def _call_llm_api(
-    user_question: str,
+def _call_llm_api_with_messages(
+    messages: list,
     config: LLMConfig,
     client: Optional[OpenAI] = None,
 ) -> str:
     """
-    Makes a single call to the LLM API. Raises LLMRequestError on any
-    failure (timeout, connection error, API error). No retry logic here —
-    retries are handled by the caller so behavior is easy to reason about
-    and test.
+    Makes a single call to the LLM API with a caller-supplied message list.
+
+    Day 23-24 addition: extracted from `_call_llm_api` so the RAG/prompt-chain
+    module (`rag_prompt_chain.py`) can reuse the exact same tested
+    timeout/rate-limit/error handling with a grounded (context-injected)
+    message list, instead of duplicating this logic. `_call_llm_api` below
+    is now a thin wrapper that builds the standard 2-message list and
+    delegates here — its external behavior is unchanged.
     """
     client = client or _get_client()
 
@@ -196,15 +245,16 @@ def _call_llm_api(
         response = client.chat.completions.create(
             model=config.model,
             timeout=config.timeout_seconds,
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": user_question},
-            ],
+            messages=messages,
         )
     except APITimeoutError as exc:
         raise LLMRequestError(f"LLM request timed out after {config.timeout_seconds}s") from exc
     except APIConnectionError as exc:
         raise LLMRequestError("Could not connect to the LLM API.") from exc
+    except RateLimitError as exc:
+        # Must be caught before the generic APIError below, since
+        # RateLimitError is a subclass of it.
+        raise LLMRateLimitError(f"LLM API rate limit hit: {exc}") from exc
     except APIError as exc:
         raise LLMRequestError(f"LLM API returned an error: {exc}") from exc
 
@@ -213,6 +263,26 @@ def _call_llm_api(
 
     if content is None:
         raise LLMRequestError("LLM response contained no message content.")
+
+    return content
+
+
+def _call_llm_api(
+    user_question: str,
+    config: LLMConfig,
+    client: Optional[OpenAI] = None,
+) -> str:
+    """
+    Makes a single call to the LLM API using the standard system prompt and
+    a plain user question. Raises LLMRequestError on any failure (timeout,
+    connection error, API error). No retry logic here — retries are handled
+    by the caller so behavior is easy to reason about and test.
+    """
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": user_question},
+    ]
+    return _call_llm_api_with_messages(messages, config, client=client)
 
     return content
 
@@ -244,7 +314,18 @@ def get_financial_assistant_response(
     for attempt in range(config.max_retries + 1):
         try:
             raw_response = _call_llm_api(cleaned_question, config, client=client)
-            return validate_llm_response(raw_response)
+            return validate_llm_response(raw_response, user_question=cleaned_question)
+        except LLMRateLimitError as exc:
+            last_error = exc
+            logger.warning(
+                "Attempt %d/%d hit a rate limit: %s",
+                attempt + 1,
+                config.max_retries + 1,
+                exc,
+            )
+            if attempt < config.max_retries:
+                time.sleep(config.rate_limit_backoff_seconds)  # longer backoff for rate limits
+                continue
         except (LLMRequestError, InvalidResponseError) as exc:
             last_error = exc
             logger.warning(
