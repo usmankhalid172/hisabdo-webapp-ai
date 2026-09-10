@@ -162,10 +162,64 @@ class OpenAILLMProvider(LLMProvider):
         return reply, tokens
 
 
+class GeminiLLMProvider(LLMProvider):
+    """Calls the real Google Gemini API. Requires GEMINI_API_KEY."""
+
+    def __init__(self, settings: Settings):
+        if not settings.gemini_api_key:
+            raise ServiceError(
+                "LLM_PROVIDER_MISCONFIGURED",
+                "LLM_PROVIDER=gemini but GEMINI_API_KEY is not set",
+                status_code=500,
+            )
+        self._api_key = settings.gemini_api_key
+
+    def generate_reply(
+        self,
+        message: str,
+        context: str | None = None,
+        history: list[dict] | None = None,
+    ) -> tuple[str, int | None]:
+        user_content = f"Context:\n{context}\n\nUser question: {message}" if context else message
+
+        # Gemini uses "user"/"model" roles (not "assistant"), and wraps each
+        # turn's text in a "parts" list rather than a flat "content" string.
+        contents = [
+            {
+                "role": "model" if turn["role"] == "assistant" else "user",
+                "parts": [{"text": turn["content"]}],
+            }
+            for turn in (history or [])
+        ]
+        contents.append({"role": "user", "parts": [{"text": user_content}]})
+
+        resp = httpx.post(
+            "https://generativelanguage.googleapis.com/v1beta/models/"
+            "gemini-2.0-flash:generateContent",
+            headers={"content-type": "application/json"},
+            params={"key": self._api_key},
+            json={
+                "system_instruction": {"parts": [{"text": SYSTEM_PROMPT}]},
+                "contents": contents,
+            },
+            timeout=30,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        reply = "".join(
+            part.get("text", "")
+            for part in data["candidates"][0]["content"]["parts"]
+        )
+        tokens = data.get("usageMetadata", {}).get("candidatesTokenCount")
+        return reply, tokens
+
+
 def get_llm_provider() -> LLMProvider:
     settings = get_settings()
     if settings.llm_provider == "anthropic":
         return AnthropicLLMProvider(settings)
     if settings.llm_provider == "openai":
         return OpenAILLMProvider(settings)
+    if settings.llm_provider == "gemini":
+        return GeminiLLMProvider(settings)
     return MockLLMProvider()
