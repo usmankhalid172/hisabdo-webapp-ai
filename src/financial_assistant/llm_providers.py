@@ -16,12 +16,22 @@ import httpx
 
 from ..config import Settings, get_settings
 from ..errors import ServiceError
+from .prompts import SYSTEM_PROMPT
 
 
 class LLMProvider(ABC):
     @abstractmethod
-    def generate_reply(self, message: str, context: str | None = None) -> tuple[str, int | None]:
-        """Returns (reply_text, tokens_used_or_None)."""
+    def generate_reply(
+        self,
+        message: str,
+        context: str | None = None,
+        history: list[dict] | None = None,
+    ) -> tuple[str, int | None]:
+        """Returns (reply_text, tokens_used_or_None).
+
+        `history` is prior conversation turns, oldest first, each shaped
+        like {"role": "user"|"assistant", "content": str}.
+        """
         ...
 
 
@@ -32,12 +42,24 @@ class MockLLMProvider(LLMProvider):
     message and any retrieved context, which is enough to exercise the
     full request path (validation -> prompt building -> "model" call ->
     post-processing) and to keep tests deterministic.
+
+    Deliberately ignores `history`: it has no real language understanding
+    to make context-aware use of prior turns, so accepting-and-ignoring is
+    the honest behavior here (unlike the real providers below).
     """
 
-    def generate_reply(self, message: str, context: str | None = None) -> tuple[str, int | None]:
+    def generate_reply(
+        self,
+        message: str,
+        context: str | None = None,
+        history: list[dict] | None = None,
+    ) -> tuple[str, int | None]:
         if context:
+            # Was "Based on HisabDo's docs: ..." — wrong when context came
+            # from the backend financial API (a user's live balance is not
+            # a "doc"). Neutral phrasing works regardless of provenance.
             reply = (
-                f"Based on HisabDo's docs: {context.strip()} "
+                f"Here's what I found: {context.strip()} "
                 f"(In response to: \"{message.strip()}\")"
             )
         else:
@@ -61,12 +83,19 @@ class AnthropicLLMProvider(LLMProvider):
             )
         self._api_key = settings.anthropic_api_key
 
-    def generate_reply(self, message: str, context: str | None = None) -> tuple[str, int | None]:
-        system = (
-            "You are HisabDo's in-app financial assistant. Answer using only the "
-            "provided context when given; be concise."
-        )
-        prompt = f"Context:\n{context}\n\nUser question: {message}" if context else message
+    def generate_reply(
+        self,
+        message: str,
+        context: str | None = None,
+        history: list[dict] | None = None,
+    ) -> tuple[str, int | None]:
+        user_content = f"Context:\n{context}\n\nUser question: {message}" if context else message
+
+        messages = [
+            {"role": turn["role"], "content": turn["content"]}
+            for turn in (history or [])
+        ]
+        messages.append({"role": "user", "content": user_content})
 
         resp = httpx.post(
             "https://api.anthropic.com/v1/messages",
@@ -78,8 +107,8 @@ class AnthropicLLMProvider(LLMProvider):
             json={
                 "model": "claude-sonnet-4-6",
                 "max_tokens": 400,
-                "system": system,
-                "messages": [{"role": "user", "content": prompt}],
+                "system": SYSTEM_PROMPT,
+                "messages": messages,
             },
             timeout=30,
         )
@@ -102,18 +131,27 @@ class OpenAILLMProvider(LLMProvider):
             )
         self._api_key = settings.openai_api_key
 
-    def generate_reply(self, message: str, context: str | None = None) -> tuple[str, int | None]:
-        prompt = f"Context:\n{context}\n\nUser question: {message}" if context else message
+    def generate_reply(
+        self,
+        message: str,
+        context: str | None = None,
+        history: list[dict] | None = None,
+    ) -> tuple[str, int | None]:
+        user_content = f"Context:\n{context}\n\nUser question: {message}" if context else message
+
+        messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+        messages.extend(
+            {"role": turn["role"], "content": turn["content"]}
+            for turn in (history or [])
+        )
+        messages.append({"role": "user", "content": user_content})
 
         resp = httpx.post(
             "https://api.openai.com/v1/chat/completions",
             headers={"Authorization": f"Bearer {self._api_key}", "content-type": "application/json"},
             json={
                 "model": "gpt-4o-mini",
-                "messages": [
-                    {"role": "system", "content": "You are HisabDo's in-app financial assistant."},
-                    {"role": "user", "content": prompt},
-                ],
+                "messages": messages,
             },
             timeout=30,
         )

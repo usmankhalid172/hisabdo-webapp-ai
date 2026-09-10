@@ -47,3 +47,50 @@ def test_chatbot_endpoint_returns_valid_shape(client, auth_headers):
     for field in ("reply", "conversation_id", "source"):
         assert field in body
     assert body["source"] == "rag"
+
+
+def test_history_is_passed_to_llm_provider(monkeypatch):
+    """service.py must forward request.history into generate_reply —
+    regression guard for the bug where history was silently dropped."""
+    captured = {}
+
+    class SpyProvider:
+        def generate_reply(self, message, context=None, history=None):
+            captured["history"] = history
+            captured["message"] = message
+            return "reply", 10
+
+    monkeypatch.setattr(
+        "src.financial_assistant.service.get_llm_provider",
+        lambda: SpyProvider(),
+    )
+
+    from src.financial_assistant.service import handle_chat
+    from src.schemas import ChatbotRequest
+
+    history = [
+        {"role": "user", "content": "How do I categorize an expense?"},
+        {"role": "assistant", "content": "Rule-based + ML model."},
+    ]
+    request = ChatbotRequest(
+        user_id="test-user",
+        message="What about the batch version?",
+        conversation_id="test-convo",
+        history=history,
+    )
+    handle_chat(request)
+
+    assert captured["history"] == history
+
+
+def test_mock_provider_does_not_mislabel_financial_data_as_docs():
+    """Regression guard for the bug where backend_financial_api context
+    was described as 'HisabDo's docs' in the reply text."""
+    from src.financial_assistant.llm_providers import MockLLMProvider
+
+    provider = MockLLMProvider()
+    reply, _ = provider.generate_reply(
+        "What is my balance?",
+        context="Balance: 100 PKR.",
+    )
+    assert "docs" not in reply.lower()
