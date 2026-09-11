@@ -244,6 +244,53 @@ class GeminiLLMProvider(LLMProvider):
         return reply, tokens
 
 
+class GroqLLMProvider(LLMProvider):
+    """Calls Groq's OpenAI-compatible Chat Completions API. Requires GROQ_API_KEY.
+
+    Groq hosts open models (not its own); some of them (e.g. gpt-oss) return
+    an extra "reasoning" field alongside "content" in the response message.
+    We only read "content" — the final answer — same as OpenAILLMProvider.
+    """
+
+    def __init__(self, settings: Settings):
+        if not settings.groq_api_key:
+            raise ServiceError(
+                "LLM_PROVIDER_MISCONFIGURED",
+                "LLM_PROVIDER=groq but GROQ_API_KEY is not set",
+                status_code=500,
+            )
+        self._api_key = settings.groq_api_key
+
+    def generate_reply(
+        self,
+        message: str,
+        context: str | None = None,
+        history: list[dict] | None = None,
+    ) -> tuple[str, int | None]:
+        user_content = f"Context:\n{context}\n\nUser question: {message}" if context else message
+
+        messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+        messages.extend(
+            {"role": turn["role"], "content": turn["content"]}
+            for turn in (history or [])
+        )
+        messages.append({"role": "user", "content": user_content})
+
+        resp = _post_with_retry(
+            "https://api.groq.com/openai/v1/chat/completions",
+            headers={"Authorization": f"Bearer {self._api_key}", "content-type": "application/json"},
+            json={
+                "model": "openai/gpt-oss-120b",
+                "messages": messages,
+            },
+            timeout=30,
+        )
+        data = resp.json()
+        reply = data["choices"][0]["message"]["content"]
+        tokens = data.get("usage", {}).get("completion_tokens")
+        return reply, tokens
+
+
 def get_llm_provider() -> LLMProvider:
     settings = get_settings()
     if settings.llm_provider == "anthropic":
@@ -252,4 +299,6 @@ def get_llm_provider() -> LLMProvider:
         return OpenAILLMProvider(settings)
     if settings.llm_provider == "gemini":
         return GeminiLLMProvider(settings)
+    if settings.llm_provider == "groq":
+        return GroqLLMProvider(settings)
     return MockLLMProvider()

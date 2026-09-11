@@ -118,3 +118,16 @@ def test_strong_rag_match_still_retrieves():
     matches = get_retriever().retrieve("How do I categorize an expense?", top_k=1)
     assert len(matches) == 1
     assert matches[0]["id"] == "faq-002"
+
+
+def test_system_prompt_warns_against_inventing_product_details():
+    """Regression guard: SYSTEM_PROMPT must explicitly instruct against
+    fabricating specific HisabDo product/API details when ungrounded.
+    Found via live testing: Groq confidently invented a full fake
+    /categorize-batch API spec (endpoint, fields, example JSON) for a
+    feature marked "(Planned)" in the actual API docs, before this rule
+    was added."""
+    from src.financial_assistant.prompts import SYSTEM_PROMPT
+
+    assert "invent" in SYSTEM_PROMPT.lower()
+    assert "hisabdo product" in SYSTEM_PROMPT.lower() or "api endpoints" in SYSTEM_PROMPT.lower()
