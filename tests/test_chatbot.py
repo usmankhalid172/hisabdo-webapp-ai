@@ -94,3 +94,27 @@ def test_mock_provider_does_not_mislabel_financial_data_as_docs():
         context="Balance: 100 PKR.",
     )
     assert "docs" not in reply.lower()
+
+
+def test_weak_rag_match_falls_back_to_general_instead_of_wrong_answer():
+    """Regression guard: a query with no good FAQ match (e.g. paraphrased
+    export question, which previously top-matched the unrelated
+    'is my data used to train the model' FAQ at a low score) must fall
+    through to the general LLM path rather than returning a confidently
+    wrong RAG answer. See RELEVANCE_THRESHOLD in faq_rag.py."""
+    from src.financial_assistant.faq_rag import get_retriever
+
+    matches = get_retriever().retrieve(
+        "How can I get my spending data out of the app?", top_k=1
+    )
+    assert matches == []
+
+
+def test_strong_rag_match_still_retrieves():
+    """Regression guard: raising RELEVANCE_THRESHOLD must not break
+    legitimate high-confidence matches."""
+    from src.financial_assistant.faq_rag import get_retriever
+
+    matches = get_retriever().retrieve("How do I categorize an expense?", top_k=1)
+    assert len(matches) == 1
+    assert matches[0]["id"] == "faq-002"

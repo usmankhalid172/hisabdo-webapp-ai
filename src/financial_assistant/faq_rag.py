@@ -16,7 +16,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 DOCS_PATH = Path(__file__).resolve().parents[2] / "data" / "faq_docs.json"
-RELEVANCE_THRESHOLD = 0.12
+RELEVANCE_THRESHOLD = 0.30
 
 
 class FaqRetriever:
