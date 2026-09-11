@@ -6,7 +6,7 @@
   },
   {
     "id": "faq-002",
-    "title": "How does automatic expense categorization work?",
+    "title": "How do I categorize an expense? How does automatic expense categorization work?",
     "text": "When you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions. If the model isn't confident, the expense is flagged for you to confirm or correct the category instead of being applied automatically."
   },
   {
@@ -28,5 +28,35 @@
     "id": "faq-006",
     "title": "What's the difference between profit and cash flow?",
     "text": "Profit is revenue minus expenses over a period, based on accounting rules, while cash flow is the actual movement of money in and out of your accounts. A business can be profitable on paper while still running low on cash if customers haven't paid yet."
+  },
+  {
+    "id": "finance_001",
+    "title": "What is profit?",
+    "text": "Profit is the amount remaining after expenses are subtracted from revenue."
+  },
+  {
+    "id": "finance_002",
+    "title": "What is revenue?",
+    "text": "Revenue is the total income generated from business sales or services before expenses are deducted."
+  },
+  {
+    "id": "finance_003",
+    "title": "What is an expense?",
+    "text": "An expense is a cost incurred by a business while operating or generating revenue."
+  },
+  {
+    "id": "finance_004",
+    "title": "What is cash flow?",
+    "text": "Cash flow represents the movement of money entering and leaving a business during a period."
+  },
+  {
+    "id": "finance_005",
+    "title": "Why should customer balances be tracked?",
+    "text": "Tracking customer balances helps a business identify outstanding payments and monitor money owed by customers."
+  },
+  {
+    "id": "finance_006",
+    "title": "Why should business expenses be categorized?",
+    "text": "Categorizing expenses makes financial records easier to analyze and helps identify where business money is being spent."
   }
 ]
