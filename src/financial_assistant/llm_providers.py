@@ -10,6 +10,7 @@ REST APIs so switching is a one-line config change (`LLM_PROVIDER=...`)
 once a provider is chosen and a key is supplied — no code change needed
 in `service.py`.
 """
+import time
 from abc import ABC, abstractmethod
 
 import httpx
@@ -17,6 +18,38 @@ import httpx
 from ..config import Settings, get_settings
 from ..errors import ServiceError
 from .prompts import SYSTEM_PROMPT
+
+# Real LLM APIs occasionally return transient 5xx errors under load (seen in
+# practice: Gemini 503s). A single retry with a short backoff turns a
+# transient blip into a successful response instead of a hard user-facing
+# failure; if it fails twice, that's a genuine outage worth surfacing.
+_RETRYABLE_STATUS_CODES = {500, 502, 503, 504}
+_MAX_ATTEMPTS = 2
+_RETRY_DELAY_SECONDS = 1.5
+
+
+def _post_with_retry(url: str, **kwargs) -> httpx.Response:
+    last_exc: Exception | None = None
+    for attempt in range(1, _MAX_ATTEMPTS + 1):
+        try:
+            resp = httpx.post(url, **kwargs)
+        except httpx.TimeoutException as exc:
+            # A hung/slow provider response, not a status code — retry the
+            # same as a 5xx, since a second attempt commonly succeeds.
+            last_exc = exc
+            if attempt < _MAX_ATTEMPTS:
+                time.sleep(_RETRY_DELAY_SECONDS)
+            continue
+
+        if resp.status_code not in _RETRYABLE_STATUS_CODES:
+            resp.raise_for_status()
+            return resp
+        last_exc = httpx.HTTPStatusError(
+            f"Server error {resp.status_code}", request=resp.request, response=resp
+        )
+        if attempt < _MAX_ATTEMPTS:
+            time.sleep(_RETRY_DELAY_SECONDS)
+    raise last_exc
 
 
 class LLMProvider(ABC):
@@ -97,7 +130,7 @@ class AnthropicLLMProvider(LLMProvider):
         ]
         messages.append({"role": "user", "content": user_content})
 
-        resp = httpx.post(
+        resp = _post_with_retry(
             "https://api.anthropic.com/v1/messages",
             headers={
                 "x-api-key": self._api_key,
@@ -112,7 +145,6 @@ class AnthropicLLMProvider(LLMProvider):
             },
             timeout=30,
         )
-        resp.raise_for_status()
         data = resp.json()
         reply = "".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text")
         tokens = data.get("usage", {}).get("output_tokens")
@@ -146,7 +178,7 @@ class OpenAILLMProvider(LLMProvider):
         )
         messages.append({"role": "user", "content": user_content})
 
-        resp = httpx.post(
+        resp = _post_with_retry(
             "https://api.openai.com/v1/chat/completions",
             headers={"Authorization": f"Bearer {self._api_key}", "content-type": "application/json"},
             json={
@@ -155,7 +187,6 @@ class OpenAILLMProvider(LLMProvider):
             },
             timeout=30,
         )
-        resp.raise_for_status()
         data = resp.json()
         reply = data["choices"][0]["message"]["content"]
         tokens = data.get("usage", {}).get("completion_tokens")
@@ -193,9 +224,9 @@ class GeminiLLMProvider(LLMProvider):
         ]
         contents.append({"role": "user", "parts": [{"text": user_content}]})
 
-        resp = httpx.post(
+        resp = _post_with_retry(
             "https://generativelanguage.googleapis.com/v1beta/models/"
-            "gemini-2.0-flash:generateContent",
+            "gemini-2.5-flash:generateContent",
             headers={"content-type": "application/json"},
             params={"key": self._api_key},
             json={
@@ -204,7 +235,6 @@ class GeminiLLMProvider(LLMProvider):
             },
             timeout=30,
         )
-        resp.raise_for_status()
         data = resp.json()
         reply = "".join(
             part.get("text", "")
