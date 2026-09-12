@@ -23,6 +23,7 @@ from .expense_categorization.router import router as categorization_router
 from .financial_assistant.router import router as chatbot_router
 from .middleware import CorrelationIdMiddleware, RequestLoggingMiddleware
 from .schemas import HealthResponse, VersionResponse
+from .doctor_information.router import router as doctor_information_router
 
 settings = get_settings()
 
@@ -60,3 +61,4 @@ def version() -> VersionResponse:
 app.include_router(infra_router)
 app.include_router(chatbot_router)
 app.include_router(categorization_router)
+app.include_router(doctor_information_router)

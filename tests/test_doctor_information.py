@@ -137,3 +137,147 @@ def test_grounded_prompt_blocks_medical_advice():
     )
 
     assert "Do not provide diagnosis or treatment advice." in prompt
+
+from src.doctor_information.service import DoctorInformationService
+
+
+def test_service_returns_grounded_doctor_information():
+    service = DoctorInformationService()
+
+    result = service.answer(
+        "What is Dr. Ahmed Khan's specialty?"
+    )
+
+    assert result["retrieved"] is True
+    assert result["retrieved_doctors"] == ["Dr. Ahmed Khan"]
+    assert "Dr. Ahmed Khan" in result["answer"]
+    assert "Dermatology" in result["answer"]
+
+
+def test_service_returns_fallback_for_unknown_doctor():
+    service = DoctorInformationService()
+
+    result = service.answer(
+        "What is Dr. Unknown's schedule?"
+    )
+
+    assert result["retrieved"] is False
+    assert (
+        result["answer"]
+        == "I couldn't find that information in the available doctor records."
+    )
+
+
+def test_service_returns_fallback_for_empty_question():
+    service = DoctorInformationService()
+
+    result = service.answer("")
+
+    assert result["retrieved"] is False
+    assert (
+        result["answer"]
+        == "I couldn't find that information in the available doctor records."
+    )
+
+def test_doctor_information_endpoint_returns_valid_shape(client, auth_headers):
+    response = client.post(
+        "/api/v1/doctor-information",
+        json={
+            "user_id": "user-1",
+            "question": "What is Dr. Ahmed Khan's specialty?",
+            "conversation_id": "doctor-c1",
+        },
+        headers=auth_headers,
+    )
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    for field in (
+        "answer",
+        "conversation_id",
+        "source",
+        "retrieved",
+        "retrieved_doctors",
+        "tokens_used",
+    ):
+        assert field in body
+
+    assert body["conversation_id"] == "doctor-c1"
+    assert body["retrieved"] is True
+    assert "Dr. Ahmed Khan" in body["retrieved_doctors"]
+
+
+def test_doctor_information_endpoint_requires_internal_token(client):
+    response = client.post(
+        "/api/v1/doctor-information",
+        json={
+            "user_id": "user-1",
+            "question": "What is Dr. Ahmed Khan's specialty?",
+            "conversation_id": "doctor-c2",
+        },
+    )
+
+    assert response.status_code == 401
+    assert response.json()["error_code"] == "UNAUTHORIZED_SERVICE"
+
+
+def test_doctor_information_endpoint_blocks_medical_advice(
+    client,
+    auth_headers,
+):
+    response = client.post(
+        "/api/v1/doctor-information",
+        json={
+            "user_id": "user-1",
+            "question": "What treatment should I take?",
+            "conversation_id": "doctor-c3",
+        },
+        headers=auth_headers,
+    )
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert body["source"] == "doctor_information_safety_boundary"
+    assert body["retrieved"] is False
+    assert body["tokens_used"] is None
+    assert "can't provide diagnosis or treatment advice" in body["answer"]
+
+
+def test_doctor_information_endpoint_unknown_doctor_uses_fallback(
+    client,
+    auth_headers,
+):
+    response = client.post(
+        "/api/v1/doctor-information",
+        json={
+            "user_id": "user-1",
+            "question": "What is Dr. Unknown's schedule?",
+            "conversation_id": "doctor-c4",
+        },
+        headers=auth_headers,
+    )
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert body["retrieved"] is False
+    assert body["retrieved_doctors"] == []
+    assert (
+        body["answer"]
+        == "I couldn't find that information in the available doctor records."
+    )
+
+
+def test_doctor_information_endpoint_is_in_openapi(client):
+    response = client.get("/openapi.json")
+
+    assert response.status_code == 200
+
+    paths = response.json()["paths"]
+
+    assert "/api/v1/doctor-information" in paths

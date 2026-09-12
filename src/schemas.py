@@ -62,3 +62,17 @@ class BatchCategorizeRequest(BaseModel):
 
 class BatchCategorizeResponse(BaseModel):
     results: list[CategorizeResponse]
+
+class DoctorInformationRequest(BaseModel):
+    user_id: str
+    question: str = Field(min_length=1)
+    conversation_id: str
+
+
+class DoctorInformationResponse(BaseModel):
+    answer: str
+    conversation_id: str
+    source: str
+    retrieved: bool
+    retrieved_doctors: list[str] = Field(default_factory=list)
+    tokens_used: Optional[int] = None
