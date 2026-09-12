@@ -13,108 +13,139 @@ The evaluation covers:
 
 ## 2. Evaluation Environment
 
-- Project: HisabDo Web App AI
-- Evaluation date: 2026-09-05
-- Execution mode: Local development environment
-- LLM provider: MockLLMProvider
-- Benchmark script: `tests/ai_metrics_benchmark.py`
-- Consistency validator: `tests/output_consistency_validator.py`
+* Project: HisabDo Web App AI
+* Evaluation date: 2026-09-12
+* Execution mode: Local development environment
+* LLM provider: MockLLMProvider
+* Benchmark script: `tests/ai_metrics_benchmark.py`
+* Consistency validator: `tests/output_consistency_validator.py`
+* API endpoint: `POST /api/v1/chatbot`
+
+The benchmark was regenerated using the HTTP API layer rather than calling the chatbot service directly. This provides coverage of API routing, authentication, HTTP status handling, and response serialization.
+
+The reproducible benchmark command is:
+
+```text
+python -m tests.ai_metrics_benchmark
+```
 
 ## 3. Metrics and Results
 
 ### 3.1 JSON Output Validity
 
-Three chatbot responses were evaluated for valid response schema and JSON serialization.
+Ten chatbot requests were evaluated through the `/api/v1/chatbot` HTTP endpoint.
 
-| Test | Result |
-|---|---|
-| JSON-LAT-01 | PASS |
-| JSON-LAT-02 | PASS |
-| JSON-LAT-03 | PASS |
+| Metric               |      Result |
+| -------------------- | ----------: |
+| Total requests       |          10 |
+| HTTP 200 responses   |          10 |
+| Valid JSON responses |          10 |
+| JSON validity rate   | **100.00%** |
 
-- Total responses: 3
-- Valid responses: 3
-- JSON validity rate: **100.00%**
-
-The responses successfully passed `ChatbotResponse` validation and JSON serialization checks.
+All benchmark requests returned HTTP 200 responses with JSON response bodies.
 
 ### 3.2 Response Latency
 
-The benchmark measured execution time using `time.perf_counter()`.
+Response latency was measured using `time.perf_counter()` around the HTTP API request.
 
-| Test | Latency |
-|---|---:|
-| JSON-LAT-01 | 27.66 ms |
-| JSON-LAT-02 | 1.41 ms |
-| JSON-LAT-03 | 0.56 ms |
+| Test        |   Latency |
+| ----------- | --------: |
+| HTTP-LAT-01 | 158.89 ms |
+| HTTP-LAT-02 |  30.47 ms |
+| HTTP-LAT-03 |   9.87 ms |
+| HTTP-LAT-04 |   9.46 ms |
+| HTTP-LAT-05 |   8.32 ms |
+| HTTP-LAT-06 |   9.86 ms |
+| HTTP-LAT-07 |   9.70 ms |
+| HTTP-LAT-08 |   7.90 ms |
+| HTTP-LAT-09 |   8.16 ms |
+| HTTP-LAT-10 |   8.22 ms |
 
 Summary:
 
-- Average latency: **9.88 ms**
-- Minimum latency: **0.56 ms**
-- Maximum latency: **27.66 ms**
+* Average API latency: **26.08 ms**
+* Minimum latency: **7.90 ms**
+* Maximum latency: **158.89 ms**
 
-These values represent local MockLLM/application execution and should not be treated as production external-LLM latency.
+These measurements represent local HTTP API execution using `MockLLMProvider`. They should not be interpreted as production external-LLM latency.
+
+The current benchmark supersedes the earlier 3-case direct service-layer latency measurements. The new baseline uses 10 HTTP API requests to provide broader endpoint coverage and consistent measurement methodology.
 
 ### 3.3 Response Consistency
 
 The existing LLM output consistency validator executed five test cases across three cycles, producing 15 total executions.
 
-| Metric | Result |
-|---|---:|
-| Total executions | 15 |
-| Passed | 12 |
-| Flagged | 3 |
+| Metric               |     Result |
+| -------------------- | ---------: |
+| Total executions     |         15 |
+| Passed               |         12 |
+| Flagged              |          3 |
 | Validation pass rate | **80.00%** |
-| Flag rate | **20.00%** |
+| Flag rate            | **20.00%** |
 
 TC-01 through TC-04 were consistent across all three cycles.
 
 TC-05 produced invalid-output flags across its three cycles:
 
-- Cycle 1: Empty response
-- Cycle 2: Response contains no usable content
-- Cycle 3: Response is a bare echo of the question
+* Cycle 1: Empty response
+* Cycle 2: Response contains no usable content
+* Cycle 3: Response is a bare echo of the question
 
-This identifies a consistency/response-quality edge case that requires further investigation.
+This identifies a response-quality edge case that requires further investigation.
 
 ### 3.4 Symptom Extraction Accuracy
 
-**Status: N/A — Not Implemented**
+**Status: N/A â€” Not Implemented**
 
 No symptom extraction component or corresponding ground-truth evaluation dataset was identified in the current chatbot implementation.
 
-Therefore, no accuracy percentage is reported for this metric. Future evaluation should define a labeled test dataset containing expected symptom entities before calculating extraction accuracy.
+Therefore, no accuracy percentage is reported for this metric.
+
+If symptom extraction becomes part of the implemented AI functionality, a labeled evaluation dataset containing expected symptom entities should be created before calculating extraction accuracy.
 
 ## 4. Baseline Summary
 
-| Metric | Baseline |
-|---|---:|
-| JSON output validity | **100.00%** |
-| Average response latency | **9.88 ms** |
-| Minimum latency | **0.56 ms** |
-| Maximum latency | **27.66 ms** |
-| Response consistency validation pass rate | **80.00%** |
-| Symptom extraction accuracy | **N/A — Not Implemented** |
+| Metric                                    |                  Baseline |
+| ----------------------------------------- | ------------------------: |
+| JSON output validity                      |               **100.00%** |
+| HTTP 200 response rate                    |               **100.00%** |
+| Average API latency                       |              **26.08 ms** |
+| Minimum latency                           |               **7.90 ms** |
+| Maximum latency                           |             **158.89 ms** |
+| Response consistency validation pass rate |                **80.00%** |
+| Symptom extraction accuracy               | **N/A â€” Not Implemented** |
 
 ## 5. Findings
 
-1. All three benchmark responses produced valid chatbot response objects and JSON-serializable output.
-2. Local benchmark latency was low, with an average of 9.88 ms.
-3. The first RAG-related benchmark response had the highest measured latency at 27.66 ms.
-4. Four consistency test cases passed across all three executions.
-5. TC-05 exposed three invalid-output conditions and resulted in the overall 80.00% validation pass rate.
-6. Symptom extraction accuracy cannot currently be measured because the required extraction component and labeled evaluation data are not implemented.
+1. All 10 benchmark requests returned successful HTTP 200 responses with valid JSON output.
+
+2. JSON output validity was **100.00%** across the benchmark sample.
+
+3. Average HTTP API latency was **26.08 ms**, with a minimum of **7.90 ms** and a maximum of **158.89 ms**.
+
+4. The benchmark now exercises the actual `/api/v1/chatbot` HTTP endpoint rather than only calling the internal chatbot service layer.
+
+5. The HTTP benchmark provides coverage of API routing, authentication, HTTP response status, and JSON response handling.
+
+6. Response consistency validation achieved an **80.00% pass rate**. TC-01 through TC-04 were consistent, while TC-05 was flagged across all three cycles.
+
+7. Symptom extraction accuracy remains unavailable because the feature and labeled evaluation dataset are not currently implemented.
 
 ## 6. Recommendations
 
-- Investigate the TC-05 invalid-output behavior.
-- Repeat latency testing with multiple executions per test case for a more stable latency baseline.
-- Add a labeled symptom extraction dataset if symptom extraction becomes part of the implemented AI functionality.
-- Repeat these benchmarks after major model, prompt, or integration changes to compare performance against this baseline.
+* Investigate and improve the TC-05 invalid-output behavior.
+* Repeat latency testing with multiple cycles per test case for a more stable performance baseline.
+* Expand benchmark coverage with additional realistic chatbot requests.
+* Add dedicated API-level validation for authentication failures and invalid request payloads in future benchmark iterations.
+* Add a labeled symptom extraction dataset if symptom extraction becomes part of the implemented AI functionality.
+* Repeat these benchmarks after major model, prompt, RAG, or API integration changes to compare performance against the baseline.
 
 ## 7. Conclusion
 
-The Sprint 1 benchmark establishes an initial measurable baseline for AI response quality and performance.
+The Sprint 1 benchmark establishes an updated measurable baseline for AI response quality and performance using the actual chatbot HTTP API endpoint.
 
-The current implementation achieved **100.00% JSON output validity** in the benchmark sample, an average local execution latency of **9.88 ms**, and an **80.00% response consistency validation pass rate**. The consistency failures provide a clear QA follow-up area, while symptom extraction remains not applicable until the feature is implemented and test data is available.
+The current implementation achieved **100.00% JSON output validity** across 10 benchmark requests, with an average local API latency of **26.08 ms** and an **80.00% response consistency validation pass rate**.
+
+The benchmark also identified TC-05 as a response-quality edge case requiring further investigation. Symptom extraction remains not applicable until the feature and corresponding evaluation dataset are implemented.
+
+The benchmark results should be treated as a local development baseline using `MockLLMProvider`, not as production external-LLM performance.
