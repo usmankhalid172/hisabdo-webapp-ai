@@ -44,7 +44,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
         # Authoritative data path — never touches the RAG knowledge base.
         summary = get_backend_client().get_user_financial_summary(request.user_id)
         context = _format_financial_summary(summary)
-        reply, tokens = provider.generate_reply(request.message, context=context, history=request.history)
+        reply, tokens = provider.generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
         return ChatbotResponse(
             reply=reply,
             conversation_id=request.conversation_id,
@@ -56,7 +56,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     matches = get_retriever().retrieve(request.message, top_k=1)
     if matches:
         context = matches[0]["text"]
-        reply, tokens = provider.generate_reply(request.message, context=context, history=request.history)
+        reply, tokens = provider.generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
         return ChatbotResponse(
             reply=reply,
             conversation_id=request.conversation_id,
@@ -65,7 +65,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="rag",
         )
 
-    reply, tokens = provider.generate_reply(request.message, context=None, history=request.history)
+    reply, tokens = provider.generate_reply(request.message, context=None, history=[h.model_dump() for h in request.history])
     return ChatbotResponse(
         reply=reply,
         conversation_id=request.conversation_id,
