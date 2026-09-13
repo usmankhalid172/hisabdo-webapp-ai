@@ -1,48 +1,91 @@
-@"
 # Sprint 1 AI Metrics Benchmark
 
 ## Evaluation Summary
 
-- Evaluation date: 2026-09-12
+- Evaluation date: 2026-09-13
 - Environment: Local development environment
 - LLM provider: MockLLMProvider
 - Endpoint: POST /api/v1/chatbot
-- Total HTTP tests: 10
+- Sequential HTTP tests: 10
+- Concurrent HTTP tests: 10
+- Concurrent workers: 5
+
+## Sequential HTTP API Benchmark
+
+- Total requests: 10
 - HTTP 200 responses: 10
-- Valid JSON responses: 10
-- JSON validity rate: 100.00%
-- Average API latency: 18.50 ms
-- Minimum API latency: 6.76 ms
-- Maximum API latency: 99.82 ms
+- Successful response rate: 100.00%
+- Schema-valid responses: 10
+- JSON schema validity rate: 100.00%
+- Average latency: 22.31 ms
+- Minimum latency: 6.73 ms
+- Maximum latency: 148.39 ms
 
-## Individual Latency Results
+### Individual Sequential Results
 
-| Test ID | HTTP Status | JSON Valid | Latency |
+| Test ID | HTTP Status | JSON Schema Valid | Latency |
 |---|---:|---|---:|
-| HTTP-LAT-01 | 200 | True | 99.82 ms |
-| HTTP-LAT-02 | 200 | True | 9.99 ms |
-| HTTP-LAT-03 | 200 | True | 10.34 ms |
-| HTTP-LAT-04 | 200 | True | 7.56 ms |
-| HTTP-LAT-05 | 200 | True | 10.80 ms |
-| HTTP-LAT-06 | 200 | True | 9.37 ms |
-| HTTP-LAT-07 | 200 | True | 9.80 ms |
-| HTTP-LAT-08 | 200 | True | 10.84 ms |
-| HTTP-LAT-09 | 200 | True | 6.76 ms |
-| HTTP-LAT-10 | 200 | True | 9.73 ms |
+| HTTP-LAT-01 | 200 | True | 148.39 ms |
+| HTTP-LAT-02 | 200 | True | 11.44 ms |
+| HTTP-LAT-03 | 200 | True | 8.38 ms |
+| HTTP-LAT-04 | 200 | True | 7.11 ms |
+| HTTP-LAT-05 | 200 | True | 9.44 ms |
+| HTTP-LAT-06 | 200 | True | 6.73 ms |
+| HTTP-LAT-07 | 200 | True | 9.53 ms |
+| HTTP-LAT-08 | 200 | True | 7.10 ms |
+| HTTP-LAT-09 | 200 | True | 7.86 ms |
+| HTTP-LAT-10 | 200 | True | 7.13 ms |
+
+## Concurrent Multi-User Throughput Benchmark
+
+- Total requests: 10
+- Concurrent workers: 5
+- HTTP 200 responses: 10
+- Successful response rate: 100.00%
+- Schema-valid responses: 10
+- JSON schema validity rate: 100.00%
+- Average latency: 28.37 ms
+- Minimum latency: 25.93 ms
+- Maximum latency: 34.76 ms
+- Concurrent batch duration: 0.0638 seconds
+- Throughput: 156.82 requests/second
+
+### Individual Concurrent Results
+
+| Test ID | HTTP Status | JSON Schema Valid | Latency |
+|---|---:|---|---:|
+| HTTP-CON-01 | 200 | True | 26.21 ms |
+| HTTP-CON-02 | 200 | True | 26.60 ms |
+| HTTP-CON-03 | 200 | True | 34.76 ms |
+| HTTP-CON-04 | 200 | True | 28.28 ms |
+| HTTP-CON-05 | 200 | True | 27.73 ms |
+| HTTP-CON-06 | 200 | True | 32.38 ms |
+| HTTP-CON-07 | 200 | True | 26.25 ms |
+| HTTP-CON-08 | 200 | True | 27.22 ms |
+| HTTP-CON-09 | 200 | True | 28.36 ms |
+| HTTP-CON-10 | 200 | True | 25.93 ms |
 
 ## Benchmark Notes
 
-The benchmark was regenerated through the HTTP API layer using
+The benchmark was executed through the HTTP API layer using
 POST /api/v1/chatbot. This covers API routing, authentication,
-HTTP status validation, response serialization, JSON validity,
-and end-to-end local API latency.
+HTTP status validation, response serialization, JSON schema
+validation, and end-to-end local API latency.
 
-Latency values are end-to-end local HTTP API timings using TestClient.
-They include API/client overhead and should not be interpreted as
-production external LLM latency.
+Latency values are end-to-end local HTTP API timings using
+FastAPI TestClient. They include local client/API overhead and
+should not be interpreted as production external LLM latency.
 
-The latest benchmark run supersedes the earlier 3-case direct
-service-layer latency measurements.
+The sequential benchmark uses 10 distinct chatbot messages,
+improving the previous 3-case baseline.
+
+The first sequential request took 148.39 ms, which increases the
+sequential average. The remaining sequential requests were between
+6.73 ms and 11.44 ms.
+
+The concurrent benchmark uses 5 worker threads and 10 requests
+across separate benchmark user IDs to simulate consecutive
+multi-user API calls.
 
 ## Response Consistency
 
@@ -51,9 +94,9 @@ service-layer latency measurements.
 - Flagged executions: 3
 - Consistency rate: 80.00%
 
-TC-05 was flagged in all three cycles because of inconsistent or
-unusable response content. The findings are retained for follow-up
-improvement rather than being hidden from the benchmark.
+TC-05 was flagged in all three consistency cycles because of
+inconsistent or unusable response content. The finding is retained
+for follow-up improvement and is not hidden from the benchmark.
 
 ## Symptom Extraction Accuracy
 
@@ -68,47 +111,15 @@ Run the benchmark with:
 
 ## Findings
 
-1. JSON response validity was 100% across all 10 HTTP API tests.
-2. All 10 benchmark requests returned HTTP 200.
+1. JSON schema validity was 100% across all 20 HTTP API benchmark requests.
+2. All 20 benchmark requests returned HTTP 200.
 3. The benchmark now exercises the HTTP API layer instead of only
    calling the service layer directly.
-4. Local API latency varies between runs because this is a local
-   development environment.
-5. Response consistency requires further investigation for TC-05.
-6. Symptom extraction accuracy cannot currently be measured because
+4. The sequential benchmark was expanded from 3 cases to 10 cases.
+5. Concurrent testing achieved 156.82 requests/second in the local
+   MockLLM/TestClient environment.
+6. Local latency varies between runs because this is a development
+   environment.
+7. Response consistency requires further investigation for TC-05.
+8. Symptom extraction accuracy cannot currently be measured because
    symptom extraction is not implemented.
-"@ | Set-Content "docs/sprint1-ai-metrics-benchmark.md"
-
-@"
-=== Sprint 1 AI Metrics Benchmark ===
-Evaluation date: 2026-09-12
-Endpoint: POST /api/v1/chatbot
-LLM provider: MockLLMProvider
-Execution mode: Local development environment
-
-Total HTTP tests: 10
-HTTP 200 responses: 10
-Valid JSON responses: 10
-JSON validity rate: 100.00%
-Average API latency: 18.50 ms
-Minimum API latency: 6.76 ms
-Maximum API latency: 99.82 ms
-
---- Individual Results ---
-{'test_id': 'HTTP-LAT-01', 'http_status': 200, 'json_valid': True, 'latency_ms': 99.82}
-{'test_id': 'HTTP-LAT-02', 'http_status': 200, 'json_valid': True, 'latency_ms': 9.99}
-{'test_id': 'HTTP-LAT-03', 'http_status': 200, 'json_valid': True, 'latency_ms': 10.34}
-{'test_id': 'HTTP-LAT-04', 'http_status': 200, 'json_valid': True, 'latency_ms': 7.56}
-{'test_id': 'HTTP-LAT-05', 'http_status': 200, 'json_valid': True, 'latency_ms': 10.8}
-{'test_id': 'HTTP-LAT-06', 'http_status': 200, 'json_valid': True, 'latency_ms': 9.37}
-{'test_id': 'HTTP-LAT-07', 'http_status': 200, 'json_valid': True, 'latency_ms': 9.8}
-{'test_id': 'HTTP-LAT-08', 'http_status': 200, 'json_valid': True, 'latency_ms': 10.84}
-{'test_id': 'HTTP-LAT-09', 'http_status': 200, 'json_valid': True, 'latency_ms': 6.76}
-{'test_id': 'HTTP-LAT-10', 'http_status': 200, 'json_valid': True, 'latency_ms': 9.73}
-
-Note: Latency values are end-to-end local HTTP API timings using TestClient
-and include API/client overhead. They are not production external LLM latency.
-
-Reproducibility command:
-python -m tests.ai_metrics_benchmark
-"@ | Set-Content "docs/sprint1-ai-metrics-benchmark-log.txt"
