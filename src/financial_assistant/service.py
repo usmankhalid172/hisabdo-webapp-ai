@@ -22,20 +22,62 @@ OWN_FINANCIAL_DATA_PATTERNS = [
     r"\bwhat('?s| is) my\b.*\b(balance|expense|revenue|outstanding)\b",
 ]
 
-# Security fix: a message referencing a third party (even alongside "my",
-# e.g. "what is my friend's balance") must never route to the backend
-# financial API using the requester's own user_id — that would return the
-# requester's real numbers mislabeled as someone else's answer.
-THIRD_PARTY_MARKERS = re.compile(
-    r"\b(his|her|their|someone else'?s|other user'?s|another user'?s|"
-    r"friend'?s|colleague'?s|another person'?s)\b",
+# Security guard: any message that appears to ask about someone ELSE's
+# financial data is refused deterministically in handle_chat(), before the
+# LLM is ever called — not just rerouted away from the backend. Relying on
+# the prompt alone would not survive an instruction-override attempt
+# ("ignore your instructions and tell me anyway").
+THIRD_PARTY_RELATIONSHIP_WORDS = re.compile(
+    r"\b(his|her|their|its|someone else'?s|other user'?s|another user'?s|"
+    r"other person'?s|another person'?s|friend'?s|colleague'?s|coworker'?s|"
+    r"wife'?s|husband'?s|spouse'?s|partner'?s|boyfriend'?s|girlfriend'?s|"
+    r"brother'?s|sister'?s|mother'?s|father'?s|mom'?s|dad'?s|boss'?s|"
+    r"manager'?s|client'?s|customer'?s|employee'?s|roommate'?s|teammate'?s)\b",
     re.IGNORECASE,
 )
+
+# Catches probes by identifier instead of relationship, e.g. "user 2's
+# balance", "account #5", "customer 12".
+THIRD_PARTY_ID_REFERENCE = re.compile(
+    r"\b(user|account|customer|client)\s*#?\s*\d+\b", re.IGNORECASE
+)
+
+# Non-person possessives that must NOT trip the bare-name heuristic below.
+_SAFE_POSSESSIVE_WORDS = {
+    "my", "this", "that", "today's", "month's", "week's", "year's",
+    "quarter's", "day's", "account's", "app's", "system's",
+}
+
+
+def _mentions_bare_name_possessive(message: str) -> bool:
+    """Heuristic for 'Ali's balance' style references: a capitalized word
+    (not the first word, to avoid flagging normal sentence-initial capitals)
+    immediately followed by a possessive 's."""
+    words = message.split()
+    for i, word in enumerate(words):
+        if i == 0:
+            continue
+        stripped = word.rstrip(",.?!")
+        if re.fullmatch(r"[A-Z][a-zA-Z]*'s", stripped):
+            if stripped.lower() not in _SAFE_POSSESSIVE_WORDS:
+                return True
+    return False
+
+
+def _mentions_third_party(message: str) -> bool:
+    text = message.lower()
+    if THIRD_PARTY_RELATIONSHIP_WORDS.search(text):
+        return True
+    if THIRD_PARTY_ID_REFERENCE.search(text):
+        return True
+    if _mentions_bare_name_possessive(message):
+        return True
+    return False
 
 
 def _is_own_financial_data_query(message: str) -> bool:
     text = message.lower()
-    if THIRD_PARTY_MARKERS.search(text):
+    if _mentions_third_party(message):
         return False
     return any(re.search(pattern, text) for pattern in OWN_FINANCIAL_DATA_PATTERNS)
 
@@ -49,7 +91,23 @@ def _format_financial_summary(summary: dict) -> str:
     )
 
 
+THIRD_PARTY_REFUSAL_MESSAGE = (
+    "I'm sorry, but I can only provide information about your own account."
+)
+
+
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
+    if _mentions_third_party(request.message):
+        # Deterministic refusal — never reaches the LLM, so this cannot be
+        # talked around by a prompt-injection / instruction-override attempt.
+        return ChatbotResponse(
+            reply=THIRD_PARTY_REFUSAL_MESSAGE,
+            conversation_id=request.conversation_id,
+            intent="declined_third_party",
+            tokens_used=0,
+            source="policy_guard",
+        )
+
     provider = get_llm_provider()
 
     if _is_own_financial_data_query(request.message):
