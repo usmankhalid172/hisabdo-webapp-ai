@@ -22,9 +22,21 @@ OWN_FINANCIAL_DATA_PATTERNS = [
     r"\bwhat('?s| is) my\b.*\b(balance|expense|revenue|outstanding)\b",
 ]
 
+# Security fix: a message referencing a third party (even alongside "my",
+# e.g. "what is my friend's balance") must never route to the backend
+# financial API using the requester's own user_id — that would return the
+# requester's real numbers mislabeled as someone else's answer.
+THIRD_PARTY_MARKERS = re.compile(
+    r"\b(his|her|their|someone else'?s|other user'?s|another user'?s|"
+    r"friend'?s|colleague'?s|another person'?s)\b",
+    re.IGNORECASE,
+)
+
 
 def _is_own_financial_data_query(message: str) -> bool:
     text = message.lower()
+    if THIRD_PARTY_MARKERS.search(text):
+        return False
     return any(re.search(pattern, text) for pattern in OWN_FINANCIAL_DATA_PATTERNS)
 
 
