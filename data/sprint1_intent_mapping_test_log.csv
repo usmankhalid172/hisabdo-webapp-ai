@@ -1,0 +1,10 @@
+﻿test_case_id,patient_message,expected_intent,detected_intent,required_information,api_method,api_endpoint,result
+INTENT-001,"Is Dr. Ahmed available tomorrow?",doctor_availability,doctor_availability,"doctor_name; preferred_date",GET,/appointments/availability,PASS
+INTENT-002,"Do you have any open slots for Dr. Khan?",doctor_availability,doctor_availability,"doctor_name",GET,/appointments/availability,PASS
+INTENT-003,"I want to book an appointment with Dr. Ahmed.",book_appointment,book_appointment,"patient_name; doctor_name",POST,/appointments,PASS
+INTENT-004,"My name is Mehar and I want to book an appointment with Dr. Ahmed on Monday at 10 AM.",book_appointment,book_appointment,"patient_name; doctor_name; preferred_date; preferred_time",POST,/appointments,PASS
+INTENT-005,"I need to reschedule my appointment.",reschedule_appointment,reschedule_appointment,"appointment_id",PATCH,/appointments/{appointment_id},PASS
+INTENT-006,"I want to reschedule appointment APT-123 to Monday at 10 AM.",reschedule_appointment,reschedule_appointment,"appointment_id; preferred_date; preferred_time",PATCH,/appointments/{appointment_id},PASS
+INTENT-007,"What are your hospital timings?",unknown,unknown,"None",None,None,PASS
+INTENT-008,"I want to book an appointment with Dr. Ahmed","book_appointment","book_appointment","patient_name; doctor_name",POST,/appointments,PASS
+INTENT-009,"My name is Mehar and I prefer Monday at 10 AM","book_appointment","book_appointment","patient_name; doctor_name; preferred_date; preferred_time",POST,/appointments,PASS
