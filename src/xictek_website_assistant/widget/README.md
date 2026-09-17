@@ -38,30 +38,32 @@ python -m http.server 5500
 `demo.html` is a stand-in page — the widget code itself is identical
 to what would ship on the real site.
 
-## Branding — action needed
+## Branding
 
-I could not pull xicteksystems.com's actual brand colors, fonts, or
-logo into this build: the site's Next.js pages only exposed page text
-through the tools available here, not its compiled CSS or raster
-assets. So `xictek-widget.js` currently ships a placeholder palette —
-a clean blue/navy tech-company look chosen to look presentable on
-its own — set as CSS custom properties at the top of the injected
-`STYLE` block:
+Palette pulled from real xicteksystems.com screenshots (the fetch tool
+available here only extracts page text, not CSS/images, so screenshots
+were the way to get this accurately) — near-black navy hero/footer,
+bright sky-blue CTA buttons, white/light-gray content sections, and a
+blue→indigo gradient accent on headlines:
 
 ```css
---xk-ink: #12182B;
+--xk-ink: #0B1120;       /* hero/footer navy, header bar */
 --xk-bg: #FFFFFF;
---xk-bg-soft: #F4F6FB;
---xk-accent: #2F6FED;
---xk-accent-ink: #1B4FC4;
---xk-border: #E3E7F0;
+--xk-bg-soft: #F5F8FC;   /* light-section background */
+--xk-accent: #1E9EFF;    /* primary CTA blue */
+--xk-accent-ink: #0D7FE0;/* hover/pressed */
+--xk-accent-2: #6C63FF;  /* gradient endpoint, unused directly yet */
+--xk-border: #E4E9F2;
+--xk-muted: #64748B;
 ```
 
-**Before this goes on the real site**, swap these for XICTEK's actual
-brand hex values (and, if there's a wordmark/icon, replace the generic
-chat-bubble SVG in the launcher button with it). That's a five-line
-edit, deliberately isolated so it doesn't require touching any of the
-widget's structure or logic.
+These are close reads from screenshots, not exact hex values sampled
+from the live CSS — worth a final pixel-level check against the real
+site (or the design team) before shipping, but should already look
+at-home next to the rest of xicteksystems.com. The generic chat-bubble
+SVG in the launcher button is still a placeholder — swap in the real
+"X" wordmark/icon (visible in the header/footer screenshots) when
+integrating with the live site.
 
 ## Security note — read before the real integration
 

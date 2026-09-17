@@ -53,13 +53,17 @@
   // ---------------------------------------------------------------------
   var STYLE = `
     :root {
-      --xk-ink: #12182B;
+      /* Pulled from actual xicteksystems.com screenshots: near-black
+         navy hero/footer, bright sky-blue CTA buttons, white/light-gray
+         content sections, blue->indigo gradient on headline accents. */
+      --xk-ink: #0B1120;
       --xk-bg: #FFFFFF;
-      --xk-bg-soft: #F4F6FB;
-      --xk-accent: #2F6FED;
-      --xk-accent-ink: #1B4FC4;
-      --xk-border: #E3E7F0;
-      --xk-muted: #667085;
+      --xk-bg-soft: #F5F8FC;
+      --xk-accent: #1E9EFF;
+      --xk-accent-ink: #0D7FE0;
+      --xk-accent-2: #6C63FF;
+      --xk-border: #E4E9F2;
+      --xk-muted: #64748B;
       --xk-radius: 14px;
       --xk-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
@@ -106,7 +110,7 @@
     #xk-panel.xk-open { display: flex; }
 
     #xk-header {
-      background: var(--xk-ink);
+      background: linear-gradient(135deg, var(--xk-ink) 0%, #142042 100%);
       color: #fff;
       padding: 14px 16px;
       display: flex;
