@@ -26,7 +26,12 @@ def client():
 
 @pytest.fixture()
 def auth_headers():
-    return {"X-Internal-Token": "test-token"}
+    # Derive from the same INTERNAL_SERVICE_TOKEN the app itself reads,
+    # rather than hardcoding a value — os.environ.setdefault() above is a
+    # no-op if the variable is already set in the shell/`.env` (common on
+    # a dev machine that's had this repo configured before), so a
+    # hardcoded guess here can silently drift from what the app expects.
+    return {"X-Internal-Token": os.environ["INTERNAL_SERVICE_TOKEN"]}
 
 
 @pytest.fixture(scope="session", autouse=True)
