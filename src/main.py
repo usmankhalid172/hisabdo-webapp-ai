@@ -16,6 +16,8 @@ Then:
     open http://localhost:8000/docs
 """
 from fastapi import APIRouter, FastAPI
+from slowapi.errors import RateLimitExceeded
+from slowapi import _rate_limit_exceeded_handler
 
 from .config import get_settings
 from .errors import register_exception_handlers
@@ -23,6 +25,8 @@ from .expense_categorization.router import router as categorization_router
 from .financial_assistant.router import router as chatbot_router
 from .middleware import CorrelationIdMiddleware, RequestLoggingMiddleware
 from .schemas import HealthResponse, VersionResponse
+from .xictek_website_assistant.rate_limit import limiter
+from .xictek_website_assistant.router import router as xictek_router
 
 settings = get_settings()
 
@@ -39,6 +43,14 @@ app.add_middleware(RequestLoggingMiddleware)
 app.add_middleware(CorrelationIdMiddleware)
 
 register_exception_handlers(app)
+
+# XICTEK website assistant's per-IP rate limiting (slowapi). Wired here
+# rather than inside that module's router.py because slowapi requires the
+# limiter to live on app.state and its 429 handler to be registered on the
+# app itself — see xictek_website_assistant/rate_limit.py for why this
+# endpoint needs it from day one.
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 infra_router = APIRouter(prefix="/api/v1", tags=["infra"])
 
@@ -60,3 +72,4 @@ def version() -> VersionResponse:
 app.include_router(infra_router)
 app.include_router(chatbot_router)
 app.include_router(categorization_router)
+app.include_router(xictek_router)

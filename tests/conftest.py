@@ -5,6 +5,11 @@ from pathlib import Path
 # Ensure the internal token is set before Settings is constructed anywhere.
 os.environ.setdefault("INTERNAL_SERVICE_TOKEN", "test-token")
 os.environ.setdefault("LLM_PROVIDER", "mock")
+# TestClient requests all share one synthetic IP ("testclient"), so the
+# xictek chat endpoint's real per-IP rate limit (20/minute, meant for
+# actual website visitors) would otherwise start 429-ing partway through
+# any test session that sends more than 20 requests to it.
+os.environ.setdefault("XICTEK_RATE_LIMIT", "10000/minute")
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 

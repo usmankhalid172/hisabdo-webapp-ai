@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XICTEK Website Assistant — Widget Demo</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 640px;
+      margin: 80px auto;
+      padding: 0 20px;
+      color: #12182B;
+      line-height: 1.6;
+    }
+    h1 { font-size: 22px; }
+    code {
+      background: #F4F6FB;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <h1>XICTEK Website Assistant — widget demo</h1>
+  <p>
+    This page stands in for a real xicteksystems.com page. The chat
+    launcher in the bottom-right corner is the same
+    <code>xictek-widget.js</code> that would be dropped onto the real
+    site — nothing on this page is special-cased for the demo.
+  </p>
+  <p>
+    Requires <code>uvicorn src.main:app --reload --port 8000</code>
+    running from the repo root, and this file served (not opened via
+    <code>file://</code>, so the widget's <code>fetch()</code> calls
+    aren't blocked): e.g. from this <code>widget/</code> folder run
+    <code>python -m http.server 5500</code> and open
+    <code>http://localhost:5500/demo.html</code>.
+  </p>
+
+  <script
+    src="xictek-widget.js"
+    data-api-base="http://localhost:8000"
+    data-api-token="change-me-dev-token"
+    data-title="XICTEK Assistant"
+  ></script>
+</body>
+</html>
