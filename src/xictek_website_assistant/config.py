@@ -37,8 +37,12 @@ class XictekSettings(BaseSettings):
     groq_api_key: str | None = None
     llm_provider: str | None = None
 
-    # Embeddings
-    embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
+    # Embeddings. Multilingual (not English-only all-MiniLM-L6-v2) so
+    # queries in Urdu, Hindi, or Arabic still retrieve the right English
+    # site content -- team lead requested EN/UR/HI/AR support. Officially
+    # supports ar/hi/ur/en + 50 more languages. Bigger download (~470MB
+    # vs ~90MB) but same CPU-friendly inference cost at this index size.
+    embedding_model: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
     embedding_dim: int = 384
     chunk_size_chars: int = 1200
     chunk_overlap_chars: int = 200

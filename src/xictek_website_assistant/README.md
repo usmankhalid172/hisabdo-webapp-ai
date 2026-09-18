@@ -94,6 +94,15 @@ chunks and embeds it, and overwrites whatever index already exists
 under `data/index/`. It's a full rebuild every time — no incremental
 indexing — which is fine at this content scale (a few hundred pages).
 
+**Re-run required after the multilingual embedding model change:**
+both models happen to output 384-dimensional vectors, so an old index
+built with `all-MiniLM-L6-v2` will *load* without error under the new
+`paraphrase-multilingual-MiniLM-L12-v2` — but the two models' vector
+spaces aren't compatible with each other, so similarity scores against
+a stale index would be meaningless. If you built an index before this
+change, you must re-run `ingest.py` — there's no way to detect this
+automatically from the file, so nothing will warn you if you skip it.
+
 **Re-run this any time xicteksystems.com or hisabdo.app content
 changes** (new blog post, updated services page, etc.) and restart the
 service afterward so it picks up the new index (`service.py` caches
@@ -110,9 +119,14 @@ with outbound internet access, then commit/deploy the resulting
 
 ## Embeddings
 
-- **Model:** `sentence-transformers/all-MiniLM-L6-v2` (local, via the
-  `sentence-transformers` package) — free, no API cost, no network
-  dependency at *query* time once the model's cached locally.
+- **Model:** `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
+  (local, via the `sentence-transformers` package) — free, no API cost,
+  no network dependency at *query* time once the model's cached
+  locally. Multilingual (officially supports `ar`/`hi`/`ur`/`en` + 50
+  more) rather than the English-only `all-MiniLM-L6-v2`, so a query in
+  Urdu, Hindi, or Arabic still retrieves the right chunks from the
+  site's English-language content — bigger download (~470MB vs ~90MB),
+  same inference cost at this index's size.
 - Chosen over TF-IDF (used by HisabDo's smaller `financial_assistant`
   FAQ) because this knowledge base is larger and more varied
   (50+ blog posts plus company/product pages) — semantic similarity
@@ -126,6 +140,31 @@ with outbound internet access, then commit/deploy the resulting
   to inspect/debug. Swapping in a real vector DB later only touches
   `vector_store.py`'s internals — `service.py` only ever sees
   `VectorStore.query()`'s return shape.
+
+## Multilingual support (English / Urdu / Hindi / Arabic)
+
+Per the team lead's request after reviewing the initial build:
+`SYSTEM_PROMPT` (prompts.py) instructs the model to detect the
+visitor's language and reply in it — English, Urdu, Hindi, or Arabic —
+translating facts from the (English) retrieved context as needed. This
+needed the embedding model swap above too: an English-only embedder
+wouldn't reliably match an Urdu/Arabic/Hindi query against English site
+content, so retrieval would silently degrade for non-English visitors
+even if the LLM could technically reply in their language.
+
+The widget (`widget/xictek-widget.js`) sets `dir="auto"` on message
+bubbles and the input box, so the browser's own bidi detection renders
+Urdu/Arabic right-to-left and Hindi/English left-to-right automatically
+per message, with no language-detection logic needed in JS.
+
+**Known limitation:** `guardrails.py`'s deterministic prompt-injection
+patterns are English-only regex. An injection attempt phrased in Urdu,
+Hindi, or Arabic won't be caught by that layer — it falls through to
+`SYSTEM_PROMPT` alone (still instructed to refuse, just a weaker
+defense-in-depth than English gets). Translating those patterns
+accurately enough to trust is real work on its own — a wrong or overly
+literal translation gives false confidence — so this is flagged as a
+follow-up rather than shipped untested.
 
 ### Result diversification (MMR)
 
@@ -158,7 +197,7 @@ root for the current list. Notable ones:
 | `GROQ_API_KEY` | *(unset)* | Chat generation (shared with HisabDo's chatbot by default). With `LLM_PROVIDER=mock` (repo default), no key is needed — see below. |
 | `XICTEK_GROQ_API_KEY` | *(unset — falls back to `GROQ_API_KEY`)* | Optional: give this module its own Groq key, separate from HisabDo's chatbot |
 | `XICTEK_LLM_PROVIDER` | *(unset — falls back to `LLM_PROVIDER`)* | Optional: override the provider (e.g. `groq`) independent of the shared setting |
-| `XICTEK_EMBEDDING_MODEL` | `sentence-transformers/all-MiniLM-L6-v2` | Local embedding model |
+| `XICTEK_EMBEDDING_MODEL` | `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` | Local embedding model |
 | `XICTEK_TOP_K` | `4` | Chunks retrieved per query |
 | `XICTEK_RELEVANCE_THRESHOLD` | `0.35` | Minimum cosine similarity to count as a match |
 | `XICTEK_ALLOWED_CRAWL_DOMAINS` | xicteksystems.com, hisabdo.app (+ `www.`) | `ingest.py`'s crawl allow-list |

@@ -24,9 +24,11 @@ from typing import Optional
 import numpy as np
 
 from .config import get_xictek_settings
+from ..logging_config import logger
 
 EMBEDDINGS_FILENAME = "embeddings.npy"
 CHUNKS_FILENAME = "chunks.json"
+METADATA_FILENAME = "metadata.json"
 
 
 @dataclass
@@ -151,6 +153,17 @@ class VectorStore:
             for c in self.chunks
         ]
         (index_dir / CHUNKS_FILENAME).write_text(json.dumps(payload, indent=2, ensure_ascii=False))
+        # Records which model built this index. Two different embedding
+        # models can output the same vector dimension (e.g. both
+        # all-MiniLM-L6-v2 and paraphrase-multilingual-MiniLM-L12-v2 are
+        # 384-dim) without their vector spaces being remotely compatible
+        # -- an index built with one and queried with the other would
+        # load without error but return meaningless similarity scores.
+        # This lets load() catch that instead of silently corrupting
+        # results.
+        (index_dir / METADATA_FILENAME).write_text(
+            json.dumps({"embedding_model": get_xictek_settings().embedding_model}, indent=2)
+        )
 
     @classmethod
     def load(cls, index_dir: Optional[Path] = None) -> "VectorStore":
@@ -159,6 +172,24 @@ class VectorStore:
         chunks_path = index_dir / CHUNKS_FILENAME
         if not vectors_path.exists() or not chunks_path.exists():
             return cls()  # empty store — caller decides how to handle "no index yet"
+
+        metadata_path = index_dir / METADATA_FILENAME
+        current_model = get_xictek_settings().embedding_model
+        if metadata_path.exists():
+            built_with = json.loads(metadata_path.read_text()).get("embedding_model")
+            if built_with and built_with != current_model:
+                logger.warning(
+                    "xictek_index_embedding_model_mismatch",
+                    extra={
+                        "built_with_model": built_with,
+                        "current_model": current_model,
+                    },
+                )
+        else:
+            # Index predates this metadata file (built before this
+            # check existed) -- can't know what built it, so just warn
+            # that we can't verify rather than silently assuming it's fine.
+            logger.warning("xictek_index_metadata_missing_cannot_verify_embedding_model")
 
         vectors = np.load(vectors_path)
         raw_chunks = json.loads(chunks_path.read_text())

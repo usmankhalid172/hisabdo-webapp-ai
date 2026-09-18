@@ -15,6 +15,18 @@ Layers, in order (see service.py):
   1. length/abuse cap (schema + this module)              -> declined, no LLM call
   2. prompt-injection / system-prompt-extraction heuristics -> declined, no LLM call
   3. SYSTEM_PROMPT instructs the model to refuse the rest    -> model call, but hardened
+
+KNOWN LIMITATION: the patterns below are English-only. Now that the
+assistant answers in English/Urdu/Hindi/Arabic (see prompts.py), an
+injection attempt phrased in Urdu, Hindi, or Arabic will NOT be caught
+by this deterministic layer -- it falls through to layer 3 (the system
+prompt) alone. This isn't a full bypass (the model is still instructed
+to refuse), just a weaker defense-in-depth for those languages than
+English gets. Translating these regexes accurately enough to be worth
+trusting is a real task on its own (a wrong or overly literal
+translation gives false confidence), not something to bolt on without
+verification -- flagging this as a follow-up rather than shipping
+untested translated patterns.
 """
 import re
 

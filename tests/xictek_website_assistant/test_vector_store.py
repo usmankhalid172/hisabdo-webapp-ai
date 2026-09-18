@@ -67,3 +67,54 @@ def test_save_and_load_roundtrip(populated_store, tmp_path):
 def test_load_missing_index_returns_empty_store(tmp_path):
     store = VectorStore.load(index_dir=tmp_path / "does-not-exist")
     assert len(store) == 0
+
+
+def test_save_writes_metadata_recording_the_embedding_model(populated_store, tmp_path, monkeypatch):
+    monkeypatch.setenv("XICTEK_EMBEDDING_MODEL", "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
+    from src.xictek_website_assistant.config import get_xictek_settings
+
+    get_xictek_settings.cache_clear()
+    populated_store.save(index_dir=tmp_path)
+
+    import json
+
+    metadata = json.loads((tmp_path / "metadata.json").read_text())
+    assert metadata["embedding_model"] == "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    get_xictek_settings.cache_clear()
+
+
+def test_load_warns_on_embedding_model_mismatch(populated_store, tmp_path, monkeypatch):
+    from unittest.mock import patch
+
+    from src.xictek_website_assistant.config import get_xictek_settings
+
+    # Save under one model...
+    monkeypatch.setenv("XICTEK_EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
+    get_xictek_settings.cache_clear()
+    populated_store.save(index_dir=tmp_path)
+
+    # ...then load under a different one -- should warn, not silently
+    # return results as if nothing's wrong. The logger's own handler
+    # writes JSON straight to stdout regardless of caplog/propagation
+    # config, so assert directly on the call rather than fighting that.
+    monkeypatch.setenv("XICTEK_EMBEDDING_MODEL", "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
+    get_xictek_settings.cache_clear()
+    with patch("src.xictek_website_assistant.vector_store.logger.warning") as mock_warn:
+        VectorStore.load(index_dir=tmp_path)
+    assert any("mismatch" in str(call.args) for call in mock_warn.call_args_list)
+    get_xictek_settings.cache_clear()
+
+
+def test_load_does_not_warn_when_model_matches(populated_store, tmp_path, monkeypatch):
+    from unittest.mock import patch
+
+    from src.xictek_website_assistant.config import get_xictek_settings
+
+    monkeypatch.setenv("XICTEK_EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
+    get_xictek_settings.cache_clear()
+    populated_store.save(index_dir=tmp_path)
+
+    with patch("src.xictek_website_assistant.vector_store.logger.warning") as mock_warn:
+        VectorStore.load(index_dir=tmp_path)
+    assert not any("mismatch" in str(call.args) for call in mock_warn.call_args_list)
+    get_xictek_settings.cache_clear()

@@ -252,7 +252,7 @@
     "</div>" +
     '<div id="xk-messages"></div>' +
     '<div id="xk-input-row">' +
-    '<textarea id="xk-input" rows="1" placeholder="Ask a question…" aria-label="Message"></textarea>' +
+    '<textarea id="xk-input" dir="auto" rows="1" placeholder="Ask a question…" aria-label="Message"></textarea>' +
     '<button id="xk-send" aria-label="Send message">' +
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>' +
     "</button>" +
@@ -276,6 +276,12 @@
   function appendMessage(role, text) {
     var el = document.createElement("div");
     el.className = "xk-msg " + (role === "user" ? "xk-msg-user" : "xk-msg-bot");
+    // dir="auto" lets the browser's own bidi detection pick RTL for
+    // Urdu/Arabic text and LTR for English/Hindi (Devanagari is LTR)
+    // per-message, based on the actual content -- no language-detection
+    // logic needed here, and it's correct even mid-conversation if the
+    // visitor switches languages between messages.
+    el.dir = "auto";
     el.textContent = text;
     messagesEl.appendChild(el);
     return el;
