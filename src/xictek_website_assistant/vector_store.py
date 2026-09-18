@@ -97,15 +97,23 @@ class VectorStore:
                 if scores[idx] >= relevance_threshold
             ]
 
-        # Candidate pool: relevant chunks to choose diversely among.
-        # Wider than top_k so MMR has room to pick a more varied set
-        # instead of being stuck with whatever squeezed into a top_k-sized
-        # window; capped so this stays cheap on a low-end machine.
+        # Candidate pool: relevant chunks to choose diversely among. We
+        # deliberately do NOT cap this tightly — with only ~1,000-2,000
+        # chunks in a site-scale index like this, scoring every
+        # qualifying candidate is still cheap (a handful of dot products
+        # per candidate), and an aggressive cap actively breaks
+        # diversification: if enough near-duplicate template chunks
+        # outscore the genuinely distinct content (exactly what happens
+        # here — ~40 pages sharing a templated intro can easily fill a
+        # small pool on their own), the distinct chunk never even enters
+        # the pool for MMR to pick from. A generous cap only exists as a
+        # safety net for pathological cases (e.g. relevance_threshold
+        # set to something that qualifies most of a much larger index).
         candidate_idx = np.where(scores >= relevance_threshold)[0]
         if len(candidate_idx) == 0:
             return []
         candidate_idx = candidate_idx[np.argsort(-scores[candidate_idx])]
-        pool_size = min(len(candidate_idx), max(top_k * 8, 30))
+        pool_size = min(len(candidate_idx), max(top_k * 50, 300))
         candidate_idx = candidate_idx[:pool_size]
 
         selected: list[int] = []

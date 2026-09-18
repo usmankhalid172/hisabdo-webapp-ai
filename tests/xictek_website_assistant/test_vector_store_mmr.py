@@ -111,3 +111,38 @@ def test_diversification_matches_plain_query_when_all_scores_distinct():
     plain = {r.chunk.chunk_id for r in store.query(query, top_k=2, relevance_threshold=-1.0, diversify=False)}
     diverse = {r.chunk.chunk_id for r in store.query(query, top_k=2, relevance_threshold=-1.0, diversify=True)}
     assert plain == diverse == {"c0", "c1"}
+
+
+def test_diversification_pool_is_wide_enough_to_reach_outnumbered_distinct_content():
+    """
+    Regression test for a real bug found on Hamza's machine (2026-09-18):
+    the first MMR implementation capped its candidate pool at
+    max(top_k*8, 30) = 32 for top_k=4. The live site has ~40 pages
+    sharing a templated intro paragraph, each contributing at least one
+    near-duplicate high-scoring chunk to a generic query -- enough on
+    their own to fill a 32-chunk pool, so the genuinely distinct content
+    (the real /services page) never even entered the candidate pool for
+    MMR to consider, and kept getting crowded out even after "fixing"
+    diversification. This test reproduces that at a smaller scale: 40
+    near-duplicate chunks outscoring 1 distinct chunk, with top_k=4 --
+    the old pool sizing would exclude the distinct chunk entirely; the
+    fix (a much wider pool, since scoring is cheap at this index scale)
+    must include it.
+    """
+    dup_vec = _normalize([1.0, 0.05, 0.0])
+    distinct_vec = _normalize([0.5, 0.0, 0.5])  # scores lower, but is genuinely different
+
+    chunks = [Chunk(chunk_id=f"dup-{i}", title=f"Templated {i}", url=f"https://x.com/{i}", text="template") for i in range(40)]
+    chunks.append(Chunk(chunk_id="distinct", title="Services", url="https://x.com/services", text="real content"))
+    vectors = np.stack([dup_vec] * 40 + [distinct_vec])
+
+    store = VectorStore()
+    store.build(chunks, vectors)
+
+    query = _normalize([1.0, 0.0, 0.0])
+    results = store.query(query, top_k=4, relevance_threshold=0.1, diversify=True)
+    ids = [r.chunk.chunk_id for r in results]
+    assert "distinct" in ids, (
+        "distinct chunk was excluded -- likely the candidate pool is too small "
+        "to reach content that's outnumbered by near-duplicates"
+    )
