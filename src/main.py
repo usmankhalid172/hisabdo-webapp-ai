@@ -25,6 +25,7 @@ from .expense_categorization.router import router as categorization_router
 from .financial_assistant.router import router as chatbot_router
 from .middleware import CorrelationIdMiddleware, RequestLoggingMiddleware
 from .schemas import HealthResponse, VersionResponse
+from .xictek_website_assistant.cors import add_xictek_cors
 from .xictek_website_assistant.rate_limit import limiter
 from .xictek_website_assistant.router import router as xictek_router
 
@@ -51,6 +52,11 @@ register_exception_handlers(app)
 # endpoint needs it from day one.
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# CORS for the website widget, scoped to /api/v1/xictek/* only -- see
+# cors.py's module docstring for why this can't just be Starlette's
+# CORSMiddleware applied to the whole app.
+add_xictek_cors(app)
 
 infra_router = APIRouter(prefix="/api/v1", tags=["infra"])
 

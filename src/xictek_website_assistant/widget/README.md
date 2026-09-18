@@ -26,6 +26,14 @@ page.
 
 ## Local demo
 
+Requires `XICTEK_WIDGET_ALLOWED_ORIGINS=["http://localhost:5500"]` in
+the repo root's `.env` — `demo.html`'s port (`5500`) differs from the
+API's port (`8000`), which browsers treat as a different origin, so
+without this the widget's requests are silently blocked by the browser
+itself (shows as a generic "Sorry, something went wrong" in the widget,
+with the real CORS error only visible in the browser's dev console, not
+in the server's logs). `.env.example` already includes this by default.
+
 ```bash
 # terminal 1, from the repo root
 uvicorn src.main:app --reload --port 8000

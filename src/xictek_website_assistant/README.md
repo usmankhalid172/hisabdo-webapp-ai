@@ -219,7 +219,7 @@ root for the current list. Notable ones:
 | `XICTEK_RELEVANCE_THRESHOLD` | `0.35` | Minimum cosine similarity to count as a match |
 | `XICTEK_ALLOWED_CRAWL_DOMAINS` | xicteksystems.com, hisabdo.app (+ `www.`) | `ingest.py`'s crawl allow-list |
 | `XICTEK_RATE_LIMIT` | `20/minute` | Per-IP rate limit on `POST /chat` |
-| `XICTEK_WIDGET_ALLOWED_ORIGINS` | `[]` (locked down) | CORS origins for the real website widget — set once the live domain is confirmed |
+| `XICTEK_WIDGET_ALLOWED_ORIGINS` | `[]` (locked down) | CORS origins allowed to call these endpoints from a browser — see "Local widget testing" below for dev, and set to the real xicteksystems.com origin for production |
 | `XICTEK_MAX_MESSAGE_CHARS` | `2000` | Hard cap so one request can't blow up embedding/LLM cost |
 
 Shared, cross-cutting secrets (`INTERNAL_SERVICE_TOKEN`) live in the
@@ -283,9 +283,31 @@ knowledge-base grounding QA pass.
    the new index.
 4. Set `XICTEK_WIDGET_ALLOWED_ORIGINS` to the real xicteksystems.com
    origin once the widget is actually embedded there (empty/locked
-   down until then — same-origin Swagger/demo testing isn't subject to
-   CORS).
+   down until then — Swagger's own page is served by this app itself so
+   it's same-origin and unaffected either way, but widget/demo.html
+   (served on a different port) genuinely is cross-origin — see "Local
+   widget testing" below).
 5. Re-run step 1 any time site content changes.
+
+## Local widget testing (CORS)
+
+`widget/demo.html` is served on its own port (e.g. `:5500`, per its own
+instructions) while the API runs on `:8000` — different ports count as
+different origins under browser same-origin policy, so this genuinely
+needs `XICTEK_WIDGET_ALLOWED_ORIGINS` configured, or the browser will
+silently block every request the widget makes (its `fetch()` calls will
+fail with something like "Sorry, something went wrong reaching the
+assistant" in the widget UI, with the real reason only visible in the
+browser's own dev console as a CORS error — not in this app's logs at
+all, since the browser blocks the request before it's even sent for a
+failed preflight).
+
+Add this to `.env` for local testing:
+```
+XICTEK_WIDGET_ALLOWED_ORIGINS=["http://localhost:5500"]
+```
+(match whatever port you're actually serving `demo.html` on). Restart
+`uvicorn` after changing this — it's read at process start.
 
 ## Widget
 
