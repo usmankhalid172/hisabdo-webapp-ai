@@ -82,3 +82,9 @@ class BatchCategorizeRequest(BaseModel):
 
 class BatchCategorizeResponse(BaseModel):
     results: list[CategorizeResponse]
+class StructuredLLMResponse(BaseModel):
+    model_config = {"extra": "forbid"}
+
+    symptoms: list[str]
+    severity: str
+    message: str
