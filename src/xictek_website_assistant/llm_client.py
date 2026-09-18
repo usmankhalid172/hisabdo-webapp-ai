@@ -8,9 +8,11 @@ shared blast radius if either module's provider logic changes. It follows
 the same shape (Mock default, real provider needs a key, retry on
 transient 5xx) so it's a familiar pattern to anyone who's read that file.
 
-Reuses `src.config.get_settings()` for `GROQ_API_KEY` / `LLM_PROVIDER`
-rather than duplicating those — they're genuinely shared, service-wide
-secrets, not XICTEK-specific config (see config.py's docstring).
+Reuses `src.config.get_settings()` for `GROQ_API_KEY` / `LLM_PROVIDER` by
+default, since they're normally shared, service-wide secrets — but either
+can be overridden per-module via `XICTEK_GROQ_API_KEY` / `XICTEK_LLM_PROVIDER`
+(see config.py) so this module's chat generation can run on its own Groq
+key, independent of HisabDo's chatbot.
 """
 from __future__ import annotations
 
@@ -19,8 +21,9 @@ from abc import ABC, abstractmethod
 
 import httpx
 
-from ..config import Settings, get_settings
+from ..config import get_settings
 from ..errors import ServiceError
+from .config import get_xictek_settings
 from .prompts import SYSTEM_PROMPT
 
 _RETRYABLE_STATUS_CODES = {500, 502, 503, 504}
@@ -86,16 +89,12 @@ class MockLLMProvider(LLMProvider):
 
 
 class GroqLLMProvider(LLMProvider):
-    """Calls Groq's OpenAI-compatible Chat Completions API. Requires GROQ_API_KEY."""
+    """Calls Groq's OpenAI-compatible Chat Completions API. Requires an
+    API key — either XICTEK_GROQ_API_KEY (this module's own key, if set)
+    or the shared GROQ_API_KEY as a fallback."""
 
-    def __init__(self, settings: Settings):
-        if not settings.groq_api_key:
-            raise ServiceError(
-                "LLM_PROVIDER_MISCONFIGURED",
-                "LLM_PROVIDER=groq but GROQ_API_KEY is not set",
-                status_code=500,
-            )
-        self._api_key = settings.groq_api_key
+    def __init__(self, api_key: str):
+        self._api_key = api_key
 
     def generate_reply(
         self,
@@ -126,6 +125,16 @@ class GroqLLMProvider(LLMProvider):
 
 def get_llm_provider() -> LLMProvider:
     settings = get_settings()
-    if settings.llm_provider == "groq":
-        return GroqLLMProvider(settings)
+    xictek_settings = get_xictek_settings()
+
+    provider = xictek_settings.llm_provider or settings.llm_provider
+    if provider == "groq":
+        api_key = xictek_settings.groq_api_key or settings.groq_api_key
+        if not api_key:
+            raise ServiceError(
+                "LLM_PROVIDER_MISCONFIGURED",
+                "LLM_PROVIDER=groq but neither XICTEK_GROQ_API_KEY nor GROQ_API_KEY is set",
+                status_code=500,
+            )
+        return GroqLLMProvider(api_key)
     return MockLLMProvider()

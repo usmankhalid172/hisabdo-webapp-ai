@@ -135,7 +135,9 @@ root for the current list. Notable ones:
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `GROQ_API_KEY` | *(unset)* | Chat generation. With `LLM_PROVIDER=mock` (repo default), no key is needed — see below. |
+| `GROQ_API_KEY` | *(unset)* | Chat generation (shared with HisabDo's chatbot by default). With `LLM_PROVIDER=mock` (repo default), no key is needed — see below. |
+| `XICTEK_GROQ_API_KEY` | *(unset — falls back to `GROQ_API_KEY`)* | Optional: give this module its own Groq key, separate from HisabDo's chatbot |
+| `XICTEK_LLM_PROVIDER` | *(unset — falls back to `LLM_PROVIDER`)* | Optional: override the provider (e.g. `groq`) independent of the shared setting |
 | `XICTEK_EMBEDDING_MODEL` | `sentence-transformers/all-MiniLM-L6-v2` | Local embedding model |
 | `XICTEK_TOP_K` | `4` | Chunks retrieved per query |
 | `XICTEK_RELEVANCE_THRESHOLD` | `0.35` | Minimum cosine similarity to count as a match |
@@ -144,9 +146,12 @@ root for the current list. Notable ones:
 | `XICTEK_WIDGET_ALLOWED_ORIGINS` | `[]` (locked down) | CORS origins for the real website widget — set once the live domain is confirmed |
 | `XICTEK_MAX_MESSAGE_CHARS` | `2000` | Hard cap so one request can't blow up embedding/LLM cost |
 
-Shared, cross-cutting secrets (`GROQ_API_KEY`, `INTERNAL_SERVICE_TOKEN`)
-live in the repo-root `src.config.Settings`, not duplicated here — see
-`config.py`'s module docstring.
+Shared, cross-cutting secrets (`INTERNAL_SERVICE_TOKEN`) live in the
+repo-root `src.config.Settings`, not duplicated here — see
+`config.py`'s module docstring. `GROQ_API_KEY` / `LLM_PROVIDER` default
+to the same shared values too, but can be overridden per-module via
+`XICTEK_GROQ_API_KEY` / `XICTEK_LLM_PROVIDER` above, if you want this
+module's chat generation on its own key.
 
 ## Setup
 

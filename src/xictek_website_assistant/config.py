@@ -8,10 +8,12 @@ scoped to it and doesn't grow the shared config every time this module
 needs a new knob. It still reads the same `.env` file, so no extra
 wiring is needed to run both modules side by side.
 
-Shared cross-cutting secrets (GROQ_API_KEY, INTERNAL_SERVICE_TOKEN) stay
-in `src.config.Settings` as the single source of truth — this module
-reads them from there via `get_settings()` in llm_client.py / router.py
-rather than duplicating them here.
+Shared cross-cutting secrets (GROQ_API_KEY, INTERNAL_SERVICE_TOKEN) default
+to `src.config.Settings` as the source of truth — this module reads them
+from there via get_settings() in llm_client.py / router.py. GROQ_API_KEY
+and LLM_PROVIDER can optionally be overridden per-module via
+XICTEK_GROQ_API_KEY / XICTEK_LLM_PROVIDER below, for teams that want this
+module's chat generation on a separate Groq key from HisabDo's chatbot.
 """
 from functools import lru_cache
 from pathlib import Path
@@ -24,6 +26,16 @@ DEFAULT_INDEX_DIR = MODULE_ROOT / "data" / "index"
 
 class XictekSettings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore", env_prefix="XICTEK_")
+
+    # Optional per-module overrides. Unset (None) by default, in which
+    # case llm_client.py falls back to the shared src.config.Settings
+    # values — so nothing breaks for anyone who hasn't set these. Set
+    # XICTEK_GROQ_API_KEY / XICTEK_LLM_PROVIDER in .env to give this
+    # module its own Groq key/provider, separate from HisabDo's chatbot
+    # (e.g. so the public website bot can be rate-limited or revoked
+    # independently of the product chatbot).
+    groq_api_key: str | None = None
+    llm_provider: str | None = None
 
     # Embeddings
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
