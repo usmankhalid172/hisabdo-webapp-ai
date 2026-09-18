@@ -141,30 +141,47 @@ with outbound internet access, then commit/deploy the resulting
   `vector_store.py`'s internals — `service.py` only ever sees
   `VectorStore.query()`'s return shape.
 
-## Multilingual support (English / Urdu / Hindi / Arabic)
+## Multilingual support (English / Urdu / Roman Urdu / Hindi / Arabic)
 
 Per the team lead's request after reviewing the initial build:
 `SYSTEM_PROMPT` (prompts.py) instructs the model to detect the
-visitor's language and reply in it — English, Urdu, Hindi, or Arabic —
-translating facts from the (English) retrieved context as needed. This
-needed the embedding model swap above too: an English-only embedder
-wouldn't reliably match an Urdu/Arabic/Hindi query against English site
-content, so retrieval would silently degrade for non-English visitors
-even if the LLM could technically reply in their language.
+visitor's language **and script** and reply matching both — English,
+Urdu (Urdu script), Roman Urdu (Urdu in Latin letters — a distinct,
+very common style in Pakistan, not the same as English), Hindi, or
+Arabic — translating facts from the (English) retrieved context as
+needed. This needed the embedding model swap above too: an
+English-only embedder wouldn't reliably match a non-English query
+against English site content, so retrieval would silently degrade for
+non-English visitors even if the LLM could technically reply in their
+language.
 
 The widget (`widget/xictek-widget.js`) sets `dir="auto"` on message
 bubbles and the input box, so the browser's own bidi detection renders
-Urdu/Arabic right-to-left and Hindi/English left-to-right automatically
-per message, with no language-detection logic needed in JS.
+Urdu/Arabic right-to-left and Hindi/English/Roman Urdu left-to-right
+automatically per message, with no language-detection logic needed in
+JS.
 
-**Known limitation:** `guardrails.py`'s deterministic prompt-injection
-patterns are English-only regex. An injection attempt phrased in Urdu,
-Hindi, or Arabic won't be caught by that layer — it falls through to
-`SYSTEM_PROMPT` alone (still instructed to refuse, just a weaker
-defense-in-depth than English gets). Translating those patterns
-accurately enough to trust is real work on its own — a wrong or overly
-literal translation gives false confidence — so this is flagged as a
-follow-up rather than shipped untested.
+**Known limitations:**
+- `guardrails.py`'s deterministic prompt-injection patterns are
+  English-only regex. An injection attempt phrased in Urdu, Hindi, or
+  Arabic won't be caught by that layer — it falls through to
+  `SYSTEM_PROMPT` alone (still instructed to refuse, just a weaker
+  defense-in-depth than English gets). Translating those patterns
+  accurately enough to trust is real work on its own — a wrong or
+  overly literal translation gives false confidence — so this is
+  flagged as a follow-up rather than shipped untested.
+- Roman Urdu retrieval quality is less certain than the other four
+  languages. `paraphrase-multilingual-MiniLM-L12-v2`'s official
+  language coverage is for Urdu in its standard (Perso-Arabic) script
+  — informal Latin-script transliteration isn't a distinct language
+  code the model was explicitly trained on, so a Roman Urdu query
+  embedding may not align with English site content as reliably as a
+  proper-script Urdu, Hindi, or Arabic query would. The LLM will still
+  correctly *reply* in Roman Urdu either way (that part only depends on
+  the LLM, not the embedder) — it's specifically retrieval accuracy for
+  Roman Urdu *queries* that's the open question. Worth extra manual
+  testing with real Roman Urdu questions before treating it as
+  equally reliable to the other languages.
 
 ### Result diversification (MMR)
 

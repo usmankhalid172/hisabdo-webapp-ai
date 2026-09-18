@@ -12,6 +12,7 @@ def test_default_embedding_model_is_multilingual():
 def test_system_prompt_instructs_multilingual_response():
     lower = SYSTEM_PROMPT.lower()
     assert "urdu" in lower
+    assert "roman urdu" in lower
     assert "hindi" in lower
     assert "arabic" in lower
     assert "english" in lower
@@ -47,5 +48,15 @@ def test_chat_endpoint_accepts_hindi_message(client, auth_headers):
         "/api/v1/xictek/chat",
         headers=auth_headers,
         json={"message": hindi_message, "conversation_id": "multilingual-test-hi"},
+    )
+    assert resp.status_code == 200
+
+
+def test_chat_endpoint_accepts_roman_urdu_message(client, auth_headers):
+    roman_urdu_message = "XICTEK kya services deta hai?"
+    resp = client.post(
+        "/api/v1/xictek/chat",
+        headers=auth_headers,
+        json={"message": roman_urdu_message, "conversation_id": "multilingual-test-roman-ur"},
     )
     assert resp.status_code == 200
