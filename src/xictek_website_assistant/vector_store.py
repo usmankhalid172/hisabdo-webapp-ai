@@ -59,19 +59,78 @@ class VectorStore:
         self.chunks = chunks
         self._vectors = vectors
 
-    def query(self, query_vector: np.ndarray, top_k: int, relevance_threshold: float) -> list[RetrievedChunk]:
+    def query(
+        self,
+        query_vector: np.ndarray,
+        top_k: int,
+        relevance_threshold: float,
+        diversify: bool = True,
+        mmr_lambda: float = 0.5,
+    ) -> list[RetrievedChunk]:
+        """
+        Returns the top_k chunks most relevant to query_vector.
+
+        diversify=True (default) applies Maximal Marginal Relevance: a
+        candidate that's near-identical to a chunk already selected gets
+        penalized, so results spread across genuinely different content
+        instead of returning several copies of the same idea. This
+        matters a lot here — several xicteksystems.com "pillar guide"
+        pages share a templated intro/CTA paragraph with only the topic
+        name swapped in (a content-generation quirk on their end, not
+        ours), so without diversification a query can come back with
+        e.g. 4 near-duplicate intro paragraphs from 4 different pages,
+        all scoring the same to 4 decimal places, instead of 4 chunks
+        that actually say different things. mmr_lambda trades relevance
+        (1.0) against diversity (0.0); 0.5 balances both.
+        """
         if not self.chunks or self._vectors is None or len(self.chunks) == 0:
             return []
         # Vectors are L2-normalized at embed time, so a plain dot product
         # is cosine similarity — no need to re-normalize per query.
         scores = self._vectors @ query_vector
-        top_idx = np.argsort(-scores)[:top_k]
-        results = []
-        for idx in top_idx:
-            score = float(scores[idx])
-            if score >= relevance_threshold:
-                results.append(RetrievedChunk(chunk=self.chunks[idx], score=score))
-        return results
+
+        if not diversify:
+            top_idx = np.argsort(-scores)[:top_k]
+            return [
+                RetrievedChunk(chunk=self.chunks[idx], score=float(scores[idx]))
+                for idx in top_idx
+                if scores[idx] >= relevance_threshold
+            ]
+
+        # Candidate pool: relevant chunks to choose diversely among.
+        # Wider than top_k so MMR has room to pick a more varied set
+        # instead of being stuck with whatever squeezed into a top_k-sized
+        # window; capped so this stays cheap on a low-end machine.
+        candidate_idx = np.where(scores >= relevance_threshold)[0]
+        if len(candidate_idx) == 0:
+            return []
+        candidate_idx = candidate_idx[np.argsort(-scores[candidate_idx])]
+        pool_size = min(len(candidate_idx), max(top_k * 8, 30))
+        candidate_idx = candidate_idx[:pool_size]
+
+        selected: list[int] = []
+        remaining = list(candidate_idx)
+        while remaining and len(selected) < top_k:
+            if not selected:
+                # First pick is just the most relevant candidate.
+                best = remaining[0]
+            else:
+                selected_vectors = self._vectors[selected]  # (k, dim)
+                best = None
+                best_mmr = -np.inf
+                for idx in remaining:
+                    relevance = float(scores[idx])
+                    # Redundancy: highest similarity to anything already
+                    # picked (dot product of two normalized vectors).
+                    redundancy = float(np.max(selected_vectors @ self._vectors[idx]))
+                    mmr = mmr_lambda * relevance - (1 - mmr_lambda) * redundancy
+                    if mmr > best_mmr:
+                        best_mmr = mmr
+                        best = idx
+            selected.append(best)
+            remaining.remove(best)
+
+        return [RetrievedChunk(chunk=self.chunks[idx], score=float(scores[idx])) for idx in selected]
 
     def save(self, index_dir: Optional[Path] = None) -> None:
         index_dir = index_dir or get_xictek_settings().index_dir

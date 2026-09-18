@@ -127,6 +127,26 @@ with outbound internet access, then commit/deploy the resulting
   `vector_store.py`'s internals — `service.py` only ever sees
   `VectorStore.query()`'s return shape.
 
+### Result diversification (MMR)
+
+A real issue found while testing against the live index: several
+xicteksystems.com "pillar guide" blog pages share a templated
+intro/CTA paragraph with only the topic name swapped in (a
+content-generation quirk on their end — confirmed by fetching a few of
+these pages directly and finding the same section headers and near-
+identical wording across totally different topics). Their embeddings
+are near-identical, so a plain top-k-by-score query could return 3-4
+near-duplicate intro paragraphs from different pages — all scoring the
+same to 4 decimal places — instead of chunks that actually differ.
+
+`VectorStore.query()` defaults to Maximal Marginal Relevance (MMR):
+after picking the most relevant chunk, later picks are penalized for
+being redundant with what's already selected, so results spread across
+genuinely different content. Pass `diversify=False` to get plain
+top-k-by-score back if needed for debugging. See
+`tests/xictek_website_assistant/test_vector_store_mmr.py` for the
+before/after behavior on a reproduction of the real pattern.
+
 ## Environment variables
 
 All `XICTEK_*` settings have defaults in `config.py` — you only need
