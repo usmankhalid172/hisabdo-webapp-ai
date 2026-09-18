@@ -122,14 +122,32 @@ def crawl(seed_urls: list[str], allowed_domains: list[str], max_pages: int, dela
 
 
 def build_index(pages: list[CrawledPage]) -> VectorStore:
+    """
+    Some pages on xicteksystems.com (a source-side content bug in their
+    "pillar guide" SEO pages, not anything in our crawl/extraction) paste
+    the exact same multi-paragraph block under 10+ different <h2>
+    headers — e.g. /blog/custom-software-development-guide repeats one
+    ~7KB paragraph block verbatim under "What the topic means...",
+    "Architecture and technology decisions...", "Testing, measurement,
+    and continuous improvement...", etc. That's ~40 pages each producing
+    roughly 12x more chunks (and 12x the embedding work) than their
+    actual unique content, for zero retrieval benefit — a duplicate
+    chunk can only ever retrieve the same answer its first copy would.
+    We dedupe per-page before embedding rather than "fixing" their
+    content, since we don't control that site.
+    """
     settings = get_xictek_settings()
     chunks: list[Chunk] = []
     texts: list[str] = []
 
     for page in pages:
+        seen_chunk_texts: set[str] = set()
         for i, chunk_body in enumerate(
             chunk_text(page.text, settings.chunk_size_chars, settings.chunk_overlap_chars)
         ):
+            if chunk_body in seen_chunk_texts:
+                continue
+            seen_chunk_texts.add(chunk_body)
             chunks.append(
                 Chunk(
                     chunk_id=f"{page.url}#chunk-{i}",
