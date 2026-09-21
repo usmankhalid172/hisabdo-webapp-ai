@@ -67,3 +67,5 @@ node_modules/
 pyproject.toml
 uv.lock
 .python-version
+*.bundle
+ai_context.md
