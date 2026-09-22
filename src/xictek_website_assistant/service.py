@@ -11,6 +11,7 @@ for why that matters for prompt-injection resistance.
 """
 from __future__ import annotations
 
+import re
 from functools import lru_cache
 
 from .config import get_xictek_settings
@@ -28,6 +29,40 @@ LENGTH_REFUSAL_MESSAGE = (
     "That message is a bit long for me to process here — could you shorten it or ask "
     "one question at a time?"
 )
+
+# Greetings/small talk short-circuit — same rationale as the HisabDo
+# chatbot's service.py: avoids the "I don't have that in the knowledge
+# base" fallback firing on plain "hi"/"assalam o alaikum"/"thanks", and
+# skips a wasted embed + vector-store query for messages that don't need it.
+_SMALL_TALK_REPLIES = {
+    "salam": "Wa Alaikum Assalam! How can I help you with XICTEK Systems today?",
+    "wellbeing": "I'm doing great, thanks for asking! What would you like to know about XICTEK Systems?",
+    "thanks": "You're welcome! Let me know if there's anything else you'd like to know about XICTEK.",
+    "farewell": "Thanks for stopping by — feel free to reach out anytime!",
+    "greeting": "Hello! I'm the XICTEK Systems assistant — ask me about our services, technology, HisabDo, or careers.",
+}
+
+
+def _classify_small_talk(message: str) -> str | None:
+    """Returns a small-talk category if the WHOLE message is a short
+    greeting/pleasantry, else None — a real question that happens to
+    start with "hi" still goes through normal retrieval instead of being
+    swallowed here."""
+    text = message.strip().lower()
+    text = re.sub(r"[!?.,]+$", "", text).strip()
+    if not text or len(text.split()) > 6:
+        return None
+    if re.search(r"assalam|salamu?\s*alaikum|\bsalam\b|\baoa\b", text):
+        return "salam"
+    if re.search(r"how\s*(are|r)\s*(you|u)\b|kaise\s*ho\b|kya\s*hal\s*hai\b", text):
+        return "wellbeing"
+    if re.search(r"\bthank(s| you)?\b|\bshukriya\b", text):
+        return "thanks"
+    if re.search(r"\b(bye|goodbye|good\s*night|see\s*you)\b", text):
+        return "farewell"
+    if re.search(r"\b(hi+|hello+|hey+|yo)\b|good\s*(morning|afternoon|evening)\b", text):
+        return "greeting"
+    return None
 
 
 @lru_cache
@@ -56,6 +91,16 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
             reply=INJECTION_REFUSAL_MESSAGE,
             conversation_id=request.conversation_id,
             intent="declined_prompt_injection",
+        )
+
+    small_talk = _classify_small_talk(message)
+    if small_talk:
+        return XictekChatResponse(
+            reply=_SMALL_TALK_REPLIES[small_talk],
+            conversation_id=request.conversation_id,
+            sources=[],
+            intent="general",
+            tokens_used=0,
         )
 
     store = _load_store()

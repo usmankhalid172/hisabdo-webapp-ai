@@ -95,6 +95,41 @@ THIRD_PARTY_REFUSAL_MESSAGE = (
     "I'm sorry, but I can only provide information about your own account."
 )
 
+# Greetings/small talk short-circuit — these were previously falling
+# through to the LLM with no context and, whenever the mock provider was
+# active, landing on the generic "I don't have that in the knowledge
+# base" template. Handling them deterministically also avoids a wasted
+# RAG lookup + LLM call for messages that never needed either.
+_SMALL_TALK_REPLIES = {
+    "salam": "Wa Alaikum Assalam! How can I help you with HisabDo today?",
+    "wellbeing": "I'm doing well, thank you! How can I help you with HisabDo today?",
+    "thanks": "You're welcome! Let me know if there's anything else I can help with.",
+    "farewell": "Take care! Come back anytime you need help with HisabDo.",
+    "greeting": "Hello! How can I help you with HisabDo today?",
+}
+
+
+def _classify_small_talk(message: str) -> str | None:
+    """Returns a small-talk category if the WHOLE message is a short
+    greeting/pleasantry, else None. Deliberately scoped to short messages
+    only, so a real question that happens to start with "hi" (e.g. "hi,
+    how do I add a payable?") still goes through the normal RAG/LLM path."""
+    text = message.strip().lower()
+    text = re.sub(r"[!?.,]+$", "", text).strip()
+    if not text or len(text.split()) > 6:
+        return None
+    if re.search(r"assalam|salamu?\s*alaikum|\bsalam\b|\baoa\b", text):
+        return "salam"
+    if re.search(r"how\s*(are|r)\s*(you|u)\b|kaise\s*ho\b|kya\s*hal\s*hai\b", text):
+        return "wellbeing"
+    if re.search(r"\bthank(s| you)?\b|\bshukriya\b", text):
+        return "thanks"
+    if re.search(r"\b(bye|goodbye|good\s*night|see\s*you)\b", text):
+        return "farewell"
+    if re.search(r"\b(hi+|hello+|hey+|yo)\b|good\s*(morning|afternoon|evening)\b", text):
+        return "greeting"
+    return None
+
 
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     if _mentions_third_party(request.message):
@@ -106,6 +141,16 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             intent="declined_third_party",
             tokens_used=0,
             source="policy_guard",
+        )
+
+    small_talk = _classify_small_talk(request.message)
+    if small_talk:
+        return ChatbotResponse(
+            reply=_SMALL_TALK_REPLIES[small_talk],
+            conversation_id=request.conversation_id,
+            intent="general",
+            tokens_used=0,
+            source="greeting_fastpath",
         )
 
     provider = get_llm_provider()
