@@ -123,11 +123,18 @@ class GroqLLMProvider(LLMProvider):
         return reply, tokens
 
 
+import logging as _logging
+
+_provider_logger = _logging.getLogger(__name__)
+
+
 def get_llm_provider() -> LLMProvider:
     settings = get_settings()
     xictek_settings = get_xictek_settings()
 
-    provider = xictek_settings.llm_provider or settings.llm_provider
+    raw_provider = xictek_settings.llm_provider or settings.llm_provider
+    # Tolerate a hand-typed dashboard value such as ' Groq ' or '"groq"'.
+    provider = str(raw_provider or "").strip().strip("\"'").lower()
     if provider == "groq":
         api_key = xictek_settings.groq_api_key or settings.groq_api_key
         if not api_key:
@@ -137,4 +144,9 @@ def get_llm_provider() -> LLMProvider:
                 status_code=500,
             )
         return GroqLLMProvider(api_key)
+    _provider_logger.warning(
+        "llm_provider_is_mock: XICTEK_LLM_PROVIDER=%r LLM_PROVIDER=%r -> using MockLLMProvider",
+        xictek_settings.llm_provider,
+        settings.llm_provider,
+    )
     return MockLLMProvider()
