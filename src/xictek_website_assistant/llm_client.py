@@ -132,9 +132,15 @@ def get_llm_provider() -> LLMProvider:
     settings = get_settings()
     xictek_settings = get_xictek_settings()
 
-    raw_provider = xictek_settings.llm_provider or settings.llm_provider
-    # Tolerate a hand-typed dashboard value such as ' Groq ' or '"groq"'.
-    provider = str(raw_provider or "").strip().strip("\"'").lower()
+    def _clean(value) -> str:
+        # Tolerate a hand-typed dashboard value such as ' Groq ' or '"groq"'.
+        return str(value or "").strip().strip("\"'").lower()
+
+    xictek_choice = _clean(xictek_settings.llm_provider)
+    shared_choice = _clean(settings.llm_provider)
+    # Use Groq if EITHER the XICTEK-specific or the shared (HisabDo) setting asks
+    # for it, so XICTEK works wherever HisabDo's chatbot already works.
+    provider = "groq" if "groq" in (xictek_choice, shared_choice) else (xictek_choice or shared_choice)
     if provider == "groq":
         api_key = xictek_settings.groq_api_key or settings.groq_api_key
         if not api_key:
