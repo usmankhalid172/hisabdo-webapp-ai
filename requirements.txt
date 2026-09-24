@@ -13,6 +13,5 @@ pytest-asyncio
 
 # --- XICTEK website assistant (src/xictek_website_assistant) ---
 beautifulsoup4==4.12.3   # ingest.py: HTML text extraction
-sentence-transformers==3.1.1   # embeddings.py: local embedding model
 numpy==1.26.4   # vector_store.py: embedding matrix / cosine similarity
 slowapi==0.1.9   # rate_limit.py: per-IP rate limiting on the chat endpoint
