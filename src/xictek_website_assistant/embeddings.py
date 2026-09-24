@@ -27,6 +27,7 @@ were built in.
 from __future__ import annotations
 
 import pickle
+import re
 from functools import lru_cache
 
 import numpy as np
@@ -35,6 +36,66 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from .config import get_xictek_settings
 
 VECTORIZER_FILENAME = "tfidf_vectorizer.pkl"
+
+# Query-side synonym lexicon for common website-visitor intents. A trigger
+# word in the visitor's question pulls in related words that the site's FAQ
+# entries are likely to use. Extend this dict as real misses show up.
+_SYNONYMS: dict[str, str] = {
+    "touch": "contact email phone reach",
+    "contact": "email phone reach touch",
+    "reach": "contact email phone",
+    "email": "contact reach",
+    "phone": "contact reach call",
+    "call": "contact phone reach",
+    "based": "located location office address headquarters",
+    "located": "based location office address headquarters",
+    "location": "based located office address headquarters",
+    "address": "location office located based",
+    "headquarters": "based located location office",
+    "office": "location located address based",
+    "price": "pricing cost free paid plan subscription charge",
+    "pricing": "price cost free paid plan subscription charge",
+    "cost": "price pricing free paid plan charge",
+    "free": "price pricing cost paid plan",
+    "timeline": "duration long take weeks months typical time",
+    "duration": "timeline long take weeks months time",
+    "industry": "industries sector clients domain",
+    "industries": "industry sector clients domain",
+    "sector": "industry industries clients domain",
+    "freelance": "contract hire hiring engagement outsourcing dedicated team",
+    "contract": "freelance hire engagement outsourcing dedicated team",
+    "engagement": "freelance contract hire outsourcing dedicated team",
+    "demo": "book schedule consultation meeting call conversation",
+    "book": "demo schedule consultation meeting call conversation",
+    "blog": "article articles guide post resource",
+    "post": "blog article articles guide resource",
+    "posts": "blog article articles guide resource",
+    "different": "why choose unique difference strengths approach experience",
+    "unique": "why choose different strengths approach experience",
+    "categorization": "category categories categorize expense",
+    "portfolio": "projects project completed work case studies",
+    "projects": "portfolio project completed work case studies",
+    "platform": "android ios app play store",
+    "ios": "iphone apple app store platform android",
+    "android": "app play store platform ios",
+    "career": "careers job jobs hiring internship vacancy apply roles",
+    "careers": "career job jobs hiring internship vacancy apply roles",
+    "hiring": "career careers job jobs internship vacancy apply roles",
+    "jobs": "career careers hiring internship vacancy apply roles",
+    "internships": "internship bootcamp career hiring apply",
+    "ai": "artificial intelligence chatbot automation machine learning llm",
+    "rag": "retrieval augmented generation ai chatbot knowledge",
+    "chatbot": "conversation assistant ai automation",
+}
+_EXPANSION_WEIGHT = 0.5
+
+
+def _expand_query(text: str) -> str:
+    """Related words for any trigger words in `text` ('' if none)."""
+    extra: list[str] = []
+    for word in re.findall(r"[a-z]+", text.lower()):
+        extra.extend(_SYNONYMS.get(word, "").split())
+    return " ".join(dict.fromkeys(extra))
 
 
 def embed_texts(texts: list[str]) -> np.ndarray:
@@ -66,5 +127,13 @@ def embed_query(text: str) -> np.ndarray:
     during ingest, never re-fits. Translate non-English queries to
     English before calling this: TF-IDF only matches literal tokens, so
     it cannot bridge languages the way the old multilingual model could."""
-    vector = _vectorizer().transform([text])
-    return vector.toarray().astype(np.float32)[0]
+    vectorizer = _vectorizer()
+    vector = vectorizer.transform([text]).toarray().astype(np.float32)[0]
+    expansion = _expand_query(text)
+    if expansion:
+        extra = vectorizer.transform([expansion]).toarray().astype(np.float32)[0]
+        vector = vector + _EXPANSION_WEIGHT * extra
+        norm = float(np.linalg.norm(vector))
+        if norm > 0:
+            vector = vector / norm
+    return vector

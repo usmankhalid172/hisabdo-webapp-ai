@@ -74,6 +74,16 @@ def _load_store() -> VectorStore:
     return VectorStore.load()
 
 
+import logging as _logging
+
+_llm_logger = _logging.getLogger(__name__)
+
+LLM_UNAVAILABLE_MESSAGE = (
+    "Sorry, I'm getting a lot of questions right now and couldn't finish that answer. "
+    "Please try again in a moment, or reach the XICTEK team through the Contact page."
+)
+
+
 def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
     settings = get_xictek_settings()
     message = request.message
@@ -113,7 +123,17 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
     history = [h.model_dump() for h in request.history]
 
     provider = get_llm_provider()
-    reply, tokens = provider.generate_reply(message, context=context, history=history)
+    try:
+        reply, tokens = provider.generate_reply(message, context=context, history=history)
+    except Exception:  # rate limit (429), timeout, provider outage -- degrade, don't 500
+        _llm_logger.exception("xictek_llm_call_failed")
+        return XictekChatResponse(
+            reply=LLM_UNAVAILABLE_MESSAGE,
+            conversation_id=request.conversation_id,
+            sources=[],
+            intent="general",
+            tokens_used=0,
+        )
 
     sources = [
         SourceRef(title=m.chunk.title, url=m.chunk.url, score=round(m.score, 4))

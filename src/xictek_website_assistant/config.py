@@ -46,8 +46,8 @@ class XictekSettings(BaseSettings):
     embedding_dim: int = 384
     chunk_size_chars: int = 1200
     chunk_overlap_chars: int = 200
-    top_k: int = 4
-    relevance_threshold: float = 0.35
+    top_k: int = 8
+    relevance_threshold: float = 0.20
 
     # Where the built index (embeddings.npy + chunks.json) lives. The
     # ingest script writes here; the retriever reads from here at startup.
