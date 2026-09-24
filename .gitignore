@@ -69,3 +69,6 @@ uv.lock
 .python-version
 *.bundle
 ai_context.md
+
+# the fitted TF-IDF vectorizer is required at runtime -- do not ignore it
+!src/xictek_website_assistant/data/index/tfidf_vectorizer.pkl
