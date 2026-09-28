@@ -1,0 +1,46 @@
+[
+  {
+    "chunk_id": "CHUNK_DOC_CARD_01",
+    "specialty": "Cardiology",
+    "metadata": {
+      "doc_id": "DOC_CARD_01",
+      "title": "Cardiology & Heart Care Overview",
+      "approved_by": "Medical Board Admin",
+      "last_updated": "2026-09-04"
+    },
+    "vector_payload_text": "Specialty: Cardiology | Title: Cardiology & Heart Care Overview | Content: Cardiology handles heart conditions including hypertension, chest pain, arrhythmias, and coronary artery disease. Available specialists: Dr. Ahmed Khan, Dr. Sarah Ali. Appointment slots: Mon-Fri 09:00 AM - 01:00 PM."
+  },
+  {
+    "chunk_id": "CHUNK_DOC_DERM_02",
+    "specialty": "Dermatology",
+    "metadata": {
+      "doc_id": "DOC_DERM_02",
+      "title": "Dermatology & Skin Health Overview",
+      "approved_by": "Medical Board Admin",
+      "last_updated": "2026-09-04"
+    },
+    "vector_payload_text": "Specialty: Dermatology | Title: Dermatology & Skin Health Overview | Content: Dermatology addresses skin rashes, acne, eczema, psoriasis, and skin allergies. Available specialists: Dr. Fatima Noor. Appointment slots: Tue-Thu 02:00 PM - 06:00 PM."
+  },
+  {
+    "chunk_id": "CHUNK_DOC_PEDI_03",
+    "specialty": "Pediatrics",
+    "metadata": {
+      "doc_id": "DOC_PEDI_03",
+      "title": "Pediatrics & Child Healthcare",
+      "approved_by": "Medical Board Admin",
+      "last_updated": "2026-09-04"
+    },
+    "vector_payload_text": "Specialty: Pediatrics | Title: Pediatrics & Child Healthcare | Content: Pediatrics focuses on infant, child, and adolescent healthcare, growth monitoring, and routine vaccinations. Available specialists: Dr. Usman Tariq. Appointment slots: Mon-Sat 10:00 AM - 03:00 PM."
+  },
+  {
+    "chunk_id": "CHUNK_DOC_GEN_04",
+    "specialty": "General Medicine",
+    "metadata": {
+      "doc_id": "DOC_GEN_04",
+      "title": "General Medicine & Primary Care",
+      "approved_by": "Medical Board Admin",
+      "last_updated": "2026-09-04"
+    },
+    "vector_payload_text": "Specialty: General Medicine | Title: General Medicine & Primary Care | Content: General Medicine treats general fever, viral infections, routine health checkups, and initial health triage. Available specialists: Dr. Bilquis Raza. Appointment slots: Mon-Sun 08:00 AM - 08:00 PM."
+  }
+]
