@@ -1,5 +1,47 @@
 # Sprint 1 AI Metrics Benchmark
+## Latest Benchmark Run — 2026-09-30
 
+- Evaluation date: 2026-09-30
+- Environment: Local development environment
+- LLM provider: MockLLMProvider
+- Endpoint: POST /api/v1/chatbot
+- Sequential HTTP tests: 10
+- Concurrent HTTP tests: 10
+- JSON schema validity: 100.00%
+
+### Sequential HTTP API Benchmark
+
+- Total requests: 10
+- HTTP 200 responses: 10
+- Successful response rate: 100.00%
+- Schema-valid responses: 10
+- JSON schema validity rate: 100.00%
+- Average latency: 21.17 ms
+- Minimum latency: 6.69 ms
+- Maximum latency: 127.95 ms
+
+### Concurrent Multi-User Throughput Benchmark
+
+- Total requests: 10
+- HTTP 200 responses: 10
+- Successful response rate: 100.00%
+- Schema-valid responses: 10
+- JSON schema validity rate: 100.00%
+- Average latency: 37.28 ms
+- Minimum latency: 33.82 ms
+- Maximum latency: 40.52 ms
+- Concurrent batch duration: 0.0792 seconds
+- Throughput: 126.32 requests/second
+
+### Latest Benchmark Findings
+
+1. All 20 HTTP API benchmark requests returned HTTP 200.
+2. All 20 responses passed JSON schema validation.
+3. Sequential requests achieved an average latency of 21.17 ms.
+4. Concurrent requests achieved an average latency of 37.28 ms.
+5. The concurrent benchmark achieved 126.32 requests/second in the local MockLLM/TestClient environment.
+6. The benchmark confirms stable HTTP response and schema validation behavior across sequential and concurrent calls.
+7. Latency and throughput are specific to the local development environment and should not be interpreted as production performance.
 ## Evaluation Summary
 
 - Evaluation date: 2026-09-13
