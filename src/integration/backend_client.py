@@ -1,17 +1,13 @@
+
 """
-Client for the application backend's financial data API.
+Financial backend client.
 
-Per Day 15 §6.1: exact user financial values (balance, expenses, revenue,
-outstanding, etc.) must always come from authenticated backend/API data and
-deterministic calculation — never from RAG retrieval.
-
-The real backend data contract is not yet defined (Day 15 §10 blocker), so
-per the Day 16 continuity plan this is mocked with a deterministic,
-clearly-labelled stand-in. Swap `MockBackendClient` for a real HTTP client
-once the contract lands — the interface (`get_user_financial_summary`)
-is what the rest of the code depends on.
+Real financial data must not be fabricated while the backend
+data contract is unavailable.
 """
 from abc import ABC, abstractmethod
+
+from ..errors import ServiceError
 
 
 class BackendClient(ABC):
@@ -21,20 +17,17 @@ class BackendClient(ABC):
 
 
 class MockBackendClient(BackendClient):
-    """Deterministic fake data, clearly marked as such, for POC/demo use."""
+    """Fail safely instead of returning fake financial figures."""
 
     def get_user_financial_summary(self, user_id: str) -> dict:
-        return {
-            "user_id": user_id,
-            "balance": 45230.50,
-            "currency": "PKR",
-            "total_expenses_this_month": 18420.00,
-            "total_revenue_this_month": 62000.00,
-            "outstanding_receivables": 9000.00,
-            "source": "MOCK_BACKEND_CLIENT — replace once Day 15 §10 data contract is finalized",
-        }
+        raise ServiceError(
+            "FINANCIAL_BACKEND_UNAVAILABLE",
+            "Actual account-specific financial data is not available yet.",
+            status_code=503,
+        )
 
 
 def get_backend_client() -> BackendClient:
-    # Single seam to swap in a real HTTP-based client later.
+    # Replace this with the real authenticated backend client
+    # after the financial data contract is finalized.
     return MockBackendClient()
