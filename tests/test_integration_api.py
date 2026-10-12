@@ -41,7 +41,7 @@ def test_full_flow_chatbot_then_categorize(client, auth_headers):
             "conversation_id": "conv-42",
             "history": [],
         },
-        headers=auth_headers,
+        headers={**auth_headers, "X-Authenticated-User-Id": "user-42"},
     )
     assert chat_resp.status_code == 200
 

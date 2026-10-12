@@ -131,3 +131,81 @@ def test_system_prompt_warns_against_inventing_product_details():
 
     assert "invent" in SYSTEM_PROMPT.lower()
     assert "hisabdo product" in SYSTEM_PROMPT.lower() or "api endpoints" in SYSTEM_PROMPT.lower()
+
+def test_chatbot_rejects_missing_token(client):
+    response = client.post(
+        "/api/v1/chatbot",
+        json={
+            "user_id": "user-1",
+            "message": "What is my balance?",
+            "conversation_id": "security-test-1",
+            "history": [],
+        },
+    )
+    assert response.status_code == 401
+
+
+def test_chatbot_rejects_invalid_token(client):
+    response = client.post(
+        "/api/v1/chatbot",
+        json={
+            "user_id": "user-1",
+            "message": "What is my balance?",
+            "conversation_id": "security-test-2",
+            "history": [],
+        },
+        headers={"X-Internal-Token": "wrong-token"},
+    )
+    assert response.status_code == 401
+def test_financial_query_rejects_missing_authenticated_user_id(
+    client, auth_headers
+):
+    response = client.post(
+        "/api/v1/chatbot",
+        json={
+            "user_id": "user-1",
+            "message": "What is my balance?",
+            "conversation_id": "security-missing-identity",
+            "history": [],
+        },
+        headers=auth_headers,
+    )
+    assert response.status_code == 401
+
+
+def test_financial_query_rejects_another_users_identity(
+    client, auth_headers
+):
+    response = client.post(
+        "/api/v1/chatbot",
+        json={
+            "user_id": "user-1",
+            "message": "What is my balance?",
+            "conversation_id": "security-wrong-identity",
+            "history": [],
+        },
+        headers={
+            **auth_headers,
+            "X-Authenticated-User-Id": "user-2",
+        },
+    )
+    assert response.status_code == 403
+
+
+def test_financial_query_allows_matching_user_identity(
+    client, auth_headers
+):
+    response = client.post(
+        "/api/v1/chatbot",
+        json={
+            "user_id": "user-1",
+            "message": "What is my balance?",
+            "conversation_id": "security-matching-identity",
+            "history": [],
+        },
+        headers={
+            **auth_headers,
+            "X-Authenticated-User-Id": "user-1",
+        },
+    )
+    assert response.status_code == 200

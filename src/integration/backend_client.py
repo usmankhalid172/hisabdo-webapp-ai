@@ -1,17 +1,7 @@
-"""
-Client for the application backend's financial data API.
-
-Per Day 15 §6.1: exact user financial values (balance, expenses, revenue,
-outstanding, etc.) must always come from authenticated backend/API data and
-deterministic calculation — never from RAG retrieval.
-
-The real backend data contract is not yet defined (Day 15 §10 blocker), so
-per the Day 16 continuity plan this is mocked with a deterministic,
-clearly-labelled stand-in. Swap `MockBackendClient` for a real HTTP client
-once the contract lands — the interface (`get_user_financial_summary`)
-is what the rest of the code depends on.
-"""
+"""Client for the application's financial data API."""
 from abc import ABC, abstractmethod
+from calendar import monthrange
+from datetime import date
 
 
 class BackendClient(ABC):
@@ -21,9 +11,15 @@ class BackendClient(ABC):
 
 
 class MockBackendClient(BackendClient):
-    """Deterministic fake data, clearly marked as such, for POC/demo use."""
+    """Demo figures only; not actual customer financial data."""
 
     def get_user_financial_summary(self, user_id: str) -> dict:
+        today = date.today()
+        period_start = today.replace(day=1)
+        period_end = today.replace(
+            day=monthrange(today.year, today.month)[1]
+        )
+
         return {
             "user_id": user_id,
             "balance": 45230.50,
@@ -31,10 +27,17 @@ class MockBackendClient(BackendClient):
             "total_expenses_this_month": 18420.00,
             "total_revenue_this_month": 62000.00,
             "outstanding_receivables": 9000.00,
-            "source": "MOCK_BACKEND_CLIENT — replace once Day 15 §10 data contract is finalized",
+            "reporting_period": "Current calendar month (demo)",
+            "period_start": period_start.isoformat(),
+            "period_end": period_end.isoformat(),
+            "data_type": "DEMO",
+            "is_mock_data": True,
+            "source": (
+                "MockBackendClient - demo figures only; "
+                "not actual customer data."
+            ),
         }
 
 
 def get_backend_client() -> BackendClient:
-    # Single seam to swap in a real HTTP-based client later.
     return MockBackendClient()
