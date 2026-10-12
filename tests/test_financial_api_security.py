@@ -55,6 +55,44 @@ def test_mock_financial_data_is_not_returned_as_real_data():
     assert exc.value.error_code == "FINANCIAL_BACKEND_UNAVAILABLE"
 
 
+def test_demo_transactions_are_not_used_as_real_financial_data(monkeypatch):
+    from src.financial_assistant import service
+    from src.schemas import ChatbotRequest
+
+    def reject_demo_retrieval():
+        raise AssertionError(
+            "Financial questions must not access demo/RAG data"
+        )
+
+    monkeypatch.setattr(
+        service,
+        "get_retriever",
+        reject_demo_retrieval,
+    )
+
+    # Prevent a real LLM request during this security test.
+    monkeypatch.setattr(
+        service,
+        "get_llm_provider",
+        lambda: SimpleNamespace(
+            generate_reply=lambda *args, **kwargs: ("test reply", 0)
+        ),
+    )
+
+    request = ChatbotRequest(
+        user_id="customer-1",
+        message="What is my balance?",
+        conversation_id="demo-data-security-test",
+        history=[],
+    )
+
+    with pytest.raises(ServiceError) as exc:
+        service.handle_chat(request)
+
+    assert exc.value.status_code == 503
+    assert exc.value.error_code == "FINANCIAL_BACKEND_UNAVAILABLE"
+
+
 def test_chatbot_rejects_missing_authenticated_identity(client, auth_headers):
     response = client.post(
         "/api/v1/chatbot",
