@@ -31,3 +31,21 @@ def require_internal_token(token: str | None = Security(internal_token_header)) 
             "Missing or invalid internal service token",
             status_code=401,
         )
+
+from fastapi import Request
+
+
+def require_authenticated_user(request: Request) -> str:
+    """Require a user identity set by trusted authentication middleware."""
+    from .errors import ServiceError
+
+    user_id = getattr(request.state, "authenticated_user_id", None)
+
+    if not isinstance(user_id, str) or not user_id.strip():
+        raise ServiceError(
+            "UNAUTHORIZED_USER",
+            "User authentication is required",
+            status_code=401,
+        )
+
+    return user_id
