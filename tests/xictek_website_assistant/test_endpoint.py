@@ -8,7 +8,10 @@ outside this sandbox's network access — see README.md "Testing" section).
 """
 
 
-def test_index_status_reports_unbuilt_index_by_default(client, auth_headers):
+def test_index_status_reports_unbuilt_index_by_default(client, auth_headers, monkeypatch):
+    from src.xictek_website_assistant import service
+
+    monkeypatch.setattr(service, "_load_store", lambda: service.VectorStore())
     resp = client.get("/api/v1/xictek/index-status", headers=auth_headers)
     assert resp.status_code == 200
     body = resp.json()

@@ -58,5 +58,25 @@
     "id": "finance_006",
     "title": "Why should business expenses be categorized?",
     "text": "Categorizing expenses makes financial records easier to analyze and helps identify where business money is being spent."
+  },
+  {
+    "id": "finance_007",
+    "title": "What is a balance sheet?",
+    "text": "A balance sheet summarizes a business's assets, liabilities, and owner's equity at a specific point in time."
+  },
+  {
+    "id": "finance_008",
+    "title": "What are accounts payable and accounts receivable?",
+    "text": "Accounts payable is money a business owes to suppliers. Accounts receivable is money customers owe to the business."
+  },
+  {
+    "id": "finance_009",
+    "title": "What is a budget?",
+    "text": "A budget estimates income and expenses over a future period and helps compare planned results with actual results."
+  },
+  {
+    "id": "finance_010",
+    "title": "What is the break-even point?",
+    "text": "The break-even point is where total revenue equals total costs, resulting in neither profit nor loss."
   }
 ]
