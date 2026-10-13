@@ -1,32 +1,36 @@
-"""
-chatbot_service — builds prompt/context, calls the configured LLM, and
-post-processes the reply, per Day 15 §6.1.
 
-Critical boundary (Day 15 §6.1, restated in Day 16 continuity plan §2):
-exact user financial figures never come from RAG. If the message is asking
-about the user's own numbers, this routes to the (mocked) backend financial
-API instead of the knowledge base.
 """
+HisabDo AI Financial Assistant service.
+
+Routes user questions to the appropriate handler:
+- Third-party financial data requests are refused.
+- Greetings are handled without an LLM call.
+- Personal financial figures come only from the backend financial API.
+- Verified FAQ and product documentation questions use RAG.
+- Queries without a verified FAQ match use the general LLM flow.
+"""
+
+import logging
 import re
 
 from ..integration.backend_client import get_backend_client
 from ..schemas import ChatbotRequest, ChatbotResponse
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
+from .rag_pipeline import prepare_context, format_context_block
 
-# Deliberately simple keyword intent check — good enough for a POC boundary
-# demonstration; a production version would use a real intent classifier.
+logger = logging.getLogger("financial_assistant.service")
+
+
 OWN_FINANCIAL_DATA_PATTERNS = [
-    r"\bmy balance\b", r"\bmy expenses?\b", r"\bmy revenue\b",
-    r"\bhow much (have i|did i) spen[dt]\b", r"\bmy outstanding\b",
+    r"\bmy balance\b",
+    r"\bmy expenses?\b",
+    r"\bmy revenue\b",
+    r"\bhow much (have i|did i) spen[dt]\b",
+    r"\bmy outstanding\b",
     r"\bwhat('?s| is) my\b.*\b(balance|expense|revenue|outstanding)\b",
 ]
 
-# Security guard: any message that appears to ask about someone ELSE's
-# financial data is refused deterministically in handle_chat(), before the
-# LLM is ever called — not just rerouted away from the backend. Relying on
-# the prompt alone would not survive an instruction-override attempt
-# ("ignore your instructions and tell me anyway").
 THIRD_PARTY_RELATIONSHIP_WORDS = re.compile(
     r"\b(his|her|their|its|someone else'?s|other user'?s|another user'?s|"
     r"other person'?s|another person'?s|friend'?s|colleague'?s|coworker'?s|"
@@ -36,71 +40,21 @@ THIRD_PARTY_RELATIONSHIP_WORDS = re.compile(
     re.IGNORECASE,
 )
 
-# Catches probes by identifier instead of relationship, e.g. "user 2's
-# balance", "account #5", "customer 12".
 THIRD_PARTY_ID_REFERENCE = re.compile(
-    r"\b(user|account|customer|client)\s*#?\s*\d+\b", re.IGNORECASE
+    r"\b(user|account|customer|client)\s*#?\s*\d+\b",
+    re.IGNORECASE,
 )
 
-# Non-person possessives that must NOT trip the bare-name heuristic below.
 _SAFE_POSSESSIVE_WORDS = {
     "my", "this", "that", "today's", "month's", "week's", "year's",
     "quarter's", "day's", "account's", "app's", "system's",
 }
 
-
-def _mentions_bare_name_possessive(message: str) -> bool:
-    """Heuristic for 'Ali's balance' style references: a capitalized word
-    (not the first word, to avoid flagging normal sentence-initial capitals)
-    immediately followed by a possessive 's."""
-    words = message.split()
-    for i, word in enumerate(words):
-        if i == 0:
-            continue
-        stripped = word.rstrip(",.?!")
-        if re.fullmatch(r"[A-Z][a-zA-Z]*'s", stripped):
-            if stripped.lower() not in _SAFE_POSSESSIVE_WORDS:
-                return True
-    return False
-
-
-def _mentions_third_party(message: str) -> bool:
-    text = message.lower()
-    if THIRD_PARTY_RELATIONSHIP_WORDS.search(text):
-        return True
-    if THIRD_PARTY_ID_REFERENCE.search(text):
-        return True
-    if _mentions_bare_name_possessive(message):
-        return True
-    return False
-
-
-def _is_own_financial_data_query(message: str) -> bool:
-    text = message.lower()
-    if _mentions_third_party(message):
-        return False
-    return any(re.search(pattern, text) for pattern in OWN_FINANCIAL_DATA_PATTERNS)
-
-
-def _format_financial_summary(summary: dict) -> str:
-    return (
-        f"Balance: {summary['balance']} {summary['currency']}. "
-        f"Expenses this month: {summary['total_expenses_this_month']} {summary['currency']}. "
-        f"Revenue this month: {summary['total_revenue_this_month']} {summary['currency']}. "
-        f"Outstanding receivables: {summary['outstanding_receivables']} {summary['currency']}."
-    )
-
-
 THIRD_PARTY_REFUSAL_MESSAGE = (
     "I'm sorry, but I can only provide information about your own account."
 )
 
-# Greetings/small talk short-circuit — these were previously falling
-# through to the LLM with no context and, whenever the mock provider was
-# active, landing on the generic "I don't have that in the knowledge
-# base" template. Handling them deterministically also avoids a wasted
-# RAG lookup + LLM call for messages that never needed either.
-_SMALL_TALK_REPLIES = {
+SMALL_TALK_REPLIES = {
     "salam": "Wa Alaikum Assalam! How can I help you with HisabDo today?",
     "wellbeing": "I'm doing well, thank you! How can I help you with HisabDo today?",
     "thanks": "You're welcome! Let me know if there's anything else I can help with.",
@@ -108,33 +62,132 @@ _SMALL_TALK_REPLIES = {
     "greeting": "Hello! How can I help you with HisabDo today?",
 }
 
+FAQ_NO_MATCH_REPLY = (
+    "I couldn't find relevant verified information in the HisabDo "
+    "documentation or FAQs. Please contact HisabDo support for confirmation."
+)
+
+FAQ_RETRIEVAL_ERROR_REPLY = (
+    "I couldn't search the HisabDo knowledge base right now. "
+    "Please try again later."
+)
+
+
+def _mentions_bare_name_possessive(message: str) -> bool:
+    """Detect references such as 'Ali's balance'."""
+
+    words = message.split()
+
+    for index, word in enumerate(words):
+        if index == 0:
+            continue
+
+        stripped = word.rstrip(",.?!")
+
+        if re.fullmatch(r"[A-Z][a-zA-Z]*'s", stripped):
+            if stripped.lower() not in _SAFE_POSSESSIVE_WORDS:
+                return True
+
+    return False
+
+
+def _mentions_third_party(message: str) -> bool:
+    if THIRD_PARTY_RELATIONSHIP_WORDS.search(message):
+        return True
+
+    if THIRD_PARTY_ID_REFERENCE.search(message):
+        return True
+
+    return _mentions_bare_name_possessive(message)
+
+
+def _is_own_financial_data_query(message: str) -> bool:
+    if _mentions_third_party(message):
+        return False
+
+    text = message.lower()
+
+    return any(
+        re.search(pattern, text)
+        for pattern in OWN_FINANCIAL_DATA_PATTERNS
+    )
+
+
+def _format_financial_summary(summary: dict) -> str:
+    return (
+        f"Balance: {summary['balance']} {summary['currency']}. "
+        f"Expenses this month: {summary['total_expenses_this_month']} "
+        f"{summary['currency']}. "
+        f"Revenue this month: {summary['total_revenue_this_month']} "
+        f"{summary['currency']}. "
+        f"Outstanding receivables: {summary['outstanding_receivables']} "
+        f"{summary['currency']}."
+    )
+
 
 def _classify_small_talk(message: str) -> str | None:
-    """Returns a small-talk category if the WHOLE message is a short
-    greeting/pleasantry, else None. Deliberately scoped to short messages
-    only, so a real question that happens to start with "hi" (e.g. "hi,
-    how do I add a payable?") still goes through the normal RAG/LLM path."""
+    """Classify short greetings and pleasantries."""
+
     text = message.strip().lower()
     text = re.sub(r"[!?.,]+$", "", text).strip()
+
     if not text or len(text.split()) > 6:
         return None
-    if re.search(r"assalam|salamu?\s*alaikum|\bsalam\b|\baoa\b", text):
+
+    if re.search(
+        r"assalam|salamu?\s*alaikum|\bsalam\b|\baoa\b",
+        text,
+    ):
         return "salam"
-    if re.search(r"how\s*(are|r)\s*(you|u)\b|kaise\s*ho\b|kya\s*hal\s*hai\b", text):
+
+    if re.search(
+        r"how\s*(are|r)\s*(you|u)\b|kaise\s*ho\b|kya\s*hal\s*hai\b",
+        text,
+    ):
         return "wellbeing"
+
     if re.search(r"\bthank(s| you)?\b|\bshukriya\b", text):
         return "thanks"
+
     if re.search(r"\b(bye|goodbye|good\s*night|see\s*you)\b", text):
         return "farewell"
-    if re.search(r"\b(hi+|hello+|hey+|yo)\b|good\s*(morning|afternoon|evening)\b", text):
+
+    if re.search(
+        r"\b(hi+|hello+|hey+|yo)\b|good\s*(morning|afternoon|evening)\b",
+        text,
+    ):
         return "greeting"
+
     return None
 
 
+def _general_response(
+    request: ChatbotRequest,
+    provider,
+    history: list[dict],
+) -> ChatbotResponse:
+    """Use the general LLM flow when no verified FAQ matches."""
+
+    reply, tokens = provider.generate_reply(
+        request.message,
+        context=None,
+        history=history,
+    )
+
+    return ChatbotResponse(
+        reply=reply,
+        conversation_id=request.conversation_id,
+        intent="general",
+        tokens_used=tokens,
+        source="llm_general",
+    )
+
+
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
+    """Handle a chatbot request while preserving financial data boundaries."""
+
+    # 1. Refuse requests for another person's financial data.
     if _mentions_third_party(request.message):
-        # Deterministic refusal — never reaches the LLM, so this cannot be
-        # talked around by a prompt-injection / instruction-override attempt.
         return ChatbotResponse(
             reply=THIRD_PARTY_REFUSAL_MESSAGE,
             conversation_id=request.conversation_id,
@@ -143,10 +196,12 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="policy_guard",
         )
 
+    # 2. Handle greetings without retrieval or LLM calls.
     small_talk = _classify_small_talk(request.message)
+
     if small_talk:
         return ChatbotResponse(
-            reply=_SMALL_TALK_REPLIES[small_talk],
+            reply=SMALL_TALK_REPLIES[small_talk],
             conversation_id=request.conversation_id,
             intent="general",
             tokens_used=0,
@@ -154,12 +209,22 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
         )
 
     provider = get_llm_provider()
+    history = [item.model_dump() for item in request.history]
 
+    # 3. Personal financial figures must come from the backend API.
     if _is_own_financial_data_query(request.message):
-        # Authoritative data path — never touches the RAG knowledge base.
-        summary = get_backend_client().get_user_financial_summary(request.user_id)
+        summary = get_backend_client().get_user_financial_summary(
+            request.user_id
+        )
+
         context = _format_financial_summary(summary)
-        reply, tokens = provider.generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
+
+        reply, tokens = provider.generate_reply(
+            request.message,
+            context=context,
+            history=history,
+        )
+
         return ChatbotResponse(
             reply=reply,
             conversation_id=request.conversation_id,
@@ -168,23 +233,66 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="backend_financial_api",
         )
 
-    matches = get_retriever().retrieve(request.message, top_k=1)
-    if matches:
-        context = matches[0]["text"]
-        reply, tokens = provider.generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
+    # 4. Retrieve verified FAQ and product documentation.
+    try:
+        matches = get_retriever().retrieve(
+            request.message,
+            top_k=3,
+        )
+    except Exception:
+        logger.exception("FAQ semantic retrieval failed.")
+
         return ChatbotResponse(
-            reply=reply,
+            reply=FAQ_RETRIEVAL_ERROR_REPLY,
             conversation_id=request.conversation_id,
             intent="product_faq",
-            tokens_used=tokens,
-            source="rag",
+            tokens_used=0,
+            source="rag_error",
         )
 
-    reply, tokens = provider.generate_reply(request.message, context=None, history=[h.model_dump() for h in request.history])
+    # 5. No verified match: preserve general LLM behavior and history.
+    if not matches:
+        return _general_response(request, provider, history)
+
+    # 6. Normalize retrieved documents and build source-labelled context.
+    context_chunks = []
+
+    for match in matches:
+        if not isinstance(match, dict):
+            continue
+
+        title = match.get("title") or "HisabDo Knowledge Base"
+        content = match.get("text")
+
+        if not isinstance(content, str) or not content.strip():
+            continue
+
+        context_chunks.append(
+            {
+                "text": content,
+                "source": match.get("source") or title,
+                "score": match.get("score"),
+            }
+        )
+
+    prepared_context = prepare_context(context_chunks)
+    context = format_context_block(prepared_context)
+
+    # Invalid or empty retrieved content also falls back to general flow.
+    if not context:
+        return _general_response(request, provider, history)
+
+    # 7. Generate an answer using verified retrieved context.
+    reply, tokens = provider.generate_reply(
+        request.message,
+        context=context,
+        history=history,
+    )
+
     return ChatbotResponse(
         reply=reply,
         conversation_id=request.conversation_id,
-        intent="general",
+        intent="product_faq",
         tokens_used=tokens,
-        source="llm_general",
+        source="rag",
     )

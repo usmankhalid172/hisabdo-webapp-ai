@@ -2,61 +2,191 @@
   {
     "id": "faq-001",
     "title": "What is HisabDo?",
-    "text": "HisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going."
+    "text": "HisabDo is an offline-first khata and ledger app for Android. It helps users track money given and received, customer balances, and expenses. PDF reports are available for supported records.",
+    "type": "product_faq",
+    "version": "1.2.0",
+    "verified": true,
+    "source": "Official HisabDo FAQ — https://hisabdo.app/faq",
+    "last_reviewed": "2026-10-13"
   },
   {
     "id": "faq-002",
-    "title": "How do I categorize an expense? How does automatic expense categorization work?",
-    "text": "When you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions. If the model isn't confident, the expense is flagged for you to confirm or correct the category instead of being applied automatically."
+    "title": "How do I categorize an expense?",
+    "text": "The existing FAQ describes expense categorization as a combination of rule-based matching and a machine-learning model. It states that uncertain predictions are flagged for the user to confirm or correct. Confirm this workflow against the current application before publishing.",
+    "type": "product_faq",
+    "version": "1.1.0",
+    "verified": false,
+    "source": "Existing HisabDo FAQ; product confirmation required",
+    "last_reviewed": null
   },
   {
     "id": "faq-003",
     "title": "Is my financial data used to train the shared AI model?",
-    "text": "No individual user's raw financial data is used as a knowledge source for the chatbot. Chatbot answers about your own balance, expenses, or revenue are always pulled live from your account through the backend, not from any shared knowledge base."
+    "text": "The existing FAQ states that individual users' raw financial data is not used as a chatbot knowledge source and that account-specific figures should come from the backend. Confirm the current data-handling and privacy policy with the product team before making this claim to users.",
+    "type": "product_faq",
+    "version": "1.1.0",
+    "verified": false,
+    "source": "Existing HisabDo FAQ; privacy confirmation required",
+    "last_reviewed": null
   },
   {
     "id": "faq-004",
     "title": "What is a cash flow statement?",
-    "text": "A cash flow statement is a financial report that shows the money moving in and out of a business over a period of time, split into operating, investing, and financing activities. It helps you see whether a business is generating enough cash to sustain itself."
+    "text": "A cash flow statement summarizes money entering and leaving a business during a period. It commonly groups cash flows into operating, investing, and financing activities.",
+    "type": "finance_faq",
+    "version": "1.1.0",
+    "verified": true,
+    "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "last_reviewed": "2026-10-13"
   },
   {
     "id": "faq-005",
     "title": "How do I export my expenses?",
-    "text": "You can export your recorded expenses as a CSV or PDF report from the Reports section of the app, filtered by date range, category, or tag."
+    "text": "HisabDo supports PDF reports for supported records. Official documentation describes reports for transactions, customer balances, and customer activity. The exact steps may depend on the screen and record being viewed. CSV export is not confirmed by the source.",
+    "type": "product_faq",
+    "version": "1.1.0",
+    "verified": true,
+    "source": "Official HisabDo FAQ — https://hisabdo.app/faq",
+    "last_reviewed": "2026-10-13"
   },
   {
     "id": "faq-006",
     "title": "What's the difference between profit and cash flow?",
-    "text": "Profit is revenue minus expenses over a period, based on accounting rules, while cash flow is the actual movement of money in and out of your accounts. A business can be profitable on paper while still running low on cash if customers haven't paid yet."
+    "text": "Profit is revenue minus expenses over a period under the applicable accounting rules. Cash flow describes actual cash entering and leaving a business. A business can report a profit while experiencing a cash shortage if customers have not paid.",
+    "type": "finance_faq",
+    "version": "1.1.0",
+    "verified": true,
+    "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "last_reviewed": "2026-10-13"
   },
   {
     "id": "finance_001",
     "title": "What is profit?",
-    "text": "Profit is the amount remaining after expenses are subtracted from revenue."
+    "text": "Profit is the amount remaining after expenses are subtracted from revenue, according to the applicable accounting method.",
+    "type": "finance_faq",
+    "version": "1.1.0",
+    "verified": true,
+    "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "last_reviewed": "2026-10-13"
   },
   {
     "id": "finance_002",
     "title": "What is revenue?",
-    "text": "Revenue is the total income generated from business sales or services before expenses are deducted."
+    "text": "Revenue is the income generated from a business's sales or services before expenses are deducted.",
+    "type": "finance_faq",
+    "version": "1.1.0",
+    "verified": true,
+    "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "last_reviewed": "2026-10-13"
   },
   {
     "id": "finance_003",
     "title": "What is an expense?",
-    "text": "An expense is a cost incurred by a business while operating or generating revenue."
+    "text": "An expense is a cost incurred by a business while operating or generating revenue.",
+    "type": "finance_faq",
+    "version": "1.1.0",
+    "verified": true,
+    "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "last_reviewed": "2026-10-13"
   },
   {
     "id": "finance_004",
     "title": "What is cash flow?",
-    "text": "Cash flow represents the movement of money entering and leaving a business during a period."
+    "text": "Cash flow is the movement of money into and out of a business during a period.",
+    "type": "finance_faq",
+    "version": "1.1.0",
+    "verified": true,
+    "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "last_reviewed": "2026-10-13"
   },
   {
     "id": "finance_005",
     "title": "Why should customer balances be tracked?",
-    "text": "Tracking customer balances helps a business identify outstanding payments and monitor money owed by customers."
+    "text": "Tracking customer balances helps a business monitor outstanding payments and amounts owed by customers.",
+    "type": "finance_faq",
+    "version": "1.1.0",
+    "verified": false,
+    "source": "Existing finance FAQ; review required",
+    "last_reviewed": null
   },
   {
     "id": "finance_006",
     "title": "Why should business expenses be categorized?",
-    "text": "Categorizing expenses makes financial records easier to analyze and helps identify where business money is being spent."
+    "text": "Categorizing business expenses makes financial records easier to analyze and helps identify where money is being spent.",
+    "type": "finance_faq",
+    "version": "1.1.0",
+    "verified": false,
+    "source": "Existing finance FAQ; review required",
+    "last_reviewed": null
+  },
+  {
+    "id": "finance_007",
+    "title": "What is the difference between revenue and profit?",
+    "text": "Revenue is the income generated before expenses are deducted. Profit is what remains after the relevant expenses are subtracted from revenue.",
+    "type": "finance_faq",
+    "version": "1.1.0",
+    "verified": true,
+    "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "last_reviewed": "2026-10-13"
+  },
+  {
+    "id": "finance_008",
+    "title": "Why can a profitable business have cash-flow problems?",
+    "text": "A business may record revenue before receiving payment from customers. It can therefore report a profit while not having enough available cash to pay its immediate obligations.",
+    "type": "finance_faq",
+    "version": "1.1.0",
+    "verified": true,
+    "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "last_reviewed": "2026-10-13"
+  },
+  {
+    "id": "finance_009",
+    "title": "What is an outstanding customer payment?",
+    "text": "An outstanding customer payment is an amount a customer still owes the business for goods or services already supplied.",
+    "type": "finance_faq",
+    "version": "1.0.0",
+    "verified": false,
+    "source": "New FAQ draft; review required",
+    "last_reviewed": null
+  },
+  {
+    "id": "finance_010",
+    "title": "Why is it important to keep financial records?",
+    "text": "Keeping organized financial records helps a business review income and expenses, monitor payments, and prepare financial summaries. The exact reports available depend on the business's tools and accounting practices.",
+    "type": "finance_faq",
+    "version": "1.0.0",
+    "verified": false,
+    "source": "New FAQ draft; review required",
+    "last_reviewed": null
+  },
+  {
+    "id": "product_001",
+    "title": "How do I download a financial report in HisabDo?",
+    "text": "HisabDo supports PDF reports for supported records. Official documentation describes reports for transactions, customer balances, and customer activity. The exact steps may depend on the screen and record being viewed. CSV export is not confirmed by the source.",
+    "type": "product_documentation",
+    "version": "1.1.0",
+    "verified": true,
+    "source": "Official HisabDo FAQ — https://hisabdo.app/faq",
+    "last_reviewed": "2026-10-13"
+  },
+  {
+    "id": "product_002",
+    "title": "How does HisabDo protect account-specific financial answers?",
+    "text": "The intended design is that a user's personal balance, revenue, and expense figures must come from authorized backend data rather than general FAQ documents. Confirm the implementation and access controls with the engineering team before describing this as a guaranteed product behavior.",
+    "type": "product_documentation",
+    "version": "1.0.0",
+    "verified": false,
+    "source": "Product documentation draft; engineering confirmation required",
+    "last_reviewed": null
+  },
+  {
+    "id": "product_003",
+    "title": "What should the assistant do when it cannot find a relevant answer?",
+    "text": "The assistant should avoid inventing product features or financial facts. When the knowledge base does not contain sufficiently relevant verified information, it should use the configured safe fallback and clearly avoid presenting unsupported details as facts.",
+    "type": "product_documentation",
+    "version": "1.0.0",
+    "verified": false,
+    "source": "Product documentation draft; engineering review required",
+    "last_reviewed": null
   }
 ]
