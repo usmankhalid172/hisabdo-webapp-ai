@@ -25,6 +25,7 @@ run it from a normal dev machine or CI with outbound HTTPS access.
 """
 from __future__ import annotations
 
+import json
 import sys
 import time
 from collections import deque
@@ -164,6 +165,40 @@ def build_index(pages: list[CrawledPage]) -> VectorStore:
     return store
 
 
+
+def load_faq_pages(path: Path | None = None) -> list[CrawledPage]:
+    """Load FAQ question-answer pairs from the local JSONL file."""
+    faq_path = path or (Path(__file__).resolve().parent / "data" / "xictek_faq_raw.jsonl")
+    pages: list[CrawledPage] = []
+    if not faq_path.exists():
+        print(f"  [warning] FAQ file not found: {faq_path}", file=sys.stderr)
+        return pages
+
+    with faq_path.open("r", encoding="utf-8") as file:
+        for line_number, line in enumerate(file, start=1):
+            if not line.strip():
+                continue
+            try:
+                item = json.loads(line)
+            except json.JSONDecodeError as exc:
+                print(f"  [skip] Invalid FAQ JSON on line {line_number}: {exc}", file=sys.stderr)
+                continue
+
+            pairs = []
+            for fact in item.get("facts", []):
+                question = str(fact.get("question", "")).strip()
+                answer = str(fact.get("answer", "")).strip()
+                if question and answer:
+                    pairs.append(f"Question: {question}\nAnswer: {answer}")
+            if pairs:
+                pages.append(CrawledPage(
+                    url=str(item.get("url", "")).strip(),
+                    title=str(item.get("title", "XICTEK FAQ")).strip(),
+                    text="\n\n".join(pairs),
+                ))
+    print(f"Loaded FAQ content from {len(pages)} source records.")
+    return pages
+
 def main() -> None:
     settings = get_xictek_settings()
     print(f"Crawling {settings.crawl_seed_urls} (allowed domains: {settings.allowed_crawl_domains})...")
@@ -173,7 +208,8 @@ def main() -> None:
         max_pages=settings.crawl_max_pages,
         delay_seconds=settings.crawl_request_delay_seconds,
     )
-    print(f"Crawled {len(pages)} pages. Chunking + embedding...")
+    pages.extend(load_faq_pages())
+    print(f"Processing {len(pages)} website and FAQ source records. Chunking + embedding...")
     store = build_index(pages)
     store.save()
     print(f"Indexed {len(store)} chunks -> {settings.index_dir}")
@@ -181,3 +217,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+from pathlib import Path

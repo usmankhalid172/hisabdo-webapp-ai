@@ -1,16 +1,16 @@
 """
 Lean local vector store: numpy array of L2-normalized embeddings +
 a parallel JSON file of chunk metadata (text/title/url). No vector DB
-dependency — per the plan, this is the right scale for a few hundred
+dependency â€” per the plan, this is the right scale for a few hundred
 website/blog chunks, and it keeps the module dependency-light and
 easy to demo (two flat files, easy to inspect, easy to re-ingest).
 
 Persisted layout under `config.index_dir`:
-    embeddings.npy   — float32 array, shape (n_chunks, embedding_dim)
-    chunks.json      — list of {id, title, url, text}, same order as the rows above
+    embeddings.npy   â€” float32 array, shape (n_chunks, embedding_dim)
+    chunks.json      â€” list of {id, title, url, text}, same order as the rows above
 
 Swapping this for a real vector DB later means replacing this file's
-internals only (build/query/save/load) — `service.py` and `router.py`
+internals only (build/query/save/load) â€” `service.py` and `router.py`
 only ever see `retrieve()`'s return shape, same as the HisabDo
 financial_assistant's vector_store.py -> rag_pipeline.ContextChunk pattern.
 """
@@ -76,7 +76,7 @@ class VectorStore:
         candidate that's near-identical to a chunk already selected gets
         penalized, so results spread across genuinely different content
         instead of returning several copies of the same idea. This
-        matters a lot here — several xicteksystems.com "pillar guide"
+        matters a lot here â€” several xicteksystems.com "pillar guide"
         pages share a templated intro/CTA paragraph with only the topic
         name swapped in (a content-generation quirk on their end, not
         ours), so without diversification a query can come back with
@@ -88,7 +88,7 @@ class VectorStore:
         if not self.chunks or self._vectors is None or len(self.chunks) == 0:
             return []
         # Vectors are L2-normalized at embed time, so a plain dot product
-        # is cosine similarity — no need to re-normalize per query.
+        # is cosine similarity â€” no need to re-normalize per query.
         scores = self._vectors @ query_vector
 
         if not diversify:
@@ -100,13 +100,13 @@ class VectorStore:
             ]
 
         # Candidate pool: relevant chunks to choose diversely among. We
-        # deliberately do NOT cap this tightly — with only ~1,000-2,000
+        # deliberately do NOT cap this tightly â€” with only ~1,000-2,000
         # chunks in a site-scale index like this, scoring every
         # qualifying candidate is still cheap (a handful of dot products
         # per candidate), and an aggressive cap actively breaks
         # diversification: if enough near-duplicate template chunks
         # outscore the genuinely distinct content (exactly what happens
-        # here — ~40 pages sharing a templated intro can easily fill a
+        # here â€” ~40 pages sharing a templated intro can easily fill a
         # small pool on their own), the distinct chunk never even enters
         # the pool for MMR to pick from. A generous cap only exists as a
         # safety net for pathological cases (e.g. relevance_threshold
@@ -162,7 +162,7 @@ class VectorStore:
         # This lets load() catch that instead of silently corrupting
         # results.
         (index_dir / METADATA_FILENAME).write_text(
-            json.dumps({"embedding_model": get_xictek_settings().embedding_model}, indent=2)
+            json.dumps({"embedding_model": get_xictek_settings().embedding_model, "kb_version": "1.0.0", "chunk_count": len(self.chunks)}, indent=2)
         )
 
     @classmethod
@@ -171,7 +171,7 @@ class VectorStore:
         vectors_path = index_dir / EMBEDDINGS_FILENAME
         chunks_path = index_dir / CHUNKS_FILENAME
         if not vectors_path.exists() or not chunks_path.exists():
-            return cls()  # empty store — caller decides how to handle "no index yet"
+            return cls()  # empty store â€” caller decides how to handle "no index yet"
 
         metadata_path = index_dir / METADATA_FILENAME
         current_model = get_xictek_settings().embedding_model
@@ -192,7 +192,7 @@ class VectorStore:
             logger.warning("xictek_index_metadata_missing_cannot_verify_embedding_model")
 
         vectors = np.load(vectors_path)
-        raw_chunks = json.loads(chunks_path.read_text())
+        raw_chunks = json.loads(chunks_path.read_text(encoding="utf-8"))
         chunks = [
             Chunk(chunk_id=c["id"], title=c["title"], url=c.get("url"), text=c["text"])
             for c in raw_chunks

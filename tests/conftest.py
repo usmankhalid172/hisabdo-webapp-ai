@@ -10,6 +10,7 @@ os.environ.setdefault("LLM_PROVIDER", "mock")
 # actual website visitors) would otherwise start 429-ing partway through
 # any test session that sends more than 20 requests to it.
 os.environ.setdefault("XICTEK_RATE_LIMIT", "10000/minute")
+os.environ.setdefault("XICTEK_INDEX_DIR", str(Path(__file__).resolve().parent / "empty_xictek_index"))
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -27,7 +28,7 @@ def client():
 @pytest.fixture()
 def auth_headers():
     # Derive from the same INTERNAL_SERVICE_TOKEN the app itself reads,
-    # rather than hardcoding a value — os.environ.setdefault() above is a
+    # rather than hardcoding a value â€” os.environ.setdefault() above is a
     # no-op if the variable is already set in the shell/`.env` (common on
     # a dev machine that's had this repo configured before), so a
     # hardcoded guess here can silently drift from what the app expects.
@@ -38,13 +39,13 @@ def auth_headers():
 def ensure_categorization_model():
     """
     model/expense_categorization_pipeline.pkl is a generated binary artifact
-    and is gitignored, so it never exists on a fresh clone — every clone
+    and is gitignored, so it never exists on a fresh clone â€” every clone
     needs someone to manually run train_model.py first, or every test that
     touches the real ML path fails with FileNotFoundError (has already
     happened twice: Day 28 audit, and again after a later pull).
 
     Session-scoped and autouse so this runs once, automatically, before any
-    test in the suite — a fresh clone just works with `pytest`, no manual
+    test in the suite â€” a fresh clone just works with `pytest`, no manual
     step required.
     """
     repo_root = Path(__file__).resolve().parents[1]
