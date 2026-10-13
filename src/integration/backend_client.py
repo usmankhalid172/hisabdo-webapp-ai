@@ -13,6 +13,10 @@ is what the rest of the code depends on.
 """
 from abc import ABC, abstractmethod
 
+from fastapi import HTTPException
+
+from ..config import get_settings
+
 
 class BackendClient(ABC):
     @abstractmethod
@@ -36,5 +40,10 @@ class MockBackendClient(BackendClient):
 
 
 def get_backend_client() -> BackendClient:
-    # Single seam to swap in a real HTTP-based client later.
+    # Never expose demo financial figures in production.
+    if get_settings().app_env.lower() == "production":
+        raise HTTPException(
+            status_code=503,
+            detail="Real financial backend is not configured; mock data is disabled in production.",
+        )
     return MockBackendClient()

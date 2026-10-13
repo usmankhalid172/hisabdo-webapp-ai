@@ -9,7 +9,7 @@ FastAPI adds it to the OpenAPI spec, and /docs renders a real "Authorize"
 button. Click it once, paste the token, and every protected endpoint's
 "Try it out" sends the header automatically — no manual header editing.
 """
-from fastapi import Security
+from fastapi import Header, Security
 from fastapi.security import APIKeyHeader
 
 from .config import get_settings
@@ -30,4 +30,24 @@ def require_internal_token(token: str | None = Security(internal_token_header)) 
             "UNAUTHORIZED_SERVICE",
             "Missing or invalid internal service token",
             status_code=401,
+        )
+
+
+def require_customer_access(
+    requested_user_id: str,
+    authenticated_user_id: str | None,
+) -> None:
+    """Enforce account ownership using an identity asserted by a trusted gateway."""
+    if not authenticated_user_id or not authenticated_user_id.strip():
+        raise ServiceError(
+            "UNAUTHENTICATED_CUSTOMER",
+            "Authenticated customer identity is required for financial data",
+            status_code=401,
+        )
+
+    if requested_user_id.strip() != authenticated_user_id.strip():
+        raise ServiceError(
+            "CUSTOMER_ACCESS_DENIED",
+            "The requested account does not belong to the authenticated customer",
+            status_code=403,
         )

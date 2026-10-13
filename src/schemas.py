@@ -3,6 +3,7 @@ Request/response contracts. These are the source of truth mirrored by the
 backend's API client, per Day 15 §8.
 """
 from typing import Literal, Optional
+from decimal import Decimal
 
 from pydantic import BaseModel, Field
 
@@ -63,9 +64,9 @@ class ChatbotResponse(BaseModel):
 class CategorizeRequest(BaseModel):
     expense_id: Optional[str] = None
     description: str = Field(min_length=1)
-    amount: float
+    amount: Decimal = Field(ge=0, max_digits=14, decimal_places=2)
     merchant: Optional[str] = None
-    currency: str = "PKR"
+    currency: str = Field(default="PKR", pattern=r"^[A-Z]{3}$")
 
 
 class CategorizeResponse(BaseModel):
