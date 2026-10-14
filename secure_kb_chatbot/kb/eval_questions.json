@@ -1,0 +1,34 @@
+[
+  {
+    "question": "How do I record an expense?",
+    "expect": "KB-001"
+  },
+  {
+    "question": "kharcha kaise likhun?",
+    "expect": "KB-001"
+  },
+  {
+    "question": "HisabDo ki price kya hai?",
+    "expect": "KB-002"
+  },
+  {
+    "question": "Can I download my ledger as Excel?",
+    "expect": "KB-003"
+  },
+  {
+    "question": "Udhaar ka hisab kahan dekhun?",
+    "expect": "KB-101"
+  },
+  {
+    "question": "Give me a biryani recipe",
+    "expect": null
+  },
+  {
+    "question": "Who won the cricket match?",
+    "expect": null
+  },
+  {
+    "question": "What is the capital of France?",
+    "expect": null
+  }
+]

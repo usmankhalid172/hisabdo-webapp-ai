@@ -1,0 +1,32 @@
+[
+  {
+    "id": "KB-001",
+    "category": "expenses",
+    "question": "How do I record an expense in HisabDo?",
+    "answer": "DRAFT - replace with the real steps from the product team.",
+    "status": "draft",
+    "verified_by": "",
+    "verified_on": "",
+    "source": ""
+  },
+  {
+    "id": "KB-002",
+    "category": "pricing",
+    "question": "How much does HisabDo cost?",
+    "answer": "DRAFT - replace with the current plans and prices.",
+    "status": "draft",
+    "verified_by": "",
+    "verified_on": "",
+    "source": ""
+  },
+  {
+    "id": "KB-003",
+    "category": "data",
+    "question": "Can I export my data to Excel or PDF?",
+    "answer": "DRAFT - confirm which exports exist and where they are found.",
+    "status": "draft",
+    "verified_by": "",
+    "verified_on": "",
+    "source": ""
+  }
+]
