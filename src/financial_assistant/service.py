@@ -18,6 +18,7 @@ from ..schemas import ChatbotRequest, ChatbotResponse
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
 from .rag_pipeline import prepare_context, format_context_block
+from .intent_router import classify_intent, extract_slots, get_missing_fields, build_follow_up
 
 logger = logging.getLogger("financial_assistant.service")
 
@@ -183,6 +184,123 @@ def _general_response(
     )
 
 
+
+
+def _pending_transaction_intent(history: list[dict]) -> str | None:
+    """Recover an expense/income intent when the assistant asked a follow-up."""
+    last_assistant = None
+    last_assistant_index = -1
+
+    for index in range(len(history) - 1, -1, -1):
+        if history[index].get("role") == "assistant":
+            last_assistant = history[index].get("content", "").lower()
+            last_assistant_index = index
+            break
+
+    if not last_assistant:
+        return None
+
+    is_follow_up = any(
+        phrase in last_assistant
+        for phrase in (
+            "what was the amount?",
+            "please describe the transaction.",
+            "please provide the transaction amount and description.",
+        )
+    )
+    if not is_follow_up:
+        return None
+
+    for turn in reversed(history[:last_assistant_index]):
+        if turn.get("role") != "user":
+            continue
+        intent = classify_intent(turn.get("content", ""))
+        if intent in {"expense", "income"}:
+            return intent
+
+    return None
+
+
+def _handle_transaction_intent(
+    message: str,
+    history: list[dict],
+    conversation_id: str,
+) -> ChatbotResponse | None:
+    """Collect transaction details without pretending to save a transaction."""
+    intent = classify_intent(message)
+    pending_intent = _pending_transaction_intent(history)
+
+    if intent not in {"expense", "income"}:
+        if pending_intent is None:
+            return None
+        intent = pending_intent
+
+    slots = {}
+
+    # Reuse details from the earlier user turn when answering a follow-up.
+    if pending_intent == intent:
+        for turn in reversed(history):
+            if turn.get("role") == "user":
+                previous_intent = classify_intent(turn.get("content", ""))
+                if previous_intent == intent:
+                    slots.update(extract_slots(turn["content"]))
+                    break
+
+    current_slots = extract_slots(message)
+    slots.update(current_slots)
+
+    last_assistant = next(
+        (
+            turn.get("content", "").lower()
+            for turn in reversed(history)
+            if turn.get("role") == "assistant"
+        ),
+        "",
+    )
+
+    if pending_intent == intent and "what was the amount?" in last_assistant:
+        if "amount" not in current_slots:
+            import re
+            from decimal import Decimal, InvalidOperation
+
+            bare_amount = re.fullmatch(r"\s*(\d[\d,]*(?:\.\d{1,2})?)\s*", message)
+            if bare_amount:
+                try:
+                    value = Decimal(bare_amount.group(1).replace(",", ""))
+                    if value > 0:
+                        slots["amount"] = str(value)
+                except InvalidOperation:
+                    pass
+
+    if (
+        pending_intent == intent
+        and "please describe the transaction." in last_assistant
+        and not current_slots.get("description")
+    ):
+        slots["description"] = message.strip(" .,")
+
+    missing = get_missing_fields(intent, slots)
+
+    if missing:
+        reply = build_follow_up(intent, missing)
+    else:
+        amount = slots["amount"]
+        description = slots["description"]
+        reply = (
+            f"I have the {intent} details: {amount} PKR for {description}. "
+            "This is not saved yet; transaction saving is not enabled "
+            "in this chatbot flow."
+        )
+
+    return ChatbotResponse(
+        reply=reply,
+        conversation_id=conversation_id,
+        intent=intent,
+        tokens_used=0,
+        source="intent_router",
+    )
+
+
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     """Handle a chatbot request while preserving financial data boundaries."""
 
@@ -210,6 +328,16 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
 
     provider = get_llm_provider()
     history = [item.model_dump() for item in request.history]
+
+    # 3. Recognize expense/income requests and continue pending follow-ups.
+    transaction_response = _handle_transaction_intent(
+        request.message,
+        history,
+        request.conversation_id,
+    )
+    if transaction_response:
+        return transaction_response
+
 
     # 3. Personal financial figures must come from the backend API.
     if _is_own_financial_data_query(request.message):
