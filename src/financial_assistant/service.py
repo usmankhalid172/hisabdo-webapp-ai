@@ -9,6 +9,8 @@ API instead of the knowledge base.
 """
 import re
 
+from .intent_router import ConversationState, handle_turn
+
 from ..integration.backend_client import get_backend_client
 from ..schemas import ChatbotRequest, ChatbotResponse
 from .llm_providers import get_llm_provider
@@ -166,6 +168,65 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             intent="own_financial_data",
             tokens_used=tokens,
             source="backend_financial_api",
+        )
+
+    # Resume slot filling only when the latest assistant message
+    # is one of our known follow-up questions.
+    follow_up_prompts = {
+        "What was the amount?",
+        "Please describe the transaction.",
+        "Which category should I use?",
+        "Which period should the report cover?",
+    }
+
+    state = ConversationState(
+        user_id=request.user_id,
+        conversation_id=request.conversation_id,
+    )
+
+    if (
+        request.history
+        and request.history[-1].role == "assistant"
+        and request.history[-1].content.strip() in follow_up_prompts
+    ):
+        for turn in request.history:
+            if turn.role == "user":
+                handle_turn(turn.content, state)
+
+    intent_result = handle_turn(request.message, state)
+
+    is_faq_style = bool(re.search(
+        r"\\b(how does|how do i|what is|what are|does hisabdo|"
+        r"help me understand)\\b",
+        request.message,
+        re.IGNORECASE,
+    ))
+
+    if (
+        not request.message.strip().lower().startswith((
+            "how does ", "how do i ", "what is ", "what are ",
+            "does hisabdo ", "help me understand ",
+        ))
+        and intent_result.intent in {
+            "expense", "income", "categorization", "correction", "report"
+        }
+    ):
+        if not intent_result.ready:
+            reply = intent_result.follow_up or "Please provide more details."
+        else:
+            reply = (
+                f"I identified your {intent_result.intent} request and "
+                f"collected these details: {intent_result.slots}. "
+                "This intent-routing step has not saved or changed any "
+                "financial records."
+            )
+
+        return ChatbotResponse(
+            reply=reply,
+            conversation_id=request.conversation_id,
+            intent=intent_result.intent,
+            tokens_used=0,
+            source="intent_router",
         )
 
     matches = get_retriever().retrieve(request.message, top_k=1)
