@@ -27,6 +27,10 @@ class Settings(BaseSettings):
     # Categorization
     categorization_confidence_threshold: float = 0.55
 
+    # Chatbot intent router + multi-turn conversation state (financial_assistant/dialogue).
+    # false = every message goes through the previous single-turn flow.
+    dialogue_enabled: bool = True
+
 
 @lru_cache
 def get_settings() -> Settings:
