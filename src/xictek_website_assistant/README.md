@@ -75,7 +75,8 @@ question set this was built against.
 ```
 crawl_seed_urls  --(same-domain BFS crawl, allow-listed domains only)-->
   raw HTML pages --(strip nav/header/footer/script/style, extract text)-->
-    page text --(chunking.py: paragraph-aware, ~1200 chars, 200 overlap)-->
+    page text --(chunking.py: paragraph-aware, ~1200 chars, 200 overlap;
+                 job-role sections keep their title with requirements)-->
       chunks --(embeddings.py: sentence-transformers, local)-->
         vectors --(vector_store.py: VectorStore.save())-->
           data/index/embeddings.npy + data/index/chunks.json

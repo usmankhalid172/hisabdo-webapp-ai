@@ -66,3 +66,35 @@ def test_no_duplicates_means_no_chunks_dropped():
         store = build_index([CrawledPage(url="https://example.com/x", title="X", text=text)])
 
     assert len(store) == 1  # short enough to pack into one chunk, per chunking.py's defaults
+
+
+def test_career_role_requirements_are_indexed_with_their_role_title():
+    page = CrawledPage(
+        url="https://example.com/careers",
+        title="Careers & Job Openings",
+        text="\n\n".join(
+            [
+                "Careers & Job Openings",
+                "A" * 280,
+                "Senior Full-Stack Developer",
+                "Requirements: React, Next.js, .NET, PostgreSQL.",
+                "Mobile App Developer",
+                "Requirements: Flutter, React Native, iOS, Android.",
+            ]
+        ),
+    )
+
+    with patch("src.xictek_website_assistant.ingest.embed_texts", side_effect=_stub_embed):
+        store = build_index([page])
+
+    indexed_texts = [chunk.text for chunk in store.chunks]
+    assert any(
+        "Senior Full-Stack Developer" in text
+        and "React, Next.js, .NET, PostgreSQL" in text
+        for text in indexed_texts
+    )
+    assert any(
+        "Mobile App Developer" in text
+        and "Flutter, React Native, iOS, Android" in text
+        for text in indexed_texts
+    )

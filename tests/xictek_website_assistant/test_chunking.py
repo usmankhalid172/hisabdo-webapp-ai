@@ -46,3 +46,41 @@ def test_reconstructs_all_content_across_chunks():
     joined = " ".join(chunks)
     for p in paragraphs:
         assert p in joined
+
+
+def test_career_role_titles_stay_with_their_requirements_at_chunk_boundaries():
+    text = "\n\n".join(
+        [
+            "Careers & Job Openings",
+            "A" * 280,
+            "Senior Full-Stack Developer",
+            "Requirements: React, Next.js, .NET, PostgreSQL.",
+            "Mobile App Developer",
+            "Requirements: Flutter, React Native, iOS, Android.",
+        ]
+    )
+
+    chunks = chunk_text(text, chunk_size_chars=320, chunk_overlap_chars=40)
+
+    assert any(
+        "Senior Full-Stack Developer" in chunk
+        and "React, Next.js, .NET, PostgreSQL" in chunk
+        for chunk in chunks
+    )
+    assert any(
+        "Mobile App Developer" in chunk
+        and "Flutter, React Native, iOS, Android" in chunk
+        for chunk in chunks
+    )
+
+
+def test_long_career_role_chunks_repeat_role_title_for_context():
+    title = "Cloud Solutions Architect"
+    requirements = "Requirements: " + ("Azure, AWS, Terraform, DevOps. " * 30)
+    text = "\n\n".join([title, requirements, "UI/UX Designer", "Figma, prototyping."])
+
+    chunks = chunk_text(text, chunk_size_chars=100, chunk_overlap_chars=20)
+
+    cloud_chunks = [chunk for chunk in chunks if "Azure" in chunk or "Terraform" in chunk]
+    assert len(cloud_chunks) > 1
+    assert all(title in chunk for chunk in cloud_chunks)
