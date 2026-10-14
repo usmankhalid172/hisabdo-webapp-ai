@@ -20,6 +20,7 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
+from urllib.parse import urlsplit
 
 import numpy as np
 
@@ -68,6 +69,7 @@ class VectorStore:
         relevance_threshold: float,
         diversify: bool = True,
         mmr_lambda: float = 0.5,
+        url_path_prefix: Optional[str] = None,
     ) -> list[RetrievedChunk]:
         """
         Returns the top_k chunks most relevant to query_vector.
@@ -91,12 +93,33 @@ class VectorStore:
         # is cosine similarity — no need to re-normalize per query.
         scores = self._vectors @ query_vector
 
+        # Apply section filtering before ranking so a high-scoring chunk
+        # from another part of the site cannot displace a service result.
+        candidate_idx = np.arange(len(self.chunks))
+        if url_path_prefix:
+            prefix = "/" + url_path_prefix.strip("/").casefold()
+            candidate_idx = np.array(
+                [
+                    idx
+                    for idx, chunk in enumerate(self.chunks)
+                    if chunk.url
+                    and (
+                        (path := urlsplit(chunk.url).path.rstrip("/").casefold()) == prefix
+                        or path.startswith(prefix + "/")
+                    )
+                ],
+                dtype=int,
+            )
+        candidate_idx = candidate_idx[scores[candidate_idx] >= relevance_threshold]
+        if len(candidate_idx) == 0:
+            return []
+        candidate_idx = candidate_idx[np.argsort(-scores[candidate_idx], kind="stable")]
+
         if not diversify:
-            top_idx = np.argsort(-scores)[:top_k]
+            top_idx = candidate_idx[:top_k]
             return [
                 RetrievedChunk(chunk=self.chunks[idx], score=float(scores[idx]))
                 for idx in top_idx
-                if scores[idx] >= relevance_threshold
             ]
 
         # Candidate pool: relevant chunks to choose diversely among. We
@@ -111,10 +134,6 @@ class VectorStore:
         # the pool for MMR to pick from. A generous cap only exists as a
         # safety net for pathological cases (e.g. relevance_threshold
         # set to something that qualifies most of a much larger index).
-        candidate_idx = np.where(scores >= relevance_threshold)[0]
-        if len(candidate_idx) == 0:
-            return []
-        candidate_idx = candidate_idx[np.argsort(-scores[candidate_idx])]
         pool_size = min(len(candidate_idx), max(top_k * 50, 300))
         candidate_idx = candidate_idx[:pool_size]
 

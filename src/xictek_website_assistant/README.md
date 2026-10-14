@@ -215,8 +215,10 @@ root for the current list. Notable ones:
 | `XICTEK_GROQ_API_KEY` | *(unset — falls back to `GROQ_API_KEY`)* | Optional: give this module its own Groq key, separate from HisabDo's chatbot |
 | `XICTEK_LLM_PROVIDER` | *(unset — falls back to `LLM_PROVIDER`)* | Optional: override the provider (e.g. `groq`) independent of the shared setting |
 | `XICTEK_EMBEDDING_MODEL` | `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` | Local embedding model |
-| `XICTEK_TOP_K` | `4` | Chunks retrieved per query |
-| `XICTEK_RELEVANCE_THRESHOLD` | `0.35` | Minimum cosine similarity to count as a match |
+| `XICTEK_TOP_K` | `8` | Maximum chunks for general site queries |
+| `XICTEK_RELEVANCE_THRESHOLD` | `0.20` | Minimum cosine similarity for general site queries |
+| `XICTEK_CORE_SERVICES_TOP_K` | `4` | Maximum Core Services page chunks passed to the LLM |
+| `XICTEK_CORE_SERVICES_RELEVANCE_THRESHOLD` | `0.35` | Minimum cosine similarity for Core Services matches |
 | `XICTEK_ALLOWED_CRAWL_DOMAINS` | xicteksystems.com, hisabdo.app (+ `www.`) | `ingest.py`'s crawl allow-list |
 | `XICTEK_RATE_LIMIT` | `20/minute` | Per-IP rate limit on `POST /chat` |
 | `XICTEK_WIDGET_ALLOWED_ORIGINS` | `[]` (locked down) | CORS origins allowed to call these endpoints from a browser — see "Local widget testing" below for dev, and set to the real xicteksystems.com origin for production |
@@ -228,6 +230,13 @@ repo-root `src.config.Settings`, not duplicated here — see
 to the same shared values too, but can be overridden per-module via
 `XICTEK_GROQ_API_KEY` / `XICTEK_LLM_PROVIDER` above, if you want this
 module's chat generation on its own key.
+
+Core Services questions use the `/services` URL path filter and their own
+retrieval settings, so tuning this section does not change the general
+site, Blog, Careers, or Contact retrieval defaults. The initial settings
+are top-k `4` and minimum cosine similarity `0.35`; adjust them with the
+two `XICTEK_CORE_SERVICES_*` environment variables above after evaluating
+service queries against the indexed content.
 
 ## Setup
 

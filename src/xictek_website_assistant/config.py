@@ -18,6 +18,7 @@ module's chat generation on a separate Groq key from HisabDo's chatbot.
 from functools import lru_cache
 from pathlib import Path
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 MODULE_ROOT = Path(__file__).resolve().parent
@@ -46,8 +47,12 @@ class XictekSettings(BaseSettings):
     embedding_dim: int = 384
     chunk_size_chars: int = 1200
     chunk_overlap_chars: int = 200
-    top_k: int = 8
-    relevance_threshold: float = 0.20
+    # General site retrieval settings. Section-specific overrides keep one
+    # team's tuning from changing results for other website sections.
+    top_k: int = Field(default=8, ge=1, le=20)
+    relevance_threshold: float = Field(default=0.20, ge=-1.0, le=1.0)
+    core_services_top_k: int = Field(default=4, ge=1, le=20)
+    core_services_relevance_threshold: float = Field(default=0.35, ge=-1.0, le=1.0)
 
     # Where the built index (embeddings.npy + chunks.json) lives. The
     # ingest script writes here; the retriever reads from here at startup.

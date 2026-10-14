@@ -83,6 +83,29 @@ LLM_UNAVAILABLE_MESSAGE = (
     "Please try again in a moment, or reach the XICTEK team through the Contact page."
 )
 
+# Queries about these offerings use only chunks indexed from the Core
+# Services pages. That keeps generic site content from being supplied as
+# evidence for service-specific answers.
+_CORE_SERVICES_QUERY_TERMS = (
+    "service", "services", "custom software", "web development", "web application",
+    "mobile", "mobile app", "mobile application", "android", "ios", "saas",
+    "cloud", "azure", "aws", "ai", "ai solution", "ai development",
+    "automation", "erp", "devops", "api integration", "application modernization",
+    "digital transformation", "ui ux", "ux design",
+)
+
+
+def _normalize_service_query_text(value: str) -> str:
+    return re.sub(r"[^\w]+", " ", value.casefold()).strip()
+
+
+def _is_core_services_query(message: str) -> bool:
+    normalized = f" {_normalize_service_query_text(message)} "
+    return any(
+        f" {_normalize_service_query_text(term)} " in normalized
+        for term in _CORE_SERVICES_QUERY_TERMS
+    )
+
 
 def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
     settings = get_xictek_settings()
@@ -117,7 +140,17 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
     matches = []
     if len(store) > 0:
         query_vector = embed_query(message)
-        matches = store.query(query_vector, top_k=settings.top_k, relevance_threshold=settings.relevance_threshold)
+        is_core_services_query = _is_core_services_query(message)
+        matches = store.query(
+            query_vector,
+            top_k=settings.core_services_top_k if is_core_services_query else settings.top_k,
+            relevance_threshold=(
+                settings.core_services_relevance_threshold
+                if is_core_services_query
+                else settings.relevance_threshold
+            ),
+            url_path_prefix="/services" if is_core_services_query else None,
+        )
 
     context = "\n\n---\n\n".join(m.chunk.text for m in matches) if matches else None
     history = [h.model_dump() for h in request.history]
