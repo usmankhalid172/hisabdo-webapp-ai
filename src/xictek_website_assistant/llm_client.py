@@ -24,7 +24,7 @@ import httpx
 from ..config import get_settings
 from ..errors import ServiceError
 from .config import get_xictek_settings
-from .prompts import SYSTEM_PROMPT
+from .prompts import build_system_prompt
 
 _RETRYABLE_STATUS_CODES = {500, 502, 503, 504}
 _MAX_ATTEMPTS = 2
@@ -104,7 +104,7 @@ class GroqLLMProvider(LLMProvider):
     ) -> tuple[str, int | None]:
         user_content = f"Context:\n{context}\n\nVisitor question: {message}" if context else message
 
-        messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+        messages = [{"role": "system", "content": build_system_prompt(message)}]
         messages.extend(
             {"role": turn["role"], "content": turn["content"]}
             for turn in (history or [])

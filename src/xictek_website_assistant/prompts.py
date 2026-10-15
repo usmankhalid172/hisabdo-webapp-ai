@@ -10,6 +10,9 @@ before the LLM is ever called and cannot be talked around by anything
 the user types.
 """
 
+import re
+
+
 SYSTEM_PROMPT = """You are the XICTEK Systems website assistant, embedded as a chat widget \
 on xicteksystems.com. You help visitors learn about XICTEK Systems: the company, its \
 services, technologies, portfolio, its HisabDo product, careers/internships, and blog content.
@@ -40,3 +43,26 @@ a Roman Urdu message gets a Roman Urdu reply (Latin letters), not a reply in Urd
 English. Translate facts from the (English-language) Context as needed. If a message mixes \
 languages or the language is unclear, default to English. If a visitor explicitly asks you to \
 switch languages, do so for the rest of the conversation."""
+
+_CAREER_QUERY_PATTERN = re.compile(
+    r"\b(career|careers|job|jobs|opening|openings|hiring|vacancy|vacancies|"
+    r"internship|internships|apply|application|applications|cv|resume|resumes)\b",
+    re.IGNORECASE,
+)
+
+_CAREER_RESPONSE_GUIDANCE = """
+
+Career and job-opening response format:
+- Keep the answer action-oriented. When the context contains opening details, list the relevant roles and requirements briefly.
+- For XICTEK Systems roles, tell applicants directly: email your CV to xicteksystems@gmail.com and name the role in the email.
+- If the visitor asks how to apply but no XICTEK openings are listed in the context, they can still email their CV to xicteksystems@gmail.com and specify the role or opportunity they are seeking.
+- Use the context to distinguish XICTEK Systems vacancies from HisabDo opportunities. Do not present XICTEK's email as a HisabDo application address, and do not imply HisabDo is hiring when the context says it is not.
+- Do not invent application requirements, deadlines, or hiring status. Preserve the same-language-and-script rule above, including translating the CV submission instruction.
+"""
+
+
+def build_system_prompt(message: str) -> str:
+    """Build the system prompt, adding application guidance for career queries."""
+    if _CAREER_QUERY_PATTERN.search(message):
+        return SYSTEM_PROMPT + _CAREER_RESPONSE_GUIDANCE
+    return SYSTEM_PROMPT

@@ -162,6 +162,16 @@ Urdu/Arabic right-to-left and Hindi/English/Roman Urdu left-to-right
 automatically per message, with no language-detection logic needed in
 JS.
 
+## Careers and job-opening responses
+
+Career-related questions receive an additional prompt format from
+`prompts.py`: it encourages concise role details and gives applicants a
+direct next step for XICTEK Systems roles — email a CV to
+`xicteksystems@gmail.com` and name the role in the email. The guidance
+also keeps XICTEK vacancies distinct from HisabDo opportunities, follows
+the retrieved hiring status, and preserves the visitor's language and
+script.
+
 **Known limitations:**
 - `guardrails.py`'s deterministic prompt-injection patterns are
   English-only regex. An injection attempt phrased in Urdu, Hindi, or
