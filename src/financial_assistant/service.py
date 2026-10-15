@@ -7,10 +7,17 @@ exact user financial figures never come from RAG. If the message is asking
 about the user's own numbers, this routes to the (mocked) backend financial
 API instead of the knowledge base.
 """
+import logging
 import re
+from functools import lru_cache
 
+from ..config import get_settings
 from ..integration.backend_client import get_backend_client
-from ..schemas import ChatbotRequest, ChatbotResponse
+from ..schemas import ChatbotRequest, ChatbotResponse, DialogueInfo, TransactionActionOut
+from .dialogue import ConversationState, DialogueManager, DialogueOutcome, Route
+from .dialogue.account_data import BackendClientAccountData
+from .dialogue.manager import karachi_today
+from .dialogue.state_store import get_state_store
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
 
@@ -131,7 +138,94 @@ def _classify_small_talk(message: str) -> str | None:
     return None
 
 
+log = logging.getLogger("hisabdo.ai.dialogue")
+
+
+@lru_cache
+def get_dialogue_manager() -> DialogueManager:
+    """Intent router + multi-turn slot filling. Private figures come from the
+    same BackendClient seam as the single-turn path below."""
+    return DialogueManager(
+        account_data=BackendClientAccountData(today=karachi_today),
+        default_currency=_account_currency,
+    )
+
+
+def _account_currency(user_id: str) -> str | None:
+    """The user's own account currency, so a new entry doesn't need to ask.
+    If the backend can't tell us, the dialogue asks (it never assumes)."""
+    try:
+        return get_backend_client().get_user_financial_summary(user_id).get("currency")
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _run_dialogue(request: ChatbotRequest) -> tuple[DialogueOutcome | None, ConversationState | None]:
+    """Never blocks the chat: if the router fails, the single-turn flow answers as before
+    and the saved state is left unchanged."""
+    if not get_settings().dialogue_enabled:
+        return None, None
+    store = get_state_store()
+    state = store.load(request.user_id, request.conversation_id)
+    try:
+        return get_dialogue_manager().handle(request.user_id, request.message, state), state
+    except Exception as exc:  # noqa: BLE001
+        log.error("dialogue_failed", extra={"error_type": type(exc).__name__})
+        return None, None
+
+
+def _dialogue_info(outcome: DialogueOutcome, state: ConversationState) -> DialogueInfo:
+    return DialogueInfo(
+        status=outcome.status.value, route=outcome.route.value, awaiting=state.awaiting,
+        missing_slots=outcome.missing_slots, collected=state.slots.filled() if state.active_intent else {},
+    )
+
+
+def _intent_name(outcome: DialogueOutcome) -> str:
+    # Keep the existing name for "my balance" style questions (backend contract / tests).
+    return "own_financial_data" if outcome.intent.value == "account_query" else outcome.intent.value
+
+
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
+    """
+    1. third-party guard (deterministic refusal, unchanged)
+    2. intent router: transaction flows (expense / income / correction / categorize)
+       and private figures (balance / report) are answered here with fixed templates
+    3. everything else (FAQ, small talk, general) goes through the single-turn flow
+       below, with a reminder appended if an entry is still unfinished
+    """
+    if _mentions_third_party(request.message):
+        return _single_turn(request)
+
+    outcome, state = _run_dialogue(request)
+    if outcome is not None and outcome.reply is not None:
+        response = ChatbotResponse(
+            reply=outcome.reply,
+            conversation_id=request.conversation_id,
+            intent=_intent_name(outcome),
+            tokens_used=0,
+            source="backend_financial_api" if outcome.route == Route.ACCOUNT_DATA else "dialogue",
+            dialogue=_dialogue_info(outcome, state),
+            action=TransactionActionOut(**outcome.action.model_dump(exclude={"created_at"})) if outcome.action else None,
+        )
+    else:
+        response = _single_turn(request)
+        if outcome is not None:
+            if outcome.pending_reminder:
+                response.reply = f"{response.reply}\n\n{outcome.pending_reminder}"
+            response.dialogue = _dialogue_info(outcome, state)
+
+    if outcome is not None:
+        get_state_store().save(request.user_id, request.conversation_id, state)
+        log.info("dialogue_turn", extra={   # names and statuses only - never amounts, categories or text
+            "intent": outcome.intent.value, "route": outcome.route.value, "status": outcome.status.value,
+            "missing_slots": outcome.missing_slots, "action_type": outcome.action.type if outcome.action else None,
+        })
+    return response
+
+
+def _single_turn(request: ChatbotRequest) -> ChatbotResponse:
+    """The original single-message flow (unchanged)."""
     if _mentions_third_party(request.message):
         # Deterministic refusal — never reaches the LLM, so this cannot be
         # talked around by a prompt-injection / instruction-override attempt.

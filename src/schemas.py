@@ -50,12 +50,37 @@ class ChatbotRequest(BaseModel):
     }
 
 
+class DialogueInfo(BaseModel):
+    """What the intent router decided for this message (financial_assistant/dialogue)."""
+    status: str                     # collecting | awaiting_confirmation | completed | cancelled | none
+    route: str                      # transaction | account_data | knowledge | general
+    awaiting: Optional[str] = None  # the slot we just asked for, or "confirmation"
+    missing_slots: list[str] = Field(default_factory=list)
+    collected: dict = Field(default_factory=dict)   # slots understood so far (amount, category, date ...)
+
+
+class TransactionActionOut(BaseModel):
+    """
+    A CONFIRMED entry. The AI service does not write to the database: the
+    backend saves this through its own authenticated transactions API.
+    action_id lets a later correction point at this entry.
+    """
+    action_id: str
+    type: Literal["create_expense", "create_income", "update_transaction", "delete_transaction"]
+    status: Literal["confirmed"] = "confirmed"
+    payload: dict
+    requires_client_execution: bool = True
+
+
 class ChatbotResponse(BaseModel):
     reply: str
     conversation_id: str
     intent: Optional[str] = None
     tokens_used: Optional[int] = None
-    source: str  # "rag" | "backend_financial_api" | "llm_general" — POC transparency, not in Day 15 contract
+    source: str  # "rag" | "backend_financial_api" | "llm_general" | "dialogue" — POC transparency, not in Day 15 contract
+    # Added for the intent router (optional, backwards compatible): None when the router did not run.
+    dialogue: Optional[DialogueInfo] = None
+    action: Optional[TransactionActionOut] = None
 
 
 # ---------- §6.2 Expense categorization ----------
