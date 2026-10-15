@@ -1,0 +1,64 @@
+﻿[
+  {
+    "id": "EVAL-01",
+    "type": "Simple",
+    "question": "How do I categorize an expense?",
+    "expected_faq_ids": ["faq-002"]
+  },
+  {
+    "id": "EVAL-02",
+    "type": "Detailed",
+    "question": "How does HisabDo decide which category an expense belongs to?",
+    "expected_faq_ids": ["faq-002"]
+  },
+  {
+    "id": "EVAL-03",
+    "type": "Reworded",
+    "question": "How can I get my spending data out of the app?",
+    "expected_faq_ids": ["faq-005"]
+  },
+  {
+    "id": "EVAL-04",
+    "type": "Simple",
+    "question": "How do I export my expenses?",
+    "expected_faq_ids": ["faq-005"]
+  },
+  {
+    "id": "EVAL-05",
+    "type": "Roman Urdu",
+    "question": "Main apne expenses ka record kaise export karun?",
+    "expected_faq_ids": ["faq-005"]
+  },
+  {
+    "id": "EVAL-06",
+    "type": "Urdu-English mixed",
+    "question": "HisabDo expense ki category kaise select karta hai?",
+    "expected_faq_ids": ["faq-002"]
+  },
+  {
+    "id": "EVAL-07",
+    "type": "Simple",
+    "question": "What does cash flow mean?",
+    "expected_faq_ids": ["finance_004", "faq-004", "faq-006"]
+  },
+  {
+    "id": "EVAL-08",
+    "type": "Detailed",
+    "question": "What is the difference between profit and cash flow?",
+    "expected_faq_ids": ["faq-006", "finance_001", "finance_004"]
+  },
+  {
+    "id": "EVAL-09",
+    "type": "Ambiguous",
+    "question": "Show me the balance",
+    "expected_faq_ids": [],
+    "expected_behavior": "Clarify whether the user means account balance or balance sheet."
+  },
+  {
+    "id": "EVAL-10",
+    "type": "Unsupported",
+    "question": "Does HisabDo integrate with QuickBooks?",
+    "expected_faq_ids": [],
+    "expected_behavior": "Do not invent an integration; explain that it cannot be confirmed from the available FAQ."
+  }
+]

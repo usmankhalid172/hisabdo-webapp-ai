@@ -96,18 +96,15 @@ def test_mock_provider_does_not_mislabel_financial_data_as_docs():
     assert "docs" not in reply.lower()
 
 
-def test_weak_rag_match_falls_back_to_general_instead_of_wrong_answer():
-    """Regression guard: a query with no good FAQ match (e.g. paraphrased
-    export question, which previously top-matched the unrelated
-    'is my data used to train the model' FAQ at a low score) must fall
-    through to the general LLM path rather than returning a confidently
-    wrong RAG answer. See RELEVANCE_THRESHOLD in faq_rag.py."""
+def test_paraphrased_export_question_retrieves_export_faq():
+    """A paraphrased export question should retrieve the correct FAQ."""
     from src.financial_assistant.faq_rag import get_retriever
 
     matches = get_retriever().retrieve(
         "How can I get my spending data out of the app?", top_k=1
     )
-    assert matches == []
+    assert len(matches) == 1
+    assert matches[0]["id"] == "faq-005"
 
 
 def test_strong_rag_match_still_retrieves():
@@ -209,3 +206,29 @@ def test_financial_query_allows_matching_user_identity(
         },
     )
     assert response.status_code == 200
+
+def test_ambiguous_balance_query_does_not_match_balance_sheet_faq():
+    """Ambiguous balance wording must not retrieve the balance-sheet FAQ."""
+    from src.financial_assistant.faq_rag import get_retriever
+
+    assert not get_retriever().retrieve("Show me the balance", top_k=1)
+
+
+def test_ambiguous_balance_query_returns_clarification():
+    """The chatbot should clarify rather than guess what balance means."""
+    from src.schemas import ChatbotRequest
+    from src.financial_assistant.service import handle_chat
+
+    request = ChatbotRequest(
+        user_id="user-1",
+        conversation_id="ambiguous-balance-test",
+        history=[],
+        message="Show me the balance",
+    )
+    response = handle_chat(request)
+
+    assert response.intent == "clarification"
+    assert response.source == "clarification"
+    assert "account balance" in response.reply.lower()
+    assert "balance sheet" in response.reply.lower()
+    assert response.tokens_used == 0

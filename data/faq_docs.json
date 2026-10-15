@@ -21,8 +21,8 @@
   },
   {
     "id": "faq-005",
-    "title": "How do I export my expenses?",
-    "text": "You can export your recorded expenses as a CSV or PDF report from the Reports section of the app, filtered by date range, category, or tag."
+    "title": "How do I export my expenses or get my spending data?",
+    "text": "To export your recorded expenses or get your spending data out of HisabDo, open the Reports section and export a CSV or PDF report. You can filter the report by date range, category, or tag."
   },
   {
     "id": "faq-006",

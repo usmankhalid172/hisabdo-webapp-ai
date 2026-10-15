@@ -155,6 +155,30 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="greeting_fastpath",
         )
 
+    normalized_message = " ".join(request.message.lower().split()).strip(" ?!.")
+    ambiguous_balance_questions = {
+        "balance",
+        "the balance",
+        "show balance",
+        "show me the balance",
+        "please show me the balance",
+        "tell me the balance",
+        "what is the balance",
+        "what's the balance",
+        "can you show me the balance",
+    }
+    if normalized_message in ambiguous_balance_questions:
+        return ChatbotResponse(
+            reply=(
+                "Do you mean your account balance or a balance sheet "
+                "showing assets, liabilities, and equity?"
+            ),
+            conversation_id=request.conversation_id,
+            intent="clarification",
+            tokens_used=0,
+            source="clarification",
+        )
+
     provider = get_llm_provider()
 
     if _is_own_financial_data_query(request.message):

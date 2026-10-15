@@ -62,6 +62,24 @@ class FaqRetriever:
         if not query or not query.strip() or top_k < 1:
             return []
 
+        # Avoid guessing when "the balance" could mean account balance
+        # or a balance sheet. The chat service handles personal financial
+        # balance requests through its backend-financial-data intent.
+        normalized_query = " ".join(query.lower().split()).strip(" ?!.")
+        ambiguous_balance_phrases = {
+            "balance",
+            "the balance",
+            "show balance",
+            "show me the balance",
+            "please show me the balance",
+            "tell me the balance",
+            "what is the balance",
+            "what's the balance",
+            "can you show me the balance",
+        }
+        if normalized_query in ambiguous_balance_phrases:
+            return []
+
         if self._client is not None and self._embeddings is not None:
             try:
                 response = self._client.embeddings.create(
