@@ -7,7 +7,6 @@ dependency and is replaced with a small deterministic fake HTTP client.
 
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass
 from typing import Any
 
@@ -133,16 +132,19 @@ async def test_chatbot_sends_contract_and_returns_normalized_response(
     assert FakeAsyncClient.last_url == (
         "http://ai-service.test/api/v1/chatbot"
     )
+
     assert FakeAsyncClient.last_payload == {
         "user_id": "user-001",
         "message": "How much did I spend this month?",
         "conversation_id": "conv-001",
         "history": [],
     }
+
     assert FakeAsyncClient.last_headers == {
         "Accept": "application/json",
         "Content-Type": "application/json",
         "X-Internal-Token": "test-internal-token",
+        "X-Authenticated-User-ID": "user-001",
     }
 
 
@@ -177,6 +179,13 @@ async def test_chatbot_preserves_history(
 
     assert FakeAsyncClient.last_payload is not None
     assert FakeAsyncClient.last_payload["history"] == history
+
+    assert FakeAsyncClient.last_headers == {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "X-Internal-Token": "test-internal-token",
+        "X-Authenticated-User-ID": "user-002",
+    }
 
 
 @pytest.mark.asyncio
@@ -311,3 +320,18 @@ async def test_invalid_json_response_is_rejected(
             description="Bought groceries",
             amount=2500.0,
         )
+
+
+@pytest.mark.asyncio
+async def test_chatbot_rejects_blank_user_id(
+    client: ApplicationAIClient,
+) -> None:
+    with pytest.raises(AIServiceError) as exc_info:
+        await client.chatbot(
+            user_id=" ",
+            message="Hello",
+            conversation_id="conv-006",
+        )
+
+    assert exc_info.value.status_code == 401
+    assert exc_info.value.error_code == "UNAUTHENTICATED_USER"

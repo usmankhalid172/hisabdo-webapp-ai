@@ -1,15 +1,6 @@
 """
 Application-side client for consuming the HisabDo AI service.
 
-This module belongs to the Capstone/application integration boundary.
-It deliberately does not implement AI logic. It only:
-
-- builds requests for the ready AI endpoints
-- adds service-to-service authentication
-- handles HTTP/network failures
-- validates downstream responses
-- converts AI-service responses into application-facing models
-
 Environment variables:
     AI_SERVICE_BASE_URL
     AI_SERVICE_INTERNAL_TOKEN
@@ -32,13 +23,8 @@ CATEGORIZE_PATH = "/api/v1/categorize"
 DEFAULT_TIMEOUT_SECONDS = 15.0
 
 
-# ---------------------------------------------------------------------------
-# Application-facing response models
-# ---------------------------------------------------------------------------
-
-
 class ChatResult(BaseModel):
-    """Normalized Financial Assistant result returned to the application."""
+    """Normalized Financial Assistant result."""
 
     reply: str
     conversation_id: str
@@ -48,7 +34,7 @@ class ChatResult(BaseModel):
 
 
 class ExpenseCategoryResult(BaseModel):
-    """Normalized expense-categorization result returned to the application."""
+    """Normalized expense-categorization result."""
 
     category: str
     confidence: float
@@ -70,8 +56,6 @@ class AIServiceError(Exception):
 
 
 class AIServiceConfigurationError(AIServiceError):
-    """Raised when required client configuration is missing."""
-
     def __init__(self, message: str) -> None:
         super().__init__(
             message=message,
@@ -81,9 +65,10 @@ class AIServiceConfigurationError(AIServiceError):
 
 
 class AIServiceTimeoutError(AIServiceError):
-    """Raised when the downstream AI service exceeds the timeout."""
-
-    def __init__(self, message: str = "AI service request timed out.") -> None:
+    def __init__(
+        self,
+        message: str = "AI service request timed out.",
+    ) -> None:
         super().__init__(
             message=message,
             status_code=504,
@@ -92,8 +77,6 @@ class AIServiceTimeoutError(AIServiceError):
 
 
 class AIServiceUnavailableError(AIServiceError):
-    """Raised when the downstream AI service cannot be reached."""
-
     def __init__(
         self,
         message: str = "AI service is currently unavailable.",
@@ -106,8 +89,6 @@ class AIServiceUnavailableError(AIServiceError):
 
 
 class AIServiceResponseError(AIServiceError):
-    """Raised when the downstream AI response is invalid or unexpected."""
-
     def __init__(
         self,
         message: str,
@@ -121,26 +102,8 @@ class AIServiceResponseError(AIServiceError):
         )
 
 
-# ---------------------------------------------------------------------------
-# Client
-# ---------------------------------------------------------------------------
-
-
 class ApplicationAIClient:
-    """
-    Client used by the Capstone backend/application integration layer.
-
-    The client talks only to the existing AI-service API. It does not contain
-    model, RAG, prompt, or categorization logic.
-
-    Example:
-        client = ApplicationAIClient()
-        result = await client.chatbot(
-            user_id="user-001",
-            message="How much did I spend this month?",
-            conversation_id="conv-001",
-        )
-    """
+    """Client for the existing HisabDo AI-service API."""
 
     def __init__(
         self,
@@ -187,18 +150,28 @@ class ApplicationAIClient:
                 "AI_SERVICE_INTERNAL_TOKEN is not configured."
             )
 
-    def _headers(self) -> dict[str, str]:
-        """Build headers for authenticated service-to-service requests."""
-        return {
+    def _headers(
+        self,
+        extra_headers: Mapping[str, str] | None = None,
+    ) -> dict[str, str]:
+        """Build service-authentication headers and optional trusted identity."""
+        headers = {
             "Accept": "application/json",
             "Content-Type": "application/json",
             "X-Internal-Token": self.internal_token,
         }
 
+        if extra_headers:
+            headers.update(extra_headers)
+
+        return headers
+
     async def _post(
         self,
         path: str,
         payload: Mapping[str, Any],
+        *,
+        extra_headers: Mapping[str, str] | None = None,
     ) -> dict[str, Any]:
         """POST JSON to the AI service and normalize transport errors."""
         url = f"{self.base_url}{path}"
@@ -208,7 +181,7 @@ class ApplicationAIClient:
                 response = await client.post(
                     url,
                     json=dict(payload),
-                    headers=self._headers(),
+                    headers=self._headers(extra_headers),
                 )
         except httpx.TimeoutException as exc:
             raise AIServiceTimeoutError() from exc
@@ -280,19 +253,34 @@ class ApplicationAIClient:
         history: list[dict[str, Any]] | None = None,
     ) -> ChatResult:
         """
-        Send a Financial Assistant request to the ready AI service.
+        Send a chatbot request.
 
-        The AI-service contract requires user_id, message, and
-        conversation_id. History is optional and defaults to an empty list.
+        IMPORTANT: user_id must come from the trusted application's
+        verified login/session, not from an untrusted client request.
         """
+        if not isinstance(user_id, str) or not user_id.strip():
+            raise AIServiceError(
+                message="An authenticated user ID is required.",
+                status_code=401,
+                error_code="UNAUTHENTICATED_USER",
+            )
+
+        verified_user_id = user_id.strip()
+
         payload = {
-            "user_id": user_id,
+            "user_id": verified_user_id,
             "message": message,
             "conversation_id": conversation_id,
             "history": history or [],
         }
 
-        data = await self._post(CHATBOT_PATH, payload)
+        data = await self._post(
+            CHATBOT_PATH,
+            payload,
+            extra_headers={
+                "X-Authenticated-User-ID": verified_user_id,
+            },
+        )
 
         try:
             return ChatResult.model_validate(data)
@@ -310,12 +298,7 @@ class ApplicationAIClient:
         merchant: str | None = None,
         currency: str = "PKR",
     ) -> ExpenseCategoryResult:
-        """
-        Send an expense-categorization request to the ready AI service.
-
-        The method does not perform categorization locally; it only consumes
-        the existing AI service output.
-        """
+        """Send an expense-categorization request to the AI service."""
         payload = {
             "expense_id": expense_id,
             "description": description,
