@@ -7,7 +7,8 @@ Routes user questions to the appropriate handler:
 - Greetings are handled without an LLM call.
 - Personal financial figures come only from the backend financial API.
 - Verified FAQ and product documentation questions use RAG.
-- Queries without a verified FAQ match use the general LLM flow.
+- Unsupported product-specific questions receive a safe fallback.
+- General questions can use the general LLM flow.
 """
 
 import logging
@@ -18,7 +19,12 @@ from ..schemas import ChatbotRequest, ChatbotResponse
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
 from .rag_pipeline import prepare_context, format_context_block
-from .intent_router import classify_intent, extract_slots, get_missing_fields, build_follow_up
+from .intent_router import (
+    classify_intent,
+    extract_slots,
+    get_missing_fields,
+    build_follow_up,
+)
 
 logger = logging.getLogger("financial_assistant.service")
 
@@ -73,10 +79,45 @@ FAQ_RETRIEVAL_ERROR_REPLY = (
     "Please try again later."
 )
 
+PRODUCT_SPECIFIC_TERMS = re.compile(
+    r"\bhisabdo\b|"
+    r"\bin the app\b|"
+    r"\bthis app\b|"
+    r"\bapp feature\b|"
+    r"\bpdf reports?\b|"
+    r"\bfinancial reports?\b|"
+    r"\bexport\b|"
+    r"\bdownload\b|"
+    r"\badd (?:a )?customer\b|"
+    r"\bcustomer screen\b|"
+    r"\bsettings\b|"
+    r"\bdashboard\b|"
+    r"\baccount setup\b|"
+    r"\bhow do i use\b",
+    re.IGNORECASE,
+)
+
+
+def _is_product_specific_query(message: str) -> bool:
+    """Identify questions about HisabDo features and app-specific steps."""
+    return bool(PRODUCT_SPECIFIC_TERMS.search(message))
+
+
+def _no_verified_faq_response(
+    request: ChatbotRequest,
+) -> ChatbotResponse:
+    """Avoid inventing answers to unsupported product-specific questions."""
+    return ChatbotResponse(
+        reply=FAQ_NO_MATCH_REPLY,
+        conversation_id=request.conversation_id,
+        intent="product_faq",
+        tokens_used=0,
+        source="rag_no_match",
+    )
+
 
 def _mentions_bare_name_possessive(message: str) -> bool:
     """Detect references such as 'Ali's balance'."""
-
     words = message.split()
 
     for index, word in enumerate(words):
@@ -128,7 +169,6 @@ def _format_financial_summary(summary: dict) -> str:
 
 def _classify_small_talk(message: str) -> str | None:
     """Classify short greetings and pleasantries."""
-
     text = message.strip().lower()
     text = re.sub(r"[!?.,]+$", "", text).strip()
 
@@ -167,8 +207,7 @@ def _general_response(
     provider,
     history: list[dict],
 ) -> ChatbotResponse:
-    """Use the general LLM flow when no verified FAQ matches."""
-
+    """Use the general LLM flow for non-product queries without a FAQ match."""
     reply, tokens = provider.generate_reply(
         request.message,
         context=None,
@@ -182,8 +221,6 @@ def _general_response(
         tokens_used=tokens,
         source="llm_general",
     )
-
-
 
 
 def _pending_transaction_intent(history: list[dict]) -> str | None:
@@ -208,13 +245,16 @@ def _pending_transaction_intent(history: list[dict]) -> str | None:
             "please provide the transaction amount and description.",
         )
     )
+
     if not is_follow_up:
         return None
 
     for turn in reversed(history[:last_assistant_index]):
         if turn.get("role") != "user":
             continue
+
         intent = classify_intent(turn.get("content", ""))
+
         if intent in {"expense", "income"}:
             return intent
 
@@ -242,6 +282,7 @@ def _handle_transaction_intent(
         for turn in reversed(history):
             if turn.get("role") == "user":
                 previous_intent = classify_intent(turn.get("content", ""))
+
                 if previous_intent == intent:
                     slots.update(extract_slots(turn["content"]))
                     break
@@ -260,15 +301,20 @@ def _handle_transaction_intent(
 
     if pending_intent == intent and "what was the amount?" in last_assistant:
         if "amount" not in current_slots:
-            import re
             from decimal import Decimal, InvalidOperation
 
-            bare_amount = re.fullmatch(r"\s*(\d[\d,]*(?:\.\d{1,2})?)\s*", message)
+            bare_amount = re.fullmatch(
+                r"\s*(\d[\d,]*(?:\.\d{1,2})?)\s*",
+                message,
+            )
+
             if bare_amount:
                 try:
                     value = Decimal(bare_amount.group(1).replace(",", ""))
+
                     if value > 0:
                         slots["amount"] = str(value)
+
                 except InvalidOperation:
                     pass
 
@@ -335,11 +381,11 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
         history,
         request.conversation_id,
     )
+
     if transaction_response:
         return transaction_response
 
-
-    # 3. Personal financial figures must come from the backend API.
+    # 4. Personal financial figures must come from the backend API.
     if _is_own_financial_data_query(request.message):
         summary = get_backend_client().get_user_financial_summary(
             request.user_id
@@ -361,7 +407,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="backend_financial_api",
         )
 
-    # 4. Retrieve verified FAQ and product documentation.
+    # 5. Retrieve verified FAQ and product documentation.
     try:
         matches = get_retriever().retrieve(
             request.message,
@@ -378,11 +424,14 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="rag_error",
         )
 
-    # 5. No verified match: preserve general LLM behavior and history.
+    # 6. No verified match: avoid guessing about product-specific features.
     if not matches:
+        if _is_product_specific_query(request.message):
+            return _no_verified_faq_response(request)
+
         return _general_response(request, provider, history)
 
-    # 6. Normalize retrieved documents and build source-labelled context.
+    # 7. Normalize retrieved documents and build source-labelled context.
     context_chunks = []
 
     for match in matches:
@@ -406,11 +455,14 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     prepared_context = prepare_context(context_chunks)
     context = format_context_block(prepared_context)
 
-    # Invalid or empty retrieved content also falls back to general flow.
+    # 8. Invalid or empty retrieved content must not trigger invented instructions.
     if not context:
+        if _is_product_specific_query(request.message):
+            return _no_verified_faq_response(request)
+
         return _general_response(request, provider, history)
 
-    # 7. Generate an answer using verified retrieved context.
+    # 9. Generate an answer using retrieved context.
     reply, tokens = provider.generate_reply(
         request.message,
         context=context,
