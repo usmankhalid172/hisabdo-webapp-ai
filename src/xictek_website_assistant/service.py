@@ -16,6 +16,7 @@ from functools import lru_cache
 
 from .config import get_xictek_settings
 from .embeddings import embed_query
+from .formatting import format_core_services_output
 from .guardrails import (
     INJECTION_REFUSAL_MESSAGE,
     exceeds_length_limit,
@@ -23,6 +24,7 @@ from .guardrails import (
 )
 from .llm_client import get_llm_provider
 from .schemas import IndexStatsResponse, SourceRef, XictekChatRequest, XictekChatResponse
+from .service_queries import is_core_services_query
 from .vector_store import VectorStore
 
 LENGTH_REFUSAL_MESSAGE = (
@@ -83,30 +85,6 @@ LLM_UNAVAILABLE_MESSAGE = (
     "Please try again in a moment, or reach the XICTEK team through the Contact page."
 )
 
-# Queries about these offerings use only chunks indexed from the Core
-# Services pages. That keeps generic site content from being supplied as
-# evidence for service-specific answers.
-_CORE_SERVICES_QUERY_TERMS = (
-    "service", "services", "custom software", "web development", "web application",
-    "mobile", "mobile app", "mobile application", "android", "ios", "saas",
-    "cloud", "azure", "aws", "ai", "ai solution", "ai development",
-    "automation", "erp", "devops", "api integration", "application modernization",
-    "digital transformation", "ui ux", "ux design",
-)
-
-
-def _normalize_service_query_text(value: str) -> str:
-    return re.sub(r"[^\w]+", " ", value.casefold()).strip()
-
-
-def _is_core_services_query(message: str) -> bool:
-    normalized = f" {_normalize_service_query_text(message)} "
-    return any(
-        f" {_normalize_service_query_text(term)} " in normalized
-        for term in _CORE_SERVICES_QUERY_TERMS
-    )
-
-
 def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
     settings = get_xictek_settings()
     message = request.message
@@ -136,20 +114,20 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
             tokens_used=0,
         )
 
+    core_services_query = is_core_services_query(message)
     store = _load_store()
     matches = []
     if len(store) > 0:
         query_vector = embed_query(message)
-        is_core_services_query = _is_core_services_query(message)
         matches = store.query(
             query_vector,
-            top_k=settings.core_services_top_k if is_core_services_query else settings.top_k,
+            top_k=settings.core_services_top_k if core_services_query else settings.top_k,
             relevance_threshold=(
                 settings.core_services_relevance_threshold
-                if is_core_services_query
+                if core_services_query
                 else settings.relevance_threshold
             ),
-            url_path_prefix="/services" if is_core_services_query else None,
+            url_path_prefix="/services" if core_services_query else None,
         )
 
     context = "\n\n---\n\n".join(m.chunk.text for m in matches) if matches else None
@@ -167,6 +145,9 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
             intent="general",
             tokens_used=0,
         )
+
+    if core_services_query:
+        reply = format_core_services_output(reply)
 
     sources = [
         SourceRef(title=m.chunk.title, url=m.chunk.url, score=round(m.score, 4))

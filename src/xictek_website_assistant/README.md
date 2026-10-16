@@ -238,6 +238,26 @@ are top-k `4` and minimum cosine similarity `0.35`; adjust them with the
 two `XICTEK_CORE_SERVICES_*` environment variables above after evaluating
 service queries against the indexed content.
 
+After generation, `formatting.py` converts clear multi-item Core Services
+answers into Markdown bullet lists. It normalizes existing numbered/bulleted
+lists and splits short inline enumerations, while leaving single-item answers
+and ordinary prose intact. It only reorganizes model output; it does not add
+service claims or summarize the retrieved content.
+
+Run the offline Core Services formatting evaluation from the repository
+root:
+
+```bash
+python scripts/evaluate_core_services_formatting.py
+```
+
+It checks 18 representative Core Services queries against source-grounded
+answer fixtures, including routing, bullet formatting, exact item retention,
+duplicates, and a 20-word per-item concision limit. It also checks that a
+single item and ordinary prose remain unchanged. The evaluation is deterministic
+and requires no LLM key or network access; it does not measure live retrieval
+or live model factuality. A non-zero exit code means one or more checks failed.
+
 ## Setup
 
 ```bash
