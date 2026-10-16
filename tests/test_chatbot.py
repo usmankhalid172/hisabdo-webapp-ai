@@ -97,17 +97,20 @@ def test_mock_provider_does_not_mislabel_financial_data_as_docs():
 
 
 def test_weak_rag_match_falls_back_to_general_instead_of_wrong_answer():
-    """Regression guard: a query with no good FAQ match (e.g. paraphrased
-    export question, which previously top-matched the unrelated
-    'is my data used to train the model' FAQ at a low score) must fall
-    through to the general LLM path rather than returning a confidently
-    wrong RAG answer. See RELEVANCE_THRESHOLD in faq_rag.py."""
+    """Regression guard: a query must never be answered from an UNRELATED FAQ.
+
+    Updated in the Day-7 evaluation: this test used to require [] for
+    "How can I get my spending data out of the app?" - because the old TF-IDF
+    retriever's top match for it was the unrelated 'is my data used to train the
+    model' FAQ. The question is actually about exporting, so with the reworked
+    retriever the correct answer is faq-005 (export). The intent of the test is
+    kept: no wrong document, and truly unrelated questions still get nothing."""
     from src.financial_assistant.faq_rag import get_retriever
 
-    matches = get_retriever().retrieve(
-        "How can I get my spending data out of the app?", top_k=1
-    )
-    assert matches == []
+    matches = get_retriever().retrieve("How can I get my spending data out of the app?", top_k=1)
+    assert matches == [] or matches[0]["id"] == "faq-005"
+    assert get_retriever().retrieve("Who won the cricket match yesterday?", top_k=1) == []
+    assert get_retriever().retrieve("How much does HisabDo cost per month?", top_k=1) == []
 
 
 def test_strong_rag_match_still_retrieves():
@@ -131,3 +134,12 @@ def test_system_prompt_warns_against_inventing_product_details():
 
     assert "invent" in SYSTEM_PROMPT.lower()
     assert "hisabdo product" in SYSTEM_PROMPT.lower() or "api endpoints" in SYSTEM_PROMPT.lower()
+
+
+def test_system_prompt_requires_direct_source_cited_answers():
+    """Day-7 evaluation: KB answers must start with the answer, stay short, cite the source title,
+    and never present the user's own figures as someone else's."""
+    from src.financial_assistant.prompts import SYSTEM_PROMPT
+    assert "[Source: <title>]" in SYSTEM_PROMPT and "(Source: <title>)" in SYSTEM_PROMPT
+    assert "First sentence = the direct answer" in SYSTEM_PROMPT
+    assert "belongs ONLY to the current user" in SYSTEM_PROMPT

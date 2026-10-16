@@ -72,12 +72,21 @@ class TransactionActionOut(BaseModel):
     requires_client_execution: bool = True
 
 
+class SourceRef(BaseModel):
+    """A knowledge-base document the answer is based on (source attribution)."""
+    id: str
+    title: str
+    score: float
+
+
 class ChatbotResponse(BaseModel):
     reply: str
     conversation_id: str
     intent: Optional[str] = None
     tokens_used: Optional[int] = None
-    source: str  # "rag" | "backend_financial_api" | "llm_general" | "dialogue" — POC transparency, not in Day 15 contract
+    source: str  # "rag" | "backend_financial_api" | "llm_general" | "dialogue" | "policy_guard" | "kb_fallback" — POC transparency
+    # Source attribution for knowledge-base answers (empty for everything else).
+    sources: list[SourceRef] = Field(default_factory=list)
     # Added for the intent router (optional, backwards compatible): None when the router did not run.
     dialogue: Optional[DialogueInfo] = None
     action: Optional[TransactionActionOut] = None

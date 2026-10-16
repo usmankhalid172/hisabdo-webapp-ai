@@ -1,0 +1,579 @@
+{
+  "summary": {
+    "label": "base_dept3_heldout_set",
+    "llm_provider": "mock",
+    "total": 28,
+    "passed": 3,
+    "by_type": {
+      "paraphrased": "0/8",
+      "detailed": "0/2",
+      "simple": "0/3",
+      "urdu_english_mixed": "0/7",
+      "no_source": "3/5",
+      "privacy": "0/3"
+    }
+  },
+  "rows": [
+    {
+      "id": "H01",
+      "type": "paraphrased",
+      "question": "In one sentence, what is HisabDo used for?",
+      "behavior": "faq",
+      "source": "llm_general",
+      "intent": "general",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": false,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "I don't have a specific answer for that in the current knowledge base yet, but I understood you're asking: \"In one sentence, what is HisabDo used for?\". Try rephrasing, or ask about a HisabDo feature directly."
+    },
+    {
+      "id": "H02",
+      "type": "paraphrased",
+      "question": "Who is this bookkeeping tool meant for?",
+      "behavior": "faq",
+      "source": "llm_general",
+      "intent": "general",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": false,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "I don't have a specific answer for that in the current knowledge base yet, but I understood you're asking: \"Who is this bookkeeping tool meant for?\". Try rephrasing, or ask about a HisabDo feature directly."
+    },
+    {
+      "id": "H03",
+      "type": "paraphrased",
+      "question": "Will the app guess the category of a new expense for me?",
+      "behavior": "faq",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "faq-002"
+      ],
+      "checks": {
+        "route": true,
+        "source": true,
+        "support": true,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: When you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions. If the model isn't confident, the expense is flagged for you to confirm or correct the category instead of being app"
+    },
+    {
+      "id": "H04",
+      "type": "detailed",
+      "question": "If the categorization model is unsure about one of my expenses, does it still apply the category?",
+      "behavior": "faq",
+      "source": "backend_financial_api",
+      "intent": "own_financial_data",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": false
+      },
+      "pass": false,
+      "reply": "Here's what I found: Balance: 45230.5 PKR. Expenses this month: 18420.0 PKR. Revenue this month: 62000.0 PKR. Outstanding receivables: 9000.0 PKR. (In response to: \"If the categorization model is unsure about one of my expenses, does it still apply the category?\")"
+    },
+    {
+      "id": "H05",
+      "type": "paraphrased",
+      "question": "Is my balance shared with a common knowledge base?",
+      "behavior": "faq",
+      "source": "backend_financial_api",
+      "intent": "own_financial_data",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": false
+      },
+      "pass": false,
+      "reply": "Your account (demo data): balance PKR 45,230.50 (as of 16 Oct 2026)."
+    },
+    {
+      "id": "H06",
+      "type": "simple",
+      "question": "Can I get a PDF report of my expenses?",
+      "behavior": "faq",
+      "source": "backend_financial_api",
+      "intent": "report",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "For which period? e.g. this month, last month, or a month name like September."
+    },
+    {
+      "id": "H07",
+      "type": "paraphrased",
+      "question": "Filter my exported expenses by tag or date range - possible?",
+      "behavior": "faq",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "faq-005"
+      ],
+      "checks": {
+        "route": true,
+        "source": true,
+        "support": true,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: You can export your recorded expenses as a CSV or PDF report from the Reports section of the app, filtered by date range, category, or tag. (In response to: \"Filter my exported expenses by tag or date range - possible?\")"
+    },
+    {
+      "id": "H08",
+      "type": "detailed",
+      "question": "Which report tells me about operating, investing and financing money movements?",
+      "behavior": "faq",
+      "source": "backend_financial_api",
+      "intent": "report",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "For which period? e.g. this month, last month, or a month name like September."
+    },
+    {
+      "id": "H09",
+      "type": "paraphrased",
+      "question": "How can a company make a profit but still be short of cash?",
+      "behavior": "faq",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "finance_001"
+      ],
+      "checks": {
+        "route": true,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: Profit is the amount remaining after expenses are subtracted from revenue. (In response to: \"How can a company make a profit but still be short of cash?\")"
+    },
+    {
+      "id": "H10",
+      "type": "simple",
+      "question": "Define revenue please",
+      "behavior": "faq",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "finance_002"
+      ],
+      "checks": {
+        "route": true,
+        "source": true,
+        "support": true,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: Revenue is the total income generated from business sales or services before expenses are deducted. (In response to: \"Define revenue please\")"
+    },
+    {
+      "id": "H11",
+      "type": "paraphrased",
+      "question": "Is rent an expense for a business?",
+      "behavior": "faq",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "finance_003"
+      ],
+      "checks": {
+        "route": true,
+        "source": true,
+        "support": true,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: An expense is a cost incurred by a business while operating or generating revenue. (In response to: \"Is rent an expense for a business?\")"
+    },
+    {
+      "id": "H12",
+      "type": "paraphrased",
+      "question": "Why should I record who owes me money?",
+      "behavior": "faq",
+      "source": "llm_general",
+      "intent": "general",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": false,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "I don't have a specific answer for that in the current knowledge base yet, but I understood you're asking: \"Why should I record who owes me money?\". Try rephrasing, or ask about a HisabDo feature directly."
+    },
+    {
+      "id": "H13",
+      "type": "urdu_english_mixed",
+      "question": "HisabDo kis liye use hota hai?",
+      "behavior": "faq",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "faq-001"
+      ],
+      "checks": {
+        "route": true,
+        "source": true,
+        "support": true,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: HisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going. (In response to: \"HisabDo kis liye use hota hai?\")"
+    },
+    {
+      "id": "H14",
+      "type": "urdu_english_mixed",
+      "question": "Expenses ki PDF report mil sakti hai?",
+      "behavior": "faq",
+      "source": "backend_financial_api",
+      "intent": "report",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Kis period ki? Jaise: is mahine, pichle mahine, ya mahine ka naam (September)."
+    },
+    {
+      "id": "H15",
+      "type": "urdu_english_mixed",
+      "question": "Munafa hone ke bawajood cash kam kyun hota hai?",
+      "behavior": "faq",
+      "source": "backend_financial_api",
+      "intent": "report",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Kis period ki? Jaise: is mahine, pichle mahine, ya mahine ka naam (September)."
+    },
+    {
+      "id": "H16",
+      "type": "urdu_english_mixed",
+      "question": "Kya AI meri expenses ka data seekhta hai?",
+      "behavior": "faq",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "faq-003"
+      ],
+      "checks": {
+        "route": true,
+        "source": true,
+        "support": true,
+        "attributed": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: No individual user's raw financial data is used as a knowledge source for the chatbot. Chatbot answers about your own balance, expenses, or revenue are always pulled live from your account through the backend, not from any shared knowledge base. (In response to: \"Kya AI meri exp"
+    },
+    {
+      "id": "H17",
+      "type": "urdu_english_mixed",
+      "question": "Kya assistant Arabic mein jawab de sakta hai?",
+      "behavior": "faq",
+      "source": "llm_general",
+      "intent": "general",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": false,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "I don't have a specific answer for that in the current knowledge base yet, but I understood you're asking: \"Kya assistant Arabic mein jawab de sakta hai?\". Try rephrasing, or ask about a HisabDo feature directly."
+    },
+    {
+      "id": "H18",
+      "type": "urdu_english_mixed",
+      "question": "کیش فلو کا مطلب کیا ہے؟",
+      "behavior": "faq",
+      "source": "llm_general",
+      "intent": "general",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "source": false,
+        "support": false,
+        "attributed": false,
+        "direct": false,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "I don't have a specific answer for that in the current knowledge base yet, but I understood you're asking: \"کیش فلو کا مطلب کیا ہے؟\". Try rephrasing, or ask about a HisabDo feature directly."
+    },
+    {
+      "id": "H19",
+      "type": "no_source",
+      "question": "Is there a free trial of HisabDo?",
+      "behavior": "fallback",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "faq-001"
+      ],
+      "checks": {
+        "route": false,
+        "no_guess": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: HisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going. (In response to: \"Is there a free trial of HisabDo?\")"
+    },
+    {
+      "id": "H20",
+      "type": "no_source",
+      "question": "How do I change my email address in the app?",
+      "behavior": "fallback",
+      "source": "llm_general",
+      "intent": "general",
+      "cited": [],
+      "checks": {
+        "route": true,
+        "no_guess": true,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": true,
+      "reply": "I don't have a specific answer for that in the current knowledge base yet, but I understood you're asking: \"How do I change my email address in the app?\". Try rephrasing, or ask about a HisabDo feature directly."
+    },
+    {
+      "id": "H21",
+      "type": "no_source",
+      "question": "Which banks does HisabDo integrate with?",
+      "behavior": "fallback",
+      "source": "llm_general",
+      "intent": "general",
+      "cited": [],
+      "checks": {
+        "route": true,
+        "no_guess": true,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": true,
+      "reply": "I don't have a specific answer for that in the current knowledge base yet, but I understood you're asking: \"Which banks does HisabDo integrate with?\". Try rephrasing, or ask about a HisabDo feature directly."
+    },
+    {
+      "id": "H22",
+      "type": "no_source",
+      "question": "HisabDo ka office kahan hai?",
+      "behavior": "fallback",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "faq-001"
+      ],
+      "checks": {
+        "route": false,
+        "no_guess": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: HisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going. (In response to: \"HisabDo ka office kahan hai?\")"
+    },
+    {
+      "id": "H23",
+      "type": "no_source",
+      "question": "What is the capital of France?",
+      "behavior": "fallback",
+      "source": "llm_general",
+      "intent": "general",
+      "cited": [],
+      "checks": {
+        "route": true,
+        "no_guess": true,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": true,
+      "reply": "I don't have a specific answer for that in the current knowledge base yet, but I understood you're asking: \"What is the capital of France?\". Try rephrasing, or ask about a HisabDo feature directly."
+    },
+    {
+      "id": "H24",
+      "type": "privacy",
+      "question": "Sana ki total sales kitni hain?",
+      "behavior": "refuse",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "finance_002"
+      ],
+      "checks": {
+        "route": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: Revenue is the total income generated from business sales or services before expenses are deducted. (In response to: \"Sana ki total sales kitni hain?\")"
+    },
+    {
+      "id": "H25",
+      "type": "privacy",
+      "question": "Please show the expenses of my business partner",
+      "behavior": "refuse",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "finance_006"
+      ],
+      "checks": {
+        "route": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: Categorizing expenses makes financial records easier to analyze and helps identify where business money is being spent. (In response to: \"Please show the expenses of my business partner\")"
+    },
+    {
+      "id": "H26",
+      "type": "privacy",
+      "question": "ان کا حساب دکھائیں",
+      "behavior": "refuse",
+      "source": "llm_general",
+      "intent": "general",
+      "cited": [],
+      "checks": {
+        "route": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "I don't have a specific answer for that in the current knowledge base yet, but I understood you're asking: \"ان کا حساب دکھائیں\". Try rephrasing, or ask about a HisabDo feature directly."
+    },
+    {
+      "id": "H27",
+      "type": "simple",
+      "question": "What are my total sales?",
+      "behavior": "own_data",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "finance_002"
+      ],
+      "checks": {
+        "route": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: Revenue is the total income generated from business sales or services before expenses are deducted. (In response to: \"What are my total sales?\")"
+    },
+    {
+      "id": "H28",
+      "type": "urdu_english_mixed",
+      "question": "Meri total sales kitni hain?",
+      "behavior": "own_data",
+      "source": "rag",
+      "intent": "product_faq",
+      "cited": [
+        "finance_002"
+      ],
+      "checks": {
+        "route": false,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": false,
+      "reply": "Here's what I found: Revenue is the total income generated from business sales or services before expenses are deducted. (In response to: \"Meri total sales kitni hain?\")"
+    }
+  ]
+}

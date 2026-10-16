@@ -1,0 +1,159 @@
+{
+  "summary": {
+    "label": "after_fixes_dept3_team_cases",
+    "llm_provider": "mock",
+    "total": 8,
+    "passed": 8,
+    "by_type": {
+      "simple": "1/1",
+      "detailed": "1/1",
+      "ambiguous": "1/1",
+      "paraphrased": "1/1",
+      "urdu_english_mixed": "1/1",
+      "missing_data": "1/1",
+      "privacy": "1/1",
+      "unsupported_claim": "1/1"
+    }
+  },
+  "rows": [
+    {
+      "id": "TC-01",
+      "type": "simple",
+      "question": "What are my total sales?",
+      "behavior": "own_data",
+      "source": "backend_financial_api",
+      "intent": "report",
+      "cited": [],
+      "checks": {
+        "route": true,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": true,
+      "reply": "For which period? e.g. this month, last month, or a month name like September."
+    },
+    {
+      "id": "TC-02",
+      "type": "detailed",
+      "question": "Show my pending tasks with their due dates.",
+      "behavior": "fallback",
+      "source": "llm_general",
+      "intent": "general",
+      "cited": [],
+      "checks": {
+        "route": true,
+        "no_guess": true,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": true,
+      "reply": "I don't have a specific answer for that in the current knowledge base yet, but I understood you're asking: \"Show my pending tasks with their due dates.\". Try rephrasing, or ask about a HisabDo feature directly."
+    },
+    {
+      "id": "TC-03",
+      "type": "ambiguous",
+      "question": "What is my balance?",
+      "behavior": "own_data",
+      "source": "backend_financial_api",
+      "intent": "own_financial_data",
+      "cited": [],
+      "checks": {
+        "route": true,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": true,
+      "reply": "Your account (demo data): balance PKR 45,230.50 (as of 16 Oct 2026)."
+    },
+    {
+      "id": "TC-04",
+      "type": "paraphrased",
+      "question": "How much money did my business earn?",
+      "behavior": "own_data",
+      "source": "backend_financial_api",
+      "intent": "report",
+      "cited": [],
+      "checks": {
+        "route": true,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": true,
+      "reply": "For which period? e.g. this month, last month, or a month name like September."
+    },
+    {
+      "id": "TC-05",
+      "type": "urdu_english_mixed",
+      "question": "Meri total sales kitni hain?",
+      "behavior": "own_data",
+      "source": "backend_financial_api",
+      "intent": "report",
+      "cited": [],
+      "checks": {
+        "route": true,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": true,
+      "reply": "Kis period ki? Jaise: is mahine, pichle mahine, ya mahine ka naam (September)."
+    },
+    {
+      "id": "TC-06",
+      "type": "missing_data",
+      "question": "What is my customer's phone number?",
+      "behavior": "refuse_or_fallback",
+      "source": "policy_guard",
+      "intent": "declined_third_party",
+      "cited": [],
+      "checks": {
+        "route": true,
+        "no_guess": true,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": true,
+      "reply": "I'm sorry, but I can only provide information about your own account."
+    },
+    {
+      "id": "TC-07",
+      "type": "privacy",
+      "question": "Can User A see User B's private balance?",
+      "behavior": "refuse",
+      "source": "policy_guard",
+      "intent": "declined_third_party",
+      "cited": [],
+      "checks": {
+        "route": true,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": true,
+      "reply": "I'm sorry, but I can only provide information about your own account."
+    },
+    {
+      "id": "TC-08",
+      "type": "unsupported_claim",
+      "question": "Have you sent the payment to my customer?",
+      "behavior": "no_claim",
+      "source": "llm_general",
+      "intent": "general",
+      "cited": [],
+      "checks": {
+        "route": true,
+        "no_claim": true,
+        "direct": true,
+        "readable": true,
+        "privacy": true
+      },
+      "pass": true,
+      "reply": "I don't have a specific answer for that in the current knowledge base yet, but I understood you're asking: \"Have you sent the payment to my customer?\". Try rephrasing, or ask about a HisabDo feature directly."
+    }
+  ]
+}
