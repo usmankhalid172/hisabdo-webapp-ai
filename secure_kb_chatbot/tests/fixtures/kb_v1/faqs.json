@@ -1,0 +1,32 @@
+[
+  {
+    "id": "KB-001",
+    "category": "expenses",
+    "question": "How do I record an expense?",
+    "answer": "TEST FIXTURE: open Expenses, enter the amount and category, then save.",
+    "status": "verified",
+    "verified_by": "test fixture",
+    "verified_on": "2026-10-13",
+    "source": "fixture guide s.4"
+  },
+  {
+    "id": "KB-002",
+    "category": "pricing",
+    "question": "What does the paid plan cost?",
+    "answer": "TEST FIXTURE: the plan price is listed on the pricing page.",
+    "status": "verified",
+    "verified_by": "test fixture",
+    "verified_on": "2026-10-13",
+    "source": "fixture"
+  },
+  {
+    "id": "KB-003",
+    "category": "data",
+    "question": "Can I export to Excel?",
+    "answer": "TEST FIXTURE: drafts must never be indexed.",
+    "status": "draft",
+    "verified_by": "",
+    "verified_on": "",
+    "source": ""
+  }
+]
