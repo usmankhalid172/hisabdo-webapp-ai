@@ -57,6 +57,7 @@ class ChatbotResponse(BaseModel):
     intent: Optional[str] = None
     tokens_used: Optional[int] = None
     source: str  # "rag" | "backend_financial_api" | "llm_general" — POC transparency, not in Day 15 contract
+    pdf_url: Optional[str] = None
 
 
 # ---------- §6.2 Expense categorization ----------

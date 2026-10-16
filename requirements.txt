@@ -15,3 +15,4 @@ pytest-asyncio
 beautifulsoup4==4.12.3   # ingest.py: HTML text extraction
 numpy==1.26.4   # vector_store.py: embedding matrix / cosine similarity
 slowapi==0.1.9   # rate_limit.py: per-IP rate limiting on the chat endpoint
+reportlab>=4.0
