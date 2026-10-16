@@ -94,3 +94,37 @@ All 11 tests passed during local testing.
 The API treats the start date as included and the end date as excluded. For the whole month of October, use:
 `start_date=2026-10-01&end_date=2026-11-01`
 This avoids double-counting records that fall exactly on adjacent period boundaries.
+
+## Semantic Knowledge Retrieval Prototype
+
+This prototype uses multilingual semantic embeddings to retrieve relevant FAQ entries.
+
+- Retrieval module: knowledge_retrieval.py
+- Knowledge base: knowledge_base/faq.json
+- Relevance threshold: 0.45
+- Includes source attribution and safe fallback.
+
+### Tests
+Run: python test_knowledge_retrieval.py
+
+### Limitations
+- Not integrated into the live HisabDo chatbot.
+- Verify FAQ sources against official documentation.
+- Private customer balances must come from authenticated, account-scoped APIs.
+
+## Semantic Knowledge Retrieval Prototype
+
+This prototype uses multilingual semantic embeddings to retrieve relevant FAQ entries.
+
+- Retrieval module: knowledge_retrieval.py
+- Knowledge base: knowledge_base/faq.json
+- Relevance threshold: 0.45
+- Includes source attribution and safe fallback.
+
+### Tests
+Run: python test_knowledge_retrieval.py
+
+### Limitations
+- Not integrated into the live HisabDo chatbot.
+- Verify FAQ sources against official documentation.
+- Private customer balances must come from authenticated, account-scoped APIs.
