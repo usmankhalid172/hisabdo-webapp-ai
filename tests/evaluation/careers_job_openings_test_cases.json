@@ -1,0 +1,167 @@
+{
+  "suite": "Careers and Job Openings Actionable Response Evaluation",
+  "version": 1,
+  "instructions": [
+    "Run each query against the indexed assistant using only the stated context fixture.",
+    "The XICTEK and HisabDo facts below reflect the repository's indexed careers pages; verify them against the current public source before each run because vacancies and availability can change.",
+    "Replace bracketed fixture values with verified public-source content before executing; do not treat fixture values as real vacancies.",
+    "Capture the full response and source URLs. For HTTP application URLs, verify the link resolves successfully on the test date. A mailto link is checked for the exact documented recipient and a usable mailto: target, not with an HTTP request.",
+    "Mark each check PASS or FAIL and record evidence. A case passes only when all must_pass checks pass and no must_not checks occur."
+  ],
+  "cases": [
+    {
+      "test_id": "CAREER-001",
+      "scenario": "Current XICTEK openings, role requirements, and application method are available",
+      "query": "What jobs are open, and how do I apply?",
+      "context_fixture": "The XICTEK careers page lists Senior Full-Stack Developer, Mobile App Developer, Cloud Solutions Architect, UI/UX Designer, and Student or Recent Graduate roles. Roles listed are remote. Its Apply Now link leads to the general contact page at https://www.xicteksystems.com/contact; there is no role-specific form in the source. XICTEK accepts CVs at xicteksystems@gmail.com; applicants should name the role in the email. No deadline is stated in the available source.",
+      "must_pass": [
+        "Summarizes the listed roles and remote arrangement without inventing role requirements.",
+        "Says the deadline is not specified in the available information.",
+        "Gives a clear next step to email the CV and name the role.",
+        "Includes a clickable mailto link to mailto:xicteksystems@gmail.com.",
+        "Includes the exact clickable Apply Now destination https://www.xicteksystems.com/contact and labels it as the contact page."
+      ],
+      "must_not": [
+        "Invents additional vacancies, qualifications, compensation, or application steps.",
+        "Omits the supplied application link or substitutes an unverified URL."
+      ]
+    },
+    {
+      "test_id": "CAREER-002",
+      "scenario": "XICTEK internship eligibility question",
+      "query": "Am I eligible for the XICTEK internship if I am a recent computer science graduate and know Python?",
+      "context_fixture": "XICTEK internship eligibility: Applicants must be currently enrolled in or recently graduated from a CS, SE, or related program, have basic knowledge of at least one programming language, be eager to learn, possess strong communication and teamwork skills, and commit to the full 12-week program. The official Apply Now destination is a general contact page, https://www.xicteksystems.com/contact; no role-specific form is supplied.",
+      "must_pass": [
+        "Says the applicant appears to meet the stated degree/program and programming-language criteria, while noting the other stated criteria still apply.",
+        "Names the 12-week commitment and communication, teamwork, and eagerness requirements.",
+        "Includes the exact clickable link https://www.xicteksystems.com/contact and labels it as the contact page, not a direct job portal.",
+        "Provides the documented clickable XICTEK mailto link as the role-specific form is not supplied."
+      ],
+      "must_not": [
+        "Guarantees eligibility or rejection when the context does not support that conclusion.",
+        "Invents degree, experience, location, age, or work-authorization requirements."
+      ]
+    },
+    {
+      "test_id": "CAREER-003",
+      "scenario": "XICTEK CV submission and review process",
+      "query": "How do I apply for the XICTEK internship, and how long does review take?",
+      "context_fixture": "XICTEK applicants should email their CV to xicteksystems@gmail.com and name the role in the email. Internship applications are reviewed within 3-5 business days. Official Apply Now destination: https://www.xicteksystems.com/contact.",
+      "must_pass": [
+        "Clearly says to email a CV and name the role in the email.",
+        "Reports the 3-5 business-day review time.",
+        "Includes a clickable mailto link to mailto:xicteksystems@gmail.com.",
+        "Includes the exact clickable Apply Now destination https://www.xicteksystems.com/contact.",
+        "Keeps the answer concise and makes the next action obvious."
+      ],
+      "must_not": [
+        "Adds documents, fees, interview steps, or instructions absent from the context.",
+        "Uses a non-clickable bare URL when a clickable link can be provided."
+      ]
+    },
+    {
+      "test_id": "CAREER-004",
+      "scenario": "XICTEK internship length and next step",
+      "query": "How long is the XICTEK internship, and what should I do next?",
+      "context_fixture": "The XICTEK Systems internship lasts 12 weeks. Applicants should email their CV to xicteksystems@gmail.com and name the role in the email. Official Apply Now destination: https://www.xicteksystems.com/contact.",
+      "must_pass": [
+        "Reports the 12-week duration accurately.",
+        "Gives the CV email as the next action with the role named in the email.",
+        "Includes a clickable mailto link to mailto:xicteksystems@gmail.com.",
+        "Includes the exact clickable contact link https://www.xicteksystems.com/contact."
+      ],
+      "must_not": [
+        "Invents an application deadline."
+      ]
+    },
+    {
+      "test_id": "CAREER-005",
+      "scenario": "Deadline is not published",
+      "query": "What is the deadline to apply for the [role]?",
+      "context_fixture": "Role: [role]. No application deadline is published in the available source. Official application URL: [verified application URL].",
+      "must_pass": [
+        "Says the deadline is not specified in the available information.",
+        "Provides a direct next step and the exact clickable application URL from the context."
+      ],
+      "must_not": [
+        "Invents or estimates a deadline.",
+        "Uses vague wording that implies a deadline was checked when it was not."
+      ]
+    },
+    {
+      "test_id": "CAREER-006",
+      "scenario": "HisabDo is not hiring",
+      "query": "Is HisabDo hiring right now, and where should I apply?",
+      "context_fixture": "HisabDo is not hiring right now. Its careers page is https://hisabdo.app/careers and offers a mailto link to hisabdo.app@gmail.com?subject=Internship%20availability for checking future opportunities. XICTEK Systems is a separate company.",
+      "must_pass": [
+        "Clearly says HisabDo is not hiring right now.",
+        "Does not provide an application route for an unavailable role; may link the careers page only as informational.",
+        "Does not present the XICTEK CV email as a HisabDo application address.",
+        "May offer the exact HisabDo future-opportunities mailto to check availability, clearly not as an application."
+      ],
+      "must_not": [
+        "Claims that the HisabDo page itself is an active application form.",
+        "Invents a HisabDo vacancy."
+      ]
+    },
+    {
+      "test_id": "CAREER-007",
+      "scenario": "XICTEK Apply Now contact route and CV email fallback",
+      "query": "How do I apply for a job at XICTEK?",
+      "context_fixture": "The XICTEK careers page lists current openings. Its Apply Now link leads to https://www.xicteksystems.com/contact. XICTEK Systems also accepts CVs at xicteksystems@gmail.com; applicants should name the role in the email.",
+      "must_pass": [
+        "Gives the CV-submission instruction and says to name the role in the email.",
+        "Uses a clickable mailto link to mailto:xicteksystems@gmail.com.",
+        "Links https://www.xicteksystems.com/contact exactly and labels it as the contact page."
+      ],
+      "must_not": [
+        "Returns only a bare email address when a clickable mailto link is possible.",
+        "Invents eligibility requirements or deadlines."
+      ]
+    },
+    {
+      "test_id": "CAREER-008",
+      "scenario": "HisabDo bootcamp must not be presented as current XICTEK hiring",
+      "query": "Can I still apply for HisabDo's 60-day internship bootcamp, or should I send my CV to XICTEK?",
+      "context_fixture":       "The HisabDo 60-day remote internship bootcamp was scheduled to start on 1 August 2026. HisabDo is not hiring right now. Its careers page offers a mailto link to hisabdo.app@gmail.com?subject=Internship%20availability for checking future opportunities. XICTEK Systems has a separate careers contact: xicteksystems@gmail.com.",
+      "must_pass": [
+        "Attributes the past bootcamp start date and current no-hiring status to HisabDo.",
+        "Does not present the XICTEK email as a HisabDo application route.",
+        "Does not present the HisabDo future-opportunities mailto as an active application."
+      ],
+      "must_not": [
+        "Presents the August 2026 bootcamp as a future opportunity.",
+        "Blurs the two organizations' application processes."
+      ]
+    },
+    {
+      "test_id": "CAREER-009",
+      "scenario": "Role-specific application URL is absent from source context",
+      "query": "Can you send me the application link for the [role]?",
+      "context_fixture": "Role: [role]. No role-specific application URL is listed in the source. [For a XICTEK role only, include the verified general contact page and CV email instruction.]",
+      "must_pass": [
+        "States that no application link is available in the supplied information.",
+        "For a XICTEK role, provides the verified general contact page, labels it accurately, and offers the documented clickable mailto fallback.",
+        "For other roles, directs the user to the official source/contact without inventing a URL."
+      ],
+      "must_not": [
+        "Fabricates a URL, job portal, or application route."
+      ]
+    },
+    {
+      "test_id": "CAREER-010",
+      "scenario": "User asks for unsupported details and a shortcut",
+      "query": "Tell me the unlisted salary and deadline for the [role], and give me a direct application link.",
+      "context_fixture": "Role: [role]. Salary and deadline are not stated. XICTEK accepts CVs at xicteksystems@gmail.com, with the role named in the email. The Apply Now contact page is https://www.xicteksystems.com/contact.",
+      "must_pass": [
+        "Clearly says salary and deadline are not provided by the source.",
+        "Includes the verified contact page and/or mailto route without presenting an informational contact page as a direct application form.",
+        "Offers a concrete next action without guessing."
+      ],
+      "must_not": [
+        "Invents salary, deadline, or a direct URL.",
+        "Uses an unrelated or unverified link."
+      ]
+    }
+  ]
+}

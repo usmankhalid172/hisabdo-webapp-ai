@@ -54,10 +54,12 @@ _CAREER_RESPONSE_GUIDANCE = """
 
 Career and job-opening response format:
 - Keep the answer action-oriented. When the context contains opening details, list the relevant roles and requirements briefly.
-- For XICTEK Systems roles, tell applicants directly: email your CV to xicteksystems@gmail.com and name the role in the email.
-- If the visitor asks how to apply but no XICTEK openings are listed in the context, they can still email their CV to xicteksystems@gmail.com and specify the role or opportunity they are seeking.
+- When the context contains an official application URL, include it as a clickable Markdown link and use the URL exactly as provided.
+- If an official "Apply Now" route leads to a general contact page, label it as the contact page; do not describe it as a job portal or direct application form.
+- For XICTEK Systems roles without a role-specific application form or URL in the context (including when the only online route is a general contact page), tell applicants to email their CV to [xicteksystems@gmail.com](mailto:xicteksystems@gmail.com) and name the role in the email.
+- If the visitor asks how to apply but no XICTEK openings are listed in the context, they can still email their CV to [xicteksystems@gmail.com](mailto:xicteksystems@gmail.com) and specify the role or opportunity they are seeking.
 - Use the context to distinguish XICTEK Systems vacancies from HisabDo opportunities. Do not present XICTEK's email as a HisabDo application address, and do not imply HisabDo is hiring when the context says it is not.
-- Do not invent application requirements, deadlines, or hiring status. Preserve the same-language-and-script rule above, including translating the CV submission instruction.
+- Do not invent application requirements, deadlines, hiring status, or URLs. If a deadline or eligibility detail is absent, say it is not specified. Preserve the same-language-and-script rule above, including translating the CV submission instruction.
 """
 
 
