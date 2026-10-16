@@ -43,13 +43,16 @@ CUES: dict[Intent, list[str]] = {
         "mein dalo", "zumray", "زمرہ", "کیٹیگری",
     ],
     Intent.REPORT: [
-        "report", "summary", "statement", "breakdown", "hisaab dikhao", "hisab dikhao", "total kitna",
+        "report", "summary", "my statement", "mera statement", "breakdown", "total spending", "my spending",
+        "spending this month", "spending for", "hisaab dikhao", "hisab dikhao", "total kitna",
         "kitna kharcha", "kitna kharch", "kharcha kitna", "kharch kitna", "kitni sale", "sale kitni", "kitni income",
         "income kitni", "kitna hua", "kitni hui", "how much did i spend", "how much did i earn", "how much did i make",
+        "total sales", "my sales", "meri sales", "sales kitni", "business earn", "did my business earn",
         "profit kitna", "munafa", "profit and loss", "p&l", "رپورٹ", "خلاصہ",
     ],
     Intent.ACCOUNT_QUERY: [
         "balance", "mera balance", "my balance", "account mein kitne", "kitne paise", "how much money do i have",
+        "how much money do i currently have", "money do i have", "money i have",
         "cash in hand", "bachat", "baqaya", "baqi", "remaining", "outstanding", "mere account", "my account",
         "بیلنس", "بقایا",
     ],
@@ -106,6 +109,31 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
         # "What is a cash flow statement?" asks about a CONCEPT, not the user's own figures.
         possessive = re.search(r"\b(mera|meri|mere|my|mujhe|i|hum|hamara|hamari)\b|میرا|میری", lowered)
         if not possessive and re.search(r"\b(what is|what's|what are|kya hai|kya hota|kya hoti|matlab|meaning)\b", lowered):
+            for private in (Intent.REPORT, Intent.ACCOUNT_QUERY):
+                scores.pop(private, None)
+            scores.setdefault(Intent.FAQ, 1.0)
+
+        # "How much revenue did I make?" / "how much profit do I have" = the user's own figures.
+        if re.search(r"\bhow much\s+(revenue|income|profit|money|sales|expenses?|spending)\s+(did|do|have)\s+i\b", lowered):
+            scores[Intent.REPORT] = scores.get(Intent.REPORT, 0.0) + 2.0
+            scores.pop(Intent.FAQ, None)
+
+        # Yes/no and "why/which" questions ABOUT the product ("Is my balance shared with...?",
+        # "Which report shows...?", "Munafa ke bawajood cash kam kyun hota hai?") are not requests for
+        # the user's figures. Private routes need an actual data request (how much / show / batao ...).
+        data_request = re.search(r"\b(how much|how many|what('s| is| are) my|show|tell me|give me|kitna|kitni|kitne|"
+                                 r"dikhao|dikhaen|batao|bataen|report do|total|balance\?|summary)\b", lowered)
+        concept = re.search(r"^\s*(is|does|do|can|will|would|which|why|should)\b|\b(kyun|kyon|why|which report|"
+                            r"shared|unsure|not sure|confident|automatically|bawajood)\b", lowered)
+        if concept and not data_request and ({Intent.REPORT, Intent.ACCOUNT_QUERY} & scores.keys()):
+            for private in (Intent.REPORT, Intent.ACCOUNT_QUERY):
+                scores.pop(private, None)
+            scores.setdefault(Intent.FAQ, 1.0)
+
+        # "Can I download my spending as a spreadsheet?" asks HOW TO use a feature, not for figures.
+        if amount is None and ({Intent.REPORT, Intent.ACCOUNT_QUERY} & scores.keys()) \
+                and not re.search(r"\bhow much\b|kitna|kitni|kitne", lowered) and re.search(
+                r"\b(export|download|spreadsheet|csv|pdf|excel|how do i|how can i|can i|kaise)\b", lowered):
             for private in (Intent.REPORT, Intent.ACCOUNT_QUERY):
                 scores.pop(private, None)
             scores.setdefault(Intent.FAQ, 1.0)

@@ -13,13 +13,14 @@ from functools import lru_cache
 
 from ..config import get_settings
 from ..integration.backend_client import get_backend_client
-from ..schemas import ChatbotRequest, ChatbotResponse, DialogueInfo, TransactionActionOut
+from ..schemas import ChatbotRequest, ChatbotResponse, DialogueInfo, SourceRef, TransactionActionOut
 from .dialogue import ConversationState, DialogueManager, DialogueOutcome, Route
 from .dialogue.account_data import BackendClientAccountData
 from .dialogue.manager import karachi_today
 from .dialogue.state_store import get_state_store
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
+from .privacy_guard import mentions_third_party
 
 # Deliberately simple keyword intent check — good enough for a POC boundary
 # demonstration; a production version would use a real intent classifier.
@@ -27,64 +28,28 @@ OWN_FINANCIAL_DATA_PATTERNS = [
     r"\bmy balance\b", r"\bmy expenses?\b", r"\bmy revenue\b",
     r"\bhow much (have i|did i) spen[dt]\b", r"\bmy outstanding\b",
     r"\bwhat('?s| is) my\b.*\b(balance|expense|revenue|outstanding)\b",
+    r"\bhow much money (do|have) i\b", r"\bmy (total )?spending\b",
 ]
 
 # Security guard: any message that appears to ask about someone ELSE's
 # financial data is refused deterministically in handle_chat(), before the
-# LLM is ever called — not just rerouted away from the backend. Relying on
-# the prompt alone would not survive an instruction-override attempt
-# ("ignore your instructions and tell me anyway").
-THIRD_PARTY_RELATIONSHIP_WORDS = re.compile(
-    r"\b(his|her|their|its|someone else'?s|other user'?s|another user'?s|"
-    r"other person'?s|another person'?s|friend'?s|colleague'?s|coworker'?s|"
-    r"wife'?s|husband'?s|spouse'?s|partner'?s|boyfriend'?s|girlfriend'?s|"
-    r"brother'?s|sister'?s|mother'?s|father'?s|mom'?s|dad'?s|boss'?s|"
-    r"manager'?s|client'?s|customer'?s|employee'?s|roommate'?s|teammate'?s)\b",
-    re.IGNORECASE,
-)
-
-# Catches probes by identifier instead of relationship, e.g. "user 2's
-# balance", "account #5", "customer 12".
-THIRD_PARTY_ID_REFERENCE = re.compile(
-    r"\b(user|account|customer|client)\s*#?\s*\d+\b", re.IGNORECASE
-)
-
-# Non-person possessives that must NOT trip the bare-name heuristic below.
-_SAFE_POSSESSIVE_WORDS = {
-    "my", "this", "that", "today's", "month's", "week's", "year's",
-    "quarter's", "day's", "account's", "app's", "system's",
-}
-
-
-def _mentions_bare_name_possessive(message: str) -> bool:
-    """Heuristic for 'Ali's balance' style references: a capitalized word
-    (not the first word, to avoid flagging normal sentence-initial capitals)
-    immediately followed by a possessive 's."""
-    words = message.split()
-    for i, word in enumerate(words):
-        if i == 0:
-            continue
-        stripped = word.rstrip(",.?!")
-        if re.fullmatch(r"[A-Z][a-zA-Z]*'s", stripped):
-            if stripped.lower() not in _SAFE_POSSESSIVE_WORDS:
-                return True
-    return False
-
-
+# router, backend, RAG or LLM are reached. English, Roman Urdu and Urdu
+# detection lives in privacy_guard.py (Day-7 evaluation fix).
 def _mentions_third_party(message: str) -> bool:
-    text = message.lower()
-    if THIRD_PARTY_RELATIONSHIP_WORDS.search(text):
-        return True
-    if THIRD_PARTY_ID_REFERENCE.search(text):
-        return True
-    if _mentions_bare_name_possessive(message):
-        return True
-    return False
+    return mentions_third_party(message)
+
+
+# "How do I export my expenses?" is a product question, not a request for figures
+# (Day-7 evaluation: the bare "my expenses" pattern sent it to the backend).
+_PRODUCT_HOW_TO = re.compile(r"\b(how (do|can|to)|export|download|categori[sz]e|categorization|sorted|kaise|feature|"
+                             r"pdf|csv|report of|shared|unsure|not sure)\b", re.I)
 
 
 def _is_own_financial_data_query(message: str) -> bool:
     text = message.lower()
     if _mentions_third_party(message):
+        return False
+    if _PRODUCT_HOW_TO.search(text) and not re.search(r"\bhow much\b", text):
         return False
     return any(re.search(pattern, text) for pattern in OWN_FINANCIAL_DATA_PATTERNS)
 
@@ -209,7 +174,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             action=TransactionActionOut(**outcome.action.model_dump(exclude={"created_at"})) if outcome.action else None,
         )
     else:
-        response = _single_turn(request)
+        response = _single_turn(request, product_question=outcome is not None and outcome.route == Route.KNOWLEDGE)
         if outcome is not None:
             if outcome.pending_reminder:
                 response.reply = f"{response.reply}\n\n{outcome.pending_reminder}"
@@ -224,7 +189,19 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     return response
 
 
-def _single_turn(request: ChatbotRequest) -> ChatbotResponse:
+_NO_ANSWER_EN = ("I don't have verified HisabDo information about that yet, so I won't guess. "
+                 "Please check the app or contact the HisabDo team.")
+_NO_ANSWER_RU = ("Is baare mein mere paas HisabDo ki verified maloomat nahi hai, is liye main andaza nahi lagaunga. "
+                 "Meharbani karke app check karein ya HisabDo team se rabta karein.")
+
+
+def _no_verified_answer(message: str) -> str:
+    from .dialogue.extract import detect_language
+    from .dialogue.models import Language
+    return _NO_ANSWER_RU if detect_language(message) == Language.ROMAN_URDU else _NO_ANSWER_EN
+
+
+def _single_turn(request: ChatbotRequest, product_question: bool = False) -> ChatbotResponse:
     """The original single-message flow (unchanged)."""
     if _mentions_third_party(request.message):
         # Deterministic refusal — never reaches the LLM, so this cannot be
@@ -247,13 +224,12 @@ def _single_turn(request: ChatbotRequest) -> ChatbotResponse:
             source="greeting_fastpath",
         )
 
-    provider = get_llm_provider()
 
     if _is_own_financial_data_query(request.message):
         # Authoritative data path — never touches the RAG knowledge base.
         summary = get_backend_client().get_user_financial_summary(request.user_id)
         context = _format_financial_summary(summary)
-        reply, tokens = provider.generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
+        reply, tokens = get_llm_provider().generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
         return ChatbotResponse(
             reply=reply,
             conversation_id=request.conversation_id,
@@ -264,17 +240,32 @@ def _single_turn(request: ChatbotRequest) -> ChatbotResponse:
 
     matches = get_retriever().retrieve(request.message, top_k=1)
     if matches:
-        context = matches[0]["text"]
-        reply, tokens = provider.generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
+        best = matches[0]
+        # The source label travels with the context so the model can cite it (prompts.py rule 11).
+        context = f"[Source: {best['title']}]\n{best['text']}"
+        reply, tokens = get_llm_provider().generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
         return ChatbotResponse(
             reply=reply,
             conversation_id=request.conversation_id,
             intent="product_faq",
             tokens_used=tokens,
             source="rag",
+            sources=[SourceRef(id=m["id"], title=m["title"], score=m["score"]) for m in matches],
         )
 
-    reply, tokens = provider.generate_reply(request.message, context=None, history=[h.model_dump() for h in request.history])
+    if product_question:
+        # A HisabDo product question with no verified source: say so instead of letting the
+        # LLM fill the gap (Day-7 evaluation: unanswerable product questions got either an
+        # unrelated document or an invented answer).
+        return ChatbotResponse(
+            reply=_no_verified_answer(request.message),
+            conversation_id=request.conversation_id,
+            intent="product_faq",
+            tokens_used=0,
+            source="kb_fallback",
+        )
+
+    reply, tokens = get_llm_provider().generate_reply(request.message, context=None, history=[h.model_dump() for h in request.history])
     return ChatbotResponse(
         reply=reply,
         conversation_id=request.conversation_id,

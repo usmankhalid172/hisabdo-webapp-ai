@@ -2,61 +2,168 @@
   {
     "id": "faq-001",
     "title": "What is HisabDo?",
-    "text": "HisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going."
+    "text": "HisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going.",
+    "aliases": [
+      "What does this app do?",
+      "What is the purpose of the HisabDo app?",
+      "Tell me about HisabDo",
+      "HisabDo app kis kaam aati hai?",
+      "Yeh app kya karti hai?",
+      "حساب دو ایپ کیا کرتی ہے؟",
+      "bookkeeping app for small business"
+    ]
   },
   {
     "id": "faq-002",
     "title": "How do I categorize an expense? How does automatic expense categorization work?",
-    "text": "When you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions. If the model isn't confident, the expense is flagged for you to confirm or correct the category instead of being applied automatically."
+    "text": "When you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions. If the model isn't confident, the expense is flagged for you to confirm or correct the category instead of being applied automatically.",
+    "aliases": [
+      "How are expense categories assigned?",
+      "Does the app categorize expenses automatically?",
+      "What happens if the category prediction is wrong or not confident?",
+      "Expense ki category khud kaise lagti hai?",
+      "Category automatically kaise set hoti hai?",
+      "خرچ کی کیٹیگری کیسے طے ہوتی ہے؟",
+      "auto categorization of spending into groups"
+    ]
   },
   {
     "id": "faq-003",
     "title": "Is my financial data used to train the shared AI model?",
-    "text": "No individual user's raw financial data is used as a knowledge source for the chatbot. Chatbot answers about your own balance, expenses, or revenue are always pulled live from your account through the backend, not from any shared knowledge base."
+    "text": "No individual user's raw financial data is used as a knowledge source for the chatbot. Chatbot answers about your own balance, expenses, or revenue are always pulled live from your account through the backend, not from any shared knowledge base.",
+    "aliases": [
+      "Is my data used to train the AI?",
+      "Can other users see my financial data?",
+      "Is my financial data private?",
+      "Does the chatbot use my records as training data?",
+      "Kya mera data AI ki training mein use hota hai?",
+      "Mera data kisi aur ko nazar aata hai?",
+      "کیا میرا ڈیٹا اے آئی کی ٹریننگ میں استعمال ہوتا ہے؟"
+    ]
   },
   {
     "id": "faq-004",
     "title": "What is a cash flow statement?",
-    "text": "A cash flow statement is a financial report that shows the money moving in and out of a business over a period of time, split into operating, investing, and financing activities. It helps you see whether a business is generating enough cash to sustain itself."
+    "text": "A cash flow statement is a financial report that shows the money moving in and out of a business over a period of time, split into operating, investing, and financing activities. It helps you see whether a business is generating enough cash to sustain itself.",
+    "aliases": [
+      "Explain a cash flow statement",
+      "What report shows money moving in and out?",
+      "Cash flow statement ka matlab kya hai?",
+      "کیش فلو اسٹیٹمنٹ کیا ہے؟",
+      "operating investing financing activities report"
+    ]
   },
   {
     "id": "faq-005",
     "title": "How do I export my expenses?",
-    "text": "You can export your recorded expenses as a CSV or PDF report from the Reports section of the app, filtered by date range, category, or tag."
+    "text": "You can export your recorded expenses as a CSV or PDF report from the Reports section of the app, filtered by date range, category, or tag.",
+    "aliases": [
+      "Can I download my expenses?",
+      "How do I get my expense report as CSV or PDF?",
+      "Download expenses as a file or spreadsheet",
+      "Expenses ko download kaise karte hain?",
+      "Report CSV ya PDF mein kaise nikalein?",
+      "اخراجات ایکسپورٹ کیسے کریں؟"
+    ]
   },
   {
     "id": "faq-006",
     "title": "What's the difference between profit and cash flow?",
-    "text": "Profit is revenue minus expenses over a period, based on accounting rules, while cash flow is the actual movement of money in and out of your accounts. A business can be profitable on paper while still running low on cash if customers haven't paid yet."
+    "text": "Profit is revenue minus expenses over a period, based on accounting rules, while cash flow is the actual movement of money in and out of your accounts. A business can be profitable on paper while still running low on cash if customers haven't paid yet.",
+    "aliases": [
+      "Profit vs cash flow",
+      "Why can a profitable business run out of cash?",
+      "Munafa aur cash flow mein farq kya hai?",
+      "Profit hai magar bank mein paise nahi, kyun?",
+      "منافع اور کیش فلو میں کیا فرق ہے؟"
+    ]
   },
   {
     "id": "finance_001",
     "title": "What is profit?",
-    "text": "Profit is the amount remaining after expenses are subtracted from revenue."
+    "text": "Profit is the amount remaining after expenses are subtracted from revenue.",
+    "aliases": [
+      "Define profit",
+      "What remains after subtracting expenses from income?",
+      "Munafa kya hota hai?",
+      "Profit ka matlab kya hai?",
+      "منافع کیا ہے؟"
+    ]
   },
   {
     "id": "finance_002",
     "title": "What is revenue?",
-    "text": "Revenue is the total income generated from business sales or services before expenses are deducted."
+    "text": "Revenue is the total income generated from business sales or services before expenses are deducted.",
+    "aliases": [
+      "Define revenue",
+      "What is total income from sales?",
+      "Revenue ka matlab kya hai?",
+      "Aamdani kya hoti hai?",
+      "آمدنی کیا ہے؟"
+    ]
   },
   {
     "id": "finance_003",
     "title": "What is an expense?",
-    "text": "An expense is a cost incurred by a business while operating or generating revenue."
+    "text": "An expense is a cost incurred by a business while operating or generating revenue.",
+    "aliases": [
+      "Define expense",
+      "What counts as a business expense?",
+      "Kharcha kya hota hai?",
+      "Expense ka matlab kya hai?",
+      "خرچ کیا ہوتا ہے؟"
+    ]
   },
   {
     "id": "finance_004",
     "title": "What is cash flow?",
-    "text": "Cash flow represents the movement of money entering and leaving a business during a period."
+    "text": "Cash flow represents the movement of money entering and leaving a business during a period.",
+    "aliases": [
+      "Define cash flow",
+      "Money flowing in and out of a business",
+      "Cash flow ka matlab kya hai?",
+      "کیش فلو کیا ہے؟"
+    ]
   },
   {
     "id": "finance_005",
     "title": "Why should customer balances be tracked?",
-    "text": "Tracking customer balances helps a business identify outstanding payments and monitor money owed by customers."
+    "text": "Tracking customer balances helps a business identify outstanding payments and monitor money owed by customers.",
+    "aliases": [
+      "Why track money customers owe?",
+      "Why keep a record of customer credit (udhaar)?",
+      "Customer balance kyun track karna chahiye?",
+      "Udhaar ka hisaab rakhna kyun zaroori hai?",
+      "گاہکوں کا ادھار کیوں ریکارڈ کریں؟"
+    ]
   },
   {
     "id": "finance_006",
     "title": "Why should business expenses be categorized?",
-    "text": "Categorizing expenses makes financial records easier to analyze and helps identify where business money is being spent."
+    "text": "Categorizing expenses makes financial records easier to analyze and helps identify where business money is being spent.",
+    "aliases": [
+      "Why categorize business expenses?",
+      "What is the benefit of grouping costs into categories?",
+      "Kharchon ki category banana kyun faida mand hai?",
+      "اخراجات کو زمروں میں کیوں تقسیم کریں؟"
+    ]
+  },
+  {
+    "id": "faq-007",
+    "title": "Which languages does the HisabDo assistant understand?",
+    "text": "The HisabDo AI Financial Assistant understands and replies in English, Urdu (Urdu script), Roman Urdu (Urdu written in English letters), Hindi and Arabic. It answers in the same language and script you write in.",
+    "aliases": [
+      "Can I chat in Urdu?",
+      "Does the assistant understand Roman Urdu?",
+      "Kya chatbot Urdu samajhta hai?",
+      "Kis zaban mein baat kar sakte hain?",
+      "کیا میں اردو میں سوال پوچھ سکتا ہوں؟",
+      "supported languages"
+    ],
+    "source": {
+      "file": "src/financial_assistant/prompts.py",
+      "note": "SYSTEM_PROMPT language rule, merged on main",
+      "quote": "You support English, Urdu (Urdu script"
+    }
   }
 ]

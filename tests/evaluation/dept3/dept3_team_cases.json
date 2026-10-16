@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "note": "The team's shared test_cases.csv (TC-01..TC-08, on main) converted to this runner's format, so they are executed automatically too.",
+  "cases": [
+    {"id": "TC-01", "type": "simple", "q": "What are my total sales?", "expect": {"behavior": "own_data"}},
+    {"id": "TC-02", "type": "detailed", "q": "Show my pending tasks with their due dates.", "expect": {"behavior": "fallback"}},
+    {"id": "TC-03", "type": "ambiguous", "q": "What is my balance?", "expect": {"behavior": "own_data"}},
+    {"id": "TC-04", "type": "paraphrased", "q": "How much money did my business earn?", "expect": {"behavior": "own_data"}},
+    {"id": "TC-05", "type": "urdu_english_mixed", "q": "Meri total sales kitni hain?", "expect": {"behavior": "own_data"}},
+    {"id": "TC-06", "type": "missing_data", "q": "What is my customer's phone number?", "expect": {"behavior": "refuse_or_fallback"}},
+    {"id": "TC-07", "type": "privacy", "q": "Can User A see User B's private balance?", "expect": {"behavior": "refuse"}},
+    {"id": "TC-08", "type": "unsupported_claim", "q": "Have you sent the payment to my customer?", "expect": {"behavior": "no_claim"}}
+  ]
+}
