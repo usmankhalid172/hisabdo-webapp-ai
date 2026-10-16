@@ -7,12 +7,14 @@ Routes user questions to the appropriate handler:
 - Greetings are handled without an LLM call.
 - Personal financial figures come only from the backend financial API.
 - Verified FAQ and product documentation questions use RAG.
+- PDF requests receive transparent product guidance.
 - Unsupported product-specific questions receive a safe fallback.
 - General questions can use the general LLM flow.
 """
 
 import logging
 import re
+from decimal import Decimal, InvalidOperation
 
 from ..integration.backend_client import get_backend_client
 from ..schemas import ChatbotRequest, ChatbotResponse
@@ -79,6 +81,24 @@ FAQ_RETRIEVAL_ERROR_REPLY = (
     "Please try again later."
 )
 
+PDF_GUIDANCE_REPLY = (
+    "HisabDo supports PDF reports for supported records. "
+    "Open Report in the app and select a period such as This Week, "
+    "This Month, This Year, or All Time. In the tested app flow, "
+    "the PDF action opened WhatsApp sharing instead of a PDF preview. "
+    "This chatbot cannot currently generate or attach a PDF file directly."
+)
+
+# Recognize requests specifically about PDF report generation or downloading.
+PDF_REQUEST_TERMS = re.compile(
+    r"\bpdf\b|"
+    r"\b(download|export|generate|create|share|open|send)\b.{0,50}\b(report|statement)\b|"
+    r"\b(report|statement)\b.{0,50}\b(download|export|generate|create|pdf|share)\b|"
+    r"پی\s*ڈی\s*ایف|"
+    r"رپورٹ\s*(ڈاؤن\s*لوڈ|بنا|چاہیے|چاہیئے|بھیج)",
+    re.IGNORECASE,
+)
+
 PRODUCT_SPECIFIC_TERMS = re.compile(
     r"\bhisabdo\b|"
     r"\bin the app\b|"
@@ -92,10 +112,27 @@ PRODUCT_SPECIFIC_TERMS = re.compile(
     r"\bcustomer screen\b|"
     r"\bsettings\b|"
     r"\bdashboard\b|"
+    r"\btransactions?\b|"
+    r"\bexpenses?\b|"
+    r"\bincome\b|"
+    r"\bkhata\b|"
+    r"\budhar\b|"
+    r"\breceivable\b|"
+    r"\bpayable\b|"
     r"\baccount setup\b|"
-    r"\bhow do i use\b",
+    r"\bhow do i use\b|"
+    r"رپورٹ|"
+    r"خرچ|"
+    r"آمدن|"
+    r"ادھار|"
+    r"کھاتہ",
     re.IGNORECASE,
 )
+
+
+def _is_pdf_request(message: str) -> bool:
+    """Identify explicit PDF report and document requests."""
+    return bool(PDF_REQUEST_TERMS.search(message))
 
 
 def _is_product_specific_query(message: str) -> bool:
@@ -301,8 +338,6 @@ def _handle_transaction_intent(
 
     if pending_intent == intent and "what was the amount?" in last_assistant:
         if "amount" not in current_slots:
-            from decimal import Decimal, InvalidOperation
-
             bare_amount = re.fullmatch(
                 r"\s*(\d[\d,]*(?:\.\d{1,2})?)\s*",
                 message,
@@ -372,10 +407,21 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="greeting_fastpath",
         )
 
+    # 3. Explicit PDF report requests get transparent product guidance.
+    # This does not create or attach an actual PDF file.
+    if _is_pdf_request(request.message):
+        return ChatbotResponse(
+            reply=PDF_GUIDANCE_REPLY,
+            conversation_id=request.conversation_id,
+            intent="pdf_report",
+            tokens_used=0,
+            source="verified_product_guidance",
+        )
+
     provider = get_llm_provider()
     history = [item.model_dump() for item in request.history]
 
-    # 3. Recognize expense/income requests and continue pending follow-ups.
+    # 4. Recognize expense/income requests and continue pending follow-ups.
     transaction_response = _handle_transaction_intent(
         request.message,
         history,
@@ -385,7 +431,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     if transaction_response:
         return transaction_response
 
-    # 4. Personal financial figures must come from the backend API.
+    # 5. Personal financial figures must come from the backend API.
     if _is_own_financial_data_query(request.message):
         summary = get_backend_client().get_user_financial_summary(
             request.user_id
@@ -407,7 +453,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="backend_financial_api",
         )
 
-    # 5. Retrieve verified FAQ and product documentation.
+    # 6. Retrieve verified FAQ and product documentation.
     try:
         matches = get_retriever().retrieve(
             request.message,
@@ -424,14 +470,14 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="rag_error",
         )
 
-    # 6. No verified match: avoid guessing about product-specific features.
+    # 7. No verified match: avoid guessing about product-specific features.
     if not matches:
         if _is_product_specific_query(request.message):
             return _no_verified_faq_response(request)
 
         return _general_response(request, provider, history)
 
-    # 7. Normalize retrieved documents and build source-labelled context.
+    # 8. Normalize retrieved documents and build source-labelled context.
     context_chunks = []
 
     for match in matches:
@@ -455,14 +501,14 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     prepared_context = prepare_context(context_chunks)
     context = format_context_block(prepared_context)
 
-    # 8. Invalid or empty retrieved content must not trigger invented instructions.
+    # 9. Invalid or empty retrieved content must not trigger invented instructions.
     if not context:
         if _is_product_specific_query(request.message):
             return _no_verified_faq_response(request)
 
         return _general_response(request, provider, history)
 
-    # 9. Generate an answer using retrieved context.
+    # 10. Generate an answer using retrieved context.
     reply, tokens = provider.generate_reply(
         request.message,
         context=context,

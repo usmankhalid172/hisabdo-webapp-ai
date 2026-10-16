@@ -1,4 +1,5 @@
-﻿import re
+﻿
+import re
 from decimal import Decimal, InvalidOperation
 
 
@@ -6,10 +7,14 @@ INTENTS = {
     "expense": (
         r"\b(add|record|log|save|enter)\b.*\b(expense|spent|spending|purchase)\b",
         r"\b(expense|spent|spending)\b.*\b(add|record|log)\b",
+        r"\b(kharch|kharcha|kharchay|kharch kiya|kharch kiye)\b",
+        r"خرچ|اخراجات|خرچہ",
     ),
     "income": (
-        r"\b(add|record|log|save|enter)\b.*\b(income|revenue|earning|sale)\b",
-        r"\b(income|revenue|earning|sale)\b.*\b(add|record|log)\b",
+        r"\b(add|record|log|save|enter)\b.*\b(income|revenue|earning|sale|salary)\b",
+        r"\b(income|revenue|earning|sale|salary)\b.*\b(add|record|log)\b",
+        r"\b(aamdani|amadni|kamai|kamaai|tankhwa|tankhwah)\b",
+        r"آمدن|آمدنی|کمائی|تنخواہ",
     ),
     "correction": (
         r"\b(correct|edit|update|change|fix|modify)\b.*\b(expense|income|transaction|amount|category)\b",
@@ -18,15 +23,18 @@ INTENTS = {
     "report": (
         r"\b(report|summary|breakdown|statement|total)\b",
         r"\b(show|view|generate)\b.*\b(expenses|income|sales|profit)\b",
+        r"\b(kitna|kitni|hisab|khata|udhar)\b",
+        r"کھاتہ|کھاتا|ادھار|رپورٹ",
     ),
     "categorization": (
         r"\b(categorize|categorise|category|categorization|categorisation)\b",
+        r"زمرہ|کیٹیگری",
     ),
 }
 
 
 def classify_intent(message: str) -> str:
-    """Classify a message without calling an LLM."""
+    """Classify English, Roman Urdu and common Urdu financial requests."""
     text = message.lower().strip()
 
     for intent, patterns in INTENTS.items():
@@ -44,16 +52,18 @@ def classify_intent(message: str) -> str:
 
 
 def extract_slots(message: str) -> dict:
-    """Extract basic transaction fields from a user message."""
+    """Extract basic transaction fields from English and Urdu-style input."""
     text = message.strip()
+    lower_text = text.lower()
     slots = {}
 
-    amount_match = re.search(
+    amount_pattern = (
         r"(?<!\w)(?:rs\.?|pkr|₨)\s*([\d,]+(?:\.\d{1,2})?)"
-        r"|(?<!\w)([\d,]+(?:\.\d{1,2})?)\s*(?:pkr|rupees?|rs\.?)\b",
-        text,
-        re.IGNORECASE,
+        r"|(?<!\w)([\d,]+(?:\.\d{1,2})?)\s*"
+        r"(?:pkr|rupees?|rupay|rupaye|rs\.?|روپے|روپیہ)"
     )
+
+    amount_match = re.search(amount_pattern, text, re.IGNORECASE)
 
     if amount_match:
         raw_amount = next(
@@ -70,11 +80,42 @@ def extract_slots(message: str) -> dict:
 
     description_match = re.search(
         r"\b(?:for|on)\s+(.+)$",
-        message,
+        text,
         re.IGNORECASE,
     )
+
     if description_match:
-        slots["description"] = description_match.group(1).strip(" .,")
+        description = description_match.group(1).strip(" .,")
+        description = re.sub(
+            r"\s+(?:ke liye|kay liye|k liye|kharch kiya|kharch kiye)$",
+            "",
+            description,
+            flags=re.IGNORECASE,
+        ).strip()
+        if description:
+            slots["description"] = description
+
+    if "description" not in slots:
+        roman_match = re.search(
+            r"(?:rupay|rupaye|rupees?)\s+(.+?)\s+"
+            r"(?:ke|kay|k)\s+liye\b",
+            lower_text,
+            re.IGNORECASE,
+        )
+        if roman_match:
+            description = roman_match.group(1).strip(" .,")
+            if description:
+                slots["description"] = description
+
+    if "description" not in slots:
+        urdu_match = re.search(
+            r"(?:روپے|روپیہ)\s+(.+?)\s+کے\s+لیے",
+            text,
+        )
+        if urdu_match:
+            description = urdu_match.group(1).strip(" .,")
+            if description:
+                slots["description"] = description
 
     category_match = re.search(
         r"\b(food|groceries|transport|fuel|rent|utilities|"
