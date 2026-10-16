@@ -47,16 +47,23 @@ CUES: dict[Intent, list[str]] = {
         "kitna kharcha", "kitna kharch", "kharcha kitna", "kharch kitna", "kitni sale", "sale kitni", "kitni income",
         "income kitni", "kitna hua", "kitni hui", "how much did i spend", "how much did i earn", "how much did i make",
         "profit kitna", "munafa", "profit and loss", "p&l", "رپورٹ", "خلاصہ",
+        # Urdu-script "how much was spent/earned" (multilingual coverage)
+        "کتنا خرچ", "خرچ ہوا", "کتنی آمدنی", "کتنی سیل",
     ],
     Intent.ACCOUNT_QUERY: [
         "balance", "mera balance", "my balance", "account mein kitne", "kitne paise", "how much money do i have",
         "cash in hand", "bachat", "baqaya", "baqi", "remaining", "outstanding", "mere account", "my account",
         "بیلنس", "بقایا",
+        # money owed to the user (udhar), English and Urdu script
+        "owe me", "owes me", "owe us", "باقی",
     ],
     Intent.FAQ: [
         "hisabdo", "hisab do", "app", "feature", "features", "kya aap", "can you", "can the", "do you", "does the",
         "how do i", "how to", "kaise karte", "kaise karun", "kaise kare", "support", "language", "urdu", "help",
         "kya hai", "what is", "kon si", "which", "حساب دو", "ایپ",
+        # khata / PDF / backup are HisabDo features (hisabdo.app/faq). Generic "how do I" words are NOT cues on
+        # their own ("payment reminder kaise likhun?" is a writing request): see the how-to rules below.
+        "khata", "khaata", "کھاتہ", "کھاتا", "کھاتے", "pdf", "پی ڈی ایف", "backup", "back up", "بیک اپ", "مطلب",
     ],
     Intent.GREETING: ["hi", "hello", "hey", "salam", "assalam", "aoa", "assalamualaikum", "good morning", "السلام"],
 }
@@ -109,6 +116,38 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
             for private in (Intent.REPORT, Intent.ACCOUNT_QUERY):
                 scores.pop(private, None)
             scores.setdefault(Intent.FAQ, 1.0)
+
+        # "How do I share a PDF statement?" asks how the APP works, not for the user's own report.
+        how_to = re.search(r"\b(how do i|how can i|how to|can i|kaise|kese|sakta|sakti)\b|کیسے|سکتا|سکتی", lowered)
+        app_feature = re.search(r"\b(pdf|statement|export|share|whatsapp|backup|back up)\b|پی ڈی ایف|اسٹیٹمنٹ|واٹس ایپ|بیک اپ",
+                                lowered)
+        if how_to and app_feature and amount is None:
+            scores.pop(Intent.REPORT, None)
+            scores[Intent.FAQ] = scores.get(Intent.FAQ, 0.0) + 2.0
+            signals.append("faq:how_to_feature")
+
+        # "How much udhar is still outstanding?" asks for the user's OWN figures: keep it on the private route,
+        # never on a public one where the knowledge base or the AI model could answer with made-up numbers.
+        owed = re.search(r"\b(owe|owes|owed|owing|udhar|udhaar|baqi)\b|ادھار|باقی", lowered)
+        how_much = re.search(r"\b(how much|kitna|kitni|kitne)\b|کتنا|کتنی|کتنے", lowered)
+        if owed and how_much and amount is None and not how_to:
+            scores[Intent.ACCOUNT_QUERY] = scores.get(Intent.ACCOUNT_QUERY, 0.0) + 2.0
+            signals.append("account_query:how_much_owed")
+
+        # "Customer ko udhar diya to kaise likhun?" asks how to RECORD something in the app: a product question
+        # only when the how-to words come with a bookkeeping topic.
+        ledger_topic = re.search(r"\b(udhar|udhaar|khata|khaata|entry|kharcha|kharch|aamdani|expense|income)\b"
+                                 r"|ادھار|کھات|خرچ|آمدنی", lowered)
+        if how_to and ledger_topic and amount is None and "account_query:how_much_owed" not in signals:
+            scores[Intent.FAQ] = scores.get(Intent.FAQ, 0.0) + 1.0
+            signals.append("faq:how_to_record")
+
+        # "Ahmed ka khata dikhao" asks to SEE a ledger (private data), unlike "khata kya hai?" (a concept).
+        if re.search(r"\b(khata|khaata|ledger)\b|کھات", lowered) and \
+                re.search(r"\b(dikhao|dikhaen|dikhayen|show|open)\b|دکھا", lowered):
+            scores.pop(Intent.FAQ, None)
+            scores[Intent.ACCOUNT_QUERY] = scores.get(Intent.ACCOUNT_QUERY, 0.0) + 2.0
+            signals.append("account_query:show_khata")
 
         # A question mark with no money words and no amount is most likely a general/product question.
         is_question = "?" in text or "؟" in text

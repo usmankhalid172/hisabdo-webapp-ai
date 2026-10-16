@@ -1,0 +1,58 @@
+{
+  "description": "Multilingual product-guidance test cases (English, Urdu script, Roman Urdu) for expenses, income, khata, udhar, reports and PDF. Each case states the intent the chatbot should recognise and the route that must answer it. Written for evaluation only; none of these sentences were used to build the intent rules.",
+  "owner": "Fahad Zubairi",
+  "created": "2026-10-16",
+  "routes": {
+    "transaction": "step-by-step entry flow (add_expense, add_income, categorize, correct_transaction)",
+    "account_data": "the user's PRIVATE figures, only from the authenticated backend (report, account_query)",
+    "knowledge": "verified product knowledge base (faq)",
+    "general": "small talk / general assistant (greeting, general)"
+  },
+  "cases": [
+    {"id": "EXP-EN-1", "area": "expenses", "language": "en", "text": "How do I record an expense in HisabDo?", "expect_intent": "faq"},
+    {"id": "EXP-RU-1", "area": "expenses", "language": "roman_ur", "text": "HisabDo mein kharcha kaise darj karun?", "expect_intent": "faq"},
+    {"id": "EXP-UR-1", "area": "expenses", "language": "ur", "text": "حساب دو میں خرچہ کیسے درج کروں؟", "expect_intent": "faq"},
+    {"id": "EXP-EN-2", "area": "expenses", "language": "en", "text": "I paid 1200 for the electricity bill", "expect_intent": "add_expense"},
+    {"id": "EXP-RU-2", "area": "expenses", "language": "roman_ur", "text": "Kal 800 ka doodh kharida", "expect_intent": "add_expense"},
+    {"id": "EXP-UR-2", "area": "expenses", "language": "ur", "text": "آج 300 کی سبزی خریدی", "expect_intent": "add_expense"},
+    {"id": "EXP-EN-3", "area": "expenses", "language": "en", "text": "How much did I spend this month?", "expect_intent": "report"},
+    {"id": "EXP-RU-3", "area": "expenses", "language": "roman_ur", "text": "Is mahine kitna kharcha hua?", "expect_intent": "report"},
+    {"id": "EXP-UR-3", "area": "expenses", "language": "ur", "text": "اس مہینے کتنا خرچ ہوا؟", "expect_intent": "report"},
+
+    {"id": "INC-EN-1", "area": "income", "language": "en", "text": "How do I add income in HisabDo?", "expect_intent": "faq"},
+    {"id": "INC-RU-1", "area": "income", "language": "roman_ur", "text": "HisabDo mein aamdani kaise add karte hain?", "expect_intent": "faq"},
+    {"id": "INC-UR-1", "area": "income", "language": "ur", "text": "حساب دو میں آمدنی کیسے شامل کریں؟", "expect_intent": "faq"},
+    {"id": "INC-EN-2", "area": "income", "language": "en", "text": "I received 5000 from a client today", "expect_intent": "add_income"},
+    {"id": "INC-RU-2", "area": "income", "language": "roman_ur", "text": "Bilal se 3000 wasool hue", "expect_intent": "add_income"},
+    {"id": "INC-UR-2", "area": "income", "language": "ur", "text": "آج 2000 کی آمدنی ہوئی", "expect_intent": "add_income"},
+
+    {"id": "KHA-EN-1", "area": "khata", "language": "en", "text": "What is a khata?", "expect_intent": "faq"},
+    {"id": "KHA-RU-1", "area": "khata", "language": "roman_ur", "text": "Khata kya hota hai?", "expect_intent": "faq"},
+    {"id": "KHA-UR-1", "area": "khata", "language": "ur", "text": "کھاتہ کیا ہوتا ہے؟", "expect_intent": "faq"},
+    {"id": "KHA-EN-2", "area": "khata", "language": "en", "text": "Can I keep a separate khata for each customer?", "expect_intent": "faq"},
+    {"id": "KHA-RU-2", "area": "khata", "language": "roman_ur", "text": "Kya har customer ka alag khata ban sakta hai?", "expect_intent": "faq"},
+    {"id": "KHA-UR-2", "area": "khata", "language": "ur", "text": "کیا ہر گاہک کا الگ کھاتہ بن سکتا ہے؟", "expect_intent": "faq"},
+
+    {"id": "UDH-EN-1", "area": "udhar", "language": "en", "text": "How do I record udhar given to a customer?", "expect_intent": "faq"},
+    {"id": "UDH-RU-1", "area": "udhar", "language": "roman_ur", "text": "Customer ko udhar diya to kaise likhun?", "expect_intent": "faq"},
+    {"id": "UDH-UR-1", "area": "udhar", "language": "ur", "text": "گاہک کو ادھار دیا تو کیسے لکھوں؟", "expect_intent": "faq"},
+    {"id": "UDH-EN-2", "area": "udhar", "language": "en", "text": "How much udhar do my customers still owe me?", "expect_intent": "account_query"},
+    {"id": "UDH-RU-2", "area": "udhar", "language": "roman_ur", "text": "Mera kitna udhar baqi hai?", "expect_intent": "account_query"},
+    {"id": "UDH-UR-2", "area": "udhar", "language": "ur", "text": "میرا کتنا ادھار باقی ہے؟", "expect_intent": "account_query"},
+
+    {"id": "REP-EN-1", "area": "reports", "language": "en", "text": "Show me this month's report", "expect_intent": "report"},
+    {"id": "REP-RU-1", "area": "reports", "language": "roman_ur", "text": "Pichle mahine ki report dikhao", "expect_intent": "report"},
+    {"id": "REP-UR-1", "area": "reports", "language": "ur", "text": "اس مہینے کی رپورٹ دکھائیں", "expect_intent": "report"},
+
+    {"id": "PDF-EN-1", "area": "pdf", "language": "en", "text": "Can I export a PDF statement for a customer?", "expect_intent": "faq"},
+    {"id": "PDF-RU-1", "area": "pdf", "language": "roman_ur", "text": "Kya main customer ki PDF report bana sakta hoon?", "expect_intent": "faq"},
+    {"id": "PDF-UR-1", "area": "pdf", "language": "ur", "text": "کیا میں گاہک کی پی ڈی ایف رپورٹ بنا سکتا ہوں؟", "expect_intent": "faq"},
+    {"id": "PDF-EN-2", "area": "pdf", "language": "en", "text": "How do I share a PDF statement on WhatsApp?", "expect_intent": "faq"},
+    {"id": "PDF-RU-2", "area": "pdf", "language": "roman_ur", "text": "PDF statement WhatsApp par kaise bhejun?", "expect_intent": "faq"},
+    {"id": "PDF-UR-2", "area": "pdf", "language": "ur", "text": "پی ڈی ایف اسٹیٹمنٹ واٹس ایپ پر کیسے بھیجوں؟", "expect_intent": "faq"},
+
+    {"id": "GEN-EN-1", "area": "offline", "language": "en", "text": "Does HisabDo work without internet?", "expect_intent": "faq"},
+    {"id": "GEN-RU-1", "area": "offline", "language": "roman_ur", "text": "Kya HisabDo internet ke baghair chalta hai?", "expect_intent": "faq"},
+    {"id": "GEN-UR-1", "area": "offline", "language": "ur", "text": "کیا حساب دو انٹرنیٹ کے بغیر چلتا ہے؟", "expect_intent": "faq"}
+  ]
+}
