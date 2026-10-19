@@ -5,6 +5,7 @@ import re
 
 CORE_SERVICES_QUERY_TERMS = (
     "service", "services", "custom software", "web development", "web application",
+    "web applications", "web app", "web apps", "subscription", "billing",
     "mobile", "mobile app", "mobile application", "android", "ios", "saas",
     "cloud", "azure", "aws", "ai", "ai solution", "ai development",
     "automation", "erp", "devops", "api integration", "application modernization",

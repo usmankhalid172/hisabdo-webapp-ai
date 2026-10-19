@@ -5,10 +5,13 @@ import re
 
 _LIST_MARKER_RE = re.compile(r"^\s*(?:[-*+•]|\d+[.)])\s+(.+?)\s*$")
 _LIST_LEAD_RE = re.compile(
-    r"^(?P<intro>.*?(?:\b(?:include|includes|offer|offers|provide|provides)\b\s*:?|:))\s*(?P<body>.+)$",
+    r"^(?P<intro>.*?(?:\b(?:include|includes|offer|offers|provide|provides|use|uses)\b\s*:?|:))\s*(?P<body>.+)$",
     re.IGNORECASE,
 )
-_INLINE_SEPARATOR_RE = re.compile(r"\s*;\s*|\s*,\s*(?:(?:and|or)\s+)?|\s+(?:and|or)\s+", re.IGNORECASE)
+_SEMICOLON_SEPARATOR_RE = re.compile(r"\s*;\s*")
+_COMMA_SEPARATOR_RE = re.compile(r"\s*,\s*")
+_FINAL_CONJUNCTION_RE = re.compile(r"^(?:and|or)\s+", re.IGNORECASE)
+_CONJUNCTION_RE = re.compile(r"\s+(?:and|or)\s+", re.IGNORECASE)
 
 
 def _clean_item(value: str) -> str:
@@ -78,15 +81,32 @@ def _format_inline_list(text: str) -> str | None:
         content = lead.group("body").strip()
 
     content = content.rstrip(" .!?\t")
-    # A second sentence or an unintroduced prose clause is too ambiguous to
-    # split safely. Preserve it verbatim rather than manufacture list items.
-    if re.search(r"[.!?]", content):
-        return None
-    explicitly_introduced = intro.endswith(":")
-    if not re.search(r"[,;]", content) and not explicitly_introduced:
+    # Allow punctuation inside names such as "Next.js", but don't split
+    # across sentence boundaries or question/exclamation marks.
+    if re.search(r"[!?]|\.(?:\s|$)", content):
         return None
 
-    parts = _unique_items(_INLINE_SEPARATOR_RE.split(content))
+    has_semicolons = ";" in content
+    has_commas = "," in content
+    explicitly_introduced = bool(intro)
+    if has_semicolons:
+        # Semicolons clearly separate list entries. Keep conjunctions inside
+        # each entry, e.g. "LLM and OpenAI integrations".
+        parts = _SEMICOLON_SEPARATOR_RE.split(content)
+    elif has_commas:
+        parts = _COMMA_SEPARATOR_RE.split(content)
+        # Support the conventional Oxford-comma form "A, B, and C" without
+        # splitting compound names joined by "and" inside an entry.
+        if len(parts) > 1:
+            parts[-1] = _FINAL_CONJUNCTION_RE.sub("", parts[-1])
+    elif explicitly_introduced and re.search(r"\s+(?:and|or)\s+", content, re.IGNORECASE):
+        # A clear list lead makes a simple conjunction safe to format while
+        # ordinary prose such as "design and development" remains untouched.
+        parts = _CONJUNCTION_RE.split(content)
+    else:
+        return None
+
+    parts = _unique_items(parts)
     if len(parts) < 2:
         return None
     if not intro and any(len(item.split()) > 9 for item in parts):

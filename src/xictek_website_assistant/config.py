@@ -52,7 +52,10 @@ class XictekSettings(BaseSettings):
     top_k: int = Field(default=8, ge=1, le=20)
     relevance_threshold: float = Field(default=0.20, ge=-1.0, le=1.0)
     core_services_top_k: int = Field(default=4, ge=1, le=20)
-    core_services_relevance_threshold: float = Field(default=0.35, ge=-1.0, le=1.0)
+    # Core Services chunks are already constrained to /services in the
+    # request path; a lower cutoff recovers relevant paraphrase matches while
+    # top_k still caps context size.
+    core_services_relevance_threshold: float = Field(default=0.22, ge=-1.0, le=1.0)
 
     # Where the built index (embeddings.npy + chunks.json) lives. The
     # ingest script writes here; the retriever reads from here at startup.

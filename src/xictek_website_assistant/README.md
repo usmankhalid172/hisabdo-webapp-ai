@@ -218,7 +218,7 @@ root for the current list. Notable ones:
 | `XICTEK_TOP_K` | `8` | Maximum chunks for general site queries |
 | `XICTEK_RELEVANCE_THRESHOLD` | `0.20` | Minimum cosine similarity for general site queries |
 | `XICTEK_CORE_SERVICES_TOP_K` | `4` | Maximum Core Services page chunks passed to the LLM |
-| `XICTEK_CORE_SERVICES_RELEVANCE_THRESHOLD` | `0.35` | Minimum cosine similarity for Core Services matches |
+| `XICTEK_CORE_SERVICES_RELEVANCE_THRESHOLD` | `0.22` | Minimum cosine similarity for Core Services matches |
 | `XICTEK_ALLOWED_CRAWL_DOMAINS` | xicteksystems.com, hisabdo.app (+ `www.`) | `ingest.py`'s crawl allow-list |
 | `XICTEK_RATE_LIMIT` | `20/minute` | Per-IP rate limit on `POST /chat` |
 | `XICTEK_WIDGET_ALLOWED_ORIGINS` | `[]` (locked down) | CORS origins allowed to call these endpoints from a browser — see "Local widget testing" below for dev, and set to the real xicteksystems.com origin for production |
@@ -233,10 +233,18 @@ module's chat generation on its own key.
 
 Core Services questions use the `/services` URL path filter and their own
 retrieval settings, so tuning this section does not change the general
-site, Blog, Careers, or Contact retrieval defaults. The initial settings
-are top-k `4` and minimum cosine similarity `0.35`; adjust them with the
-two `XICTEK_CORE_SERVICES_*` environment variables above after evaluating
-service queries against the indexed content.
+site, Blog, Careers, or Contact retrieval defaults. The settings are top-k
+`4` and minimum cosine similarity `0.22`. The cutoff was lowered from
+`0.35` after indexed-query checks found relevant paraphrase matches around
+`0.23–0.30`; in a 12-query spot check, `0.22` retained the expected service
+page for all 12, while `0.25` retained 11 and `0.30` retained 8. The section
+filter and top-k cap continue to limit unrelated context. Override the values
+with the two `XICTEK_CORE_SERVICES_*`
+environment variables above if new evaluation data supports different
+settings. This spot check used the checked-in vectorizer with scikit-learn
+`1.7.2`, while the index was built with `1.5.2`; rerun calibration in the
+dependency-pinned environment before treating the sample counts as production
+metrics.
 
 After generation, `formatting.py` converts clear multi-item Core Services
 answers into Markdown bullet lists. It normalizes existing numbered/bulleted
