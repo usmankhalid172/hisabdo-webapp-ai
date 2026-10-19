@@ -1,5 +1,5 @@
 {
-  "kb_version": "1.0.0",
-  "released_on": "",
-  "changes": "Initial structure. All entries are drafts awaiting product-team verification."
+  "kb_version": "1.1.0",
+  "released_on": "2026-10-19",
+  "changes": "First verified release: 10 FAQs and the udhar/khata guide verified against official HisabDo sources (hisabdo.app and Google Play). KB-006 (currencies) stays draft: sources disagree."
 }

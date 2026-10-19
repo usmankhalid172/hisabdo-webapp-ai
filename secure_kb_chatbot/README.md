@@ -18,12 +18,16 @@
 > pytest
 > ```
 >
-> All 258 tests run offline, without API keys. Every step is explained in
+> All 259 tests run offline, without API keys. Every step is explained in
 > [`docs/IMPLEMENTATION_GUIDE.md`](docs/IMPLEMENTATION_GUIDE.md). That guide was written for applying
 > the changes to the original chatbot, so its `reference/` folder corresponds to this folder.
 >
-> **Not done yet:** the knowledge-base entries are drafts awaiting product-team verification, and
-> real Supabase logins and live Gemini embeddings have not been tested.
+> **Knowledge base:** version 1.1.0 has 11 entries verified against official HisabDo sources
+> (hisabdo.app and Google Play), each with its source link. KB-006 (currencies) stays a draft because
+> the sources disagree. Product-team sign-off is still recommended.
+>
+> **Not tested yet:** real Supabase logins and live Gemini embeddings. The full picture is in
+> [`../docs/fahad-zubairi-final-documentation.md`](../docs/fahad-zubairi-final-documentation.md).
 
 Answers questions like **"How much does Ahmed owe?"** from the signed-in user's own business
 data (customers, receivables, payables, tasks, notes) instead of giving generic replies, and won't

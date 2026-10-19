@@ -112,7 +112,8 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
 
         # "What is a cash flow statement?" asks about a CONCEPT, not the user's own figures.
         possessive = re.search(r"\b(mera|meri|mere|my|mujhe|i|hum|hamara|hamari)\b|میرا|میری", lowered)
-        if not possessive and re.search(r"\b(what is|what's|what are|kya hai|kya hota|kya hoti|matlab|meaning)\b", lowered):
+        if not possessive and re.search(r"\b(what is|what's|what are|kya hai|kya hota|kya hoti|matlab|meaning|mean)\b",
+                                        lowered):
             for private in (Intent.REPORT, Intent.ACCOUNT_QUERY):
                 scores.pop(private, None)
             scores.setdefault(Intent.FAQ, 1.0)
@@ -125,6 +126,23 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
             scores.pop(Intent.REPORT, None)
             scores[Intent.FAQ] = scores.get(Intent.FAQ, 0.0) + 2.0
             signals.append("faq:how_to_feature")
+
+        # "Can HisabDo make a monthly report PDF?" asks what the APP can do, not for the user's own report.
+        app_subject = re.search(r"\b(hisabdo|hisab do|the app)\b|حساب دو", lowered)
+        capability = re.search(r"\b(can|could|does|do|kya|sakta|sakti|sakte|deta|deti|karta|karti)\b"
+                               r"|سکتا|سکتی|دیتا|دیتی|کرتا", lowered)
+        if app_subject and capability and amount is None:
+            scores.pop(Intent.REPORT, None)
+            scores[Intent.FAQ] = scores.get(Intent.FAQ, 0.0) + 2.0
+            signals.append("faq:app_capability")
+
+        # "What did I spend last month?" names a money topic AND a period: the user's own figures (private).
+        money_topic = re.search(r"\b(spend|spent|spending|expense|expenses|earn|earned|earning|income|sales|"
+                                r"kharch|kharcha|aamdani|amdani)\b|خرچ|آمدنی", lowered)
+        if money_topic and amount is None and not how_to and "faq:app_capability" not in signals \
+                and extract.extract_period(text, today) is not None:
+            scores[Intent.REPORT] = scores.get(Intent.REPORT, 0.0) + 2.0
+            signals.append("report:money_in_period")
 
         # "How much udhar is still outstanding?" asks for the user's OWN figures: keep it on the private route,
         # never on a public one where the knowledge base or the AI model could answer with made-up numbers.

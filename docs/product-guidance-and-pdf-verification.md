@@ -120,16 +120,30 @@ The original 39 cases were used while writing the change, so their 100% is expec
   3. "Show Ahmed's khata" is **private data**; "What is khata?" is a product question.
 - **Not affected:** generic "how do I write…" requests, such as a payment reminder, still go to the general assistant.
 
-**Still wrong on the held-out set:**
+**Round 2 (final tuning, 2026-10-19).** Round 1's held-out set had been seen, so a new held-out set (`multilingual_product_test_cases_heldout_v2.json`, 27 cases) was written **before** any round-2 change. Round 2 used only round 1's five remaining misses and added three rules:
+1. A money topic plus a period ("What did I spend last month?") is the user's **own report** (private).
+2. "What does X mean?" is a **concept** question.
+3. "Can HisabDo / does the app do X?" is a **product** question, even when it mentions a report or PDF.
+
+| Set | Before round 2 | After round 2 | Private questions on a public route |
+|---|---|---|---|
+| Round-1 held-out (now tuning material) | 22/27 (81%) | 27/27 (100%) | 1 → 0 |
+| **New held-out v2 (honest measure)** | 18/27 (67%) | **22/27 (81%)** | **5 → 2** |
+| Saba's labelled and held-out sets | 60/60, 30/33 | 60/60, 30/33 | 0 → 0 |
+
+Note that round 1's 81% did not fully carry over to fresh questions: the new set started at 67%. The v2 set is now spent too, so measuring a third round needs a third, freshly written set.
+
+**Still wrong on held-out v2** (known limitations, deliberately not tuned away):
 
 | Message | Expected | Got |
 |---|---|---|
-| What did I spend last month? | report (private) | general: **a private question on a public route** |
-| What does udhar mean? | faq | general |
-| Can HisabDo make a monthly report PDF? (in all 3 languages) | faq | report |
+| Bilal ka hisaab kholo | account_query (private) | general: **private question on a public route** |
+| بلال کا کھاتہ کھولیں | account_query (private) | faq: **private question on a public route** |
+| Udhar aur payment mein kya farq hai? / ادھار اور ادائیگی میں کیا فرق ہے؟ | faq | general |
+| Is my khata safe if I change my phone? | faq | correct_transaction ("change" is read as a correction) |
 
-**Tests:** `tests/test_multilingual_product_coverage.py`, 42 tests. They check:
-- every original case is routed correctly
+**Tests:** `tests/test_multilingual_product_coverage.py`, 69 tests (round-1 cases plus round-1 held-out). They check:
+- every regression case is routed correctly
 - no private question reaches a public route
 - every area is covered in all three languages
 - Urdu-script messages are answered in Roman Urdu, per the team rule

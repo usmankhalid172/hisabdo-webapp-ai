@@ -1,8 +1,10 @@
 """Regression tests: multilingual (English / Urdu script / Roman Urdu) routing of product questions.
 
-Cases live in data/multilingual_product_test_cases.json (expenses, income, khata, udhar,
-reports, PDF). The held-out set is measured by scripts/evaluate_multilingual_coverage.py
-and deliberately NOT asserted here, so it stays an honest measure.
+Locked in here (regression): the round-1 cases (multilingual_product_test_cases.json) and
+the round-1 held-out cases, which became tuning material in round 2.
+
+Deliberately NOT asserted: data/multilingual_product_test_cases_heldout_v2.json, the current
+honest measure. Run `python scripts/evaluate_multilingual_coverage.py --heldout` for it.
 """
 
 import json
@@ -16,7 +18,11 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from evaluate_multilingual_coverage import evaluate  # noqa: E402
 
-CASES = json.loads((ROOT / "data" / "multilingual_product_test_cases.json").read_text(encoding="utf-8"))["cases"]
+CASES = [
+    case
+    for name in ("multilingual_product_test_cases.json", "multilingual_product_test_cases_heldout.json")
+    for case in json.loads((ROOT / "data" / name).read_text(encoding="utf-8"))["cases"]
+]
 ROWS = {r["id"]: r for r in evaluate(CASES)}
 
 

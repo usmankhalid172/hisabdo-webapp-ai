@@ -56,10 +56,21 @@ def test_docs_are_split_by_section_and_keep_their_source():
     assert all(c.source == "fixture guide s.7" and c.title == "Customer balances" for c in doc)
 
 
-def test_shipped_kb_is_valid_and_all_draft():
-    """The starter KB must load, and must not be quotable until a person verifies entries."""
+def test_shipped_kb_is_valid_and_every_verified_entry_cites_an_official_source():
+    """Verified entries must name where they were checked; only those are ever indexed."""
     version, entries = load_kb(ROOT / "kb" / "v1")
-    assert entries and chunk_entries(version, entries) == []
+    verified = [e for e in entries if e.is_verified]
+    assert version == "1.1.0" and len(verified) == 11
+    official = ("https://hisabdo.app", "https://play.google.com/store/apps/details?id=com.usman.hisabdo")
+    assert all(any(src in e.source for src in official) for e in verified)
+    assert {c.entry_id for c in chunk_entries(version, entries)} == {e.id for e in verified}
+
+
+def test_conflicting_fact_stays_unquotable():
+    """Currencies differ between the website and Google Play, so KB-006 is a draft and never indexed."""
+    version, entries = load_kb(ROOT / "kb" / "v1")
+    assert next(e for e in entries if e.id == "KB-006").status == "draft"
+    assert "KB-006" not in {c.entry_id for c in chunk_entries(version, entries)}
 
 
 @pytest.mark.parametrize(

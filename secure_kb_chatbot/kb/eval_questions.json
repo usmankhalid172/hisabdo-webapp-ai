@@ -8,15 +8,35 @@
     "expect": "KB-001"
   },
   {
-    "question": "HisabDo ki price kya hai?",
+    "question": "Kya HisabDo free hai?",
     "expect": "KB-002"
   },
   {
-    "question": "Can I download my ledger as Excel?",
+    "question": "Can I send a customer a PDF statement on WhatsApp?",
     "expect": "KB-003"
   },
   {
-    "question": "Udhaar ka hisab kahan dekhun?",
+    "question": "Can I export to Excel?",
+    "expect": "KB-003"
+  },
+  {
+    "question": "Kya internet ke baghair chalta hai?",
+    "expect": "KB-004"
+  },
+  {
+    "question": "Does it support Urdu?",
+    "expect": "KB-005"
+  },
+  {
+    "question": "Phone badalne par data kaise wapis laun?",
+    "expect": "KB-007"
+  },
+  {
+    "question": "Is there an iPhone app?",
+    "expect": "KB-008"
+  },
+  {
+    "question": "Udhar kaise likhte hain?",
     "expect": "KB-101"
   },
   {

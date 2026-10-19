@@ -3,30 +3,110 @@
     "id": "KB-001",
     "category": "expenses",
     "question": "How do I record an expense in HisabDo?",
-    "answer": "DRAFT - replace with the real steps from the product team.",
-    "status": "draft",
-    "verified_by": "",
-    "verified_on": "",
-    "source": ""
+    "answer": "Record each expense in HisabDo as it happens. You can add a descriptive note to any transaction, and voice entry lets you create a record by speaking instead of typing.",
+    "status": "verified",
+    "verified_by": "Fahad Zubairi (official HisabDo sources)",
+    "verified_on": "2026-10-19",
+    "source": "https://hisabdo.app/faq (notes, voice entry); https://play.google.com/store/apps/details?id=com.usman.hisabdo (expense tracker)"
   },
   {
     "id": "KB-002",
     "category": "pricing",
-    "question": "How much does HisabDo cost?",
-    "answer": "DRAFT - replace with the current plans and prices.",
-    "status": "draft",
-    "verified_by": "",
-    "verified_on": "",
-    "source": ""
+    "question": "Is HisabDo free?",
+    "answer": "Yes. HisabDo is free to download and use from Google Play. Core features, including khata management, customer accounts, PDF export and backup, are available at no cost.",
+    "status": "verified",
+    "verified_by": "Fahad Zubairi (official HisabDo sources)",
+    "verified_on": "2026-10-19",
+    "source": "https://hisabdo.app/faq"
   },
   {
     "id": "KB-003",
     "category": "data",
-    "question": "Can I export my data to Excel or PDF?",
-    "answer": "DRAFT - confirm which exports exist and where they are found.",
+    "question": "Can I export my records as a PDF?",
+    "answer": "Yes. HisabDo generates PDF statements for any customer account or time period, showing what is owed, what has been paid and the running balance. You can share them via WhatsApp, email or any messaging app. The official sources do not mention CSV or Excel export.",
+    "status": "verified",
+    "verified_by": "Fahad Zubairi (official HisabDo sources)",
+    "verified_on": "2026-10-19",
+    "source": "https://hisabdo.app/faq; https://hisabdo.app/about-app"
+  },
+  {
+    "id": "KB-004",
+    "category": "offline",
+    "question": "Does HisabDo work without the internet?",
+    "answer": "Yes. HisabDo is offline-first. You can use it as a guest without an account, and guest records stay on your device. If you sign in, supported data can sync with the cloud (Supabase) when you are online.",
+    "status": "verified",
+    "verified_by": "Fahad Zubairi (official HisabDo sources)",
+    "verified_on": "2026-10-19",
+    "source": "https://hisabdo.app/faq"
+  },
+  {
+    "id": "KB-005",
+    "category": "languages",
+    "question": "Which languages does HisabDo support?",
+    "answer": "Urdu, English, Hindi, Arabic and Roman Urdu. You can switch language in the app settings at any time.",
+    "status": "verified",
+    "verified_by": "Fahad Zubairi (official HisabDo sources)",
+    "verified_on": "2026-10-19",
+    "source": "https://hisabdo.app/faq"
+  },
+  {
+    "id": "KB-006",
+    "category": "currency",
+    "question": "Which currencies does HisabDo support?",
+    "answer": "DRAFT - sources disagree: hisabdo.app lists PKR, USD and INR; the Google Play listing (13 Oct 2026) lists PKR, INR, AED and USD. Confirm with the product team before verifying.",
     "status": "draft",
     "verified_by": "",
     "verified_on": "",
-    "source": ""
+    "source": "https://hisabdo.app/faq; https://play.google.com/store/apps/details?id=com.usman.hisabdo"
+  },
+  {
+    "id": "KB-007",
+    "category": "backup",
+    "question": "How do I back up and restore my data?",
+    "answer": "HisabDo has a local backup feature that saves your app data to the device or supported external storage. You can restore a backup on any Android device running HisabDo, which is useful when changing phones. If you uninstall without a backup, local data may be lost.",
+    "status": "verified",
+    "verified_by": "Fahad Zubairi (official HisabDo sources)",
+    "verified_on": "2026-10-19",
+    "source": "https://hisabdo.app/faq"
+  },
+  {
+    "id": "KB-008",
+    "category": "platform",
+    "question": "Is HisabDo available on iPhone?",
+    "answer": "No. HisabDo is available on Android only, from Google Play. It works on Android 6.0 and above; Android 8.0 or later is recommended.",
+    "status": "verified",
+    "verified_by": "Fahad Zubairi (official HisabDo sources)",
+    "verified_on": "2026-10-19",
+    "source": "https://hisabdo.app/faq"
+  },
+  {
+    "id": "KB-009",
+    "category": "analytics",
+    "question": "Does HisabDo show reports or analytics?",
+    "answer": "Yes. The dashboard shows your receivables, payables and cash position, and overdue balances are visible. Analytics show income trends, expense patterns and outstanding balances, and PDF reports can be generated.",
+    "status": "verified",
+    "verified_by": "Fahad Zubairi (official HisabDo sources)",
+    "verified_on": "2026-10-19",
+    "source": "https://hisabdo.app/faq; https://hisabdo.app/about-app"
+  },
+  {
+    "id": "KB-010",
+    "category": "payables",
+    "question": "Can I track money I owe to suppliers?",
+    "answer": "Yes. HisabDo tracks payables (money you owe to suppliers or others) alongside receivables, so you see both sides of your obligations.",
+    "status": "verified",
+    "verified_by": "Fahad Zubairi (official HisabDo sources)",
+    "verified_on": "2026-10-19",
+    "source": "https://hisabdo.app/faq"
+  },
+  {
+    "id": "KB-011",
+    "category": "support",
+    "question": "How do I contact HisabDo support?",
+    "answer": "Email hisabdo.app@gmail.com or use the Contact page on hisabdo.app. The team aims to respond within 48 hours. Bug reports and feature suggestions go to the same address.",
+    "status": "verified",
+    "verified_by": "Fahad Zubairi (official HisabDo sources)",
+    "verified_on": "2026-10-19",
+    "source": "https://hisabdo.app/faq"
   }
 ]
