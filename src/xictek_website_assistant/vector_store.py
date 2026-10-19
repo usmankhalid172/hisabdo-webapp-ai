@@ -170,13 +170,17 @@ class VectorStore:
         index_dir = index_dir or get_xictek_settings().index_dir
         vectors_path = index_dir / EMBEDDINGS_FILENAME
         chunks_path = index_dir / CHUNKS_FILENAME
+
         if not vectors_path.exists() or not chunks_path.exists():
-            return cls()  # empty store — caller decides how to handle "no index yet"
+            return cls()
 
         metadata_path = index_dir / METADATA_FILENAME
         current_model = get_xictek_settings().embedding_model
+
         if metadata_path.exists():
-            built_with = json.loads(metadata_path.read_text()).get("embedding_model")
+            built_with = json.loads(
+                metadata_path.read_text(encoding="utf-8")
+            ).get("embedding_model")
             if built_with and built_with != current_model:
                 logger.warning(
                     "xictek_index_embedding_model_mismatch",
@@ -186,17 +190,24 @@ class VectorStore:
                     },
                 )
         else:
-            # Index predates this metadata file (built before this
-            # check existed) -- can't know what built it, so just warn
-            # that we can't verify rather than silently assuming it's fine.
-            logger.warning("xictek_index_metadata_missing_cannot_verify_embedding_model")
+            logger.warning(
+                "xictek_index_metadata_missing_cannot_verify_embedding_model"
+            )
 
         vectors = np.load(vectors_path)
-        raw_chunks = json.loads(chunks_path.read_text())
+        raw_chunks = json.loads(
+            chunks_path.read_text(encoding="utf-8")
+        )
         chunks = [
-            Chunk(chunk_id=c["id"], title=c["title"], url=c.get("url"), text=c["text"])
+            Chunk(
+                chunk_id=c["id"],
+                title=c["title"],
+                url=c.get("url"),
+                text=c["text"],
+            )
             for c in raw_chunks
         ]
+
         store = cls()
         store.build(chunks, vectors)
         return store
