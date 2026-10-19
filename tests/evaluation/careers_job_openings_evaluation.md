@@ -71,11 +71,13 @@ was accepted.
 ## Current evaluation status
 
 The repository provides a documented XICTEK CV submission address and role-in-
-email instruction. The assistant's career prompt now requires source URLs to
-be linked exactly and provides a clickable `mailto:xicteksystems@gmail.com`
-fallback for XICTEK roles. It also distinguishes the active XICTEK contact
-destination from a direct application form. The targeted prompt unit test
-verifies these instructions.
+email instruction. The assistant's career prompt requires direct answers and
+context-supported next steps, exact clickable source URLs, and a clickable
+`mailto:xicteksystems@gmail.com` fallback for XICTEK roles with no
+role-specific route. It distinguishes XICTEK's general contact page from a
+direct application form and HisabDo future-opportunity inquiries from active
+applications. Targeted prompt tests verify these instructions and that
+eligibility, deadline, salary, and position queries receive career guidance.
 
 The repository contains an indexed knowledge base, but the ten response
 scenarios remain **NOT TESTED** against an actual generated answer from the

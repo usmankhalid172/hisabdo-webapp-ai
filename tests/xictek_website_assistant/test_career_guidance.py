@@ -28,21 +28,41 @@ def test_careers_evaluation_suite_has_required_scenarios_and_checks():
         for case in cases
         for check in case["must_pass"]
     )
+    assert all(
+        "Career and job-opening response format:"
+        in build_system_prompt(case["query"])
+        for case in cases
+    )
 
 
 def test_career_prompt_includes_direct_xictek_cv_submission_guidance():
     prompt = build_system_prompt("What job openings do you have, and where should I send my CV?")
 
     assert prompt.startswith(SYSTEM_PROMPT)
+    assert "Start with a direct answer to the visitor's question" in prompt
+    assert "give the most useful next action supported by the context" in prompt
     assert "email their CV to [xicteksystems@gmail.com](mailto:xicteksystems@gmail.com)" in prompt
     assert "[xicteksystems@gmail.com](mailto:xicteksystems@gmail.com)" in prompt
-    assert "clickable Markdown link" in prompt
-    assert "use the URL exactly as provided" in prompt
-    assert "label it as the contact page" in prompt
-    assert "including when the only online route is a general contact page" in prompt
+    assert "clickable Markdown link using the exact URL" in prompt
+    assert "link that exact destination and call it the contact page" in prompt
     assert "name the role in the email" in prompt
-    assert "Do not invent application requirements, deadlines, hiring status, or URLs" in prompt
-    assert "do not present xictek's email as a hisabdo application address" in prompt.lower()
+    assert "do not give the XICTEK email as an application address" in prompt
+    assert "do not present any route as an application" in prompt
+    assert "say that no application link is provided" in prompt
+    assert "Never fabricate a URL" in prompt
+
+
+def test_career_related_edge_case_queries_receive_career_guidance():
+    queries = (
+        "What are the eligibility requirements?",
+        "What is the deadline?",
+        "What salary is offered?",
+        "Are there any positions?",
+        "How can a candidate apply?",
+    )
+
+    for query in queries:
+        assert "Career and job-opening response format:" in build_system_prompt(query)
 
 
 def test_non_career_prompt_does_not_add_application_guidance():

@@ -46,20 +46,25 @@ switch languages, do so for the rest of the conversation."""
 
 _CAREER_QUERY_PATTERN = re.compile(
     r"\b(career|careers|job|jobs|opening|openings|hiring|vacancy|vacancies|"
-    r"internship|internships|apply|application|applications|cv|resume|resumes)\b",
+    r"internship|internships|apply|application|applications|cv|resume|resumes|"
+    r"employment|employ|recruitment|recruit|position|positions|role|roles|"
+    r"eligible|eligibility|qualify|qualification|qualifications|deadline|"
+    r"salary|salaries|compensation|candidate|candidates)\b",
     re.IGNORECASE,
 )
 
 _CAREER_RESPONSE_GUIDANCE = """
 
 Career and job-opening response format:
-- Keep the answer action-oriented. When the context contains opening details, list the relevant roles and requirements briefly.
-- When the context contains an official application URL, include it as a clickable Markdown link and use the URL exactly as provided.
-- If an official "Apply Now" route leads to a general contact page, label it as the contact page; do not describe it as a job portal or direct application form.
-- For XICTEK Systems roles without a role-specific application form or URL in the context (including when the only online route is a general contact page), tell applicants to email their CV to [xicteksystems@gmail.com](mailto:xicteksystems@gmail.com) and name the role in the email.
-- If the visitor asks how to apply but no XICTEK openings are listed in the context, they can still email their CV to [xicteksystems@gmail.com](mailto:xicteksystems@gmail.com) and specify the role or opportunity they are seeking.
-- Use the context to distinguish XICTEK Systems vacancies from HisabDo opportunities. Do not present XICTEK's email as a HisabDo application address, and do not imply HisabDo is hiring when the context says it is not.
-- Do not invent application requirements, deadlines, hiring status, or URLs. If a deadline or eligibility detail is absent, say it is not specified. Preserve the same-language-and-script rule above, including translating the CV submission instruction.
+- Start with a direct answer to the visitor's question, then give the most useful next action supported by the context. Keep both concise.
+- For openings, eligibility, process, and deadline questions, state the source-supported status or answer first. List relevant roles and requirements briefly; assess eligibility only against stated criteria, and identify each missing detail (including salary or deadline) as not specified.
+- When the context supplies an official application URL, include it as a clickable Markdown link using the exact URL. Do not omit a supplied route when the visitor asks where or how to apply, and never substitute a guessed or remembered URL.
+- If an official "Apply Now" route leads to a general contact page, link that exact destination and call it the contact page. Never describe it as a job portal, role-specific form, or direct application form.
+- For a XICTEK role with no role-specific form or URL in the context, give the actionable CV fallback: email the CV to [xicteksystems@gmail.com](mailto:xicteksystems@gmail.com) and name the role in the email. If a general contact page is also supplied, include its exact clickable link and label it as the contact page.
+- If the visitor asks how to apply but the context lists no XICTEK openings, say that no opening is listed in the supplied information; they may still email their CV to [xicteksystems@gmail.com](mailto:xicteksystems@gmail.com) and name the role or opportunity they seek. Do not imply that an unlisted role is open.
+- Keep XICTEK Systems and HisabDo opportunities separate. For HisabDo, do not give the XICTEK email as an application address. If the context says HisabDo is not hiring, state that clearly and do not present any route as an application; a supplied careers page is informational, and a future-opportunities contact link may only be offered as a way to ask about future availability.
+- If an application URL is absent, say that no application link is provided in the available information and direct the visitor only to a relevant official source/contact already supplied in context. Never fabricate a URL or claim a link was verified or functional unless the context supports that.
+- Do not invent openings, eligibility requirements, application steps, deadlines, hiring status, salary, or URLs. Preserve the same-language-and-script rule above, including translating next steps and link labels while leaving URL targets unchanged.
 """
 
 
