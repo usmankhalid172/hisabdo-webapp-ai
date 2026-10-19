@@ -32,7 +32,7 @@ def auth_headers():
     # no-op if the variable is already set in the shell/`.env` (common on
     # a dev machine that's had this repo configured before), so a
     # hardcoded guess here can silently drift from what the app expects.
-    return {"X-Internal-Token": os.environ["INTERNAL_SERVICE_TOKEN"]}
+    return {"X-Internal-Token": os.environ["INTERNAL_SERVICE_TOKEN"], "X-Authenticated-User-ID": "user-42"}
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -61,3 +61,4 @@ def ensure_categorization_model():
             cwd=repo_root,
             check=True,
         )
+
