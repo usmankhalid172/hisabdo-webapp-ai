@@ -266,6 +266,19 @@ single item and ordinary prose remain unchanged. The evaluation is deterministic
 and requires no LLM key or network access; it does not measure live retrieval
 or live model factuality. A non-zero exit code means one or more checks failed.
 
+Run the saved-index retrieval and link regression suite with:
+
+```bash
+python scripts/evaluate_core_services_regression.py
+```
+
+This exercises 34 baseline and edge queries against the persisted index using
+the configured Core Services `top_k` and similarity cutoff. It checks that
+each query retrieves its expected service-page source within the returned
+results and that retrieved links stay under `/services`. Four formatting
+checks cover compound list entries, punctuation, single-item answers, and
+ordinary prose. It does not call the live LLM or make a network request.
+
 ## Setup
 
 ```bash

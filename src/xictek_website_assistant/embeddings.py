@@ -41,6 +41,21 @@ VECTORIZER_FILENAME = "tfidf_vectorizer.pkl"
 # word in the visitor's question pulls in related words that the site's FAQ
 # entries are likely to use. Extend this dict as real misses show up.
 _SYNONYMS: dict[str, str] = {
+    # Core Services paraphrases uncovered by the regression suite. Keep these
+    # expansions tied to terms used by the indexed service-page FAQs.
+    "software": "custom application business system development",
+    "workflow": "process operations discovery exception",
+    "product": "application saas software platform",
+    "release": "launch deployment first release mvp",
+    "website": "web development application portal",
+    "web": "website application portal frontend react nextjs",
+    "mobile": "app application flutter react native ios android",
+    "framework": "flutter react native cross platform",
+    "roles": "role permissions access team management",
+    "role": "roles permissions access team management",
+    "permission": "permissions authorization access",
+    "erp": "enterprise resource planning inventory approvals modules operations",
+    "customization": "customize custom workflow module configuration",
     "touch": "contact email phone reach",
     "contact": "email phone reach touch",
     "reach": "contact email phone",
