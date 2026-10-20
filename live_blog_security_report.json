@@ -1,0 +1,340 @@
+{
+  "summary": {
+    "total_checks": 55,
+    "passed": 50,
+    "failed": 4,
+    "warnings": 1
+  },
+  "findings": [
+    {
+      "check": "blog_discovery",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog",
+      "detail": "Live Blog page HTTP 200; discovered 48 approved Blog links"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/software-development-company-pakistan",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/ai-development-company-pakistan",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/saas-development-services",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/erp-software-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/custom-software-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/mobile-app-development-company",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/azure-development-services",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/dotnet-development-services",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/flutter-app-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/digital-transformation-services",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/custom-software-development-guide",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/software-development-process",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/software-development-cost-pakistan",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/enterprise-software-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/startup-software-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/agile-software-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/software-maintenance-services",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/mvp-development-guide",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/saas-product-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/digital-product-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/web-development-company-pakistan",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/custom-web-application-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/nextjs-development-services",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/react-development-services",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/full-stack-development-guide",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/progressive-web-apps",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/ecommerce-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/portal-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/enterprise-web-applications",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/website-performance-optimization",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/android-app-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/ios-app-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/cross-platform-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/mobile-app-cost-guide",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/startup-mobile-apps",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/business-mobile-applications",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/app-maintenance-services",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/mobile-app-security",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/business-process-automation",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/ai-chatbot-development",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/generative-ai-applications",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/ai-for-smes",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/ai-in-erp-systems",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/ai-customer-support",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/ai-workflow-automation",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/ai-saas-platforms",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "discovered_url_reachability",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog/future-of-ai-in-business",
+      "detail": "HTTP 200; redirect destination remains in approved Blog section"
+    },
+    {
+      "check": "security_header",
+      "status": "PASS",
+      "item": "https://www.xicteksystems.com/blog",
+      "detail": "strict-transport-security: present"
+    },
+    {
+      "check": "security_header",
+      "status": "FAIL",
+      "item": "https://www.xicteksystems.com/blog",
+      "detail": "Missing x-content-type-options"
+    },
+    {
+      "check": "security_header",
+      "status": "FAIL",
+      "item": "https://www.xicteksystems.com/blog",
+      "detail": "Missing content-security-policy"
+    },
+    {
+      "check": "security_header",
+      "status": "FAIL",
+      "item": "https://www.xicteksystems.com/blog",
+      "detail": "Missing referrer-policy"
+    },
+    {
+      "check": "clickjacking_protection",
+      "status": "FAIL",
+      "item": "https://www.xicteksystems.com/blog",
+      "detail": "Neither CSP frame-ancestors nor X-Frame-Options is present"
+    },
+    {
+      "check": "optional_header",
+      "status": "WARN",
+      "item": "https://www.xicteksystems.com/blog",
+      "detail": "permissions-policy is not present (review policy requirements)"
+    }
+  ]
+}

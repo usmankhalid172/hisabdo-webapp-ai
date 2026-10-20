@@ -1,0 +1,12 @@
+[PASS] url_security | line-1: https://xicteksystems.com/blog/azure-development-services | HTTPS URL is on an approved XICTEK Blog path
+[FAIL] url_security | line-1: https://xicteksystems.com/services/custom-software-development | Path is outside the Blog section: /services/custom-software-development
+[PASS] url_security | line-2: https://xicteksystems.com/blog/azure-development-services | HTTPS URL is on an approved XICTEK Blog path
+[PASS] url_security | line-2: https://xicteksystems.com/blog/erp-software-development | HTTPS URL is on an approved XICTEK Blog path
+[PASS] url_security | line-3: https://xicteksystems.com/blog/software-development-cost-pakistan | HTTPS URL is on an approved XICTEK Blog path
+[PASS] url_security | line-3: https://xicteksystems.com/blog/erp-software-development | HTTPS URL is on an approved XICTEK Blog path
+[FAIL] url_security | line-4: https://hisabdo.app/blog | Host is not an approved XICTEK host: hisabdo.app
+[FAIL] url_security | line-5: https://hisabdo.app/blog/pdf-reports-for-businesses | Host is not an approved XICTEK host: hisabdo.app
+[FAIL] security_headers | https://www.xicteksystems.com/blog | Request failed: URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+
+Summary: 5 passed, 4 failed, 0 warnings
+JSON report: /mnt/data/work/inspect1/blog_security_link_regression_submission/captured_output_static_report.json

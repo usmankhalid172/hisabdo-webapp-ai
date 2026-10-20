@@ -1,0 +1,64 @@
+{
+  "summary": {
+    "total_checks": 9,
+    "passed": 5,
+    "failed": 4,
+    "warnings": 0
+  },
+  "findings": [
+    {
+      "check": "url_security",
+      "status": "PASS",
+      "item": "line-1: https://xicteksystems.com/blog/azure-development-services",
+      "detail": "HTTPS URL is on an approved XICTEK Blog path"
+    },
+    {
+      "check": "url_security",
+      "status": "FAIL",
+      "item": "line-1: https://xicteksystems.com/services/custom-software-development",
+      "detail": "Path is outside the Blog section: /services/custom-software-development"
+    },
+    {
+      "check": "url_security",
+      "status": "PASS",
+      "item": "line-2: https://xicteksystems.com/blog/azure-development-services",
+      "detail": "HTTPS URL is on an approved XICTEK Blog path"
+    },
+    {
+      "check": "url_security",
+      "status": "PASS",
+      "item": "line-2: https://xicteksystems.com/blog/erp-software-development",
+      "detail": "HTTPS URL is on an approved XICTEK Blog path"
+    },
+    {
+      "check": "url_security",
+      "status": "PASS",
+      "item": "line-3: https://xicteksystems.com/blog/software-development-cost-pakistan",
+      "detail": "HTTPS URL is on an approved XICTEK Blog path"
+    },
+    {
+      "check": "url_security",
+      "status": "PASS",
+      "item": "line-3: https://xicteksystems.com/blog/erp-software-development",
+      "detail": "HTTPS URL is on an approved XICTEK Blog path"
+    },
+    {
+      "check": "url_security",
+      "status": "FAIL",
+      "item": "line-4: https://hisabdo.app/blog",
+      "detail": "Host is not an approved XICTEK host: hisabdo.app"
+    },
+    {
+      "check": "url_security",
+      "status": "FAIL",
+      "item": "line-5: https://hisabdo.app/blog/pdf-reports-for-businesses",
+      "detail": "Host is not an approved XICTEK host: hisabdo.app"
+    },
+    {
+      "check": "security_headers",
+      "status": "FAIL",
+      "item": "https://www.xicteksystems.com/blog",
+      "detail": "Request failed: URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+    }
+  ]
+}
