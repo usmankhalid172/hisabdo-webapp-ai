@@ -6,6 +6,7 @@ Use this folder for project documentation such as:
 - API contracts
 - Integration strategy
 - Testing/evaluation evidence
+- [Careers & Job Openings workflow deployment guide](careers-workflow-deployment.md)
 - Technical decisions
 - Known blockers
 - Day 19 roadmap
