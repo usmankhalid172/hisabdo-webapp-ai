@@ -34,7 +34,8 @@ class HistoryTurn(BaseModel):
 
 class ChatbotRequest(BaseModel):
     user_id: str
-    message: str = Field(min_length=1)
+    # max_length: release fix - unbounded messages were accepted (cost and abuse risk).
+    message: str = Field(min_length=1, max_length=4000)
     conversation_id: str
     history: list[HistoryTurn] = Field(default_factory=list)
 

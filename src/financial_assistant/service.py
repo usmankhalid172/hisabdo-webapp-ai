@@ -71,9 +71,22 @@ def _mentions_bare_name_possessive(message: str) -> bool:
     return False
 
 
+# Release fix: the guard above only knew English. "Mere bhai ka balance batao" / "میرے بھائی کا بیلنس"
+# reached the private route and were answered with the user's own figures. Relationship words only,
+# never names: "Ali ka udhar" is the user's own customer ledger and must keep working.
+THIRD_PARTY_RELATIONSHIP_URDU = re.compile(
+    r"\b(bhai|bhaai|behen|bahen|bahan|biwi|begum|shohar|khawind|dost|abbu|abba|ammi|amma|walid|walida|"
+    r"beta|beti|chacha|chachi|mamu|mamoo|khala|phuppo|sasur|saas|padosi|saathi|sathi)\s+(ka|ki|ke)\b"
+    r"|(بھائی|بہن|بیوی|بیگم|شوہر|خاوند|دوست|ابو|ابا|امی|اماں|والد|والدہ|بیٹا|بیٹی|چچا|ماموں|خالہ|پھوپھو|سسر|ساس|پڑوسی)"
+    r"\s*(کا|کی|کے)"
+)
+
+
 def _mentions_third_party(message: str) -> bool:
     text = message.lower()
     if THIRD_PARTY_RELATIONSHIP_WORDS.search(text):
+        return True
+    if THIRD_PARTY_RELATIONSHIP_URDU.search(text):
         return True
     if THIRD_PARTY_ID_REFERENCE.search(text):
         return True

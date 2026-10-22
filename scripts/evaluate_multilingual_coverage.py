@@ -34,6 +34,7 @@ SETS = {
     "tuning": CASES_FILE,
     "round1-heldout": HELDOUT_FILE,
     "heldout-v2": ROOT / "data" / "multilingual_product_test_cases_heldout_v2.json",
+    "heldout-v3": ROOT / "data" / "multilingual_product_test_cases_heldout_v3.json",
 }
 TODAY = date(2026, 10, 16)
 LANGUAGE_NAMES = {"en": "English", "ur": "Urdu script", "roman_ur": "Roman Urdu"}
@@ -117,10 +118,10 @@ def main() -> int:
     ap.add_argument("--markdown", help="also write the summary to this file")
     ap.add_argument("--set", choices=sorted(SETS), default="tuning",
                     help="tuning (round 1), round1-heldout (became tuning material in round 2), "
-                         "heldout-v2 (the current honest measure)")
-    ap.add_argument("--heldout", action="store_true", help="shortcut for --set heldout-v2")
+                         "heldout-v2 (spent in final tuning), heldout-v3 (release-candidate measure)")
+    ap.add_argument("--heldout", action="store_true", help="shortcut for --set heldout-v3 (the current honest measure)")
     args = ap.parse_args()
-    source = SETS["heldout-v2" if args.heldout else args.set]
+    source = SETS["heldout-v3" if args.heldout else args.set]
     cases = json.loads(source.read_text(encoding="utf-8"))["cases"]
     rows = evaluate(cases)
     for r in rows:

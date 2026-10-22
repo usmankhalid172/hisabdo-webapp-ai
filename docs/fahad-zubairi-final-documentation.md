@@ -2,6 +2,8 @@
 
 **Owner:** Fahad Zubairi · **Final update:** 2026-10-19 · **Branch:** `FahadZubairi_AI` · **Repository:** https://github.com/usmankhalid172/hisabdo-webapp-ai
 
+**Release status (2026-10-22):** see [`release-candidate-review-and-handoff.md`](release-candidate-review-and-handoff.md). All 25 critical acceptance checks pass; recommended for staging or demo, not yet for production (private figures still come from the mock backend).
+
 This branch adds three things to the HisabDo AI work:
 
 1. **A secure, knowledge-grounded chatbot prototype** in `secure_kb_chatbot/`.

@@ -17,6 +17,10 @@ class Settings(BaseSettings):
     # Service-to-service auth placeholder (Day 15 blocker, see Day 16 continuity plan)
     internal_service_token: str = "change-me-dev-token"
 
+    # "production" (default, fail closed) | "development" | "test". Outside development/test the
+    # placeholder token above, or any token shorter than 32 characters, is refused (see security.py).
+    app_env: str = "production"
+
     # LLM provider selection: "mock" | "anthropic" | "openai"
     llm_provider: str = "mock"
     anthropic_api_key: str = ""

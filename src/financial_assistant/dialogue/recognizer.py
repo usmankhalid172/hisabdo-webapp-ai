@@ -160,12 +160,25 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
             scores[Intent.FAQ] = scores.get(Intent.FAQ, 0.0) + 1.0
             signals.append("faq:how_to_record")
 
-        # "Ahmed ka khata dikhao" asks to SEE a ledger (private data), unlike "khata kya hai?" (a concept).
-        if re.search(r"\b(khata|khaata|ledger)\b|کھات", lowered) and \
-                re.search(r"\b(dikhao|dikhaen|dikhayen|show|open)\b|دکھا", lowered):
+        # "Ahmed ka khata dikhao" / "Bilal ka hisaab kholo" ask to SEE or OPEN a ledger (private data),
+        # unlike "khata kya hai?" (a concept). Release fix: hisaab/account and kholo/khol do/کھولیں added.
+        if re.search(r"\b(khata|khaata|ledger|hisaab|hisab|account)\b|کھات|حساب", lowered) and \
+                re.search(r"\b(dikhao|dikha do|dikhaen|dikhayen|show|open|kholo|khol do|kholen|kholiye)\b"
+                          r"|دکھا|کھول", lowered) and not how_to:
             scores.pop(Intent.FAQ, None)
             scores[Intent.ACCOUNT_QUERY] = scores.get(Intent.ACCOUNT_QUERY, 0.0) + 2.0
             signals.append("account_query:show_khata")
+
+        # "What are my total sales?" / "Meri total sales kitni hain?" ask for the user's OWN figures.
+        # Release fix: these were answered from the knowledge base with a definition of "revenue".
+        own = re.search(r"\b(my|mera|meri|mere|our|hamara|hamari)\b|میرا|میری|میرے|ہمارا|ہماری", lowered)
+        metric = re.search(r"\b(sales|sale|revenue|income|earn|earned|earning|profit|munafa|kamai|aamdani|amdani)\b"
+                           r"|سیل|آمدنی|منافع|کمائی", lowered)
+        # Only genuinely conceptual words: "What are MY total sales?" asks for figures, not a definition.
+        concept = re.search(r"\b(matlab|meaning|mean|means|difference|farq|definition|define)\b|مطلب|فرق", lowered)
+        if own and metric and amount is None and not how_to and not concept:
+            scores[Intent.REPORT] = scores.get(Intent.REPORT, 0.0) + 2.0
+            signals.append("report:own_metric")
 
         # A question mark with no money words and no amount is most likely a general/product question.
         is_question = "?" in text or "؟" in text
