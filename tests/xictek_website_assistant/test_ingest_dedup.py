@@ -11,11 +11,60 @@ from unittest.mock import patch
 
 import numpy as np
 
-from src.xictek_website_assistant.ingest import CrawledPage, build_index
+from src.xictek_website_assistant.ingest import CrawledPage, _extract_page, build_index
 
 
 def _stub_embed(texts):
     return np.zeros((len(texts), 4), dtype="float32")
+
+
+def test_blog_extraction_removes_sidebar_author_and_comment_noise():
+    html = """
+    <html>
+      <head><title>Useful Guide</title></head>
+      <body>
+        <main>
+          <article>
+            <h1>Useful Guide</h1>
+            <p>The first article paragraph explains the topic.</p>
+            <div class="postAuthor">Written by Example Author</div>
+            <section id="comments">
+              <h2>Comments</h2>
+              <p>This visitor comment is not article content.</p>
+            </section>
+            <p>Conclusion: the article's key takeaway.</p>
+          </article>
+          <aside class="promo-sidebar">
+            <p>Subscribe to our newsletter and get a promotion.</p>
+          </aside>
+        </main>
+      </body>
+    </html>
+    """
+
+    page = _extract_page("https://example.com/blog/useful-guide", html)
+
+    assert page.title == "Useful Guide"
+    assert "The first article paragraph explains the topic." in page.text
+    assert "Conclusion: the article's key takeaway." in page.text
+    assert "Example Author" not in page.text
+    assert "visitor comment" not in page.text
+    assert "Subscribe to our newsletter" not in page.text
+
+
+def test_article_noise_cleanup_does_not_change_non_article_routes():
+    html = """
+    <html><body><main>
+      <p>Company information.</p>
+      <div class="author">The company founder</div>
+      <aside>Additional company details.</aside>
+    </main></body></html>
+    """
+
+    page = _extract_page("https://example.com/about", html)
+
+    assert "The company founder" in page.text
+    assert "Additional company details." in page.text
 
 
 def test_repeated_paragraph_block_collapses_to_unique_chunks():

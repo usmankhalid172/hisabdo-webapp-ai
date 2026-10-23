@@ -25,6 +25,7 @@ run it from a normal dev machine or CI with outbound HTTPS access.
 """
 from __future__ import annotations
 
+import re
 import sys
 import time
 from collections import deque
@@ -45,6 +46,27 @@ USER_AGENT = "XictekWebsiteAssistantIngestBot/1.0 (+internal knowledge-base inde
 # content, and otherwise pollutes every single chunk with the same
 # boilerplate (menu items, footer links) diluting retrieval quality.
 _STRIP_TAGS = ["script", "style", "nav", "header", "footer", "noscript", "svg", "form"]
+_ARTICLE_PATH_SEGMENTS = {"blog", "blogs", "news", "articles"}
+_ARTICLE_NOISE_TOKENS = {
+    "adslot",
+    "advert",
+    "advertisement",
+    "author",
+    "byline",
+    "comment",
+    "comments",
+    "commentlist",
+    "newsletter",
+    "promo",
+    "promotional",
+    "reply",
+    "replies",
+    "respond",
+    "sidebar",
+    "sponsored",
+    "subscribe",
+}
+_CAMEL_CASE_BOUNDARY_RE = re.compile(r"([a-z0-9])([A-Z])")
 
 
 @dataclass
@@ -59,10 +81,44 @@ def _is_allowed_domain(url: str, allowed_domains: list[str]) -> bool:
     return host in allowed_domains
 
 
+def _is_article_route(url: str) -> bool:
+    return bool(set(urlparse(url).path.lower().split("/")) & _ARTICLE_PATH_SEGMENTS)
+
+
+def _strip_article_noise(soup: BeautifulSoup) -> None:
+    noisy_tags = []
+    for tag in soup.find_all(True):
+        if tag.name in {"aside", "author"} or str(tag.get("role", "")).lower() == "complementary":
+            noisy_tags.append(tag)
+            continue
+
+        attributes = ("class", "id", "itemprop", "rel", "data-testid")
+        tokens = set()
+        for attribute in attributes:
+            value = tag.get(attribute, [])
+            values = value if isinstance(value, list) else [value]
+            for part in values:
+                normalized = _CAMEL_CASE_BOUNDARY_RE.sub(r"\1 \2", str(part))
+                tokens.update(
+                    token.lower()
+                    for token in re.split(r"[^a-zA-Z0-9]+", normalized)
+                    if token
+                )
+        if tokens & _ARTICLE_NOISE_TOKENS:
+            noisy_tags.append(tag)
+
+    noisy_tag_ids = {id(tag) for tag in noisy_tags}
+    for tag in noisy_tags:
+        if not any(id(parent) in noisy_tag_ids for parent in tag.parents):
+            tag.decompose()
+
+
 def _extract_page(url: str, html: str) -> CrawledPage:
     soup = BeautifulSoup(html, "html.parser")
     for tag in soup.find_all(_STRIP_TAGS):
         tag.decompose()
+    if _is_article_route(url):
+        _strip_article_noise(soup)
 
     title = soup.title.get_text(strip=True) if soup.title else url
     main = soup.find("main") or soup.body or soup

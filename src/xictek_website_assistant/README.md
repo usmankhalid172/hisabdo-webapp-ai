@@ -74,7 +74,8 @@ question set this was built against.
 
 ```
 crawl_seed_urls  --(same-domain BFS crawl, allow-listed domains only)-->
-  raw HTML pages --(strip nav/header/footer/script/style, extract text)-->
+  raw HTML pages --(strip site chrome; clean author, sidebar/promo, and
+                    comments markup on blog/news routes)-->
     page text --(chunking.py: paragraph-aware, ~1200 chars, 200 overlap)-->
       chunks --(embeddings.py: sentence-transformers, local)-->
         vectors --(vector_store.py: VectorStore.save())-->
@@ -93,6 +94,11 @@ never follow a link off those domains), extracts readable page text,
 chunks and embeds it, and overwrites whatever index already exists
 under `data/index/`. It's a full rebuild every time — no incremental
 indexing — which is fine at this content scale (a few hundred pages).
+For `/blog`, `/blogs`, `/news`, and `/articles` routes, extraction also
+removes semantic sidebars, complementary regions, and elements marked as
+author/byline, promotional, advertisement, subscription, or comment
+content before chunking. The article body and its title remain indexed;
+other route types retain their existing extraction behavior.
 
 **Re-run required after the multilingual embedding model change:**
 both models happen to output 384-dimensional vectors, so an old index
