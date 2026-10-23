@@ -12,10 +12,12 @@ def _financial_request(client, headers, user_id="user-42"):
 
 
 def test_financial_query_requires_customer_identity(client, auth_headers):
-    response = _financial_request(client, auth_headers)
+    headers = {
+        "X-Internal-Token": auth_headers["X-Internal-Token"]
+    }
+    response = _financial_request(client, headers)
     assert response.status_code == 401
     assert response.json()["error_code"] == "UNAUTHENTICATED_CUSTOMER"
-
 
 def test_customer_cannot_request_another_account(client, auth_headers):
     headers = {
