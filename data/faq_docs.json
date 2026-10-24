@@ -202,7 +202,7 @@
   {
     "id": "faq-udhar-guidance",
     "title": "How can I understand Udhar or customer balances?",
-    "text": "HisabDo helps users track money given and received and customer balances. A receivable is money owed to the user; a payable is money the user owes. A previously tested receivable entry showed PKR 5,000 for customer XYZ. Exact screen steps for all Udhar actions have not been verified. Roman Urdu queries: Udhar ka record kaise dekhoon? Udhar ka hisaab kaise check karun? Kis customer ne kitne paise dene hain? Maine kitne paise dene hain? Customer ka balance kaise dekhein?",
+    "text": "HisabDo helps users track money given and received and customer balances. A receivable is money owed to the user; a payable is money the user owes. Exact screen steps for all Udhar actions have not been verified. Roman Urdu queries: Udhar ka record kaise dekhoon? Udhar ka hisaab kaise check karun? Kis customer ne kitne paise dene hain? Maine kitne paise dene hain? Customer ka balance kaise dekhein?",
     "type": "product_faq",
     "version": "1.0.0",
     "verified": true,
