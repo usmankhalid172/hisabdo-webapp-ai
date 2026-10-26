@@ -1,3 +1,4 @@
+> **Historical status note:** This report records findings from its original review. The statuses below describe that review and do not independently establish the current implementation status. Verify current code and test evidence before reporting current results.
 # Day 26 – End-to-End AI User Flow & Bug Testing
 
 **Author:** Joyce Hany
