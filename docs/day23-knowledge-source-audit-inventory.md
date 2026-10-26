@@ -1,4 +1,5 @@
-﻿# Day 23 - Knowledge Source Audit Inventory
+﻿> **Historical status note:** This document records findings from its original review date. Verify the current code, tests, and approved product sources before treating any finding as the present status.
+# Day 23 - Knowledge Source Audit Inventory
 
 ## Scope
 This audit covers knowledge-source files identified in the repository. The actual HisabDo application and external source-owner records were not available for verification.

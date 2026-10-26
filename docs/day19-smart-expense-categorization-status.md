@@ -1,3 +1,4 @@
+﻿> **Historical status note:** This document records findings from its original review date. Verify the current code, tests, and approved product sources before treating any finding as the present status.
 # Day 19 — Smart Expense Categorization Technical Status & Roadmap
 
 **Prepared by:** Mehar Ali

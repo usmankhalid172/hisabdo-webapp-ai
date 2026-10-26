@@ -1,3 +1,4 @@
+﻿> **Historical status note:** This document records findings from its original review date. Verify the current code, tests, and approved product sources before treating any finding as the present status.
 # Day 28 - Integration QA & PR #76 Verification Log
 
 **Project:** HisabDo Web App AI
