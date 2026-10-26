@@ -4,10 +4,7 @@ Task 1 - About Us chunking + retrieval testing (Alisha Noor)
 SETUP (once):
     pip install chromadb langchain-text-splitters
 
-
-
-
-Uses a LOCAL database folder (./local_chroma), so it never touches the shared DB.
+    Uses a LOCAL database folder (./local_chroma), so it never touches the shared DB.
 """
 import csv
 import shutil
