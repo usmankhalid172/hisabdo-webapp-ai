@@ -2,61 +2,121 @@
   {
     "id": "faq-001",
     "title": "What is HisabDo?",
-    "text": "HisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going."
+    "text": "HisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   },
   {
     "id": "faq-002",
     "title": "How do I categorize an expense? How does automatic expense categorization work?",
-    "text": "When you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions. If the model isn't confident, the expense is flagged for you to confirm or correct the category instead of being applied automatically."
+    "text": "When you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions. If the model isn't confident, the expense is flagged for you to confirm or correct the category instead of being applied automatically.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   },
   {
     "id": "faq-003",
     "title": "Is my financial data used to train the shared AI model?",
-    "text": "No individual user's raw financial data is used as a knowledge source for the chatbot. Chatbot answers about your own balance, expenses, or revenue are always pulled live from your account through the backend, not from any shared knowledge base."
+    "text": "No individual user's raw financial data is used as a knowledge source for the chatbot. Chatbot answers about your own balance, expenses, or revenue are always pulled live from your account through the backend, not from any shared knowledge base.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   },
   {
     "id": "faq-004",
     "title": "What is a cash flow statement?",
-    "text": "A cash flow statement is a financial report that shows the money moving in and out of a business over a period of time, split into operating, investing, and financing activities. It helps you see whether a business is generating enough cash to sustain itself."
+    "text": "A cash flow statement is a financial report that shows the money moving in and out of a business over a period of time, split into operating, investing, and financing activities. It helps you see whether a business is generating enough cash to sustain itself.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   },
   {
     "id": "faq-005",
     "title": "How do I export my expenses?",
-    "text": "You can export your recorded expenses as a CSV or PDF report from the Reports section of the app, filtered by date range, category, or tag."
+    "text": "You can export your recorded expenses as a CSV or PDF report from the Reports section of the app, filtered by date range, category, or tag.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   },
   {
     "id": "faq-006",
     "title": "What's the difference between profit and cash flow?",
-    "text": "Profit is revenue minus expenses over a period, based on accounting rules, while cash flow is the actual movement of money in and out of your accounts. A business can be profitable on paper while still running low on cash if customers haven't paid yet."
+    "text": "Profit is revenue minus expenses over a period, based on accounting rules, while cash flow is the actual movement of money in and out of your accounts. A business can be profitable on paper while still running low on cash if customers haven't paid yet.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   },
   {
     "id": "finance_001",
     "title": "What is profit?",
-    "text": "Profit is the amount remaining after expenses are subtracted from revenue."
+    "text": "Profit is the amount remaining after expenses are subtracted from revenue.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   },
   {
     "id": "finance_002",
     "title": "What is revenue?",
-    "text": "Revenue is the total income generated from business sales or services before expenses are deducted."
+    "text": "Revenue is the total income generated from business sales or services before expenses are deducted.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   },
   {
     "id": "finance_003",
     "title": "What is an expense?",
-    "text": "An expense is a cost incurred by a business while operating or generating revenue."
+    "text": "An expense is a cost incurred by a business while operating or generating revenue.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   },
   {
     "id": "finance_004",
     "title": "What is cash flow?",
-    "text": "Cash flow represents the movement of money entering and leaving a business during a period."
+    "text": "Cash flow represents the movement of money entering and leaving a business during a period.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   },
   {
     "id": "finance_005",
     "title": "Why should customer balances be tracked?",
-    "text": "Tracking customer balances helps a business identify outstanding payments and monitor money owed by customers."
+    "text": "Tracking customer balances helps a business identify outstanding payments and monitor money owed by customers.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   },
   {
     "id": "finance_006",
     "title": "Why should business expenses be categorized?",
-    "text": "Categorizing expenses makes financial records easier to analyze and helps identify where business money is being spent."
+    "text": "Categorizing expenses makes financial records easier to analyze and helps identify where business money is being spent.",
+    "section": "FAQ",
+    "category": "general",
+    "source_url": null,
+    "language": "en",
+    "updated_date": null
   }
 ]
