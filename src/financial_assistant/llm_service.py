@@ -24,7 +24,7 @@ This module does NOT define:
 
 ASSUMPTION (flag for team lead review): built against an OpenAI-compatible
 chat completions API. The LLM client is isolated in `_call_llm_api()` so
-swapping providers (e.g. Gemini) only requires changing that one function.
+swapping providers only requires changing that one function.
 """
 
 from __future__ import annotations

@@ -1,9 +1,9 @@
-
+﻿
 
 from knowledge_retrieval import search_knowledge_base
 
 
-def run_tests():
+def test_knowledge_retrieval():
     tests = [
         {
             "name": "Receivable definition",
@@ -77,8 +77,11 @@ def run_tests():
             else:
                 print(f"  FAIL: {check_name}")
 
-        if all(checks.values()):
-            passed += 1
+        assert all(checks.values()), (
+            f"Failed checks for test case: {test['name']}"
+        )
+
+        passed += 1
 
         print(f"  Answer: {result.get('answer')}")
         print(f"  Source: {result.get('source') or 'No matching source'}")
@@ -89,4 +92,4 @@ def run_tests():
 
 
 if __name__ == "__main__":
-    run_tests()
+    test_knowledge_retrieval()
