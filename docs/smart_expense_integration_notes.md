@@ -1,4 +1,4 @@
-# Smart Expense Categorization – Integration Notes
+﻿# Smart Expense Categorization - Integration Notes
 
 ## 1. Service Purpose
 
@@ -34,3 +34,4 @@ HisabDo Application
   |
   v
 User
+```
