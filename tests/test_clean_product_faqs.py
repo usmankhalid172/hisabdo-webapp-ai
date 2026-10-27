@@ -1,10 +1,10 @@
 """Content cleaning of the approved product FAQ (scripts/clean_product_faqs.py).
 
 Uses the saved official page tests/fixtures/hisabdo_faq_2026-10-26.html, so the
-tests run offline and do not change when the live site changes.
+tests run offline and do not change when the live site changes. The KB output for
+the FAQ is now produced by clean_knowledge_sources.py (tests/test_clean_knowledge_sources.py).
 """
 
-import json
 import re
 import sys
 from dataclasses import replace
@@ -17,10 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from clean_product_faqs import clean_text, extract, to_markdown, write  # noqa: E402
-from kb_privacy_scan import scan_file  # noqa: E402
 
 FIXTURE = ROOT / "tests" / "fixtures" / "hisabdo_faq_2026-10-26.html"
-COMMITTED = ROOT / "data" / "kb" / "product_faqs"
 DAY = date(2026, 10, 26)
 
 BOILERPLATE = ["Download Free", "Contact Support", "Ready to Get Started", "Frequently Asked Questions",
@@ -130,19 +128,3 @@ def test_rerun_is_idempotent_and_reports_changes(result, tmp_path):
     changes = write(edited, report, tmp_path)
     assert changes["removed"] == ["Is HisabDo free to use?"] and changes["changed"] == [edited[0].question]
     assert len(list(tmp_path.glob("*.md"))) == 32  # stale chunk files are removed
-
-
-def test_committed_chunks_match_the_cleaner_output(result):
-    """data/kb/product_faqs must be regenerated whenever the cleaner or the snapshot changes."""
-    chunks, _ = result
-    index = json.loads((COMMITTED / "index.json").read_text(encoding="utf-8"))
-    assert index["chunk_count"] == 33
-    for c in chunks:
-        entry = next(e for e in index["chunks"] if e["id"] == c.id)
-        assert (COMMITTED / entry["file"]).read_text(encoding="utf-8") == to_markdown(c)
-
-
-def test_committed_chunks_pass_the_privacy_gate():
-    for path in sorted(COMMITTED.iterdir()):
-        findings = [h for h in scan_file(path) if "(allowed" not in h[1]]
-        assert findings == [], f"{path.name}: {findings}"

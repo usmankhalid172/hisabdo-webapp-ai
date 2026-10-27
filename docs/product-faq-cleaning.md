@@ -2,6 +2,11 @@
 
 **Author:** Fahad Zubairi (AI intern) · **Date:** 2026-10-26 · **Branch:** `FahadZubairi_AI`
 
+> **Superseded on 2026-10-27** by [kb-content-cleaning.md](kb-content-cleaning.md). The FAQ is now cleaned
+> together with every other approved source by `scripts/clean_knowledge_sources.py`, into `data/kb/approved/`.
+> `data/kb/product_faqs/` was removed so the FAQ answers are not in the KB twice. The FAQ cleaner below is
+> still used as the FAQ reader inside the new pipeline.
+
 ## 1. Scope
 
 The only **approved** product FAQ is the official Help Center, <https://hisabdo.app/faq>

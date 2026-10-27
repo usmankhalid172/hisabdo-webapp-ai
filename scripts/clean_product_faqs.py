@@ -1,5 +1,9 @@
 """Clean the approved HisabDo product FAQ into one Markdown chunk per question.
 
+The knowledge base is now built by clean_knowledge_sources.py, which uses this
+module to read the FAQ page. Run this script on its own only for a standalone
+FAQ export (--out is required so it cannot recreate the retired data/kb/product_faqs).
+
 Source: the official Help Center (https://hisabdo.app/faq), the only approved
 product FAQ (see docs/dept3-knowledge-source-audit.md, OFF-01).
 
@@ -18,8 +22,8 @@ Each chunk gets front matter (id, section, source, owner, approval, dates,
 review policy, content hash). Re-running compares hashes with the previous
 index and reports added, changed and removed questions.
 
-    python scripts/clean_product_faqs.py                          # fetch the live page
-    python scripts/clean_product_faqs.py --html saved_page.html   # use a saved copy
+    python scripts/clean_product_faqs.py --out faq_export                          # fetch the live page
+    python scripts/clean_product_faqs.py --out faq_export --html saved_page.html   # use a saved copy
 """
 
 from __future__ import annotations
@@ -42,7 +46,6 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_URL = "https://hisabdo.app/faq"
 SITE = "https://hisabdo.app"
-OUT_DIR = ROOT / "data" / "kb" / "product_faqs"
 OWNER = "Mian Usman Khalid (founder, XICTEK Systems)"
 REVIEW_POLICY = "P-FAQ"
 REVIEW_DAYS = 30  # P-FAQ: re-verify every 30 days and within 7 days of each app release
@@ -175,7 +178,9 @@ def slugify(text: str) -> str:
 # ------------------------------------------------------------------------------------ extraction
 
 
-def extract(page_html: str, retrieved_on: date, base_url: str = SOURCE_URL) -> tuple[list[FaqChunk], dict]:
+def extract(page_html: str, retrieved_on: date, base_url: str = SOURCE_URL,
+            rewrite: bool = True) -> tuple[list[FaqChunk], dict]:
+    """rewrite=False leaves website-relative wording for the caller to rewrite (clean_knowledge_sources)."""
     soup = BeautifulSoup(page_html, "html.parser")
     main = soup.find("main") or soup
     report = {"removed_boilerplate": [], "warnings": []}
@@ -210,8 +215,9 @@ def extract(page_html: str, retrieved_on: date, base_url: str = SOURCE_URL) -> t
         fixes = []
         if raw_answer != " ".join(p.get_text(" ") for p in details.find_all("p")).strip():
             fixes.append("normalised whitespace/characters")
-        answer, context_fixes = contextualise(answer)
-        fixes += context_fixes
+        if rewrite:
+            answer, context_fixes = contextualise(answer)
+            fixes += context_fixes
 
         chunk = FaqChunk(
             id=f"hisabdo-faq-{n:03d}", question=question, section=section, answer=answer,
@@ -278,7 +284,7 @@ def main() -> int:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--html", help="saved copy of the FAQ page (default: fetch the live page)")
-    ap.add_argument("--out", default=str(OUT_DIR))
+    ap.add_argument("--out", required=True, help="output folder for the export")
     ap.add_argument("--retrieved-on", default=date.today().isoformat())
     args = ap.parse_args()
 
