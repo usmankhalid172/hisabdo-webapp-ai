@@ -7,7 +7,15 @@
     "version": "1.2.0",
     "verified": true,
     "source": "Official HisabDo FAQ — https://hisabdo.app/faq",
-    "last_reviewed": "2026-10-13"
+    "last_reviewed": "2026-10-13",
+    "section": "Product Overview",
+    "category": "Product Support",
+    "source_url": "https://hisabdo.app/faq",
+    "language": "en",
+    "last_updated": "2026-10-13",
+    "product_area": "HisabDo Expense Management",
+    "chunk_id": "faq-001",
+    "content_status": "approved"
   },
   {
     "id": "faq-002",
@@ -17,7 +25,15 @@
     "version": "1.1.0",
     "verified": false,
     "source": "Existing HisabDo FAQ; product confirmation required",
-    "last_reviewed": null
+    "last_reviewed": null,
+    "section": "Expense Management",
+    "category": "Product Support",
+    "source_url": null,
+    "language": "en",
+    "last_updated": "2026-10-27",
+    "product_area": "HisabDo Expense Management",
+    "chunk_id": "faq-002",
+    "content_status": "needs_review"
   },
   {
     "id": "faq-003",
@@ -27,7 +43,15 @@
     "version": "1.1.0",
     "verified": false,
     "source": "Existing HisabDo FAQ; privacy confirmation required",
-    "last_reviewed": null
+    "last_reviewed": null,
+    "section": "Privacy and Data Handling",
+    "category": "Product Support",
+    "source_url": null,
+    "language": "en",
+    "last_updated": "2026-10-27",
+    "product_area": "HisabDo Expense Management",
+    "chunk_id": "faq-003",
+    "content_status": "needs_review"
   },
   {
     "id": "faq-004",
@@ -37,7 +61,15 @@
     "version": "1.1.0",
     "verified": true,
     "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
-    "last_reviewed": "2026-10-13"
+    "last_reviewed": "2026-10-13",
+    "section": "Financial Concepts",
+    "category": "Finance Education",
+    "source_url": "https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "language": "en",
+    "last_updated": "2026-10-13",
+    "product_area": "General Finance",
+    "chunk_id": "faq-004",
+    "content_status": "approved"
   },
   {
     "id": "faq-005",
@@ -47,7 +79,18 @@
     "version": "1.1.0",
     "verified": true,
     "source": "Official HisabDo FAQ — https://hisabdo.app/faq",
-    "last_reviewed": "2026-10-13"
+    "last_reviewed": "2026-10-13",
+    "section": "Expense Management",
+    "category": "Product Support",
+    "source_url": "https://hisabdo.app/faq",
+    "language": "en",
+    "last_updated": "2026-10-13",
+    "product_area": "HisabDo Expense Management",
+    "chunk_id": "faq-005",
+    "content_status": "approved",
+    "alternate_questions": [
+      "How do I download a financial report in HisabDo?"
+    ]
   },
   {
     "id": "faq-006",
@@ -57,7 +100,15 @@
     "version": "1.1.0",
     "verified": true,
     "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
-    "last_reviewed": "2026-10-13"
+    "last_reviewed": "2026-10-13",
+    "section": "Financial Concepts",
+    "category": "Finance Education",
+    "source_url": "https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "language": "en",
+    "last_updated": "2026-10-13",
+    "product_area": "General Finance",
+    "chunk_id": "faq-006",
+    "content_status": "approved"
   },
   {
     "id": "finance_001",
@@ -67,7 +118,15 @@
     "version": "1.1.0",
     "verified": true,
     "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
-    "last_reviewed": "2026-10-13"
+    "last_reviewed": "2026-10-13",
+    "section": "Financial Concepts",
+    "category": "Finance Education",
+    "source_url": "https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "language": "en",
+    "last_updated": "2026-10-13",
+    "product_area": "General Finance",
+    "chunk_id": "finance_001",
+    "content_status": "approved"
   },
   {
     "id": "finance_002",
@@ -77,7 +136,15 @@
     "version": "1.1.0",
     "verified": true,
     "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
-    "last_reviewed": "2026-10-13"
+    "last_reviewed": "2026-10-13",
+    "section": "Financial Concepts",
+    "category": "Finance Education",
+    "source_url": "https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "language": "en",
+    "last_updated": "2026-10-13",
+    "product_area": "General Finance",
+    "chunk_id": "finance_002",
+    "content_status": "approved"
   },
   {
     "id": "finance_003",
@@ -87,7 +154,15 @@
     "version": "1.1.0",
     "verified": true,
     "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
-    "last_reviewed": "2026-10-13"
+    "last_reviewed": "2026-10-13",
+    "section": "Expense Management",
+    "category": "Finance Education",
+    "source_url": "https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "language": "en",
+    "last_updated": "2026-10-13",
+    "product_area": "General Finance",
+    "chunk_id": "finance_003",
+    "content_status": "approved"
   },
   {
     "id": "finance_004",
@@ -97,7 +172,15 @@
     "version": "1.1.0",
     "verified": true,
     "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
-    "last_reviewed": "2026-10-13"
+    "last_reviewed": "2026-10-13",
+    "section": "Financial Concepts",
+    "category": "Finance Education",
+    "source_url": "https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "language": "en",
+    "last_updated": "2026-10-13",
+    "product_area": "General Finance",
+    "chunk_id": "finance_004",
+    "content_status": "approved"
   },
   {
     "id": "finance_005",
@@ -107,7 +190,15 @@
     "version": "1.1.0",
     "verified": false,
     "source": "Existing finance FAQ; review required",
-    "last_reviewed": null
+    "last_reviewed": null,
+    "section": "Khata and Customer Balances",
+    "category": "Finance Education",
+    "source_url": null,
+    "language": "en",
+    "last_updated": "2026-10-27",
+    "product_area": "General Finance",
+    "chunk_id": "finance_005",
+    "content_status": "needs_review"
   },
   {
     "id": "finance_006",
@@ -116,8 +207,16 @@
     "type": "finance_faq",
     "version": "1.1.0",
     "verified": false,
-    "source": "Existing finance FAQ; review required",
-    "last_reviewed": null
+    "source": "Australian Taxation Office, Recording business income and expenses ? Categorising accurately",
+    "last_reviewed": null,
+    "section": "Expense Management",
+    "category": "Finance Education",
+    "source_url": "https://smallbusiness.taxsuperandyou.gov.au/recording-business-income-and-expenses/fast-facts",
+    "language": "en",
+    "last_updated": "2026-10-27",
+    "product_area": "General Finance",
+    "chunk_id": "finance_006",
+    "content_status": "needs_review"
   },
   {
     "id": "finance_007",
@@ -127,7 +226,15 @@
     "version": "1.1.0",
     "verified": true,
     "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
-    "last_reviewed": "2026-10-13"
+    "last_reviewed": "2026-10-13",
+    "section": "Financial Concepts",
+    "category": "Finance Education",
+    "source_url": "https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "language": "en",
+    "last_updated": "2026-10-13",
+    "product_area": "General Finance",
+    "chunk_id": "finance_007",
+    "content_status": "approved"
   },
   {
     "id": "finance_008",
@@ -137,7 +244,15 @@
     "version": "1.1.0",
     "verified": true,
     "source": "OpenStax, Principles of Financial Accounting, Section 2.1 — https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
-    "last_reviewed": "2026-10-13"
+    "last_reviewed": "2026-10-13",
+    "section": "Financial Concepts",
+    "category": "Finance Education",
+    "source_url": "https://openstax.org/books/principles-financial-accounting/pages/2-1-describe-the-income-statement-statement-of-owners-equity-balance-sheet-and-statement-of-cash-flows-and-how-they-interrelate",
+    "language": "en",
+    "last_updated": "2026-10-13",
+    "product_area": "General Finance",
+    "chunk_id": "finance_008",
+    "content_status": "approved"
   },
   {
     "id": "finance_009",
@@ -147,7 +262,15 @@
     "version": "1.0.0",
     "verified": false,
     "source": "New FAQ draft; review required",
-    "last_reviewed": null
+    "last_reviewed": null,
+    "section": "Khata and Customer Balances",
+    "category": "Finance Education",
+    "source_url": null,
+    "language": "en",
+    "last_updated": "2026-10-27",
+    "product_area": "General Finance",
+    "chunk_id": "finance_009",
+    "content_status": "needs_review"
   },
   {
     "id": "finance_010",
@@ -156,18 +279,16 @@
     "type": "finance_faq",
     "version": "1.0.0",
     "verified": false,
-    "source": "New FAQ draft; review required",
-    "last_reviewed": null
-  },
-  {
-    "id": "product_001",
-    "title": "How do I download a financial report in HisabDo?",
-    "text": "HisabDo supports PDF reports for supported records. Official documentation describes reports for transactions, customer balances, and customer activity. The exact steps may depend on the screen and record being viewed. CSV export is not confirmed by the source.",
-    "type": "product_documentation",
-    "version": "1.1.0",
-    "verified": true,
-    "source": "Official HisabDo FAQ — https://hisabdo.app/faq",
-    "last_reviewed": "2026-10-13"
+    "source": "Internal Revenue Service, Publication 583 ? Starting a Business and Keeping Records",
+    "last_reviewed": null,
+    "section": "Financial Concepts",
+    "category": "Finance Education",
+    "source_url": "https://www.irs.gov/publications/p583",
+    "language": "en",
+    "last_updated": "2026-10-27",
+    "product_area": "General Finance",
+    "chunk_id": "finance_010",
+    "content_status": "needs_review"
   },
   {
     "id": "product_002",
@@ -177,7 +298,15 @@
     "version": "1.0.0",
     "verified": false,
     "source": "Product documentation draft; engineering confirmation required",
-    "last_reviewed": null
+    "last_reviewed": null,
+    "section": "Privacy and Data Handling",
+    "category": "Product Support",
+    "source_url": null,
+    "language": "en",
+    "last_updated": "2026-10-27",
+    "product_area": "HisabDo Expense Management",
+    "chunk_id": "product_002",
+    "content_status": "needs_review"
   },
   {
     "id": "product_003",
@@ -187,7 +316,15 @@
     "version": "1.0.0",
     "verified": false,
     "source": "Product documentation draft; engineering review required",
-    "last_reviewed": null
+    "last_reviewed": null,
+    "section": "AI Assistant Guidance",
+    "category": "Product Support",
+    "source_url": null,
+    "language": "en",
+    "last_updated": "2026-10-27",
+    "product_area": "HisabDo Expense Management",
+    "chunk_id": "product_003",
+    "content_status": "needs_review"
   },
   {
     "id": "faq-khata-guidance",
@@ -196,8 +333,16 @@
     "type": "product_faq",
     "version": "1.0.0",
     "verified": true,
-    "source": "Official HisabDo FAQ ? https://hisabdo.app/faq",
-    "last_reviewed": "2026-10-16"
+    "source": "Official HisabDo FAQ - https://hisabdo.app/faq",
+    "last_reviewed": "2026-10-16",
+    "section": "Khata and Customer Balances",
+    "category": "Product Support",
+    "source_url": "https://hisabdo.app/faq",
+    "language": "en",
+    "last_updated": "2026-10-16",
+    "product_area": "HisabDo Expense Management",
+    "chunk_id": "faq-khata-guidance",
+    "content_status": "approved"
   },
   {
     "id": "faq-udhar-guidance",
@@ -207,6 +352,18 @@
     "version": "1.0.0",
     "verified": true,
     "source": "Official HisabDo FAQ and earlier manual app observation",
-    "last_reviewed": "2026-10-16"
+    "last_reviewed": "2026-10-16",
+    "section": "Khata and Customer Balances",
+    "category": "Product Support",
+    "source_url": "https://hisabdo.app/faq",
+    "language": "en",
+    "last_updated": "2026-10-16",
+    "product_area": "HisabDo Expense Management",
+    "chunk_id": "faq-udhar-guidance",
+    "content_status": "approved",
+    "languages": [
+      "en",
+      "ur-Latn"
+    ]
   }
 ]

@@ -13,12 +13,30 @@ RELEVANCE_THRESHOLD = 0.12
 
 class FaqRetriever:
     def __init__(self, docs_path: Path = DOCS_PATH):
-        self._docs = json.loads(docs_path.read_text())
-        corpus = [f"{d['title']} {d['text']}" for d in self._docs]
+        loaded_docs = json.loads(docs_path.read_text(encoding="utf-8"))
+        self._docs = [
+            doc for doc in loaded_docs
+            if isinstance(doc, dict) and doc.get("verified") is True
+        ]
+
+        self._vectorizer = None
+        self._matrix = None
+        if not self._docs:
+            return
+
+        corpus = [
+            f"{doc.get('title', '')} {doc.get('text', '')}"
+            for doc in self._docs
+        ]
         self._vectorizer = TfidfVectorizer(stop_words="english")
         self._matrix = self._vectorizer.fit_transform(corpus)
 
     def retrieve(self, query: str, top_k: int = 1) -> list:
+        if not isinstance(query, str) or not query.strip():
+            return []
+        if self._matrix is None or self._vectorizer is None:
+            return []
+
         query_vec = self._vectorizer.transform([query])
         scores = cosine_similarity(query_vec, self._matrix)[0]
         ranked_idx = scores.argsort()[::-1][:top_k]
