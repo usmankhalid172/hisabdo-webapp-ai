@@ -13,7 +13,8 @@
     "section": "Financial Knowledge",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "General Financial Knowledge"
   },
   {
     "id": "finance_002",
@@ -29,7 +30,8 @@
     "section": "Financial Knowledge",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "General Financial Knowledge"
   },
   {
     "id": "finance_003",
@@ -45,7 +47,8 @@
     "section": "Financial Knowledge",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "General Financial Knowledge"
   },
   {
     "id": "finance_004",
@@ -61,7 +64,8 @@
     "section": "Financial Knowledge",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "General Financial Knowledge"
   },
   {
     "id": "finance_005",
@@ -78,7 +82,8 @@
     "section": "Financial Knowledge",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "HisabDo"
   },
   {
     "id": "finance_006",
@@ -94,6 +99,7 @@
     "section": "Financial Knowledge",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "HisabDo"
   }
 ]

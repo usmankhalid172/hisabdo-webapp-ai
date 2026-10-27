@@ -10,6 +10,7 @@ REQUIRED_METADATA_FIELDS = (
     "source_url",
     "language",
     "updated_date",
+    "product_area",
 )
 
 
@@ -20,7 +21,7 @@ def validate_metadata(document: dict[str, Any]) -> list[str]:
         if field not in document:
             errors.append(f"Missing metadata field: {field}")
 
-    for field in ("title", "section", "category", "language"):
+    for field in ("title", "section", "category", "language", "product_area"):
         value = document.get(field)
         if not isinstance(value, str) or not value.strip():
             errors.append(f"Missing or empty metadata field: {field}")

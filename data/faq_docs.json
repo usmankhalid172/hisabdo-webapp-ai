@@ -7,7 +7,8 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "HisabDo"
   },
   {
     "id": "faq-002",
@@ -17,7 +18,8 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "HisabDo"
   },
   {
     "id": "faq-003",
@@ -27,7 +29,8 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "HisabDo Privacy"
   },
   {
     "id": "faq-004",
@@ -37,7 +40,8 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "General Financial Knowledge"
   },
   {
     "id": "faq-005",
@@ -47,7 +51,8 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "HisabDo"
   },
   {
     "id": "faq-006",
@@ -57,7 +62,8 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "General Financial Knowledge"
   },
   {
     "id": "finance_001",
@@ -67,7 +73,8 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "General Financial Knowledge"
   },
   {
     "id": "finance_002",
@@ -77,7 +84,8 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "General Financial Knowledge"
   },
   {
     "id": "finance_003",
@@ -87,7 +95,8 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "General Financial Knowledge"
   },
   {
     "id": "finance_004",
@@ -97,7 +106,8 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "General Financial Knowledge"
   },
   {
     "id": "finance_005",
@@ -107,7 +117,8 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "HisabDo"
   },
   {
     "id": "finance_006",
@@ -117,6 +128,7 @@
     "category": "general",
     "source_url": null,
     "language": "en",
-    "updated_date": null
+    "updated_date": null,
+    "product_area": "HisabDo"
   }
 ]
