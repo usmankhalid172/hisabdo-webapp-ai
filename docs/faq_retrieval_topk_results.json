@@ -1,0 +1,1169 @@
+{
+  "note": "Exploratory evaluation using 20 labeled proxy questions. Original Day 1 failure list was not located. Metadata filtering was tested only as an experiment, not applied to production.",
+  "corpus_size": 12,
+  "query_count": 20,
+  "answerable_query_count": 16,
+  "summary": {
+    "baseline_hit_at_1": 0.6875,
+    "baseline_hit_at_2": 0.8125,
+    "baseline_hit_at_3": 0.9375,
+    "baseline_hit_at_5": 0.9375,
+    "metadata_filter_hit_at_3": 0.5
+  },
+  "results": [
+    {
+      "query_id": "E01",
+      "query": "What is HisabDo?",
+      "expected_ids": [
+        "faq-001"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-001"
+          ],
+          "hit": true
+        },
+        "2": {
+          "returned_ids": [
+            "faq-001",
+            "faq-002"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "faq-001",
+            "faq-002",
+            "finance_006"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "faq-001",
+            "faq-002",
+            "finance_006",
+            "finance_005",
+            "finance_004"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-001",
+          "title": "What is HisabDo?",
+          "score": 0.2696
+        },
+        {
+          "id": "faq-002",
+          "title": "How do I categorize an expense? How does automatic expense categorization work?",
+          "score": 0.0906
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": true
+    },
+    {
+      "query_id": "E02",
+      "query": "How does automatic expense categorization work?",
+      "expected_ids": [
+        "faq-002"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-002"
+          ],
+          "hit": true
+        },
+        "2": {
+          "returned_ids": [
+            "faq-002",
+            "finance_003"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "faq-002",
+            "finance_003",
+            "faq-001"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "faq-002",
+            "finance_003",
+            "faq-001",
+            "finance_006",
+            "finance_005"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-002",
+          "title": "How do I categorize an expense? How does automatic expense categorization work?",
+          "score": 0.4264
+        },
+        {
+          "id": "faq-001",
+          "title": "What is HisabDo?",
+          "score": 0.0375
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": true
+    },
+    {
+      "query_id": "E03",
+      "query": "Is my financial data used to train the shared AI model?",
+      "expected_ids": [
+        "faq-003"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-003"
+          ],
+          "hit": true
+        },
+        "2": {
+          "returned_ids": [
+            "faq-003",
+            "faq-002"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "faq-003",
+            "faq-002",
+            "faq-001"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "faq-003",
+            "faq-002",
+            "faq-001",
+            "finance_006",
+            "faq-004"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-003",
+          "title": "Is my financial data used to train the shared AI model?",
+          "score": 0.6171
+        },
+        {
+          "id": "faq-002",
+          "title": "How do I categorize an expense? How does automatic expense categorization work?",
+          "score": 0.0429
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0371
+        }
+      ],
+      "metadata_filter_hit_at_3": true
+    },
+    {
+      "query_id": "E04",
+      "query": "What is a cash flow statement?",
+      "expected_ids": [
+        "faq-004"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-004"
+          ],
+          "hit": true
+        },
+        "2": {
+          "returned_ids": [
+            "faq-004",
+            "finance_004"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "faq-004",
+            "finance_004",
+            "faq-006"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "faq-004",
+            "finance_004",
+            "faq-006",
+            "faq-001",
+            "finance_006"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-001",
+          "title": "What is HisabDo?",
+          "score": 0.2847
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        },
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": false
+    },
+    {
+      "query_id": "E05",
+      "query": "How do I export my expenses?",
+      "expected_ids": [
+        "faq-005"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-005"
+          ],
+          "hit": true
+        },
+        "2": {
+          "returned_ids": [
+            "faq-005",
+            "finance_006"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "faq-005",
+            "finance_006",
+            "finance_001"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "faq-005",
+            "finance_006",
+            "finance_001",
+            "finance_002",
+            "faq-001"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-005",
+          "title": "How do I export my expenses?",
+          "score": 0.4286
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0877
+        },
+        {
+          "id": "faq-001",
+          "title": "What is HisabDo?",
+          "score": 0.0377
+        }
+      ],
+      "metadata_filter_hit_at_3": true
+    },
+    {
+      "query_id": "E06",
+      "query": "What is the difference between profit and cash flow?",
+      "expected_ids": [
+        "faq-006"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-006"
+          ],
+          "hit": true
+        },
+        "2": {
+          "returned_ids": [
+            "faq-006",
+            "finance_004"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "faq-006",
+            "finance_004",
+            "faq-004"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "faq-006",
+            "finance_004",
+            "faq-004",
+            "finance_001",
+            "faq-001"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-001",
+          "title": "What is HisabDo?",
+          "score": 0.2847
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        },
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": false
+    },
+    {
+      "query_id": "E07",
+      "query": "What is revenue?",
+      "expected_ids": [
+        "finance_002"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "finance_002"
+          ],
+          "hit": true
+        },
+        "2": {
+          "returned_ids": [
+            "finance_002",
+            "finance_001"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "finance_002",
+            "finance_001",
+            "finance_003"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "finance_002",
+            "finance_001",
+            "finance_003",
+            "faq-006",
+            "faq-003"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-003",
+          "title": "Is my financial data used to train the shared AI model?",
+          "score": 0.1209
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        },
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": false
+    },
+    {
+      "query_id": "E08",
+      "query": "What is an expense?",
+      "expected_ids": [
+        "finance_003"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-002"
+          ],
+          "hit": false
+        },
+        "2": {
+          "returned_ids": [
+            "faq-002",
+            "finance_003"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "faq-002",
+            "finance_003",
+            "faq-001"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "faq-002",
+            "finance_003",
+            "faq-001",
+            "finance_006",
+            "finance_005"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-002",
+          "title": "How do I categorize an expense? How does automatic expense categorization work?",
+          "score": 0.4532
+        },
+        {
+          "id": "faq-001",
+          "title": "What is HisabDo?",
+          "score": 0.1348
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": false
+    },
+    {
+      "query_id": "E09",
+      "query": "What is cash flow?",
+      "expected_ids": [
+        "finance_004"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "finance_004"
+          ],
+          "hit": true
+        },
+        "2": {
+          "returned_ids": [
+            "finance_004",
+            "faq-004"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "finance_004",
+            "faq-004",
+            "faq-006"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "finance_004",
+            "faq-004",
+            "faq-006",
+            "faq-001",
+            "finance_006"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-001",
+          "title": "What is HisabDo?",
+          "score": 0.2847
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        },
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": false
+    },
+    {
+      "query_id": "E10",
+      "query": "Why should customer balances be tracked?",
+      "expected_ids": [
+        "finance_005"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "finance_005"
+          ],
+          "hit": true
+        },
+        "2": {
+          "returned_ids": [
+            "finance_005",
+            "finance_006"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "finance_005",
+            "finance_006",
+            "finance_004"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "finance_005",
+            "finance_006",
+            "finance_004",
+            "finance_003",
+            "finance_002"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.62
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        },
+        {
+          "id": "faq-005",
+          "title": "How do I export my expenses?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": true
+    },
+    {
+      "query_id": "W01",
+      "query": "What does revenue mean?",
+      "expected_ids": [
+        "finance_002"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "finance_002"
+          ],
+          "hit": true
+        },
+        "2": {
+          "returned_ids": [
+            "finance_002",
+            "finance_001"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "finance_002",
+            "finance_001",
+            "faq-002"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "finance_002",
+            "finance_001",
+            "faq-002",
+            "finance_003",
+            "faq-006"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-003",
+          "title": "Is my financial data used to train the shared AI model?",
+          "score": 0.0855
+        },
+        {
+          "id": "faq-002",
+          "title": "How do I categorize an expense? How does automatic expense categorization work?",
+          "score": 0.0782
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": false
+    },
+    {
+      "query_id": "W02",
+      "query": "Why categorize business expenses?",
+      "expected_ids": [
+        "finance_006"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "finance_006"
+          ],
+          "hit": true
+        },
+        "2": {
+          "returned_ids": [
+            "finance_006",
+            "finance_002"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "finance_006",
+            "finance_002",
+            "faq-002"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "finance_006",
+            "finance_002",
+            "faq-002",
+            "faq-005",
+            "finance_001"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.3349
+        },
+        {
+          "id": "faq-005",
+          "title": "How do I export my expenses?",
+          "score": 0.0718
+        },
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.067
+        }
+      ],
+      "metadata_filter_hit_at_3": true
+    },
+    {
+      "query_id": "W03",
+      "query": "What reports show money coming in and going out?",
+      "expected_ids": [
+        "faq-004",
+        "finance_004"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-001"
+          ],
+          "hit": false
+        },
+        "2": {
+          "returned_ids": [
+            "faq-001",
+            "faq-005"
+          ],
+          "hit": false
+        },
+        "3": {
+          "returned_ids": [
+            "faq-001",
+            "faq-005",
+            "finance_004"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "faq-001",
+            "faq-005",
+            "finance_004",
+            "finance_006",
+            "finance_005"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-001",
+          "title": "What is HisabDo?",
+          "score": 0.1544
+        },
+        {
+          "id": "faq-005",
+          "title": "How do I export my expenses?",
+          "score": 0.1127
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0582
+        }
+      ],
+      "metadata_filter_hit_at_3": false
+    },
+    {
+      "query_id": "W04",
+      "query": "How do I track business spending?",
+      "expected_ids": [
+        "finance_006",
+        "finance_003"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-001"
+          ],
+          "hit": false
+        },
+        "2": {
+          "returned_ids": [
+            "faq-001",
+            "finance_006"
+          ],
+          "hit": true
+        },
+        "3": {
+          "returned_ids": [
+            "faq-001",
+            "finance_006",
+            "faq-004"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "faq-001",
+            "finance_006",
+            "faq-004",
+            "finance_003",
+            "finance_002"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.1987
+        },
+        {
+          "id": "faq-001",
+          "title": "What is HisabDo?",
+          "score": 0.1271
+        },
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.0901
+        }
+      ],
+      "metadata_filter_hit_at_3": true
+    },
+    {
+      "query_id": "W05",
+      "query": "What is the money left after paying costs?",
+      "expected_ids": [
+        "finance_001"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "finance_004"
+          ],
+          "hit": false
+        },
+        "2": {
+          "returned_ids": [
+            "finance_004",
+            "finance_006"
+          ],
+          "hit": false
+        },
+        "3": {
+          "returned_ids": [
+            "finance_004",
+            "finance_006",
+            "finance_005"
+          ],
+          "hit": false
+        },
+        "5": {
+          "returned_ids": [
+            "finance_004",
+            "finance_006",
+            "finance_005",
+            "faq-001",
+            "faq-004"
+          ],
+          "hit": false
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.1323
+        },
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.12
+        },
+        {
+          "id": "faq-001",
+          "title": "What is HisabDo?",
+          "score": 0.1138
+        }
+      ],
+      "metadata_filter_hit_at_3": false
+    },
+    {
+      "query_id": "W06",
+      "query": "How can I download my expense report?",
+      "expected_ids": [
+        "faq-005"
+      ],
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-002"
+          ],
+          "hit": false
+        },
+        "2": {
+          "returned_ids": [
+            "faq-002",
+            "finance_003"
+          ],
+          "hit": false
+        },
+        "3": {
+          "returned_ids": [
+            "faq-002",
+            "finance_003",
+            "faq-005"
+          ],
+          "hit": true
+        },
+        "5": {
+          "returned_ids": [
+            "faq-002",
+            "finance_003",
+            "faq-005",
+            "faq-004",
+            "faq-001"
+          ],
+          "hit": true
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-002",
+          "title": "How do I categorize an expense? How does automatic expense categorization work?",
+          "score": 0.2873
+        },
+        {
+          "id": "faq-005",
+          "title": "How do I export my expenses?",
+          "score": 0.1372
+        },
+        {
+          "id": "faq-001",
+          "title": "What is HisabDo?",
+          "score": 0.0855
+        }
+      ],
+      "metadata_filter_hit_at_3": true
+    },
+    {
+      "query_id": "N01",
+      "query": "What is my current account balance?",
+      "expected_ids": null,
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-003"
+          ],
+          "hit": null
+        },
+        "2": {
+          "returned_ids": [
+            "faq-003",
+            "finance_006"
+          ],
+          "hit": null
+        },
+        "3": {
+          "returned_ids": [
+            "faq-003",
+            "finance_006",
+            "finance_005"
+          ],
+          "hit": null
+        },
+        "5": {
+          "returned_ids": [
+            "faq-003",
+            "finance_006",
+            "finance_005",
+            "finance_004",
+            "finance_003"
+          ],
+          "hit": null
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-003",
+          "title": "Is my financial data used to train the shared AI model?",
+          "score": 0.171
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        },
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": null
+    },
+    {
+      "query_id": "N02",
+      "query": "Tell me another customer's balance.",
+      "expected_ids": null,
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "finance_005"
+          ],
+          "hit": null
+        },
+        "2": {
+          "returned_ids": [
+            "finance_005",
+            "faq-003"
+          ],
+          "hit": null
+        },
+        "3": {
+          "returned_ids": [
+            "finance_005",
+            "faq-003",
+            "finance_006"
+          ],
+          "hit": null
+        },
+        "5": {
+          "returned_ids": [
+            "finance_005",
+            "faq-003",
+            "finance_006",
+            "finance_004",
+            "finance_003"
+          ],
+          "hit": null
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.2451
+        },
+        {
+          "id": "faq-003",
+          "title": "Is my financial data used to train the shared AI model?",
+          "score": 0.0855
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": null
+    },
+    {
+      "query_id": "N03",
+      "query": "What is the weather today?",
+      "expected_ids": null,
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "finance_006"
+          ],
+          "hit": null
+        },
+        "2": {
+          "returned_ids": [
+            "finance_006",
+            "finance_005"
+          ],
+          "hit": null
+        },
+        "3": {
+          "returned_ids": [
+            "finance_006",
+            "finance_005",
+            "finance_004"
+          ],
+          "hit": null
+        },
+        "5": {
+          "returned_ids": [
+            "finance_006",
+            "finance_005",
+            "finance_004",
+            "finance_003",
+            "finance_002"
+          ],
+          "hit": null
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        },
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.0
+        },
+        {
+          "id": "faq-005",
+          "title": "How do I export my expenses?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": null
+    },
+    {
+      "query_id": "N04",
+      "query": "How do I add a payable?",
+      "expected_ids": null,
+      "baseline_topk": {
+        "1": {
+          "returned_ids": [
+            "faq-002"
+          ],
+          "hit": null
+        },
+        "2": {
+          "returned_ids": [
+            "faq-002",
+            "finance_006"
+          ],
+          "hit": null
+        },
+        "3": {
+          "returned_ids": [
+            "faq-002",
+            "finance_006",
+            "finance_005"
+          ],
+          "hit": null
+        },
+        "5": {
+          "returned_ids": [
+            "faq-002",
+            "finance_006",
+            "finance_005",
+            "finance_004",
+            "finance_003"
+          ],
+          "hit": null
+        }
+      },
+      "metadata_filter_top3": [
+        {
+          "id": "faq-002",
+          "title": "How do I categorize an expense? How does automatic expense categorization work?",
+          "score": 0.1105
+        },
+        {
+          "id": "finance_006",
+          "title": "Why should business expenses be categorized?",
+          "score": 0.0
+        },
+        {
+          "id": "finance_005",
+          "title": "Why should customer balances be tracked?",
+          "score": 0.0
+        }
+      ],
+      "metadata_filter_hit_at_3": null
+    }
+  ]
+}

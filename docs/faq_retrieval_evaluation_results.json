@@ -1,0 +1,2437 @@
+{
+  "note": "Exploratory labeled proxy set; original Day 1 failed-query list was not located. TF-IDF and lexical query expansion are not embedding-based semantic retrieval.",
+  "corpus_size": 12,
+  "query_count": 20,
+  "summary": {
+    "baseline": {
+      "answerable_queries": 16,
+      "hit_at_1": 0.6875,
+      "hit_at_3": 0.9375
+    },
+    "normalized": {
+      "answerable_queries": 16,
+      "hit_at_1": 0.6875,
+      "hit_at_3": 0.9375
+    },
+    "expanded": {
+      "answerable_queries": 16,
+      "hit_at_1": 0.8125,
+      "hit_at_3": 0.9375
+    },
+    "expanded_reranked": {
+      "answerable_queries": 16,
+      "hit_at_1": 0.8125,
+      "hit_at_3": 0.875
+    }
+  },
+  "threshold_sweep": {
+    "baseline": [
+      {
+        "threshold": 0.0,
+        "coverage": 1.0,
+        "accepted_precision": 0.6875,
+        "no_answer_false_accepts": 4
+      },
+      {
+        "threshold": 0.1,
+        "coverage": 1.0,
+        "accepted_precision": 0.6875,
+        "no_answer_false_accepts": 3
+      },
+      {
+        "threshold": 0.2,
+        "coverage": 0.75,
+        "accepted_precision": 0.8333,
+        "no_answer_false_accepts": 1
+      },
+      {
+        "threshold": 0.3,
+        "coverage": 0.5625,
+        "accepted_precision": 0.8889,
+        "no_answer_false_accepts": 0
+      },
+      {
+        "threshold": 0.4,
+        "coverage": 0.5,
+        "accepted_precision": 0.875,
+        "no_answer_false_accepts": 0
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.25,
+        "accepted_precision": 1.0,
+        "no_answer_false_accepts": 0
+      }
+    ],
+    "normalized": [
+      {
+        "threshold": 0.0,
+        "coverage": 1.0,
+        "accepted_precision": 0.6875,
+        "no_answer_false_accepts": 4
+      },
+      {
+        "threshold": 0.1,
+        "coverage": 1.0,
+        "accepted_precision": 0.6875,
+        "no_answer_false_accepts": 3
+      },
+      {
+        "threshold": 0.2,
+        "coverage": 0.75,
+        "accepted_precision": 0.8333,
+        "no_answer_false_accepts": 1
+      },
+      {
+        "threshold": 0.3,
+        "coverage": 0.5625,
+        "accepted_precision": 0.8889,
+        "no_answer_false_accepts": 0
+      },
+      {
+        "threshold": 0.4,
+        "coverage": 0.5,
+        "accepted_precision": 0.875,
+        "no_answer_false_accepts": 0
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.25,
+        "accepted_precision": 1.0,
+        "no_answer_false_accepts": 0
+      }
+    ],
+    "expanded": [
+      {
+        "threshold": 0.0,
+        "coverage": 1.0,
+        "accepted_precision": 0.8125,
+        "no_answer_false_accepts": 4
+      },
+      {
+        "threshold": 0.1,
+        "coverage": 1.0,
+        "accepted_precision": 0.8125,
+        "no_answer_false_accepts": 3
+      },
+      {
+        "threshold": 0.2,
+        "coverage": 0.8125,
+        "accepted_precision": 1.0,
+        "no_answer_false_accepts": 1
+      },
+      {
+        "threshold": 0.3,
+        "coverage": 0.6875,
+        "accepted_precision": 1.0,
+        "no_answer_false_accepts": 0
+      },
+      {
+        "threshold": 0.4,
+        "coverage": 0.5,
+        "accepted_precision": 1.0,
+        "no_answer_false_accepts": 0
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.25,
+        "accepted_precision": 1.0,
+        "no_answer_false_accepts": 0
+      }
+    ],
+    "expanded_reranked": [
+      {
+        "threshold": 0.0,
+        "coverage": 1.0,
+        "accepted_precision": 0.8125,
+        "no_answer_false_accepts": 4
+      },
+      {
+        "threshold": 0.1,
+        "coverage": 1.0,
+        "accepted_precision": 0.8125,
+        "no_answer_false_accepts": 4
+      },
+      {
+        "threshold": 0.2,
+        "coverage": 0.9375,
+        "accepted_precision": 0.8667,
+        "no_answer_false_accepts": 3
+      },
+      {
+        "threshold": 0.3,
+        "coverage": 0.75,
+        "accepted_precision": 1.0,
+        "no_answer_false_accepts": 2
+      },
+      {
+        "threshold": 0.4,
+        "coverage": 0.75,
+        "accepted_precision": 1.0,
+        "no_answer_false_accepts": 0
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.5625,
+        "accepted_precision": 1.0,
+        "no_answer_false_accepts": 0
+      }
+    ]
+  },
+  "results": [
+    {
+      "id": "E01",
+      "query": "What is HisabDo?",
+      "expected_ids": [
+        "faq-001"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.2896,
+              "final_score": 0.2896
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0962,
+              "final_score": 0.0962
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.2896
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.2896,
+              "final_score": 0.2896
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0962,
+              "final_score": 0.0962
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.2896
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.2896,
+              "final_score": 0.2896
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0962,
+              "final_score": 0.0962
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.2896
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.2896,
+              "final_score": 0.5382
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.0,
+              "final_score": 0.2333
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.0,
+              "final_score": 0.2333
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.5382
+        }
+      }
+    },
+    {
+      "id": "E02",
+      "query": "How does automatic expense categorization work?",
+      "expected_ids": [
+        "faq-002"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.4159,
+              "final_score": 0.4159
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.1073,
+              "final_score": 0.1073
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0331,
+              "final_score": 0.0331
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4159
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.4159,
+              "final_score": 0.4159
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.1073,
+              "final_score": 0.1073
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0331,
+              "final_score": 0.0331
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4159
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.3936,
+              "final_score": 0.3936
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.1897,
+              "final_score": 0.1897
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0314,
+              "final_score": 0.0314
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.3936
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.3936,
+              "final_score": 0.4892
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.1897,
+              "final_score": 0.19
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0314,
+              "final_score": 0.0482
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4892
+        }
+      }
+    },
+    {
+      "id": "E03",
+      "query": "Is my financial data used to train the shared AI model?",
+      "expected_ids": [
+        "faq-003"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.6184,
+              "final_score": 0.6184
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0476,
+              "final_score": 0.0476
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0358,
+              "final_score": 0.0358
+            }
+          ],
+          "top1_id": "faq-003",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.6184
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.6184,
+              "final_score": 0.6184
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0476,
+              "final_score": 0.0476
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0358,
+              "final_score": 0.0358
+            }
+          ],
+          "top1_id": "faq-003",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.6184
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.6184,
+              "final_score": 0.6184
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0476,
+              "final_score": 0.0476
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0358,
+              "final_score": 0.0358
+            }
+          ],
+          "top1_id": "faq-003",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.6184
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.6184,
+              "final_score": 0.7519
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0476,
+              "final_score": 0.1218
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.024,
+              "final_score": 0.1156
+            }
+          ],
+          "top1_id": "faq-003",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.7519
+        }
+      }
+    },
+    {
+      "id": "E04",
+      "query": "What is a cash flow statement?",
+      "expected_ids": [
+        "faq-004"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.5705,
+              "final_score": 0.5705
+            },
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.3567,
+              "final_score": 0.3567
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.2478,
+              "final_score": 0.2478
+            }
+          ],
+          "top1_id": "faq-004",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.5705
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.5705,
+              "final_score": 0.5705
+            },
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.3567,
+              "final_score": 0.3567
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.2478,
+              "final_score": 0.2478
+            }
+          ],
+          "top1_id": "faq-004",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.5705
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.5705,
+              "final_score": 0.5705
+            },
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.3567,
+              "final_score": 0.3567
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.2478,
+              "final_score": 0.2478
+            }
+          ],
+          "top1_id": "faq-004",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.5705
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.5705,
+              "final_score": 0.7208
+            },
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.3567,
+              "final_score": 0.5069
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.2478,
+              "final_score": 0.4194
+            }
+          ],
+          "top1_id": "faq-004",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.7208
+        }
+      }
+    },
+    {
+      "id": "E05",
+      "query": "How do I export my expenses?",
+      "expected_ids": [
+        "faq-005"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.4197,
+              "final_score": 0.4197
+            },
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.0707,
+              "final_score": 0.0707
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.0546,
+              "final_score": 0.0546
+            }
+          ],
+          "top1_id": "faq-005",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4197
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.4197,
+              "final_score": 0.4197
+            },
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.0707,
+              "final_score": 0.0707
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.0546,
+              "final_score": 0.0546
+            }
+          ],
+          "top1_id": "faq-005",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4197
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.4486,
+              "final_score": 0.4486
+            },
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.0589,
+              "final_score": 0.0589
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.0455,
+              "final_score": 0.0455
+            }
+          ],
+          "top1_id": "faq-005",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4486
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.4486,
+              "final_score": 0.5266
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0,
+              "final_score": 0.105
+            },
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.0589,
+              "final_score": 0.0733
+            }
+          ],
+          "top1_id": "faq-005",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.5266
+        }
+      }
+    },
+    {
+      "id": "E06",
+      "query": "What is the difference between profit and cash flow?",
+      "expected_ids": [
+        "faq-006"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.4793,
+              "final_score": 0.4793
+            },
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.2901,
+              "final_score": 0.2901
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.2078,
+              "final_score": 0.2078
+            }
+          ],
+          "top1_id": "faq-006",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4793
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.4793,
+              "final_score": 0.4793
+            },
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.2901,
+              "final_score": 0.2901
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.2078,
+              "final_score": 0.2078
+            }
+          ],
+          "top1_id": "faq-006",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4793
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.4793,
+              "final_score": 0.4793
+            },
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.2901,
+              "final_score": 0.2901
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.2078,
+              "final_score": 0.2078
+            }
+          ],
+          "top1_id": "faq-006",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4793
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.4793,
+              "final_score": 0.6166
+            },
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.2901,
+              "final_score": 0.3785
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.2078,
+              "final_score": 0.3251
+            }
+          ],
+          "top1_id": "faq-006",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.6166
+        }
+      }
+    },
+    {
+      "id": "E07",
+      "query": "What is revenue?",
+      "expected_ids": [
+        "finance_002"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.3013,
+              "final_score": 0.3013
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.1897,
+              "final_score": 0.1897
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.1685,
+              "final_score": 0.1685
+            }
+          ],
+          "top1_id": "finance_002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.3013
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.3013,
+              "final_score": 0.3013
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.1897,
+              "final_score": 0.1897
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.1685,
+              "final_score": 0.1685
+            }
+          ],
+          "top1_id": "finance_002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.3013
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.4191,
+              "final_score": 0.4191
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0854,
+              "final_score": 0.0854
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.0804,
+              "final_score": 0.0804
+            }
+          ],
+          "top1_id": "finance_002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4191
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.4191,
+              "final_score": 0.5824
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0854,
+              "final_score": 0.2455
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.0804,
+              "final_score": 0.2423
+            }
+          ],
+          "top1_id": "finance_002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.5824
+        }
+      }
+    },
+    {
+      "id": "E08",
+      "query": "What is an expense?",
+      "expected_ids": [
+        "finance_003"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.4247,
+              "final_score": 0.4247
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.4141,
+              "final_score": 0.4141
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.1279,
+              "final_score": 0.1279
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "top1_score": 0.4247
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.4247,
+              "final_score": 0.4247
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.4141,
+              "final_score": 0.4141
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.1279,
+              "final_score": 0.1279
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "top1_score": 0.4247
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.4677,
+              "final_score": 0.4677
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.2567,
+              "final_score": 0.2567
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0773,
+              "final_score": 0.0773
+            }
+          ],
+          "top1_id": "finance_003",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4677
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.4677,
+              "final_score": 0.579
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.2567,
+              "final_score": 0.3252
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0773,
+              "final_score": 0.2502
+            }
+          ],
+          "top1_id": "finance_003",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.579
+        }
+      }
+    },
+    {
+      "id": "E09",
+      "query": "What is cash flow?",
+      "expected_ids": [
+        "finance_004"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.5569,
+              "final_score": 0.5569
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.399,
+              "final_score": 0.399
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.3869,
+              "final_score": 0.3869
+            }
+          ],
+          "top1_id": "finance_004",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.5569
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.5569,
+              "final_score": 0.5569
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.399,
+              "final_score": 0.399
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.3869,
+              "final_score": 0.3869
+            }
+          ],
+          "top1_id": "finance_004",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.5569
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.5569,
+              "final_score": 0.5569
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.399,
+              "final_score": 0.399
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.3869,
+              "final_score": 0.3869
+            }
+          ],
+          "top1_id": "finance_004",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.5569
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.5569,
+              "final_score": 0.712
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.399,
+              "final_score": 0.6093
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.3869,
+              "final_score": 0.5765
+            }
+          ],
+          "top1_id": "finance_004",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.712
+        }
+      }
+    },
+    {
+      "id": "E10",
+      "query": "Why should customer balances be tracked?",
+      "expected_ids": [
+        "finance_005"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.6299,
+              "final_score": 0.6299
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "finance_005",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.6299
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.6299,
+              "final_score": 0.6299
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "finance_005",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.6299
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.6299,
+              "final_score": 0.6299
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "finance_005",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.6299
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.6299,
+              "final_score": 0.7094
+            },
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.0,
+              "final_score": 0.15
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.0,
+              "final_score": 0.0357
+            }
+          ],
+          "top1_id": "finance_005",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.7094
+        }
+      }
+    },
+    {
+      "id": "W01",
+      "query": "What does revenue mean?",
+      "expected_ids": [
+        "finance_002"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.1583,
+              "final_score": 0.1583
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.0996,
+              "final_score": 0.0996
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0953,
+              "final_score": 0.0953
+            }
+          ],
+          "top1_id": "finance_002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.1583
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.1583,
+              "final_score": 0.1583
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.0996,
+              "final_score": 0.0996
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0953,
+              "final_score": 0.0953
+            }
+          ],
+          "top1_id": "finance_002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.1583
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.3454,
+              "final_score": 0.3454
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0704,
+              "final_score": 0.0704
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.0663,
+              "final_score": 0.0663
+            }
+          ],
+          "top1_id": "finance_002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.3454
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.3454,
+              "final_score": 0.4245
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0704,
+              "final_score": 0.1458
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.0663,
+              "final_score": 0.1431
+            }
+          ],
+          "top1_id": "finance_002",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4245
+        }
+      }
+    },
+    {
+      "id": "W02",
+      "query": "Why categorize business expenses?",
+      "expected_ids": [
+        "finance_006"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.2588,
+              "final_score": 0.2588
+            },
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.082,
+              "final_score": 0.082
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0703,
+              "final_score": 0.0703
+            }
+          ],
+          "top1_id": "finance_006",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.2588
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.2588,
+              "final_score": 0.2588
+            },
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.082,
+              "final_score": 0.082
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0703,
+              "final_score": 0.0703
+            }
+          ],
+          "top1_id": "finance_006",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.2588
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.2588,
+              "final_score": 0.2588
+            },
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.082,
+              "final_score": 0.082
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0703,
+              "final_score": 0.0703
+            }
+          ],
+          "top1_id": "finance_006",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.2588
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.2588,
+              "final_score": 0.2995
+            },
+            {
+              "id": "finance_002",
+              "title": "What is revenue?",
+              "score": 0.082,
+              "final_score": 0.1158
+            },
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.0296,
+              "final_score": 0.0942
+            }
+          ],
+          "top1_id": "finance_006",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.2995
+        }
+      }
+    },
+    {
+      "id": "W03",
+      "query": "What reports show money coming in and going out?",
+      "expected_ids": [
+        "faq-004",
+        "finance_004"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.1459,
+              "final_score": 0.1459
+            },
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.1174,
+              "final_score": 0.1174
+            },
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.0493,
+              "final_score": 0.0493
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "top1_score": 0.1459
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.1459,
+              "final_score": 0.1459
+            },
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.1174,
+              "final_score": 0.1174
+            },
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.0493,
+              "final_score": 0.0493
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "top1_score": 0.1459
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.1459,
+              "final_score": 0.1459
+            },
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.1174,
+              "final_score": 0.1174
+            },
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.0493,
+              "final_score": 0.0493
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "top1_score": 0.1459
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.1459,
+              "final_score": 0.2171
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.0294,
+              "final_score": 0.1802
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.0303,
+              "final_score": 0.1697
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "top1_score": 0.2171
+        }
+      }
+    },
+    {
+      "id": "W04",
+      "query": "How do I track business spending?",
+      "expected_ids": [
+        "finance_006",
+        "finance_003"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.1498,
+              "final_score": 0.1498
+            },
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.0946,
+              "final_score": 0.0946
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.0689,
+              "final_score": 0.0689
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "top1_score": 0.1498
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.1498,
+              "final_score": 0.1498
+            },
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.0946,
+              "final_score": 0.0946
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.0689,
+              "final_score": 0.0689
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "top1_score": 0.1498
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.1482,
+              "final_score": 0.1482
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.112,
+              "final_score": 0.112
+            },
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.0707,
+              "final_score": 0.0707
+            }
+          ],
+          "top1_id": "finance_005",
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "top1_score": 0.1482
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.1482,
+              "final_score": 0.1588
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0,
+              "final_score": 0.1313
+            },
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.0,
+              "final_score": 0.1313
+            }
+          ],
+          "top1_id": "finance_005",
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "top1_score": 0.1588
+        }
+      }
+    },
+    {
+      "id": "W05",
+      "query": "What is the money left after paying costs?",
+      "expected_ids": [
+        "finance_001"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.1331,
+              "final_score": 0.1331
+            },
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.1122,
+              "final_score": 0.1122
+            },
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.0993,
+              "final_score": 0.0993
+            }
+          ],
+          "top1_id": "finance_004",
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "top1_score": 0.1331
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.1331,
+              "final_score": 0.1331
+            },
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.1122,
+              "final_score": 0.1122
+            },
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.0993,
+              "final_score": 0.0993
+            }
+          ],
+          "top1_id": "finance_004",
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "top1_score": 0.1331
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.1331,
+              "final_score": 0.1331
+            },
+            {
+              "id": "finance_006",
+              "title": "Why should business expenses be categorized?",
+              "score": 0.1122,
+              "final_score": 0.1122
+            },
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.0993,
+              "final_score": 0.0993
+            }
+          ],
+          "top1_id": "finance_004",
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "top1_score": 0.1331
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "finance_004",
+              "title": "What is cash flow?",
+              "score": 0.1331,
+              "final_score": 0.2365
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.0817,
+              "final_score": 0.2031
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.0793,
+              "final_score": 0.2015
+            }
+          ],
+          "top1_id": "finance_004",
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "top1_score": 0.2365
+        }
+      }
+    },
+    {
+      "id": "W06",
+      "query": "How can I download my expense report?",
+      "expected_ids": [
+        "faq-005"
+      ],
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.2812,
+              "final_score": 0.2812
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.2741,
+              "final_score": 0.2741
+            },
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.1151,
+              "final_score": 0.1151
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "top1_score": 0.2812
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.2812,
+              "final_score": 0.2812
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.2741,
+              "final_score": 0.2741
+            },
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.1151,
+              "final_score": 0.1151
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "top1_score": 0.2812
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.3218,
+              "final_score": 0.3218
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.2827,
+              "final_score": 0.2827
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.1551,
+              "final_score": 0.1551
+            }
+          ],
+          "top1_id": "faq-005",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.3218
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.3218,
+              "final_score": 0.4046
+            },
+            {
+              "id": "finance_003",
+              "title": "What is an expense?",
+              "score": 0.2827,
+              "final_score": 0.2383
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.1551,
+              "final_score": 0.1963
+            }
+          ],
+          "top1_id": "faq-005",
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "top1_score": 0.4046
+        }
+      }
+    },
+    {
+      "id": "N01",
+      "query": "What is my current account balance?",
+      "expected_ids": null,
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.1722,
+              "final_score": 0.1722
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-003",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.1722
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.1722,
+              "final_score": 0.1722
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-003",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.1722
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.1722,
+              "final_score": 0.1722
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-003",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.1722
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.1722,
+              "final_score": 0.3119
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.1167
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.0,
+              "final_score": 0.1167
+            }
+          ],
+          "top1_id": "faq-003",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.3119
+        }
+      }
+    },
+    {
+      "id": "N02",
+      "query": "Tell me another customer's balance.",
+      "expected_ids": null,
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.249,
+              "final_score": 0.249
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0861,
+              "final_score": 0.0861
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "finance_005",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.249
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.249,
+              "final_score": 0.249
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0861,
+              "final_score": 0.0861
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "finance_005",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.249
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.249,
+              "final_score": 0.249
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0861,
+              "final_score": 0.0861
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "finance_005",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.249
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "finance_005",
+              "title": "Why should customer balances be tracked?",
+              "score": 0.249,
+              "final_score": 0.2118
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0861,
+              "final_score": 0.1274
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.0,
+              "final_score": 0.05
+            }
+          ],
+          "top1_id": "finance_005",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.2118
+        }
+      }
+    },
+    {
+      "id": "N03",
+      "query": "What is the weather today?",
+      "expected_ids": null,
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.0
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.0
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-001",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.0
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.0,
+              "final_score": 0.19
+            },
+            {
+              "id": "faq-006",
+              "title": "What's the difference between profit and cash flow?",
+              "score": 0.0,
+              "final_score": 0.19
+            },
+            {
+              "id": "finance_001",
+              "title": "What is profit?",
+              "score": 0.0,
+              "final_score": 0.19
+            }
+          ],
+          "top1_id": "faq-004",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.19
+        }
+      }
+    },
+    {
+      "id": "N04",
+      "query": "How do I add a payable?",
+      "expected_ids": null,
+      "approaches": {
+        "baseline": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.112,
+              "final_score": 0.112
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.112
+        },
+        "normalized": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.112,
+              "final_score": 0.112
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.112
+        },
+        "expanded": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.112,
+              "final_score": 0.112
+            },
+            {
+              "id": "faq-001",
+              "title": "What is HisabDo?",
+              "score": 0.0,
+              "final_score": 0.0
+            },
+            {
+              "id": "faq-003",
+              "title": "Is my financial data used to train the shared AI model?",
+              "score": 0.0,
+              "final_score": 0.0
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.112
+        },
+        "expanded_reranked": {
+          "top3": [
+            {
+              "id": "faq-002",
+              "title": "How do I categorize an expense? How does automatic expense categorization work?",
+              "score": 0.112,
+              "final_score": 0.3311
+            },
+            {
+              "id": "faq-005",
+              "title": "How do I export my expenses?",
+              "score": 0.0,
+              "final_score": 0.2167
+            },
+            {
+              "id": "faq-004",
+              "title": "What is a cash flow statement?",
+              "score": 0.0,
+              "final_score": 0.0583
+            }
+          ],
+          "top1_id": "faq-002",
+          "hit_at_1": null,
+          "hit_at_3": null,
+          "top1_score": 0.3311
+        }
+      }
+    }
+  ]
+}
