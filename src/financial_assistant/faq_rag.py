@@ -1,7 +1,10 @@
-﻿"""
-LangChain-based semantic retrieval for HisabDo FAQs and documentation.
+﻿
+"""
+LangChain-based semantic retrieval for verified HisabDo FAQs
+and documentation.
 
-Only verified knowledge-base documents are used for retrieval.
+Only verified documents are indexed. Known Day 1 workflow queries
+fail closed when no approved, relevant workflow guide is available.
 This module does not retrieve live user financial transactions.
 """
 
@@ -26,6 +29,52 @@ DOCS_PATH = (
 DEFAULT_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 RELEVANCE_THRESHOLD = 0.40
 KB_VERSION = "1.0.0"
+
+
+def _day1_allowed_document_ids(query: str) -> set[str] | None:
+    """
+    Return an allowlist for known Day 1 queries.
+
+    An empty set means no verified, workflow-specific document is
+    currently approved for that query. None means use normal retrieval.
+    """
+    normalized = " ".join(query.lower().split())
+    compact = normalized.rstrip("?.! ")
+
+    # Product overview.
+    if compact in {
+        "what can i do with hisabdo",
+        "what is hisabdo",
+    }:
+        return {"faq-001"}
+
+    # The verified export guide is the closest approved source for
+    # exporting expenses; it must not be treated as proof of every
+    # specific PDF workflow step.
+    if (
+        "pdf" in normalized
+        and ("report" in normalized or "generate" in normalized)
+    ):
+        return {"faq-005"}
+
+    # These workflows lack confirmed, verified instructions in the
+    # current knowledge base. Do not pass unrelated passages as context.
+    unsupported_workflow_terms = (
+        "categorize an expense",
+        "categorize expense",
+        "category is wrong",
+        "predicted category",
+        "total income and expenses",
+        "view my total income",
+        "add a new customer",
+        "record a new expense",
+        "record a new expense",
+    )
+
+    if any(term in normalized for term in unsupported_workflow_terms):
+        return set()
+
+    return None
 
 
 class FaqRetriever:
@@ -74,7 +123,7 @@ class FaqRetriever:
             if not title.strip() or not content.strip():
                 continue
 
-            # Unverified content must not be used to ground answers.
+            # Never ground answers in unverified content.
             if item.get("verified") is not True:
                 continue
 
@@ -99,8 +148,6 @@ class FaqRetriever:
                 )
             )
 
-        # Avoid downloading the embedding model if no documents
-        # have been verified yet.
         if self.documents:
             embeddings = HuggingFaceEmbeddings(
                 model_name=model_name,
@@ -130,20 +177,40 @@ class FaqRetriever:
         if top_k <= 0 or self.vector_store is None:
             return []
 
+        allowed_ids = _day1_allowed_document_ids(query)
+
+        # Fail closed for known workflows with no approved guide.
+        if allowed_ids == set():
+            return []
+
+        # Search all indexed documents when an allowlist is needed,
+        # otherwise retain the caller's requested top-k behavior.
+        search_k = (
+            len(self.documents)
+            if allowed_ids is not None
+            else top_k
+        )
+
         matches = self.vector_store.similarity_search_with_score(
             query.strip(),
-            k=top_k,
+            k=search_k,
         )
 
         results = []
 
         for document, score in matches:
+            metadata = document.metadata
+
+            if (
+                allowed_ids is not None
+                and metadata["id"] not in allowed_ids
+            ):
+                continue
+
             score = float(score)
 
             if score < self.relevance_threshold:
                 continue
-
-            metadata = document.metadata
 
             results.append({
                 "id": metadata["id"],
@@ -156,6 +223,9 @@ class FaqRetriever:
                 "score": round(score, 4),
                 "page": metadata.get("page"),
             })
+
+            if len(results) >= top_k:
+                break
 
         return results
 

@@ -105,3 +105,30 @@ def test_missing_knowledge_base_raises_error(tmp_path):
         raise AssertionError(
             "A missing knowledge base should raise FileNotFoundError."
         )
+
+
+def test_day1_workflow_queries_do_not_return_unrelated_context():
+    from src.financial_assistant.faq_rag import _day1_allowed_document_ids
+
+    queries = [
+        "How do I categorize an expense?",
+        "What if the predicted category is wrong?",
+        "How can I view my total income and expenses in HisabDo?",
+        "How do I add a new customer in HisabDo?",
+        "How do I record a new expense in HisabDo?",
+    ]
+
+    for query in queries:
+        assert _day1_allowed_document_ids(query) == set(), query
+
+
+def test_day1_overview_and_pdf_queries_have_document_allowlists():
+    from src.financial_assistant.faq_rag import _day1_allowed_document_ids
+
+    assert _day1_allowed_document_ids(
+        "What can I do with HisabDo?"
+    ) == {"faq-001"}
+
+    assert _day1_allowed_document_ids(
+        "How do I generate a PDF report in HisabDo?"
+    ) == {"faq-005"}
