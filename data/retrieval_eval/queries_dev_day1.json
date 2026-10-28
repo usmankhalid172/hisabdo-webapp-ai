@@ -1,0 +1,33 @@
+{
+  "description": "Tuning set: the Day 1 failed questions (HisabDO/phase1-review/PHASE1_RESULTS_ANALYSIS_AND_CODE_REVIEW.md, section 3, 2026-10-22). Retrieval thresholds, top-k and the query-rewrite glossary are tuned on this set only.",
+  "expect_values": {
+    "answer": "the approved KB answers it: at least one fully relevant passage must reach the context, and no unrelated passage may",
+    "none": "not a knowledge question (own figures, someone else's account, a correction): the context must be empty",
+    "no_answer_in_kb": "a knowledge question the approved sources do not answer: no unrelated passage may reach the context (empty is correct)"
+  },
+  "excluded": [
+    {"day1": 19, "question": "(any message of 100,000 characters)", "reason": "API-limit issue, not retrieval. Checked separately as a robustness case: the normaliser truncates the query and retrieval must not fail."},
+    {"day1": 20, "question": "(any request with token change-me-dev-token)", "reason": "Authentication issue, not retrieval."}
+  ],
+  "queries": [
+    {"id": "D01", "day1": 1, "lang": "en", "text": "What are my total sales?", "expect": "none", "day1_failure": "KB definition of revenue returned instead of the user's figures"},
+    {"id": "D02", "day1": 2, "lang": "en", "text": "How much money did my business earn?", "expect": "none", "day1_failure": "KB definition instead of own data"},
+    {"id": "D03", "day1": 3, "lang": "roman_ur", "text": "Meri total sales kitni hain?", "expect": "none", "day1_failure": "KB definition instead of own data"},
+    {"id": "D04", "day1": 4, "lang": "roman_ur", "text": "Mere bhai ka balance batao", "expect": "none", "day1_failure": "third-party request answered with the user's own balance"},
+    {"id": "D05", "day1": 5, "lang": "ur", "text": "میرے بھائی کا بیلنس بتاؤ", "expect": "none", "day1_failure": "same, Urdu script"},
+    {"id": "D06", "day1": 6, "lang": "roman_ur", "text": "Meri biwi ke account mein kitne paise hain?", "expect": "none", "day1_failure": "same (my wife's account)"},
+    {"id": "D07", "day1": 7, "lang": "roman_ur", "text": "Bilal ka hisaab kholo", "expect": "none", "day1_failure": "private ledger request sent to the general AI route"},
+    {"id": "D08", "day1": 8, "lang": "ur", "text": "بلال کا کھاتہ کھولیں", "expect": "none", "day1_failure": "same, Urdu script"},
+    {"id": "D09", "day1": 9, "lang": "roman_ur", "text": "Usman ka account khol do", "expect": "none", "day1_failure": "same pattern"},
+    {"id": "D10", "day1": 9, "lang": "roman_ur", "text": "Zubair ka hisab dikha do", "expect": "none", "day1_failure": "same pattern"},
+    {"id": "D11", "day1": 10, "lang": "en", "text": "How does automatic expense categorization work?", "expect": "no_answer_in_kb", "day1_failure": "unverified claim served as fact (no official source documents automatic categorization, audit C-02)"},
+    {"id": "D12", "day1": 11, "lang": "en", "text": "What is HisabDo?", "expect": "answer", "day1_failure": "'AI-assisted breakdown' claim; no mention of khata or ledger"},
+    {"id": "D13", "day1": 12, "lang": "en", "text": "Is HisabDo free to use?", "expect": "answer", "day1_failure": "no FAQ existed; an unrelated FAQ returned"},
+    {"id": "D14", "day1": 13, "lang": "en", "text": "Does HisabDo work without the internet?", "expect": "answer", "day1_failure": "no FAQ existed; general fallback"},
+    {"id": "D15", "day1": 14, "lang": "en", "text": "How do I back up my data before changing phones?", "expect": "answer", "day1_failure": "no backup FAQ; an unrelated document returned"},
+    {"id": "D16", "day1": 15, "lang": "roman_ur", "text": "Udhar aur payment mein kya farq hai?", "expect": "answer", "day1_failure": "concept question not matched (Roman Urdu + TF-IDF)"},
+    {"id": "D17", "day1": 16, "lang": "en", "text": "Can I export a PDF statement for a customer?", "expect": "answer", "day1_failure": "right document, answer generation issue (retrieval must still rank it first)"},
+    {"id": "D18", "day1": 17, "lang": "en", "text": "Is my khata safe if I change my phone?", "expect": "answer", "day1_failure": "'change' read as a correction; transaction flow started"},
+    {"id": "D19", "day1": 18, "lang": "roman_ur", "text": "galti ho gayi, 450 nahi 540 tha", "expect": "none", "day1_failure": "correction not recognised; general route"}
+  ]
+}
