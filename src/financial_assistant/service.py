@@ -10,7 +10,7 @@ API instead of the knowledge base.
 import re
 
 from ..integration.backend_client import get_backend_client
-from ..schemas import ChatbotRequest, ChatbotResponse
+from ..schemas import ChatbotCitation, ChatbotRequest, ChatbotResponse
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
 
@@ -178,6 +178,14 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             intent="product_faq",
             tokens_used=tokens,
             source="rag",
+            citations=[
+                ChatbotCitation(
+                    title=matches[0].get("title", "FAQ"),
+                    section=matches[0].get("section"),
+                    source_url=matches[0].get("source_url"),
+                    source_id=matches[0].get("id"),
+                )
+            ],
         )
 
     reply, tokens = provider.generate_reply(request.message, context=None, history=[h.model_dump() for h in request.history])

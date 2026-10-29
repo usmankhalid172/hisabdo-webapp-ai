@@ -51,12 +51,20 @@ class ChatbotRequest(BaseModel):
     }
 
 
+class ChatbotCitation(BaseModel):
+    title: str
+    section: Optional[str] = None
+    source_url: Optional[str] = None
+    source_id: Optional[str] = None
+
+
 class ChatbotResponse(BaseModel):
     reply: str
     conversation_id: str
     intent: Optional[str] = None
     tokens_used: Optional[int] = None
     source: str  # "rag" | "backend_financial_api" | "llm_general" — POC transparency, not in Day 15 contract
+    citations: list[ChatbotCitation] = Field(default_factory=list)
     pdf_url: Optional[str] = None
 
 
