@@ -1,3 +1,4 @@
+
 """
 Request/response contracts. These are the source of truth mirrored by the
 backend's API client, per Day 15 §8.
@@ -24,10 +25,7 @@ class VersionResponse(BaseModel):
 # ---------- §6.1 Chatbot ----------
 
 class HistoryTurn(BaseModel):
-    """One prior conversation turn. Both fields are required — a malformed
-    entry (e.g. Swagger's old default {} placeholder) is now rejected by
-    FastAPI's own validation with a clean 422, instead of crashing deep
-    inside the LLM provider with a raw 500."""
+    """One prior conversation turn."""
     role: Literal["user", "assistant"]
     content: str = Field(min_length=1)
 
@@ -50,12 +48,20 @@ class ChatbotRequest(BaseModel):
     }
 
 
+class ChatbotCitation(BaseModel):
+    """A source retrieved from the verified knowledge base."""
+    title: str
+    source_url: Optional[str] = None
+    section: Optional[str] = None
+
+
 class ChatbotResponse(BaseModel):
     reply: str
     conversation_id: str
     intent: Optional[str] = None
     tokens_used: Optional[int] = None
-    source: str  # "rag" | "backend_financial_api" | "llm_general" — POC transparency, not in Day 15 contract
+    source: str
+    citations: list[ChatbotCitation] = Field(default_factory=list)
 
 
 # ---------- §6.2 Expense categorization ----------
@@ -73,7 +79,7 @@ class CategorizeResponse(BaseModel):
     confidence: float
     alternative_categories: list[str] = Field(default_factory=list)
     needs_confirmation: bool
-    method: str  # "rule_based" | "ml_model" — POC transparency
+    method: str
 
 
 class BatchCategorizeRequest(BaseModel):

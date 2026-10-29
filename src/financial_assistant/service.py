@@ -3,6 +3,7 @@
 HisabDo AI Financial Assistant service.
 
 Routes user questions to the appropriate handler:
+
 - Third-party financial data requests are refused.
 - Greetings are handled without an LLM call.
 - Personal financial figures come only from the backend financial API.
@@ -16,8 +17,10 @@ import logging
 import re
 from decimal import Decimal, InvalidOperation
 
+from src.errors import ServiceError
+
 from ..integration.backend_client import get_backend_client
-from ..schemas import ChatbotRequest, ChatbotResponse
+from ..schemas import ChatbotCitation, ChatbotRequest, ChatbotResponse
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
 from .rag_pipeline import prepare_context, format_context_block
@@ -94,8 +97,8 @@ PDF_REQUEST_TERMS = re.compile(
     r"\bpdf\b|"
     r"\b(download|export|generate|create|share|open|send)\b.{0,50}\b(report|statement)\b|"
     r"\b(report|statement)\b.{0,50}\b(download|export|generate|create|pdf|share)\b|"
-    r"پی\s*ڈی\s*ایف|"
-    r"رپورٹ\s*(ڈاؤن\s*لوڈ|بنا|چاہیے|چاہیئے|بھیج)",
+    r"\u067e\u06cc\s*\u0688\s*\u06cc\s*\u0627\u06cc\u0641|"
+    r"\u0631\u067e\u0648\u0631\u0679\s*(\u0688\u0627\u0624\u0646\s*\u0644\u0648\u0688|\u0628\u0646\u0627|\u0686\u0627\u06c1\u06cc\u06d2|\u0686\u0627\u06c1\u06cc\u0626\u06d2|\u0628\u06be\u06cc\u062c)",
     re.IGNORECASE,
 )
 
@@ -106,26 +109,21 @@ PRODUCT_SPECIFIC_TERMS = re.compile(
     r"\bapp feature\b|"
     r"\bpdf reports?\b|"
     r"\bfinancial reports?\b|"
+    r"\bexpenses?\b|"
+    r"\bincome\b|"
     r"\bexport\b|"
     r"\bdownload\b|"
     r"\badd (?:a )?customer\b|"
     r"\bcustomer screen\b|"
     r"\bsettings\b|"
     r"\bdashboard\b|"
-    r"\btransactions?\b|"
-    r"\bexpenses?\b|"
-    r"\bincome\b|"
+    r"\u062e\u0631\u0686|"
+    r"\u0622\u0645\u062f\u0646|"
+    r"\u0627\u062f\u06be\u0627\u0631|"
+    r"\u06a9\u06be\u0627\u062a\u06c1|"
+    r"\u062a\u0641\u0635\u06cc\u0644|\u06a9\u06cc\u0633\u06d2|\u062f\u06cc\u06a9\u06be\u0648\u06ba|\u0627\u0633\u062a\u0639\u0645\u0627\u0644|"
     r"\bkhata\b|"
-    r"\budhar\b|"
-    r"\breceivable\b|"
-    r"\bpayable\b|"
-    r"\baccount setup\b|"
-    r"\bhow do i use\b|"
-    r"رپورٹ|"
-    r"خرچ|"
-    r"آمدن|"
-    r"ادھار|"
-    r"کھاتہ",
+    r"\budhar\b",
     re.IGNORECASE,
 )
 
@@ -382,6 +380,61 @@ def _handle_transaction_intent(
     )
 
 
+def _build_verified_citations(matches: list) -> list[ChatbotCitation]:
+    """
+    Build citations only from retrieved documents with usable source URLs.
+
+    URLs and section names are taken from retrieval metadata; they are never
+    constructed or guessed by the chatbot service.
+    """
+    citations = []
+    seen_citations = set()
+
+    for match in matches:
+        if not isinstance(match, dict):
+            continue
+
+        content = match.get("text")
+        if not isinstance(content, str) or not content.strip():
+            continue
+
+        title = match.get("title") or match.get("source") or "HisabDo Knowledge Base"
+        source_url = match.get("source_url") or match.get("url")
+        section = match.get("section")
+
+        # Do not invent or expose a URL that was not provided by retrieval.
+        if not isinstance(source_url, str) or not source_url.strip():
+            continue
+
+        source_url = source_url.strip()
+
+        if not source_url.startswith(("https://", "http://")):
+            continue
+
+        section = (
+            section.strip()
+            if isinstance(section, str) and section.strip()
+            else None
+        )
+
+        citation_key = (source_url, section)
+
+        if citation_key in seen_citations:
+            continue
+
+        seen_citations.add(citation_key)
+
+        citations.append(
+            ChatbotCitation(
+                title=title,
+                source_url=source_url,
+                section=section,
+            )
+        )
+
+    return citations
+
+
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     """Handle a chatbot request while preserving financial data boundaries."""
 
@@ -433,12 +486,28 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
 
     # 5. Personal financial figures must come from the backend API.
     if _is_own_financial_data_query(request.message):
-        summary = get_backend_client().get_user_financial_summary(
-            request.user_id
-        )
+        try:
+            summary = get_backend_client().get_user_financial_summary(
+                request.user_id
+            )
+        except ServiceError:
+            raise
+        except Exception:
+            logger.exception("Financial backend is unavailable.")
+
+            return ChatbotResponse(
+                reply=(
+                    "I can't access your financial data right now "
+                    "because the financial service is unavailable. "
+                    "Please try again later."
+                ),
+                conversation_id=request.conversation_id,
+                intent="own_financial_data",
+                tokens_used=0,
+                source="backend_unavailable",
+            )
 
         context = _format_financial_summary(summary)
-
         reply, tokens = provider.generate_reply(
             request.message,
             context=context,
@@ -453,7 +522,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="backend_financial_api",
         )
 
-    # 6. Retrieve verified FAQ and product documentation.
+    # 6. Retrieve FAQ and product documentation.
     try:
         matches = get_retriever().retrieve(
             request.message,
@@ -470,7 +539,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="rag_error",
         )
 
-    # 7. No verified match: avoid guessing about product-specific features.
+    # 7. No retrieved matches: avoid guessing about product-specific features.
     if not matches:
         if _is_product_specific_query(request.message):
             return _no_verified_faq_response(request)
@@ -515,10 +584,14 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
         history=history,
     )
 
+    # 11. Return only citations backed by retrieved source metadata.
+    citations = _build_verified_citations(matches)
+
     return ChatbotResponse(
         reply=reply,
         conversation_id=request.conversation_id,
         intent="product_faq",
         tokens_used=tokens,
         source="rag",
+        citations=citations,
     )

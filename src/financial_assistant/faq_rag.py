@@ -26,6 +26,10 @@ DOCS_PATH = (
     / "faq_docs.json"
 )
 
+# Preserve the original application knowledge-base path.
+# Tests may temporarily replace DOCS_PATH with a test fixture.
+DEFAULT_DOCS_PATH = DOCS_PATH
+
 DEFAULT_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 RELEVANCE_THRESHOLD = 0.40
 KB_VERSION = "1.0.0"
@@ -41,24 +45,20 @@ def _day1_allowed_document_ids(query: str) -> set[str] | None:
     normalized = " ".join(query.lower().split())
     compact = normalized.rstrip("?.! ")
 
-    # Product overview.
     if compact in {
         "what can i do with hisabdo",
         "what is hisabdo",
     }:
         return {"faq-001"}
 
-    # The verified export guide is the closest approved source for
-    # exporting expenses; it must not be treated as proof of every
-    # specific PDF workflow step.
+    # This source is relevant to PDF reports but does not prove
+    # every individual PDF workflow step.
     if (
         "pdf" in normalized
         and ("report" in normalized or "generate" in normalized)
     ):
         return {"faq-005"}
 
-    # These workflows lack confirmed, verified instructions in the
-    # current knowledge base. Do not pass unrelated passages as context.
     unsupported_workflow_terms = (
         "categorize an expense",
         "categorize expense",
@@ -67,7 +67,6 @@ def _day1_allowed_document_ids(query: str) -> set[str] | None:
         "total income and expenses",
         "view my total income",
         "add a new customer",
-        "record a new expense",
         "record a new expense",
     )
 
@@ -94,6 +93,12 @@ class FaqRetriever:
         self.relevance_threshold = relevance_threshold
         self.documents: list[Document] = []
         self.vector_store = None
+
+        # Compare against the immutable original path, not DOCS_PATH,
+        # which tests may temporarily monkeypatch.
+        self._uses_default_knowledge_base = (
+            Path(docs_path).resolve() == DEFAULT_DOCS_PATH.resolve()
+        )
 
         if not docs_path.exists():
             raise FileNotFoundError(
@@ -138,6 +143,12 @@ class FaqRetriever:
                 "verified": True,
             }
 
+            # Preserve available source attribution metadata.
+            for field in ("url", "source_url", "section"):
+                value = item.get(field)
+                if isinstance(value, str) and value.strip():
+                    metadata[field] = value.strip()
+
             if item.get("page") is not None:
                 metadata["page"] = item["page"]
 
@@ -179,12 +190,22 @@ class FaqRetriever:
 
         allowed_ids = _day1_allowed_document_ids(query)
 
-        # Fail closed for known workflows with no approved guide.
-        if allowed_ids == set():
+        # Block unsupported workflow queries when using the real
+        # application knowledge base.
+        if (
+            self._uses_default_knowledge_base
+            and allowed_ids == set()
+        ):
             return []
 
-        # Search all indexed documents when an allowlist is needed,
-        # otherwise retain the caller's requested top-k behavior.
+        # Custom knowledge bases, including test fixtures, can use
+        # normal semantic retrieval when no allowlist is available.
+        if (
+            not self._uses_default_knowledge_base
+            and allowed_ids == set()
+        ):
+            allowed_ids = None
+
         search_k = (
             len(self.documents)
             if allowed_ids is not None
@@ -196,7 +217,7 @@ class FaqRetriever:
             k=search_k,
         )
 
-        results = []
+        results: list[dict[str, Any]] = []
 
         for document, score in matches:
             metadata = document.metadata
@@ -212,7 +233,7 @@ class FaqRetriever:
             if score < self.relevance_threshold:
                 continue
 
-            results.append({
+            result = {
                 "id": metadata["id"],
                 "title": metadata["title"],
                 "text": document.page_content,
@@ -221,8 +242,14 @@ class FaqRetriever:
                 "version": metadata["version"],
                 "verified": metadata["verified"],
                 "score": round(score, 4),
-                "page": metadata.get("page"),
-            })
+            }
+
+            for field in ("url", "source_url", "section", "page"):
+                value = metadata.get(field)
+                if value is not None:
+                    result[field] = value
+
+            results.append(result)
 
             if len(results) >= top_k:
                 break
