@@ -1,0 +1,273 @@
+{
+ "mode": "hybrid",
+ "endpoint": {
+  "citation": [
+   {
+    "reply": "Yes. HisabDo is free to download and use from Google Play. Core features including khata management, customer accounts, PDF export and backup are available at no cost. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › Is HisabDo free to use?: https://hisabdo.app/faq",
+    "answer_status": "answered",
+    "source": "rag",
+    "needs_review": false,
+    "citations": [
+     {
+      "n": 1,
+      "title": "HisabDo Help Center FAQ › Is HisabDo free to use?",
+      "url": "https://hisabdo.app/faq",
+      "chunk_id": "off-01-002-is-hisabdo-free-to-use",
+      "last_updated": null
+     }
+    ],
+    "intent": "product_faq",
+    "question": "Is HisabDo free to use?"
+   },
+   {
+    "reply": "Yes. HisabDo is offline-first. Guest users can use supported local/offline features without internet access. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › Does HisabDo work without the internet?: https://hisabdo.app/faq",
+    "answer_status": "answered",
+    "source": "rag",
+    "needs_review": false,
+    "citations": [
+     {
+      "n": 1,
+      "title": "HisabDo Help Center FAQ › Does HisabDo work without the internet?",
+      "url": "https://hisabdo.app/faq",
+      "chunk_id": "off-01-008-does-hisabdo-work-without-the-internet",
+      "last_updated": null
+     }
+    ],
+    "intent": "product_faq",
+    "question": "Does HisabDo work without the internet?"
+   },
+   {
+    "reply": "HisabDo ke official page ke mutabiq (English mein):\n\nCurrently HisabDo is available on Android only. iOS support may be considered in future development. Follow our social media channels for updates. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › Is HisabDo available on iOS (iPhone)?: https://hisabdo.app/faq",
+    "answer_status": "answered",
+    "source": "rag",
+    "needs_review": false,
+    "citations": [
+     {
+      "n": 1,
+      "title": "HisabDo Help Center FAQ › Is HisabDo available on iOS (iPhone)?",
+      "url": "https://hisabdo.app/faq",
+      "chunk_id": "off-01-029-is-hisabdo-available-on-ios-iphone",
+      "last_updated": null
+     }
+    ],
+    "intent": "product_faq",
+    "question": "Kya HisabDo iPhone par chalta hai?"
+   },
+   {
+    "reply": "The Privacy Policy says, in \"7. Advertising & Cookies\": \"Our website may use third-party advertising technology, including Google AdSense, to display ads. These services may use cookies or similar technologies to personalize advertisements, measure ad performance, and provide relevant content based on your browsing activity. Depending on your location and applicable law, you may be able to control or opt out of certain personalized advertising.\" [1]\n\nSources:\n[1] Privacy Policy › 7. Advertising & Cookies: https://hisabdo.app/privacy-policy",
+    "answer_status": "answered",
+    "source": "rag",
+    "needs_review": false,
+    "citations": [
+     {
+      "n": 1,
+      "title": "Privacy Policy › 7. Advertising & Cookies",
+      "url": "https://hisabdo.app/privacy-policy",
+      "chunk_id": "off-06-009-7-advertising-cookies",
+      "last_updated": "2026-09-24"
+     }
+    ],
+    "intent": "product_faq",
+    "question": "Does HisabDo use cookies for advertising?"
+   },
+   {
+    "reply": "I found this on the related help topic \"Can I restore a backup?\": If you have created a backup, you can restore it to any Android device running HisabDo. This is useful when changing phones or recovering from a device problem. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › Can I restore a backup?: https://hisabdo.app/faq",
+    "answer_status": "answered",
+    "source": "rag",
+    "needs_review": false,
+    "citations": [
+     {
+      "n": 1,
+      "title": "HisabDo Help Center FAQ › Can I restore a backup?",
+      "url": "https://hisabdo.app/faq",
+      "chunk_id": "off-01-021-can-i-restore-a-backup",
+      "last_updated": null
+     }
+    ],
+    "intent": "product_faq",
+    "question": "Can I use HisabDo on two phones at once?"
+   }
+  ],
+  "fallback": [
+   {
+    "reply": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar.",
+    "answer_status": "no_source",
+    "source": "kb_fallback",
+    "needs_review": false,
+    "citations": [],
+    "intent": "no_source",
+    "question": "Does HisabDo have a desktop app for Mac?"
+   },
+   {
+    "reply": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar. For advice specific to your business, please consult a qualified accountant.",
+    "answer_status": "no_source",
+    "source": "kb_fallback",
+    "needs_review": false,
+    "citations": [],
+    "intent": "no_source",
+    "question": "Can HisabDo file my income tax return?"
+   },
+   {
+    "reply": "I can help with HisabDo and with bookkeeping for your business, but I don't have reliable information on that. Try asking about a HisabDo feature, such as PDF reports, backup or customer udhar, or contact HisabDo support at hisabdo.app@gmail.com.",
+    "answer_status": "out_of_scope",
+    "source": "kb_fallback",
+    "needs_review": false,
+    "citations": [],
+    "intent": "out_of_scope",
+    "question": "Write a short poem about the sea."
+   }
+  ],
+  "clarification": [
+   {
+    "reply": "Which part of HisabDo do you need help with? For example: customers and udhar, expenses, PDF reports, backup, or using the app without internet.",
+    "answer_status": "clarify",
+    "source": "clarification",
+    "needs_review": false,
+    "citations": [],
+    "intent": "clarify",
+    "question": "how?"
+   },
+   {
+    "reply": "Do you mean \"Can I restore a backup\" or \"Can I backup my data\"?",
+    "answer_status": "clarify",
+    "source": "clarification",
+    "needs_review": false,
+    "citations": [],
+    "intent": "clarify",
+    "question": "backup"
+   },
+   {
+    "reply": "Which part of HisabDo do you need help with? For example: customers and udhar, expenses, PDF reports, backup, or using the app without internet.",
+    "answer_status": "clarify",
+    "source": "clarification",
+    "needs_review": false,
+    "citations": [],
+    "intent": "clarify",
+    "question": "kaise?"
+   }
+  ],
+  "conflict": [
+   {
+    "reply": "HisabDo's official sources don't agree on this yet, so I can't give you one answer. I've flagged it for review.\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support? (no date shown): HisabDo supports Pakistani Rupee (PKR), US Dollar (USD) and Indian Rupee (INR). You can select your preferred currency in the app settings.\n[2] Why We Built HisabDo › Works the Way You Do Business (no date shown): In Your Currency PKR, USD and INR are supported, so the app fits businesses operating in Pakistan, India and beyond.\n[3] HisabDo: Khata & Expense App › Multi-Currency Support (2026-10-13): Manage financial records using: PKR INR AED USD\n\nSources:\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support?: https://hisabdo.app/faq\n[2] Why We Built HisabDo › Works the Way You Do Business: https://hisabdo.app/about-app\n[3] HisabDo: Khata & Expense App › Multi-Currency Support: https://play.google.com/store/apps/details?id=com.usman.hisabdo",
+    "answer_status": "conflict",
+    "source": "rag",
+    "needs_review": true,
+    "citations": [
+     {
+      "n": 1,
+      "title": "HisabDo Help Center FAQ › Which currencies does HisabDo support?",
+      "url": "https://hisabdo.app/faq",
+      "chunk_id": "off-01-019-which-currencies-does-hisabdo-support",
+      "last_updated": null
+     },
+     {
+      "n": 2,
+      "title": "Why We Built HisabDo › Works the Way You Do Business",
+      "url": "https://hisabdo.app/about-app",
+      "chunk_id": "off-02-010-works-the-way-you-do-business",
+      "last_updated": null
+     },
+     {
+      "n": 3,
+      "title": "HisabDo: Khata & Expense App › Multi-Currency Support",
+      "url": "https://play.google.com/store/apps/details?id=com.usman.hisabdo",
+      "chunk_id": "off-04-010-multi-currency-support",
+      "last_updated": "2026-10-13"
+     }
+    ],
+    "intent": "product_faq",
+    "question": "Which currencies does HisabDo support?"
+   },
+   {
+    "reply": "HisabDo ke official sources is baare mein abhi mutafiq nahi hain, is liye main ek jawab nahi de sakta. Maine isay review ke liye flag kar diya hai.\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support? (no date shown): HisabDo supports Pakistani Rupee (PKR), US Dollar (USD) and Indian Rupee (INR). You can select your preferred currency in the app settings.\n[2] Why We Built HisabDo › Works the Way You Do Business (no date shown): In Your Currency PKR, USD and INR are supported, so the app fits businesses operating in Pakistan, India and beyond.\n[3] HisabDo: Khata & Expense App › Multi-Currency Support (2026-10-13): Manage financial records using: PKR INR AED USD\n\nSources:\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support?: https://hisabdo.app/faq\n[2] Why We Built HisabDo › Works the Way You Do Business: https://hisabdo.app/about-app\n[3] HisabDo: Khata & Expense App › Multi-Currency Support: https://play.google.com/store/apps/details?id=com.usman.hisabdo",
+    "answer_status": "conflict",
+    "source": "rag",
+    "needs_review": true,
+    "citations": [
+     {
+      "n": 1,
+      "title": "HisabDo Help Center FAQ › Which currencies does HisabDo support?",
+      "url": "https://hisabdo.app/faq",
+      "chunk_id": "off-01-019-which-currencies-does-hisabdo-support",
+      "last_updated": null
+     },
+     {
+      "n": 2,
+      "title": "Why We Built HisabDo › Works the Way You Do Business",
+      "url": "https://hisabdo.app/about-app",
+      "chunk_id": "off-02-010-works-the-way-you-do-business",
+      "last_updated": null
+     },
+     {
+      "n": 3,
+      "title": "HisabDo: Khata & Expense App › Multi-Currency Support",
+      "url": "https://play.google.com/store/apps/details?id=com.usman.hisabdo",
+      "chunk_id": "off-04-010-multi-currency-support",
+      "last_updated": "2026-10-13"
+     }
+    ],
+    "intent": "product_faq",
+    "question": "Kya HisabDo AED currency support karta hai?"
+   }
+  ],
+  "known_limits": [
+   {
+    "reply": "I found this on the related help topic \"What happens when I sign in?\": You can create or sign in to your HisabDo account. When you are signed in and connected to the internet, supported data can be synchronized with our Supabase cloud infrastructure. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › What happens when I sign in?: https://hisabdo.app/faq",
+    "answer_status": "answered",
+    "source": "rag",
+    "needs_review": false,
+    "citations": [
+     {
+      "n": 1,
+      "title": "HisabDo Help Center FAQ › What happens when I sign in?",
+      "url": "https://hisabdo.app/faq",
+      "chunk_id": "off-01-007-what-happens-when-i-sign-in",
+      "last_updated": null
+     }
+    ],
+    "intent": "product_faq",
+    "question": "Can I connect HisabDo to my bank account?"
+   },
+   {
+    "reply": "HisabDo is compatible with Android 6.0 and above. For the best experience, we recommend using a device running Android 8.0 or later. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › What Android version is required?: https://hisabdo.app/faq",
+    "answer_status": "answered",
+    "source": "rag",
+    "needs_review": false,
+    "citations": [
+     {
+      "n": 1,
+      "title": "HisabDo Help Center FAQ › What Android version is required?",
+      "url": "https://hisabdo.app/faq",
+      "chunk_id": "off-01-030-what-android-version-is-required",
+      "last_updated": null
+     }
+    ],
+    "intent": "product_faq",
+    "question": "Does HisabDo have a web version?"
+   },
+   {
+    "reply": "For which period? e.g. this month, last month, or a month name like September.",
+    "answer_status": null,
+    "source": "backend_financial_api",
+    "needs_review": false,
+    "citations": [],
+    "intent": "report",
+    "question": "Should I register my shop for sales tax?"
+   }
+  ]
+ },
+ "model_drafts": [
+  {
+   "question": "Is HisabDo free to use?",
+   "draft": "HisabDo is free to download and use from Google Play. [2] Tap the Premium button in Settings to unlock unlimited exports. [1]",
+   "status": "answered",
+   "reply": "HisabDo is free to download and use from Google Play. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › Is HisabDo free to use?: https://hisabdo.app/faq"
+  },
+  {
+   "question": "Is HisabDo free to use?",
+   "draft": "Yes, HisabDo Gold costs Rs. 499 per month and includes a desktop version.",
+   "status": "no_source",
+   "reply": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar."
+  }
+ ]
+}

@@ -29,97 +29,20 @@ from pathlib import Path
 
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from src.financial_assistant.grounding.retrieval import (  # noqa: E402  shared with the chatbot
+    BGE, BGE_QUERY_PREFIX, BM25, GLOSSARY, MAX_QUERY_CHARS, ROMAN_STOP, STOP, TOKEN, URDU_RANGE, bm25_unit,
+    normalise, passage, rewrite, tokens)
+
 ROOT = Path(__file__).resolve().parents[1]
 EVAL = ROOT / "data" / "retrieval_eval"
 KB = ROOT / "data" / "kb" / "approved" / "kb_chunks.jsonl"
 CACHE = Path.home() / ".cache" / "hisabdo_retrieval_eval"
 
-BGE = "BAAI/bge-small-en-v1.5"
 MINILM_ML = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 RERANKER = "Xenova/ms-marco-MiniLM-L-6-v2"
-BGE_QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
-MAX_QUERY_CHARS = 512  # Day 1 #19: a 100,000-character message must not reach the retriever whole
 
 # ------------------------------------------------------------------------------------ normalisation
-
-STOP = set("""a an the is are am be been was were do does did of to in on for with at by from and or but if then
-so as it its this that these those i me my we our you your he she they them what which who whom how can could
-should would will shall may might there here about into than too very just not no yes any some""".split())
-ROMAN_STOP = set("ka ki ke ko hai hain ho hun mein main se aur bhi to ye yeh woh wo kya".split())
-
-# Roman Urdu / Urdu -> English terms used in the KB. Written from the Day 1 questions and general finance
-# vocabulary BEFORE the held-out questions were read; frozen afterwards (see docs).
-GLOSSARY = {
-    # app and product
-    "hisabdo": "hisabdo", "ہساب": "hisabdo", "حسابدو": "hisabdo",
-    "app": "app", "ایپ": "app", "aplikeshan": "app",
-    "muft": "free", "مفت": "free", "free": "free", "paisa lagta": "price cost free",
-    "qeemat": "price cost", "قیمت": "price cost", "fees": "price cost free", "fee": "price cost free",
-    "internet": "internet offline", "انٹرنیٹ": "internet offline", "offline": "offline internet",
-    "net": "internet offline",
-    "backup": "backup restore", "بیک": "backup", "بیکاپ": "backup restore",
-    "restore": "restore backup", "wapas": "restore",
-    "phone": "phone device", "فون": "phone device", "mobile": "phone device", "موبائل": "phone device",
-    "badal": "change new phone", "badalna": "change new phone", "badlun": "change new phone", "نیا": "new",
-    "naya": "new", "nayi": "new",
-    "data": "data records", "ڈیٹا": "data records",
-    "mehfooz": "safe secure", "محفوظ": "safe secure", "safe": "safe secure backup",
-    "report": "report pdf", "رپورٹ": "report pdf", "pdf": "pdf report statement", "statement": "statement pdf",
-    "bhejna": "send share", "bhejo": "send share", "bhej": "send share", "بھیج": "send share",
-    "zuban": "language", "zaban": "language", "زبان": "language", "urdu": "urdu language", "اردو": "urdu language",
-    "currency": "currency", "کرنسی": "currency", "rupay": "currency pkr", "rupee": "currency pkr",
-    "iphone": "iphone ios", "android": "android",
-    "awaz": "voice", "آواز": "voice", "bol": "voice",
-    "rabta": "contact support", "رابطہ": "contact support", "madad": "help support", "مدد": "help support",
-    "delete": "delete data", "mitana": "delete", "hatana": "delete", "ختم": "delete",
-    "account": "account sign in", "login": "sign in account",
-    # ledger and finance concepts
-    "khata": "khata ledger", "کھاتہ": "khata ledger", "کھاتا": "khata ledger", "کھاتے": "khata ledger",
-    "hisab": "ledger account", "hisaab": "ledger account", "حساب": "ledger account",
-    "udhar": "udhar credit dues receivable", "udhaar": "udhar credit dues receivable",
-    "ادھار": "udhar credit dues receivable",
-    "qarz": "debt payable owe", "قرض": "debt payable owe", "baqaya": "outstanding balance dues", "بقایا": "outstanding balance dues",
-    "kharcha": "expense", "kharch": "expense", "kharche": "expenses", "خرچہ": "expense", "خرچ": "expense",
-    "aamdani": "income", "amdani": "income", "آمدنی": "income", "kamai": "income earnings", "کمائی": "income earnings",
-    "munafa": "profit", "منافع": "profit", "nuksan": "loss", "نقصان": "loss",
-    "farq": "difference", "فرق": "difference", "matlab": "meaning definition", "مطلب": "meaning definition",
-    "grahak": "customer", "customer": "customer", "گاہک": "customer", "supplier": "supplier", "سپلائر": "supplier",
-    "payment": "payment", "ادائیگی": "payment", "adaigi": "payment", "raqam": "amount", "رقم": "amount",
-    "len": "receivable", "dain": "payable", "lena": "receivable", "dena": "payable",
-    # question words
-    "kaise": "how", "کیسے": "how", "kyun": "why", "کیوں": "why", "kab": "when", "کب": "when",
-    "kahan": "where", "کہاں": "where", "kon": "who", "kaun": "who", "کون": "who",
-    "kitna": "how much", "kitni": "how much", "kitne": "how much", "کتنا": "how much", "کتنی": "how much",
-    "kya": "", "کیا": "",
-}
-URDU_RANGE = r"؀-ۿ"
-TOKEN = re.compile(rf"[a-z0-9]+|[{URDU_RANGE}]+")
-
-
-def normalise(text: str) -> str:
-    """Unicode NFKC, lower case, punctuation to spaces, collapsed whitespace, length cap."""
-    text = unicodedata.normalize("NFKC", text)[:MAX_QUERY_CHARS].lower()
-    text = re.sub(rf"[^a-z0-9{URDU_RANGE}\s]", " ", text)
-    return re.sub(r"\s+", " ", text).strip()
-
-
-def rewrite(text: str) -> str:
-    """Normalised query plus English equivalents of Roman Urdu / Urdu terms (the original words are kept)."""
-    norm = normalise(text)
-    extra = []
-    for phrase, english in GLOSSARY.items():
-        if " " in phrase:
-            if phrase in norm:
-                extra.append(english)
-        elif re.search(rf"(?<![a-z0-9{URDU_RANGE}]){re.escape(phrase)}(?![a-z0-9{URDU_RANGE}])", norm):
-            extra.append(english)
-    extra = " ".join(e for e in extra if e)
-    return f"{norm} {extra}".strip() if extra else norm
-
-
-def tokens(text: str) -> list[str]:
-    return [t for t in TOKEN.findall(text.lower()) if t not in STOP and t not in ROMAN_STOP and len(t) > 1]
-
 
 # ------------------------------------------------------------------------------------ metadata gate
 
@@ -159,11 +82,6 @@ def load_chunks() -> list[dict]:
     return [json.loads(line) for line in KB.read_text(encoding="utf-8").splitlines()]
 
 
-def passage(c: dict) -> str:
-    """Text indexed for a chunk: page title, heading and body, so a chunk carries its own context."""
-    return f"{c['title']}. {c['heading']}.\n{c['body']}"
-
-
 class TfIdf:
     """The production algorithm (src/financial_assistant/faq_rag.py): sklearn TF-IDF, English stop words."""
     name = "tfidf"
@@ -176,29 +94,6 @@ class TfIdf:
     def scores(self, q: str) -> np.ndarray:
         from sklearn.metrics.pairwise import cosine_similarity
         return cosine_similarity(self.v.transform([q]), self.m)[0]
-
-
-class BM25:
-    name = "bm25"
-
-    def __init__(self, texts: list[str], k1: float = 1.5, b: float = 0.75):
-        self.docs = [Counter(tokens(t)) for t in texts]
-        self.len = np.array([sum(d.values()) for d in self.docs], dtype=float)
-        self.avg = self.len.mean()
-        df = Counter(t for d in self.docs for t in d)
-        n = len(self.docs)
-        self.idf = {t: math.log(1 + (n - f + 0.5) / (f + 0.5)) for t, f in df.items()}
-        self.k1, self.b = k1, b
-
-    def scores(self, q: str) -> np.ndarray:
-        out = np.zeros(len(self.docs))
-        for t in set(tokens(q)):
-            idf = self.idf.get(t)
-            if idf is None:
-                continue
-            tf = np.array([d.get(t, 0) for d in self.docs], dtype=float)
-            out += idf * tf * (self.k1 + 1) / (tf + self.k1 * (1 - self.b + self.b * self.len / self.avg))
-        return out
 
 
 class Dense:
@@ -255,11 +150,6 @@ class Config:
 
 LEGAL_TERMS = re.compile(r"privacy|policy|terms|legal|third.part|share my|sell|delete|rights|retention|children|"
                          r"cookies|advert|liabilit|disclaimer|personal information|collect|law|security|secure|safe")
-
-
-def bm25_unit(s: np.ndarray, k: float = 5.0) -> np.ndarray:
-    """BM25 squashed to 0..1 without per-query normalisation, so a threshold keeps one meaning across queries."""
-    return s / (s + k)
 
 
 class Pipeline:
@@ -323,6 +213,8 @@ CONFIGS = [
            kb_intents=("faq", "general")),
     Config("C14 C13 + scope filter", "hybrid", rewrite=True, rerank=True, gate="router", kb_intents=("faq", "general"),
            scope_filter=True),
+    Config("C15 BM25 + rewrite + router gate (faq)", "bm25", rewrite=True, gate="router",
+           note="lexical fallback for servers without fastembed"),
 ]
 ROUTER_DAY = __import__("datetime").date(2026, 10, 28)
 
@@ -521,7 +413,7 @@ def summary(r: dict) -> dict:
     return {k: v for k, v in r.items() if k != "rows"}
 
 
-def cmd_run() -> None:
+def cmd_run(only: str | None = None) -> None:
     chunks = load_chunks()
     pipe = Pipeline(chunks)
     qrels = load_qrels()
@@ -529,7 +421,11 @@ def cmd_run() -> None:
     fold_a, fold_b = folds(held)
     results = {"kb_chunks": len(chunks), "dev_queries": len(dev), "heldout_queries": len(held),
                "folds": {"A": [q["id"] for q in fold_a], "B": [q["id"] for q in fold_b]}, "configs": []}
-    for cfg in CONFIGS:
+    previous = []
+    if only:  # re-measure one configuration and keep the stored results of the others
+        previous = [c for c in json.loads((EVAL / "results" / "comparison.json").read_text(encoding="utf-8"))["configs"]
+                    if not c["name"].startswith(only + " ")]
+    for cfg in [c for c in CONFIGS if not only or c.name.startswith(only + " ")]:
         ranked, traces, ms = score_all(pipe, cfg, dev + held)
         # 1. Tuned on the Day 1 questions only (the brief): kept to show how far 19 questions generalise.
         p1, _ = sweep(dev, ranked, chunks, qrels)
@@ -557,6 +453,9 @@ def cmd_run() -> None:
               f"CV held {cv['correct']:3}/{len(held)} recall {cv['recall_at_k']:.2f} prec {cv['context_precision']:.2f} "
               f"unrel {cv['unrelated_in_context']:3} | prod t={prod['threshold']:+.3f} k={prod['top_k']} m={prod['margin']} "
               f"day1 {dev_r['correct']}/{len(dev)} | {ms:.0f} ms")
+    if only:
+        order = {c.name: i for i, c in enumerate(CONFIGS)}
+        results["configs"] = sorted(previous + results["configs"], key=lambda c: order.get(c["name"], 99))
     (EVAL / "results").mkdir(exist_ok=True)
     (EVAL / "results" / "comparison.json").write_text(
         json.dumps(rounded(results), indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -595,8 +494,9 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("command", choices=["heldout", "pool", "run"])
     ap.add_argument("--depth", type=int, default=5)
+    ap.add_argument("--only", help="config prefix, e.g. C15: re-measure only that configuration")
     a = ap.parse_args()
-    {"heldout": cmd_heldout, "pool": lambda: cmd_pool(a.depth), "run": cmd_run}[a.command]()
+    {"heldout": cmd_heldout, "pool": lambda: cmd_pool(a.depth), "run": lambda: cmd_run(a.only)}[a.command]()
     return 0
 
 

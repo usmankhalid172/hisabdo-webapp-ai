@@ -35,6 +35,12 @@ class Settings(BaseSettings):
     # false = every message goes through the previous single-turn flow.
     dialogue_enabled: bool = True
 
+    # Grounded answers from the approved KB (financial_assistant/grounding, docs/grounded-answer-rules.md):
+    # cited sources, conflict notices, clarifying questions and no-source fallbacks.
+    # Off until the release gate has run on it; false = the previous top-1 faq_docs.json path.
+    grounded_answers_enabled: bool = False
+    kb_retriever_mode: str = "auto"   # auto | hybrid (needs fastembed) | lexical
+
 
 @lru_cache
 def get_settings() -> Settings:
