@@ -56,6 +56,10 @@ class XictekSettings(BaseSettings):
     # request path; a lower cutoff recovers relevant paraphrase matches while
     # top_k still caps context size.
     core_services_relevance_threshold: float = Field(default=0.22, ge=-1.0, le=1.0)
+    # Provisional Careers tuning: the checked-in TF-IDF index scores common
+    # opening queries below the general 0.20 threshold.
+    careers_top_k: int = Field(default=4, ge=1, le=20)
+    careers_relevance_threshold: float = Field(default=0.12, ge=-1.0, le=1.0)
 
     # Where the built index (embeddings.npy + chunks.json) lives. The
     # ingest script writes here; the retriever reads from here at startup.

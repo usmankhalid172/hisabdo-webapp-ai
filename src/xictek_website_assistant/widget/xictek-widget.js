@@ -294,10 +294,18 @@
     var label = document.createElement("div");
     label.textContent = "Sources: ";
     sources.forEach(function (s, i) {
-      var link = s.url
-        ? '<a href="' + s.url + '" target="_blank" rel="noopener">' + s.title + "</a>"
-        : s.title;
-      label.innerHTML += link + (i < sources.length - 1 ? ", " : "");
+      if (i) label.appendChild(document.createTextNode(", "));
+      label.appendChild(document.createTextNode("[" + (i + 1) + "] "));
+      if (s.url) {
+        var link = document.createElement("a");
+        link.href = s.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = s.title;
+        label.appendChild(link);
+      } else {
+        label.appendChild(document.createTextNode(s.title));
+      }
     });
     el.appendChild(label);
     messagesEl.appendChild(el);

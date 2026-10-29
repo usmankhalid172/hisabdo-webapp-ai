@@ -16,6 +16,7 @@ key, independent of HisabDo's chatbot.
 """
 from __future__ import annotations
 
+import re
 import time
 from abc import ABC, abstractmethod
 
@@ -76,9 +77,11 @@ class MockLLMProvider(LLMProvider):
         history: list[dict] | None = None,
     ) -> tuple[str, int | None]:
         if context:
+            citation_ids = re.findall(r"(?m)^Source \[(\d+)\]$", context)
+            citations = " ".join(f"[{number}]" for number in citation_ids)
             reply = (
                 f"Based on XICTEK's website content: {context.strip()} "
-                f"(In response to: \"{message.strip()}\")"
+                f"{citations} (In response to: \"{message.strip()}\")"
             )
         else:
             reply = (

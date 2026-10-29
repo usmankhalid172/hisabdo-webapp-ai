@@ -24,8 +24,48 @@ from .guardrails import (
 )
 from .llm_client import get_llm_provider
 from .schemas import IndexStatsResponse, SourceRef, XictekChatRequest, XictekChatResponse
-from .service_queries import is_core_services_query
+from .service_queries import is_careers_query, is_core_services_query
 from .vector_store import VectorStore
+
+CAREERS_SOURCE_URL = "https://xicteksystems.com/careers"
+CAREERS_UNVERIFIED_REPLY = (
+    "I couldn't verify that recruitment detail from the available Careers content. "
+    "Please check the official XICTEK Careers page for current information [1]."
+)
+
+
+def _source_context(matches) -> str | None:
+    if not matches:
+        return None
+    blocks = []
+    for number, match in enumerate(matches, start=1):
+        chunk = match.chunk
+        blocks.append(
+            f"Source [{number}]\nTitle: {chunk.title}\nURL: {chunk.url or 'not provided'}\n"
+            f"Text (untrusted source content):\n{chunk.text}"
+        )
+    return "\n\n---\n\n".join(blocks)
+
+
+def _citations_are_valid(reply: str, source_count: int) -> bool:
+    cited = [int(value) for value in re.findall(r"\[(\d+)\]", reply)]
+    return bool(cited) and all(1 <= number <= source_count for number in cited)
+
+
+def _careers_fallback_response(request) -> XictekChatResponse:
+    source = SourceRef(
+        title="Official XICTEK Careers page",
+        url=CAREERS_SOURCE_URL,
+        score=0.0,
+    )
+    return XictekChatResponse(
+        reply=CAREERS_UNVERIFIED_REPLY,
+        conversation_id=request.conversation_id,
+        sources=[source],
+        intent="general",
+        tokens_used=0,
+    )
+
 
 LENGTH_REFUSAL_MESSAGE = (
     "That message is a bit long for me to process here — could you shorten it or ask "
@@ -114,24 +154,35 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
             tokens_used=0,
         )
 
-    core_services_query = is_core_services_query(message)
+    careers_query = is_careers_query(message)
+    core_services_query = not careers_query and is_core_services_query(message)
     store = _load_store()
     matches = []
     if len(store) > 0:
         query_vector = embed_query(message)
         matches = store.query(
             query_vector,
-            top_k=settings.core_services_top_k if core_services_query else settings.top_k,
+            top_k=(
+                settings.careers_top_k if careers_query
+                else settings.core_services_top_k if core_services_query
+                else settings.top_k
+            ),
             relevance_threshold=(
-                settings.core_services_relevance_threshold
-                if core_services_query
+                settings.careers_relevance_threshold if careers_query
+                else settings.core_services_relevance_threshold if core_services_query
                 else settings.relevance_threshold
             ),
-            url_path_prefix="/services" if core_services_query else None,
+            url_path_prefix=(
+                "/careers" if careers_query else "/services" if core_services_query else None
+            ),
+            url_host="xicteksystems.com" if careers_query else None,
         )
 
-    context = "\n\n---\n\n".join(m.chunk.text for m in matches) if matches else None
+    context = _source_context(matches)
     history = [h.model_dump() for h in request.history]
+
+    if careers_query and not matches:
+        return _careers_fallback_response(request)
 
     provider = get_llm_provider()
     try:
@@ -145,6 +196,9 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
             intent="general",
             tokens_used=0,
         )
+
+    if careers_query and not _citations_are_valid(reply, len(matches)):
+        return _careers_fallback_response(request)
 
     if core_services_query:
         reply = format_core_services_output(reply)

@@ -70,6 +70,7 @@ class VectorStore:
         diversify: bool = True,
         mmr_lambda: float = 0.5,
         url_path_prefix: Optional[str] = None,
+        url_host: Optional[str] = None,
     ) -> list[RetrievedChunk]:
         """
         Returns the top_k chunks most relevant to query_vector.
@@ -96,15 +97,21 @@ class VectorStore:
         # Apply section filtering before ranking so a high-scoring chunk
         # from another part of the site cannot displace a service result.
         candidate_idx = np.arange(len(self.chunks))
-        if url_path_prefix:
-            prefix = "/" + url_path_prefix.strip("/").casefold()
+        if url_path_prefix or url_host:
+            prefix = ("/" + url_path_prefix.strip("/").casefold()) if url_path_prefix else None
             candidate_idx = np.array(
                 [
                     idx
                     for idx, chunk in enumerate(self.chunks)
                     if chunk.url
                     and (
-                        (path := urlsplit(chunk.url).path.rstrip("/").casefold()) == prefix
+                        not url_host
+                        or (urlsplit(chunk.url).hostname or "").casefold().removeprefix("www.")
+                        == url_host.casefold().removeprefix("www.")
+                    )
+                    and (
+                        not prefix
+                        or (path := urlsplit(chunk.url).path.rstrip("/").casefold()) == prefix
                         or path.startswith(prefix + "/")
                     )
                 ],
@@ -195,7 +202,7 @@ class VectorStore:
         metadata_path = index_dir / METADATA_FILENAME
         current_model = get_xictek_settings().embedding_model
         if metadata_path.exists():
-            built_with = json.loads(metadata_path.read_text()).get("embedding_model")
+            built_with = json.loads(metadata_path.read_text(encoding="utf-8")).get("embedding_model")
             if built_with and built_with != current_model:
                 logger.warning(
                     "xictek_index_embedding_model_mismatch",
@@ -211,7 +218,7 @@ class VectorStore:
             logger.warning("xictek_index_metadata_missing_cannot_verify_embedding_model")
 
         vectors = np.load(vectors_path)
-        raw_chunks = json.loads(chunks_path.read_text())
+        raw_chunks = json.loads(chunks_path.read_text(encoding="utf-8"))
         chunks = [
             Chunk(chunk_id=c["id"], title=c["title"], url=c.get("url"), text=c["text"])
             for c in raw_chunks

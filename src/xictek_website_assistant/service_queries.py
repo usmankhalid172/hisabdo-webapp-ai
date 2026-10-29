@@ -14,6 +14,14 @@ CORE_SERVICES_QUERY_TERMS = (
     "digital transformation", "ui ux", "ux design",
 )
 
+CAREERS_QUERY_TERMS = (
+    "career", "careers", "job", "jobs", "job opening", "job openings",
+    "vacancy", "vacancies", "hiring", "recruitment", "internship",
+    "internships", "apply for", "application status", "applicant", "position",
+    "positions", "opening", "openings", "role", "roles", "resume", "cv",
+    "interview", "salary", "compensation", "eligibility", "benefits",
+)
+
 
 def normalize_service_query_text(value: str) -> str:
     """Normalize punctuation and case for whole-term matching."""
@@ -26,4 +34,13 @@ def is_core_services_query(message: str) -> bool:
     return any(
         f" {normalize_service_query_text(term)} " in normalized
         for term in CORE_SERVICES_QUERY_TERMS
+    )
+
+
+def is_careers_query(message: str) -> bool:
+    """Identify recruitment questions for the XICTEK Careers source route."""
+    normalized = f" {normalize_service_query_text(message)} "
+    return any(
+        f" {normalize_service_query_text(term)} " in normalized
+        for term in CAREERS_QUERY_TERMS
     )
