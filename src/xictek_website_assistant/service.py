@@ -24,7 +24,11 @@ from .guardrails import (
 )
 from .llm_client import get_llm_provider
 from .schemas import IndexStatsResponse, SourceRef, XictekChatRequest, XictekChatResponse
-from .service_queries import is_careers_query, is_core_services_query
+from .service_queries import (
+    is_careers_query,
+    is_core_services_query,
+    is_personal_application_status_query,
+)
 from .vector_store import VectorStore
 
 CAREERS_SOURCE_URL = "https://xicteksystems.com/careers"
@@ -153,6 +157,12 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
             intent="general",
             tokens_used=0,
         )
+
+    # A public knowledge base cannot inspect an individual's application.
+    # Avoid turning a loosely related FAQ hit (e.g., review time) into a
+    # false confirmation of receipt or status.
+    if is_personal_application_status_query(message):
+        return _careers_fallback_response(request)
 
     careers_query = is_careers_query(message)
     core_services_query = not careers_query and is_core_services_query(message)

@@ -17,9 +17,16 @@ CORE_SERVICES_QUERY_TERMS = (
 CAREERS_QUERY_TERMS = (
     "career", "careers", "job", "jobs", "job opening", "job openings",
     "vacancy", "vacancies", "hiring", "recruitment", "internship",
-    "internships", "apply for", "application status", "applicant", "position",
+    "internships", "apply for", "application status", "application received",
+    "received my application", "my application", "applicant", "employment",
+    "job offer", "position",
     "positions", "opening", "openings", "role", "roles", "resume", "cv",
     "interview", "salary", "compensation", "eligibility", "benefits",
+)
+
+PERSONAL_APPLICATION_STATUS_TERMS = (
+    "my application", "application status", "application received",
+    "received my application", "check my application", "my interview status",
 )
 
 
@@ -43,4 +50,13 @@ def is_careers_query(message: str) -> bool:
     return any(
         f" {normalize_service_query_text(term)} " in normalized
         for term in CAREERS_QUERY_TERMS
+    )
+
+
+def is_personal_application_status_query(message: str) -> bool:
+    """Identify private application-status requests public website content cannot answer."""
+    normalized = f" {normalize_service_query_text(message)} "
+    return any(
+        f" {normalize_service_query_text(term)} " in normalized
+        for term in PERSONAL_APPLICATION_STATUS_TERMS
     )

@@ -1,4 +1,5 @@
 from types import SimpleNamespace
+from pathlib import Path
 
 import numpy as np
 
@@ -6,7 +7,7 @@ from src.xictek_website_assistant import service
 from src.xictek_website_assistant.llm_client import MockLLMProvider
 from src.xictek_website_assistant.prompts import SYSTEM_PROMPT
 from src.xictek_website_assistant.schemas import XictekChatRequest
-from src.xictek_website_assistant.service_queries import is_careers_query
+from src.xictek_website_assistant.service_queries import is_careers_query, is_personal_application_status_query
 from src.xictek_website_assistant.vector_store import Chunk, VectorStore
 
 
@@ -154,6 +155,8 @@ def test_mock_provider_cites_numbered_context_sources():
 def test_openings_and_role_questions_are_routed_to_careers():
     assert is_careers_query("What positions are open?")
     assert is_careers_query("Are these roles remote?")
+    assert is_personal_application_status_query("Can you check whether my application was received?")
+    assert not is_personal_application_status_query("How long does it take to review an application?")
 
 
 def test_careers_reply_can_cite_both_conflicting_sources(monkeypatch):
@@ -174,3 +177,68 @@ def test_careers_reply_can_cite_both_conflicting_sources(monkeypatch):
     assert len(result.sources) == 2
     assert result.sources[0].url == result.sources[1].url
 
+
+
+
+def test_careers_multi_turn_history_reaches_provider_and_keeps_conversation(monkeypatch):
+    store = _FakeStore([_match(text="The Careers page lists internship roles.")])
+    calls = []
+
+    class Provider:
+        def generate_reply(self, message, context, history):
+            calls.append({"message": message, "context": context, "history": history})
+            return "The page lists internship roles [1].", 7
+
+    monkeypatch.setattr(service, "_load_store", lambda: store)
+    monkeypatch.setattr(service, "embed_query", lambda message: np.array([1.0]))
+    monkeypatch.setattr(service, "get_llm_provider", lambda: Provider())
+
+    first = service.handle_chat(_request("What internship roles are listed?"))
+    history = [
+        {"role": "user", "content": "What internship roles are listed?"},
+        {"role": "assistant", "content": first.reply},
+    ]
+    second_request = XictekChatRequest(
+        message="What are the requirements for those roles?",
+        conversation_id="careers-test",
+        history=history,
+    )
+    second = service.handle_chat(second_request)
+
+    assert first.conversation_id == second.conversation_id == "careers-test"
+    assert len(calls) == 2
+    assert calls[0]["history"] == []
+    assert calls[1]["history"] == history
+    assert "Source [1]" in calls[1]["context"]
+    assert second.sources[0].url == "https://xicteksystems.com/careers"
+
+
+def test_careers_application_status_without_evidence_uses_linked_fallback(monkeypatch):
+    # Even when public retrieval finds a nearby FAQ about review time, it
+    # cannot confirm the private status of this visitor's application.
+    store = _FakeStore([_match(text="Applications are reviewed within 3-5 business days.")])
+
+    class Provider:
+        def generate_reply(self, *args, **kwargs):
+            raise AssertionError("Unsupported application status must not reach the LLM")
+
+    monkeypatch.setattr(service, "_load_store", lambda: store)
+    monkeypatch.setattr(service, "embed_query", lambda message: np.array([1.0]))
+    monkeypatch.setattr(service, "get_llm_provider", lambda: Provider())
+
+    result = service.handle_chat(_request("Can you check whether my application was received?"))
+
+    assert result.reply == service.CAREERS_UNVERIFIED_REPLY
+    assert result.sources[0].url == service.CAREERS_SOURCE_URL
+    assert result.reply.endswith("[1].")
+
+
+def test_widget_creates_numbered_clickable_links_from_api_sources():
+    widget = Path(__file__).resolve().parents[2] / "src" / "xictek_website_assistant" / "widget" / "xictek-widget.js"
+    source = widget.read_text(encoding="utf-8")
+
+    assert "function appendSources(sources)" in source
+    assert '"[" + (i + 1) + "] "' in source
+    assert "link.href = s.url" in source
+    assert 'link.target = "_blank"' in source
+    assert "appendSources(data.sources)" in source
