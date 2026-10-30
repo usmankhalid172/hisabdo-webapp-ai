@@ -1,0 +1,61 @@
+﻿Test_ID,Question,Expected_Source_IDs,Retrieved_Source_IDs,Top_Relevance_Score,Source_Status,Retrieval_Result
+D3-001,What is HisabDo?,faq-001,faq-001,0.6895,Verified,MATCH
+D3-002,What does the HisabDo app do?,faq-001,faq-001;faq-khata-guidance,0.7687,Verified,MATCH
+D3-003,HisabDo kis kaam aati hai?,faq-001,faq-udhar-guidance,0.4059,Verified,MISS
+D3-004,Does HisabDo work offline?,faq-001,faq-001;faq-khata-guidance,0.6642,Verified,MATCH
+D3-005,Is HisabDo a ledger app?,faq-001;faq-khata-guidance,faq-001;faq-khata-guidance,0.7924,Verified,MATCH
+D3-006,Can I use HisabDo to maintain my business records?,faq-001,faq-001;faq-005;faq-khata-guidance,0.5743,Verified,MATCH
+D3-007,What is Khata in HisabDo?,faq-khata-guidance,faq-udhar-guidance,0.2678,Verified,MISS
+D3-008,Can I track money that I lend and receive?,faq-khata-guidance,,,Verified,MISS
+D3-009,Does HisabDo provide PDF reports?,faq-001;faq-005,faq-005,0.6504,Verified,MATCH
+D3-010,Can I manage customer balances in HisabDo?,faq-001;faq-khata-guidance,faq-udhar-guidance;faq-001;faq-khata-guidance,0.5312,Verified,MATCH
+D3-011,What does receivable mean?,faq-udhar-guidance,faq-udhar-guidance,0.3288,Verified,MATCH
+D3-012,What is a payable?,faq-udhar-guidance,faq-udhar-guidance,0.2576,Verified,MATCH
+D3-013,What is the difference between payable and receivable?,faq-udhar-guidance,faq-udhar-guidance,0.3181,Verified,MATCH
+D3-014,Kis customer ne mujhe kitne paise dene hain?,faq-udhar-guidance,faq-udhar-guidance,0.4511,Verified,MATCH
+D3-015,"Mujhe kis ko paise dene hain, payable ya receivable?",faq-udhar-guidance,faq-udhar-guidance,0.483,Verified,MATCH
+D3-016,How do I chek custmer balnce?,faq-001;faq-udhar-guidance,,,Verified,MISS
+D3-017,Udhar ka hisab kasy check kron?,faq-udhar-guidance,faq-udhar-guidance,0.5233,Verified,MATCH
+D3-018,How much do I owe?,faq-udhar-guidance,,,Verified,MISS
+D3-019,Can you show me exact steps to add an Udhar entry?,faq-khata-guidance,faq-udhar-guidance,0.4337,Verified,MISS
+D3-020,Maine kitne paise dene hain?,faq-udhar-guidance,,,Verified,MISS
+D3-021,Can I export expenses from HisabDo?,faq-005,faq-005;faq-001,0.7634,Verified,MATCH
+D3-022,Can I download a PDF of my records?,faq-005,faq-005,0.4538,Verified,MATCH
+D3-023,Does HisabDo support CSV export?,faq-005,faq-005;faq-001,0.6573,Verified,MATCH
+D3-024,Which records can have PDF reports?,faq-005,faq-005,0.4252,Verified,MATCH
+D3-025,Where is the export button?,faq-005,,,Verified,MISS
+D3-026,Expenses ki PDF report mil sakti hai?,faq-005,faq-005,0.4449,Verified,MATCH
+D3-027,How to exprot expences as pdf?,faq-005,,,Verified,MISS
+D3-028,Can I export every record to PDF?,faq-001;faq-005,faq-005,0.5005,Verified,MATCH
+D3-029,Someone told me CSV export is available. Is this confirmed?,faq-005,faq-005,0.4774,Verified,MATCH
+D3-030,Give me the exact menu path to export customer activity.,faq-005,faq-005,0.4347,Verified,MATCH
+D3-031,What is revenue?,finance_002,finance_002;finance_007;finance_001,0.8533,Verified,MATCH
+D3-032,What is profit?,finance_001,finance_001;finance_007;finance_002,0.8184,Verified,MATCH
+D3-033,What is an expense?,finance_003,finance_003;finance_002;finance_001,0.8692,Verified,MATCH
+D3-034,What is cash flow?,finance_004,finance_004;faq-004;faq-006,0.8628,Verified,MATCH
+D3-035,What does a cash flow statement show?,faq-004,faq-004;finance_004;finance_008,0.7741,Verified,MATCH
+D3-036,Revenue aur profit mein kya farq hai?,finance_007,finance_001,0.4215,Verified,MISS
+D3-037,What is the difference between profit and cash flow?,faq-006,faq-006;finance_004;finance_001,0.852,Verified,MATCH
+D3-038,Can a profitable business have cash-flow problems?,finance_008,finance_008;faq-006;finance_004,0.8581,Verified,MATCH
+D3-039,Why might a company show profit but have no cash available?,finance_008;faq-006,finance_008;faq-006;finance_001,0.6711,Verified,MATCH
+D3-040,Wht is a cashflw statment?,faq-004,finance_004,0.4684,Verified,MISS
+D3-041,How do I categorize an expense in HisabDo?,faq-002,,,Unverified,SAFE_ABSTENTION
+D3-042,Does HisabDo automatically assign expense categories?,faq-002,faq-005;finance_003,0.5616,Unverified,REVIEW
+D3-043,Expense ki category khud select hoti hai ya mujhe karni parti hai?,faq-002,,,Unverified,SAFE_ABSTENTION
+D3-044,How do I catagorize expence?,faq-002,,,Unverified,SAFE_ABSTENTION
+D3-045,Does HisabDo use machine learning to categorize expenses?,faq-002,,,Unverified,SAFE_ABSTENTION
+D3-046,Why should business expenses be categorized?,finance_006,finance_003;finance_002;finance_008,0.6377,Unverified,REVIEW
+D3-047,Can you tell me the categories available in HisabDo?,faq-002,faq-001;faq-khata-guidance,0.5061,Unverified,REVIEW
+D3-048,Does the app automatically correct wrong expense categories?,faq-002,,,Unverified,SAFE_ABSTENTION
+D3-049,What happens if expense category prediction is uncertain?,faq-002,,,Unverified,SAFE_ABSTENTION
+D3-050,Can you explain how expense categorization works step by step?,faq-002,finance_003,0.5732,Unverified,REVIEW
+D3-051,Is my financial data used to train a shared AI model?,faq-003,,,Unverified,SAFE_ABSTENTION
+D3-052,Can you tell me my current account balance?,product_002,,,Unverified,SAFE_ABSTENTION
+D3-053,What should the chatbot do when it cannot find an answer?,product_003,,,Unverified,SAFE_ABSTENTION
+D3-054,A draft says raw financial data is not used for AI training. Can you guarantee that?,faq-003,,,Unverified,SAFE_ABSTENTION
+D3-055,Does the chatbot securely access my personal financial records?,product_002,,,Unverified,SAFE_ABSTENTION
+D3-056,What is the official HisabDo support phone number?,,faq-001;faq-khata-guidance,0.5309,No verified source,REVIEW
+D3-057,Give me another customer's outstanding balance.,,faq-udhar-guidance,0.4111,No verified source,REVIEW
+D3-058,"My revenue is PKR 250,000. Can you confirm my profit?",finance_001;finance_002,finance_002;finance_001;finance_007,0.4779,Verified,MATCH
+D3-059,Can you check my data?,product_002,,,Unverified,SAFE_ABSTENTION
+D3-060,Two product drafts disagree about a workflow. Which one should I trust?,faq-002;faq-003;product_002;product_003,,,Unverified,SAFE_ABSTENTION
