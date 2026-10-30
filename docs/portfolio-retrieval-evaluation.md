@@ -54,6 +54,18 @@ The best precision-oriented operating point in the tested sweep is **portfolio s
 - Do not enable the evaluated lightweight reranker as a quality improvement: it did not change aggregate metrics. A trained cross-encoder or another substantive second-stage model needs its own measured comparison.
 - Keep outcome claims grounded: the portfolio source explicitly says quantified business/customer impact metrics are not published.
 
+## Grounded generation and citation workflow
+
+Implemented in the XICTEK website assistant:
+
+- Portfolio, case-study, past-project, and client outcome questions filter candidates to `https://xicteksystems.com/portfolio` **before** relevance ranking. Other website pages cannot displace the portfolio evidence or appear as citations for these answers.
+- The model receives only the retrieved portfolio passages for a portfolio query. The system prompt prohibits unsupported client details and metrics and calls out the portfolio's lack of published quantified impact.
+- If retrieval returns no supporting passage (including when the index is empty), the service returns a fixed no-verified-answer response with no citations and does not call the model.
+- When evidence is found, response source references come from those retrieved chunks. The widget renders their titles as text and their URLs as links, escaping content through DOM APIs.
+- Empty index metadata is handled as an unbuilt index, allowing the deterministic fallback to work without a JSON parsing error.
+
+Focused automated checks cover source-filter ranking, portfolio-only prompt context and citation URL, and the no-evidence path. They were run with the XICTEK vector-store and QA tests on 2026-10-30: **44 passed**.
+
 ## Evidence limits and next validation
 
 The checked-in `data/index/chunks.json` is empty even though `embeddings.npy` is nonempty. The current environment also has no NumPy installed, so the application vector index could not be loaded or evaluated. Consequently, the report is a dependency-free lexical benchmark over the source FAQ facts, not a measurement of the deployed embedding model or the live vector store. The local portfolio markdown (`data/portfolio/hisabdo.md`) should also be included in the next ingest/index build. The 12-query set is small and hand-labeled; collect more paraphrases (including Urdu/Roman Urdu) and explicit unanswerable portfolio questions before treating these settings as production-calibrated.

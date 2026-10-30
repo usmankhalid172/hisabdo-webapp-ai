@@ -83,6 +83,20 @@ LLM_UNAVAILABLE_MESSAGE = (
     "Please try again in a moment, or reach the XICTEK team through the Contact page."
 )
 
+NO_GROUNDED_ANSWER_MESSAGE = (
+    "I don't have a verified answer to that in XICTEK's public content yet. "
+    "Please check the relevant page or contact XICTEK directly."
+)
+
+_PORTFOLIO_QUERY_RE = re.compile(
+    r"\b(portfolio|case\s*stud(?:y|ies)|past\s+projects?|client\s+work|"
+    r"client\s+(?:roi|results?|outcomes?|impact|metrics?)|"
+    r"project\s+(?:outcomes?|results?|impact|metrics?)|"
+    r"(?:outcomes?|results?|impact|metrics?)\s+(?:of|from|for)\s+(?:hisabdo|the\s+project))\b",
+    re.IGNORECASE,
+)
+_PORTFOLIO_URL_PREFIX = "https://xicteksystems.com/portfolio"
+
 
 def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
     settings = get_xictek_settings()
@@ -115,9 +129,26 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
 
     store = _load_store()
     matches = []
+    portfolio_query = bool(_PORTFOLIO_QUERY_RE.search(message))
     if len(store) > 0:
         query_vector = embed_query(message)
-        matches = store.query(query_vector, top_k=settings.top_k, relevance_threshold=settings.relevance_threshold)
+        matches = store.query(
+            query_vector,
+            top_k=settings.top_k,
+            relevance_threshold=settings.relevance_threshold,
+            url_prefix=_PORTFOLIO_URL_PREFIX if portfolio_query else None,
+        )
+
+    # Never ask the model to answer from conversation history or prior
+    # assumptions when retrieval found no supporting public source.
+    if not matches:
+        return XictekChatResponse(
+            reply=NO_GROUNDED_ANSWER_MESSAGE,
+            conversation_id=request.conversation_id,
+            sources=[],
+            intent="general",
+            tokens_used=0,
+        )
 
     context = "\n\n---\n\n".join(m.chunk.text for m in matches) if matches else None
     history = [h.model_dump() for h in request.history]

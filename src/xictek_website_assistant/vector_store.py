@@ -68,6 +68,7 @@ class VectorStore:
         relevance_threshold: float,
         diversify: bool = True,
         mmr_lambda: float = 0.5,
+        url_prefix: str | None = None,
     ) -> list[RetrievedChunk]:
         """
         Returns the top_k chunks most relevant to query_vector.
@@ -90,6 +91,17 @@ class VectorStore:
         # Vectors are L2-normalized at embed time, so a plain dot product
         # is cosine similarity — no need to re-normalize per query.
         scores = self._vectors @ query_vector
+        # Apply source routing before ranking so portfolio queries can
+        # retrieve relevant portfolio facts even when unrelated pages score
+        # higher in the global index.
+        eligible = np.ones(len(self.chunks), dtype=bool)
+        if url_prefix:
+            prefix = url_prefix.rstrip("/").lower()
+            eligible = np.array([
+                bool(chunk.url) and chunk.url.rstrip("/").lower().startswith(prefix)
+                for chunk in self.chunks
+            ])
+        scores = np.where(eligible, scores, -np.inf)
 
         if not diversify:
             top_idx = np.argsort(-scores)[:top_k]
@@ -192,7 +204,12 @@ class VectorStore:
             logger.warning("xictek_index_metadata_missing_cannot_verify_embedding_model")
 
         vectors = np.load(vectors_path)
-        raw_chunks = json.loads(chunks_path.read_text())
+        chunks_text = chunks_path.read_text()
+        if not chunks_text.strip():
+            return cls()  # treat an intentionally empty index as unbuilt
+        raw_chunks = json.loads(chunks_text)
+        if not raw_chunks:
+            return cls()
         chunks = [
             Chunk(chunk_id=c["id"], title=c["title"], url=c.get("url"), text=c["text"])
             for c in raw_chunks

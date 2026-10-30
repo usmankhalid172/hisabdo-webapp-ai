@@ -49,6 +49,26 @@ def test_query_respects_relevance_threshold(populated_store):
     assert results[0].chunk.chunk_id == "a"
 
 
+def test_query_can_restrict_candidates_to_a_source_prefix():
+    store = VectorStore()
+    store.build(
+        [
+            Chunk("general", "General", "unrelated", "https://xicteksystems.com/services"),
+            Chunk("portfolio", "Portfolio", "case study", "https://xicteksystems.com/portfolio"),
+        ],
+        np.array([[1.0, 0.0], [0.9, 0.1]], dtype=np.float32),
+    )
+
+    results = store.query(
+        _unit_vector(1, 0),
+        top_k=2,
+        relevance_threshold=0.0,
+        url_prefix="https://xicteksystems.com/portfolio",
+    )
+
+    assert [result.chunk.chunk_id for result in results] == ["portfolio"]
+
+
 def test_query_respects_top_k(populated_store):
     results = populated_store.query(_unit_vector(1, 0), top_k=1, relevance_threshold=-1.0)
     assert len(results) == 1
