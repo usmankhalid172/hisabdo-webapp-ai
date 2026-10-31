@@ -10,6 +10,9 @@ os.environ.setdefault("LLM_PROVIDER", "mock")
 # actual website visitors) would otherwise start 429-ing partway through
 # any test session that sends more than 20 requests to it.
 os.environ.setdefault("XICTEK_RATE_LIMIT", "10000/minute")
+os.environ["XICTEK_INDEX_DIR"] = str(
+    Path(__file__).resolve().parent / "_empty_xictek_index"
+)
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -17,7 +20,6 @@ import pytest
 from fastapi.testclient import TestClient
 
 from src.main import app
-
 
 @pytest.fixture()
 def client():

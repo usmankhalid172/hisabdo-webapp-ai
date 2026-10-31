@@ -1,0 +1,77 @@
+{
+  "kb_version": "1.0.0",
+  "chunks": [
+    {
+      "chunk_id": "chunk-001",
+      "faq_id": "faq-001",
+      "title": "What is a receivable?",
+      "section": "Accounts Receivable",
+      "category": "Financial Definitions",
+      "source": "HisabDo Finance FAQ",
+      "source_url": null,
+      "language": "English",
+      "updated_date": "2026-10-15",
+      "product_area": "Receivables"
+    },
+    {
+      "chunk_id": "chunk-002",
+      "faq_id": "faq-002",
+      "title": "What is a payable?",
+      "section": "Accounts Payable",
+      "category": "Financial Definitions",
+      "source": "HisabDo Finance FAQ",
+      "source_url": null,
+      "language": "English",
+      "updated_date": "2026-10-15",
+      "product_area": "Payables"
+    },
+    {
+      "chunk_id": "chunk-003",
+      "faq_id": "faq-003",
+      "title": "How do I check customer balances?",
+      "section": "Customer Balances",
+      "category": "App Workflows",
+      "source": "HisabDo Finance FAQ",
+      "source_url": null,
+      "language": "English",
+      "updated_date": "2026-10-15",
+      "product_area": "Customer Management"
+    },
+    {
+      "chunk_id": "chunk-004",
+      "faq_id": "faq-004",
+      "title": "What is cash flow?",
+      "section": "Cash Flow",
+      "category": "Financial Definitions",
+      "source": "Business Finance Glossary",
+      "source_url": null,
+      "language": "English",
+      "updated_date": "2026-10-15",
+      "product_area": "Financial Reporting"
+    },
+    {
+      "chunk_id": "chunk-005",
+      "faq_id": "faq-005",
+      "title": "How do I record a customer payment?",
+      "section": "Customer Payments",
+      "category": "Accounting Workflows",
+      "source": "General Accounting Guidance",
+      "source_url": null,
+      "language": "English",
+      "updated_date": "2026-10-15",
+      "product_area": "Transactions"
+    },
+    {
+      "chunk_id": "chunk-006",
+      "faq_id": "faq-006",
+      "title": "What money do customers owe my business?",
+      "section": "Accounts Receivable",
+      "category": "Financial Definitions",
+      "source": "Business Finance Glossary",
+      "source_url": null,
+      "language": "English and Roman Urdu",
+      "updated_date": "2026-10-15",
+      "product_area": "Receivables"
+    }
+  ]
+}

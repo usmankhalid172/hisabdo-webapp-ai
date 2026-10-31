@@ -19,7 +19,16 @@ def test_protected_endpoint_rejects_missing_token(client):
     assert body["error_code"] == "UNAUTHORIZED_SERVICE"
     assert "request_id" in body
 
-
+def test_protected_endpoint_rejects_invalid_token(client):
+    resp = client.post(
+        "/api/v1/categorize",
+        json={"description": "Groceries", "amount": 100},
+        headers={"X-Internal-Token": "wrong-token"},
+    )
+    assert resp.status_code == 401
+    body = resp.json()
+    assert body["error_code"] == "UNAUTHORIZED_SERVICE"
+    
 def test_protected_endpoint_accepts_valid_token(client, auth_headers):
     resp = client.post(
         "/api/v1/categorize",

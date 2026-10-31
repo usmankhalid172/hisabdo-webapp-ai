@@ -1,0 +1,60 @@
+{
+  "kb_version": "1.0.0",
+  "last_updated": "2026-10-15",
+  "documents": [
+    {
+      "id": "faq-001",
+      "title": "What is a receivable?",
+      "question": "What does receivable mean?",
+      "answer": "A receivable is money your business expects to receive from customers for goods or services provided.",
+      "source": "HisabDo Finance FAQ",
+      "source_type": "faq",
+      "verified": true
+    },
+    {
+      "id": "faq-002",
+      "title": "What is a payable?",
+      "question": "What does payable mean?",
+      "answer": "A payable is money your business owes to suppliers or other parties.",
+      "source": "HisabDo Finance FAQ",
+      "source_type": "faq",
+      "verified": true
+    },
+    {
+      "id": "faq-003",
+      "title": "How do I check customer balances?",
+      "question": "How can I see how much my customers owe me?",
+      "answer": "Check the customer balance or receivables section in your account. The exact steps may depend on your HisabDo app version.",
+      "source": "HisabDo Finance FAQ",
+      "source_type": "faq",
+      "verified": false
+    },
+    {
+      "id": "faq-004",
+      "title": "What is cash flow?",
+      "question": "Explain cash flow for my business.",
+      "answer": "Cash flow describes money moving into and out of a business during a period. Cash received is an inflow, and money paid out is an outflow.",
+      "source": "Business Finance Glossary",
+      "source_type": "glossary",
+      "verified": true
+    },
+    {
+      "id": "faq-005",
+      "title": "How do I record a customer payment?",
+      "question": "My customer paid me. How should I record the payment?",
+      "answer": "Record the payment using the appropriate payment or transaction workflow in your accounting system. Confirm the existing receivable and payment details before saving to avoid duplicate records.",
+      "source": "General Accounting Guidance",
+      "source_type": "documentation",
+      "verified": true
+    },
+    {
+      "id": "faq-006",
+      "title": "What money do customers owe my business?",
+      "question": "What money do customers still owe my business? What money is still outstanding? Mere customers ke paas mera kitna paisa baqi hai?",
+      "answer": "Money customers owe your business is called accounts receivable. It is the amount your business expects to collect from customers for goods or services provided.",
+      "source": "Business Finance Glossary",
+      "source_type": "glossary",
+      "verified": true
+    }
+  ]
+}

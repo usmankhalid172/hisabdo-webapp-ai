@@ -176,7 +176,7 @@ class VectorStore:
         metadata_path = index_dir / METADATA_FILENAME
         current_model = get_xictek_settings().embedding_model
         if metadata_path.exists():
-            built_with = json.loads(metadata_path.read_text()).get("embedding_model")
+            built_with = json.loads(metadata_path.read_text(encoding="utf-8")).get("embedding_model")
             if built_with and built_with != current_model:
                 logger.warning(
                     "xictek_index_embedding_model_mismatch",
@@ -192,7 +192,7 @@ class VectorStore:
             logger.warning("xictek_index_metadata_missing_cannot_verify_embedding_model")
 
         vectors = np.load(vectors_path)
-        raw_chunks = json.loads(chunks_path.read_text())
+        raw_chunks = json.loads(chunks_path.read_text(encoding="utf-8"))
         chunks = [
             Chunk(chunk_id=c["id"], title=c["title"], url=c.get("url"), text=c["text"])
             for c in raw_chunks
