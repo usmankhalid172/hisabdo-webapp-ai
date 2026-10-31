@@ -1,0 +1,1394 @@
+{
+ "mode": "lexical",
+ "totals": {
+  "dev": {
+   "correct_refusal": 12,
+   "safe_no_answer": 3,
+   "correct_answer": 4
+  },
+  "heldout.json": {
+   "correct_answer": 25,
+   "safe_no_answer": 18,
+   "wrong_citation": 9,
+   "correct_refusal": 68
+  }
+ },
+ "answerable_by_language": {
+  "en:correct_answer": 15,
+  "en:safe_no_answer": 7,
+  "en:wrong_citation": 2,
+  "roman_ur:correct_answer": 8,
+  "roman_ur:safe_no_answer": 8,
+  "roman_ur:wrong_citation": 2,
+  "ur:correct_answer": 6,
+  "ur:safe_no_answer": 6,
+  "ur:wrong_citation": 4
+ },
+ "statuses": {
+  "routed:report": 18,
+  "routed:account_query": 28,
+  "out_of_scope": 12,
+  "no_source": 7,
+  "answered": 50,
+  "routed:correct_transaction": 1,
+  "routed:add_expense": 16,
+  "routed:add_income": 4,
+  "clarify": 2,
+  "routed:greeting": 1
+ },
+ "rows": [
+  {
+   "id": "D01",
+   "set": "dev",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "D02",
+   "set": "dev",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "D03",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "D04",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "D05",
+   "set": "dev",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "D06",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "D07",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "D08",
+   "set": "dev",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "D09",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "D10",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "D11",
+   "set": "dev",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "status": "out_of_scope",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "D12",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "status": "no_source",
+   "grade": "safe_no_answer",
+   "cited": []
+  },
+  {
+   "id": "D13",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-01-002-is-hisabdo-free-to-use"
+   ]
+  },
+  {
+   "id": "D14",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-01-008-does-hisabdo-work-without-the-internet"
+   ]
+  },
+  {
+   "id": "D15",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-01-023-what-happens-to-my-data-if-i-uninstall-the-app"
+   ]
+  },
+  {
+   "id": "D16",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "out_of_scope",
+   "grade": "safe_no_answer",
+   "cited": []
+  },
+  {
+   "id": "D17",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ]
+  },
+  {
+   "id": "D18",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "status": "routed:correct_transaction",
+   "grade": "safe_no_answer",
+   "cited": []
+  },
+  {
+   "id": "D19",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "out_of_scope",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-EXP-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-04-002-expense-tracker"
+   ]
+  },
+  {
+   "id": "H-EXP-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "no_source",
+   "grade": "safe_no_answer",
+   "cited": []
+  },
+  {
+   "id": "H-EXP-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "wrong_citation",
+   "cited": [
+    "off-04-005-customer-ledger"
+   ]
+  },
+  {
+   "id": "H-EXP-EN-2",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-EXP-RU-2",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-EXP-UR-2",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-EXP-EN-3",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-EXP-RU-3",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-EXP-UR-3",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-INC-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "wrong_citation",
+   "cited": [
+    "blog-15-006-step-5-balance-the-budget"
+   ]
+  },
+  {
+   "id": "H-INC-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "wrong_citation",
+   "cited": [
+    "blog-15-006-step-5-balance-the-budget"
+   ]
+  },
+  {
+   "id": "H-INC-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "wrong_citation",
+   "cited": [
+    "off-04-005-customer-ledger"
+   ]
+  },
+  {
+   "id": "H-INC-EN-2",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:add_income",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-INC-RU-2",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:add_income",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-INC-UR-2",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:add_income",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-KHA-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "clarify",
+   "grade": "safe_no_answer",
+   "cited": []
+  },
+  {
+   "id": "H-KHA-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "clarify",
+   "grade": "safe_no_answer",
+   "cited": []
+  },
+  {
+   "id": "H-KHA-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-08-015-what-is-the-difference-between-a-khata-and-a-led"
+   ]
+  },
+  {
+   "id": "H-KHA-EN-2",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "wrong_citation",
+   "cited": [
+    "blog-08-007-6-keep-receivables-and-payables-separate"
+   ]
+  },
+  {
+   "id": "H-KHA-RU-2",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "blog-08-015-what-is-the-difference-between-a-khata-and-a-led"
+   ]
+  },
+  {
+   "id": "H-KHA-UR-2",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "blog-08-015-what-is-the-difference-between-a-khata-and-a-led"
+   ]
+  },
+  {
+   "id": "H-UDH-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
+  },
+  {
+   "id": "H-UDH-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
+  },
+  {
+   "id": "H-UDH-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
+  },
+  {
+   "id": "H-UDH-EN-2",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-UDH-RU-2",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-UDH-UR-2",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-REP-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-REP-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-REP-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-PDF-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ]
+  },
+  {
+   "id": "H-PDF-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ]
+  },
+  {
+   "id": "H-PDF-EN-2",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-02-005-hand-them-a-real-statement"
+   ]
+  },
+  {
+   "id": "H-PDF-RU-2",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-02-005-hand-them-a-real-statement"
+   ]
+  },
+  {
+   "id": "H-PDF-UR-2",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "no_source",
+   "grade": "safe_no_answer",
+   "cited": []
+  },
+  {
+   "id": "H-GEN-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-01-008-does-hisabdo-work-without-the-internet"
+   ]
+  },
+  {
+   "id": "H-GEN-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-01-008-does-hisabdo-work-without-the-internet"
+   ]
+  },
+  {
+   "id": "H-GEN-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-03-003-use-hisabdo-your-way"
+   ]
+  },
+  {
+   "id": "H-H-PDF-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-02-005-hand-them-a-real-statement"
+   ]
+  },
+  {
+   "id": "H-H-PDF-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ]
+  },
+  {
+   "id": "H-H-PDF-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "no_source",
+   "grade": "safe_no_answer",
+   "cited": []
+  },
+  {
+   "id": "H-H-KHA-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-08-008-7-back-up-your-records-regularly"
+   ]
+  },
+  {
+   "id": "H-H-KHA-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "off-01-021-can-i-restore-a-backup",
+    "off-03-004-everything-you-need"
+   ]
+  },
+  {
+   "id": "H-H-KHA-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "wrong_citation",
+   "cited": [
+    "blog-07-006-backup-and-recovery",
+    "blog-08-015-what-is-the-difference-between-a-khata-and-a-led"
+   ]
+  },
+  {
+   "id": "H-H-UDH-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
+  },
+  {
+   "id": "H-H-UDH-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
+  },
+  {
+   "id": "H-H-UDH-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
+  },
+  {
+   "id": "H-H-UDH-EN-2",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-UDH-RU-2",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-UDH-UR-2",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-REP-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-REP-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-REP-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-KHA-EN-2",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-KHA-RU-2",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-KHA-UR-2",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-EXP-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-EXP-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-EXP-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-INC-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-INC-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-INC-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:add_income",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H-PDF-EN-2",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ]
+  },
+  {
+   "id": "H-H-PDF-RU-2",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ]
+  },
+  {
+   "id": "H-H-PDF-UR-2",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ]
+  },
+  {
+   "id": "H-H2-REP-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-REP-EN-2",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-REP-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-REP-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-UDH-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-UDH-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-UDH-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-UDH-EN-2",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
+  },
+  {
+   "id": "H-H2-UDH-UR-2",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "out_of_scope",
+   "grade": "safe_no_answer",
+   "cited": []
+  },
+  {
+   "id": "H-H2-PDF-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ]
+  },
+  {
+   "id": "H-H2-PDF-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ]
+  },
+  {
+   "id": "H-H2-PDF-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ]
+  },
+  {
+   "id": "H-H2-PDF-EN-2",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "blog-12-012-generating-reports-efficiently-with-hisabdo"
+   ]
+  },
+  {
+   "id": "H-H2-KHA-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-KHA-RU-2",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "wrong_citation",
+   "cited": [
+    "off-04-016-start-managing-your-finances"
+   ]
+  },
+  {
+   "id": "H-H2-EXP-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-EXP-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-EXP-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-INC-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-INC-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-INC-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H2-GEN-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-07-009-multi-language-support"
+   ]
+  },
+  {
+   "id": "H-H2-GEN-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-07-009-multi-language-support"
+   ]
+  },
+  {
+   "id": "H-H3-KHA-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H3-KHA-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H3-UDH-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H3-UDH-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H3-REP-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H3-REP-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:report",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H3-PDF-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ]
+  },
+  {
+   "id": "H-H3-PDF-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "wrong_citation",
+   "cited": [
+    "off-06-010-8-data-security"
+   ]
+  },
+  {
+   "id": "H-H3-GEN-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-01-029-is-hisabdo-available-on-ios-iphone"
+   ]
+  },
+  {
+   "id": "H-H3-GEN-EN-1",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "off-01-030-what-android-version-is-required"
+   ]
+  },
+  {
+   "id": "H-H3-EXP-UR-1",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H3-INC-RU-1",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "routed:add_expense",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-H3-UDH-RU-2",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "safe_no_answer",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
+  },
+  {
+   "id": "H-TC-02",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "out_of_scope",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-TC-03",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-TC-06",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "answered",
+   "grade": "wrong_citation",
+   "cited": [
+    "blog-16-013-what-happens-to-my-data-if-i-lose-my-phone"
+   ]
+  },
+  {
+   "id": "H-TC-07",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-TC-08",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "out_of_scope",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-F-01",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-03-009-can-i-export-reports"
+   ]
+  },
+  {
+   "id": "H-F-05",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "answer",
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-01-029-is-hisabdo-available-on-ios-iphone"
+   ]
+  },
+  {
+   "id": "H-P-06",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-P-08",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-OT-01",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "no_source",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-OT-02",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "out_of_scope",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-OT-03",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "out_of_scope",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-OT-04",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "no_source",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-OT-05",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "out_of_scope",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-OT-06",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "out_of_scope",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-OT-07",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "no_source",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-OT-08",
+   "set": "heldout.json",
+   "lang": "en",
+   "expect": "none",
+   "status": "routed:greeting",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-OT-09",
+   "set": "heldout.json",
+   "lang": "roman_ur",
+   "expect": "none",
+   "status": "out_of_scope",
+   "grade": "correct_refusal",
+   "cited": []
+  },
+  {
+   "id": "H-OT-10",
+   "set": "heldout.json",
+   "lang": "ur",
+   "expect": "none",
+   "status": "out_of_scope",
+   "grade": "correct_refusal",
+   "cited": []
+  }
+ ]
+}

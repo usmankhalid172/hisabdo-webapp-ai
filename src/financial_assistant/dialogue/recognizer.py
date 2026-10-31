@@ -47,16 +47,23 @@ CUES: dict[Intent, list[str]] = {
         "kitna kharcha", "kitna kharch", "kharcha kitna", "kharch kitna", "kitni sale", "sale kitni", "kitni income",
         "income kitni", "kitna hua", "kitni hui", "how much did i spend", "how much did i earn", "how much did i make",
         "profit kitna", "munafa", "profit and loss", "p&l", "رپورٹ", "خلاصہ",
+        # Urdu-script "how much was spent/earned" (multilingual coverage)
+        "کتنا خرچ", "خرچ ہوا", "کتنی آمدنی", "کتنی سیل",
     ],
     Intent.ACCOUNT_QUERY: [
         "balance", "mera balance", "my balance", "account mein kitne", "kitne paise", "how much money do i have",
         "cash in hand", "bachat", "baqaya", "baqi", "remaining", "outstanding", "mere account", "my account",
         "بیلنس", "بقایا",
+        # money owed to the user (udhar), English and Urdu script
+        "owe me", "owes me", "owe us", "باقی",
     ],
     Intent.FAQ: [
         "hisabdo", "hisab do", "app", "feature", "features", "kya aap", "can you", "can the", "do you", "does the",
         "how do i", "how to", "kaise karte", "kaise karun", "kaise kare", "support", "language", "urdu", "help",
         "kya hai", "what is", "kon si", "which", "حساب دو", "ایپ",
+        # khata / PDF / backup are HisabDo features (hisabdo.app/faq). Generic "how do I" words are NOT cues on
+        # their own ("payment reminder kaise likhun?" is a writing request): see the how-to rules below.
+        "khata", "khaata", "کھاتہ", "کھاتا", "کھاتے", "pdf", "پی ڈی ایف", "backup", "back up", "بیک اپ", "مطلب",
     ],
     Intent.GREETING: ["hi", "hello", "hey", "salam", "assalam", "aoa", "assalamualaikum", "good morning", "السلام"],
 }
@@ -105,10 +112,73 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
 
         # "What is a cash flow statement?" asks about a CONCEPT, not the user's own figures.
         possessive = re.search(r"\b(mera|meri|mere|my|mujhe|i|hum|hamara|hamari)\b|میرا|میری", lowered)
-        if not possessive and re.search(r"\b(what is|what's|what are|kya hai|kya hota|kya hoti|matlab|meaning)\b", lowered):
+        if not possessive and re.search(r"\b(what is|what's|what are|kya hai|kya hota|kya hoti|matlab|meaning|mean)\b",
+                                        lowered):
             for private in (Intent.REPORT, Intent.ACCOUNT_QUERY):
                 scores.pop(private, None)
             scores.setdefault(Intent.FAQ, 1.0)
+
+        # "How do I share a PDF statement?" asks how the APP works, not for the user's own report.
+        how_to = re.search(r"\b(how do i|how can i|how to|can i|kaise|kese|sakta|sakti)\b|کیسے|سکتا|سکتی", lowered)
+        app_feature = re.search(r"\b(pdf|statement|export|share|whatsapp|backup|back up)\b|پی ڈی ایف|اسٹیٹمنٹ|واٹس ایپ|بیک اپ",
+                                lowered)
+        if how_to and app_feature and amount is None:
+            scores.pop(Intent.REPORT, None)
+            scores[Intent.FAQ] = scores.get(Intent.FAQ, 0.0) + 2.0
+            signals.append("faq:how_to_feature")
+
+        # "Can HisabDo make a monthly report PDF?" asks what the APP can do, not for the user's own report.
+        app_subject = re.search(r"\b(hisabdo|hisab do|the app)\b|حساب دو", lowered)
+        capability = re.search(r"\b(can|could|does|do|kya|sakta|sakti|sakte|deta|deti|karta|karti)\b"
+                               r"|سکتا|سکتی|دیتا|دیتی|کرتا", lowered)
+        if app_subject and capability and amount is None:
+            scores.pop(Intent.REPORT, None)
+            scores[Intent.FAQ] = scores.get(Intent.FAQ, 0.0) + 2.0
+            signals.append("faq:app_capability")
+
+        # "What did I spend last month?" names a money topic AND a period: the user's own figures (private).
+        money_topic = re.search(r"\b(spend|spent|spending|expense|expenses|earn|earned|earning|income|sales|"
+                                r"kharch|kharcha|aamdani|amdani)\b|خرچ|آمدنی", lowered)
+        if money_topic and amount is None and not how_to and "faq:app_capability" not in signals \
+                and extract.extract_period(text, today) is not None:
+            scores[Intent.REPORT] = scores.get(Intent.REPORT, 0.0) + 2.0
+            signals.append("report:money_in_period")
+
+        # "How much udhar is still outstanding?" asks for the user's OWN figures: keep it on the private route,
+        # never on a public one where the knowledge base or the AI model could answer with made-up numbers.
+        owed = re.search(r"\b(owe|owes|owed|owing|udhar|udhaar|baqi)\b|ادھار|باقی", lowered)
+        how_much = re.search(r"\b(how much|kitna|kitni|kitne)\b|کتنا|کتنی|کتنے", lowered)
+        if owed and how_much and amount is None and not how_to:
+            scores[Intent.ACCOUNT_QUERY] = scores.get(Intent.ACCOUNT_QUERY, 0.0) + 2.0
+            signals.append("account_query:how_much_owed")
+
+        # "Customer ko udhar diya to kaise likhun?" asks how to RECORD something in the app: a product question
+        # only when the how-to words come with a bookkeeping topic.
+        ledger_topic = re.search(r"\b(udhar|udhaar|khata|khaata|entry|kharcha|kharch|aamdani|expense|income)\b"
+                                 r"|ادھار|کھات|خرچ|آمدنی", lowered)
+        if how_to and ledger_topic and amount is None and "account_query:how_much_owed" not in signals:
+            scores[Intent.FAQ] = scores.get(Intent.FAQ, 0.0) + 1.0
+            signals.append("faq:how_to_record")
+
+        # "Ahmed ka khata dikhao" / "Bilal ka hisaab kholo" ask to SEE or OPEN a ledger (private data),
+        # unlike "khata kya hai?" (a concept). Release fix: hisaab/account and kholo/khol do/کھولیں added.
+        if re.search(r"\b(khata|khaata|ledger|hisaab|hisab|account)\b|کھات|حساب", lowered) and \
+                re.search(r"\b(dikhao|dikha do|dikhaen|dikhayen|show|open|kholo|khol do|kholen|kholiye)\b"
+                          r"|دکھا|کھول", lowered) and not how_to:
+            scores.pop(Intent.FAQ, None)
+            scores[Intent.ACCOUNT_QUERY] = scores.get(Intent.ACCOUNT_QUERY, 0.0) + 2.0
+            signals.append("account_query:show_khata")
+
+        # "What are my total sales?" / "Meri total sales kitni hain?" ask for the user's OWN figures.
+        # Release fix: these were answered from the knowledge base with a definition of "revenue".
+        own = re.search(r"\b(my|mera|meri|mere|our|hamara|hamari)\b|میرا|میری|میرے|ہمارا|ہماری", lowered)
+        metric = re.search(r"\b(sales|sale|revenue|income|earn|earned|earning|profit|munafa|kamai|aamdani|amdani)\b"
+                           r"|سیل|آمدنی|منافع|کمائی", lowered)
+        # Only genuinely conceptual words: "What are MY total sales?" asks for figures, not a definition.
+        concept = re.search(r"\b(matlab|meaning|mean|means|difference|farq|definition|define)\b|مطلب|فرق", lowered)
+        if own and metric and amount is None and not how_to and not concept:
+            scores[Intent.REPORT] = scores.get(Intent.REPORT, 0.0) + 2.0
+            signals.append("report:own_metric")
 
         # A question mark with no money words and no amount is most likely a general/product question.
         is_question = "?" in text or "؟" in text

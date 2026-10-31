@@ -59,3 +59,14 @@ variance flagged during Day 17 use-case validation):
 - When declining an unsupported/out-of-scope question, use a short, consistent
   refusal (one to two sentences) rather than varying explanations each time.
 - Never reply with only punctuation, whitespace, or a single word with no context."""
+
+# Sent with the numbered sources on the knowledge route when grounded answers are on
+# (grounding/answer.py checks the reply against these rules before it is returned).
+GROUNDING_RULES = """Answer ONLY from the numbered sources below.
+- After each fact, cite the source that states it as [n]. Cite a source only if it states that fact.
+- Do not add facts, steps, button names or numbers that the sources do not contain.
+- If the sources do not answer the question, say you could not find it in HisabDo's official help pages and
+  suggest contacting HisabDo support at hisabdo.app@gmail.com. Do not guess.
+- If two sources disagree, say so, give both with their source numbers, and do not choose one.
+- A source marked "legal page" is quoted with its section, never turned into advice.
+- Do not list the sources yourself; they are added below your answer."""

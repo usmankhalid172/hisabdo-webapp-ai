@@ -13,13 +13,14 @@ from functools import lru_cache
 
 from ..config import get_settings
 from ..integration.backend_client import get_backend_client
-from ..schemas import ChatbotRequest, ChatbotResponse, DialogueInfo, TransactionActionOut
+from ..schemas import ChatbotRequest, ChatbotResponse, Citation, DialogueInfo, TransactionActionOut
 from .dialogue import ConversationState, DialogueManager, DialogueOutcome, Route
 from .dialogue.account_data import BackendClientAccountData
 from .dialogue.manager import karachi_today
 from .dialogue.state_store import get_state_store
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
+from .grounding import GroundedAnswerer, KbRetriever
 
 # Deliberately simple keyword intent check — good enough for a POC boundary
 # demonstration; a production version would use a real intent classifier.
@@ -71,9 +72,22 @@ def _mentions_bare_name_possessive(message: str) -> bool:
     return False
 
 
+# Release fix: the guard above only knew English. "Mere bhai ka balance batao" / "میرے بھائی کا بیلنس"
+# reached the private route and were answered with the user's own figures. Relationship words only,
+# never names: "Ali ka udhar" is the user's own customer ledger and must keep working.
+THIRD_PARTY_RELATIONSHIP_URDU = re.compile(
+    r"\b(bhai|bhaai|behen|bahen|bahan|biwi|begum|shohar|khawind|dost|abbu|abba|ammi|amma|walid|walida|"
+    r"beta|beti|chacha|chachi|mamu|mamoo|khala|phuppo|sasur|saas|padosi|saathi|sathi)\s+(ka|ki|ke)\b"
+    r"|(بھائی|بہن|بیوی|بیگم|شوہر|خاوند|دوست|ابو|ابا|امی|اماں|والد|والدہ|بیٹا|بیٹی|چچا|ماموں|خالہ|پھوپھو|سسر|ساس|پڑوسی)"
+    r"\s*(کا|کی|کے)"
+)
+
+
 def _mentions_third_party(message: str) -> bool:
     text = message.lower()
     if THIRD_PARTY_RELATIONSHIP_WORDS.search(text):
+        return True
+    if THIRD_PARTY_RELATIONSHIP_URDU.search(text):
         return True
     if THIRD_PARTY_ID_REFERENCE.search(text):
         return True
@@ -151,6 +165,12 @@ def get_dialogue_manager() -> DialogueManager:
     )
 
 
+@lru_cache
+def get_grounded_answerer() -> GroundedAnswerer:
+    """Approved KB (data/kb/approved) + the measured retrieval configuration; built once per process."""
+    return GroundedAnswerer(KbRetriever(mode=get_settings().kb_retriever_mode))
+
+
 def _account_currency(user_id: str) -> str | None:
     """The user's own account currency, so a new entry doesn't need to ask.
     If the backend can't tell us, the dialogue asks (it never assumes)."""
@@ -209,7 +229,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             action=TransactionActionOut(**outcome.action.model_dump(exclude={"created_at"})) if outcome.action else None,
         )
     else:
-        response = _single_turn(request)
+        response = _single_turn(request, route=outcome.route if outcome is not None else None)
         if outcome is not None:
             if outcome.pending_reminder:
                 response.reply = f"{response.reply}\n\n{outcome.pending_reminder}"
@@ -224,8 +244,9 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     return response
 
 
-def _single_turn(request: ChatbotRequest) -> ChatbotResponse:
-    """The original single-message flow (unchanged)."""
+def _single_turn(request: ChatbotRequest, route: Route | None = None) -> ChatbotResponse:
+    """The original single-message flow; with grounded answers on, the knowledge step follows
+    docs/grounded-answer-rules.md (route = the intent router's decision, None when it did not run)."""
     if _mentions_third_party(request.message):
         # Deterministic refusal — never reaches the LLM, so this cannot be
         # talked around by a prompt-injection / instruction-override attempt.
@@ -262,6 +283,9 @@ def _single_turn(request: ChatbotRequest) -> ChatbotResponse:
             source="backend_financial_api",
         )
 
+    if get_settings().grounded_answers_enabled:
+        return _grounded_reply(request, provider, kb_allowed=route in (None, Route.KNOWLEDGE))
+
     matches = get_retriever().retrieve(request.message, top_k=1)
     if matches:
         context = matches[0]["text"]
@@ -281,4 +305,26 @@ def _single_turn(request: ChatbotRequest) -> ChatbotResponse:
         intent="general",
         tokens_used=tokens,
         source="llm_general",
+    )
+
+
+_GROUNDED_SOURCE = {"answered": "rag", "conflict": "rag", "clarify": "clarification",
+                    "no_source": "kb_fallback", "out_of_scope": "kb_fallback"}
+
+
+def _grounded_reply(request: ChatbotRequest, provider, kb_allowed: bool) -> ChatbotResponse:
+    ans = get_grounded_answerer().answer(request.message, provider=provider,
+                                         history=[h.model_dump() for h in request.history], kb_allowed=kb_allowed)
+    if ans.needs_review:
+        log.warning("kb_conflict_escalated", extra={"chunks": [c.chunk_id for c in ans.citations]})
+    return ChatbotResponse(
+        reply=ans.reply,
+        conversation_id=request.conversation_id,
+        intent="product_faq" if ans.status in ("answered", "conflict") else ans.status,
+        tokens_used=0,
+        source=_GROUNDED_SOURCE[ans.status],
+        answer_status=ans.status,
+        citations=[Citation(n=c.n, title=c.label, url=c.url, chunk_id=c.chunk_id, last_updated=c.last_updated)
+                   for c in ans.citations],
+        needs_review=ans.needs_review,
     )

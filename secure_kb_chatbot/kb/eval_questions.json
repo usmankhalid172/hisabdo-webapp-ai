@@ -1,0 +1,54 @@
+[
+  {
+    "question": "How do I record an expense?",
+    "expect": "KB-001"
+  },
+  {
+    "question": "kharcha kaise likhun?",
+    "expect": "KB-001"
+  },
+  {
+    "question": "Kya HisabDo free hai?",
+    "expect": "KB-002"
+  },
+  {
+    "question": "Can I send a customer a PDF statement on WhatsApp?",
+    "expect": "KB-003"
+  },
+  {
+    "question": "Can I export to Excel?",
+    "expect": "KB-003"
+  },
+  {
+    "question": "Kya internet ke baghair chalta hai?",
+    "expect": "KB-004"
+  },
+  {
+    "question": "Does it support Urdu?",
+    "expect": "KB-005"
+  },
+  {
+    "question": "Phone badalne par data kaise wapis laun?",
+    "expect": "KB-007"
+  },
+  {
+    "question": "Is there an iPhone app?",
+    "expect": "KB-008"
+  },
+  {
+    "question": "Udhar kaise likhte hain?",
+    "expect": "KB-101"
+  },
+  {
+    "question": "Give me a biryani recipe",
+    "expect": null
+  },
+  {
+    "question": "Who won the cricket match?",
+    "expect": null
+  },
+  {
+    "question": "What is the capital of France?",
+    "expect": null
+  }
+]

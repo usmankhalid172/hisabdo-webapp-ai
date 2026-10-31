@@ -1,0 +1,25 @@
+{
+ "config": "C10 C6 + router gate (faq)",
+ "pipeline": [
+  "Router gate: only messages the team intent router (src/financial_assistant/dialogue/recognizer.py) labels 'faq' reach the KB; own figures, reports, transactions, other people's accounts and general chat get an empty context",
+  "Query normalisation: NFKC, lower case, punctuation removed, capped at 512 characters",
+  "Query rewrite: Roman Urdu / Urdu terms expanded with their English KB terms (GLOSSARY in scripts/retrieval_eval.py); original words kept",
+  "Hybrid retrieval over data/kb/approved/kb_chunks.jsonl: 0.6 x cosine(bge-small-en-v1.5) + 0.4 x BM25/(BM25+5)",
+  "Context selection: score >= threshold, within margin of the best passage, at most top_k passages"
+ ],
+ "threshold": 0.585804,
+ "top_k": 2,
+ "margin": 0.05,
+ "how_set": "Swept on measured results (threshold midpoints between observed scores, top_k 1-8, margin none-3.0). Cross-validated thresholds were 0.58556 (tuned on Day 1 + fold A) and 0.58540 (Day 1 + fold B); production value tuned on Day 1 + all held-out questions.",
+ "results": {
+  "day1": "17/19 (Day 1 baseline 9/19); the 2 misses are router decisions (D16 -> general, D18 -> correct_transaction)",
+  "heldout_cross_validated": "101/120 fully correct; 68/68 must-be-empty questions empty; 32/51 answerable questions with an answering passage in context; 8 unrelated passages in 85; context precision 0.90",
+  "latency": "155 ms per question measured on CPU in the evaluation run (router + hybrid), after the one-off embedding of the KB"
+ },
+ "rejected_despite_score": {},
+ "known_limits": [
+  "Urdu-script questions: answering passage reached the context for 7 of 16 (glossary gaps, e.g. 'محفوظ کریں' = save mapped only to 'safe')",
+  "The production threshold sits exactly at D12's score ('What is HisabDo?', 0.5858): recalibrate whenever the KB or the embedding model changes",
+  "Router gate accuracy on these sets is optimistic: the router rules were tuned on the same multilingual sets (commit 0f2a1b1)"
+ ]
+}

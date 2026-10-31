@@ -4,6 +4,8 @@ from pathlib import Path
 
 # Ensure the internal token is set before Settings is constructed anywhere.
 os.environ.setdefault("INTERNAL_SERVICE_TOKEN", "test-token")
+# The service fails closed in production (short/placeholder tokens refused); tests run as "test".
+os.environ.setdefault("APP_ENV", "test")
 os.environ.setdefault("LLM_PROVIDER", "mock")
 # TestClient requests all share one synthetic IP ("testclient"), so the
 # xictek chat endpoint's real per-IP rate limit (20/minute, meant for
