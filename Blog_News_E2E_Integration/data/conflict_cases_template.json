@@ -1,0 +1,10 @@
+[
+  {
+    "id": "C01",
+    "question": "[Ask about the disputed fact]",
+    "follow_up": "[Ask why the two sources differ]",
+    "article_a": "https://www.xicteksystems.com/blog/REPLACE-WITH-REAL-ARTICLE-A/",
+    "article_b": "https://www.xicteksystems.com/blog/REPLACE-WITH-REAL-ARTICLE-B/",
+    "expected": "Assistant identifies the disagreement, attributes each value/date to its source, cites both, and avoids silently choosing one."
+  }
+]
