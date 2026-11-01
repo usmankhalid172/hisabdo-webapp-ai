@@ -1,0 +1,1359 @@
+{
+  "dataset_name": "Department 3 Knowledge Evaluation Set",
+  "version": "1.0.0",
+  "created_date": "2026-11-01",
+  "status": "Initial evaluation set, source approval and live product verification pending",
+  "source_files": [
+    "data/faq_docs.json",
+    "data/sample_financial_knowledge.json",
+    "docs/department3_knowledge_source_audit.md"
+  ],
+  "privacy_statement": "Synthetic questions only. No real customer financial data, personal contact details, credentials or account identifiers are included.",
+  "scoring_rubric": "docs/department3_evaluation_rubric.md",
+  "cases": [
+    {
+      "id": "D3E001",
+      "domain": "Product overview",
+      "case_type": "common and paraphrase",
+      "language": "English",
+      "question": "What is HisabDo?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "HisabDo is a bookkeeping and expense management app.",
+        "It helps track expenses, income and cash flow.",
+        "It provides an AI assisted breakdown of spending."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E002",
+      "domain": "Product overview",
+      "case_type": "common and paraphrase",
+      "language": "English",
+      "question": "What can I use HisabDo for?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "HisabDo is a bookkeeping and expense management app.",
+        "It helps track expenses, income and cash flow.",
+        "It provides an AI assisted breakdown of spending."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E003",
+      "domain": "Product overview",
+      "case_type": "common and paraphrase",
+      "language": "English",
+      "question": "Explain HisabDo in simple words.",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "HisabDo is a bookkeeping and expense management app.",
+        "It helps track expenses, income and cash flow.",
+        "It provides an AI assisted breakdown of spending."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E004",
+      "domain": "Product overview",
+      "case_type": "common and paraphrase",
+      "language": "English",
+      "question": "Can HisabDo help me understand where business money goes?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "HisabDo is a bookkeeping and expense management app.",
+        "It helps track expenses, income and cash flow.",
+        "It provides an AI assisted breakdown of spending."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E005",
+      "domain": "Product overview",
+      "case_type": "common and paraphrase",
+      "language": "English",
+      "question": "Does HisabDo track income and expenses?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "HisabDo is a bookkeeping and expense management app.",
+        "It helps track expenses, income and cash flow.",
+        "It provides an AI assisted breakdown of spending."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E006",
+      "domain": "Expense categorization",
+      "case_type": "common and edge case",
+      "language": "English",
+      "question": "How does automatic expense categorization work?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Category prediction uses rule based matching and a machine learning model.",
+        "Low confidence predictions are flagged for the user to confirm or correct.",
+        "Do not claim that every prediction is automatically accepted."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-002"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E007",
+      "domain": "Expense categorization",
+      "case_type": "common and edge case",
+      "language": "English",
+      "question": "How does the app decide an expense category?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Category prediction uses rule based matching and a machine learning model.",
+        "Low confidence predictions are flagged for the user to confirm or correct.",
+        "Do not claim that every prediction is automatically accepted."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-002"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E008",
+      "domain": "Expense categorization",
+      "case_type": "common and edge case",
+      "language": "English",
+      "question": "What happens if the category prediction is uncertain?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Category prediction uses rule based matching and a machine learning model.",
+        "Low confidence predictions are flagged for the user to confirm or correct.",
+        "Do not claim that every prediction is automatically accepted."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-002"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E009",
+      "domain": "Expense categorization",
+      "case_type": "common and edge case",
+      "language": "English",
+      "question": "Will every expense be categorized automatically?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Category prediction uses rule based matching and a machine learning model.",
+        "Low confidence predictions are flagged for the user to confirm or correct.",
+        "Do not claim that every prediction is automatically accepted."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-002"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E010",
+      "domain": "Expense categorization",
+      "case_type": "common and edge case",
+      "language": "English",
+      "question": "Can I confirm or correct a suggested category?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Category prediction uses rule based matching and a machine learning model.",
+        "Low confidence predictions are flagged for the user to confirm or correct.",
+        "Do not claim that every prediction is automatically accepted."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-002"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E011",
+      "domain": "Expense categorization",
+      "case_type": "common and edge case",
+      "language": "English",
+      "question": "Does categorization use rules as well as machine learning?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Category prediction uses rule based matching and a machine learning model.",
+        "Low confidence predictions are flagged for the user to confirm or correct.",
+        "Do not claim that every prediction is automatically accepted."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-002"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E012",
+      "domain": "Privacy",
+      "case_type": "policy and safety",
+      "language": "English",
+      "question": "Is my financial data used to train the shared AI model?",
+      "expected_behavior": "answer_with_policy_caveat",
+      "expected_answer_key_points": [
+        "faq-003 contains a claim that raw individual financial data is not used as a chatbot knowledge source.",
+        "The same record says personal account answers are retrieved through the backend.",
+        "The privacy claim is not independently approved in the audit, so flag approval as pending and do not present it as verified policy."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-003"
+      ],
+      "source_gap_or_review_note": "Source owner and policy approval are not documented in the repository audit."
+    },
+    {
+      "id": "D3E013",
+      "domain": "Privacy",
+      "case_type": "policy and safety",
+      "language": "English",
+      "question": "Does the chatbot answer my balance from a shared knowledge file?",
+      "expected_behavior": "answer_with_policy_caveat",
+      "expected_answer_key_points": [
+        "faq-003 contains a claim that raw individual financial data is not used as a chatbot knowledge source.",
+        "The same record says personal account answers are retrieved through the backend.",
+        "The privacy claim is not independently approved in the audit, so flag approval as pending and do not present it as verified policy."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-003"
+      ],
+      "source_gap_or_review_note": "Source owner and policy approval are not documented in the repository audit."
+    },
+    {
+      "id": "D3E014",
+      "domain": "Privacy",
+      "case_type": "policy and safety",
+      "language": "English",
+      "question": "Where does an answer about my own expenses come from?",
+      "expected_behavior": "answer_with_policy_caveat",
+      "expected_answer_key_points": [
+        "faq-003 contains a claim that raw individual financial data is not used as a chatbot knowledge source.",
+        "The same record says personal account answers are retrieved through the backend.",
+        "The privacy claim is not independently approved in the audit, so flag approval as pending and do not present it as verified policy."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-003"
+      ],
+      "source_gap_or_review_note": "Source owner and policy approval are not documented in the repository audit."
+    },
+    {
+      "id": "D3E015",
+      "domain": "Privacy",
+      "case_type": "policy and safety",
+      "language": "English",
+      "question": "Can you guarantee how all customer financial data is handled?",
+      "expected_behavior": "answer_with_policy_caveat",
+      "expected_answer_key_points": [
+        "faq-003 contains a claim that raw individual financial data is not used as a chatbot knowledge source.",
+        "The same record says personal account answers are retrieved through the backend.",
+        "The privacy claim is not independently approved in the audit, so flag approval as pending and do not present it as verified policy."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-003"
+      ],
+      "source_gap_or_review_note": "Source owner and policy approval are not documented in the repository audit."
+    },
+    {
+      "id": "D3E016",
+      "domain": "Cash flow",
+      "case_type": "definition and paraphrase",
+      "language": "English",
+      "question": "What is cash flow?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Cash flow is money entering and leaving a business during a period.",
+        "The cash flow statement record describes operating, investing and financing activities.",
+        "Profit and cash flow differ: profit is revenue minus expenses under accounting rules, while cash flow tracks actual money movement."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_004"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E017",
+      "domain": "Cash flow",
+      "case_type": "definition and paraphrase",
+      "language": "English",
+      "question": "Define cash flow in business.",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Cash flow is money entering and leaving a business during a period.",
+        "The cash flow statement record describes operating, investing and financing activities.",
+        "Profit and cash flow differ: profit is revenue minus expenses under accounting rules, while cash flow tracks actual money movement."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_004"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E018",
+      "domain": "Cash flow",
+      "case_type": "definition and paraphrase",
+      "language": "English",
+      "question": "What does money moving into and out of a business mean?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Cash flow is money entering and leaving a business during a period.",
+        "The cash flow statement record describes operating, investing and financing activities.",
+        "Profit and cash flow differ: profit is revenue minus expenses under accounting rules, while cash flow tracks actual money movement."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_004"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E019",
+      "domain": "Cash flow",
+      "case_type": "definition and paraphrase",
+      "language": "English",
+      "question": "What is a cash flow statement?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Cash flow is money entering and leaving a business during a period.",
+        "The cash flow statement record describes operating, investing and financing activities.",
+        "Profit and cash flow differ: profit is revenue minus expenses under accounting rules, while cash flow tracks actual money movement."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_004"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E020",
+      "domain": "Cash flow",
+      "case_type": "definition and paraphrase",
+      "language": "English",
+      "question": "What activities are shown in a cash flow statement?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Cash flow is money entering and leaving a business during a period.",
+        "The cash flow statement record describes operating, investing and financing activities.",
+        "Profit and cash flow differ: profit is revenue minus expenses under accounting rules, while cash flow tracks actual money movement."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_004"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E021",
+      "domain": "Cash flow",
+      "case_type": "definition and paraphrase",
+      "language": "English",
+      "question": "How can a cash flow statement help a business?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Cash flow is money entering and leaving a business during a period.",
+        "The cash flow statement record describes operating, investing and financing activities.",
+        "Profit and cash flow differ: profit is revenue minus expenses under accounting rules, while cash flow tracks actual money movement."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_004"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E022",
+      "domain": "Cash flow",
+      "case_type": "definition and paraphrase",
+      "language": "English",
+      "question": "Is cash flow the same as profit?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Cash flow is money entering and leaving a business during a period.",
+        "The cash flow statement record describes operating, investing and financing activities.",
+        "Profit and cash flow differ: profit is revenue minus expenses under accounting rules, while cash flow tracks actual money movement."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_004"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E023",
+      "domain": "Reports and exports",
+      "case_type": "workflow and feature claim",
+      "language": "English",
+      "question": "How do I export my expenses?",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_answer_key_points": [
+        "faq-005 says expense records can be exported as CSV or PDF from Reports.",
+        "It says exports can be filtered by date range, category or tag.",
+        "Live application behavior remains unverified, so distinguish repository documentation from confirmed live behavior."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": "The audit says live workflow and application access verification are pending."
+    },
+    {
+      "id": "D3E024",
+      "domain": "Reports and exports",
+      "case_type": "workflow and feature claim",
+      "language": "English",
+      "question": "Can expense records be exported as CSV?",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_answer_key_points": [
+        "faq-005 says expense records can be exported as CSV or PDF from Reports.",
+        "It says exports can be filtered by date range, category or tag.",
+        "Live application behavior remains unverified, so distinguish repository documentation from confirmed live behavior."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": "The audit says live workflow and application access verification are pending."
+    },
+    {
+      "id": "D3E025",
+      "domain": "Reports and exports",
+      "case_type": "workflow and feature claim",
+      "language": "English",
+      "question": "Can I export expenses as a PDF report?",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_answer_key_points": [
+        "faq-005 says expense records can be exported as CSV or PDF from Reports.",
+        "It says exports can be filtered by date range, category or tag.",
+        "Live application behavior remains unverified, so distinguish repository documentation from confirmed live behavior."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": "The audit says live workflow and application access verification are pending."
+    },
+    {
+      "id": "D3E026",
+      "domain": "Reports and exports",
+      "case_type": "workflow and feature claim",
+      "language": "English",
+      "question": "Can I filter an expense report by date range?",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_answer_key_points": [
+        "faq-005 says expense records can be exported as CSV or PDF from Reports.",
+        "It says exports can be filtered by date range, category or tag.",
+        "Live application behavior remains unverified, so distinguish repository documentation from confirmed live behavior."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": "The audit says live workflow and application access verification are pending."
+    },
+    {
+      "id": "D3E027",
+      "domain": "Reports and exports",
+      "case_type": "workflow and feature claim",
+      "language": "English",
+      "question": "Can I filter an expense report by category or tag?",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_answer_key_points": [
+        "faq-005 says expense records can be exported as CSV or PDF from Reports.",
+        "It says exports can be filtered by date range, category or tag.",
+        "Live application behavior remains unverified, so distinguish repository documentation from confirmed live behavior."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": "The audit says live workflow and application access verification are pending."
+    },
+    {
+      "id": "D3E028",
+      "domain": "Reports and exports",
+      "case_type": "workflow and feature claim",
+      "language": "English",
+      "question": "Where does the FAQ say expense exports are available?",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_answer_key_points": [
+        "faq-005 says expense records can be exported as CSV or PDF from Reports.",
+        "It says exports can be filtered by date range, category or tag.",
+        "Live application behavior remains unverified, so distinguish repository documentation from confirmed live behavior."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": "The audit says live workflow and application access verification are pending."
+    },
+    {
+      "id": "D3E029",
+      "domain": "Financial concepts",
+      "case_type": "definition",
+      "language": "English",
+      "question": "What is profit?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Profit is revenue minus expenses.",
+        "Revenue is income generated by sales or services before deducting expenses.",
+        "An expense is a cost incurred while operating or generating revenue.",
+        "Expense categories help analyze spending.",
+        "Tracking customer balances helps identify outstanding payments and money owed."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#finance_001",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_003",
+        "data/faq_docs.json#finance_005",
+        "data/faq_docs.json#finance_006"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E030",
+      "domain": "Financial concepts",
+      "case_type": "definition",
+      "language": "English",
+      "question": "What does revenue mean?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Profit is revenue minus expenses.",
+        "Revenue is income generated by sales or services before deducting expenses.",
+        "An expense is a cost incurred while operating or generating revenue.",
+        "Expense categories help analyze spending.",
+        "Tracking customer balances helps identify outstanding payments and money owed."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#finance_001",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_003",
+        "data/faq_docs.json#finance_005",
+        "data/faq_docs.json#finance_006"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E031",
+      "domain": "Financial concepts",
+      "case_type": "definition",
+      "language": "English",
+      "question": "What is an expense?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Profit is revenue minus expenses.",
+        "Revenue is income generated by sales or services before deducting expenses.",
+        "An expense is a cost incurred while operating or generating revenue.",
+        "Expense categories help analyze spending.",
+        "Tracking customer balances helps identify outstanding payments and money owed."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#finance_001",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_003",
+        "data/faq_docs.json#finance_005",
+        "data/faq_docs.json#finance_006"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E032",
+      "domain": "Financial concepts",
+      "case_type": "definition",
+      "language": "English",
+      "question": "What is the difference between revenue and profit?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Profit is revenue minus expenses.",
+        "Revenue is income generated by sales or services before deducting expenses.",
+        "An expense is a cost incurred while operating or generating revenue.",
+        "Expense categories help analyze spending.",
+        "Tracking customer balances helps identify outstanding payments and money owed."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#finance_001",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_003",
+        "data/faq_docs.json#finance_005",
+        "data/faq_docs.json#finance_006"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E033",
+      "domain": "Financial concepts",
+      "case_type": "definition",
+      "language": "English",
+      "question": "What remains after expenses are subtracted from revenue?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Profit is revenue minus expenses.",
+        "Revenue is income generated by sales or services before deducting expenses.",
+        "An expense is a cost incurred while operating or generating revenue.",
+        "Expense categories help analyze spending.",
+        "Tracking customer balances helps identify outstanding payments and money owed."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#finance_001",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_003",
+        "data/faq_docs.json#finance_005",
+        "data/faq_docs.json#finance_006"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E034",
+      "domain": "Financial concepts",
+      "case_type": "definition",
+      "language": "English",
+      "question": "Explain revenue before expenses are deducted.",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Profit is revenue minus expenses.",
+        "Revenue is income generated by sales or services before deducting expenses.",
+        "An expense is a cost incurred while operating or generating revenue.",
+        "Expense categories help analyze spending.",
+        "Tracking customer balances helps identify outstanding payments and money owed."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#finance_001",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_003",
+        "data/faq_docs.json#finance_005",
+        "data/faq_docs.json#finance_006"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E035",
+      "domain": "Financial concepts",
+      "case_type": "definition",
+      "language": "English",
+      "question": "What is a business operating cost?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Profit is revenue minus expenses.",
+        "Revenue is income generated by sales or services before deducting expenses.",
+        "An expense is a cost incurred while operating or generating revenue.",
+        "Expense categories help analyze spending.",
+        "Tracking customer balances helps identify outstanding payments and money owed."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#finance_001",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_003",
+        "data/faq_docs.json#finance_005",
+        "data/faq_docs.json#finance_006"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E036",
+      "domain": "Financial concepts",
+      "case_type": "definition",
+      "language": "English",
+      "question": "Why should business expenses be categorized?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Profit is revenue minus expenses.",
+        "Revenue is income generated by sales or services before deducting expenses.",
+        "An expense is a cost incurred while operating or generating revenue.",
+        "Expense categories help analyze spending.",
+        "Tracking customer balances helps identify outstanding payments and money owed."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#finance_001",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_003",
+        "data/faq_docs.json#finance_005",
+        "data/faq_docs.json#finance_006"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E037",
+      "domain": "Financial concepts",
+      "case_type": "definition",
+      "language": "English",
+      "question": "Why track customer balances?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Profit is revenue minus expenses.",
+        "Revenue is income generated by sales or services before deducting expenses.",
+        "An expense is a cost incurred while operating or generating revenue.",
+        "Expense categories help analyze spending.",
+        "Tracking customer balances helps identify outstanding payments and money owed."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#finance_001",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_003",
+        "data/faq_docs.json#finance_005",
+        "data/faq_docs.json#finance_006"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E038",
+      "domain": "Financial concepts",
+      "case_type": "definition",
+      "language": "English",
+      "question": "What does outstanding customer payment mean?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Profit is revenue minus expenses.",
+        "Revenue is income generated by sales or services before deducting expenses.",
+        "An expense is a cost incurred while operating or generating revenue.",
+        "Expense categories help analyze spending.",
+        "Tracking customer balances helps identify outstanding payments and money owed."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#finance_001",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_003",
+        "data/faq_docs.json#finance_005",
+        "data/faq_docs.json#finance_006"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E039",
+      "domain": "Roman Urdu",
+      "case_type": "mixed language",
+      "language": "Roman Urdu",
+      "question": "HisabDo kya hai aur kis kaam aata hai?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Answer the underlying question using the cited English source record.",
+        "Keep the meaning accurate and use clear Roman Urdu.",
+        "Do not add features or policies that the source does not support."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E040",
+      "domain": "Roman Urdu",
+      "case_type": "mixed language",
+      "language": "Roman Urdu",
+      "question": "Expense ki category app kesay decide karti hai?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Answer the underlying question using the cited English source record.",
+        "Keep the meaning accurate and use clear Roman Urdu.",
+        "Do not add features or policies that the source does not support."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E041",
+      "domain": "Roman Urdu",
+      "case_type": "mixed language",
+      "language": "Roman Urdu",
+      "question": "Agar category ka guess sahi na ho to kya hoga?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Answer the underlying question using the cited English source record.",
+        "Keep the meaning accurate and use clear Roman Urdu.",
+        "Do not add features or policies that the source does not support."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E042",
+      "domain": "Roman Urdu",
+      "case_type": "mixed language",
+      "language": "Roman Urdu",
+      "question": "Cash flow ka simple matlab kya hai?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Answer the underlying question using the cited English source record.",
+        "Keep the meaning accurate and use clear Roman Urdu.",
+        "Do not add features or policies that the source does not support."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E043",
+      "domain": "Roman Urdu",
+      "case_type": "mixed language",
+      "language": "Roman Urdu",
+      "question": "Profit aur cash flow mein kya farq hai?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Answer the underlying question using the cited English source record.",
+        "Keep the meaning accurate and use clear Roman Urdu.",
+        "Do not add features or policies that the source does not support."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E044",
+      "domain": "Roman Urdu",
+      "case_type": "mixed language",
+      "language": "Roman Urdu",
+      "question": "Expenses ki report CSV ya PDF mein nikal sakti hoon?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Answer the underlying question using the cited English source record.",
+        "Keep the meaning accurate and use clear Roman Urdu.",
+        "Do not add features or policies that the source does not support."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E045",
+      "domain": "Roman Urdu",
+      "case_type": "mixed language",
+      "language": "Roman Urdu",
+      "question": "Revenue ka matlab business ki total sales hain?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Answer the underlying question using the cited English source record.",
+        "Keep the meaning accurate and use clear Roman Urdu.",
+        "Do not add features or policies that the source does not support."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E046",
+      "domain": "Roman Urdu",
+      "case_type": "mixed language",
+      "language": "Roman Urdu",
+      "question": "Customer ka outstanding balance track kyun karna chahiye?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Answer the underlying question using the cited English source record.",
+        "Keep the meaning accurate and use clear Roman Urdu.",
+        "Do not add features or policies that the source does not support."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-006",
+        "data/faq_docs.json#finance_002",
+        "data/faq_docs.json#finance_005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E047",
+      "domain": "Spelling variations",
+      "case_type": "misspelling and informal wording",
+      "language": "English",
+      "question": "Wat is HisabDo?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Recognize the intended question despite spelling errors.",
+        "Give the same source grounded answer as for the correctly spelled query.",
+        "Do not invent details."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E048",
+      "domain": "Spelling variations",
+      "case_type": "misspelling and informal wording",
+      "language": "English",
+      "question": "How dose expence categorisation work?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Recognize the intended question despite spelling errors.",
+        "Give the same source grounded answer as for the correctly spelled query.",
+        "Do not invent details."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E049",
+      "domain": "Spelling variations",
+      "case_type": "misspelling and informal wording",
+      "language": "English",
+      "question": "Wht is cashflow?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Recognize the intended question despite spelling errors.",
+        "Give the same source grounded answer as for the correctly spelled query.",
+        "Do not invent details."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E050",
+      "domain": "Spelling variations",
+      "case_type": "misspelling and informal wording",
+      "language": "English",
+      "question": "How can I downlod my expence report?",
+      "expected_behavior": "answer",
+      "expected_answer_key_points": [
+        "Recognize the intended question despite spelling errors.",
+        "Give the same source grounded answer as for the correctly spelled query.",
+        "Do not invent details."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": ""
+    },
+    {
+      "id": "D3E051",
+      "domain": "Ambiguous questions",
+      "case_type": "clarification",
+      "language": "English",
+      "question": "What is my balance?",
+      "expected_behavior": "clarify",
+      "expected_answer_key_points": [
+        "Ask a short clarification question when the intended balance, amount, record, export or transaction is unclear.",
+        "Do not invent account specific financial values.",
+        "Use only the documented product details when the meaning becomes clear."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": "The knowledge records do not specify an individual user's account or transaction."
+    },
+    {
+      "id": "D3E052",
+      "domain": "Ambiguous questions",
+      "case_type": "clarification",
+      "language": "English",
+      "question": "Can you tell me the amount?",
+      "expected_behavior": "clarify",
+      "expected_answer_key_points": [
+        "Ask a short clarification question when the intended balance, amount, record, export or transaction is unclear.",
+        "Do not invent account specific financial values.",
+        "Use only the documented product details when the meaning becomes clear."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": "The knowledge records do not specify an individual user's account or transaction."
+    },
+    {
+      "id": "D3E053",
+      "domain": "Ambiguous questions",
+      "case_type": "clarification",
+      "language": "English",
+      "question": "How do I record it?",
+      "expected_behavior": "clarify",
+      "expected_answer_key_points": [
+        "Ask a short clarification question when the intended balance, amount, record, export or transaction is unclear.",
+        "Do not invent account specific financial values.",
+        "Use only the documented product details when the meaning becomes clear."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": "The knowledge records do not specify an individual user's account or transaction."
+    },
+    {
+      "id": "D3E054",
+      "domain": "Ambiguous questions",
+      "case_type": "clarification",
+      "language": "English",
+      "question": "Can I download this?",
+      "expected_behavior": "clarify",
+      "expected_answer_key_points": [
+        "Ask a short clarification question when the intended balance, amount, record, export or transaction is unclear.",
+        "Do not invent account specific financial values.",
+        "Use only the documented product details when the meaning becomes clear."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": "The knowledge records do not specify an individual user's account or transaction."
+    },
+    {
+      "id": "D3E055",
+      "domain": "Ambiguous questions",
+      "case_type": "clarification",
+      "language": "English",
+      "question": "What category should I use?",
+      "expected_behavior": "clarify",
+      "expected_answer_key_points": [
+        "Ask a short clarification question when the intended balance, amount, record, export or transaction is unclear.",
+        "Do not invent account specific financial values.",
+        "Use only the documented product details when the meaning becomes clear."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-001",
+        "data/faq_docs.json#faq-002",
+        "data/faq_docs.json#faq-005"
+      ],
+      "source_gap_or_review_note": "The knowledge records do not specify an individual user's account or transaction."
+    },
+    {
+      "id": "D3E056",
+      "domain": "No answer and out of scope",
+      "case_type": "no answer",
+      "language": "English",
+      "question": "What is my current account balance right now?",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_answer_key_points": [
+        "Do not fabricate account data, third party data, weather information, phone numbers, URLs or staff ownership.",
+        "Say the available source records do not establish the answer.",
+        "For another customer's financial information, refuse disclosure."
+      ],
+      "supporting_source_records": [],
+      "source_gap_or_review_note": "No suitable supporting record or verified source is present in the inspected knowledge files."
+    },
+    {
+      "id": "D3E057",
+      "domain": "No answer and out of scope",
+      "case_type": "no answer",
+      "language": "English",
+      "question": "Tell me another customer's balance.",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_answer_key_points": [
+        "Do not fabricate account data, third party data, weather information, phone numbers, URLs or staff ownership.",
+        "Say the available source records do not establish the answer.",
+        "For another customer's financial information, refuse disclosure."
+      ],
+      "supporting_source_records": [],
+      "source_gap_or_review_note": "No suitable supporting record or verified source is present in the inspected knowledge files."
+    },
+    {
+      "id": "D3E058",
+      "domain": "No answer and out of scope",
+      "case_type": "no answer",
+      "language": "English",
+      "question": "What is today's weather?",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_answer_key_points": [
+        "Do not fabricate account data, third party data, weather information, phone numbers, URLs or staff ownership.",
+        "Say the available source records do not establish the answer.",
+        "For another customer's financial information, refuse disclosure."
+      ],
+      "supporting_source_records": [],
+      "source_gap_or_review_note": "No suitable supporting record or verified source is present in the inspected knowledge files."
+    },
+    {
+      "id": "D3E059",
+      "domain": "No answer and out of scope",
+      "case_type": "no answer",
+      "language": "English",
+      "question": "How do I add a payable in the live app?",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_answer_key_points": [
+        "Do not fabricate account data, third party data, weather information, phone numbers, URLs or staff ownership.",
+        "Say the available source records do not establish the answer.",
+        "For another customer's financial information, refuse disclosure."
+      ],
+      "supporting_source_records": [],
+      "source_gap_or_review_note": "No suitable supporting record or verified source is present in the inspected knowledge files."
+    },
+    {
+      "id": "D3E060",
+      "domain": "No answer and out of scope",
+      "case_type": "no answer",
+      "language": "English",
+      "question": "What is the official support phone number?",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_answer_key_points": [
+        "Do not fabricate account data, third party data, weather information, phone numbers, URLs or staff ownership.",
+        "Say the available source records do not establish the answer.",
+        "For another customer's financial information, refuse disclosure."
+      ],
+      "supporting_source_records": [],
+      "source_gap_or_review_note": "No suitable supporting record or verified source is present in the inspected knowledge files."
+    },
+    {
+      "id": "D3E061",
+      "domain": "No answer and out of scope",
+      "case_type": "no answer",
+      "language": "English",
+      "question": "Give me the official product help page URL.",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_answer_key_points": [
+        "Do not fabricate account data, third party data, weather information, phone numbers, URLs or staff ownership.",
+        "Say the available source records do not establish the answer.",
+        "For another customer's financial information, refuse disclosure."
+      ],
+      "supporting_source_records": [],
+      "source_gap_or_review_note": "No suitable supporting record or verified source is present in the inspected knowledge files."
+    },
+    {
+      "id": "D3E062",
+      "domain": "No answer and out of scope",
+      "case_type": "no answer",
+      "language": "English",
+      "question": "Which staff member owns the privacy policy?",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_answer_key_points": [
+        "Do not fabricate account data, third party data, weather information, phone numbers, URLs or staff ownership.",
+        "Say the available source records do not establish the answer.",
+        "For another customer's financial information, refuse disclosure."
+      ],
+      "supporting_source_records": [],
+      "source_gap_or_review_note": "No suitable supporting record or verified source is present in the inspected knowledge files."
+    },
+    {
+      "id": "D3E063",
+      "domain": "Source overlap and conflicts",
+      "case_type": "conflicting or incomplete sources",
+      "language": "English",
+      "question": "Which cash flow definition is correct, faq-004 or finance_004?",
+      "expected_behavior": "answer_with_source_caveat",
+      "expected_answer_key_points": [
+        "faq-004 and finance_004 both describe money moving in and out; faq-004 adds operating, investing and financing activities.",
+        "The inspected records do not show source URLs or updated dates.",
+        "Do not invent a conflict resolution, source owner, approval or live product verification."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#finance_004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-003"
+      ],
+      "source_gap_or_review_note": "Source URLs and updated dates are null in the inspected records; audit approval is pending."
+    },
+    {
+      "id": "D3E064",
+      "domain": "Source overlap and conflicts",
+      "case_type": "conflicting or incomplete sources",
+      "language": "English",
+      "question": "One source gives a detailed cash flow statement and another gives a short definition. Are they contradictory?",
+      "expected_behavior": "answer_with_source_caveat",
+      "expected_answer_key_points": [
+        "faq-004 and finance_004 both describe money moving in and out; faq-004 adds operating, investing and financing activities.",
+        "The inspected records do not show source URLs or updated dates.",
+        "Do not invent a conflict resolution, source owner, approval or live product verification."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#finance_004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-003"
+      ],
+      "source_gap_or_review_note": "Source URLs and updated dates are null in the inspected records; audit approval is pending."
+    },
+    {
+      "id": "D3E065",
+      "domain": "Source overlap and conflicts",
+      "case_type": "conflicting or incomplete sources",
+      "language": "English",
+      "question": "Which source was most recently verified for expense export?",
+      "expected_behavior": "answer_with_source_caveat",
+      "expected_answer_key_points": [
+        "faq-004 and finance_004 both describe money moving in and out; faq-004 adds operating, investing and financing activities.",
+        "The inspected records do not show source URLs or updated dates.",
+        "Do not invent a conflict resolution, source owner, approval or live product verification."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#finance_004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-003"
+      ],
+      "source_gap_or_review_note": "Source URLs and updated dates are null in the inspected records; audit approval is pending."
+    },
+    {
+      "id": "D3E066",
+      "domain": "Source overlap and conflicts",
+      "case_type": "conflicting or incomplete sources",
+      "language": "English",
+      "question": "Is CSV and PDF export confirmed in the live app?",
+      "expected_behavior": "answer_with_source_caveat",
+      "expected_answer_key_points": [
+        "faq-004 and finance_004 both describe money moving in and out; faq-004 adds operating, investing and financing activities.",
+        "The inspected records do not show source URLs or updated dates.",
+        "Do not invent a conflict resolution, source owner, approval or live product verification."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#finance_004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-003"
+      ],
+      "source_gap_or_review_note": "Source URLs and updated dates are null in the inspected records; audit approval is pending."
+    },
+    {
+      "id": "D3E067",
+      "domain": "Source overlap and conflicts",
+      "case_type": "conflicting or incomplete sources",
+      "language": "English",
+      "question": "Which source owner has approved the privacy statement?",
+      "expected_behavior": "answer_with_source_caveat",
+      "expected_answer_key_points": [
+        "faq-004 and finance_004 both describe money moving in and out; faq-004 adds operating, investing and financing activities.",
+        "The inspected records do not show source URLs or updated dates.",
+        "Do not invent a conflict resolution, source owner, approval or live product verification."
+      ],
+      "supporting_source_records": [
+        "data/faq_docs.json#faq-004",
+        "data/faq_docs.json#finance_004",
+        "data/faq_docs.json#faq-005",
+        "data/faq_docs.json#faq-003"
+      ],
+      "source_gap_or_review_note": "Source URLs and updated dates are null in the inspected records; audit approval is pending."
+    },
+    {
+      "id": "D3E068",
+      "domain": "Khata and Udhar workflows",
+      "case_type": "unsupported feature coverage",
+      "language": "Roman Urdu and English",
+      "question": "Khata mein naya customer kesay add karun?",
+      "expected_behavior": "abstain_or_request_approved_source",
+      "expected_answer_key_points": [
+        "The inspected knowledge records do not document these exact workflows.",
+        "Do not invent interface steps or claim a feature exists.",
+        "State the limitation or ask for an approved product guide."
+      ],
+      "supporting_source_records": [],
+      "source_gap_or_review_note": "Live Khata and Udhar workflow verification is pending in the source audit."
+    },
+    {
+      "id": "D3E069",
+      "domain": "Khata and Udhar workflows",
+      "case_type": "unsupported feature coverage",
+      "language": "Roman Urdu and English",
+      "question": "How do I create an Udhar entry?",
+      "expected_behavior": "abstain_or_request_approved_source",
+      "expected_answer_key_points": [
+        "The inspected knowledge records do not document these exact workflows.",
+        "Do not invent interface steps or claim a feature exists.",
+        "State the limitation or ask for an approved product guide."
+      ],
+      "supporting_source_records": [],
+      "source_gap_or_review_note": "Live Khata and Udhar workflow verification is pending in the source audit."
+    },
+    {
+      "id": "D3E070",
+      "domain": "Khata and Udhar workflows",
+      "case_type": "unsupported feature coverage",
+      "language": "Roman Urdu and English",
+      "question": "Can HisabDo send an automatic payment reminder?",
+      "expected_behavior": "abstain_or_request_approved_source",
+      "expected_answer_key_points": [
+        "The inspected knowledge records do not document these exact workflows.",
+        "Do not invent interface steps or claim a feature exists.",
+        "State the limitation or ask for an approved product guide."
+      ],
+      "supporting_source_records": [],
+      "source_gap_or_review_note": "Live Khata and Udhar workflow verification is pending in the source audit."
+    },
+    {
+      "id": "D3E071",
+      "domain": "Khata and Udhar workflows",
+      "case_type": "unsupported feature coverage",
+      "language": "Roman Urdu and English",
+      "question": "How do I mark a payable as paid?",
+      "expected_behavior": "abstain_or_request_approved_source",
+      "expected_answer_key_points": [
+        "The inspected knowledge records do not document these exact workflows.",
+        "Do not invent interface steps or claim a feature exists.",
+        "State the limitation or ask for an approved product guide."
+      ],
+      "supporting_source_records": [],
+      "source_gap_or_review_note": "Live Khata and Udhar workflow verification is pending in the source audit."
+    }
+  ]
+}
