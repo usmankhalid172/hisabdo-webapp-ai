@@ -1,0 +1,1979 @@
+{
+  "summary": {
+    "dataset_version": "1.0.0",
+    "total_cases": 71,
+    "corpus_documents": 12,
+    "answerable_cases_with_sources": 55,
+    "no_answer_or_clarification_cases": 16,
+    "answerable_hit_at_1": 0.8909,
+    "answerable_hit_at_3": 0.9636,
+    "no_answer_cases_with_retrieved_source": 16,
+    "method": "TF-IDF unigram and bigram retrieval, top 3",
+    "limitation": "Retrieval-only evaluation. It does not score generated answers, citations, language quality, or safety. Cases without source IDs are excluded from hit-rate calculations."
+  },
+  "results": [
+    {
+      "id": "D3E001",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001"
+      ],
+      "top1_id": "faq-001",
+      "top1_score": 0.2481,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.2481
+        },
+        {
+          "id": "faq-002",
+          "score": 0.1044
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E002",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001"
+      ],
+      "top1_id": "faq-001",
+      "top1_score": 0.2481,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.2481
+        },
+        {
+          "id": "faq-002",
+          "score": 0.1044
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E003",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001"
+      ],
+      "top1_id": "faq-001",
+      "top1_score": 0.2481,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.2481
+        },
+        {
+          "id": "faq-002",
+          "score": 0.1044
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E004",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001"
+      ],
+      "top1_id": "finance_006",
+      "top1_score": 0.2208,
+      "top3": [
+        {
+          "id": "finance_006",
+          "score": 0.2208
+        },
+        {
+          "id": "faq-001",
+          "score": 0.1754
+        },
+        {
+          "id": "finance_004",
+          "score": 0.1089
+        }
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E005",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001"
+      ],
+      "top1_id": "faq-001",
+      "top1_score": 0.287,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.287
+        },
+        {
+          "id": "finance_002",
+          "score": 0.1627
+        },
+        {
+          "id": "faq-002",
+          "score": 0.1092
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E006",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-002"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.3946,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.3946
+        },
+        {
+          "id": "finance_003",
+          "score": 0.0919
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0335
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E007",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-002"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.2611,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.2611
+        },
+        {
+          "id": "faq-005",
+          "score": 0.1546
+        },
+        {
+          "id": "finance_003",
+          "score": 0.1541
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E008",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-002"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.1768,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.1768
+        },
+        {
+          "id": "faq-005",
+          "score": 0.1572
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E009",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-002"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.1896,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.1896
+        },
+        {
+          "id": "finance_003",
+          "score": 0.1677
+        },
+        {
+          "id": "finance_006",
+          "score": 0.1116
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E010",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-002"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.2673,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.2673
+        },
+        {
+          "id": "faq-005",
+          "score": 0.0698
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E011",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-002"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.2482,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.2482
+        },
+        {
+          "id": "faq-006",
+          "score": 0.06
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E012",
+      "expected_behavior": "answer_with_policy_caveat",
+      "expected_source_ids": [
+        "faq-003"
+      ],
+      "top1_id": "faq-003",
+      "top1_score": 0.599,
+      "top3": [
+        {
+          "id": "faq-003",
+          "score": 0.599
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0437
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0363
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E013",
+      "expected_behavior": "answer_with_policy_caveat",
+      "expected_source_ids": [
+        "faq-003"
+      ],
+      "top1_id": "faq-003",
+      "top1_score": 0.3718,
+      "top3": [
+        {
+          "id": "faq-003",
+          "score": 0.3718
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0508
+        },
+        {
+          "id": "finance_005",
+          "score": 0.0499
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E014",
+      "expected_behavior": "answer_with_policy_caveat",
+      "expected_source_ids": [
+        "faq-003"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.108,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.108
+        },
+        {
+          "id": "finance_001",
+          "score": 0.1044
+        },
+        {
+          "id": "finance_006",
+          "score": 0.0893
+        }
+      ],
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E015",
+      "expected_behavior": "answer_with_policy_caveat",
+      "expected_source_ids": [
+        "faq-003"
+      ],
+      "top1_id": "faq-003",
+      "top1_score": 0.3013,
+      "top3": [
+        {
+          "id": "faq-003",
+          "score": 0.3013
+        },
+        {
+          "id": "finance_005",
+          "score": 0.18
+        },
+        {
+          "id": "finance_006",
+          "score": 0.0545
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E016",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-004",
+        "faq-006",
+        "finance_004"
+      ],
+      "top1_id": "finance_004",
+      "top1_score": 0.5333,
+      "top3": [
+        {
+          "id": "finance_004",
+          "score": 0.5333
+        },
+        {
+          "id": "faq-004",
+          "score": 0.3334
+        },
+        {
+          "id": "faq-006",
+          "score": 0.3169
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E017",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-004",
+        "faq-006",
+        "finance_004"
+      ],
+      "top1_id": "finance_004",
+      "top1_score": 0.5312,
+      "top3": [
+        {
+          "id": "finance_004",
+          "score": 0.5312
+        },
+        {
+          "id": "faq-004",
+          "score": 0.3598
+        },
+        {
+          "id": "faq-006",
+          "score": 0.3207
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E018",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-004",
+        "faq-006",
+        "finance_004"
+      ],
+      "top1_id": "faq-004",
+      "top1_score": 0.2723,
+      "top3": [
+        {
+          "id": "faq-004",
+          "score": 0.2723
+        },
+        {
+          "id": "finance_004",
+          "score": 0.0775
+        },
+        {
+          "id": "finance_006",
+          "score": 0.0735
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E019",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-004",
+        "faq-006",
+        "finance_004"
+      ],
+      "top1_id": "faq-004",
+      "top1_score": 0.4979,
+      "top3": [
+        {
+          "id": "faq-004",
+          "score": 0.4979
+        },
+        {
+          "id": "finance_004",
+          "score": 0.3415
+        },
+        {
+          "id": "faq-006",
+          "score": 0.2029
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E020",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-004",
+        "faq-006",
+        "finance_004"
+      ],
+      "top1_id": "faq-004",
+      "top1_score": 0.5114,
+      "top3": [
+        {
+          "id": "faq-004",
+          "score": 0.5114
+        },
+        {
+          "id": "finance_004",
+          "score": 0.3001
+        },
+        {
+          "id": "faq-006",
+          "score": 0.1783
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E021",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-004",
+        "faq-006",
+        "finance_004"
+      ],
+      "top1_id": "faq-004",
+      "top1_score": 0.516,
+      "top3": [
+        {
+          "id": "faq-004",
+          "score": 0.516
+        },
+        {
+          "id": "finance_004",
+          "score": 0.3576
+        },
+        {
+          "id": "faq-006",
+          "score": 0.2159
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E022",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-004",
+        "faq-006",
+        "finance_004"
+      ],
+      "top1_id": "faq-006",
+      "top1_score": 0.3981,
+      "top3": [
+        {
+          "id": "faq-006",
+          "score": 0.3981
+        },
+        {
+          "id": "finance_004",
+          "score": 0.3556
+        },
+        {
+          "id": "finance_001",
+          "score": 0.2271
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E023",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_source_ids": [
+        "faq-005"
+      ],
+      "top1_id": "faq-005",
+      "top1_score": 0.3824,
+      "top3": [
+        {
+          "id": "faq-005",
+          "score": 0.3824
+        },
+        {
+          "id": "finance_001",
+          "score": 0.0781
+        },
+        {
+          "id": "finance_006",
+          "score": 0.0668
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E024",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_source_ids": [
+        "faq-005"
+      ],
+      "top1_id": "finance_003",
+      "top1_score": 0.1677,
+      "top3": [
+        {
+          "id": "finance_003",
+          "score": 0.1677
+        },
+        {
+          "id": "faq-005",
+          "score": 0.1141
+        },
+        {
+          "id": "faq-002",
+          "score": 0.1138
+        }
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E025",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_source_ids": [
+        "faq-005"
+      ],
+      "top1_id": "faq-005",
+      "top1_score": 0.4814,
+      "top3": [
+        {
+          "id": "faq-005",
+          "score": 0.4814
+        },
+        {
+          "id": "finance_001",
+          "score": 0.0526
+        },
+        {
+          "id": "faq-004",
+          "score": 0.051
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E026",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_source_ids": [
+        "faq-005"
+      ],
+      "top1_id": "faq-005",
+      "top1_score": 0.3294,
+      "top3": [
+        {
+          "id": "faq-005",
+          "score": 0.3294
+        },
+        {
+          "id": "finance_003",
+          "score": 0.1296
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0879
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E027",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_source_ids": [
+        "faq-005"
+      ],
+      "top1_id": "faq-005",
+      "top1_score": 0.3161,
+      "top3": [
+        {
+          "id": "faq-005",
+          "score": 0.3161
+        },
+        {
+          "id": "faq-002",
+          "score": 0.1662
+        },
+        {
+          "id": "finance_003",
+          "score": 0.1338
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E028",
+      "expected_behavior": "answer_with_verification_caveat",
+      "expected_source_ids": [
+        "faq-005"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.2424,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.2424
+        },
+        {
+          "id": "finance_003",
+          "score": 0.2145
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0782
+        }
+      ],
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E029",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "finance_001",
+        "finance_002",
+        "finance_003",
+        "finance_005",
+        "finance_006"
+      ],
+      "top1_id": "finance_001",
+      "top1_score": 0.4678,
+      "top3": [
+        {
+          "id": "finance_001",
+          "score": 0.4678
+        },
+        {
+          "id": "faq-006",
+          "score": 0.2137
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E030",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "finance_001",
+        "finance_002",
+        "finance_003",
+        "finance_005",
+        "finance_006"
+      ],
+      "top1_id": "finance_001",
+      "top1_score": 0.1425,
+      "top3": [
+        {
+          "id": "finance_001",
+          "score": 0.1425
+        },
+        {
+          "id": "finance_002",
+          "score": 0.1414
+        },
+        {
+          "id": "faq-002",
+          "score": 0.1035
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E031",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "finance_001",
+        "finance_002",
+        "finance_003",
+        "finance_005",
+        "finance_006"
+      ],
+      "top1_id": "finance_003",
+      "top1_score": 0.3549,
+      "top3": [
+        {
+          "id": "finance_003",
+          "score": 0.3549
+        },
+        {
+          "id": "faq-002",
+          "score": 0.2407
+        },
+        {
+          "id": "faq-001",
+          "score": 0.1295
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E032",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "finance_001",
+        "finance_002",
+        "finance_003",
+        "finance_005",
+        "finance_006"
+      ],
+      "top1_id": "finance_001",
+      "top1_score": 0.4693,
+      "top3": [
+        {
+          "id": "finance_001",
+          "score": 0.4693
+        },
+        {
+          "id": "faq-006",
+          "score": 0.2188
+        },
+        {
+          "id": "finance_002",
+          "score": 0.0941
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E033",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "finance_001",
+        "finance_002",
+        "finance_003",
+        "finance_005",
+        "finance_006"
+      ],
+      "top1_id": "finance_001",
+      "top1_score": 0.5569,
+      "top3": [
+        {
+          "id": "finance_001",
+          "score": 0.5569
+        },
+        {
+          "id": "finance_002",
+          "score": 0.1161
+        },
+        {
+          "id": "finance_006",
+          "score": 0.0526
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E034",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "finance_001",
+        "finance_002",
+        "finance_003",
+        "finance_005",
+        "finance_006"
+      ],
+      "top1_id": "finance_002",
+      "top1_score": 0.3334,
+      "top3": [
+        {
+          "id": "finance_002",
+          "score": 0.3334
+        },
+        {
+          "id": "finance_001",
+          "score": 0.2851
+        },
+        {
+          "id": "finance_006",
+          "score": 0.0526
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E035",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "finance_001",
+        "finance_002",
+        "finance_003",
+        "finance_005",
+        "finance_006"
+      ],
+      "top1_id": "finance_003",
+      "top1_score": 0.4755,
+      "top3": [
+        {
+          "id": "finance_003",
+          "score": 0.4755
+        },
+        {
+          "id": "faq-004",
+          "score": 0.1062
+        },
+        {
+          "id": "finance_006",
+          "score": 0.058
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E036",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "finance_001",
+        "finance_002",
+        "finance_003",
+        "finance_005",
+        "finance_006"
+      ],
+      "top1_id": "finance_006",
+      "top1_score": 0.3927,
+      "top3": [
+        {
+          "id": "finance_006",
+          "score": 0.3927
+        },
+        {
+          "id": "finance_001",
+          "score": 0.0625
+        },
+        {
+          "id": "finance_002",
+          "score": 0.0591
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E037",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "finance_001",
+        "finance_002",
+        "finance_003",
+        "finance_005",
+        "finance_006"
+      ],
+      "top1_id": "finance_005",
+      "top1_score": 0.4449,
+      "top3": [
+        {
+          "id": "finance_005",
+          "score": 0.4449
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0853
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E038",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "finance_001",
+        "finance_002",
+        "finance_003",
+        "finance_005",
+        "finance_006"
+      ],
+      "top1_id": "finance_005",
+      "top1_score": 0.3886,
+      "top3": [
+        {
+          "id": "finance_005",
+          "score": 0.3886
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0608
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E039",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005",
+        "faq-006",
+        "finance_002",
+        "finance_005"
+      ],
+      "top1_id": "faq-001",
+      "top1_score": 0.2481,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.2481
+        },
+        {
+          "id": "faq-002",
+          "score": 0.1044
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E040",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005",
+        "faq-006",
+        "finance_002",
+        "finance_005"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.2336,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.2336
+        },
+        {
+          "id": "faq-005",
+          "score": 0.1886
+        },
+        {
+          "id": "finance_003",
+          "score": 0.188
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E041",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005",
+        "faq-006",
+        "finance_002",
+        "finance_005"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.1768,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.1768
+        },
+        {
+          "id": "faq-005",
+          "score": 0.1572
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E042",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005",
+        "faq-006",
+        "finance_002",
+        "finance_005"
+      ],
+      "top1_id": "finance_004",
+      "top1_score": 0.5333,
+      "top3": [
+        {
+          "id": "finance_004",
+          "score": 0.5333
+        },
+        {
+          "id": "faq-004",
+          "score": 0.3334
+        },
+        {
+          "id": "faq-006",
+          "score": 0.3169
+        }
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E043",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005",
+        "faq-006",
+        "finance_002",
+        "finance_005"
+      ],
+      "top1_id": "finance_004",
+      "top1_score": 0.4311,
+      "top3": [
+        {
+          "id": "finance_004",
+          "score": 0.4311
+        },
+        {
+          "id": "faq-006",
+          "score": 0.3819
+        },
+        {
+          "id": "finance_001",
+          "score": 0.2753
+        }
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E044",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005",
+        "faq-006",
+        "finance_002",
+        "finance_005"
+      ],
+      "top1_id": "faq-005",
+      "top1_score": 0.3369,
+      "top3": [
+        {
+          "id": "faq-005",
+          "score": 0.3369
+        },
+        {
+          "id": "finance_001",
+          "score": 0.0678
+        },
+        {
+          "id": "faq-004",
+          "score": 0.0658
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E045",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005",
+        "faq-006",
+        "finance_002",
+        "finance_005"
+      ],
+      "top1_id": "finance_002",
+      "top1_score": 0.4798,
+      "top3": [
+        {
+          "id": "finance_002",
+          "score": 0.4798
+        },
+        {
+          "id": "finance_001",
+          "score": 0.1029
+        },
+        {
+          "id": "finance_003",
+          "score": 0.0889
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E046",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005",
+        "faq-006",
+        "finance_002",
+        "finance_005"
+      ],
+      "top1_id": "finance_005",
+      "top1_score": 0.38,
+      "top3": [
+        {
+          "id": "finance_005",
+          "score": 0.38
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0883
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0498
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E047",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005"
+      ],
+      "top1_id": "faq-001",
+      "top1_score": 0.2481,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.2481
+        },
+        {
+          "id": "faq-002",
+          "score": 0.1044
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E048",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.1216,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.1216
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E049",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005"
+      ],
+      "top1_id": "faq-001",
+      "top1_score": 0.0,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.0
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E050",
+      "expected_behavior": "answer",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-004",
+        "faq-005"
+      ],
+      "top1_id": "faq-005",
+      "top1_score": 0.1572,
+      "top3": [
+        {
+          "id": "faq-005",
+          "score": 0.1572
+        },
+        {
+          "id": "faq-004",
+          "score": 0.1328
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E051",
+      "expected_behavior": "clarify",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-005"
+      ],
+      "top1_id": "finance_005",
+      "top1_score": 0.1393,
+      "top3": [
+        {
+          "id": "finance_005",
+          "score": 0.1393
+        },
+        {
+          "id": "faq-003",
+          "score": 0.1122
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E052",
+      "expected_behavior": "clarify",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-005"
+      ],
+      "top1_id": "faq-001",
+      "top1_score": 0.0,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.0
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E053",
+      "expected_behavior": "clarify",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-005"
+      ],
+      "top1_id": "faq-001",
+      "top1_score": 0.0,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.0
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E054",
+      "expected_behavior": "clarify",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-005"
+      ],
+      "top1_id": "faq-001",
+      "top1_score": 0.0,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.0
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E055",
+      "expected_behavior": "clarify",
+      "expected_source_ids": [
+        "faq-001",
+        "faq-002",
+        "faq-005"
+      ],
+      "top1_id": "faq-002",
+      "top1_score": 0.1768,
+      "top3": [
+        {
+          "id": "faq-002",
+          "score": 0.1768
+        },
+        {
+          "id": "faq-005",
+          "score": 0.1572
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E056",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_source_ids": [],
+      "top1_id": "faq-003",
+      "top1_score": 0.1722,
+      "top3": [
+        {
+          "id": "faq-003",
+          "score": 0.1722
+        },
+        {
+          "id": "finance_005",
+          "score": 0.0908
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": false
+    },
+    {
+      "id": "D3E057",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_source_ids": [],
+      "top1_id": "finance_005",
+      "top1_score": 0.3761,
+      "top3": [
+        {
+          "id": "finance_005",
+          "score": 0.3761
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0582
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": false
+    },
+    {
+      "id": "D3E058",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_source_ids": [],
+      "top1_id": "faq-001",
+      "top1_score": 0.0,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.0
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": false
+    },
+    {
+      "id": "D3E059",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_source_ids": [],
+      "top1_id": "faq-005",
+      "top1_score": 0.0816,
+      "top3": [
+        {
+          "id": "faq-005",
+          "score": 0.0816
+        },
+        {
+          "id": "faq-003",
+          "score": 0.079
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0761
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": false
+    },
+    {
+      "id": "D3E060",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_source_ids": [],
+      "top1_id": "faq-001",
+      "top1_score": 0.0,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.0
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": false
+    },
+    {
+      "id": "D3E061",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_source_ids": [],
+      "top1_id": "faq-001",
+      "top1_score": 0.0,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.0
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": false
+    },
+    {
+      "id": "D3E062",
+      "expected_behavior": "abstain_or_refuse",
+      "expected_source_ids": [],
+      "top1_id": "faq-001",
+      "top1_score": 0.0,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.0
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": false
+    },
+    {
+      "id": "D3E063",
+      "expected_behavior": "answer_with_source_caveat",
+      "expected_source_ids": [
+        "faq-003",
+        "faq-004",
+        "faq-005",
+        "finance_004"
+      ],
+      "top1_id": "finance_004",
+      "top1_score": 0.4067,
+      "top3": [
+        {
+          "id": "finance_004",
+          "score": 0.4067
+        },
+        {
+          "id": "faq-004",
+          "score": 0.2543
+        },
+        {
+          "id": "faq-006",
+          "score": 0.2417
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E064",
+      "expected_behavior": "answer_with_source_caveat",
+      "expected_source_ids": [
+        "faq-003",
+        "faq-004",
+        "faq-005",
+        "finance_004"
+      ],
+      "top1_id": "faq-004",
+      "top1_score": 0.4376,
+      "top3": [
+        {
+          "id": "faq-004",
+          "score": 0.4376
+        },
+        {
+          "id": "finance_004",
+          "score": 0.3001
+        },
+        {
+          "id": "faq-006",
+          "score": 0.1783
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E065",
+      "expected_behavior": "answer_with_source_caveat",
+      "expected_source_ids": [
+        "faq-003",
+        "faq-004",
+        "faq-005",
+        "finance_004"
+      ],
+      "top1_id": "faq-005",
+      "top1_score": 0.1931,
+      "top3": [
+        {
+          "id": "faq-005",
+          "score": 0.1931
+        },
+        {
+          "id": "finance_003",
+          "score": 0.1677
+        },
+        {
+          "id": "faq-002",
+          "score": 0.1138
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E066",
+      "expected_behavior": "answer_with_source_caveat",
+      "expected_source_ids": [
+        "faq-003",
+        "faq-004",
+        "faq-005",
+        "finance_004"
+      ],
+      "top1_id": "faq-005",
+      "top1_score": 0.415,
+      "top3": [
+        {
+          "id": "faq-005",
+          "score": 0.415
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0545
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0525
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E067",
+      "expected_behavior": "answer_with_source_caveat",
+      "expected_source_ids": [
+        "faq-003",
+        "faq-004",
+        "faq-005",
+        "finance_004"
+      ],
+      "top1_id": "faq-004",
+      "top1_score": 0.1851,
+      "top3": [
+        {
+          "id": "faq-004",
+          "score": 0.1851
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0924
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "has_expected_source": true
+    },
+    {
+      "id": "D3E068",
+      "expected_behavior": "abstain_or_request_approved_source",
+      "expected_source_ids": [],
+      "top1_id": "finance_005",
+      "top1_score": 0.2407,
+      "top3": [
+        {
+          "id": "finance_005",
+          "score": 0.2407
+        },
+        {
+          "id": "faq-002",
+          "score": 0.086
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": false
+    },
+    {
+      "id": "D3E069",
+      "expected_behavior": "abstain_or_request_approved_source",
+      "expected_source_ids": [],
+      "top1_id": "faq-001",
+      "top1_score": 0.0,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.0
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0
+        },
+        {
+          "id": "faq-003",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": false
+    },
+    {
+      "id": "D3E070",
+      "expected_behavior": "abstain_or_request_approved_source",
+      "expected_source_ids": [],
+      "top1_id": "faq-001",
+      "top1_score": 0.1288,
+      "top3": [
+        {
+          "id": "faq-001",
+          "score": 0.1288
+        },
+        {
+          "id": "faq-002",
+          "score": 0.1277
+        },
+        {
+          "id": "finance_005",
+          "score": 0.098
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": false
+    },
+    {
+      "id": "D3E071",
+      "expected_behavior": "abstain_or_request_approved_source",
+      "expected_source_ids": [],
+      "top1_id": "faq-006",
+      "top1_score": 0.1469,
+      "top3": [
+        {
+          "id": "faq-006",
+          "score": 0.1469
+        },
+        {
+          "id": "faq-001",
+          "score": 0.0
+        },
+        {
+          "id": "faq-002",
+          "score": 0.0
+        }
+      ],
+      "hit_at_1": null,
+      "hit_at_3": null,
+      "has_expected_source": false
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 # Department 3 Baseline Comparison Report
 
 Dataset version: 1.0.0
-Report version: 1.0.0
+Report version: 1.1.0
 Prepared: 2026-11-01
 
 ## Purpose
@@ -25,7 +25,37 @@ The existing report states that top k 3 achieved 93.75% baseline Hit rate, compa
 
 The new versioned dataset contains 71 questions. It covers common questions, difficult cases, paraphrases, misspellings, Roman Urdu, ambiguity, no answer scenarios and incomplete or overlapping sources.
 
-New dataset model response scores have not yet been measured. Historical numbers above must not be presented as results on the new dataset.
+New dataset retrieval results have now been measured and are recorded below. Full model response scores have not yet been measured. Historical numbers above remain separate.
+
+
+## New Department 3 measured retrieval baseline
+
+Evaluation dataset: data/department3_evaluation_v1.json
+Results file: docs/department3_evaluation_v1_results.json
+Evaluation date: 2026-11-01
+
+| Metric | Measured result |
+| --- | ---: |
+| Total evaluation questions | 71 |
+| Knowledge base documents | 12 |
+| Answerable cases with supporting sources | 55 |
+| No answer or clarification cases | 16 |
+| Hit@1 | 89.09% |
+| Hit@3 | 96.36% |
+| No answer cases that still retrieved a source | 16 of 16 |
+
+The evaluation used TF IDF unigram and bigram retrieval with sublinear term frequency and top 3 ranking.
+
+### Findings
+
+1. The correct supporting source appeared first for 89.09% of answerable cases.
+2. The correct supporting source appeared in the top three for 96.36% of answerable cases.
+3. All 16 no answer or clarification cases still received a retrieved source. Retrieval alone therefore does not reliably decide when the assistant should abstain or ask for clarification.
+4. These results measure source retrieval only. They do not measure generated answer accuracy, citation correctness, completeness, language quality or safety.
+
+### Comparison note
+
+The historical results above use a different 20 question proxy dataset. They must not be treated as a direct before and after comparison with this 71 question evaluation. The new results use the same 12 document count but a separate evaluation script and dataset.
 
 ## Limitations
 
@@ -37,4 +67,4 @@ New dataset model response scores have not yet been measured. Historical numbers
 
 ## Next comparison
 
-Run the same model and retrieval configurations on every question in `data/department3_evaluation_v1.json`. Save raw responses, retrieved record IDs, per dimension scores, total scores, pass rate, abstention behavior and safety failures in a separate versioned results file. Compare approaches only when they use the same dataset version and settings.
+Next, evaluate actual assistant responses on every question in `data/department3_evaluation_v1.json`. Save raw responses, retrieved record IDs, per dimension scores, total scores, pass rate, abstention behavior and safety failures in a separate versioned results file. Compare approaches only when they use the same dataset version and settings.
