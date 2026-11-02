@@ -1,0 +1,4 @@
+COMMAND: python -m py_compile guardrails.py evaluate_guardrails.py global_retrieval_eval.py
+WORKING DIRECTORY: /mnt/data/ggc_unpacked/grounded generation and citation/code
+EXIT CODE: 0
+

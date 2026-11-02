@@ -1,0 +1,6 @@
+COMMAND: python -m pytest test_guardrails.py -q
+WORKING DIRECTORY: /mnt/data/ggc_unpacked/grounded generation and citation/code
+EXIT CODE: 0
+
+.......                                                                  [100%]
+7 passed in 0.03s

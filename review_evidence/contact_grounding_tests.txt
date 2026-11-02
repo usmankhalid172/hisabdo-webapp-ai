@@ -1,0 +1,55 @@
+COMMAND: python -m unittest test_xictek_contact_grounded_generation.py -v
+WORKING DIRECTORY: /mnt/data/ggc_unpacked/grounded generation and citation
+EXIT CODE: 1
+
+test_all_15_queries_meet_100_percent_grounding_compliance (test_xictek_contact_grounded_generation.GroundedGenerationAndCitationsTests.test_all_15_queries_meet_100_percent_grounding_compliance) ... ERROR
+test_citation_url_matches_official_contact_page (test_xictek_contact_grounded_generation.GroundedGenerationAndCitationsTests.test_citation_url_matches_official_contact_page) ... ERROR
+test_office_hours_and_phone_triggers_fallback (test_xictek_contact_grounded_generation.GroundedGenerationAndCitationsTests.test_office_hours_and_phone_triggers_fallback) ... ok
+test_office_location_triggers_explicit_fallback (test_xictek_contact_grounded_generation.GroundedGenerationAndCitationsTests.test_office_location_triggers_explicit_fallback) ... ok
+test_support_sla_unverified_triggers_fallback (test_xictek_contact_grounded_generation.GroundedGenerationAndCitationsTests.test_support_sla_unverified_triggers_fallback) ... ok
+test_verified_project_inquiries_grounded_without_fallback (test_xictek_contact_grounded_generation.GroundedGenerationAndCitationsTests.test_verified_project_inquiries_grounded_without_fallback) ... ok
+
+======================================================================
+ERROR: test_all_15_queries_meet_100_percent_grounding_compliance (test_xictek_contact_grounded_generation.GroundedGenerationAndCitationsTests.test_all_15_queries_meet_100_percent_grounding_compliance)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/ggc_unpacked/grounded generation and citation/test_xictek_contact_grounded_generation.py", line 14, in test_all_15_queries_meet_100_percent_grounding_compliance
+    summary = run_grounded_generation_suite()
+  File "/mnt/data/ggc_unpacked/grounded generation and citation/xictek_contact_grounded_generation.py", line 162, in run_grounded_generation_suite
+    corpus = json.loads(CORPUS_PATH.read_text(encoding="utf-8"))
+                        ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 548, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 539, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/ggc_unpacked/grounded generation and citation/xictek_contact_locations_retrieval_corpus.json'
+
+======================================================================
+ERROR: test_citation_url_matches_official_contact_page (test_xictek_contact_grounded_generation.GroundedGenerationAndCitationsTests.test_citation_url_matches_official_contact_page)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/ggc_unpacked/grounded generation and citation/test_xictek_contact_grounded_generation.py", line 21, in test_citation_url_matches_official_contact_page
+    summary = run_grounded_generation_suite()
+  File "/mnt/data/ggc_unpacked/grounded generation and citation/xictek_contact_grounded_generation.py", line 162, in run_grounded_generation_suite
+    corpus = json.loads(CORPUS_PATH.read_text(encoding="utf-8"))
+                        ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 548, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 539, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/ggc_unpacked/grounded generation and citation/xictek_contact_locations_retrieval_corpus.json'
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.003s
+
+FAILED (errors=2)
