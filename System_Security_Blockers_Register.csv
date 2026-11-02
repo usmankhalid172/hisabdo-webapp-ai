@@ -1,0 +1,11 @@
+﻿Priority,Domain,Finding,Status,Required action
+P0,HisabDo,Private-record request produced financial-record categories; privacy intent/authorization boundary,Open,Implement privacy gate and authorized data access boundary; rerun adversarial privacy tests
+P0,Contact & Locations,Location prompts returned email and irrelevant blog citation; SLA query returned unsupported date with HisabDo citations,Open,"Fix intent routing, source allowlist, citation filtering, and unknown-answer fallback"
+P0,All domains,Retrieved-document prompt injection not proven against configured live model,Open,Run controlled source-poisoning tests with actual retrieval and model
+P0,Portfolio,Test file supplied but no execution output; source-poisoning/privacy coverage incomplete,Open,"Execute tests, add cases, preserve raw logs"
+P0,All domains,No unified multi-turn/source-spoofing run across domains,Open,Run cross-domain test matrix on common reviewed build
+P1,All domains,Multilingual and encoded injection coverage incomplete,Open,"Add Urdu, Hindi, Arabic, Spanish, transliteration and encoded payloads"
+P1,Blog,Malicious article-body validation/quarantine not demonstrated,Open,Scan source bodies and quarantine suspicious records
+P1,Careers,Freshness uses free-text date markers; trusted crawl timestamp and approved 30-day policy absent,Partial,Add trusted metadata and content-owner-approved freshness window
+P1,About Us,Prototype misses paraphrased/multilingual attack recognition; one off-target salary answer,Open,Add intent classifier and retrieval relevance threshold
+P2,System-wide,Inconsistent test environments and CI evidence,Open,"Pinned dependencies, common CI matrix, build IDs and raw logs"
