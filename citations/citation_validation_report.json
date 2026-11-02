@@ -1,0 +1,150 @@
+{
+  "report_type": "mixed_manual_observation_and_rule_based_url_relevance",
+  "limitations": [
+    "URL structure and path relevance do not prove that a page is reachable or that its content entails the generated claim.",
+    "No live HTTP reachability test was performed.",
+    "Semantic claim/source entailment was assessed manually from supplied reference baseline and observed answers."
+  ],
+  "records": [
+    {
+      "test_id": "T01",
+      "claim_being_checked": "project_discovery",
+      "expected_source": "https://xicteksystems.com/portfolio",
+      "actual_chatbot_sources": [
+        "https://xicteksystems.com/",
+        "https://xicteksystems.com/portfolio"
+      ],
+      "expected_factual_content": "Project-specific information grounded in direct official page.",
+      "actual_generated_content": "2+ projects completed.",
+      "result": "PARTIAL",
+      "explanation": "Portfolio page is the correct direct source, but homepage is generic and the response omitted project names.",
+      "validation_method": "manual_observation_plus_rule_based_url_classification",
+      "automated_checks": {
+        "https_syntax_checked": true,
+        "direct_source_relevance_rule_applied": true,
+        "url_reachability_checked": false,
+        "semantic_entailment_automated": false
+      }
+    },
+    {
+      "test_id": "T02",
+      "claim_being_checked": "project_stack_and_challenge",
+      "expected_source": "https://xicteksystems.com/portfolio",
+      "actual_chatbot_sources": [
+        "https://xicteksystems.com/",
+        "https://xicteksystems.com/portfolio"
+      ],
+      "expected_factual_content": "Project-specific information grounded in direct official page.",
+      "actual_generated_content": "It aims to make daily financial records more practical than paper registers.",
+      "result": "PARTIAL",
+      "explanation": "Portfolio URL is relevant to challenge and stack, but actual response only answered the challenge and did not state technologies or target users.",
+      "validation_method": "manual_observation_plus_rule_based_url_classification",
+      "automated_checks": {
+        "https_syntax_checked": true,
+        "direct_source_relevance_rule_applied": true,
+        "url_reachability_checked": false,
+        "semantic_entailment_automated": false
+      }
+    },
+    {
+      "test_id": "T03",
+      "claim_being_checked": "contextual_stack_claim",
+      "expected_source": "https://xicteksystems.com/portfolio",
+      "actual_chatbot_sources": [
+        "https://xicteksystems.com/blog/react-development-services",
+        "https://xicteksystems.com/technologies"
+      ],
+      "expected_factual_content": "Project-specific information grounded in direct official page.",
+      "actual_generated_content": "Technologies can include React, TypeScript, component systems, accessibility checks, and API integration, chosen based on the product and operating model.",
+      "result": "FAIL",
+      "explanation": "The sources are not the direct HisabDo case study and the answer substitutes React/TypeScript for Flutter/Supabase/PostgreSQL.",
+      "validation_method": "manual_observation_plus_rule_based_url_classification",
+      "automated_checks": {
+        "https_syntax_checked": true,
+        "direct_source_relevance_rule_applied": true,
+        "url_reachability_checked": false,
+        "semantic_entailment_automated": false
+      }
+    },
+    {
+      "test_id": "T04",
+      "claim_being_checked": "explicit_stack_claim",
+      "expected_source": "https://xicteksystems.com/portfolio",
+      "actual_chatbot_sources": [
+        "https://xicteksystems.com/",
+        "https://hisabdo.app/company"
+      ],
+      "expected_factual_content": "Project-specific information grounded in direct official page.",
+      "actual_generated_content": "Web Application Development uses React, Next.js, and TypeScript.",
+      "result": "FAIL",
+      "explanation": "Neither supplied link is the direct Portfolio case study source; the answer gives React/Next.js/TypeScript instead of the documented stack.",
+      "validation_method": "manual_observation_plus_rule_based_url_classification",
+      "automated_checks": {
+        "https_syntax_checked": true,
+        "direct_source_relevance_rule_applied": true,
+        "url_reachability_checked": false,
+        "semantic_entailment_automated": false
+      }
+    },
+    {
+      "test_id": "T05",
+      "claim_being_checked": "direct_case_study_citation",
+      "expected_source": "https://xicteksystems.com/portfolio",
+      "actual_chatbot_sources": [
+        "https://xicteksystems.com/",
+        "https://xicteksystems.com/blog/progressive-web-apps"
+      ],
+      "expected_factual_content": "Project-specific information grounded in direct official page.",
+      "actual_generated_content": "Responsive UI, service workers, caching, and web APIs, chosen based on the use case.",
+      "result": "FAIL",
+      "explanation": "Homepage and generic PWA blog do not satisfy the request for the direct HisabDo Portfolio source; content is unrelated to the case-study stack.",
+      "validation_method": "manual_observation_plus_rule_based_url_classification",
+      "automated_checks": {
+        "https_syntax_checked": true,
+        "direct_source_relevance_rule_applied": true,
+        "url_reachability_checked": false,
+        "semantic_entailment_automated": false
+      }
+    },
+    {
+      "test_id": "T06",
+      "claim_being_checked": "unsupported_revenue_metric",
+      "expected_source": "No source supplies a first-year customer revenue percentage; abstain.",
+      "actual_chatbot_sources": [
+        "https://hisabdo.app/blog/business-finance-tips",
+        "https://hisabdo.app/mian-sharjeel-khalid"
+      ],
+      "expected_factual_content": "No verified first-year revenue percentage in supplied case-study baseline",
+      "actual_generated_content": "He focuses on customer workflows, merchant onboarding, articulates real user problems to engineering, and prioritizes features that increase revenue reliability and reduce friction for sellers.",
+      "result": "FAIL",
+      "explanation": "No evidence in the supplied case-study baseline supports a numeric percentage; response is unrelated and does not clearly abstain.",
+      "validation_method": "manual_review_of_claim_support",
+      "automated_checks": {
+        "https_syntax_checked": true,
+        "direct_source_relevance_rule_applied": false,
+        "url_reachability_checked": false,
+        "semantic_entailment_automated": false
+      }
+    },
+    {
+      "test_id": "T07",
+      "claim_being_checked": "about_features",
+      "expected_source": "https://hisabdo.app/about",
+      "actual_chatbot_sources": [
+        "https://hisabdo.app/about",
+        "https://hisabdo.app/contact"
+      ],
+      "expected_factual_content": "Customer accounts/history, transaction history, receivables/payables, expenses, income monitoring, PDF statements, offline access",
+      "actual_generated_content": "Reducing manual work, giving customers a better self-service journey, creating a dependable source of information, and making a new product easier to operate.",
+      "result": "FAIL",
+      "explanation": "About URL is directly relevant, but generated text does not state the requested features; Contact is unnecessary. A relevant URL alone does not validate the answer.",
+      "validation_method": "manual_observation_plus_rule_based_url_classification",
+      "automated_checks": {
+        "https_syntax_checked": true,
+        "direct_source_relevance_rule_applied": true,
+        "url_reachability_checked": false,
+        "semantic_entailment_automated": false
+      }
+    }
+  ]
+}

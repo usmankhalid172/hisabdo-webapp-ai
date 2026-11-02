@@ -1,0 +1,35 @@
+Portfolio E2E offline test execution
+====================================
+
+Command:
+  /opt/pyvenv/bin/python -m pytest -q tests/test_portfolio_e2e_pipeline.py
+
+Working directory:
+  /mnt/data/Muhammad-Daniyal_Portfolio_E2E_Submission
+
+Python:
+  3.13.5
+
+Platform:
+  Linux-6.18.57-x86_64-with-glibc2.41
+
+Result:
+  19 passed in 0.05s
+  0 failed
+  0 skipped
+
+Evidence classification:
+  Deterministic offline fixture/rule tests only.
+  No request was sent to the live production chatbot.
+
+Repository XICTEK suite attempt:
+  Command: python -m pytest -q tests/xictek_website_assistant
+  Result: BLOCKED BEFORE TEST COLLECTION.
+  Reason: tests/conftest.py imports src.main; src.main imports slowapi.
+          ModuleNotFoundError: No module named 'slowapi'.
+  Dependency declared in requirements.txt: slowapi==0.1.9.
+  Installation attempt: pip install slowapi==0.1.9
+  Result: unavailable because package-index network access failed (DNS/name resolution).
+  This is an environment/dependency blocker, not a reported test assertion failure.
+
+No repository tests were silently counted as passed. No live production E2E test was executed by this environment.

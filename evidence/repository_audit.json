@@ -1,0 +1,223 @@
+{
+  "archive": "hisabdo-webapp-ai-main (2)(2).zip",
+  "archive_entries": 307,
+  "scope": "Read-only inspection of uploaded ZIP; no original repository source files modified.",
+  "findings": [
+    {
+      "area": "portfolio_knowledge_base",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "src/xictek_website_assistant/data/index/chunks.json",
+          "detail": "976 records; faq-33 through faq-37 are the HisabDo Portfolio entries."
+        },
+        {
+          "file": "src/xictek_website_assistant/data/index/chunks.json",
+          "record_id": "faq-34",
+          "detail": "Q: Which technologies are used to build HisabDo? A: HisabDo is built with Flutter, Supabase, and PostgreSQL."
+        },
+        {
+          "file": "src/xictek_website_assistant/data/index/chunks.json",
+          "record_id": "faq-33",
+          "detail": "HisabDo offline-first digital ledger for shopkeepers, freelancers, and small businesses."
+        },
+        {
+          "file": "src/xictek_website_assistant/data/index/chunks.json",
+          "record_id": "faq-35",
+          "detail": "Challenge: make daily financial records more practical than paper registers."
+        },
+        {
+          "file": "src/xictek_website_assistant/data/index/chunks.json",
+          "record_id": "faq-36",
+          "detail": "Approach: offline-first workflows, clear financial summaries, simple interface."
+        },
+        {
+          "file": "src/xictek_website_assistant/data/index/chunks.json",
+          "record_id": "faq-37",
+          "detail": "Outcome: expense tracking, digital khata, customer balances."
+        }
+      ]
+    },
+    {
+      "area": "about_page_records",
+      "status": "verified_with_coverage_gap",
+      "evidence": [
+        {
+          "file": "src/xictek_website_assistant/data/index/chunks.json",
+          "record_ids": [
+            "faq-120",
+            "faq-122",
+            "faq-123",
+            "faq-124",
+            "faq-129",
+            "faq-131",
+            "faq-134"
+          ],
+          "detail": "About records cover offline-first app, customer accounts, transaction history, receivables/payables, PDF statements, audience and on-device default storage. The supplied baseline additionally lists expense tracking and income monitoring; these exact terms were not found in faq-122."
+        }
+      ]
+    },
+    {
+      "area": "retrieval_and_history",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "src/xictek_website_assistant/service.py",
+          "lines": "119-127",
+          "detail": "embed_query(message) embeds only the latest message; history is separately converted and passed to provider.generate_reply."
+        },
+        {
+          "file": "src/xictek_website_assistant/llm_client.py",
+          "lines": "84-99",
+          "detail": "Groq provider appends history messages, then adds the latest user content with retrieved context."
+        },
+        {
+          "file": "src/xictek_website_assistant/llm_client.py",
+          "lines": "68-82",
+          "detail": "Mock provider produces a deterministic context-based echo and does not use history."
+        }
+      ]
+    },
+    {
+      "area": "embedding_implementation_mismatch",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "src/xictek_website_assistant/embeddings.py",
+          "lines": "34,108",
+          "detail": "Imports and instantiates sklearn TfidfVectorizer."
+        },
+        {
+          "file": "src/xictek_website_assistant/config.py",
+          "lines": "embedding_model, embedding_dim",
+          "detail": "Defaults still identify paraphrase-multilingual-MiniLM-L12-v2 and dimension 384."
+        },
+        {
+          "file": "src/xictek_website_assistant/data/index/metadata.json",
+          "detail": "Metadata labels the persisted index as paraphrase-multilingual-MiniLM-L12-v2."
+        },
+        {
+          "file": "src/xictek_website_assistant/data/index/embeddings.npy",
+          "detail": "Actual NumPy matrix shape is 976 x 2109."
+        },
+        {
+          "file": "src/xictek_website_assistant/data/index/tfidf_vectorizer.pkl",
+          "detail": "A persisted fitted TF-IDF vectorizer is included."
+        }
+      ]
+    },
+    {
+      "area": "api_routes_and_deployment",
+      "status": "repository_route_verified_live_mapping_unverified",
+      "evidence": [
+        {
+          "file": "src/xictek_website_assistant/router.py",
+          "line": 9,
+          "detail": "Router prefix is /api/v1/xictek."
+        },
+        {
+          "file": "src/main.py",
+          "line": 81,
+          "detail": "The XICTEK router is included in FastAPI app."
+        },
+        {
+          "file": "src/xictek_website_assistant/widget/xictek-widget.js",
+          "line": 337,
+          "detail": "Repository widget calls /api/v1/xictek/chat."
+        },
+        {
+          "user_supplied_live_evidence": "Production request was POST https://www.xicteksystems.com/api/assistant/chat and returned HTTP 200. That route is not present in the ZIP search."
+        }
+      ],
+      "conclusion": "No code, proxy, rewrite, deployment configuration, or adapter in this ZIP establishes that production /api/assistant/chat is backed by this repository."
+    },
+    {
+      "area": "llm_provider",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "src/xictek_website_assistant/llm_client.py",
+          "lines": "131-160",
+          "detail": "Groq is selected only when configured and a key is present; otherwise MockLLMProvider is returned."
+        },
+        {
+          "file": "src/config.py",
+          "detail": "Shared LLM_PROVIDER default is mock."
+        },
+        {
+          "file": ".env.example",
+          "detail": "LLM_PROVIDER=mock; Groq key placeholder is empty."
+        }
+      ]
+    },
+    {
+      "area": "fallbacks",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "src/xictek_website_assistant/service.py",
+          "lines": "129-137",
+          "detail": "Provider exceptions are caught and mapped to a generic service-unavailable response."
+        },
+        {
+          "file": "src/xictek_website_assistant/service.py",
+          "lines": "121-122",
+          "detail": "Empty retrieval yields context=None, but the configured provider is still called; no explicit numeric-claim abstention gate is present in this function."
+        },
+        {
+          "file": "src/xictek_website_assistant/llm_client.py",
+          "lines": "75-82",
+          "detail": "Mock provider has a generic no-context fallback."
+        }
+      ]
+    },
+    {
+      "area": "citation_injection",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "src/xictek_website_assistant/service.py",
+          "lines": "139-142",
+          "detail": "Sources are returned from retrieved chunks (title/url/score)."
+        },
+        {
+          "file": "src/xictek_website_assistant/schemas.py",
+          "detail": "SourceRef contains title, optional URL and score; no claim-to-source entailment field or validator is defined in the response schema."
+        }
+      ]
+    },
+    {
+      "area": "security_and_widget",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "src/xictek_website_assistant/widget/xictek-widget.js",
+          "detail": "Widget sends X-Internal-Token from a client-side script attribute; module comment explicitly warns this shared secret is visible to visitors and is not production-safe."
+        },
+        {
+          "file": "src/xictek_website_assistant/router.py",
+          "detail": "Router requires internal-token dependency."
+        }
+      ]
+    },
+    {
+      "area": "test_dependencies",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "requirements.txt",
+          "detail": "slowapi==0.1.9 is declared."
+        },
+        {
+          "environment": "slowapi is not installed in the execution environment; pip installation was attempted but failed because package index network access was unavailable."
+        }
+      ]
+    }
+  ],
+  "not_verified": [
+    "The live /api/assistant/chat endpoint's deployed code mapping.",
+    "Live website URL reachability in this run.",
+    "Production LLM provider/model configuration.",
+    "Whether the user-supplied seven observations came from the exact ZIP revision."
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "evidence_type": "user_supplied_live_production_chrome_devtools_observations",
+  "unit": "milliseconds",
+  "sample_count": 10,
+  "samples": [
+    {
+      "request": 1,
+      "total_duration_ms": 487.11,
+      "waiting_for_server_response_ms": 483.81,
+      "difference_ms": 3.3
+    },
+    {
+      "request": 2,
+      "total_duration_ms": 618.49,
+      "waiting_for_server_response_ms": 613.38,
+      "difference_ms": 5.11
+    },
+    {
+      "request": 3,
+      "total_duration_ms": 962.4,
+      "waiting_for_server_response_ms": 958.48,
+      "difference_ms": 3.92
+    },
+    {
+      "request": 4,
+      "total_duration_ms": 29430.0,
+      "waiting_for_server_response_ms": 421.19,
+      "difference_ms": 29008.81
+    },
+    {
+      "request": 5,
+      "total_duration_ms": 739.37,
+      "waiting_for_server_response_ms": 734.77,
+      "difference_ms": 4.6
+    },
+    {
+      "request": 6,
+      "total_duration_ms": 624.83,
+      "waiting_for_server_response_ms": 622.17,
+      "difference_ms": 2.66
+    },
+    {
+      "request": 7,
+      "total_duration_ms": 420.02,
+      "waiting_for_server_response_ms": 417.2,
+      "difference_ms": 2.82
+    },
+    {
+      "request": 8,
+      "total_duration_ms": 431.79,
+      "waiting_for_server_response_ms": 429.13,
+      "difference_ms": 2.66
+    },
+    {
+      "request": 9,
+      "total_duration_ms": 760.07,
+      "waiting_for_server_response_ms": 757.54,
+      "difference_ms": 2.53
+    },
+    {
+      "request": 10,
+      "total_duration_ms": 585.78,
+      "waiting_for_server_response_ms": 582.6,
+      "difference_ms": 3.18
+    }
+  ],
+  "total_duration_statistics": {
+    "count": 10,
+    "mean_ms": 3505.986,
+    "median_ms": 621.66,
+    "p95_linear_ms": 16619.58,
+    "p95_nearest_rank_ms": 29430.0,
+    "minimum_ms": 420.02,
+    "maximum_ms": 29430.0
+  },
+  "server_wait_statistics": {
+    "count": 10,
+    "mean_ms": 602.027,
+    "median_ms": 597.99,
+    "p95_linear_ms": 868.057,
+    "p95_nearest_rank_ms": 958.48,
+    "minimum_ms": 417.2,
+    "maximum_ms": 958.48
+  },
+  "outlier": {
+    "request": 4,
+    "total_duration_ms": 29430.0,
+    "waiting_for_server_response_ms": 421.19,
+    "difference_ms": 29008.81,
+    "method": "IQR 1.5x rule",
+    "interpretation": "The recorded waiting-for-server-response phase was only 421.19 ms; the remaining approximately 29,008.81 ms occurred outside that phase. Full Timing breakdown is required to identify the cause."
+  },
+  "below_one_second_count": 9,
+  "separate_slow_request_observation": {
+    "duration_approx_seconds": 114,
+    "description": "Earlier separate Chrome Timing observation of approximately 1.9 minutes; not one of the ten samples; request identity and relation to this sample set are unknown."
+  },
+  "method_notes": {
+    "p95_linear": "Linear interpolation at position (n-1)*0.95 (NumPy default linear method).",
+    "p95_nearest_rank": "Sorted observation at rank ceil(0.95*n), 1-indexed.",
+    "limitations": "n=10 is small; tail percentiles are unstable and especially sensitive to one extreme observation. No samples removed."
+  }
+}

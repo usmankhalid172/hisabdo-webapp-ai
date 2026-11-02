@@ -1,0 +1,78 @@
+{
+  "source": "extracted from uploaded repository src/xictek_website_assistant/data/index/chunks.json",
+  "fixture_type": "offline_repository_evidence_snapshot",
+  "records": [
+    {
+      "id": "faq-33",
+      "title": "Our Work | XICTEK Systems",
+      "url": "https://xicteksystems.com/portfolio",
+      "text": "Q: What is HisabDo?\nA: HisabDo is an offline‑first digital ledger for shopkeepers, freelancers, and small businesses to organize khata, expenses, customer records, and receivables."
+    },
+    {
+      "id": "faq-34",
+      "title": "Our Work | XICTEK Systems",
+      "url": "https://xicteksystems.com/portfolio",
+      "text": "Q: Which technologies are used to build HisabDo?\nA: HisabDo is built with Flutter, Supabase, and PostgreSQL."
+    },
+    {
+      "id": "faq-35",
+      "title": "Our Work | XICTEK Systems",
+      "url": "https://xicteksystems.com/portfolio",
+      "text": "Q: What problem does HisabDo aim to solve?\nA: It aims to make daily financial records more practical than paper registers."
+    },
+    {
+      "id": "faq-36",
+      "title": "Our Work | XICTEK Systems",
+      "url": "https://xicteksystems.com/portfolio",
+      "text": "Q: How does HisabDo approach its design?\nA: It uses offline‑first workflows, clear financial summaries, and a simple interface for everyday use."
+    },
+    {
+      "id": "faq-37",
+      "title": "Our Work | XICTEK Systems",
+      "url": "https://xicteksystems.com/portfolio",
+      "text": "Q: What outcomes does HisabDo deliver?\nA: A focused product foundation for expense tracking, digital khata, and customer balances."
+    },
+    {
+      "id": "faq-120",
+      "title": "About HisabDo | HisabDo",
+      "url": "https://hisabdo.app/about",
+      "text": "Q: What type of app is HisabDo?\nA: An offline‑first khata and ledger app designed for shopkeepers, freelancers, small businesses, and everyday users."
+    },
+    {
+      "id": "faq-122",
+      "title": "About HisabDo | HisabDo",
+      "url": "https://hisabdo.app/about",
+      "text": "Q: What core features does HisabDo provide?\nA: Customer accounts, transaction history, receivables, payables, PDF statements, and offline access."
+    },
+    {
+      "id": "faq-123",
+      "title": "About HisabDo | HisabDo",
+      "url": "https://hisabdo.app/about",
+      "text": "Q: Which user groups can benefit from HisabDo?\nA: Shopkeepers, freelancers, home‑based sellers, and new business owners."
+    },
+    {
+      "id": "faq-124",
+      "title": "About HisabDo | HisabDo",
+      "url": "https://hisabdo.app/about",
+      "text": "Q: Do I need an internet connection to use HisabDo?\nA: No, core features work offline and records stay on the device by default."
+    },
+    {
+      "id": "faq-129",
+      "title": "About HisabDo | HisabDo",
+      "url": "https://hisabdo.app/about",
+      "text": "Q: What kind of reports can I generate in HisabDo?\nA: PDF statements that show what has been paid and what remains outstanding."
+    },
+    {
+      "id": "faq-131",
+      "title": "About HisabDo App | HisabDo",
+      "url": "https://hisabdo.app/about-app",
+      "text": "Q: Does HisabDo require an internet connection to work?\nA: No, it works offline; optional backup or sync is available when you sign in."
+    },
+    {
+      "id": "faq-134",
+      "title": "About HisabDo App | HisabDo",
+      "url": "https://hisabdo.app/about-app",
+      "text": "Q: How are records stored in HisabDo?\nA: Core records are stored locally on your device; optional backup is available when signed in."
+    }
+  ]
+}

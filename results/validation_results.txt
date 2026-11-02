@@ -1,0 +1,38 @@
+Validation execution summary
+============================
+
+Production evidence supplied by user:
+- Seven live conversation scenarios: 2 PARTIAL, 5 FAIL.
+- Production API request: POST https://www.xicteksystems.com/api/assistant/chat, HTTP 200 (user-captured).
+- Ten total-duration and server-wait timing pairs preserved.
+- Separate approximately 1.9-minute timing observation preserved as separate evidence.
+
+Benchmark calculations (milliseconds):
+- Total duration: n=10, mean=3505.986, median=621.660,
+  P95 linear=16619.580, P95 nearest-rank=29430.000,
+  min=420.020, max=29430.000.
+- Server wait: n=10, mean=602.027, median=597.990,
+  P95 linear=868.057, P95 nearest-rank=958.480,
+  min=417.200, max=958.480.
+- Request 4 difference: 29430.00 - 421.19 = 29008.81 ms.
+- Nine of ten total durations are below 1000 ms.
+- IQR 1.5x rule flags Request 4 as an outlier; it remains in the official data.
+
+Repository inspection:
+- 976 chunks; matrix shape 976 x 2109.
+- faq-33 through faq-37 verified as HisabDo Portfolio records.
+- faq-34 exact stack: Flutter, Supabase, PostgreSQL.
+- latest-message-only embedding verified; history separately passed to provider.
+- TF-IDF implementation conflicts with MiniLM config/metadata label.
+- repository/widget route /api/v1/xictek/chat; live user-captured route /api/assistant/chat.
+- no verified deployment adapter/mapping in the ZIP.
+- Mock provider is default unless Groq is configured.
+
+Automated offline suite:
+- 19 passed, 0 failed.
+- Repository XICTEK suite did not collect because slowapi is absent.
+- No live endpoint calls or URL reachability checks were performed.
+
+Citation validation:
+- Manual claim/source assessment plus deterministic HTTPS/path relevance rules.
+- URL syntax/relevance is not semantic entailment and not proof of reachability.
