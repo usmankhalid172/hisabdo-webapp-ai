@@ -17,9 +17,11 @@ financial_assistant's vector_store.py -> rag_pipeline.ContextChunk pattern.
 from __future__ import annotations
 
 import json
+import posixpath
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
+from urllib.parse import unquote, urlsplit
 
 import numpy as np
 
@@ -29,6 +31,30 @@ from ..logging_config import logger
 EMBEDDINGS_FILENAME = "embeddings.npy"
 CHUNKS_FILENAME = "chunks.json"
 METADATA_FILENAME = "metadata.json"
+
+
+def _url_is_within_prefix(url: str | None, url_prefix: str) -> bool:
+    try:
+        candidate = urlsplit(url or "")
+        prefix = urlsplit(url_prefix)
+        candidate_port = candidate.port
+        prefix_port = prefix.port
+    except ValueError:
+        return False
+
+    if (
+        candidate.scheme.lower() != prefix.scheme.lower()
+        or candidate.hostname is None
+        or candidate.hostname.lower() != (prefix.hostname or "").lower()
+        or candidate_port != prefix_port
+        or candidate.username is not None
+        or candidate.password is not None
+    ):
+        return False
+
+    candidate_path = posixpath.normpath(unquote(candidate.path))
+    prefix_path = posixpath.normpath(unquote(prefix.path).rstrip("/"))
+    return candidate_path == prefix_path or candidate_path.startswith(prefix_path + "/")
 
 
 @dataclass
@@ -96,9 +122,8 @@ class VectorStore:
         # higher in the global index.
         eligible = np.ones(len(self.chunks), dtype=bool)
         if url_prefix:
-            prefix = url_prefix.rstrip("/").lower()
             eligible = np.array([
-                bool(chunk.url) and chunk.url.rstrip("/").lower().startswith(prefix)
+                _url_is_within_prefix(chunk.url, url_prefix)
                 for chunk in self.chunks
             ])
         scores = np.where(eligible, scores, -np.inf)

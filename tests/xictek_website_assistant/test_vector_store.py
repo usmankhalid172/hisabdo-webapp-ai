@@ -55,8 +55,9 @@ def test_query_can_restrict_candidates_to_a_source_prefix():
         [
             Chunk("general", "General", "unrelated", "https://xicteksystems.com/services"),
             Chunk("portfolio", "Portfolio", "case study", "https://xicteksystems.com/portfolio"),
+            Chunk("portfolio-child", "Portfolio detail", "case study", "https://xicteksystems.com/portfolio/hisabdo"),
         ],
-        np.array([[1.0, 0.0], [0.9, 0.1]], dtype=np.float32),
+        np.array([[1.0, 0.0], [0.9, 0.1], [0.8, 0.2]], dtype=np.float32),
     )
 
     results = store.query(
@@ -66,7 +67,38 @@ def test_query_can_restrict_candidates_to_a_source_prefix():
         url_prefix="https://xicteksystems.com/portfolio",
     )
 
-    assert [result.chunk.chunk_id for result in results] == ["portfolio"]
+    assert {result.chunk.chunk_id for result in results} == {"portfolio", "portfolio-child"}
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://xicteksystems.com.evil.example/portfolio",
+        "https://evil.example/xicteksystems.com/portfolio",
+        "https://xicteksystems.com/portfolio-archive",
+        "https://xicteksystems.com/portfolio.evil",
+        "https://xicteksystems.com/portfolio/../private",
+        "https://xicteksystems.com@evil.example/portfolio",
+        "https://user@xicteksystems.com/portfolio",
+        "http://xicteksystems.com/portfolio",
+        "not a URL",
+    ],
+)
+def test_query_rejects_spoofed_or_out_of_scope_portfolio_sources(url):
+    store = VectorStore()
+    store.build(
+        [Chunk("spoofed", "Spoofed source", "untrusted case study", url)],
+        np.array([[1.0, 0.0]], dtype=np.float32),
+    )
+
+    results = store.query(
+        _unit_vector(1, 0),
+        top_k=1,
+        relevance_threshold=0.0,
+        url_prefix="https://xicteksystems.com/portfolio",
+    )
+
+    assert results == []
 
 
 def test_query_respects_top_k(populated_store):

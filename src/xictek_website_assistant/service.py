@@ -151,7 +151,8 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
         )
 
     context = "\n\n---\n\n".join(m.chunk.text for m in matches) if matches else None
-    history = [h.model_dump() for h in request.history]
+    # Portfolio answers must not inherit client-supplied or spoofed history.
+    history = [] if portfolio_query else [h.model_dump() for h in request.history]
 
     provider = get_llm_provider()
     try:
