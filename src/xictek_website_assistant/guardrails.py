@@ -5,8 +5,8 @@ Mirrors the pattern in `src.financial_assistant.service`'s third-party
 data guard: a regex/heuristic layer that can't be talked around by an
 instruction-override attempt, because it never reaches the model at all
 for the patterns it catches. This is NOT a claim that regex alone stops
-every injection attempt — SYSTEM_PROMPT in prompts.py is a second layer,
-and the LLM's own instruction-following is a third — but it deterministically
+every injection attempt â€” SYSTEM_PROMPT in prompts.py is a second layer,
+and the LLM's own instruction-following is a third â€” but it deterministically
 closes off the most common/scripted attempts (the ones the task brief's
 "20-30 test questions including prompt-injection attempts" will include)
 without depending on the model's behavior at all.
@@ -59,12 +59,12 @@ _PROMPT_EXTRACTION_PATTERNS = [
 _SECRET_PROBE_PATTERNS = [
     # No leading \b: keys/tokens are often written glued to a prefix with
     # an underscore (e.g. "GROQ_API_KEY"), which is a \w character on both
-    # sides of where "api" starts — a leading \b would never fire there.
+    # sides of where "api" starts â€” a leading \b would never fire there.
     r"api[_ -]?key",
     r"\benv(ironment)?[ _-]?var(iable)?s?\b",
     r"\.env\b",
     r"\baccess token\b",
-    r"\bcredentials?\b",
+    r"\b(reveal|show|print|dump|leak|expose|give me|send me|output|display)\b.{0,40}\b(credentials?|passwords?)\b",
     r"internal[_ -]?(service[_ -]?)?token",
 ]
 
@@ -74,12 +74,12 @@ _ALL_INJECTION_PATTERNS = [
 ]
 
 INJECTION_REFUSAL_MESSAGE = (
-    "I can only help with questions about XICTEK Systems and HisabDo — "
+    "I can only help with questions about XICTEK Systems and HisabDo â€” "
     "I'm not able to share internal instructions, system details, or act outside that scope."
 )
 
 OUT_OF_SCOPE_HINT = (
-    "That's outside what I can help with here — I'm the XICTEK Systems website assistant, "
+    "That's outside what I can help with here â€” I'm the XICTEK Systems website assistant, "
     "so I can answer questions about our services, technologies, HisabDo, careers, or blog content."
 )
 
