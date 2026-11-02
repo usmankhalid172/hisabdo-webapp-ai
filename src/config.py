@@ -39,6 +39,8 @@ class Settings(BaseSettings):
     # cited sources, conflict notices, clarifying questions and no-source fallbacks.
     # Off until the release gate has run on it; false = the previous top-1 faq_docs.json path.
     grounded_answers_enabled: bool = False
+    # Safety, privacy and domain guardrails (financial_assistant/guardrails.py, docs/safety-guardrails.md).
+    guardrails_enabled: bool = True
     kb_retriever_mode: str = "auto"   # auto | hybrid (needs fastembed) | lexical
 
 

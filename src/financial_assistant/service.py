@@ -21,6 +21,7 @@ from .dialogue.state_store import get_state_store
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
 from .grounding import GroundedAnswerer, KbRetriever
+from . import guardrails
 
 # Deliberately simple keyword intent check — good enough for a POC boundary
 # demonstration; a production version would use a real intent classifier.
@@ -207,6 +208,29 @@ def _intent_name(outcome: DialogueOutcome) -> str:
 
 
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
+    """Guardrails wrap the whole flow: input checks first, output checks on every reply."""
+    if get_settings().guardrails_enabled:
+        verdict = guardrails.check_input(request.message)
+        if verdict is None and not _classify_small_talk(request.message):
+            verdict = guardrails.check_off_topic_question(request.message, _recent_history(request))
+        if verdict is not None:
+            return ChatbotResponse(reply=verdict.reply, conversation_id=request.conversation_id,
+                                   intent=f"blocked_{verdict.category}", tokens_used=0, source="guardrail")
+    response = _handle_chat(request)
+    if get_settings().guardrails_enabled:
+        safe, findings = guardrails.check_output(response.reply)
+        if safe != response.reply:
+            response.reply = safe
+            if "secret" in findings or "prompt_text" in findings:
+                response.source, response.intent, response.citations = "output_guard", "blocked_output", []
+    return response
+
+
+def _recent_history(request: ChatbotRequest, turns: int = 4) -> str:
+    return " ".join(h.content for h in request.history[-turns:])
+
+
+def _handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     """
     1. third-party guard (deterministic refusal, unchanged)
     2. intent router: transaction flows (expense / income / correction / categorize)
@@ -298,6 +322,9 @@ def _single_turn(request: ChatbotRequest, route: Route | None = None) -> Chatbot
             source="rag",
         )
 
+    if get_settings().guardrails_enabled and (off := guardrails.check_domain(request.message, _recent_history(request))) is not None:
+        return ChatbotResponse(reply=off.reply, conversation_id=request.conversation_id, intent="blocked_off_topic",
+                               tokens_used=0, source="guardrail")
     reply, tokens = provider.generate_reply(request.message, context=None, history=[h.model_dump() for h in request.history])
     return ChatbotResponse(
         reply=reply,
