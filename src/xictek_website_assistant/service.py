@@ -12,6 +12,7 @@ for why that matters for prompt-injection resistance.
 from __future__ import annotations
 
 import re
+from datetime import date, timedelta
 from functools import lru_cache
 
 from .config import get_xictek_settings
@@ -54,6 +55,41 @@ def _source_context(matches) -> str | None:
 def _citations_are_valid(reply: str, source_count: int) -> bool:
     cited = [int(value) for value in re.findall(r"\[(\d+)\]", reply)]
     return bool(cited) and all(1 <= number <= source_count for number in cited)
+
+
+_CURRENT_OPENING_CLAIM = re.compile(
+    r"\b(?:(?:currently|now|active(?:ly)?|open|available|hiring|recruiting)"
+    r"\b.{0,35}\b(?:jobs?|positions?|roles?|vacanc(?:y|ies)|openings?)|"
+    r"(?:jobs?|positions?|roles?|vacanc(?:y|ies)|openings?)\b.{0,35}\b"
+    r"(?:currently|now|active|open|available|hiring)|"
+    r"(?:we|xictek)\s+(?:are|is)\s+(?:currently\s+)?(?:hiring|recruiting))\b",
+    re.IGNORECASE,
+)
+_DATED_FRESHNESS_MARKER = re.compile(
+    r"\b(?:as of|last updated|updated on)\s*[:,-]?\s*(\d{4}-\d{2}-\d{2})\b",
+    re.IGNORECASE,
+)
+
+
+def _has_recent_dated_opening_evidence(matches, reply: str, *, today: date | None = None) -> bool:
+    """Require a recent ISO-dated source before asserting a vacancy is open."""
+    today = today or date.today()
+    cited_numbers = {int(value) for value in re.findall(r"\[(\d+)\]", reply)}
+    cited_matches = [match for number, match in enumerate(matches, start=1) if number in cited_numbers]
+    for match in cited_matches:
+        text = match.chunk.text
+        if not re.search(r"\b(open|hiring|vacan(?:cy|cies)|available)\b", text, re.IGNORECASE):
+            continue
+        marker = _DATED_FRESHNESS_MARKER.search(text)
+        if not marker:
+            continue
+        try:
+            published = date.fromisoformat(marker.group(1))
+        except ValueError:
+            continue
+        if today - timedelta(days=30) <= published <= today:
+            return True
+    return False
 
 
 def _careers_fallback_response(request) -> XictekChatResponse:
@@ -148,6 +184,19 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
             intent="declined_prompt_injection",
         )
 
+    # History (including role labels) is client-supplied on every call.
+    # Scan every turn because a caller could label an attacker-controlled
+    # instruction as an assistant turn to bypass a user-role-only check.
+    if any(
+        looks_like_injection_or_extraction(turn.content)
+        for turn in request.history
+    ):
+        return XictekChatResponse(
+            reply=INJECTION_REFUSAL_MESSAGE,
+            conversation_id=request.conversation_id,
+            intent="declined_prompt_injection",
+        )
+
     small_talk = _classify_small_talk(message)
     if small_talk:
         return XictekChatResponse(
@@ -208,6 +257,12 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
         )
 
     if careers_query and not _citations_are_valid(reply, len(matches)):
+        return _careers_fallback_response(request)
+
+    # A page that once listed a vacancy is not proof that it is open now.
+    # Until ingestion exposes freshness metadata, only a recent explicit
+    # ISO-dated status in retrieved evidence may support a current-opening claim.
+    if careers_query and _CURRENT_OPENING_CLAIM.search(reply) and not _has_recent_dated_opening_evidence(matches, reply):
         return _careers_fallback_response(request)
 
     if core_services_query:

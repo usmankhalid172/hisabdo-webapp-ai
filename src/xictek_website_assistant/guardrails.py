@@ -68,9 +68,21 @@ _SECRET_PROBE_PATTERNS = [
     r"internal[_ -]?(service[_ -]?)?token",
 ]
 
+_PRIVATE_COMPANY_DATA_PATTERNS = [
+    r"\b(private|confidential|internal|nonpublic)\b.{0,40}\b(employees?|staff|applicants?|candidates?|recruitment|hiring|salary|compensation|roadmap|plan|document|data)\b",
+    r"\b(private|confidential|internal|nonpublic)\b.{0,50}\b(contact|phone|email|address|salary|records?|details)\b.{0,40}\b(employees?|staff|candidates?|applicants?)\b",
+    r"\b(employee|staff|candidate|applicant)\b.{0,35}\b(personal|private|contact details|address|phone|email|salary|record|data)\b",
+    r"\b(list|give|show|reveal|provide|share)\b.{0,35}\b(employee|candidate|applicant)\b.{0,35}\b(phone|email|address|salary|record|data)\b",
+]
+
 _ALL_INJECTION_PATTERNS = [
     re.compile(p, re.IGNORECASE)
-    for p in (*_INSTRUCTION_OVERRIDE_PATTERNS, *_PROMPT_EXTRACTION_PATTERNS, *_SECRET_PROBE_PATTERNS)
+    for p in (
+        *_INSTRUCTION_OVERRIDE_PATTERNS,
+        *_PROMPT_EXTRACTION_PATTERNS,
+        *_SECRET_PROBE_PATTERNS,
+        *_PRIVATE_COMPANY_DATA_PATTERNS,
+    )
 ]
 
 INJECTION_REFUSAL_MESSAGE = (
