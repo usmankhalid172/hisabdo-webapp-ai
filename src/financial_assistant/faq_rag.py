@@ -3,13 +3,13 @@
 LangChain-based semantic retrieval for verified HisabDo FAQs
 and documentation.
 
-Only verified documents are indexed. Known Day 1 workflow queries
-fail closed when no approved, relevant workflow guide is available.
-This module does not retrieve live user financial transactions.
+Only verified and safe documents are indexed. Unsupported workflow
+queries fail closed. This module does not retrieve live transactions.
 """
 
 import json
 import logging
+import re
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -17,6 +17,12 @@ from typing import Any
 from langchain_core.documents import Document
 from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
+
+from src.financial_assistant.guardrails import (
+    get_input_guardrail,
+    is_safe_knowledge_content,
+    MAX_MESSAGE_CHARS,
+)
 
 logger = logging.getLogger("financial_assistant.faq_rag")
 
@@ -26,22 +32,44 @@ DOCS_PATH = (
     / "faq_docs.json"
 )
 
-# Preserve the original application knowledge-base path.
-# Tests may temporarily replace DOCS_PATH with a test fixture.
 DEFAULT_DOCS_PATH = DOCS_PATH
 
 DEFAULT_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 RELEVANCE_THRESHOLD = 0.40
 KB_VERSION = "1.0.0"
+MAX_RETRIEVAL_TOP_K = 10
+
+
+def _is_payable_receivable_query(query: str) -> bool:
+    """Identify questions about payable and receivable concepts."""
+    normalized = " ".join(query.lower().split())
+
+    patterns = (
+        r"\bpayables?\b",
+        r"\breceivables?\b",
+        r"\baccounts payable\b",
+        r"\baccounts receivable\b",
+        r"\bmoney owed\b",
+        r"\bamount owed\b",
+        r"\bwhat i owe\b",
+        r"\bwhat does .* owe\b",
+        r"\bowe and owed\b",
+        r"\bpayable and receivable\b",
+        r"\breceivable and payable\b",
+        r"\bcustomer owes\b",
+        r"\bcustomer balance\b",
+        r"\budhar\b",
+        r"\bkhata\b",
+    )
+
+    return any(
+        re.search(pattern, normalized)
+        for pattern in patterns
+    )
 
 
 def _day1_allowed_document_ids(query: str) -> set[str] | None:
-    """
-    Return an allowlist for known Day 1 queries.
-
-    An empty set means no verified, workflow-specific document is
-    currently approved for that query. None means use normal retrieval.
-    """
+    """Return an allowlist for known Day 1 queries."""
     normalized = " ".join(query.lower().split())
     compact = normalized.rstrip("?.! ")
 
@@ -51,8 +79,6 @@ def _day1_allowed_document_ids(query: str) -> set[str] | None:
     }:
         return {"faq-001"}
 
-    # This source is relevant to PDF reports but does not prove
-    # every individual PDF workflow step.
     if (
         "pdf" in normalized
         and ("report" in normalized or "generate" in normalized)
@@ -77,7 +103,7 @@ def _day1_allowed_document_ids(query: str) -> set[str] | None:
 
 
 class FaqRetriever:
-    """Retrieve relevant verified FAQs and product documentation."""
+    """Retrieve relevant verified and safe FAQ documents."""
 
     def __init__(
         self,
@@ -85,6 +111,9 @@ class FaqRetriever:
         relevance_threshold: float = RELEVANCE_THRESHOLD,
         model_name: str = DEFAULT_MODEL_NAME,
     ):
+        if not isinstance(relevance_threshold, (int, float)):
+            raise ValueError("relevance_threshold must be numeric.")
+
         if not 0.0 <= relevance_threshold <= 1.0:
             raise ValueError(
                 "relevance_threshold must be between 0 and 1."
@@ -94,8 +123,6 @@ class FaqRetriever:
         self.documents: list[Document] = []
         self.vector_store = None
 
-        # Compare against the immutable original path, not DOCS_PATH,
-        # which tests may temporarily monkeypatch.
         self._uses_default_knowledge_base = (
             Path(docs_path).resolve() == DEFAULT_DOCS_PATH.resolve()
         )
@@ -128,8 +155,15 @@ class FaqRetriever:
             if not title.strip() or not content.strip():
                 continue
 
-            # Never ground answers in unverified content.
             if item.get("verified") is not True:
+                continue
+
+            # Reject malicious instructions and sensitive content.
+            if not is_safe_knowledge_content(f"{title}\n{content}"):
+                logger.warning(
+                    "Unsafe knowledge-base document skipped: index=%s",
+                    index,
+                )
                 continue
 
             metadata = {
@@ -143,7 +177,6 @@ class FaqRetriever:
                 "verified": True,
             }
 
-            # Preserve available source attribution metadata.
             for field in ("url", "source_url", "section"):
                 value = item.get(field)
                 if isinstance(value, str) and value.strip():
@@ -172,7 +205,7 @@ class FaqRetriever:
             )
         else:
             logger.warning(
-                "No verified knowledge-base documents are available."
+                "No verified safe knowledge-base documents are available."
             )
 
     def retrieve(
@@ -180,26 +213,52 @@ class FaqRetriever:
         query: str,
         top_k: int = 3,
     ) -> list[dict[str, Any]]:
-        """Return relevant verified documents with source attribution."""
+        """Return relevant verified and safe documents with attribution."""
 
         if not isinstance(query, str) or not query.strip():
             return []
 
-        if top_k <= 0 or self.vector_store is None:
+        # Enforce query length before retrieval.
+        if len(query) > MAX_MESSAGE_CHARS:
+            return []
+
+        # Validate top_k type and supported range.
+        if (
+            isinstance(top_k, bool)
+            or not isinstance(top_k, int)
+            or not 1 <= top_k <= MAX_RETRIEVAL_TOP_K
+        ):
+            return []
+
+        if self.vector_store is None:
+            return []
+
+        # Block prompt injection, unsafe requests and out-of-scope queries.
+        guardrail_reason = get_input_guardrail(query)
+
+        if guardrail_reason is not None:
+            logger.warning(
+                "FAQ retrieval blocked by input guardrail: %s",
+                guardrail_reason,
+            )
             return []
 
         allowed_ids = _day1_allowed_document_ids(query)
 
-        # Block unsupported workflow queries when using the real
-        # application knowledge base.
+        targeted_udhar_query = (
+            self._uses_default_knowledge_base
+            and _is_payable_receivable_query(query)
+        )
+
+        if targeted_udhar_query:
+            allowed_ids = {"faq-udhar-guidance"}
+
         if (
             self._uses_default_knowledge_base
             and allowed_ids == set()
         ):
             return []
 
-        # Custom knowledge bases, including test fixtures, can use
-        # normal semantic retrieval when no allowlist is available.
         if (
             not self._uses_default_knowledge_base
             and allowed_ids == set()
@@ -228,9 +287,23 @@ class FaqRetriever:
             ):
                 continue
 
+            # Revalidate retrieved content before returning it.
+            if not is_safe_knowledge_content(document.page_content):
+                logger.warning(
+                    "Unsafe retrieved document rejected: %s",
+                    metadata.get("id", "unknown"),
+                )
+                continue
+
             score = float(score)
 
-            if score < self.relevance_threshold:
+            if (
+                score < self.relevance_threshold
+                and not (
+                    targeted_udhar_query
+                    and metadata["id"] == "faq-udhar-guidance"
+                )
+            ):
                 continue
 
             result = {

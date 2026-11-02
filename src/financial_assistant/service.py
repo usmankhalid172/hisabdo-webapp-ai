@@ -22,6 +22,17 @@ from src.errors import ServiceError
 from ..integration.backend_client import get_backend_client
 from ..schemas import ChatbotCitation, ChatbotRequest, ChatbotResponse
 from .llm_providers import get_llm_provider
+from .guardrails import (
+    get_input_guardrail,
+    get_history_guardrail,
+    contains_sensitive_output,
+    wrap_untrusted_context,
+    INJECTION_REPLY,
+    UNSAFE_REPLY,
+    OUT_OF_SCOPE_REPLY,
+    INVALID_INPUT_REPLY,
+    SENSITIVE_OUTPUT_REPLY,
+)
 from .faq_rag import get_retriever
 from .rag_pipeline import prepare_context, format_context_block
 from .intent_router import (
@@ -237,6 +248,13 @@ def _classify_small_talk(message: str) -> str | None:
     return None
 
 
+def _guard_generated_reply(reply: str) -> str:
+    if contains_sensitive_output(reply):
+        logger.warning("Generated response blocked by sensitive-output guardrail.")
+        return SENSITIVE_OUTPUT_REPLY
+    return reply
+
+
 def _general_response(
     request: ChatbotRequest,
     provider,
@@ -248,6 +266,7 @@ def _general_response(
         context=None,
         history=history,
     )
+    reply = _guard_generated_reply(reply)
 
     return ChatbotResponse(
         reply=reply,
@@ -438,6 +457,35 @@ def _build_verified_citations(matches: list) -> list[ChatbotCitation]:
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     """Handle a chatbot request while preserving financial data boundaries."""
 
+    # 0. Validate input and bounded conversation history before any provider call.
+    history = [item.model_dump() for item in request.history]
+
+    if not get_history_guardrail(history):
+        return ChatbotResponse(
+            reply=INVALID_INPUT_REPLY,
+            conversation_id=request.conversation_id,
+            intent="invalid_history",
+            tokens_used=0,
+            source="policy_guard",
+        )
+
+    guardrail = get_input_guardrail(request.message)
+    refusal_messages = {
+        "invalid_input": INVALID_INPUT_REPLY,
+        "prompt_injection": INJECTION_REPLY,
+        "unsafe_request": UNSAFE_REPLY,
+        "out_of_scope": OUT_OF_SCOPE_REPLY,
+    }
+    if guardrail:
+        logger.warning("Input blocked by guardrail: %s", guardrail)
+        return ChatbotResponse(
+            reply=refusal_messages[guardrail],
+            conversation_id=request.conversation_id,
+            intent=guardrail,
+            tokens_used=0,
+            source="policy_guard",
+        )
+
     # 1. Refuse requests for another person's financial data.
     if _mentions_third_party(request.message):
         return ChatbotResponse(
@@ -472,7 +520,6 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
         )
 
     provider = get_llm_provider()
-    history = [item.model_dump() for item in request.history]
 
     # 4. Recognize expense/income requests and continue pending follow-ups.
     transaction_response = _handle_transaction_intent(
@@ -507,12 +554,13 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
                 source="backend_unavailable",
             )
 
-        context = _format_financial_summary(summary)
+        context = wrap_untrusted_context(_format_financial_summary(summary))
         reply, tokens = provider.generate_reply(
             request.message,
             context=context,
             history=history,
         )
+        reply = _guard_generated_reply(reply)
 
         return ChatbotResponse(
             reply=reply,
@@ -568,7 +616,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
         )
 
     prepared_context = prepare_context(context_chunks)
-    context = format_context_block(prepared_context)
+    context = wrap_untrusted_context(format_context_block(prepared_context))
 
     # 9. Invalid or empty retrieved content must not trigger invented instructions.
     if not context:
@@ -583,6 +631,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
         context=context,
         history=history,
     )
+    reply = _guard_generated_reply(reply)
 
     # 11. Return only citations backed by retrieved source metadata.
     citations = _build_verified_citations(matches)
