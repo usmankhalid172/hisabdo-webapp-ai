@@ -1,0 +1,101 @@
+﻿Method,Query ID,Query,Rank,Chunk ID,Title,URL,TF-IDF Cosine Score,Judged Relevant,Expected Relevant IDs
+Global TF-IDF baseline,Q01,What jobs is XICTEK hiring for?,1,faq-195,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.182532,no,faq-74;faq-75;faq-76;faq-77;faq-78
+Global TF-IDF baseline,Q01,What jobs is XICTEK hiring for?,2,faq-562,Software and Technology Insights | XICTEK Systems,https://xicteksystems.com/blog,0.171378,no,faq-74;faq-75;faq-76;faq-77;faq-78
+Global TF-IDF baseline,Q01,What jobs is XICTEK hiring for?,3,faq-900,Business Finance Tips — Practical Advice for Entrepreneurs | HisabDo,https://hisabdo.app/blog/business-finance-tips,0.102448,no,faq-74;faq-75;faq-76;faq-77;faq-78
+Global TF-IDF baseline,Q01,What jobs is XICTEK hiring for?,4,faq-880,Bookkeeping Basics for Small Business Owners — Start Here | HisabDo,https://hisabdo.app/blog/bookkeeping-basics,0.081748,no,faq-74;faq-75;faq-76;faq-77;faq-78
+Global TF-IDF baseline,Q01,What jobs is XICTEK hiring for?,5,faq-323,How to Evaluate a Mobile App Development Company | XICTEK Systems,https://xicteksystems.com/blog/mobile-app-development-company,0.022359,no,faq-74;faq-75;faq-76;faq-77;faq-78
+Global TF-IDF baseline,Q02,Is there a senior developer position?,1,faq-75,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.26594,yes,faq-75
+Global TF-IDF baseline,Q02,Is there a senior developer position?,2,faq-74,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.250204,no,faq-75
+Global TF-IDF baseline,Q02,Is there a senior developer position?,3,faq-932,Receivables and Payables Explained — What Every Business Owner Must Know | HisabDo,https://hisabdo.app/blog/receivable-payable-explained,0.148734,no,faq-75
+Global TF-IDF baseline,Q02,Is there a senior developer position?,4,faq-76,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.132033,no,faq-75
+Global TF-IDF baseline,Q02,Is there a senior developer position?,5,faq-91,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.130745,no,faq-75
+Global TF-IDF baseline,Q03,What technologies are used for the mobile app role?,1,faq-34,Our Work | XICTEK Systems,https://xicteksystems.com/portfolio,0.288399,no,faq-76
+Global TF-IDF baseline,Q03,What technologies are used for the mobile app role?,2,faq-540,Services | XICTEK Systems,https://xicteksystems.com/services,0.250921,no,faq-76
+Global TF-IDF baseline,Q03,What technologies are used for the mobile app role?,3,faq-76,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.240361,yes,faq-76
+Global TF-IDF baseline,Q03,What technologies are used for the mobile app role?,4,faq-316,How to Evaluate a Mobile App Development Company | XICTEK Systems,https://xicteksystems.com/blog/mobile-app-development-company,0.238507,no,faq-76
+Global TF-IDF baseline,Q03,What technologies are used for the mobile app role?,5,faq-478,React Development Services for Product Teams | XICTEK Systems,https://xicteksystems.com/blog/react-development-services,0.206965,no,faq-76
+Global TF-IDF baseline,Q04,Does XICTEK need someone for cloud architecture?,1,faq-637,XICTEK Systems - Company Behind HisabDo | HisabDo,https://hisabdo.app/company,0.289761,no,faq-77
+Global TF-IDF baseline,Q04,Does XICTEK need someone for cloud architecture?,2,faq-271,Cloud Solutions and Azure Development Services | XICTEK Systems,https://xicteksystems.com/services/cloud-solutions,0.197492,no,faq-77
+Global TF-IDF baseline,Q04,Does XICTEK need someone for cloud architecture?,3,faq-145,Mian Usman Khalid | HisabDo,https://hisabdo.app/mian-usman-khalid,0.116279,no,faq-77
+Global TF-IDF baseline,Q04,Does XICTEK need someone for cloud architecture?,4,faq-438,SaaS Product Development from MVP to Growth | XICTEK Systems,https://xicteksystems.com/blog/saas-product-development,0.116228,no,faq-77
+Global TF-IDF baseline,Q04,Does XICTEK need someone for cloud architecture?,5,faq-46,Technology Strategy Pillar Guides | XICTEK Systems,https://xicteksystems.com/pillars,0.110014,no,faq-77
+Global TF-IDF baseline,Q05,Is there a UI/UX design position?,1,faq-552,Services | XICTEK Systems,https://xicteksystems.com/services,0.547868,no,faq-78
+Global TF-IDF baseline,Q05,Is there a UI/UX design position?,2,faq-78,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.308733,yes,faq-78
+Global TF-IDF baseline,Q05,Is there a UI/UX design position?,3,faq-74,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.195044,no,faq-78
+Global TF-IDF baseline,Q05,Is there a UI/UX design position?,4,faq-932,Receivables and Payables Explained — What Every Business Owner Must Know | HisabDo,https://hisabdo.app/blog/receivable-payable-explained,0.106347,no,faq-78
+Global TF-IDF baseline,Q05,Is there a UI/UX design position?,5,faq-139,About HisabDo App | HisabDo,https://hisabdo.app/about-app,0.077827,no,faq-78
+Global TF-IDF baseline,Q06,What internship opportunities are available?,1,faq-81,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.202494,no,faq-80;faq-89
+Global TF-IDF baseline,Q06,What internship opportunities are available?,2,faq-89,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.193261,yes,faq-80;faq-89
+Global TF-IDF baseline,Q06,What internship opportunities are available?,3,faq-185,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.186045,no,faq-80;faq-89
+Global TF-IDF baseline,Q06,What internship opportunities are available?,4,faq-95,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.170763,no,faq-80;faq-89
+Global TF-IDF baseline,Q06,What internship opportunities are available?,5,faq-188,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.166678,no,faq-80;faq-89
+Global TF-IDF baseline,Q07,What is the XICTEK work culture like?,1,faq-82,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.276329,yes,faq-82;faq-83
+Global TF-IDF baseline,Q07,What is the XICTEK work culture like?,2,faq-92,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.135977,no,faq-82;faq-83
+Global TF-IDF baseline,Q07,What is the XICTEK work culture like?,3,faq-38,Our Work | XICTEK Systems,https://xicteksystems.com/portfolio,0.125724,no,faq-82;faq-83
+Global TF-IDF baseline,Q07,What is the XICTEK work culture like?,4,faq-504,"Portal Development for Customers, Partners, and Teams | XICTEK Systems",https://xicteksystems.com/blog/portal-development,0.106242,no,faq-82;faq-83
+Global TF-IDF baseline,Q07,What is the XICTEK work culture like?,5,faq-264,Mobile App Development Services | XICTEK Systems,https://xicteksystems.com/services/mobile-app-development,0.103477,no,faq-82;faq-83
+Global TF-IDF baseline,Q08,What are the requirements for the internship?,1,faq-93,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.225295,yes,faq-93
+Global TF-IDF baseline,Q08,What are the requirements for the internship?,2,faq-89,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.164693,no,faq-93
+Global TF-IDF baseline,Q08,What are the requirements for the internship?,3,faq-185,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.158544,no,faq-93
+Global TF-IDF baseline,Q08,What are the requirements for the internship?,4,faq-95,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.145521,no,faq-93
+Global TF-IDF baseline,Q08,What are the requirements for the internship?,5,faq-96,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.130215,no,faq-93
+Global TF-IDF baseline,Q09,Is the old 2026 HisabDo internship still open?,1,faq-186,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.23684,no,faq-184;faq-185;faq-195
+Global TF-IDF baseline,Q09,Is the old 2026 HisabDo internship still open?,2,faq-184,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.183889,yes,faq-184;faq-185;faq-195
+Global TF-IDF baseline,Q09,Is the old 2026 HisabDo internship still open?,3,faq-185,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.147483,yes,faq-184;faq-185;faq-195
+Global TF-IDF baseline,Q09,Is the old 2026 HisabDo internship still open?,4,faq-195,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.143635,yes,faq-184;faq-185;faq-195
+Global TF-IDF baseline,Q09,Is the old 2026 HisabDo internship still open?,5,faq-89,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.134203,no,faq-184;faq-185;faq-195
+Global TF-IDF baseline,Q10,What skills should a cloud architect have?,1,faq-77,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.234725,yes,faq-77
+Global TF-IDF baseline,Q10,What skills should a cloud architect have?,2,faq-74,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.163132,no,faq-77
+Global TF-IDF baseline,Q10,What skills should a cloud architect have?,3,faq-735,Software Development Services by XICTEK Systems | XICTEK Systems,https://xicteksystems.com/pillars/software-development-services,0.103504,no,faq-77
+Global TF-IDF baseline,Q10,What skills should a cloud architect have?,4,faq-751,SaaS Development Services from Product Idea to Scale | XICTEK Systems,https://xicteksystems.com/pillars/saas-development,0.093824,no,faq-77
+Global TF-IDF baseline,Q10,What skills should a cloud architect have?,5,faq-430,SaaS Product Development from MVP to Growth | XICTEK Systems,https://xicteksystems.com/blog/saas-product-development,0.092073,no,faq-77
+Careers metadata-filtered TF-IDF,Q01,What jobs is XICTEK hiring for?,1,faq-79,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.014172,no,faq-74;faq-75;faq-76;faq-77;faq-78
+Careers metadata-filtered TF-IDF,Q01,What jobs is XICTEK hiring for?,2,faq-89,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.013372,no,faq-74;faq-75;faq-76;faq-77;faq-78
+Careers metadata-filtered TF-IDF,Q01,What jobs is XICTEK hiring for?,3,faq-81,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.01332,no,faq-74;faq-75;faq-76;faq-77;faq-78
+Careers metadata-filtered TF-IDF,Q01,What jobs is XICTEK hiring for?,4,faq-91,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.013204,no,faq-74;faq-75;faq-76;faq-77;faq-78
+Careers metadata-filtered TF-IDF,Q01,What jobs is XICTEK hiring for?,5,faq-82,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.012738,no,faq-74;faq-75;faq-76;faq-77;faq-78
+Careers metadata-filtered TF-IDF,Q02,Is there a senior developer position?,1,faq-75,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.26594,yes,faq-75
+Careers metadata-filtered TF-IDF,Q02,Is there a senior developer position?,2,faq-74,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.250204,no,faq-75
+Careers metadata-filtered TF-IDF,Q02,Is there a senior developer position?,3,faq-76,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.132033,no,faq-75
+Careers metadata-filtered TF-IDF,Q02,Is there a senior developer position?,4,faq-91,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.130745,no,faq-75
+Careers metadata-filtered TF-IDF,Q02,Is there a senior developer position?,5,faq-77,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.0,no,faq-75
+Careers metadata-filtered TF-IDF,Q03,What technologies are used for the mobile app role?,1,faq-76,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.240361,yes,faq-76
+Careers metadata-filtered TF-IDF,Q03,What technologies are used for the mobile app role?,2,faq-77,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.13583,no,faq-76
+Careers metadata-filtered TF-IDF,Q03,What technologies are used for the mobile app role?,3,faq-75,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.133898,no,faq-76
+Careers metadata-filtered TF-IDF,Q03,What technologies are used for the mobile app role?,4,faq-78,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.073018,no,faq-76
+Careers metadata-filtered TF-IDF,Q03,What technologies are used for the mobile app role?,5,faq-74,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.070301,no,faq-76
+Careers metadata-filtered TF-IDF,Q04,Does XICTEK need someone for cloud architecture?,1,faq-77,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.059915,yes,faq-77
+Careers metadata-filtered TF-IDF,Q04,Does XICTEK need someone for cloud architecture?,2,faq-74,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.038715,no,faq-77
+Careers metadata-filtered TF-IDF,Q04,Does XICTEK need someone for cloud architecture?,3,faq-81,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.0334,no,faq-77
+Careers metadata-filtered TF-IDF,Q04,Does XICTEK need someone for cloud architecture?,4,faq-82,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.031939,no,faq-77
+Careers metadata-filtered TF-IDF,Q04,Does XICTEK need someone for cloud architecture?,5,faq-83,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.029091,no,faq-77
+Careers metadata-filtered TF-IDF,Q05,Is there a UI/UX design position?,1,faq-78,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.308733,yes,faq-78
+Careers metadata-filtered TF-IDF,Q05,Is there a UI/UX design position?,2,faq-74,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.195044,no,faq-78
+Careers metadata-filtered TF-IDF,Q05,Is there a UI/UX design position?,3,faq-75,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.0,no,faq-78
+Careers metadata-filtered TF-IDF,Q05,Is there a UI/UX design position?,4,faq-76,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.0,no,faq-78
+Careers metadata-filtered TF-IDF,Q05,Is there a UI/UX design position?,5,faq-77,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.0,no,faq-78
+Careers metadata-filtered TF-IDF,Q06,What internship opportunities are available?,1,faq-81,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.202494,no,faq-80;faq-89
+Careers metadata-filtered TF-IDF,Q06,What internship opportunities are available?,2,faq-89,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.193261,yes,faq-80;faq-89
+Careers metadata-filtered TF-IDF,Q06,What internship opportunities are available?,3,faq-95,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.170763,no,faq-80;faq-89
+Careers metadata-filtered TF-IDF,Q06,What internship opportunities are available?,4,faq-96,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.152802,no,faq-80;faq-89
+Careers metadata-filtered TF-IDF,Q06,What internship opportunities are available?,5,faq-80,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.143446,yes,faq-80;faq-89
+Careers metadata-filtered TF-IDF,Q07,What is the XICTEK work culture like?,1,faq-82,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.276329,yes,faq-82;faq-83
+Careers metadata-filtered TF-IDF,Q07,What is the XICTEK work culture like?,2,faq-92,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.135977,no,faq-82;faq-83
+Careers metadata-filtered TF-IDF,Q07,What is the XICTEK work culture like?,3,faq-83,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.08794,yes,faq-82;faq-83
+Careers metadata-filtered TF-IDF,Q07,What is the XICTEK work culture like?,4,faq-90,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.070838,no,faq-82;faq-83
+Careers metadata-filtered TF-IDF,Q07,What is the XICTEK work culture like?,5,faq-79,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.014715,no,faq-82;faq-83
+Careers metadata-filtered TF-IDF,Q08,What are the requirements for the internship?,1,faq-93,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.225295,yes,faq-93
+Careers metadata-filtered TF-IDF,Q08,What are the requirements for the internship?,2,faq-89,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.164693,no,faq-93
+Careers metadata-filtered TF-IDF,Q08,What are the requirements for the internship?,3,faq-95,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.145521,no,faq-93
+Careers metadata-filtered TF-IDF,Q08,What are the requirements for the internship?,4,faq-96,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.130215,no,faq-93
+Careers metadata-filtered TF-IDF,Q08,What are the requirements for the internship?,5,faq-80,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.122242,no,faq-93
+Careers metadata-filtered TF-IDF,Q09,Is the old 2026 HisabDo internship still open?,1,faq-186,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.23684,no,faq-184;faq-185;faq-195
+Careers metadata-filtered TF-IDF,Q09,Is the old 2026 HisabDo internship still open?,2,faq-184,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.183889,yes,faq-184;faq-185;faq-195
+Careers metadata-filtered TF-IDF,Q09,Is the old 2026 HisabDo internship still open?,3,faq-185,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.147483,yes,faq-184;faq-185;faq-195
+Careers metadata-filtered TF-IDF,Q09,Is the old 2026 HisabDo internship still open?,4,faq-195,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.143635,yes,faq-184;faq-185;faq-195
+Careers metadata-filtered TF-IDF,Q09,Is the old 2026 HisabDo internship still open?,5,faq-187,Careers at HisabDo | HisabDo,https://hisabdo.app/careers,0.078331,no,faq-184;faq-185;faq-195
+Careers metadata-filtered TF-IDF,Q10,What skills should a cloud architect have?,1,faq-77,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.234725,yes,faq-77
+Careers metadata-filtered TF-IDF,Q10,What skills should a cloud architect have?,2,faq-74,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.163132,no,faq-77
+Careers metadata-filtered TF-IDF,Q10,What skills should a cloud architect have?,3,faq-93,Internship Program | XICTEK Systems,https://xicteksystems.com/careers/internship,0.044633,no,faq-77
+Careers metadata-filtered TF-IDF,Q10,What skills should a cloud architect have?,4,faq-75,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.0,no,faq-77
+Careers metadata-filtered TF-IDF,Q10,What skills should a cloud architect have?,5,faq-76,Careers | XICTEK Systems,https://xicteksystems.com/careers,0.0,no,faq-77

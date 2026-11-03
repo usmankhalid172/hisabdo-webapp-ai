@@ -1,0 +1,7 @@
+﻿Component / metric,Actual baseline,Proposed target / alert,Measurement rule
+End-to-end latency (manual browser stopwatch),Mean 1370 ms; median 1000 ms; nearest-rank p95 3000 ms; max 3000 ms,"p50 ≤1,500 ms; p95 ≤4,000 ms",10 user-recorded wall-clock observations.
+Retrieval latency,Not separately measured,p95 ≤500 ms,Requires server-side stage instrumentation.
+Semantic reranking,Not separately measured,p95 ≤700 ms,Offline benchmark used TF-IDF only.
+Generation latency,Not separately measured,"p95 ≤3,000 ms",Requires server-side instrumentation.
+Queue/network overhead,Not separately measured,"Investigate >1,000 ms p95",Cannot isolate from manual timing.
+Technical errors,0/10 reported,<1%,Manual observations only.

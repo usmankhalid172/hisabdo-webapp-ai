@@ -1,0 +1,13 @@
+﻿Metric,Actual result,Proposed initial target,Notes
+Offline retrieval benchmark coverage,10/10 queries evaluated against 976 indexed chunks,10/10,Local repository snapshot benchmark; not production trace.
+Hit Rate@5 - global baseline,80%,≥90%,8/10 queries had a judged-relevant result in top five.
+Precision@5 - global baseline,20%,≥70%,10 relevant chunks in 50 top-five slots.
+MRR@5 - global baseline,0.583,≥0.80,Mean reciprocal rank of first relevant chunk.
+Hit Rate@5 - Careers-filtered,90%,≥90%,9/10 queries hit.
+Precision@5 - Careers-filtered,26%,≥70%,13 relevant chunks in 50 top-five slots.
+MRR@5 - Careers-filtered,0.800,≥0.80,Mean reciprocal rank of first relevant chunk.
+Live chatbot answer quality,1 pass; 6 partial; 3 fail,Improve pass rate,Qualitative review of 10 manually run website questions.
+End-to-end latency,Mean 1370 ms; median 1000 ms; nearest-rank p95 3000 ms,"p50 ≤1,500 ms; p95 ≤4,000 ms",10 manual stopwatch observations.
+Technical errors reported,0/10 (0%),<1%,No technical errors reported; not a server/API rate.
+Retrieval/rerank/generation stage latency,Not measured,Instrument all stages,No production traces available.
+Sensitive telemetry payloads,Not inspected,0 sensitive fields,No live logs inspected; privacy spec is proposed.

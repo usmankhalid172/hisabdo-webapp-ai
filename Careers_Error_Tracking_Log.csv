@@ -1,0 +1,8 @@
+﻿Issue ID,Test / area,Observed issue,Evidence status,Severity,Recommended action
+E01,Q04 Cloud role,Cloud skills/status omitted,Observed live answer,High,Return role-specific Azure/AWS/DevOps/Terraform record.
+E02,Q04 citation,Unrelated HisabDo receivables/payables article cited,Observed live answer,High,Enforce Careers source scope.
+E03,Q08 mixed intent,Internship duration omitted,Observed live answer,Medium,Split and answer both intents.
+E04,Q09 historical internship,Application fields returned instead of status,Observed live answer,High,Apply cohort/date status handling.
+E05,Q02 senior role,Technologies returned; open status/qualifications unclear,Observed live answer,Medium,Answer each sub-question if supported.
+E06,Q03 mobile role,General service/blog sources used instead of job-specific source,Observed live answer,Medium,Prefer Careers role record.
+E07,Q10 work culture,Generic culture answer with little intern-specific detail,Observed live answer,Low,Use internship/culture records and disclose gaps.
