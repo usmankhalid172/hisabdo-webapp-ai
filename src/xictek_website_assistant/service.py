@@ -12,8 +12,12 @@ for why that matters for prompt-injection resistance.
 from __future__ import annotations
 
 import re
+import time
 from functools import lru_cache
 
+import httpx
+
+from ..logging_config import logger
 from .config import get_xictek_settings
 from .embeddings import embed_query
 from .guardrails import (
@@ -74,10 +78,6 @@ def _load_store() -> VectorStore:
     return VectorStore.load()
 
 
-import logging as _logging
-
-_llm_logger = _logging.getLogger(__name__)
-
 LLM_UNAVAILABLE_MESSAGE = (
     "Sorry, I'm getting a lot of questions right now and couldn't finish that answer. "
     "Please try again in a moment, or reach the XICTEK team through the Contact page."
@@ -99,10 +99,71 @@ _PORTFOLIO_URL_PREFIX = "https://xicteksystems.com/portfolio"
 
 
 def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
+    started = time.perf_counter()
+    metrics = {
+        "provider": "not_called",
+        "provider_called": False,
+        "query_outcome": "error",
+        "query_success": False,
+        "response_completed": False,
+        "portfolio_query": False,
+        "retrieved_chunks": 0,
+        "tokens_used": None,
+        "input_tokens": None,
+        "completion_tokens": None,
+        "total_tokens": None,
+        "usage_basis": "unavailable",
+        "retrieval_duration_ms": 0.0,
+        "provider_duration_ms": 0.0,
+        "total_duration_ms": 0.0,
+        "error_category": None,
+        "error_stage": "validation",
+    }
+    try:
+        return _handle_chat(request, metrics)
+    except Exception as exc:
+        metrics["query_outcome"] = "error"
+        stage = metrics["error_stage"]
+        metrics["error_category"] = _error_category(
+            exc, stage if isinstance(stage, str) else "request_processing"
+        )
+        raise
+    finally:
+        metrics["total_duration_ms"] = round((time.perf_counter() - started) * 1000, 2)
+        logger.info("xictek_query_metrics", extra=metrics)
+
+
+def _error_category(exc: Exception, stage: str) -> str:
+    if isinstance(exc, httpx.TimeoutException):
+        return "provider_timeout" if stage.startswith("provider") else "request_timeout"
+    if isinstance(exc, httpx.HTTPStatusError):
+        status = exc.response.status_code
+        if status == 429:
+            return "provider_rate_limited"
+        if status >= 500:
+            return "provider_unavailable"
+        return "provider_http_error"
+    if stage == "provider_setup":
+        return "provider_configuration_error"
+    if stage == "provider_call":
+        return "provider_error"
+    if stage == "retrieval":
+        return "retrieval_error"
+    return "request_processing_error"
+
+
+def _handle_chat(
+    request: XictekChatRequest, metrics: dict[str, object]
+) -> XictekChatResponse:
     settings = get_xictek_settings()
     message = request.message
 
     if exceeds_length_limit(message, settings.max_message_chars):
+        metrics.update(
+            query_outcome="declined_out_of_scope",
+            response_completed=True,
+            error_stage=None,
+        )
         return XictekChatResponse(
             reply=LENGTH_REFUSAL_MESSAGE,
             conversation_id=request.conversation_id,
@@ -111,6 +172,11 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
 
     if looks_like_injection_or_extraction(message):
         # Deterministic refusal — never reaches the LLM.
+        metrics.update(
+            query_outcome="declined_prompt_injection",
+            response_completed=True,
+            error_stage=None,
+        )
         return XictekChatResponse(
             reply=INJECTION_REFUSAL_MESSAGE,
             conversation_id=request.conversation_id,
@@ -119,6 +185,11 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
 
     small_talk = _classify_small_talk(message)
     if small_talk:
+        metrics.update(
+            query_outcome="small_talk",
+            response_completed=True,
+            error_stage=None,
+        )
         return XictekChatResponse(
             reply=_SMALL_TALK_REPLIES[small_talk],
             conversation_id=request.conversation_id,
@@ -127,21 +198,35 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
             tokens_used=0,
         )
 
-    store = _load_store()
-    matches = []
     portfolio_query = bool(_PORTFOLIO_QUERY_RE.search(message))
-    if len(store) > 0:
-        query_vector = embed_query(message)
-        matches = store.query(
-            query_vector,
-            top_k=settings.top_k,
-            relevance_threshold=settings.relevance_threshold,
-            url_prefix=_PORTFOLIO_URL_PREFIX if portfolio_query else None,
+    metrics["portfolio_query"] = portfolio_query
+    metrics["error_stage"] = "retrieval"
+    retrieval_started = time.perf_counter()
+    try:
+        store = _load_store()
+        matches = []
+        if len(store) > 0:
+            query_vector = embed_query(message)
+            matches = store.query(
+                query_vector,
+                top_k=settings.portfolio_top_k if portfolio_query else settings.top_k,
+                relevance_threshold=settings.relevance_threshold,
+                url_prefix=_PORTFOLIO_URL_PREFIX if portfolio_query else None,
+            )
+    finally:
+        metrics["retrieval_duration_ms"] = round(
+            (time.perf_counter() - retrieval_started) * 1000, 2
         )
+    metrics["retrieved_chunks"] = len(matches)
 
     # Never ask the model to answer from conversation history or prior
     # assumptions when retrieval found no supporting public source.
     if not matches:
+        metrics.update(
+            query_outcome="no_evidence",
+            response_completed=True,
+            error_stage=None,
+        )
         return XictekChatResponse(
             reply=NO_GROUNDED_ANSWER_MESSAGE,
             conversation_id=request.conversation_id,
@@ -154,11 +239,26 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
     # Portfolio answers must not inherit client-supplied or spoofed history.
     history = [] if portfolio_query else [h.model_dump() for h in request.history]
 
+    metrics["error_stage"] = "provider_setup"
     provider = get_llm_provider()
+    metrics["provider"] = getattr(
+        provider, "provider_name", type(provider).__name__.lower()
+    )
+    metrics["provider_called"] = True
+    metrics["error_stage"] = "provider_call"
+    provider_started = time.perf_counter()
     try:
         reply, tokens = provider.generate_reply(message, context=context, history=history)
-    except Exception:  # rate limit (429), timeout, provider outage -- degrade, don't 500
-        _llm_logger.exception("xictek_llm_call_failed")
+    except Exception as exc:  # rate limit (429), timeout, provider outage -- degrade, don't 500
+        metrics["provider_duration_ms"] = round(
+            (time.perf_counter() - provider_started) * 1000, 2
+        )
+        metrics.update(
+            query_outcome="provider_error",
+            error_category=_error_category(exc, "provider_call"),
+            response_completed=True,
+            error_stage="provider_call",
+        )
         return XictekChatResponse(
             reply=LLM_UNAVAILABLE_MESSAGE,
             conversation_id=request.conversation_id,
@@ -167,6 +267,17 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
             tokens_used=0,
         )
 
+    metrics["provider_duration_ms"] = round(
+        (time.perf_counter() - provider_started) * 1000, 2
+    )
+    metrics.update(
+        query_outcome="answered",
+        query_success=True,
+        response_completed=True,
+        tokens_used=tokens,
+        error_stage=None,
+    )
+    metrics.update(getattr(provider, "usage_metrics", {}))
     sources = [
         SourceRef(title=m.chunk.title, url=m.chunk.url, score=round(m.score, 4))
         for m in matches

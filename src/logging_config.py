@@ -17,7 +17,30 @@ class JsonFormatter(logging.Formatter):
             "message": record.getMessage(),
         }
         # request-scoped fields attached via `extra={...}`
-        for key in ("request_id", "path", "method", "status_code", "duration_ms"):
+        for key in (
+            "request_id",
+            "path",
+            "method",
+            "status_code",
+            "duration_ms",
+            "provider",
+            "provider_called",
+            "query_outcome",
+            "query_success",
+            "response_completed",
+            "portfolio_query",
+            "retrieved_chunks",
+            "tokens_used",
+            "input_tokens",
+            "completion_tokens",
+            "total_tokens",
+            "usage_basis",
+            "retrieval_duration_ms",
+            "provider_duration_ms",
+            "total_duration_ms",
+            "error_category",
+            "error_stage",
+        ):
             value = getattr(record, key, None)
             if value is not None:
                 payload[key] = value

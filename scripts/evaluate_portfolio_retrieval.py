@@ -9,10 +9,14 @@ from __future__ import annotations
 import json
 import math
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FAQ = ROOT / "src/xictek_website_assistant/data/xictek_faq_raw.jsonl"
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(errors="backslashreplace")
 
 QUERIES = [
     ("What is HisabDo?", ("offline-first digital ledger",)),
@@ -116,6 +120,41 @@ def metrics(docs, k):
                 mrr_sum += 1 / hits[0] if hits else 0
             n = len(QUERIES)
             print(f"top_k={top_k} threshold={threshold:.2f} hit={hit/n:.3f} precision={precision_sum/n:.3f} MRR={mrr_sum/n:.3f}")
+
+    print("\nPortfolio routing before/after scorecard (hybrid, top_k=2):")
+    for label, candidates, threshold in (
+        ("before: all sources", docs, 0.0),
+        ("after: portfolio only", portfolio_docs, 0.15),
+    ):
+        hit = precision_sum = mrr_sum = 0.0
+        for query, expected_bits in QUERIES:
+            relevant = {
+                d["id"]
+                for d in candidates
+                if any(bit.lower() in d["text"].lower() for bit in expected_bits)
+            }
+            ranked = [
+                (score, doc)
+                for score, doc in rank(candidates, query, "hybrid")
+                if score >= threshold
+            ][:2]
+            hits = [
+                position
+                for position, (_, doc) in enumerate(ranked, 1)
+                if doc["id"] in relevant
+            ]
+            hit += bool(hits)
+            precision_sum += sum(
+                1 for _, doc in ranked if doc["id"] in relevant
+            ) / 2
+            mrr_sum += 1 / hits[0] if hits else 0
+        query_count = len(QUERIES)
+        print(
+            f"{label}: hit@2={hit/query_count:.3f} "
+            f"precision@2={precision_sum/query_count:.3f} "
+            f"MRR={mrr_sum/query_count:.3f}"
+        )
+
     print("\nPer-query reranked top passages:")
     for query, expected in QUERIES:
         results = rank(docs, query, "reranked")[:k]

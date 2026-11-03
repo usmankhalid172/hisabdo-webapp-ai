@@ -68,3 +68,35 @@ def test_raises_clear_error_when_groq_selected_with_no_key_anywhere(monkeypatch)
     monkeypatch.delenv("XICTEK_GROQ_API_KEY", raising=False)
     with pytest.raises(ServiceError):
         get_llm_provider()
+
+
+def test_groq_provider_exposes_safe_token_usage_metrics(monkeypatch):
+    class Response:
+        def json(self):
+            return {
+                "choices": [{"message": {"content": "Portfolio answer"}}],
+                "usage": {
+                    "prompt_tokens": 12,
+                    "completion_tokens": 4,
+                    "total_tokens": 16,
+                },
+            }
+
+    monkeypatch.setattr(
+        "src.xictek_website_assistant.llm_client._post_with_retry",
+        lambda *args, **kwargs: Response(),
+    )
+    provider = GroqLLMProvider("test-key")
+
+    reply, tokens = provider.generate_reply(
+        "Tell me about the portfolio", context="Public project facts."
+    )
+
+    assert reply == "Portfolio answer"
+    assert tokens == 4
+    assert provider.usage_metrics == {
+        "input_tokens": 12,
+        "completion_tokens": 4,
+        "total_tokens": 16,
+        "usage_basis": "provider_reported",
+    }

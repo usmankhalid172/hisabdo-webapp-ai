@@ -56,6 +56,23 @@ XictekChatResponse { reply, sources, intent, tokens_used }
 same `X-Internal-Token` auth as the rest of this service
 (`src/security.py`) plus its own per-IP rate limit (`rate_limit.py`).
 
+Portfolio and case-study questions are filtered to the public portfolio
+source before ranking and use `portfolio_top_k=2`; other questions keep
+the general `top_k` setting. The separate portfolio limit follows the
+precision-oriented point in the lexical retrieval evaluation and keeps
+irrelevant context out of the generation prompt. The benchmark's hybrid
+score threshold is not the vector store's cosine threshold and must not
+be copied into `relevance_threshold`.
+
+Each chat request emits a `xictek_query_metrics` JSON log with provider,
+query outcome, grounded-answer success, retrieved chunk count, retrieval
+and provider latency, completion/input/total token usage when available,
+and a bounded error category. Mock output usage is labeled as a word
+estimate; Groq usage is labeled provider-reported. Logs intentionally
+exclude the visitor question, conversation history/ID, retrieved text,
+provider response, IP address, and exception details. Dollar cost is not
+estimated without the provider's applicable billing rates.
+
 ### Why guardrails run *before* the LLM
 
 `SYSTEM_PROMPT` tells the model to refuse instruction-override /
@@ -215,7 +232,8 @@ root for the current list. Notable ones:
 | `XICTEK_GROQ_API_KEY` | *(unset — falls back to `GROQ_API_KEY`)* | Optional: give this module its own Groq key, separate from HisabDo's chatbot |
 | `XICTEK_LLM_PROVIDER` | *(unset — falls back to `LLM_PROVIDER`)* | Optional: override the provider (e.g. `groq`) independent of the shared setting |
 | `XICTEK_EMBEDDING_MODEL` | `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` | Local embedding model |
-| `XICTEK_TOP_K` | `4` | Chunks retrieved per query |
+| `XICTEK_TOP_K` | `8` | General-query chunks retrieved |
+| `XICTEK_PORTFOLIO_TOP_K` | `2` | Portfolio/case-study chunks retrieved |
 | `XICTEK_RELEVANCE_THRESHOLD` | `0.35` | Minimum cosine similarity to count as a match |
 | `XICTEK_ALLOWED_CRAWL_DOMAINS` | xicteksystems.com, hisabdo.app (+ `www.`) | `ingest.py`'s crawl allow-list |
 | `XICTEK_RATE_LIMIT` | `20/minute` | Per-IP rate limit on `POST /chat` |

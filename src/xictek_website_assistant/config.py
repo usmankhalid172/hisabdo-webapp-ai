@@ -47,6 +47,7 @@ class XictekSettings(BaseSettings):
     chunk_size_chars: int = 1200
     chunk_overlap_chars: int = 200
     top_k: int = 8
+    portfolio_top_k: int = 2
     relevance_threshold: float = 0.20
 
     # Where the built index (embeddings.npy + chunks.json) lives. The

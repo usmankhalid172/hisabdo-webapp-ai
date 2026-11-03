@@ -31,6 +31,12 @@ _MAX_ATTEMPTS = 2
 _RETRY_DELAY_SECONDS = 1.5
 
 
+def _token_count(value: object) -> int | None:
+    if isinstance(value, int) and not isinstance(value, bool) and value >= 0:
+        return value
+    return None
+
+
 def _post_with_retry(url: str, **kwargs) -> httpx.Response:
     last_exc: Exception | None = None
     for attempt in range(1, _MAX_ATTEMPTS + 1):
@@ -54,6 +60,15 @@ def _post_with_retry(url: str, **kwargs) -> httpx.Response:
 
 
 class LLMProvider(ABC):
+    provider_name = "unknown"
+
+    def __init__(self) -> None:
+        self._usage_metrics: dict[str, int | str | None] = {}
+
+    @property
+    def usage_metrics(self) -> dict[str, int | str | None]:
+        return self._usage_metrics.copy()
+
     @abstractmethod
     def generate_reply(
         self,
@@ -68,6 +83,11 @@ class LLMProvider(ABC):
 class MockLLMProvider(LLMProvider):
     """Deterministic, offline provider — default until GROQ_API_KEY / LLM_PROVIDER
     is configured, so the endpoint is demoable via Swagger with zero setup."""
+
+    provider_name = "mock"
+
+    def __init__(self) -> None:
+        super().__init__()
 
     def generate_reply(
         self,
@@ -85,7 +105,14 @@ class MockLLMProvider(LLMProvider):
                 "I don't have that in the current XICTEK knowledge base yet. "
                 "Try rephrasing, or ask about our services, technologies, HisabDo, careers, or blog."
             )
-        return reply, len(reply.split())
+        completion_tokens = len(reply.split())
+        self._usage_metrics = {
+            "input_tokens": None,
+            "completion_tokens": completion_tokens,
+            "total_tokens": None,
+            "usage_basis": "mock_word_estimate",
+        }
+        return reply, completion_tokens
 
 
 class GroqLLMProvider(LLMProvider):
@@ -93,7 +120,10 @@ class GroqLLMProvider(LLMProvider):
     API key — either XICTEK_GROQ_API_KEY (this module's own key, if set)
     or the shared GROQ_API_KEY as a fallback."""
 
+    provider_name = "groq"
+
     def __init__(self, api_key: str):
+        super().__init__()
         self._api_key = api_key
 
     def generate_reply(
@@ -119,7 +149,14 @@ class GroqLLMProvider(LLMProvider):
         )
         data = resp.json()
         reply = data["choices"][0]["message"]["content"]
-        tokens = data.get("usage", {}).get("completion_tokens")
+        usage = data.get("usage") or {}
+        self._usage_metrics = {
+            "input_tokens": _token_count(usage.get("prompt_tokens")),
+            "completion_tokens": _token_count(usage.get("completion_tokens")),
+            "total_tokens": _token_count(usage.get("total_tokens")),
+            "usage_basis": "provider_reported" if usage else "unavailable",
+        }
+        tokens = _token_count(usage.get("completion_tokens"))
         return reply, tokens
 
 
