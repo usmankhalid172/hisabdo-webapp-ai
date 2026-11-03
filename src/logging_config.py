@@ -17,12 +17,12 @@ class JsonFormatter(logging.Formatter):
             "message": record.getMessage(),
         }
         # request-scoped fields attached via `extra={...}`
-        for key in ("request_id", "path", "method", "status_code", "duration_ms"):
+        for key in ("request_id", "path", "method", "status_code", "duration_ms", "intent", "source", "outcome", "retrieved_source_id", "latency_ms", "tokens_used", "error_category"):
             value = getattr(record, key, None)
             if value is not None:
                 payload[key] = value
-        if record.exc_info:
-            payload["exc_info"] = self.formatException(record.exc_info)
+        if record.exc_info and record.exc_info[0]:
+            payload["error_category"] = record.exc_info[0].__name__
         return json.dumps(payload)
 
 

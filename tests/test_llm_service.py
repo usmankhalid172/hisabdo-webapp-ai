@@ -146,3 +146,24 @@ def test_leaked_response_triggers_fallback_not_crash():
     config = LLMConfig(max_retries=0)
     result = get_financial_assistant_response("What is my balance?", config=config, client=client)
     assert "trouble answering" in result.lower()
+
+def test_fallback_log_does_not_expose_reason(caplog):
+    secret = "sk-test-secret-financial-account-12345"
+    get_fallback_response(reason=secret)
+    assert secret not in caplog.text
+
+
+def test_api_error_log_does_not_expose_exception_message(caplog):
+    secret = "sk-test-secret-financial-account-12345"
+    client = MagicMock()
+    client.chat.completions.create.side_effect = LLMRequestError(secret)
+    config = LLMConfig(max_retries=0)
+
+    result = get_financial_assistant_response(
+        "How much did I spend?", config=config, client=client
+    )
+
+    assert "trouble answering" in result.lower()
+    assert secret not in caplog.text
+    assert "LLMRequestError" in caplog.text
+

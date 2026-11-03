@@ -1,5 +1,6 @@
 
 import json
+import logging
 import os
 from functools import lru_cache
 from pathlib import Path
@@ -11,6 +12,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 DOCS_PATH = Path(__file__).resolve().parents[2] / "data" / "faq_docs.json"
 RELEVANCE_THRESHOLD = 0.30
 EMBEDDING_MODEL = "text-embedding-3-small"
+
+logger = logging.getLogger("hisabdo.ai.financial_assistant.faq_rag")
 
 
 class FaqRetriever:
@@ -40,7 +43,11 @@ class FaqRetriever:
                 self._embeddings = self._normalize(
                     [item.embedding for item in response.data]
                 )
-            except Exception:
+            except Exception as exc:
+                logger.warning(
+                    "Embedding initialization failed; using TF-IDF fallback (error_type=%s).",
+                    type(exc).__name__,
+                )
                 self._client = None
                 self._embeddings = None
 
@@ -90,7 +97,11 @@ class FaqRetriever:
                     [response.data[0].embedding]
                 )[0]
                 scores = self._embeddings @ query_vector
-            except Exception:
+            except Exception as exc:
+                logger.warning(
+                    "Query embedding failed; returning no FAQ matches (error_type=%s).",
+                    type(exc).__name__,
+                )
                 return []
         else:
             query_vector = self._vectorizer.transform([query.strip()])

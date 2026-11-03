@@ -8,6 +8,7 @@ about the user's own numbers, this routes to the (mocked) backend financial
 API instead of the knowledge base.
 """
 import re
+import time
 
 from .intent_router import ConversationState, handle_turn
 
@@ -15,6 +16,7 @@ from ..integration.backend_client import get_backend_client
 from ..schemas import ChatbotRequest, ChatbotResponse
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
+from ..logging_config import logger
 
 # Deliberately simple keyword intent check — good enough for a POC boundary
 # demonstration; a production version would use a real intent classifier.
@@ -133,7 +135,7 @@ def _classify_small_talk(message: str) -> str | None:
     return None
 
 
-def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
+def _handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     if _mentions_third_party(request.message):
         # Deterministic refusal — never reaches the LLM, so this cannot be
         # talked around by a prompt-injection / instruction-override attempt.
@@ -255,6 +257,10 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
 
     matches = get_retriever().retrieve(request.message, top_k=1)
     if matches:
+        logger.info("financial_rag_retrieval", extra={
+            "retrieved_source_id": matches[0].get("id", "unknown"),
+            "outcome": "matched",
+        })
         context = matches[0]["text"]
         reply, tokens = provider.generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
         return ChatbotResponse(
@@ -265,6 +271,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="rag",
         )
 
+    logger.info("financial_rag_retrieval", extra={"outcome": "no_match"})
     reply, tokens = provider.generate_reply(request.message, context=None, history=[h.model_dump() for h in request.history])
     return ChatbotResponse(
         reply=reply,
@@ -273,3 +280,25 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
         tokens_used=tokens,
         source="llm_general",
     )
+
+
+def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
+    """Run a chat flow and log metadata only; never log user content."""
+    started = time.perf_counter()
+    try:
+        response = _handle_chat(request)
+        logger.info("financial_chat_completed", extra={
+            "intent": response.intent,
+            "source": response.source,
+            "outcome": "success",
+            "latency_ms": round((time.perf_counter() - started) * 1000, 2),
+            "tokens_used": response.tokens_used,
+        })
+        return response
+    except Exception as exc:
+        logger.warning("financial_chat_failed", extra={
+            "outcome": "error",
+            "latency_ms": round((time.perf_counter() - started) * 1000, 2),
+            "error_category": type(exc).__name__,
+        })
+        raise

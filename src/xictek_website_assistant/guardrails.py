@@ -64,6 +64,7 @@ _SECRET_PROBE_PATTERNS = [
     r"\benv(ironment)?[ _-]?var(iable)?s?\b",
     r"\.env\b",
     r"\baccess token\b",
+    r"\bwhat\b.{0,40}\b(credentials?|passwords?|api keys?|tokens?)\b.{0,60}\b(use|used|require|needed|authenticate|authentication)\b",
     r"\b(reveal|show|print|dump|leak|expose|give me|send me|output|display)\b.{0,40}\b(credentials?|passwords?)\b",
     r"internal[_ -]?(service[_ -]?)?token",
 ]

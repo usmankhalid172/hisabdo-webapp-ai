@@ -216,7 +216,7 @@ def get_fallback_response(reason: str) -> str:
     for debugging but never shown to the user (avoids leaking internal
     error detail).
     """
-    logger.warning("Falling back to default response. Reason: %s", reason)
+    logger.warning("Falling back to default response.")
     return FALLBACK_MESSAGE
 
 
@@ -318,10 +318,10 @@ def get_financial_assistant_response(
         except LLMRateLimitError as exc:
             last_error = exc
             logger.warning(
-                "Attempt %d/%d hit a rate limit: %s",
+                "Attempt %d/%d hit a rate limit (error_type=%s).",
                 attempt + 1,
                 config.max_retries + 1,
-                exc,
+                type(exc).__name__,
             )
             if attempt < config.max_retries:
                 time.sleep(config.rate_limit_backoff_seconds)  # longer backoff for rate limits
@@ -329,10 +329,10 @@ def get_financial_assistant_response(
         except (LLMRequestError, InvalidResponseError) as exc:
             last_error = exc
             logger.warning(
-                "Attempt %d/%d failed: %s",
+                "Attempt %d/%d failed (error_type=%s).",
                 attempt + 1,
                 config.max_retries + 1,
-                exc,
+                type(exc).__name__,
             )
             if attempt < config.max_retries:
                 time.sleep(1)  # brief backoff before retry
