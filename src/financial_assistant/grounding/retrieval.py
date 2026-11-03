@@ -39,6 +39,10 @@ ROMAN_STOP = set("ka ki ke ko hai hain ho hun mein main se aur bhi to ye yeh woh
 GLOSSARY = {
     # app and product
     "hisabdo": "hisabdo", "ہساب": "hisabdo", "حسابدو": "hisabdo",
+    # 2026-11-03 fixes from the grounded-answer evaluation (3 of 4 wrong citations were Urdu script):
+    "حساب دو": "hisabdo", "ہساب دو": "hisabdo", "hisab do": "hisabdo",
+    "محفوظ کر": "save export", "محفوظ کریں": "save export", "save kar": "save export",
+    "wapis": "back return restore", "wapas lena": "collect recover follow up", "wapis le": "collect recover follow up",
     "app": "app", "ایپ": "app", "aplikeshan": "app",
     "muft": "free", "مفت": "free", "free": "free", "paisa lagta": "price cost free",
     "qeemat": "price cost", "قیمت": "price cost", "fees": "price cost free", "fee": "price cost free",
@@ -93,15 +97,24 @@ def normalise(text: str) -> str:
 def rewrite(text: str) -> str:
     """Normalised query plus English equivalents of Roman Urdu / Urdu terms (the original words are kept)."""
     norm = normalise(text)
-    extra = []
+    extra, rest = [], norm
+    # Phrases first, and removed before single words are matched: "حساب دو" is the app's name, not "حساب" (ledger)
+    # + "دو" (2026-11-03 fix; docs/dept3-quality-scorecard.md).
     for phrase, english in GLOSSARY.items():
-        if " " in phrase:
-            if phrase in norm:
-                extra.append(english)
-        elif re.search(rf"(?<![a-z0-9{URDU_RANGE}]){re.escape(phrase)}(?![a-z0-9{URDU_RANGE}])", norm):
+        if " " in phrase and phrase in rest:
+            extra.append(english)
+            rest = rest.replace(phrase, " ")
+    for pattern, english in _WORD_PATTERNS:
+        if pattern.search(rest):
             extra.append(english)
     extra = " ".join(e for e in extra if e)
     return f"{norm} {extra}".strip() if extra else norm
+
+
+# Compiled once (2026-11-03): building ~140 patterns per call overflowed Python's regex cache, so these AND the
+# router's patterns were recompiled on every request (most of the knowledge route's latency).
+_WORD_PATTERNS = [(re.compile(rf"(?<![a-z0-9{URDU_RANGE}]){re.escape(p)}(?![a-z0-9{URDU_RANGE}])"), e)
+                  for p, e in GLOSSARY.items() if " " not in p]
 
 
 def tokens(text: str) -> list[str]:
@@ -148,8 +161,8 @@ def bm25_unit(s: np.ndarray, k: float = 5.0) -> np.ndarray:
 
 # Measured parameters (data/retrieval_eval/results/comparison.json, production params; tests check they match).
 HYBRID_ALPHA = 0.6
-HYBRID_THRESHOLD, HYBRID_TOP_K, HYBRID_MARGIN = 0.585804, 2, 0.05   # C10
-LEXICAL_THRESHOLD, LEXICAL_TOP_K, LEXICAL_MARGIN = 4.940, 2, 2.0     # C15, used when fastembed is not installed
+HYBRID_THRESHOLD, HYBRID_TOP_K, HYBRID_MARGIN = 0.566273, 2, 0.05   # C10, re-measured 2026-11-03 after router + glossary fixes
+LEXICAL_THRESHOLD, LEXICAL_TOP_K, LEXICAL_MARGIN = 3.857, 2, 2.0     # C15 (re-measured 2026-11-03), used when fastembed is not installed
 CANDIDATES = 20
 
 
@@ -187,6 +200,8 @@ class KbRetriever:
 
     def __init__(self, chunks: list[dict] | None = None, mode: str = "auto"):
         self.chunks = chunks if chunks is not None else load_kb()
+        self.degraded: str | None = None
+        self.version = kb_version(self.chunks)
         self.texts = [passage(c) for c in self.chunks]
         self.bm25 = BM25(self.texts)
         self.dense = None
@@ -196,9 +211,11 @@ class KbRetriever:
                 self.dense = TextEmbedding(BGE)
                 docs = np.array(list(self.dense.embed(self.texts)))
                 self.doc_vectors = docs / np.linalg.norm(docs, axis=1, keepdims=True)
-            except ImportError:
+            except Exception as exc:  # noqa: BLE001 - missing package, model download or ONNX failure
                 if mode == "hybrid":
                     raise
+                self.degraded = f"dense_unavailable:{type(exc).__name__}"
+                self.dense = None
         self.mode = "hybrid" if self.dense is not None else "lexical"
 
     def scores(self, query: str) -> np.ndarray:
@@ -226,3 +243,38 @@ def to_passage(c: dict, score: float = 0.0) -> Passage:
                    source_id=c["source_id"], source_url=c["source_url"], category=c["category"],
                    usage=c.get("usage", "answer"), last_updated=c.get("last_updated"),
                    status=c.get("status", "active"), notes=tuple(c.get("notes") or ()), score=score)
+
+
+# ------------------------------------------------------------------------------------ index updates
+
+REQUIRED_FIELDS = {"id", "title", "heading", "body", "source_url", "category", "status"}
+_PII = re.compile(r"(?:\+92[\s-]?|0)3\d{2}[\s-]?\d{7}\b|\b\d{5}-\d{7}-\d\b|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+ALLOWED_EMAILS = {"hisabdo.app@gmail.com"}
+
+
+def kb_version(chunks: list[dict]) -> str:
+    import hashlib
+    return hashlib.sha256("\n".join(c.get("content_sha256", c.get("id", "")) for c in chunks).encode()).hexdigest()[:12]
+
+
+def validate_kb(path: Path, previous_count: int | None = None) -> tuple[bool, list[str], list[dict]]:
+    """Checks a new KB file before it replaces the live index. Any reason = keep the current index."""
+    try:
+        chunks = load_kb(path)
+    except Exception as exc:  # noqa: BLE001
+        return False, [f"unreadable:{type(exc).__name__}"], []
+    reasons = []
+    if not chunks:
+        reasons.append("empty")
+    if any(not REQUIRED_FIELDS <= c.keys() for c in chunks):
+        reasons.append("missing_fields")
+    ids = [c.get("id") for c in chunks]
+    if len(set(ids)) != len(ids):
+        reasons.append("duplicate_ids")
+    if previous_count and len(chunks) < 0.8 * previous_count:
+        reasons.append(f"shrunk:{len(chunks)}<{previous_count}")
+    if any(not str(c.get("source_url", "")).startswith("https://") for c in chunks):
+        reasons.append("source_url_not_https")
+    if any(m.group(0).lower() not in ALLOWED_EMAILS for c in chunks for m in _PII.finditer(c.get("body", ""))):
+        reasons.append("personal_identifier")
+    return not reasons, reasons, chunks

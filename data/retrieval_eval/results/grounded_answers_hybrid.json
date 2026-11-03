@@ -7,10 +7,10 @@
    "safe_no_answer": 2
   },
   "heldout.json": {
-   "correct_answer": 28,
-   "wrong_citation": 4,
-   "correct_refusal": 69,
-   "safe_no_answer": 19
+   "correct_answer": 31,
+   "correct_refusal": 68,
+   "safe_no_answer": 18,
+   "wrong_citation": 3
   }
  },
  "answerable_by_language": {
@@ -19,20 +19,20 @@
   "en:wrong_citation": 1,
   "roman_ur:correct_answer": 10,
   "roman_ur:safe_no_answer": 8,
-  "ur:correct_answer": 6,
-  "ur:safe_no_answer": 7,
-  "ur:wrong_citation": 3
+  "ur:correct_answer": 9,
+  "ur:safe_no_answer": 6,
+  "ur:wrong_citation": 1
  },
  "statuses": {
   "routed:report": 18,
-  "routed:account_query": 28,
-  "out_of_scope": 12,
-  "answered": 51,
-  "routed:correct_transaction": 1,
+  "routed:account_query": 29,
+  "answered": 55,
+  "out_of_scope": 11,
   "routed:add_expense": 16,
-  "no_source": 7,
+  "no_source": 3,
   "routed:add_income": 4,
   "clarify": 1,
+  "conflict": 1,
   "routed:greeting": 1
  },
  "rows": [
@@ -131,9 +131,11 @@
    "set": "dev",
    "lang": "en",
    "expect": "no_answer_in_kb",
-   "status": "out_of_scope",
+   "status": "answered",
    "grade": "correct_refusal",
-   "cited": []
+   "cited": [
+    "blog-04-002-why-expense-categorization-matters"
+   ]
   },
   {
    "id": "D12",
@@ -185,9 +187,11 @@
    "set": "dev",
    "lang": "roman_ur",
    "expect": "answer",
-   "status": "out_of_scope",
+   "status": "answered",
    "grade": "safe_no_answer",
-   "cited": []
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
   },
   {
    "id": "D17",
@@ -205,9 +209,11 @@
    "set": "dev",
    "lang": "en",
    "expect": "answer",
-   "status": "routed:correct_transaction",
+   "status": "answered",
    "grade": "safe_no_answer",
-   "cited": []
+   "cited": [
+    "blog-08-008-7-back-up-your-records-regularly"
+   ]
   },
   {
    "id": "D19",
@@ -246,9 +252,9 @@
    "lang": "ur",
    "expect": "answer",
    "status": "answered",
-   "grade": "wrong_citation",
+   "grade": "correct_answer",
    "cited": [
-    "off-04-005-customer-ledger"
+    "off-04-002-expense-tracker"
    ]
   },
   {
@@ -333,7 +339,7 @@
    "status": "answered",
    "grade": "wrong_citation",
    "cited": [
-    "off-04-005-customer-ledger"
+    "off-01-015-does-hisabdo-have-analytics"
    ]
   },
   {
@@ -599,7 +605,7 @@
    "status": "answered",
    "grade": "correct_answer",
    "cited": [
-    "off-03-003-use-hisabdo-your-way"
+    "off-01-008-does-hisabdo-work-without-the-internet"
    ]
   },
   {
@@ -862,9 +868,9 @@
    "lang": "ur",
    "expect": "answer",
    "status": "answered",
-   "grade": "safe_no_answer",
+   "grade": "correct_answer",
    "cited": [
-    "blog-07-007-professional-pdf-reports"
+    "blog-12-012-generating-reports-efficiently-with-hisabdo"
    ]
   },
   {
@@ -946,9 +952,11 @@
    "set": "heldout.json",
    "lang": "ur",
    "expect": "answer",
-   "status": "out_of_scope",
+   "status": "answered",
    "grade": "safe_no_answer",
-   "cited": []
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
   },
   {
    "id": "H-H2-PDF-EN-1",
@@ -980,7 +988,7 @@
    "status": "answered",
    "grade": "correct_answer",
    "cited": [
-    "blog-07-007-professional-pdf-reports"
+    "blog-12-012-generating-reports-efficiently-with-hisabdo"
    ]
   },
   {
@@ -1082,10 +1090,12 @@
    "set": "heldout.json",
    "lang": "ur",
    "expect": "answer",
-   "status": "answered",
+   "status": "conflict",
    "grade": "correct_answer",
    "cited": [
-    "blog-07-009-multi-language-support"
+    "off-01-019-which-currencies-does-hisabdo-support",
+    "off-02-010-works-the-way-you-do-business",
+    "off-04-010-multi-currency-support"
    ]
   },
   {
@@ -1159,9 +1169,9 @@
    "lang": "ur",
    "expect": "answer",
    "status": "answered",
-   "grade": "wrong_citation",
+   "grade": "correct_answer",
    "cited": [
-    "off-06-010-8-data-security"
+    "off-03-009-can-i-export-reports"
    ]
   },
   {
@@ -1238,7 +1248,7 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "none",
-   "status": "no_source",
+   "status": "routed:account_query",
    "grade": "correct_refusal",
    "cited": []
   },
@@ -1256,9 +1266,11 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "none",
-   "status": "out_of_scope",
-   "grade": "correct_refusal",
-   "cited": []
+   "status": "answered",
+   "grade": "wrong_citation",
+   "cited": [
+    "blog-11-014-how-should-i-approach-a-customer-about-an-overdu"
+   ]
   },
   {
    "id": "H-F-01",
@@ -1305,7 +1317,7 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "none",
-   "status": "no_source",
+   "status": "out_of_scope",
    "grade": "correct_refusal",
    "cited": []
   },
@@ -1332,7 +1344,7 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "none",
-   "status": "no_source",
+   "status": "out_of_scope",
    "grade": "correct_refusal",
    "cited": []
   },
@@ -1359,7 +1371,7 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "none",
-   "status": "no_source",
+   "status": "out_of_scope",
    "grade": "correct_refusal",
    "cited": []
   },

@@ -29222,7 +29222,7 @@
     "candidates": 20,
     "note": ""
    },
-   "latency_ms_per_query": 154.6,
+   "latency_ms_per_query": 91.4,
    "day1_only": {
     "params": {
      "threshold": 0.559743,
@@ -29232,70 +29232,70 @@
      "unrelated": 0,
      "recall": 0.714286,
      "precision": 1.0,
-     "passages": 5,
+     "passages": 8,
      "safe_range": [
       0.54202,
-      0.582241
+      0.584285
      ],
-     "safe_run_length": 7
+     "safe_run_length": 8
     },
     "heldout": {
-     "correct": 97,
+     "correct": 100,
      "n": 120,
-     "accuracy": 0.808333,
+     "accuracy": 0.833333,
      "answerable": 51,
-     "recall_at_k": 0.568627,
-     "mrr": 0.666149,
-     "unrelated_in_context": 6,
-     "passages_in_context": 49,
-     "context_precision": 0.877551
+     "recall_at_k": 0.627451,
+     "mrr": 0.729303,
+     "unrelated_in_context": 4,
+     "passages_in_context": 50,
+     "context_precision": 0.92
     }
    },
    "cross_validated": {
     "params": {
      "tuned_on_day1+A": {
-      "threshold": 0.585565,
+      "threshold": 0.567281,
       "top_k": 2,
       "margin": 0.05,
-      "correct": 67,
+      "correct": 69,
       "unrelated": 3,
-      "recall": 0.636364,
-      "precision": 0.933333,
-      "passages": 45,
+      "recall": 0.69697,
+      "precision": 0.944444,
+      "passages": 54,
       "safe_range": [
-       0.585565,
-       0.585565
+       0.517805,
+       0.585804
       ],
-      "safe_run_length": 1
+      "safe_run_length": 22
      },
      "tuned_on_day1+B": {
-      "threshold": 0.585403,
+      "threshold": 0.621478,
       "top_k": 2,
       "margin": 0.05,
       "correct": 68,
-      "unrelated": 5,
+      "unrelated": 4,
       "recall": 0.71875,
-      "precision": 0.895833,
-      "passages": 48,
+      "precision": 0.92,
+      "passages": 50,
       "safe_range": [
-       0.585403,
-       0.585403
+       0.617778,
+       0.625161
       ],
-      "safe_run_length": 1
+      "safe_run_length": 7
      }
     },
     "heldout": {
-     "correct": 101,
+     "correct": 100,
      "n": 120,
-     "accuracy": 0.841667,
+     "accuracy": 0.833333,
      "answerable": 51,
      "recall_at_k": 0.666667,
-     "unrelated_in_context": 8,
-     "passages_in_context": 77,
-     "context_precision": 0.896104,
+     "unrelated_in_context": 7,
+     "passages_in_context": 75,
+     "context_precision": 0.906667,
      "by_expect": {
       "answer": "32/51",
-      "none": "68/68",
+      "none": "67/68",
       "no_answer_in_kb": "1/1"
      },
      "rows": [
@@ -29438,8 +29438,13 @@
        "ok": true,
        "context": [
         {
+         "chunk": "off-02-010-works-the-way-you-do-business",
+         "score": 0.7057,
+         "grade": 2
+        },
+        {
          "chunk": "blog-07-009-multi-language-support",
-         "score": 0.7175,
+         "score": 0.7056,
          "grade": 2
         }
        ]
@@ -29554,13 +29559,13 @@
        "ok": true,
        "context": [
         {
-         "chunk": "blog-07-007-professional-pdf-reports",
-         "score": 0.674,
+         "chunk": "blog-12-012-generating-reports-efficiently-with-hisabdo",
+         "score": 0.64,
          "grade": 2
         },
         {
-         "chunk": "blog-12-012-generating-reports-efficiently-with-hisabdo",
-         "score": 0.6287,
+         "chunk": "off-01-013-can-i-export-pdf-reports",
+         "score": 0.6288,
          "grade": 2
         }
        ]
@@ -29618,12 +29623,12 @@
        "context": [
         {
          "chunk": "blog-07-007-professional-pdf-reports",
-         "score": 0.6901,
+         "score": 0.7287,
          "grade": 2
         },
         {
-         "chunk": "blog-12-012-generating-reports-efficiently-with-hisabdo",
-         "score": 0.6436,
+         "chunk": "off-03-009-can-i-export-reports",
+         "score": 0.6889,
          "grade": 2
         }
        ]
@@ -29648,12 +29653,17 @@
       {
        "id": "H-EXP-UR-1",
        "expect": "answer",
-       "ok": false,
+       "ok": true,
        "context": [
         {
-         "chunk": "off-04-005-customer-ledger",
-         "score": 0.6723,
-         "grade": 0
+         "chunk": "off-04-002-expense-tracker",
+         "score": 0.6254,
+         "grade": 2
+        },
+        {
+         "chunk": "off-04-001-overview",
+         "score": 0.6156,
+         "grade": 1
         }
        ]
       },
@@ -29689,8 +29699,19 @@
       {
        "id": "H-TC-08",
        "expect": "none",
-       "ok": true,
-       "context": []
+       "ok": false,
+       "context": [
+        {
+         "chunk": "blog-11-014-how-should-i-approach-a-customer-about-an-overdu",
+         "score": 0.6175,
+         "grade": 0
+        },
+        {
+         "chunk": "blog-10-013-how-should-i-track-payments-from-multiple-client",
+         "score": 0.6146,
+         "grade": 0
+        }
+       ]
       },
       {
        "id": "H-INC-EN-2",
@@ -29928,13 +29949,7 @@
        "id": "H-H3-PDF-UR-1",
        "expect": "answer",
        "ok": false,
-       "context": [
-        {
-         "chunk": "off-06-010-8-data-security",
-         "score": 0.5872,
-         "grade": 0
-        }
-       ]
+       "context": []
       },
       {
        "id": "H-H2-GEN-EN-1",
@@ -29957,13 +29972,7 @@
        "id": "H-INC-UR-1",
        "expect": "answer",
        "ok": false,
-       "context": [
-        {
-         "chunk": "off-04-005-customer-ledger",
-         "score": 0.6165,
-         "grade": 0
-        }
-       ]
+       "context": []
       },
       {
        "id": "H-UDH-UR-1",
@@ -29999,24 +30008,19 @@
        "id": "H-H2-UDH-UR-2",
        "expect": "answer",
        "ok": false,
-       "context": []
+       "context": [
+        {
+         "chunk": "blog-03-002-what-are-customer-dues",
+         "score": 0.7791,
+         "grade": 1
+        }
+       ]
       },
       {
        "id": "H-H-PDF-UR-2",
        "expect": "answer",
        "ok": false,
-       "context": [
-        {
-         "chunk": "blog-07-007-professional-pdf-reports",
-         "score": 0.6645,
-         "grade": 1
-        },
-        {
-         "chunk": "off-03-009-can-i-export-reports",
-         "score": 0.6154,
-         "grade": 1
-        }
-       ]
+       "context": []
       },
       {
        "id": "H-H-PDF-UR-1",
@@ -30045,18 +30049,7 @@
        "id": "H-INC-RU-1",
        "expect": "answer",
        "ok": false,
-       "context": [
-        {
-         "chunk": "off-01-016-can-i-add-notes-to-transactions",
-         "score": 0.6127,
-         "grade": 1
-        },
-        {
-         "chunk": "off-04-006-business-accounting",
-         "score": 0.5997,
-         "grade": 1
-        }
-       ]
+       "context": []
       },
       {
        "id": "H-H3-UDH-RU-2",
@@ -30065,7 +30058,12 @@
        "context": [
         {
          "chunk": "blog-03-002-what-are-customer-dues",
-         "score": 0.7734,
+         "score": 0.7394,
+         "grade": 1
+        },
+        {
+         "chunk": "blog-13-005-managing-customer-credit",
+         "score": 0.7105,
          "grade": 1
         }
        ]
@@ -30122,13 +30120,13 @@
        "ok": true,
        "context": [
         {
-         "chunk": "off-03-003-use-hisabdo-your-way",
-         "score": 0.6585,
+         "chunk": "off-01-008-does-hisabdo-work-without-the-internet",
+         "score": 0.6664,
          "grade": 2
         },
         {
-         "chunk": "off-03-008-does-it-work-without-the-internet",
-         "score": 0.6443,
+         "chunk": "blog-16-012-can-i-use-hisabdo-without-an-internet-connection",
+         "score": 0.6352,
          "grade": 2
         }
        ]
@@ -30194,19 +30192,8 @@
       {
        "id": "H-PDF-UR-1",
        "expect": "answer",
-       "ok": true,
-       "context": [
-        {
-         "chunk": "blog-12-012-generating-reports-efficiently-with-hisabdo",
-         "score": 0.6181,
-         "grade": 2
-        },
-        {
-         "chunk": "blog-07-007-professional-pdf-reports",
-         "score": 0.6037,
-         "grade": 2
-        }
-       ]
+       "ok": false,
+       "context": []
       },
       {
        "id": "H-EXP-EN-1",
@@ -30457,19 +30444,19 @@
    },
    "production": {
     "params": {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 2,
      "margin": 0.05,
-     "correct": 118,
-     "unrelated": 8,
-     "recall": 0.672414,
-     "precision": 0.905882,
-     "passages": 85,
+     "correct": 120,
+     "unrelated": 9,
+     "recall": 0.724138,
+     "precision": 0.908163,
+     "passages": 98,
      "safe_range": [
-      0.585804,
-      0.585804
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 1
+     "safe_run_length": 17
     },
     "day1": {
      "correct": 17,
@@ -30477,21 +30464,21 @@
      "accuracy": 0.894737,
      "answerable": 7,
      "recall_at_k": 0.714286,
-     "mrr": 0.714286,
+     "mrr": 0.753061,
      "unrelated_in_context": 0,
-     "passages_in_context": 8,
+     "passages_in_context": 13,
      "context_precision": 1.0
     },
     "all": {
-     "correct": 118,
+     "correct": 120,
      "n": 139,
-     "accuracy": 0.848921,
+     "accuracy": 0.863309,
      "answerable": 58,
-     "recall_at_k": 0.672414,
-     "mrr": 0.671959,
-     "unrelated_in_context": 8,
-     "passages_in_context": 85,
-     "context_precision": 0.905882
+     "recall_at_k": 0.724138,
+     "mrr": 0.73217,
+     "unrelated_in_context": 9,
+     "passages_in_context": 98,
+     "context_precision": 0.908163
     },
     "rows": [
      {
@@ -30608,11 +30595,16 @@
       "id": "D11",
       "expect": "no_answer_in_kb",
       "ok": true,
-      "context": [],
+      "context": [
+       {
+        "chunk": "blog-04-002-why-expense-categorization-matters",
+        "score": 0.7325,
+        "grade": 1
+       }
+      ],
       "trace": {
-       "query_used": "How does automatic expense categorization work?",
-       "intent": "general",
-       "gated": "router intent general"
+       "query_used": "how does automatic expense categorization work",
+       "intent": "faq"
       }
      },
      {
@@ -30624,6 +30616,11 @@
         "chunk": "off-01-001-what-is-hisabdo",
         "score": 0.5858,
         "grade": 2
+       },
+       {
+        "chunk": "off-03-011-hisabdo-is-a-product-of-xictek-systems",
+        "score": 0.5786,
+        "grade": 1
        }
       ],
       "trace": {
@@ -30693,11 +30690,16 @@
       "id": "D16",
       "expect": "answer",
       "ok": false,
-      "context": [],
+      "context": [
+       {
+        "chunk": "blog-03-002-what-are-customer-dues",
+        "score": 0.7721,
+        "grade": 1
+       }
+      ],
       "trace": {
-       "query_used": "Udhar aur payment mein kya farq hai?",
-       "intent": "general",
-       "gated": "router intent general"
+       "query_used": "udhar aur payment mein kya farq hai udhar credit dues receivable difference payment",
+       "intent": "faq"
       }
      },
      {
@@ -30725,11 +30727,21 @@
       "id": "D18",
       "expect": "answer",
       "ok": false,
-      "context": [],
+      "context": [
+       {
+        "chunk": "blog-08-008-7-back-up-your-records-regularly",
+        "score": 0.6896,
+        "grade": 1
+       },
+       {
+        "chunk": "blog-07-012-is-a-digital-ledger-safe-to-use-without-internet",
+        "score": 0.6867,
+        "grade": 1
+       }
+      ],
       "trace": {
-       "query_used": "Is my khata safe if I change my phone?",
-       "intent": "correct_transaction",
-       "gated": "router intent correct_transaction"
+       "query_used": "is my khata safe if i change my phone phone device safe secure backup khata ledger",
+       "intent": "faq"
       }
      },
      {
@@ -30788,16 +30800,21 @@
      {
       "id": "H-EXP-UR-1",
       "expect": "answer",
-      "ok": false,
+      "ok": true,
       "context": [
        {
-        "chunk": "off-04-005-customer-ledger",
-        "score": 0.6723,
-        "grade": 0
+        "chunk": "off-04-002-expense-tracker",
+        "score": 0.6254,
+        "grade": 2
+       },
+       {
+        "chunk": "off-04-001-overview",
+        "score": 0.6156,
+        "grade": 1
        }
       ],
       "trace": {
-       "query_used": "حساب دو میں خرچہ کیسے درج کروں؟ ledger account expense how",
+       "query_used": "حساب دو میں خرچہ کیسے درج کروں؟ hisabdo expense how",
        "intent": "faq"
       }
      },
@@ -30915,13 +30932,18 @@
       "ok": false,
       "context": [
        {
-        "chunk": "off-04-005-customer-ledger",
-        "score": 0.6165,
+        "chunk": "off-01-015-does-hisabdo-have-analytics",
+        "score": 0.6122,
+        "grade": 0
+       },
+       {
+        "chunk": "off-02-006-understand-the-bigger-picture",
+        "score": 0.5961,
         "grade": 0
        }
       ],
       "trace": {
-       "query_used": "حساب دو میں آمدنی کیسے شامل کریں؟ ledger account income how",
+       "query_used": "حساب دو میں آمدنی کیسے شامل کریں؟ hisabdo income how",
        "intent": "faq"
       }
      },
@@ -31325,18 +31347,18 @@
       "ok": true,
       "context": [
        {
-        "chunk": "off-03-003-use-hisabdo-your-way",
-        "score": 0.6585,
+        "chunk": "off-01-008-does-hisabdo-work-without-the-internet",
+        "score": 0.6664,
         "grade": 2
        },
        {
-        "chunk": "off-03-008-does-it-work-without-the-internet",
-        "score": 0.6443,
+        "chunk": "blog-16-012-can-i-use-hisabdo-without-an-internet-connection",
+        "score": 0.6352,
         "grade": 2
        }
       ],
       "trace": {
-       "query_used": "کیا حساب دو انٹرنیٹ کے بغیر چلتا ہے؟ internet offline ledger account",
+       "query_used": "کیا حساب دو انٹرنیٹ کے بغیر چلتا ہے؟ hisabdo internet offline",
        "intent": "faq"
       }
      },
@@ -31708,21 +31730,21 @@
      {
       "id": "H-H-PDF-UR-2",
       "expect": "answer",
-      "ok": false,
+      "ok": true,
       "context": [
        {
-        "chunk": "blog-07-007-professional-pdf-reports",
-        "score": 0.6645,
-        "grade": 1
+        "chunk": "blog-12-012-generating-reports-efficiently-with-hisabdo",
+        "score": 0.6194,
+        "grade": 2
        },
        {
-        "chunk": "off-03-009-can-i-export-reports",
-        "score": 0.6154,
+        "chunk": "blog-07-007-professional-pdf-reports",
+        "score": 0.6144,
         "grade": 1
        }
       ],
       "trace": {
-       "query_used": "کیا حساب دو مہینے کی رپورٹ پی ڈی ایف میں دیتا ہے؟ report pdf ledger account",
+       "query_used": "کیا حساب دو مہینے کی رپورٹ پی ڈی ایف میں دیتا ہے؟ hisabdo report pdf",
        "intent": "faq"
       }
      },
@@ -31823,11 +31845,16 @@
       "id": "H-H2-UDH-UR-2",
       "expect": "answer",
       "ok": false,
-      "context": [],
+      "context": [
+       {
+        "chunk": "blog-03-002-what-are-customer-dues",
+        "score": 0.7791,
+        "grade": 1
+       }
+      ],
       "trace": {
-       "query_used": "ادھار اور ادائیگی میں کیا فرق ہے؟",
-       "intent": "general",
-       "gated": "router intent general"
+       "query_used": "ادھار اور ادائیگی میں کیا فرق ہے؟ udhar credit dues receivable difference payment",
+       "intent": "faq"
       }
      },
      {
@@ -31878,18 +31905,18 @@
       "ok": true,
       "context": [
        {
-        "chunk": "blog-07-007-professional-pdf-reports",
-        "score": 0.674,
+        "chunk": "blog-12-012-generating-reports-efficiently-with-hisabdo",
+        "score": 0.64,
         "grade": 2
        },
        {
-        "chunk": "blog-12-012-generating-reports-efficiently-with-hisabdo",
-        "score": 0.6287,
+        "chunk": "off-01-013-can-i-export-pdf-reports",
+        "score": 0.6288,
         "grade": 2
        }
       ],
       "trace": {
-       "query_used": "کیا حساب دو سے پی ڈی ایف رپورٹ نکل سکتی ہے؟ report pdf ledger account",
+       "query_used": "کیا حساب دو سے پی ڈی ایف رپورٹ نکل سکتی ہے؟ hisabdo report pdf",
        "intent": "faq"
       }
      },
@@ -32039,13 +32066,18 @@
       "ok": true,
       "context": [
        {
+        "chunk": "off-02-010-works-the-way-you-do-business",
+        "score": 0.7057,
+        "grade": 2
+       },
+       {
         "chunk": "blog-07-009-multi-language-support",
-        "score": 0.7175,
+        "score": 0.7056,
         "grade": 2
        }
       ],
       "trace": {
-       "query_used": "کیا حساب دو اردو میں چلتا ہے؟ urdu language ledger account",
+       "query_used": "کیا حساب دو اردو میں چلتا ہے؟ hisabdo urdu language",
        "intent": "faq"
       }
      },
@@ -32122,33 +32154,38 @@
       "context": [
        {
         "chunk": "blog-07-007-professional-pdf-reports",
-        "score": 0.6901,
+        "score": 0.7287,
         "grade": 2
        },
        {
-        "chunk": "blog-12-012-generating-reports-efficiently-with-hisabdo",
-        "score": 0.6436,
+        "chunk": "off-03-009-can-i-export-reports",
+        "score": 0.6889,
         "grade": 2
        }
       ],
       "trace": {
-       "query_used": "statement ko pdf mein kaise save karte hain pdf report statement statement pdf how",
+       "query_used": "statement ko pdf mein kaise save karte hain save export pdf report statement statement pdf how",
        "intent": "faq"
       }
      },
      {
       "id": "H-H3-PDF-UR-1",
       "expect": "answer",
-      "ok": false,
+      "ok": true,
       "context": [
        {
-        "chunk": "off-06-010-8-data-security",
-        "score": 0.5872,
-        "grade": 0
+        "chunk": "off-03-009-can-i-export-reports",
+        "score": 0.587,
+        "grade": 2
+       },
+       {
+        "chunk": "off-01-013-can-i-export-pdf-reports",
+        "score": 0.584,
+        "grade": 2
        }
       ],
       "trace": {
-       "query_used": "اسٹیٹمنٹ کو پی ڈی ایف میں کیسے محفوظ کریں؟ safe secure how",
+       "query_used": "اسٹیٹمنٹ کو پی ڈی ایف میں کیسے محفوظ کریں؟ save export how",
        "intent": "faq"
       }
      },
@@ -32213,12 +32250,17 @@
       "context": [
        {
         "chunk": "blog-03-002-what-are-customer-dues",
-        "score": 0.7734,
+        "score": 0.7394,
+        "grade": 1
+       },
+       {
+        "chunk": "blog-13-005-managing-customer-credit",
+        "score": 0.7105,
         "grade": 1
        }
       ],
       "trace": {
-       "query_used": "udhar wapis lene ka tareeqa kya hai udhar credit dues receivable",
+       "query_used": "udhar wapis lene ka tareeqa kya hai collect recover follow up udhar credit dues receivable",
        "intent": "faq"
       }
      },
@@ -32250,8 +32292,9 @@
       "ok": true,
       "context": [],
       "trace": {
-       "query_used": "what is my customer s phone number phone device customer",
-       "intent": "faq"
+       "query_used": "What is my customer's phone number?",
+       "intent": "account_query",
+       "gated": "router intent account_query"
       }
      },
      {
@@ -32268,12 +32311,22 @@
      {
       "id": "H-TC-08",
       "expect": "none",
-      "ok": true,
-      "context": [],
+      "ok": false,
+      "context": [
+       {
+        "chunk": "blog-11-014-how-should-i-approach-a-customer-about-an-overdu",
+        "score": 0.6175,
+        "grade": 0
+       },
+       {
+        "chunk": "blog-10-013-how-should-i-track-payments-from-multiple-client",
+        "score": 0.6146,
+        "grade": 0
+       }
+      ],
       "trace": {
-       "query_used": "Have you sent the payment to my customer?",
-       "intent": "general",
-       "gated": "router intent general"
+       "query_used": "have you sent the payment to my customer customer payment",
+       "intent": "faq"
       }
      },
      {
@@ -32341,8 +32394,9 @@
       "ok": true,
       "context": [],
       "trace": {
-       "query_used": "what s the weather in lahore today",
-       "intent": "faq"
+       "query_used": "What's the weather in Lahore today?",
+       "intent": "general",
+       "gated": "router intent general"
       }
      },
      {
@@ -32373,8 +32427,9 @@
       "ok": true,
       "context": [],
       "trace": {
-       "query_used": "what is the capital of france",
-       "intent": "faq"
+       "query_used": "What is the capital of France?",
+       "intent": "general",
+       "gated": "router intent general"
       }
      },
      {
@@ -32405,8 +32460,9 @@
       "ok": true,
       "context": [],
       "trace": {
-       "query_used": "how do i install python on windows",
-       "intent": "faq"
+       "query_used": "How do I install Python on Windows?",
+       "intent": "general",
+       "gated": "router intent general"
       }
      },
      {
@@ -32446,722 +32502,722 @@
    },
    "grid": [
     {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 1,
      "margin": null,
-     "correct": 115,
-     "unrelated": 5,
-     "recall": 0.586207,
-     "precision": 0.90566,
-     "passages": 53,
+     "correct": 117,
+     "unrelated": 4,
+     "recall": 0.637931,
+     "precision": 0.931034,
+     "passages": 58,
      "safe_range": [
-      0.585804,
-      0.585804
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 1
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 1,
      "margin": 0.05,
-     "correct": 115,
-     "unrelated": 5,
-     "recall": 0.586207,
-     "precision": 0.90566,
-     "passages": 53,
+     "correct": 117,
+     "unrelated": 4,
+     "recall": 0.637931,
+     "precision": 0.931034,
+     "passages": 58,
      "safe_range": [
-      0.585804,
-      0.585804
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 1
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 1,
      "margin": 0.1,
-     "correct": 115,
-     "unrelated": 5,
-     "recall": 0.586207,
-     "precision": 0.90566,
-     "passages": 53,
+     "correct": 117,
+     "unrelated": 4,
+     "recall": 0.637931,
+     "precision": 0.931034,
+     "passages": 58,
      "safe_range": [
-      0.585804,
-      0.585804
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 1
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 1,
      "margin": 0.2,
-     "correct": 115,
-     "unrelated": 5,
-     "recall": 0.586207,
-     "precision": 0.90566,
-     "passages": 53,
+     "correct": 117,
+     "unrelated": 4,
+     "recall": 0.637931,
+     "precision": 0.931034,
+     "passages": 58,
      "safe_range": [
-      0.585804,
-      0.585804
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 1
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 1,
      "margin": 0.3,
-     "correct": 115,
-     "unrelated": 5,
-     "recall": 0.586207,
-     "precision": 0.90566,
-     "passages": 53,
+     "correct": 117,
+     "unrelated": 4,
+     "recall": 0.637931,
+     "precision": 0.931034,
+     "passages": 58,
      "safe_range": [
-      0.585804,
-      0.585804
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 1
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 1,
      "margin": 1.0,
-     "correct": 115,
-     "unrelated": 5,
-     "recall": 0.586207,
-     "precision": 0.90566,
-     "passages": 53,
+     "correct": 117,
+     "unrelated": 4,
+     "recall": 0.637931,
+     "precision": 0.931034,
+     "passages": 58,
      "safe_range": [
-      0.585804,
-      0.585804
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 1
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 1,
      "margin": 2.0,
-     "correct": 115,
-     "unrelated": 5,
-     "recall": 0.586207,
-     "precision": 0.90566,
-     "passages": 53,
+     "correct": 117,
+     "unrelated": 4,
+     "recall": 0.637931,
+     "precision": 0.931034,
+     "passages": 58,
      "safe_range": [
-      0.585804,
-      0.585804
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 1
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 1,
      "margin": 3.0,
-     "correct": 115,
-     "unrelated": 5,
-     "recall": 0.586207,
-     "precision": 0.90566,
-     "passages": 53,
+     "correct": 117,
+     "unrelated": 4,
+     "recall": 0.637931,
+     "precision": 0.931034,
+     "passages": 58,
      "safe_range": [
-      0.585804,
-      0.585804
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 1
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 2,
      "margin": null,
-     "correct": 117,
+     "correct": 119,
      "unrelated": 12,
-     "recall": 0.689655,
-     "precision": 0.882353,
-     "passages": 102,
+     "recall": 0.741379,
+     "precision": 0.895652,
+     "passages": 115,
      "safe_range": [
-      0.585804,
-      0.585804
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 1
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 2,
      "margin": 0.05,
-     "correct": 118,
-     "unrelated": 8,
-     "recall": 0.672414,
-     "precision": 0.905882,
-     "passages": 85,
-     "safe_range": [
-      0.585804,
-      0.585804
-     ],
-     "safe_run_length": 1
-    },
-    {
-     "threshold": 0.585804,
-     "top_k": 2,
-     "margin": 0.1,
-     "correct": 117,
-     "unrelated": 12,
-     "recall": 0.689655,
-     "precision": 0.877551,
+     "correct": 120,
+     "unrelated": 9,
+     "recall": 0.724138,
+     "precision": 0.908163,
      "passages": 98,
      "safe_range": [
-      0.585804,
-      0.585804
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 1
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.585804,
+     "threshold": 0.566273,
      "top_k": 2,
-     "margin": 0.2,
-     "correct": 117,
-     "unrelated": 12,
-     "recall": 0.689655,
-     "precision": 0.882353,
-     "passages": 102,
-     "safe_range": [
-      0.585804,
-      0.585804
-     ],
-     "safe_run_length": 1
-    },
-    {
-     "threshold": 0.585804,
-     "top_k": 2,
-     "margin": 0.3,
-     "correct": 117,
-     "unrelated": 12,
-     "recall": 0.689655,
-     "precision": 0.882353,
-     "passages": 102,
-     "safe_range": [
-      0.585804,
-      0.585804
-     ],
-     "safe_run_length": 1
-    },
-    {
-     "threshold": 0.585804,
-     "top_k": 2,
-     "margin": 1.0,
-     "correct": 117,
-     "unrelated": 12,
-     "recall": 0.689655,
-     "precision": 0.882353,
-     "passages": 102,
-     "safe_range": [
-      0.585804,
-      0.585804
-     ],
-     "safe_run_length": 1
-    },
-    {
-     "threshold": 0.585804,
-     "top_k": 2,
-     "margin": 2.0,
-     "correct": 117,
-     "unrelated": 12,
-     "recall": 0.689655,
-     "precision": 0.882353,
-     "passages": 102,
-     "safe_range": [
-      0.585804,
-      0.585804
-     ],
-     "safe_run_length": 1
-    },
-    {
-     "threshold": 0.585804,
-     "top_k": 2,
-     "margin": 3.0,
-     "correct": 117,
-     "unrelated": 12,
-     "recall": 0.689655,
-     "precision": 0.882353,
-     "passages": 102,
-     "safe_range": [
-      0.585804,
-      0.585804
-     ],
-     "safe_run_length": 1
-    },
-    {
-     "threshold": 0.603892,
-     "top_k": 3,
-     "margin": null,
-     "correct": 116,
-     "unrelated": 15,
-     "recall": 0.689655,
-     "precision": 0.892857,
-     "passages": 140,
-     "safe_range": [
-      0.600427,
-      0.61222
-     ],
-     "safe_run_length": 7
-    },
-    {
-     "threshold": 0.632429,
-     "top_k": 3,
-     "margin": 0.05,
-     "correct": 116,
-     "unrelated": 8,
-     "recall": 0.637931,
-     "precision": 0.914894,
-     "passages": 94,
-     "safe_range": [
-      0.632078,
-      0.633487
-     ],
-     "safe_run_length": 4
-    },
-    {
-     "threshold": 0.603892,
-     "top_k": 3,
      "margin": 0.1,
-     "correct": 116,
-     "unrelated": 15,
-     "recall": 0.689655,
-     "precision": 0.882812,
-     "passages": 128,
+     "correct": 119,
+     "unrelated": 12,
+     "recall": 0.741379,
+     "precision": 0.891892,
+     "passages": 111,
      "safe_range": [
-      0.600427,
-      0.61222
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 7
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.603892,
-     "top_k": 3,
+     "threshold": 0.566273,
+     "top_k": 2,
      "margin": 0.2,
-     "correct": 116,
-     "unrelated": 15,
-     "recall": 0.689655,
-     "precision": 0.892086,
-     "passages": 139,
+     "correct": 119,
+     "unrelated": 12,
+     "recall": 0.741379,
+     "precision": 0.895652,
+     "passages": 115,
      "safe_range": [
-      0.600427,
-      0.61222
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 7
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.603892,
-     "top_k": 3,
+     "threshold": 0.566273,
+     "top_k": 2,
      "margin": 0.3,
-     "correct": 116,
-     "unrelated": 15,
-     "recall": 0.689655,
-     "precision": 0.892857,
-     "passages": 140,
+     "correct": 119,
+     "unrelated": 12,
+     "recall": 0.741379,
+     "precision": 0.895652,
+     "passages": 115,
      "safe_range": [
-      0.600427,
-      0.61222
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 7
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.603892,
-     "top_k": 3,
+     "threshold": 0.566273,
+     "top_k": 2,
      "margin": 1.0,
-     "correct": 116,
-     "unrelated": 15,
-     "recall": 0.689655,
-     "precision": 0.892857,
-     "passages": 140,
+     "correct": 119,
+     "unrelated": 12,
+     "recall": 0.741379,
+     "precision": 0.895652,
+     "passages": 115,
      "safe_range": [
-      0.600427,
-      0.61222
+      0.512506,
+      0.585554
      ],
-     "safe_run_length": 7
+     "safe_run_length": 17
     },
     {
-     "threshold": 0.603892,
+     "threshold": 0.566273,
+     "top_k": 2,
+     "margin": 2.0,
+     "correct": 119,
+     "unrelated": 12,
+     "recall": 0.741379,
+     "precision": 0.895652,
+     "passages": 115,
+     "safe_range": [
+      0.512506,
+      0.585554
+     ],
+     "safe_run_length": 17
+    },
+    {
+     "threshold": 0.566273,
+     "top_k": 2,
+     "margin": 3.0,
+     "correct": 119,
+     "unrelated": 12,
+     "recall": 0.741379,
+     "precision": 0.895652,
+     "passages": 115,
+     "safe_range": [
+      0.512506,
+      0.585554
+     ],
+     "safe_run_length": 17
+    },
+    {
+     "threshold": 0.618123,
      "top_k": 3,
-     "margin": 2.0,
-     "correct": 116,
-     "unrelated": 15,
-     "recall": 0.689655,
-     "precision": 0.892857,
-     "passages": 140,
-     "safe_range": [
-      0.600427,
-      0.61222
-     ],
-     "safe_run_length": 7
-    },
-    {
-     "threshold": 0.603892,
-     "top_k": 3,
-     "margin": 3.0,
-     "correct": 116,
-     "unrelated": 15,
-     "recall": 0.689655,
-     "precision": 0.892857,
-     "passages": 140,
-     "safe_range": [
-      0.600427,
-      0.61222
-     ],
-     "safe_run_length": 7
-    },
-    {
-     "threshold": 0.608181,
-     "top_k": 4,
      "margin": null,
-     "correct": 114,
-     "unrelated": 22,
-     "recall": 0.689655,
-     "precision": 0.878453,
-     "passages": 181,
-     "safe_range": [
-      0.605584,
-      0.61222
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.643145,
-     "top_k": 4,
-     "margin": 0.05,
-     "correct": 115,
-     "unrelated": 9,
-     "recall": 0.62069,
-     "precision": 0.91,
-     "passages": 100,
-     "safe_range": [
-      0.642157,
-      0.644875
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.608181,
-     "top_k": 4,
-     "margin": 0.1,
-     "correct": 115,
-     "unrelated": 20,
-     "recall": 0.689655,
-     "precision": 0.871795,
-     "passages": 156,
-     "safe_range": [
-      0.605584,
-      0.61222
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.608181,
-     "top_k": 4,
-     "margin": 0.2,
-     "correct": 115,
-     "unrelated": 21,
-     "recall": 0.689655,
-     "precision": 0.882682,
-     "passages": 179,
-     "safe_range": [
-      0.605584,
-      0.61222
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.608181,
-     "top_k": 4,
-     "margin": 0.3,
-     "correct": 114,
-     "unrelated": 22,
-     "recall": 0.689655,
-     "precision": 0.878453,
-     "passages": 181,
-     "safe_range": [
-      0.605584,
-      0.61222
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.608181,
-     "top_k": 4,
-     "margin": 1.0,
-     "correct": 114,
-     "unrelated": 22,
-     "recall": 0.689655,
-     "precision": 0.878453,
-     "passages": 181,
-     "safe_range": [
-      0.605584,
-      0.61222
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.608181,
-     "top_k": 4,
-     "margin": 2.0,
-     "correct": 114,
-     "unrelated": 22,
-     "recall": 0.689655,
-     "precision": 0.878453,
-     "passages": 181,
-     "safe_range": [
-      0.605584,
-      0.61222
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.608181,
-     "top_k": 4,
-     "margin": 3.0,
-     "correct": 114,
-     "unrelated": 22,
-     "recall": 0.689655,
-     "precision": 0.878453,
-     "passages": 181,
-     "safe_range": [
-      0.605584,
-      0.61222
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.643145,
-     "top_k": 5,
-     "margin": null,
-     "correct": 113,
-     "unrelated": 17,
-     "recall": 0.689655,
-     "precision": 0.905028,
-     "passages": 179,
-     "safe_range": [
-      0.642157,
-      0.644875
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.643145,
-     "top_k": 5,
-     "margin": 0.05,
-     "correct": 115,
-     "unrelated": 9,
-     "recall": 0.655172,
-     "precision": 0.914286,
-     "passages": 105,
-     "safe_range": [
-      0.642157,
-      0.644875
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.643145,
-     "top_k": 5,
-     "margin": 0.1,
-     "correct": 114,
-     "unrelated": 14,
-     "recall": 0.672414,
-     "precision": 0.902778,
-     "passages": 144,
-     "safe_range": [
-      0.642157,
-      0.644875
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.643145,
-     "top_k": 5,
-     "margin": 0.2,
-     "correct": 114,
-     "unrelated": 16,
-     "recall": 0.689655,
-     "precision": 0.909091,
-     "passages": 176,
-     "safe_range": [
-      0.642157,
-      0.644875
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.643145,
-     "top_k": 5,
-     "margin": 0.3,
-     "correct": 113,
-     "unrelated": 17,
-     "recall": 0.689655,
-     "precision": 0.905028,
-     "passages": 179,
-     "safe_range": [
-      0.642157,
-      0.644875
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.643145,
-     "top_k": 5,
-     "margin": 1.0,
-     "correct": 113,
-     "unrelated": 17,
-     "recall": 0.689655,
-     "precision": 0.905028,
-     "passages": 179,
-     "safe_range": [
-      0.642157,
-      0.644875
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.643145,
-     "top_k": 5,
-     "margin": 2.0,
-     "correct": 113,
-     "unrelated": 17,
-     "recall": 0.689655,
-     "precision": 0.905028,
-     "passages": 179,
-     "safe_range": [
-      0.642157,
-      0.644875
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.643145,
-     "top_k": 5,
-     "margin": 3.0,
-     "correct": 113,
-     "unrelated": 17,
-     "recall": 0.689655,
-     "precision": 0.905028,
-     "passages": 179,
-     "safe_range": [
-      0.642157,
-      0.644875
-     ],
-     "safe_run_length": 3
-    },
-    {
-     "threshold": 0.672543,
-     "top_k": 8,
-     "margin": null,
-     "correct": 106,
-     "unrelated": 17,
-     "recall": 0.568966,
-     "precision": 0.883562,
+     "correct": 118,
+     "unrelated": 12,
+     "recall": 0.724138,
+     "precision": 0.917808,
      "passages": 146,
      "safe_range": [
-      0.672543,
-      0.672543
+      0.618123,
+      0.618123
      ],
      "safe_run_length": 1
     },
     {
-     "threshold": 0.643145,
-     "top_k": 8,
+     "threshold": 0.618123,
+     "top_k": 3,
      "margin": 0.05,
-     "correct": 114,
-     "unrelated": 12,
-     "recall": 0.655172,
-     "precision": 0.889908,
-     "passages": 109,
+     "correct": 119,
+     "unrelated": 8,
+     "recall": 0.706897,
+     "precision": 0.927273,
+     "passages": 110,
      "safe_range": [
-      0.642157,
-      0.644875
+      0.618123,
+      0.618123
      ],
-     "safe_run_length": 3
+     "safe_run_length": 1
     },
     {
-     "threshold": 0.643145,
+     "threshold": 0.618123,
+     "top_k": 3,
+     "margin": 0.1,
+     "correct": 118,
+     "unrelated": 12,
+     "recall": 0.724138,
+     "precision": 0.911111,
+     "passages": 135,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 3,
+     "margin": 0.2,
+     "correct": 118,
+     "unrelated": 12,
+     "recall": 0.724138,
+     "precision": 0.917241,
+     "passages": 145,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 3,
+     "margin": 0.3,
+     "correct": 118,
+     "unrelated": 12,
+     "recall": 0.724138,
+     "precision": 0.917808,
+     "passages": 146,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 3,
+     "margin": 1.0,
+     "correct": 118,
+     "unrelated": 12,
+     "recall": 0.724138,
+     "precision": 0.917808,
+     "passages": 146,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 3,
+     "margin": 2.0,
+     "correct": 118,
+     "unrelated": 12,
+     "recall": 0.724138,
+     "precision": 0.917808,
+     "passages": 146,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 3,
+     "margin": 3.0,
+     "correct": 118,
+     "unrelated": 12,
+     "recall": 0.724138,
+     "precision": 0.917808,
+     "passages": 146,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 4,
+     "margin": null,
+     "correct": 116,
+     "unrelated": 19,
+     "recall": 0.724138,
+     "precision": 0.899471,
+     "passages": 189,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 4,
+     "margin": 0.05,
+     "correct": 118,
+     "unrelated": 13,
+     "recall": 0.706897,
+     "precision": 0.896825,
+     "passages": 126,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 4,
+     "margin": 0.1,
+     "correct": 117,
+     "unrelated": 18,
+     "recall": 0.724138,
+     "precision": 0.890909,
+     "passages": 165,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 4,
+     "margin": 0.2,
+     "correct": 117,
+     "unrelated": 18,
+     "recall": 0.724138,
+     "precision": 0.903743,
+     "passages": 187,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 4,
+     "margin": 0.3,
+     "correct": 116,
+     "unrelated": 19,
+     "recall": 0.724138,
+     "precision": 0.899471,
+     "passages": 189,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 4,
+     "margin": 1.0,
+     "correct": 116,
+     "unrelated": 19,
+     "recall": 0.724138,
+     "precision": 0.899471,
+     "passages": 189,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 4,
+     "margin": 2.0,
+     "correct": 116,
+     "unrelated": 19,
+     "recall": 0.724138,
+     "precision": 0.899471,
+     "passages": 189,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 4,
+     "margin": 3.0,
+     "correct": 116,
+     "unrelated": 19,
+     "recall": 0.724138,
+     "precision": 0.899471,
+     "passages": 189,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 5,
+     "margin": null,
+     "correct": 115,
+     "unrelated": 23,
+     "recall": 0.793103,
+     "precision": 0.9,
+     "passages": 230,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 5,
+     "margin": 0.05,
+     "correct": 118,
+     "unrelated": 14,
+     "recall": 0.758621,
+     "precision": 0.898551,
+     "passages": 138,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 5,
+     "margin": 0.1,
+     "correct": 116,
+     "unrelated": 21,
+     "recall": 0.775862,
+     "precision": 0.891192,
+     "passages": 193,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 5,
+     "margin": 0.2,
+     "correct": 116,
+     "unrelated": 22,
+     "recall": 0.793103,
+     "precision": 0.903084,
+     "passages": 227,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 5,
+     "margin": 0.3,
+     "correct": 115,
+     "unrelated": 23,
+     "recall": 0.793103,
+     "precision": 0.9,
+     "passages": 230,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 5,
+     "margin": 1.0,
+     "correct": 115,
+     "unrelated": 23,
+     "recall": 0.793103,
+     "precision": 0.9,
+     "passages": 230,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 5,
+     "margin": 2.0,
+     "correct": 115,
+     "unrelated": 23,
+     "recall": 0.793103,
+     "precision": 0.9,
+     "passages": 230,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 5,
+     "margin": 3.0,
+     "correct": 115,
+     "unrelated": 23,
+     "recall": 0.793103,
+     "precision": 0.9,
+     "passages": 230,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.665712,
+     "top_k": 8,
+     "margin": null,
+     "correct": 107,
+     "unrelated": 25,
+     "recall": 0.62069,
+     "precision": 0.868421,
+     "passages": 190,
+     "safe_range": [
+      0.665712,
+      0.665712
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.618123,
+     "top_k": 8,
+     "margin": 0.05,
+     "correct": 117,
+     "unrelated": 24,
+     "recall": 0.758621,
+     "precision": 0.84106,
+     "passages": 151,
+     "safe_range": [
+      0.618123,
+      0.618123
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 0.655223,
      "top_k": 8,
      "margin": 0.1,
      "correct": 112,
-     "unrelated": 24,
-     "recall": 0.672414,
-     "precision": 0.850932,
+     "unrelated": 21,
+     "recall": 0.655172,
+     "precision": 0.869565,
      "passages": 161,
      "safe_range": [
-      0.643145,
-      0.644875
+      0.655223,
+      0.655223
      ],
-     "safe_run_length": 2
+     "safe_run_length": 1
     },
     {
-     "threshold": 0.672543,
+     "threshold": 0.665712,
      "top_k": 8,
      "margin": 0.2,
-     "correct": 106,
-     "unrelated": 17,
-     "recall": 0.568966,
-     "precision": 0.882759,
-     "passages": 145,
+     "correct": 107,
+     "unrelated": 25,
+     "recall": 0.62069,
+     "precision": 0.867725,
+     "passages": 189,
      "safe_range": [
-      0.672543,
-      0.672543
+      0.665712,
+      0.665712
      ],
      "safe_run_length": 1
     },
     {
-     "threshold": 0.672543,
+     "threshold": 0.665712,
      "top_k": 8,
      "margin": 0.3,
-     "correct": 106,
-     "unrelated": 17,
-     "recall": 0.568966,
-     "precision": 0.883562,
-     "passages": 146,
+     "correct": 107,
+     "unrelated": 25,
+     "recall": 0.62069,
+     "precision": 0.868421,
+     "passages": 190,
      "safe_range": [
-      0.672543,
-      0.672543
+      0.665712,
+      0.665712
      ],
      "safe_run_length": 1
     },
     {
-     "threshold": 0.672543,
+     "threshold": 0.665712,
      "top_k": 8,
      "margin": 1.0,
-     "correct": 106,
-     "unrelated": 17,
-     "recall": 0.568966,
-     "precision": 0.883562,
-     "passages": 146,
+     "correct": 107,
+     "unrelated": 25,
+     "recall": 0.62069,
+     "precision": 0.868421,
+     "passages": 190,
      "safe_range": [
-      0.672543,
-      0.672543
+      0.665712,
+      0.665712
      ],
      "safe_run_length": 1
     },
     {
-     "threshold": 0.672543,
+     "threshold": 0.665712,
      "top_k": 8,
      "margin": 2.0,
-     "correct": 106,
-     "unrelated": 17,
-     "recall": 0.568966,
-     "precision": 0.883562,
-     "passages": 146,
+     "correct": 107,
+     "unrelated": 25,
+     "recall": 0.62069,
+     "precision": 0.868421,
+     "passages": 190,
      "safe_range": [
-      0.672543,
-      0.672543
+      0.665712,
+      0.665712
      ],
      "safe_run_length": 1
     },
     {
-     "threshold": 0.672543,
+     "threshold": 0.665712,
      "top_k": 8,
      "margin": 3.0,
-     "correct": 106,
-     "unrelated": 17,
-     "recall": 0.568966,
-     "precision": 0.883562,
-     "passages": 146,
+     "correct": 107,
+     "unrelated": 25,
+     "recall": 0.62069,
+     "precision": 0.868421,
+     "passages": 190,
      "safe_range": [
-      0.672543,
-      0.672543
+      0.665712,
+      0.665712
      ],
      "safe_run_length": 1
     }
@@ -48772,80 +48828,80 @@
     "candidates": 20,
     "note": "lexical fallback for servers without fastembed"
    },
-   "latency_ms_per_query": 51.5,
+   "latency_ms_per_query": 43.0,
    "day1_only": {
     "params": {
-     "threshold": 8.036267,
-     "top_k": 1,
-     "margin": null,
-     "correct": 16,
+     "threshold": 7.77455,
+     "top_k": 3,
+     "margin": 3.0,
+     "correct": 17,
      "unrelated": 0,
-     "recall": 0.571429,
+     "recall": 0.714286,
      "precision": 1.0,
-     "passages": 4,
+     "passages": 15,
      "safe_range": [
-      1.792463,
-      10.631566
+      1.975676,
+      9.863198
      ],
-     "safe_run_length": 32
+     "safe_run_length": 34
     },
     "heldout": {
-     "correct": 91,
+     "correct": 94,
      "n": 120,
-     "accuracy": 0.758333,
+     "accuracy": 0.783333,
      "answerable": 51,
-     "recall_at_k": 0.431373,
-     "mrr": 0.635008,
-     "unrelated_in_context": 3,
-     "passages_in_context": 36,
-     "context_precision": 0.916667
+     "recall_at_k": 0.588235,
+     "mrr": 0.674423,
+     "unrelated_in_context": 8,
+     "passages_in_context": 83,
+     "context_precision": 0.903614
     }
    },
    "cross_validated": {
     "params": {
      "tuned_on_day1+A": {
-      "threshold": 3.343602,
+      "threshold": 3.793029,
       "top_k": 2,
-      "margin": 0.1,
-      "correct": 64,
-      "unrelated": 3,
-      "recall": 0.515152,
-      "precision": 0.903226,
-      "passages": 31,
+      "margin": 1.0,
+      "correct": 65,
+      "unrelated": 6,
+      "recall": 0.575758,
+      "precision": 0.860465,
+      "passages": 43,
       "safe_range": [
-       3.264163,
-       3.824016
+       3.793029,
+       3.857043
       ],
-      "safe_run_length": 6
+      "safe_run_length": 2
      },
      "tuned_on_day1+B": {
-      "threshold": 5.037287,
-      "top_k": 2,
-      "margin": 2.0,
+      "threshold": 8.01328,
+      "top_k": 3,
+      "margin": 3.0,
       "correct": 67,
-      "unrelated": 8,
-      "recall": 0.6875,
-      "precision": 0.826087,
-      "passages": 46,
+      "unrelated": 2,
+      "recall": 0.65625,
+      "precision": 0.961538,
+      "passages": 52,
       "safe_range": [
-       4.49402,
-       5.329867
+       7.802811,
+       8.226665
       ],
-      "safe_run_length": 12
+      "safe_run_length": 5
      }
     },
     "heldout": {
-     "correct": 96,
+     "correct": 97,
      "n": 120,
-     "accuracy": 0.8,
+     "accuracy": 0.808333,
      "answerable": 51,
-     "recall_at_k": 0.607843,
-     "unrelated_in_context": 14,
-     "passages_in_context": 71,
-     "context_precision": 0.802817,
+     "recall_at_k": 0.627451,
+     "unrelated_in_context": 11,
+     "passages_in_context": 80,
+     "context_precision": 0.8625,
      "by_expect": {
       "answer": "29/51",
-      "none": "66/68",
+      "none": "67/68",
       "no_answer_in_kb": "1/1"
      },
      "rows": [
@@ -48928,6 +48984,11 @@
          "chunk": "blog-07-006-backup-and-recovery",
          "score": 7.9898,
          "grade": 1
+        },
+        {
+         "chunk": "blog-08-015-what-is-the-difference-between-a-khata-and-a-led",
+         "score": 7.1,
+         "grade": 0
         }
        ]
       },
@@ -48974,7 +49035,12 @@
        "context": [
         {
          "chunk": "blog-07-009-multi-language-support",
-         "score": 16.638,
+         "score": 14.3262,
+         "grade": 2
+        },
+        {
+         "chunk": "off-04-009-multi-language-support",
+         "score": 13.5685,
          "grade": 2
         }
        ]
@@ -49070,18 +49136,28 @@
          "chunk": "off-02-005-hand-them-a-real-statement",
          "score": 13.6193,
          "grade": 2
+        },
+        {
+         "chunk": "blog-07-007-professional-pdf-reports",
+         "score": 12.6564,
+         "grade": 2
         }
        ]
       },
       {
        "id": "H-H2-PDF-UR-1",
        "expect": "answer",
-       "ok": true,
+       "ok": false,
        "context": [
         {
          "chunk": "blog-07-007-professional-pdf-reports",
-         "score": 11.2156,
+         "score": 8.3861,
          "grade": 2
+        },
+        {
+         "chunk": "blog-12-007-payables-reports-what-to-include",
+         "score": 7.6293,
+         "grade": 0
         }
        ]
       },
@@ -49093,6 +49169,11 @@
         {
          "chunk": "off-04-016-start-managing-your-finances",
          "score": 8.4931,
+         "grade": 0
+        },
+        {
+         "chunk": "off-04-012-for-shopkeepers",
+         "score": 7.5442,
          "grade": 0
         }
        ]
@@ -49128,7 +49209,7 @@
        "context": [
         {
          "chunk": "blog-07-007-professional-pdf-reports",
-         "score": 11.2225,
+         "score": 15.7344,
          "grade": 2
         }
        ]
@@ -49142,18 +49223,23 @@
          "chunk": "off-03-009-can-i-export-reports",
          "score": 5.3627,
          "grade": 2
+        },
+        {
+         "chunk": "off-01-002-is-hisabdo-free-to-use",
+         "score": 4.7829,
+         "grade": 1
         }
        ]
       },
       {
        "id": "H-EXP-UR-1",
        "expect": "answer",
-       "ok": false,
+       "ok": true,
        "context": [
         {
-         "chunk": "off-04-005-customer-ledger",
-         "score": 8.2431,
-         "grade": 0
+         "chunk": "off-04-002-expense-tracker",
+         "score": 3.888,
+         "grade": 2
         }
        ]
       },
@@ -49165,6 +49251,11 @@
         {
          "chunk": "off-01-021-can-i-restore-a-backup",
          "score": 10.7483,
+         "grade": 1
+        },
+        {
+         "chunk": "off-03-004-everything-you-need",
+         "score": 9.9451,
          "grade": 1
         }
        ]
@@ -49184,8 +49275,19 @@
       {
        "id": "H-TC-08",
        "expect": "none",
-       "ok": true,
-       "context": []
+       "ok": false,
+       "context": [
+        {
+         "chunk": "blog-05-008-maintain-a-payment-schedule",
+         "score": 6.3318,
+         "grade": 0
+        },
+        {
+         "chunk": "blog-10-013-how-should-i-track-payments-from-multiple-client",
+         "score": 6.2703,
+         "grade": 0
+        }
+       ]
       },
       {
        "id": "H-INC-EN-2",
@@ -49274,14 +49376,8 @@
       {
        "id": "H-OT-01",
        "expect": "none",
-       "ok": false,
-       "context": [
-        {
-         "chunk": "off-04-016-start-managing-your-finances",
-         "score": 4.4762,
-         "grade": 0
-        }
-       ]
+       "ok": true,
+       "context": []
       },
       {
        "id": "H-H2-EXP-EN-1",
@@ -49364,14 +49460,8 @@
       {
        "id": "H-TC-06",
        "expect": "none",
-       "ok": false,
-       "context": [
-        {
-         "chunk": "blog-16-013-what-happens-to-my-data-if-i-lose-my-phone",
-         "score": 7.3034,
-         "grade": 0
-        }
-       ]
+       "ok": true,
+       "context": []
       },
       {
        "id": "H-H3-REP-EN-1",
@@ -49405,19 +49495,8 @@
       {
        "id": "H-KHA-RU-1",
        "expect": "answer",
-       "ok": true,
-       "context": [
-        {
-         "chunk": "blog-08-015-what-is-the-difference-between-a-khata-and-a-led",
-         "score": 7.1,
-         "grade": 2
-        },
-        {
-         "chunk": "off-03-001-overview",
-         "score": 7.0526,
-         "grade": 1
-        }
-       ]
+       "ok": false,
+       "context": []
       },
       {
        "id": "H-H2-PDF-EN-2",
@@ -49433,6 +49512,11 @@
          "chunk": "off-01-013-can-i-export-pdf-reports",
          "score": 10.0668,
          "grade": 2
+        },
+        {
+         "chunk": "blog-07-007-professional-pdf-reports",
+         "score": 9.3127,
+         "grade": 1
         }
        ]
       },
@@ -49442,13 +49526,8 @@
        "ok": false,
        "context": [
         {
-         "chunk": "off-06-010-8-data-security",
-         "score": 7.1525,
-         "grade": 0
-        },
-        {
-         "chunk": "blog-07-012-is-a-digital-ledger-safe-to-use-without-internet",
-         "score": 6.0453,
+         "chunk": "blog-07-006-backup-and-recovery",
+         "score": 8.9383,
          "grade": 0
         }
        ]
@@ -49467,6 +49546,11 @@
          "chunk": "off-04-009-multi-language-support",
          "score": 13.5685,
          "grade": 2
+        },
+        {
+         "chunk": "off-02-010-works-the-way-you-do-business",
+         "score": 12.5704,
+         "grade": 2
         }
        ]
       },
@@ -49474,18 +49558,7 @@
        "id": "H-INC-UR-1",
        "expect": "answer",
        "ok": false,
-       "context": [
-        {
-         "chunk": "off-04-005-customer-ledger",
-         "score": 6.6642,
-         "grade": 0
-        },
-        {
-         "chunk": "off-03-003-use-hisabdo-your-way",
-         "score": 5.9572,
-         "grade": 0
-        }
-       ]
+       "context": []
       },
       {
        "id": "H-UDH-UR-1",
@@ -49526,7 +49599,23 @@
        "id": "H-H2-UDH-UR-2",
        "expect": "answer",
        "ok": false,
-       "context": []
+       "context": [
+        {
+         "chunk": "blog-03-002-what-are-customer-dues",
+         "score": 12.8918,
+         "grade": 1
+        },
+        {
+         "chunk": "blog-05-012-what-is-the-difference-between-accounts-payable",
+         "score": 11.2483,
+         "grade": 1
+        },
+        {
+         "chunk": "blog-14-010-what-is-the-simplest-way-to-remember-the-differe",
+         "score": 11.1882,
+         "grade": 1
+        }
+       ]
       },
       {
        "id": "H-H-PDF-UR-2",
@@ -49535,7 +49624,7 @@
        "context": [
         {
          "chunk": "blog-07-007-professional-pdf-reports",
-         "score": 11.2156,
+         "score": 8.3861,
          "grade": 1
         }
        ]
@@ -49567,32 +49656,26 @@
        "id": "H-INC-RU-1",
        "expect": "answer",
        "ok": false,
-       "context": [
-        {
-         "chunk": "blog-15-006-step-5-balance-the-budget",
-         "score": 6.0637,
-         "grade": 0
-        },
-        {
-         "chunk": "off-01-016-can-i-add-notes-to-transactions",
-         "score": 6.0247,
-         "grade": 1
-        }
-       ]
+       "context": []
       },
       {
        "id": "H-H3-UDH-RU-2",
        "expect": "answer",
-       "ok": false,
+       "ok": true,
        "context": [
         {
-         "chunk": "blog-03-002-what-are-customer-dues",
-         "score": 12.8918,
+         "chunk": "blog-14-002-what-are-accounts-receivable",
+         "score": 13.452,
          "grade": 1
         },
         {
-         "chunk": "blog-14-002-what-are-accounts-receivable",
-         "score": 10.9345,
+         "chunk": "blog-03-008-build-a-follow-up-system",
+         "score": 13.0831,
+         "grade": 2
+        },
+        {
+         "chunk": "blog-03-002-what-are-customer-dues",
+         "score": 12.8918,
          "grade": 1
         }
        ]
@@ -49600,12 +49683,22 @@
       {
        "id": "H-H-PDF-RU-2",
        "expect": "answer",
-       "ok": false,
+       "ok": true,
        "context": [
         {
          "chunk": "blog-07-007-professional-pdf-reports",
          "score": 12.3428,
          "grade": 1
+        },
+        {
+         "chunk": "off-02-005-hand-them-a-real-statement",
+         "score": 9.7295,
+         "grade": 1
+        },
+        {
+         "chunk": "blog-12-012-generating-reports-efficiently-with-hisabdo",
+         "score": 9.4273,
+         "grade": 2
         }
        ]
       },
@@ -49624,11 +49717,6 @@
          "chunk": "off-01-030-what-android-version-is-required",
          "score": 8.024,
          "grade": 1
-        },
-        {
-         "chunk": "off-07-012-10-changes-to-these-terms",
-         "score": 6.2705,
-         "grade": 0
         }
        ]
       },
@@ -49638,13 +49726,18 @@
        "ok": true,
        "context": [
         {
-         "chunk": "off-03-003-use-hisabdo-your-way",
-         "score": 12.7588,
+         "chunk": "off-01-008-does-hisabdo-work-without-the-internet",
+         "score": 10.196,
          "grade": 2
         },
         {
-         "chunk": "off-01-008-does-hisabdo-work-without-the-internet",
-         "score": 11.3473,
+         "chunk": "off-03-008-does-it-work-without-the-internet",
+         "score": 8.8039,
+         "grade": 2
+        },
+        {
+         "chunk": "off-03-003-use-hisabdo-your-way",
+         "score": 8.4678,
          "grade": 2
         }
        ]
@@ -49663,23 +49756,23 @@
          "chunk": "off-01-013-can-i-export-pdf-reports",
          "score": 13.4912,
          "grade": 2
+        },
+        {
+         "chunk": "blog-03-016-can-hisabdo-send-payment-reminders-to-customers",
+         "score": 13.4283,
+         "grade": 1
         }
        ]
       },
       {
        "id": "H-H-KHA-EN-1",
        "expect": "answer",
-       "ok": false,
+       "ok": true,
        "context": [
         {
          "chunk": "blog-08-008-7-back-up-your-records-regularly",
          "score": 9.2365,
          "grade": 2
-        },
-        {
-         "chunk": "blog-08-002-1-record-every-transaction-the-same-day",
-         "score": 7.8503,
-         "grade": 0
         }
        ]
       },
@@ -49709,6 +49802,16 @@
          "chunk": "blog-07-007-professional-pdf-reports",
          "score": 12.6564,
          "grade": 2
+        },
+        {
+         "chunk": "blog-12-012-generating-reports-efficiently-with-hisabdo",
+         "score": 10.0414,
+         "grade": 2
+        },
+        {
+         "chunk": "blog-03-016-can-hisabdo-send-payment-reminders-to-customers",
+         "score": 9.9078,
+         "grade": 2
         }
        ]
       },
@@ -49732,24 +49835,13 @@
       {
        "id": "H-EXP-EN-1",
        "expect": "answer",
-       "ok": true,
-       "context": [
-        {
-         "chunk": "off-04-002-expense-tracker",
-         "score": 5.7168,
-         "grade": 2
-        },
-        {
-         "chunk": "off-04-007-daily-expense-management",
-         "score": 5.638,
-         "grade": 2
-        }
-       ]
+       "ok": false,
+       "context": []
       },
       {
        "id": "H-H-PDF-EN-2",
        "expect": "answer",
-       "ok": true,
+       "ok": false,
        "context": [
         {
          "chunk": "blog-07-007-professional-pdf-reports",
@@ -49760,6 +49852,11 @@
          "chunk": "blog-12-012-generating-reports-efficiently-with-hisabdo",
          "score": 11.1616,
          "grade": 2
+        },
+        {
+         "chunk": "blog-12-016-what-should-i-do-if-a-customer-disputes-the-bala",
+         "score": 10.0881,
+         "grade": 0
         }
        ]
       },
@@ -49978,19 +50075,19 @@
    },
    "production": {
     "params": {
-     "threshold": 4.93992,
+     "threshold": 3.857043,
      "top_k": 2,
      "margin": 2.0,
-     "correct": 114,
+     "correct": 116,
      "unrelated": 16,
-     "recall": 0.62069,
-     "precision": 0.813953,
-     "passages": 86,
+     "recall": 0.672414,
+     "precision": 0.835052,
+     "passages": 97,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.857043,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 1
     },
     "day1": {
      "correct": 16,
@@ -49998,21 +50095,21 @@
      "accuracy": 0.842105,
      "answerable": 7,
      "recall_at_k": 0.571429,
-     "mrr": 0.578947,
+     "mrr": 0.63497,
      "unrelated_in_context": 0,
-     "passages_in_context": 7,
+     "passages_in_context": 12,
      "context_precision": 1.0
     },
     "all": {
-     "correct": 114,
+     "correct": 116,
      "n": 139,
-     "accuracy": 0.820144,
+     "accuracy": 0.834532,
      "answerable": 58,
-     "recall_at_k": 0.62069,
-     "mrr": 0.628242,
+     "recall_at_k": 0.672414,
+     "mrr": 0.669662,
      "unrelated_in_context": 16,
-     "passages_in_context": 86,
-     "context_precision": 0.813953
+     "passages_in_context": 97,
+     "context_precision": 0.835052
     },
     "rows": [
      {
@@ -50129,11 +50226,16 @@
       "id": "D11",
       "expect": "no_answer_in_kb",
       "ok": true,
-      "context": [],
+      "context": [
+       {
+        "chunk": "blog-04-014-how-many-expense-categories-should-a-small-busin",
+        "score": 9.6805,
+        "grade": 1
+       }
+      ],
       "trace": {
-       "query_used": "How does automatic expense categorization work?",
-       "intent": "general",
-       "gated": "router intent general"
+       "query_used": "how does automatic expense categorization work",
+       "intent": "faq"
       }
      },
      {
@@ -50213,11 +50315,21 @@
       "id": "D16",
       "expect": "answer",
       "ok": false,
-      "context": [],
+      "context": [
+       {
+        "chunk": "blog-03-002-what-are-customer-dues",
+        "score": 12.8918,
+        "grade": 1
+       },
+       {
+        "chunk": "blog-05-012-what-is-the-difference-between-accounts-payable",
+        "score": 11.2483,
+        "grade": 1
+       }
+      ],
       "trace": {
-       "query_used": "Udhar aur payment mein kya farq hai?",
-       "intent": "general",
-       "gated": "router intent general"
+       "query_used": "udhar aur payment mein kya farq hai udhar credit dues receivable difference payment",
+       "intent": "faq"
       }
      },
      {
@@ -50240,11 +50352,21 @@
       "id": "D18",
       "expect": "answer",
       "ok": false,
-      "context": [],
+      "context": [
+       {
+        "chunk": "blog-07-012-is-a-digital-ledger-safe-to-use-without-internet",
+        "score": 12.3844,
+        "grade": 1
+       },
+       {
+        "chunk": "blog-07-006-backup-and-recovery",
+        "score": 10.6082,
+        "grade": 1
+       }
+      ],
       "trace": {
-       "query_used": "Is my khata safe if I change my phone?",
-       "intent": "correct_transaction",
-       "gated": "router intent correct_transaction"
+       "query_used": "is my khata safe if i change my phone phone device safe secure backup khata ledger",
+       "intent": "faq"
       }
      },
      {
@@ -50282,8 +50404,14 @@
      {
       "id": "H-EXP-RU-1",
       "expect": "answer",
-      "ok": false,
-      "context": [],
+      "ok": true,
+      "context": [
+       {
+        "chunk": "off-04-002-expense-tracker",
+        "score": 3.888,
+        "grade": 2
+       }
+      ],
       "trace": {
        "query_used": "hisabdo mein kharcha kaise darj karun hisabdo expense how",
        "intent": "faq"
@@ -50292,16 +50420,16 @@
      {
       "id": "H-EXP-UR-1",
       "expect": "answer",
-      "ok": false,
+      "ok": true,
       "context": [
        {
-        "chunk": "off-04-005-customer-ledger",
-        "score": 8.2431,
-        "grade": 0
+        "chunk": "off-04-002-expense-tracker",
+        "score": 3.888,
+        "grade": 2
        }
       ],
       "trace": {
-       "query_used": "حساب دو میں خرچہ کیسے درج کروں؟ ledger account expense how",
+       "query_used": "حساب دو میں خرچہ کیسے درج کروں؟ hisabdo expense how",
        "intent": "faq"
       }
      },
@@ -50419,18 +50547,18 @@
       "ok": false,
       "context": [
        {
-        "chunk": "off-04-005-customer-ledger",
-        "score": 6.6642,
+        "chunk": "off-01-015-does-hisabdo-have-analytics",
+        "score": 4.2169,
         "grade": 0
        },
        {
-        "chunk": "off-03-003-use-hisabdo-your-way",
-        "score": 5.9572,
+        "chunk": "blog-12-004-income-reports-what-to-include",
+        "score": 3.9473,
         "grade": 0
        }
       ],
       "trace": {
-       "query_used": "حساب دو میں آمدنی کیسے شامل کریں؟ ledger account income how",
+       "query_used": "حساب دو میں آمدنی کیسے شامل کریں؟ hisabdo income how",
        "intent": "faq"
       }
      },
@@ -50839,18 +50967,18 @@
       "ok": true,
       "context": [
        {
-        "chunk": "off-03-003-use-hisabdo-your-way",
-        "score": 12.7588,
+        "chunk": "off-01-008-does-hisabdo-work-without-the-internet",
+        "score": 10.196,
         "grade": 2
        },
        {
-        "chunk": "off-01-008-does-hisabdo-work-without-the-internet",
-        "score": 11.3473,
+        "chunk": "off-03-008-does-it-work-without-the-internet",
+        "score": 8.8039,
         "grade": 2
        }
       ],
       "trace": {
-       "query_used": "کیا حساب دو انٹرنیٹ کے بغیر چلتا ہے؟ internet offline ledger account",
+       "query_used": "کیا حساب دو انٹرنیٹ کے بغیر چلتا ہے؟ hisabdo internet offline",
        "intent": "faq"
       }
      },
@@ -51236,12 +51364,17 @@
       "context": [
        {
         "chunk": "blog-07-007-professional-pdf-reports",
-        "score": 11.2156,
+        "score": 8.3861,
         "grade": 1
+       },
+       {
+        "chunk": "blog-12-007-payables-reports-what-to-include",
+        "score": 7.6293,
+        "grade": 0
        }
       ],
       "trace": {
-       "query_used": "کیا حساب دو مہینے کی رپورٹ پی ڈی ایف میں دیتا ہے؟ report pdf ledger account",
+       "query_used": "کیا حساب دو مہینے کی رپورٹ پی ڈی ایف میں دیتا ہے؟ hisabdo report pdf",
        "intent": "faq"
       }
      },
@@ -51342,11 +51475,21 @@
       "id": "H-H2-UDH-UR-2",
       "expect": "answer",
       "ok": false,
-      "context": [],
+      "context": [
+       {
+        "chunk": "blog-03-002-what-are-customer-dues",
+        "score": 12.8918,
+        "grade": 1
+       },
+       {
+        "chunk": "blog-05-012-what-is-the-difference-between-accounts-payable",
+        "score": 11.2483,
+        "grade": 1
+       }
+      ],
       "trace": {
-       "query_used": "ادھار اور ادائیگی میں کیا فرق ہے؟",
-       "intent": "general",
-       "gated": "router intent general"
+       "query_used": "ادھار اور ادائیگی میں کیا فرق ہے؟ udhar credit dues receivable difference payment",
+       "intent": "faq"
       }
      },
      {
@@ -51389,16 +51532,21 @@
      {
       "id": "H-H2-PDF-UR-1",
       "expect": "answer",
-      "ok": true,
+      "ok": false,
       "context": [
        {
         "chunk": "blog-07-007-professional-pdf-reports",
-        "score": 11.2156,
+        "score": 8.3861,
         "grade": 2
+       },
+       {
+        "chunk": "blog-12-007-payables-reports-what-to-include",
+        "score": 7.6293,
+        "grade": 0
        }
       ],
       "trace": {
-       "query_used": "کیا حساب دو سے پی ڈی ایف رپورٹ نکل سکتی ہے؟ report pdf ledger account",
+       "query_used": "کیا حساب دو سے پی ڈی ایف رپورٹ نکل سکتی ہے؟ hisabdo report pdf",
        "intent": "faq"
       }
      },
@@ -51549,12 +51697,17 @@
       "context": [
        {
         "chunk": "blog-07-009-multi-language-support",
-        "score": 16.638,
+        "score": 14.3262,
+        "grade": 2
+       },
+       {
+        "chunk": "off-04-009-multi-language-support",
+        "score": 13.5685,
         "grade": 2
        }
       ],
       "trace": {
-       "query_used": "کیا حساب دو اردو میں چلتا ہے؟ urdu language ledger account",
+       "query_used": "کیا حساب دو اردو میں چلتا ہے؟ hisabdo urdu language",
        "intent": "faq"
       }
      },
@@ -51631,12 +51784,12 @@
       "context": [
        {
         "chunk": "blog-07-007-professional-pdf-reports",
-        "score": 11.2225,
+        "score": 15.7344,
         "grade": 2
        }
       ],
       "trace": {
-       "query_used": "statement ko pdf mein kaise save karte hain pdf report statement statement pdf how",
+       "query_used": "statement ko pdf mein kaise save karte hain save export pdf report statement statement pdf how",
        "intent": "faq"
       }
      },
@@ -51646,18 +51799,13 @@
       "ok": false,
       "context": [
        {
-        "chunk": "off-06-010-8-data-security",
-        "score": 7.1525,
-        "grade": 0
-       },
-       {
-        "chunk": "blog-07-012-is-a-digital-ledger-safe-to-use-without-internet",
-        "score": 6.0453,
+        "chunk": "blog-07-006-backup-and-recovery",
+        "score": 8.9383,
         "grade": 0
        }
       ],
       "trace": {
-       "query_used": "اسٹیٹمنٹ کو پی ڈی ایف میں کیسے محفوظ کریں؟ safe secure how",
+       "query_used": "اسٹیٹمنٹ کو پی ڈی ایف میں کیسے محفوظ کریں؟ save export how",
        "intent": "faq"
       }
      },
@@ -51723,21 +51871,21 @@
      {
       "id": "H-H3-UDH-RU-2",
       "expect": "answer",
-      "ok": false,
+      "ok": true,
       "context": [
        {
-        "chunk": "blog-03-002-what-are-customer-dues",
-        "score": 12.8918,
+        "chunk": "blog-14-002-what-are-accounts-receivable",
+        "score": 13.452,
         "grade": 1
        },
        {
-        "chunk": "blog-14-002-what-are-accounts-receivable",
-        "score": 10.9345,
-        "grade": 1
+        "chunk": "blog-03-008-build-a-follow-up-system",
+        "score": 13.0831,
+        "grade": 2
        }
       ],
       "trace": {
-       "query_used": "udhar wapis lene ka tareeqa kya hai udhar credit dues receivable",
+       "query_used": "udhar wapis lene ka tareeqa kya hai collect recover follow up udhar credit dues receivable",
        "intent": "faq"
       }
      },
@@ -51766,22 +51914,12 @@
      {
       "id": "H-TC-06",
       "expect": "none",
-      "ok": false,
-      "context": [
-       {
-        "chunk": "blog-16-013-what-happens-to-my-data-if-i-lose-my-phone",
-        "score": 7.3034,
-        "grade": 0
-       },
-       {
-        "chunk": "off-06-002-1-information-we-collect",
-        "score": 6.4275,
-        "grade": 0
-       }
-      ],
+      "ok": true,
+      "context": [],
       "trace": {
-       "query_used": "what is my customer s phone number phone device customer",
-       "intent": "faq"
+       "query_used": "What is my customer's phone number?",
+       "intent": "account_query",
+       "gated": "router intent account_query"
       }
      },
      {
@@ -51798,12 +51936,22 @@
      {
       "id": "H-TC-08",
       "expect": "none",
-      "ok": true,
-      "context": [],
+      "ok": false,
+      "context": [
+       {
+        "chunk": "blog-05-008-maintain-a-payment-schedule",
+        "score": 6.3318,
+        "grade": 0
+       },
+       {
+        "chunk": "blog-10-013-how-should-i-track-payments-from-multiple-client",
+        "score": 6.2703,
+        "grade": 0
+       }
+      ],
       "trace": {
-       "query_used": "Have you sent the payment to my customer?",
-       "intent": "general",
-       "gated": "router intent general"
+       "query_used": "have you sent the payment to my customer customer payment",
+       "intent": "faq"
       }
      },
      {
@@ -51815,6 +51963,11 @@
         "chunk": "off-03-009-can-i-export-reports",
         "score": 5.3627,
         "grade": 2
+       },
+       {
+        "chunk": "off-01-002-is-hisabdo-free-to-use",
+        "score": 4.7829,
+        "grade": 1
        }
       ],
       "trace": {
@@ -51866,8 +52019,9 @@
       "ok": true,
       "context": [],
       "trace": {
-       "query_used": "what s the weather in lahore today",
-       "intent": "faq"
+       "query_used": "What's the weather in Lahore today?",
+       "intent": "general",
+       "gated": "router intent general"
       }
      },
      {
@@ -51898,8 +52052,9 @@
       "ok": true,
       "context": [],
       "trace": {
-       "query_used": "what is the capital of france",
-       "intent": "faq"
+       "query_used": "What is the capital of France?",
+       "intent": "general",
+       "gated": "router intent general"
       }
      },
      {
@@ -51930,8 +52085,9 @@
       "ok": true,
       "context": [],
       "trace": {
-       "query_used": "how do i install python on windows",
-       "intent": "faq"
+       "query_used": "How do I install Python on Windows?",
+       "intent": "general",
+       "gated": "router intent general"
       }
      },
      {
@@ -51971,614 +52127,614 @@
    },
    "grid": [
     {
-     "threshold": 4.93992,
+     "threshold": 3.473134,
      "top_k": 1,
-     "margin": null,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.846154,
-     "passages": 52,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 1,
-     "margin": 0.05,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.846154,
-     "passages": 52,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 1,
-     "margin": 0.1,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.846154,
-     "passages": 52,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 1,
-     "margin": 0.2,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.846154,
-     "passages": 52,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 1,
-     "margin": 0.3,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.846154,
-     "passages": 52,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 1,
-     "margin": 1.0,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.846154,
-     "passages": 52,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 1,
-     "margin": 2.0,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.846154,
-     "passages": 52,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 1,
-     "margin": 3.0,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.846154,
-     "passages": 52,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 2,
      "margin": null,
      "correct": 113,
-     "unrelated": 19,
-     "recall": 0.62069,
-     "precision": 0.813725,
-     "passages": 102,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 2,
-     "margin": 0.05,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.859649,
+     "unrelated": 7,
+     "recall": 0.568966,
+     "precision": 0.877193,
      "passages": 57,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.15029,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 9
     },
     {
-     "threshold": 4.93992,
-     "top_k": 2,
+     "threshold": 3.473134,
+     "top_k": 1,
+     "margin": 0.05,
+     "correct": 113,
+     "unrelated": 7,
+     "recall": 0.568966,
+     "precision": 0.877193,
+     "passages": 57,
+     "safe_range": [
+      3.15029,
+      3.857043
+     ],
+     "safe_run_length": 9
+    },
+    {
+     "threshold": 3.473134,
+     "top_k": 1,
      "margin": 0.1,
      "correct": 113,
-     "unrelated": 8,
+     "unrelated": 7,
      "recall": 0.568966,
-     "precision": 0.866667,
-     "passages": 60,
+     "precision": 0.877193,
+     "passages": 57,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.15029,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 9
     },
     {
-     "threshold": 4.93992,
-     "top_k": 2,
+     "threshold": 3.473134,
+     "top_k": 1,
      "margin": 0.2,
-     "correct": 112,
-     "unrelated": 9,
+     "correct": 113,
+     "unrelated": 7,
      "recall": 0.568966,
-     "precision": 0.852459,
-     "passages": 61,
+     "precision": 0.877193,
+     "passages": 57,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.15029,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 9
     },
     {
-     "threshold": 4.93992,
-     "top_k": 2,
+     "threshold": 3.473134,
+     "top_k": 1,
      "margin": 0.3,
-     "correct": 112,
-     "unrelated": 9,
+     "correct": 113,
+     "unrelated": 7,
      "recall": 0.568966,
-     "precision": 0.852459,
-     "passages": 61,
+     "precision": 0.877193,
+     "passages": 57,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.15029,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 9
     },
     {
-     "threshold": 4.93992,
-     "top_k": 2,
+     "threshold": 3.473134,
+     "top_k": 1,
      "margin": 1.0,
      "correct": 113,
-     "unrelated": 13,
-     "recall": 0.586207,
-     "precision": 0.816901,
-     "passages": 71,
+     "unrelated": 7,
+     "recall": 0.568966,
+     "precision": 0.877193,
+     "passages": 57,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.15029,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 9
     },
     {
-     "threshold": 4.93992,
+     "threshold": 3.473134,
+     "top_k": 1,
+     "margin": 2.0,
+     "correct": 113,
+     "unrelated": 7,
+     "recall": 0.568966,
+     "precision": 0.877193,
+     "passages": 57,
+     "safe_range": [
+      3.15029,
+      3.857043
+     ],
+     "safe_run_length": 9
+    },
+    {
+     "threshold": 3.473134,
+     "top_k": 1,
+     "margin": 3.0,
+     "correct": 113,
+     "unrelated": 7,
+     "recall": 0.568966,
+     "precision": 0.877193,
+     "passages": 57,
+     "safe_range": [
+      3.15029,
+      3.857043
+     ],
+     "safe_run_length": 9
+    },
+    {
+     "threshold": 3.857043,
+     "top_k": 2,
+     "margin": null,
+     "correct": 115,
+     "unrelated": 17,
+     "recall": 0.689655,
+     "precision": 0.846847,
+     "passages": 111,
+     "safe_range": [
+      3.857043,
+      3.857043
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 3.473134,
+     "top_k": 2,
+     "margin": 0.05,
+     "correct": 113,
+     "unrelated": 7,
+     "recall": 0.568966,
+     "precision": 0.887097,
+     "passages": 62,
+     "safe_range": [
+      3.15029,
+      3.857043
+     ],
+     "safe_run_length": 9
+    },
+    {
+     "threshold": 3.473134,
+     "top_k": 2,
+     "margin": 0.1,
+     "correct": 115,
+     "unrelated": 8,
+     "recall": 0.603448,
+     "precision": 0.878788,
+     "passages": 66,
+     "safe_range": [
+      3.15029,
+      3.857043
+     ],
+     "safe_run_length": 9
+    },
+    {
+     "threshold": 3.857043,
+     "top_k": 2,
+     "margin": 0.2,
+     "correct": 114,
+     "unrelated": 9,
+     "recall": 0.603448,
+     "precision": 0.865672,
+     "passages": 67,
+     "safe_range": [
+      3.857043,
+      3.857043
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 3.857043,
+     "top_k": 2,
+     "margin": 0.3,
+     "correct": 114,
+     "unrelated": 10,
+     "recall": 0.603448,
+     "precision": 0.852941,
+     "passages": 68,
+     "safe_range": [
+      3.857043,
+      3.857043
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 3.857043,
+     "top_k": 2,
+     "margin": 1.0,
+     "correct": 115,
+     "unrelated": 14,
+     "recall": 0.637931,
+     "precision": 0.82716,
+     "passages": 81,
+     "safe_range": [
+      3.857043,
+      3.857043
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 3.857043,
      "top_k": 2,
      "margin": 2.0,
-     "correct": 114,
+     "correct": 116,
      "unrelated": 16,
-     "recall": 0.62069,
-     "precision": 0.813953,
-     "passages": 86,
+     "recall": 0.672414,
+     "precision": 0.835052,
+     "passages": 97,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.857043,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 1
     },
     {
-     "threshold": 4.93992,
+     "threshold": 3.857043,
      "top_k": 2,
      "margin": 3.0,
-     "correct": 114,
-     "unrelated": 17,
-     "recall": 0.62069,
-     "precision": 0.819149,
-     "passages": 94,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 8.01328,
-     "top_k": 3,
-     "margin": null,
-     "correct": 109,
-     "unrelated": 11,
-     "recall": 0.586207,
-     "precision": 0.894231,
+     "correct": 116,
+     "unrelated": 16,
+     "recall": 0.672414,
+     "precision": 0.846154,
      "passages": 104,
      "safe_range": [
-      7.916312,
-      8.218562
+      3.857043,
+      3.857043
      ],
-     "safe_run_length": 5
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 3,
-     "margin": 0.05,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.859649,
-     "passages": 57,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 3,
-     "margin": 0.1,
-     "correct": 113,
-     "unrelated": 8,
-     "recall": 0.568966,
-     "precision": 0.866667,
-     "passages": 60,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 3,
-     "margin": 0.2,
-     "correct": 112,
-     "unrelated": 9,
-     "recall": 0.568966,
-     "precision": 0.852459,
-     "passages": 61,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 3,
-     "margin": 0.3,
-     "correct": 112,
-     "unrelated": 9,
-     "recall": 0.568966,
-     "precision": 0.852459,
-     "passages": 61,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 3,
-     "margin": 1.0,
-     "correct": 111,
-     "unrelated": 15,
-     "recall": 0.586207,
-     "precision": 0.805195,
-     "passages": 77,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
+     "safe_run_length": 1
     },
     {
      "threshold": 8.01328,
      "top_k": 3,
-     "margin": 2.0,
-     "correct": 112,
-     "unrelated": 4,
-     "recall": 0.551724,
-     "precision": 0.942029,
-     "passages": 69,
-     "safe_range": [
-      7.916312,
-      8.218562
-     ],
-     "safe_run_length": 5
-    },
-    {
-     "threshold": 8.01328,
-     "top_k": 3,
-     "margin": 3.0,
-     "correct": 112,
-     "unrelated": 5,
-     "recall": 0.568966,
-     "precision": 0.939759,
-     "passages": 83,
-     "safe_range": [
-      7.916312,
-      8.218562
-     ],
-     "safe_run_length": 5
-    },
-    {
-     "threshold": 8.544529,
-     "top_k": 4,
      "margin": null,
-     "correct": 107,
-     "unrelated": 12,
-     "recall": 0.551724,
-     "precision": 0.893805,
-     "passages": 113,
+     "correct": 110,
+     "unrelated": 11,
+     "recall": 0.62069,
+     "precision": 0.903509,
+     "passages": 114,
      "safe_range": [
-      8.532725,
-      8.653772
+      7.920015,
+      8.226665
      ],
      "safe_run_length": 4
     },
     {
-     "threshold": 4.93992,
-     "top_k": 4,
+     "threshold": 3.473134,
+     "top_k": 3,
      "margin": 0.05,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.859649,
-     "passages": 57,
-     "safe_range": [
-      4.55018,
-      5.329867
-     ],
-     "safe_run_length": 14
-    },
-    {
-     "threshold": 4.93992,
-     "top_k": 4,
-     "margin": 0.1,
      "correct": 113,
+     "unrelated": 7,
+     "recall": 0.568966,
+     "precision": 0.887097,
+     "passages": 62,
+     "safe_range": [
+      3.15029,
+      3.857043
+     ],
+     "safe_run_length": 9
+    },
+    {
+     "threshold": 3.473134,
+     "top_k": 3,
+     "margin": 0.1,
+     "correct": 115,
      "unrelated": 8,
-     "recall": 0.568966,
-     "precision": 0.866667,
-     "passages": 60,
+     "recall": 0.603448,
+     "precision": 0.878788,
+     "passages": 66,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.15029,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 9
     },
     {
-     "threshold": 4.93992,
-     "top_k": 4,
+     "threshold": 3.857043,
+     "top_k": 3,
      "margin": 0.2,
-     "correct": 112,
-     "unrelated": 9,
-     "recall": 0.568966,
-     "precision": 0.852459,
-     "passages": 61,
+     "correct": 114,
+     "unrelated": 10,
+     "recall": 0.603448,
+     "precision": 0.852941,
+     "passages": 68,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.857043,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 1
     },
     {
-     "threshold": 4.93992,
-     "top_k": 4,
+     "threshold": 3.857043,
+     "top_k": 3,
      "margin": 0.3,
-     "correct": 112,
-     "unrelated": 9,
-     "recall": 0.568966,
-     "precision": 0.852459,
-     "passages": 61,
+     "correct": 114,
+     "unrelated": 11,
+     "recall": 0.603448,
+     "precision": 0.84058,
+     "passages": 69,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.857043,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 1
     },
     {
-     "threshold": 4.93992,
-     "top_k": 4,
+     "threshold": 3.857043,
+     "top_k": 3,
      "margin": 1.0,
-     "correct": 111,
-     "unrelated": 18,
-     "recall": 0.586207,
-     "precision": 0.780488,
+     "correct": 113,
+     "unrelated": 19,
+     "recall": 0.637931,
+     "precision": 0.793478,
+     "passages": 92,
+     "safe_range": [
+      3.857043,
+      3.857043
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 8.01328,
+     "top_k": 3,
+     "margin": 2.0,
+     "correct": 113,
+     "unrelated": 4,
+     "recall": 0.568966,
+     "precision": 0.95122,
      "passages": 82,
      "safe_range": [
-      4.55018,
-      5.329867
+      7.920015,
+      8.226665
      ],
-     "safe_run_length": 14
+     "safe_run_length": 4
+    },
+    {
+     "threshold": 8.01328,
+     "top_k": 3,
+     "margin": 3.0,
+     "correct": 114,
+     "unrelated": 5,
+     "recall": 0.603448,
+     "precision": 0.946809,
+     "passages": 94,
+     "safe_range": [
+      7.920015,
+      8.226665
+     ],
+     "safe_run_length": 4
+    },
+    {
+     "threshold": 8.105628,
+     "top_k": 4,
+     "margin": null,
+     "correct": 108,
+     "unrelated": 18,
+     "recall": 0.62069,
+     "precision": 0.869565,
+     "passages": 138,
+     "safe_range": [
+      8.01328,
+      8.226665
+     ],
+     "safe_run_length": 3
+    },
+    {
+     "threshold": 3.473134,
+     "top_k": 4,
+     "margin": 0.05,
+     "correct": 113,
+     "unrelated": 7,
+     "recall": 0.568966,
+     "precision": 0.887097,
+     "passages": 62,
+     "safe_range": [
+      3.15029,
+      3.857043
+     ],
+     "safe_run_length": 9
+    },
+    {
+     "threshold": 3.473134,
+     "top_k": 4,
+     "margin": 0.1,
+     "correct": 115,
+     "unrelated": 8,
+     "recall": 0.603448,
+     "precision": 0.878788,
+     "passages": 66,
+     "safe_range": [
+      3.15029,
+      3.857043
+     ],
+     "safe_run_length": 9
+    },
+    {
+     "threshold": 3.857043,
+     "top_k": 4,
+     "margin": 0.2,
+     "correct": 114,
+     "unrelated": 10,
+     "recall": 0.603448,
+     "precision": 0.852941,
+     "passages": 68,
+     "safe_range": [
+      3.857043,
+      3.857043
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 3.857043,
+     "top_k": 4,
+     "margin": 0.3,
+     "correct": 114,
+     "unrelated": 11,
+     "recall": 0.603448,
+     "precision": 0.84058,
+     "passages": 69,
+     "safe_range": [
+      3.857043,
+      3.857043
+     ],
+     "safe_run_length": 1
+    },
+    {
+     "threshold": 3.857043,
+     "top_k": 4,
+     "margin": 1.0,
+     "correct": 113,
+     "unrelated": 23,
+     "recall": 0.637931,
+     "precision": 0.767677,
+     "passages": 99,
+     "safe_range": [
+      3.857043,
+      3.857043
+     ],
+     "safe_run_length": 1
     },
     {
      "threshold": 8.01328,
      "top_k": 4,
      "margin": 2.0,
      "correct": 112,
-     "unrelated": 4,
-     "recall": 0.551724,
-     "precision": 0.943662,
-     "passages": 71,
+     "unrelated": 7,
+     "recall": 0.568966,
+     "precision": 0.91954,
+     "passages": 87,
      "safe_range": [
-      7.916312,
-      8.218562
+      7.920015,
+      8.226665
      ],
-     "safe_run_length": 5
+     "safe_run_length": 4
     },
     {
      "threshold": 8.01328,
      "top_k": 4,
      "margin": 3.0,
-     "correct": 111,
-     "unrelated": 7,
-     "recall": 0.568966,
-     "precision": 0.923077,
-     "passages": 91,
+     "correct": 113,
+     "unrelated": 9,
+     "recall": 0.603448,
+     "precision": 0.915094,
+     "passages": 106,
      "safe_range": [
-      7.916312,
-      8.218562
+      7.920015,
+      8.226665
      ],
-     "safe_run_length": 5
+     "safe_run_length": 4
     },
     {
-     "threshold": 8.609088,
+     "threshold": 9.018248,
      "top_k": 5,
      "margin": null,
      "correct": 107,
-     "unrelated": 15,
+     "unrelated": 16,
      "recall": 0.551724,
-     "precision": 0.879032,
-     "passages": 124,
+     "precision": 0.876923,
+     "passages": 130,
      "safe_range": [
-      8.609088,
-      8.653772
+      8.941346,
+      9.223642
      ],
-     "safe_run_length": 2
+     "safe_run_length": 4
     },
     {
-     "threshold": 4.93992,
+     "threshold": 3.473134,
      "top_k": 5,
      "margin": 0.05,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.859649,
-     "passages": 57,
+     "correct": 113,
+     "unrelated": 7,
+     "recall": 0.568966,
+     "precision": 0.887097,
+     "passages": 62,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.15029,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 9
     },
     {
-     "threshold": 4.93992,
+     "threshold": 3.473134,
      "top_k": 5,
      "margin": 0.1,
-     "correct": 113,
+     "correct": 115,
      "unrelated": 8,
-     "recall": 0.568966,
-     "precision": 0.866667,
-     "passages": 60,
+     "recall": 0.603448,
+     "precision": 0.878788,
+     "passages": 66,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.15029,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 9
     },
     {
-     "threshold": 4.93992,
+     "threshold": 3.857043,
      "top_k": 5,
      "margin": 0.2,
-     "correct": 112,
-     "unrelated": 9,
-     "recall": 0.568966,
-     "precision": 0.852459,
-     "passages": 61,
+     "correct": 114,
+     "unrelated": 10,
+     "recall": 0.603448,
+     "precision": 0.852941,
+     "passages": 68,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.857043,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 1
     },
     {
-     "threshold": 4.93992,
+     "threshold": 3.857043,
      "top_k": 5,
      "margin": 0.3,
-     "correct": 112,
-     "unrelated": 9,
-     "recall": 0.568966,
-     "precision": 0.852459,
-     "passages": 61,
+     "correct": 114,
+     "unrelated": 11,
+     "recall": 0.603448,
+     "precision": 0.84058,
+     "passages": 69,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.857043,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 1
     },
     {
-     "threshold": 5.257288,
+     "threshold": 3.857043,
      "top_k": 5,
      "margin": 1.0,
-     "correct": 111,
-     "unrelated": 19,
-     "recall": 0.586207,
-     "precision": 0.765432,
-     "passages": 81,
+     "correct": 112,
+     "unrelated": 26,
+     "recall": 0.637931,
+     "precision": 0.747573,
+     "passages": 103,
      "safe_range": [
-      5.118823,
-      5.329867
+      3.857043,
+      3.857043
      ],
-     "safe_run_length": 5
+     "safe_run_length": 1
     },
     {
      "threshold": 8.01328,
      "top_k": 5,
      "margin": 2.0,
      "correct": 112,
-     "unrelated": 4,
-     "recall": 0.551724,
-     "precision": 0.943662,
-     "passages": 71,
+     "unrelated": 8,
+     "recall": 0.568966,
+     "precision": 0.911111,
+     "passages": 90,
      "safe_range": [
-      7.916312,
-      8.218562
+      7.920015,
+      8.226665
      ],
-     "safe_run_length": 5
+     "safe_run_length": 4
     },
     {
      "threshold": 8.01328,
      "top_k": 5,
      "margin": 3.0,
-     "correct": 111,
-     "unrelated": 7,
-     "recall": 0.568966,
-     "precision": 0.926316,
-     "passages": 95,
+     "correct": 113,
+     "unrelated": 10,
+     "recall": 0.603448,
+     "precision": 0.910714,
+     "passages": 112,
      "safe_range": [
-      7.916312,
-      8.218562
+      7.920015,
+      8.226665
      ],
-     "safe_run_length": 5
+     "safe_run_length": 4
     },
     {
      "threshold": 9.223642,
      "top_k": 8,
      "margin": null,
-     "correct": 106,
-     "unrelated": 20,
-     "recall": 0.534483,
-     "precision": 0.848485,
-     "passages": 132,
+     "correct": 107,
+     "unrelated": 23,
+     "recall": 0.551724,
+     "precision": 0.844595,
+     "passages": 148,
      "safe_range": [
       9.223642,
       9.223642
@@ -52586,107 +52742,107 @@
      "safe_run_length": 1
     },
     {
-     "threshold": 4.93992,
+     "threshold": 3.473134,
      "top_k": 8,
      "margin": 0.05,
-     "correct": 111,
-     "unrelated": 8,
-     "recall": 0.534483,
-     "precision": 0.859649,
-     "passages": 57,
+     "correct": 113,
+     "unrelated": 7,
+     "recall": 0.568966,
+     "precision": 0.887097,
+     "passages": 62,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.15029,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 9
     },
     {
-     "threshold": 4.93992,
+     "threshold": 3.473134,
      "top_k": 8,
      "margin": 0.1,
-     "correct": 113,
+     "correct": 115,
      "unrelated": 8,
-     "recall": 0.568966,
-     "precision": 0.866667,
-     "passages": 60,
+     "recall": 0.603448,
+     "precision": 0.878788,
+     "passages": 66,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.15029,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 9
     },
     {
-     "threshold": 4.93992,
+     "threshold": 3.857043,
      "top_k": 8,
      "margin": 0.2,
-     "correct": 112,
-     "unrelated": 9,
-     "recall": 0.568966,
-     "precision": 0.852459,
-     "passages": 61,
+     "correct": 114,
+     "unrelated": 10,
+     "recall": 0.603448,
+     "precision": 0.852941,
+     "passages": 68,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.857043,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 1
     },
     {
-     "threshold": 4.93992,
+     "threshold": 3.857043,
      "top_k": 8,
      "margin": 0.3,
-     "correct": 112,
-     "unrelated": 9,
-     "recall": 0.568966,
-     "precision": 0.852459,
-     "passages": 61,
+     "correct": 114,
+     "unrelated": 11,
+     "recall": 0.603448,
+     "precision": 0.84058,
+     "passages": 69,
      "safe_range": [
-      4.55018,
-      5.329867
+      3.857043,
+      3.857043
      ],
-     "safe_run_length": 14
+     "safe_run_length": 1
     },
     {
-     "threshold": 5.257288,
+     "threshold": 3.857043,
      "top_k": 8,
      "margin": 1.0,
-     "correct": 111,
-     "unrelated": 19,
-     "recall": 0.586207,
-     "precision": 0.765432,
-     "passages": 81,
+     "correct": 112,
+     "unrelated": 28,
+     "recall": 0.637931,
+     "precision": 0.733333,
+     "passages": 105,
      "safe_range": [
-      5.118823,
-      5.329867
+      3.857043,
+      3.857043
      ],
-     "safe_run_length": 5
+     "safe_run_length": 1
     },
     {
      "threshold": 8.01328,
      "top_k": 8,
      "margin": 2.0,
      "correct": 112,
-     "unrelated": 4,
-     "recall": 0.551724,
-     "precision": 0.943662,
-     "passages": 71,
-     "safe_range": [
-      7.916312,
-      8.218562
-     ],
-     "safe_run_length": 5
-    },
-    {
-     "threshold": 8.218562,
-     "top_k": 8,
-     "margin": 3.0,
-     "correct": 111,
      "unrelated": 8,
      "recall": 0.568966,
-     "precision": 0.915789,
-     "passages": 95,
+     "precision": 0.911111,
+     "passages": 90,
      "safe_range": [
-      8.218562,
-      8.218562
+      7.920015,
+      8.226665
+     ],
+     "safe_run_length": 4
+    },
+    {
+     "threshold": 8.226665,
+     "top_k": 8,
+     "margin": 3.0,
+     "correct": 113,
+     "unrelated": 12,
+     "recall": 0.603448,
+     "precision": 0.892857,
+     "passages": 112,
+     "safe_range": [
+      8.226665,
+      8.226665
      ],
      "safe_run_length": 1
     }

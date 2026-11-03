@@ -130,6 +130,9 @@ class GroundedAnswer:
     needs_review: bool = False
     review_reason: str | None = None
     language: str = "en"
+    retrieved_ids: list[str] = field(default_factory=list)   # passed the threshold (telemetry)
+    retrieval_ms: float | None = None
+    error: str | None = None                                   # llm_error when the model failed and the source text was used
 
 
 # ------------------------------------------------------------------------------------ helpers
@@ -311,20 +314,31 @@ class GroundedAnswerer:
             return self.fallback(message, lang, out_of_scope=True)
         # Latin-script words only: the KB is English, so Urdu-script words are represented by their glossary terms.
         topic = {w for w in topic_words(rewrite(message)) if re.fullmatch(r"[a-z0-9]+", w)}
-        passages = [p for p in self.retriever.retrieve(message) if not topic or relevant(topic, p)]
+        import time as _time
+        t0 = _time.perf_counter()
+        retrieved = self.retriever.retrieve(message)
+        info = {"retrieved_ids": [p.chunk_id for p in retrieved],
+                "retrieval_ms": round((_time.perf_counter() - t0) * 1000, 1)}
+        passages = [p for p in retrieved if not topic or relevant(topic, p)]
         question = self.clarify(message, passages, lang)
         if question:
-            return GroundedAnswer(reply=question, status="clarify", language=lang)
+            return GroundedAnswer(reply=question, status="clarify", language=lang, **info)
         if not passages:
-            return self.fallback(message, lang)
+            return _with(self.fallback(message, lang), info)
         if (c := self.conflict(passages, lang, topic)) is not None:
-            return c
+            return _with(c, info)
         if provider is None or lang != "en" or getattr(provider, "extractive", False) or \
                 type(provider).__name__ == "MockLLMProvider":
             # R8 compares the user's own words with the heading; the rewrite's added synonyms are not what was asked.
-            return self.extractive(passages, lang, topic, asked_topic=topic_words(message))
-        draft, _ = provider.generate_reply(message, context=numbered_context(passages), history=history)
-        return self.verify(draft, passages, lang) or self.fallback(message, lang)
+            return _with(self.extractive(passages, lang, topic, asked_topic=topic_words(message)), info)
+        try:
+            draft, _ = provider.generate_reply(message, context=numbered_context(passages), history=history)
+        except Exception as exc:  # noqa: BLE001 - a model failure must not lose a sourced answer
+            log.error("grounding_llm_failed", extra={"error_type": type(exc).__name__})
+            ans = self.extractive(passages, lang, topic, asked_topic=topic_words(message))
+            ans.error = "llm_error"
+            return _with(ans, info)
+        return _with(self.verify(draft, passages, lang) or self.fallback(message, lang), info)
 
     @staticmethod
     def _with_sources(body: str, cites: list[Citation], lang: str) -> str:
@@ -341,3 +355,8 @@ def numbered_context(passages: list[Passage]) -> str:
         kind = "legal page: quote it, do not interpret it" if p.usage == "reference_only" else "help page"
         blocks.append(f"[{n}] {p.label} ({p.source_url}; {kind}; updated {p.last_updated or 'not shown'})\n{p.body}")
     return GROUNDING_RULES + "\n\n" + "\n\n".join(blocks)
+
+
+def _with(ans: GroundedAnswer, info: dict) -> GroundedAnswer:
+    ans.retrieved_ids, ans.retrieval_ms = info["retrieved_ids"], info["retrieval_ms"]
+    return ans

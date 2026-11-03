@@ -7,30 +7,29 @@
    "correct_answer": 4
   },
   "heldout.json": {
-   "correct_answer": 25,
-   "safe_no_answer": 18,
-   "wrong_citation": 9,
-   "correct_refusal": 68
+   "correct_answer": 27,
+   "correct_refusal": 68,
+   "wrong_citation": 8,
+   "safe_no_answer": 17
   }
  },
  "answerable_by_language": {
   "en:correct_answer": 15,
   "en:safe_no_answer": 7,
   "en:wrong_citation": 2,
-  "roman_ur:correct_answer": 8,
-  "roman_ur:safe_no_answer": 8,
+  "roman_ur:correct_answer": 9,
+  "roman_ur:safe_no_answer": 7,
   "roman_ur:wrong_citation": 2,
-  "ur:correct_answer": 6,
+  "ur:correct_answer": 7,
   "ur:safe_no_answer": 6,
-  "ur:wrong_citation": 4
+  "ur:wrong_citation": 3
  },
  "statuses": {
   "routed:report": 18,
-  "routed:account_query": 28,
-  "out_of_scope": 12,
-  "no_source": 7,
-  "answered": 50,
-  "routed:correct_transaction": 1,
+  "routed:account_query": 29,
+  "answered": 55,
+  "no_source": 3,
+  "out_of_scope": 11,
   "routed:add_expense": 16,
   "routed:add_income": 4,
   "clarify": 2,
@@ -132,9 +131,11 @@
    "set": "dev",
    "lang": "en",
    "expect": "no_answer_in_kb",
-   "status": "out_of_scope",
+   "status": "answered",
    "grade": "correct_refusal",
-   "cited": []
+   "cited": [
+    "blog-04-014-how-many-expense-categories-should-a-small-busin"
+   ]
   },
   {
    "id": "D12",
@@ -183,9 +184,11 @@
    "set": "dev",
    "lang": "roman_ur",
    "expect": "answer",
-   "status": "out_of_scope",
+   "status": "answered",
    "grade": "safe_no_answer",
-   "cited": []
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
   },
   {
    "id": "D17",
@@ -203,9 +206,11 @@
    "set": "dev",
    "lang": "en",
    "expect": "answer",
-   "status": "routed:correct_transaction",
+   "status": "answered",
    "grade": "safe_no_answer",
-   "cited": []
+   "cited": [
+    "blog-07-012-is-a-digital-ledger-safe-to-use-without-internet"
+   ]
   },
   {
    "id": "D19",
@@ -232,9 +237,11 @@
    "set": "heldout.json",
    "lang": "roman_ur",
    "expect": "answer",
-   "status": "no_source",
-   "grade": "safe_no_answer",
-   "cited": []
+   "status": "answered",
+   "grade": "correct_answer",
+   "cited": [
+    "off-04-002-expense-tracker"
+   ]
   },
   {
    "id": "H-EXP-UR-1",
@@ -242,9 +249,9 @@
    "lang": "ur",
    "expect": "answer",
    "status": "answered",
-   "grade": "wrong_citation",
+   "grade": "correct_answer",
    "cited": [
-    "off-04-005-customer-ledger"
+    "off-04-002-expense-tracker"
    ]
   },
   {
@@ -331,7 +338,7 @@
    "status": "answered",
    "grade": "wrong_citation",
    "cited": [
-    "off-04-005-customer-ledger"
+    "off-01-015-does-hisabdo-have-analytics"
    ]
   },
   {
@@ -593,7 +600,7 @@
    "status": "answered",
    "grade": "correct_answer",
    "cited": [
-    "off-03-003-use-hisabdo-your-way"
+    "off-01-008-does-hisabdo-work-without-the-internet"
    ]
   },
   {
@@ -942,9 +949,11 @@
    "set": "heldout.json",
    "lang": "ur",
    "expect": "answer",
-   "status": "out_of_scope",
+   "status": "answered",
    "grade": "safe_no_answer",
-   "cited": []
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ]
   },
   {
    "id": "H-H2-PDF-EN-1",
@@ -1159,7 +1168,7 @@
    "status": "answered",
    "grade": "wrong_citation",
    "cited": [
-    "off-06-010-8-data-security"
+    "blog-07-006-backup-and-recovery"
    ]
   },
   {
@@ -1210,7 +1219,7 @@
    "status": "answered",
    "grade": "safe_no_answer",
    "cited": [
-    "blog-03-002-what-are-customer-dues"
+    "blog-14-002-what-are-accounts-receivable"
    ]
   },
   {
@@ -1236,11 +1245,9 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "none",
-   "status": "answered",
-   "grade": "wrong_citation",
-   "cited": [
-    "blog-16-013-what-happens-to-my-data-if-i-lose-my-phone"
-   ]
+   "status": "routed:account_query",
+   "grade": "correct_refusal",
+   "cited": []
   },
   {
    "id": "H-TC-07",
@@ -1256,9 +1263,11 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "none",
-   "status": "out_of_scope",
-   "grade": "correct_refusal",
-   "cited": []
+   "status": "answered",
+   "grade": "wrong_citation",
+   "cited": [
+    "blog-05-008-maintain-a-payment-schedule"
+   ]
   },
   {
    "id": "H-F-01",
@@ -1305,7 +1314,7 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "none",
-   "status": "no_source",
+   "status": "out_of_scope",
    "grade": "correct_refusal",
    "cited": []
   },
@@ -1332,7 +1341,7 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "none",
-   "status": "no_source",
+   "status": "out_of_scope",
    "grade": "correct_refusal",
    "cited": []
   },
@@ -1359,7 +1368,7 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "none",
-   "status": "no_source",
+   "status": "out_of_scope",
    "grade": "correct_refusal",
    "cited": []
   },

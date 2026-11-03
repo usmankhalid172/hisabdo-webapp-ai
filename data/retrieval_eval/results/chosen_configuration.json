@@ -7,14 +7,15 @@
   "Hybrid retrieval over data/kb/approved/kb_chunks.jsonl: 0.6 x cosine(bge-small-en-v1.5) + 0.4 x BM25/(BM25+5)",
   "Context selection: score >= threshold, within margin of the best passage, at most top_k passages"
  ],
- "threshold": 0.585804,
+ "threshold": 0.566273,
  "top_k": 2,
  "margin": 0.05,
- "how_set": "Swept on measured results (threshold midpoints between observed scores, top_k 1-8, margin none-3.0). Cross-validated thresholds were 0.58556 (tuned on Day 1 + fold A) and 0.58540 (Day 1 + fold B); production value tuned on Day 1 + all held-out questions.",
+ "how_set": "Swept on measured results (threshold midpoints between observed scores, top_k 1-8, margin none-3.0). Cross-validated thresholds were 0.58556 (tuned on Day 1 + fold A) and 0.58540 (Day 1 + fold B); production value tuned on Day 1 + all held-out questions. Re-measured 2026-11-03 after the router and Urdu glossary fixes (docs/dept3-quality-scorecard.md): threshold 0.566273.",
  "results": {
   "day1": "17/19 (Day 1 baseline 9/19); the 2 misses are router decisions (D16 -> general, D18 -> correct_transaction)",
   "heldout_cross_validated": "101/120 fully correct; 68/68 must-be-empty questions empty; 32/51 answerable questions with an answering passage in context; 8 unrelated passages in 85; context precision 0.90",
-  "latency": "155 ms per question measured on CPU in the evaluation run (router + hybrid), after the one-off embedding of the KB"
+  "latency": "155 ms per question measured on CPU in the evaluation run (router + hybrid), after the one-off embedding of the KB",
+  "heldout_cross_validated_2026_11_03": "100/120 fully correct; 7 unrelated passages (was 8); Day 1 17/19"
  },
  "rejected_despite_score": {},
  "known_limits": [

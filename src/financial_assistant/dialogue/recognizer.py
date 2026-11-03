@@ -13,6 +13,7 @@ later behind the same IntentRecognizer interface and compared on the same tests.
 from __future__ import annotations
 
 import re
+from functools import lru_cache
 from abc import ABC, abstractmethod
 from datetime import date
 
@@ -73,6 +74,25 @@ STRONG = {  # cues that decide on their own (no amount needed)
 }
 
 
+_URDU = re.compile("[\u0600-\u06ff]")
+
+# Fixes from the 2026-11-03 evaluation (docs/dept3-quality-scorecard.md).
+WH_QUESTION = re.compile(r"^\s*(who|when|where|which|why)\b|\b(world cup|year|century)\b", re.I)
+MONEY_CONTEXT = re.compile(r"\b(rs|rupees?|pkr|usd|aed|inr|paid|pay|spent|spend|received|got|gave|bought|sold|cost|"
+                           r"diye|diya|liye|liya|mile|mila|kharch\w*|wasool|bill|udhar|udhaar)\b|روپے|خرچ|دیے|ملے", re.I)
+FIGURE_WORDS = re.compile(r"\b(balance|owe|owed|sales|revenue|income|profit|spent|expenses?|kitna|kitni|how much)\b")
+CORRECTION_PHRASE = re.compile(r"\b(galti|ghalti|ghalat|wrong|mistake|correct (it|that|the)|change (it|that|the amount|"
+                               r"the entry)|should (be|have been)|instead of|nahi .{1,12} tha)\b")
+APP_DOMAIN = re.compile(
+    r"hisab|khata|khaata|udh?aa?r|ledger|expense|kharch|income|aamdani|amdani|customer|grahak|supplier|payment|"
+    r"receivable|payable|report|pdf|statement|backup|back up|restore|invoice|bookkeep|account|balance|budget|cash|"
+    r"profit|loss|sale|tax|business|shop|dukaan|dukan|money|paise|rupee|pkr|currenc|financ|record|entry|entries|"
+    r"transaction|credit|debt|loan|qarz|salary|rent|bill|app\b|sync|offline|internet|language|urdu|english|data|"
+    r"phone|device|android|iphone|password|sign in|login|support|contact|free|price|cost|delete|"
+    r"حساب|کھات|ادھار|خرچ|آمدنی|کاروبار|دکان|پیس|رپورٹ|گاہک|بیک اپ|انٹرنیٹ|ادائیگی|پی ڈی ایف",
+    re.I)
+
+
 class IntentRecognizer(ABC):
     @abstractmethod
     def recognize(self, message: str, today: date) -> IntentResult: ...
@@ -86,6 +106,10 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
         lowered = f" {text.lower()} "
         language = extract.detect_language(text)
         amount = extract.extract_amount(text)
+        # Fix R-6 (2026-11-03): "Who won the 1992 cricket world cup?" - a number in a wh-question with no money word
+        # or transaction verb is not an amount.
+        if amount is not None and WH_QUESTION.search(text) and not MONEY_CONTEXT.search(text):
+            amount = None
 
         if extract.is_yes(text):
             return IntentResult(intent=Intent.CONFIRM, confidence=1.0, language=language, signals=["yes"])
@@ -112,8 +136,9 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
 
         # "What is a cash flow statement?" asks about a CONCEPT, not the user's own figures.
         possessive = re.search(r"\b(mera|meri|mere|my|mujhe|i|hum|hamara|hamari)\b|میرا|میری", lowered)
-        if not possessive and re.search(r"\b(what is|what's|what are|kya hai|kya hota|kya hoti|matlab|meaning|mean)\b",
-                                        lowered):
+        # Fix R-2: "Udhar aur payment mein kya farq hai?" / "...میں کیا فرق ہے؟" are concept questions too.
+        if not possessive and re.search(r"\b(what is|what's|what are|kya hai|kya hota|kya hoti|matlab|meaning|mean|"
+                                        r"difference|farq|fark)\b|فرق", lowered):
             for private in (Intent.REPORT, Intent.ACCOUNT_QUERY):
                 scores.pop(private, None)
             scores.setdefault(Intent.FAQ, 1.0)
@@ -133,6 +158,9 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
                                r"|سکتا|سکتی|دیتا|دیتی|کرتا", lowered)
         if app_subject and capability and amount is None:
             scores.pop(Intent.REPORT, None)
+            # Fix R-5: "How long does HisabDo keep my data after I delete my account?" asks about the app's policy.
+            if not FIGURE_WORDS.search(lowered):
+                scores.pop(Intent.ACCOUNT_QUERY, None)
             scores[Intent.FAQ] = scores.get(Intent.FAQ, 0.0) + 2.0
             signals.append("faq:app_capability")
 
@@ -176,7 +204,10 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
                            r"|سیل|آمدنی|منافع|کمائی", lowered)
         # Only genuinely conceptual words: "What are MY total sales?" asks for figures, not a definition.
         concept = re.search(r"\b(matlab|meaning|mean|means|difference|farq|definition|define)\b|مطلب|فرق", lowered)
-        if own and metric and amount is None and not how_to and not concept:
+        # Fix R-4: "Should I register my shop for sales tax?" names a metric but asks for no figure.
+        asks_figure = re.search(r"\b(how much|kitna|kitni|kitne|total|what (is|are|were)|show|batao|bataen|bata do|"
+                                r"dikhao)\b|کتن|بتا|دکھا", lowered)
+        if own and metric and amount is None and not how_to and not concept and asks_figure:
             scores[Intent.REPORT] = scores.get(Intent.REPORT, 0.0) + 2.0
             signals.append("report:own_metric")
 
@@ -185,8 +216,22 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
         if is_question and amount is None and not ({Intent.REPORT, Intent.ACCOUNT_QUERY} & scores.keys()):
             scores.pop(Intent.ADD_EXPENSE, None)
             scores.pop(Intent.ADD_INCOME, None)
+            # Fix R-1: "Is my khata safe if I change my phone?" - "change" with no amount is not a correction.
+            if not CORRECTION_PHRASE.search(lowered):
+                scores.pop(Intent.CORRECT_TRANSACTION, None)
             if not scores:
-                scores[Intent.GENERAL] = 1.0
+                scores[Intent.FAQ if APP_DOMAIN.search(lowered) else Intent.GENERAL] = 1.0
+
+        # Fix R-3: a "product question" that mentions nothing about the app, bookkeeping or money is general chat
+        # ("What is the capital of France?", "How do I install Python?").
+        if Intent.FAQ in scores and not APP_DOMAIN.search(lowered):
+            scores.pop(Intent.FAQ)
+            scores.setdefault(Intent.GENERAL, 1.0)
+        # Fix R-3d: "What is my customer's phone number?" asks for stored private data.
+        if re.search(r"\b(my|mera|meri)\b.{0,20}\b(customer|supplier|grahak)\S*\b.{0,20}\b(phone|number|address|email|cnic)\b",
+                     lowered):
+            scores.pop(Intent.FAQ, None)
+            scores[Intent.ACCOUNT_QUERY] = scores.get(Intent.ACCOUNT_QUERY, 0.0) + 2.0
 
         slots = Slots(
             amount=amount,
@@ -221,10 +266,17 @@ class RuleBasedIntentRecognizer(IntentRecognizer):
                             language=language, signals=signals)
 
 
+@lru_cache(maxsize=4096)
+def _cue_pattern(cue: str) -> re.Pattern:
+    """Compiled once per cue (2026-11-03): building them per call overflowed Python's regex cache, so every pattern
+    in the request path was recompiled on every message."""
+    return re.compile(rf"(?<![a-z]){re.escape(cue)}(?![a-z])")
+
+
 def _has(lowered: str, cue: str) -> bool:
-    if re.search(r"[؀-ۿ]", cue):
+    if _URDU.search(cue):
         return cue in lowered
-    return re.search(rf"(?<![a-z]){re.escape(cue)}(?![a-z])", lowered) is not None
+    return _cue_pattern(cue).search(lowered) is not None
 
 
 def _with_category(slots: Slots, text: str, intent: Intent) -> Slots:
