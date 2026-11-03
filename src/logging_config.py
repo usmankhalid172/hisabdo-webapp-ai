@@ -1,11 +1,25 @@
-"""
-Structured (JSON) logging so the AI service and backend can be aggregated
-the same way. Per Day 15 §8.
-"""
 import json
 import logging
 import sys
 import time
+
+
+SAFE_FIELDS = {
+    "event",
+    "request_id",
+    "method",
+    "status_code",
+    "duration_ms",
+    "intent",
+    "outcome",
+    "source",
+    "source_ids",
+    "provider_name",
+    "tokens_used",
+    "retrieval_duration_ms",
+    "provider_duration_ms",
+    "error_category",
+}
 
 
 class JsonFormatter(logging.Formatter):
@@ -14,16 +28,14 @@ class JsonFormatter(logging.Formatter):
             "timestamp": self.formatTime(record, "%Y-%m-%dT%H:%M:%S%z"),
             "level": record.levelname,
             "logger": record.name,
-            "message": record.getMessage(),
         }
-        # request-scoped fields attached via `extra={...}`
-        for key in ("request_id", "path", "method", "status_code", "duration_ms"):
+
+        for key in SAFE_FIELDS:
             value = getattr(record, key, None)
             if value is not None:
                 payload[key] = value
-        if record.exc_info:
-            payload["exc_info"] = self.formatException(record.exc_info)
-        return json.dumps(payload)
+
+        return json.dumps(payload, default=str)
 
 
 def configure_logging(level: int = logging.INFO) -> logging.Logger:
@@ -42,4 +54,6 @@ logger = configure_logging()
 
 
 def timed_ms(start: float) -> float:
-    return round((time.time() - start) * 1000, 2)
+    return round((time.perf_counter() - start) * 1000, 2)
+
+

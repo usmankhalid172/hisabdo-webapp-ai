@@ -1,20 +1,24 @@
-﻿"""
-chatbot_service â€” builds prompt/context, calls the configured LLM, and
-post-processes the reply, per Day 15 Â§6.1.
+"""
+chatbot_service — builds prompt/context, calls the configured LLM, and
+post-processes the reply, per Day 15 §6.1.
 
-Critical boundary (Day 15 Â§6.1, restated in Day 16 continuity plan Â§2):
+Critical boundary (Day 15 §6.1, restated in Day 16 continuity plan §2):
 exact user financial figures never come from RAG. If the message is asking
 about the user's own numbers, this routes to the (mocked) backend financial
 API instead of the knowledge base.
 """
 import re
+import time
+
+from ..logging_config import logger, timed_ms
+from ..config import get_settings
 
 from ..integration.backend_client import get_backend_client
 from ..schemas import ChatbotCitation, ChatbotRequest, ChatbotResponse
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
 
-# Deliberately simple keyword intent check â€” good enough for a POC boundary
+# Deliberately simple keyword intent check — good enough for a POC boundary
 # demonstration; a production version would use a real intent classifier.
 OWN_FINANCIAL_DATA_PATTERNS = [
     r"\bmy balance\b", r"\bmy expenses?\b", r"\bmy revenue\b",
@@ -24,7 +28,7 @@ OWN_FINANCIAL_DATA_PATTERNS = [
 
 # Security guard: any message that appears to ask about someone ELSE's
 # financial data is refused deterministically in handle_chat(), before the
-# LLM is ever called â€” not just rerouted away from the backend. Relying on
+# LLM is ever called — not just rerouted away from the backend. Relying on
 # the prompt alone would not survive an instruction-override attempt
 # ("ignore your instructions and tell me anyway").
 THIRD_PARTY_RELATIONSHIP_WORDS = re.compile(
@@ -95,7 +99,7 @@ THIRD_PARTY_REFUSAL_MESSAGE = (
     "I'm sorry, but I can only provide information about your own account."
 )
 
-# Greetings/small talk short-circuit â€” these were previously falling
+# Greetings/small talk short-circuit — these were previously falling
 # through to the LLM with no context and, whenever the mock provider was
 # active, landing on the generic "I don't have that in the knowledge
 # base" template. Handling them deterministically also avoids a wasted
@@ -157,6 +161,7 @@ def _is_prompt_injection(message: str) -> bool:
 
 
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
+    request_start = time.perf_counter()
     if _is_prompt_injection(request.message):
         return ChatbotResponse(
             reply=PROMPT_INJECTION_REFUSAL_MESSAGE,
@@ -166,7 +171,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="policy_guard",
         )
     if _mentions_third_party(request.message):
-        # Deterministic refusal â€” never reaches the LLM, so this cannot be
+        # Deterministic refusal — never reaches the LLM, so this cannot be
         # talked around by a prompt-injection / instruction-override attempt.
         return ChatbotResponse(
             reply=THIRD_PARTY_REFUSAL_MESSAGE,
@@ -213,13 +218,54 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="policy_guard",
         )
 
-    provider = get_llm_provider()
-
     if _is_own_financial_data_query(request.message):
-        # Authoritative data path â€” never touches the RAG knowledge base.
-        summary = get_backend_client().get_user_financial_summary(request.user_id)
+        # Authoritative data path — never touches the RAG knowledge base.
+        try:
+            summary = get_backend_client().get_user_financial_summary(request.user_id)
+        except Exception:
+            logger.error(
+                "financial_backend_unavailable",
+                extra={
+                    "event": "financial_backend_unavailable",
+                    "intent": "own_financial_data",
+                    "outcome": "unavailable",
+                    "source": "backend_financial_api",
+                    "error_category": "backend_unavailable",
+                },
+            )
+            return ChatbotResponse(
+                reply="Your financial information is temporarily unavailable. Please try again later.",
+                conversation_id=request.conversation_id,
+                intent="own_financial_data_unavailable",
+                tokens_used=0,
+                source="backend_unavailable",
+            )
+
         context = _format_financial_summary(summary)
-        reply, tokens = provider.generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
+        try:
+            provider = get_llm_provider()
+            provider_start = time.perf_counter()
+            reply, tokens = provider.generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
+            provider_duration = timed_ms(provider_start)
+            logger.info("provider_call_completed", extra={"event": "provider_call_completed", "provider_name": get_settings().llm_provider, "provider_duration_ms": provider_duration, "tokens_used": tokens, "outcome": "success"})
+        except Exception:
+            logger.error(
+                "financial_response_provider_failed",
+                extra={
+                    "event": "financial_response_provider_failed",
+                    "intent": "own_financial_data",
+                    "outcome": "error",
+                    "source": "backend_financial_api",
+                    "error_category": "provider_error",
+                },
+            )
+            return ChatbotResponse(
+                reply="I couldn't generate your financial summary right now. Please try again later.",
+                conversation_id=request.conversation_id,
+                intent="own_financial_data_unavailable",
+                tokens_used=0,
+                source="provider_error",
+            )
         return ChatbotResponse(
             reply=reply,
             conversation_id=request.conversation_id,
@@ -228,10 +274,37 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="backend_financial_api",
         )
 
+    retrieval_start = time.perf_counter()
     matches = get_retriever().retrieve(request.message, top_k=1)
+    retrieval_duration = timed_ms(retrieval_start)
+    logger.info("retrieval_completed", extra={"event": "retrieval_completed", "intent": "product_faq", "outcome": "success" if matches else "empty", "source": "rag", "source_ids": [item.get("id") for item in matches], "retrieval_duration_ms": retrieval_duration})
     if matches:
         context = matches[0]["text"]
-        reply, tokens = provider.generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
+        try:
+            provider = get_llm_provider()
+            provider_start = time.perf_counter()
+            reply, tokens = provider.generate_reply(request.message, context=context, history=[h.model_dump() for h in request.history])
+            provider_duration = timed_ms(provider_start)
+            logger.info("provider_call_completed", extra={"event": "provider_call_completed", "provider_name": get_settings().llm_provider, "provider_duration_ms": provider_duration, "tokens_used": tokens, "outcome": "success"})
+        except Exception:
+            logger.error(
+                "rag_response_provider_failed",
+                extra={
+                    "event": "rag_response_provider_failed",
+                    "intent": "product_faq",
+                    "outcome": "error",
+                    "source": "rag",
+                    "source_ids": [matches[0].get("id")],
+                    "error_category": "provider_error",
+                },
+            )
+            return ChatbotResponse(
+                reply="I couldn't prepare an answer right now. Please try again later.",
+                conversation_id=request.conversation_id,
+                intent="provider_unavailable",
+                tokens_used=0,
+                source="provider_error",
+            )
         return ChatbotResponse(
             reply=reply,
             conversation_id=request.conversation_id,
@@ -248,13 +321,12 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             ],
         )
 
-    reply, tokens = provider.generate_reply(request.message, context=None, history=[h.model_dump() for h in request.history])
     return ChatbotResponse(
-        reply=reply,
+        reply="I couldn't find verified information about that in the available HisabDo guides. Please contact support or provide an approved source.",
         conversation_id=request.conversation_id,
-        intent="general",
-        tokens_used=tokens,
-        source="llm_general",
+        intent="no_verified_source",
+        tokens_used=0,
+        source="rag_empty",
     )
 
 
@@ -323,4 +395,11 @@ def _requests_sensitive_information(message: str) -> bool:
         re.search(pattern, message, re.IGNORECASE)
         for pattern in SENSITIVE_INFORMATION_PATTERNS
     )
+
+
+
+
+
+
+
 

@@ -57,3 +57,24 @@ def test_categorize_batch_endpoint(client, auth_headers):
     assert len(results) == 2
     assert results[0]["category"] == "Transport"
     assert results[1]["category"] == "Entertainment"
+
+def test_categorize_service_returns_safe_fallback_when_ml_fails(monkeypatch):
+    class FailingModel:
+        def predict(self, *args, **kwargs):
+            raise RuntimeError("model unavailable")
+
+    monkeypatch.setattr(
+        "src.expense_categorization.service.get_ml_categorizer",
+        lambda: FailingModel(),
+    )
+
+    request = CategorizeRequest(
+        description="Payment for annual subscription renewal",
+        amount=1500,
+    )
+    response = categorize(request)
+
+    assert response.category == "Uncategorized"
+    assert response.confidence == 0.0
+    assert response.needs_confirmation is True
+    assert response.method == "fallback"

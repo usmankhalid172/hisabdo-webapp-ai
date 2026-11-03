@@ -22,13 +22,14 @@ def test_product_faq_query_uses_rag():
     assert resp.intent == "product_faq"
 
 
-def test_unrelated_query_falls_back_to_general():
+def test_unrelated_query_returns_safe_empty_retrieval_response():
     req = ChatbotRequest(
         user_id="user-1", message="asdkjhasd unrelated gibberish zzz", conversation_id="c3"
     )
     resp = handle_chat(req)
-    assert resp.source == "llm_general"
-    assert resp.intent == "general"
+    assert resp.source == "rag_empty"
+    assert resp.intent == "no_verified_source"
+    assert resp.tokens_used == 0
 
 
 def test_chatbot_endpoint_returns_valid_shape(client, auth_headers):
@@ -74,7 +75,7 @@ def test_history_is_passed_to_llm_provider(monkeypatch):
     ]
     request = ChatbotRequest(
         user_id="test-user",
-        message="What about the batch version?",
+        message="How do I categorize an expense?",
         conversation_id="test-convo",
         history=history,
     )
@@ -96,12 +97,12 @@ def test_mock_provider_does_not_mislabel_financial_data_as_docs():
     assert "docs" not in reply.lower()
 
 
-def test_weak_rag_match_falls_back_to_general_instead_of_wrong_answer():
+def test_weak_rag_match_returns_no_verified_source_instead_of_wrong_answer():
     """Regression guard: a query with no good FAQ match (e.g. paraphrased
     export question, which previously top-matched the unrelated
     'is my data used to train the model' FAQ at a low score) must fall
-    through to the general LLM path rather than returning a confidently
-    wrong RAG answer. See RELEVANCE_THRESHOLD in faq_rag.py."""
+    to the safe empty retrieval response rather than returning a confidently
+    wrong RAG answer or an ungrounded general response. See RELEVANCE_THRESHOLD in faq_rag.py."""
     from src.financial_assistant.faq_rag import get_retriever
 
     matches = get_retriever().retrieve(
@@ -131,3 +132,41 @@ def test_system_prompt_warns_against_inventing_product_details():
 
     assert "invent" in SYSTEM_PROMPT.lower()
     assert "hisabdo product" in SYSTEM_PROMPT.lower() or "api endpoints" in SYSTEM_PROMPT.lower()
+
+def test_rag_provider_failure_returns_safe_response(monkeypatch):
+    class FailingProvider:
+        def generate_reply(self, *args, **kwargs):
+            raise RuntimeError("sensitive provider error")
+
+    monkeypatch.setattr(
+        "src.financial_assistant.service.get_llm_provider",
+        lambda: FailingProvider(),
+    )
+
+    request = ChatbotRequest(
+        user_id="test-user",
+        message="How do I categorize an expense?",
+        conversation_id="provider-failure",
+    )
+    response = handle_chat(request)
+
+    assert response.source == "provider_error"
+    assert response.intent == "provider_unavailable"
+    assert response.tokens_used == 0
+    assert "try again later" in response.reply.lower()
+
+
+def test_index_refresh_failure_keeps_previous_index(tmp_path):
+    from src.financial_assistant.faq_rag import FaqRetriever
+
+    docs = tmp_path / "faq.json"
+    docs.write_text(
+        '[{"id":"test-1","title":"Expense help","text":"How to categorize an expense"}]',
+        encoding="utf-8",
+    )
+
+    retriever = FaqRetriever(docs)
+    docs.write_text("invalid json", encoding="utf-8")
+
+    assert retriever.refresh() is False
+    assert retriever.retrieve("How to categorize an expense")
