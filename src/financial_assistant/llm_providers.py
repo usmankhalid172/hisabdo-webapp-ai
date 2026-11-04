@@ -11,6 +11,7 @@ once a provider is chosen and a key is supplied — no code change needed
 in `service.py`.
 """
 import time
+from functools import wraps
 from abc import ABC, abstractmethod
 
 import httpx
@@ -18,6 +19,13 @@ import httpx
 from ..config import Settings, get_settings
 from ..errors import ServiceError
 from .prompts import SYSTEM_PROMPT
+from .monitoring import (
+    start_timer,
+    elapsed_ms,
+    safe_log_event,
+    monitoring_counters,
+    record_provider_failure,
+)
 
 # Real LLM APIs occasionally return transient 5xx errors under load (seen in
 # practice: Gemini 503s). A single retry with a short backoff turns a
@@ -26,6 +34,43 @@ from .prompts import SYSTEM_PROMPT
 _RETRYABLE_STATUS_CODES = {500, 502, 503, 504}
 _MAX_ATTEMPTS = 2
 _RETRY_DELAY_SECONDS = 1.5
+
+
+def _record_provider_usage(
+    provider: str,
+    model: str,
+    started_at: float,
+    input_tokens: int | None,
+    output_tokens: int | None,
+) -> None:
+    """Record allowlisted provider metrics without request or response data."""
+
+    safe_log_event(
+        "provider_call",
+        component="provider",
+        outcome="success",
+        provider=provider,
+        model=model,
+        latency_ms=elapsed_ms(started_at),
+        input_tokens=input_tokens,
+        output_tokens=output_tokens,
+    )
+
+
+
+def _monitor_provider_errors(provider: str, model: str):
+    """Record provider exceptions without logging exception details."""
+    def decorate(method):
+        @wraps(method)
+        def wrapped(self, *args, **kwargs):
+            started_at = start_timer()
+            try:
+                return method(self, *args, **kwargs)
+            except Exception:
+                record_provider_failure(provider, model, started_at)
+                raise
+        return wrapped
+    return decorate
 
 
 def _post_with_retry(url: str, **kwargs) -> httpx.Response:
@@ -116,12 +161,14 @@ class AnthropicLLMProvider(LLMProvider):
             )
         self._api_key = settings.anthropic_api_key
 
+    @_monitor_provider_errors("anthropic", "claude-sonnet-4-6")
     def generate_reply(
         self,
         message: str,
         context: str | None = None,
         history: list[dict] | None = None,
     ) -> tuple[str, int | None]:
+        started_at = start_timer()
         user_content = f"Context:\n{context}\n\nUser question: {message}" if context else message
 
         messages = [
@@ -147,7 +194,12 @@ class AnthropicLLMProvider(LLMProvider):
         )
         data = resp.json()
         reply = "".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text")
-        tokens = data.get("usage", {}).get("output_tokens")
+        usage = data.get("usage", {})
+        tokens = usage.get("output_tokens")
+        _record_provider_usage(
+            "anthropic", "claude-sonnet-4-6", started_at,
+            usage.get("input_tokens"), tokens,
+        )
         return reply, tokens
 
 
@@ -163,12 +215,14 @@ class OpenAILLMProvider(LLMProvider):
             )
         self._api_key = settings.openai_api_key
 
+    @_monitor_provider_errors("openai", "gpt-4o-mini")
     def generate_reply(
         self,
         message: str,
         context: str | None = None,
         history: list[dict] | None = None,
     ) -> tuple[str, int | None]:
+        started_at = start_timer()
         user_content = f"Context:\n{context}\n\nUser question: {message}" if context else message
 
         messages = [{"role": "system", "content": SYSTEM_PROMPT}]
@@ -189,7 +243,12 @@ class OpenAILLMProvider(LLMProvider):
         )
         data = resp.json()
         reply = data["choices"][0]["message"]["content"]
-        tokens = data.get("usage", {}).get("completion_tokens")
+        usage = data.get("usage", {})
+        tokens = usage.get("completion_tokens")
+        _record_provider_usage(
+            "openai", "gpt-4o-mini", started_at,
+            usage.get("prompt_tokens"), tokens,
+        )
         return reply, tokens
 
 
@@ -205,12 +264,14 @@ class GeminiLLMProvider(LLMProvider):
             )
         self._api_key = settings.gemini_api_key
 
+    @_monitor_provider_errors("gemini", "gemini-2.5-flash")
     def generate_reply(
         self,
         message: str,
         context: str | None = None,
         history: list[dict] | None = None,
     ) -> tuple[str, int | None]:
+        started_at = start_timer()
         user_content = f"Context:\n{context}\n\nUser question: {message}" if context else message
 
         # Gemini uses "user"/"model" roles (not "assistant"), and wraps each
@@ -240,7 +301,12 @@ class GeminiLLMProvider(LLMProvider):
             part.get("text", "")
             for part in data["candidates"][0]["content"]["parts"]
         )
-        tokens = data.get("usageMetadata", {}).get("candidatesTokenCount")
+        usage = data.get("usageMetadata", {})
+        tokens = usage.get("candidatesTokenCount")
+        _record_provider_usage(
+            "gemini", "gemini-2.5-flash", started_at,
+            usage.get("promptTokenCount"), tokens,
+        )
         return reply, tokens
 
 
@@ -261,12 +327,14 @@ class GroqLLMProvider(LLMProvider):
             )
         self._api_key = settings.groq_api_key
 
+    @_monitor_provider_errors("groq", "openai/gpt-oss-120b")
     def generate_reply(
         self,
         message: str,
         context: str | None = None,
         history: list[dict] | None = None,
     ) -> tuple[str, int | None]:
+        started_at = start_timer()
         user_content = f"Context:\n{context}\n\nUser question: {message}" if context else message
 
         messages = [{"role": "system", "content": SYSTEM_PROMPT}]
@@ -287,7 +355,12 @@ class GroqLLMProvider(LLMProvider):
         )
         data = resp.json()
         reply = data["choices"][0]["message"]["content"]
-        tokens = data.get("usage", {}).get("completion_tokens")
+        usage = data.get("usage", {})
+        tokens = usage.get("completion_tokens")
+        _record_provider_usage(
+            "groq", "openai/gpt-oss-120b", started_at,
+            usage.get("prompt_tokens"), tokens,
+        )
         return reply, tokens
 
 

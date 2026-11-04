@@ -35,6 +35,12 @@ from .guardrails import (
 )
 from .faq_rag import get_retriever
 from .rag_pipeline import prepare_context, format_context_block
+from .monitoring import (
+    start_timer,
+    elapsed_ms,
+    safe_log_event,
+    monitoring_counters,
+)
 from .intent_router import (
     classify_intent,
     extract_slots,
@@ -454,7 +460,7 @@ def _build_verified_citations(matches: list) -> list[ChatbotCitation]:
     return citations
 
 
-def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
+def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
     """Handle a chatbot request while preserving financial data boundaries."""
 
     # 0. Validate input and bounded conversation history before any provider call.
@@ -540,7 +546,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
         except ServiceError:
             raise
         except Exception:
-            logger.exception("Financial backend is unavailable.")
+            logger.error("Financial backend is unavailable; details withheld from logs.")
 
             return ChatbotResponse(
                 reply=(
@@ -577,7 +583,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             top_k=3,
         )
     except Exception:
-        logger.exception("FAQ semantic retrieval failed.")
+        logger.error("FAQ semantic retrieval failed; details withheld from logs.")
 
         return ChatbotResponse(
             reply=FAQ_RETRIEVAL_ERROR_REPLY,
@@ -644,3 +650,54 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
         source="rag",
         citations=citations,
     )
+
+def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
+    """Monitor the complete Department 3 request without logging user data."""
+
+    started_at = start_timer()
+    monitoring_counters.increment("requests")
+
+    try:
+        response = _handle_chat_impl(request)
+
+        if response.source in {"rag_error", "backend_unavailable"}:
+            outcome = "fallback"
+            monitoring_counters.increment("fallback")
+        elif response.source == "policy_guard":
+            outcome = "blocked"
+            monitoring_counters.increment("blocked")
+        else:
+            outcome = "success"
+            monitoring_counters.increment("success")
+
+        safe_log_event(
+            "chat_request",
+            component="chat",
+            outcome=outcome,
+            latency_ms=elapsed_ms(started_at),
+        )
+        return response
+
+    except ServiceError:
+        monitoring_counters.increment("errors")
+        monitoring_counters.increment("backend_failures")
+        safe_log_event(
+            "chat_request",
+            component="backend",
+            outcome="error",
+            latency_ms=elapsed_ms(started_at),
+            error_category="backend",
+        )
+        raise
+
+    except Exception:
+        monitoring_counters.increment("errors")
+        safe_log_event(
+            "chat_request",
+            component="chat",
+            outcome="error",
+            latency_ms=elapsed_ms(started_at),
+            error_category="unknown",
+        )
+        logger.error("Department 3 request failed; details withheld from logs.")
+        raise

@@ -18,6 +18,13 @@ from langchain_core.documents import Document
 from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 
+from src.financial_assistant.monitoring import (
+    start_timer,
+    elapsed_ms,
+    safe_log_event,
+    monitoring_counters,
+)
+
 from src.financial_assistant.guardrails import (
     get_input_guardrail,
     is_safe_knowledge_content,
@@ -120,6 +127,8 @@ class FaqRetriever:
             )
 
         self.relevance_threshold = relevance_threshold
+        self.docs_path = Path(docs_path)
+        self.model_name = model_name
         self.documents: list[Document] = []
         self.vector_store = None
 
@@ -208,7 +217,95 @@ class FaqRetriever:
                 "No verified safe knowledge-base documents are available."
             )
 
+    def rebuild_index(self) -> bool:
+        """Build a replacement index and retain the old one on failure."""
+
+        started_at = start_timer()
+
+        try:
+            candidate = FaqRetriever(
+                docs_path=self.docs_path,
+                relevance_threshold=self.relevance_threshold,
+                model_name=self.model_name,
+            )
+
+            if not candidate.documents or candidate.vector_store is None:
+                raise ValueError("Replacement index is empty.")
+
+            # Swap only after the replacement index is fully built.
+            self.documents, self.vector_store = (
+                candidate.documents,
+                candidate.vector_store,
+            )
+
+            safe_log_event(
+                "index_update",
+                component="index",
+                outcome="success",
+                latency_ms=elapsed_ms(started_at),
+            )
+            return True
+
+        except Exception:
+            monitoring_counters.increment("index_update_failures")
+            monitoring_counters.increment("errors")
+
+            safe_log_event(
+                "index_update",
+                component="index",
+                outcome="error",
+                latency_ms=elapsed_ms(started_at),
+                error_category="index_update",
+            )
+            logger.error(
+                "FAQ index update failed; previous index retained."
+            )
+            return False
+
     def retrieve(
+        self,
+        query: str,
+        top_k: int = 3,
+    ) -> list[dict[str, Any]]:
+        """Monitor retrieval while keeping query content out of logs."""
+
+        started_at = start_timer()
+
+        try:
+            results = self._retrieve_impl(query, top_k)
+            outcome = "success" if results else "fallback"
+
+            if results:
+                monitoring_counters.increment("retrieval_success")
+            else:
+                monitoring_counters.increment("retrieval_empty")
+
+            safe_log_event(
+                "retrieval",
+                component="retrieval",
+                outcome=outcome,
+                latency_ms=elapsed_ms(started_at),
+                retrieved_source_ids=[
+                    item.get("id")
+                    for item in results
+                    if isinstance(item, dict)
+                ],
+            )
+            return results
+
+        except Exception:
+            monitoring_counters.increment("errors")
+            safe_log_event(
+                "retrieval",
+                component="retrieval",
+                outcome="error",
+                latency_ms=elapsed_ms(started_at),
+                error_category="retrieval",
+            )
+            logger.error("FAQ retrieval failed; details withheld from logs.")
+            raise
+
+    def _retrieve_impl(
         self,
         query: str,
         top_k: int = 3,
