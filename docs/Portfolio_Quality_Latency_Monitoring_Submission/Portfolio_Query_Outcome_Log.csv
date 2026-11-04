@@ -1,0 +1,5 @@
+﻿Query ID,Test intent,Observed outcome,Assessment,Issue
+Q01,Ask for project names and source links,Only '2+ projects completed'; generic portfolio links,Partial / incomplete,Missing project specificity and useful citations
+Q02,Ask about HisabDo as a portfolio project,Portfolio source describes HisabDo flagship product; chatbot context did not consistently preserve grounded detail,Partial / needs validation,Use project record and cite supported details
+Q03,Follow-up technology-stack question,Generic React/Next.js/TypeScript claim appeared without adequate evidence,Fail: grounding,Unsupported factual assertion
+Q04,Ask about first-year revenue percentage / unsupported project metric,Prior evaluation noted unrelated or unsupported response pattern,Fail / unsupported,Fallback rather than fabricate metrics

@@ -1,0 +1,12 @@
+﻿Metric / area,Before / observed baseline,Evidence,After / recommended target or action,After status
+Response grounding,Observed weakness,Generic portfolio links; follow-up contained unsupported React/Next.js/TypeScript claim,Use retrieved portfolio chunks as sole factual basis; require source-to-claim checks,Not re-tested after tuning
+Project specificity,Observed weakness,Initial answer said only '2+ projects completed' and did not identify projects/source links adequately,"Return named projects, outcomes and project-specific URLs when supported",Not re-tested after tuning
+HisabDo factual details,Partial evidence,"Portfolio content identifies HisabDo as flagship product and lists Flutter, Supabase, PostgreSQL; bot's answer quality varied across turns",Prioritize HisabDo project record and cite its official project/product URL,Not re-tested after tuning
+Multi-turn context retention,Needs improvement,Follow-up response included unsupported/general technology claims and drifted from portfolio context,Carry portfolio intent and project entity across turns; reset only when user changes topic,Not re-tested after tuning
+Citation validity and relevance,Observed weakness,Generic portfolio links rather than precise case-study citations,Validate URL and ensure each citation supports adjacent claim,Not re-tested after tuning
+Query success outcome,Not formally scored,Available examples show partial answers and at least one factual-grounding failure; no complete labelled query set,Track success as answer completeness + factual support + valid citation + correct context,Not measured as a percentage
+Latency mean,"3,506 ms",10 supplied total-duration samples; one 29.43 s outlier,"Target mean ≤1,000 ms; investigate outliers",Target only; no after-run
+Latency p50,622 ms,Median of 10 supplied total-duration samples,"Target p50 ≤1,000 ms",Target only; no after-run
+Latency p95,"29,430 ms",Nearest-rank p95; with n=10 equals the maximum sample,"Target p95 ≤4,000 ms; monitor tail latency",Target only; no after-run
+Provider usage and cost,Not measured,No provider/model/token/cost telemetry supplied,"Log provider/model, input/output tokens, request count, retry count, currency and calculated cost if authorized",Instrumentation required
+Technical error rate,Not measured,No structured HTTP status/error log supplied for these 10 timing samples,"Track HTTP status, timeout, retry, provider error category; do not infer from answer quality",Instrumentation required

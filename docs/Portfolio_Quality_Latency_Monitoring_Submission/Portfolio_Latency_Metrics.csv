@@ -1,0 +1,11 @@
+﻿Sample,Total duration ms,Server waiting ms,Difference ms,Observation
+P01,487.11,483.81,3.3000000000000114,Within normal observed range
+P02,618.49,613.38,5.110000000000014,Within normal observed range
+P03,962.4,958.48,3.919999999999959,Within normal observed range
+P04,29430.0,421.19,29008.81,Outlier: total duration far exceeds server waiting time
+P05,739.37,734.77,4.600000000000023,Within normal observed range
+P06,624.83,622.17,2.660000000000082,Within normal observed range
+P07,420.02,417.2,2.819999999999993,Within normal observed range
+P08,431.79,429.13,2.660000000000025,Within normal observed range
+P09,760.07,757.54,2.5300000000000864,Within normal observed range
+P10,585.78,582.6,3.17999999999995,Within normal observed range
