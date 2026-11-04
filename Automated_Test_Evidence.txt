@@ -1,0 +1,34 @@
+DAY 7 AUTOMATED TEST EVIDENCE
+Date: 2026-11-04
+Archive: hisabdo-webapp-ai-main (3).zip
+
+1) Initial command:
+   pytest -q tests/xictek_website_assistant
+   Result: 107 passed, 1 failed, 3 warnings in 3.73s.
+   Failure: tests/xictek_website_assistant/test_endpoint.py::test_index_status_reports_unbuilt_index_by_default
+   Expected index_built=False; actual response was index_built=True because this ZIP contains 976 indexed chunks.
+
+2) Rerun excluding only that stale assertion:
+   pytest -q tests/xictek_website_assistant -k 'not index_status_reports_unbuilt_index_by_default'
+   Result: 107 passed, 1 deselected, 3 warnings in 0.63s.
+
+3) Environment notes:
+   - The runtime did not have slowapi or openai installed; network access prevented pip installation.
+   - Temporary import stubs were created outside the repository solely to allow tests and local TestClient execution. No source files in the repository were modified.
+   - The slowapi decorator was a no-op stub: rate limiting is NOT covered by this test result.
+   - OpenAI SDK was stubbed to prevent external LLM calls; test and local API generation used the repository's MockLLMProvider.
+   - scikit-learn emitted InconsistentVersionWarning: saved TfidfVectorizer/TfidfTransformer pickle from 1.5.2 loaded by runtime 1.8.0.
+   - One Starlette deprecation warning for HTTP 422 status constant.
+
+4) Local TestClient run:
+   - 10 benchmark queries × 3 repeats = 30 POST requests to /api/v1/xictek/chat.
+   - 30/30 HTTP 200.
+   - 10/10 query groups had byte-for-byte identical reply/intent/source tuples across three repeats (MockLLMProvider).
+   - Mean 7.7529 ms; median 3.9788 ms; nearest-rank p95 34.5629 ms; min 3.0244 ms; max 50.7813 ms.
+   - These figures include local TestClient overhead and do not represent production network/provider latency.
+
+5) Persisted index audit:
+   - 976 chunks; embeddings.npy shape (976, 2109); TF-IDF vocabulary 2,109 features.
+   - 10 XICTEK Careers chunks; 8 XICTEK internship chunks; 13 HisabDo Careers chunks.
+   - 976/976 chunk URLs have HTTPS and use an approved xicteksystems.com / hisabdo.app host (static validation only; not a reachability test).
+   - metadata.json says sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2, while embeddings.py uses TF-IDF and tfidf_vectorizer.pkl is present. Metadata is stale/inconsistent.

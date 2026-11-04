@@ -1,0 +1,16 @@
+﻿Area,Measured evidence,Status,Notes / limitation
+Live answer quality,"10 manually supplied production-chatbot responses; 5 pass, 1 partial, 4 fail",FAIL,Four answers failed the requested intent; one was incomplete.
+Live citation presence,10/10 answers supplied one or more source links,PASS,Presence checked; source support is separately graded.
+Live citation relevance,"7 strong, 2 partial, 1 weak for requested detail",PARTIAL,Some role answers cite general blog content; Q5 source does not support requested skills.
+Live link syntax/domain,11/11 URLs use HTTPS and approved XICTEK domain,PASS,Static syntax/allow-list check only; live reachability not verified.
+Offline retrieval Hit@5,9/10 expected target chunks retrieved in top five (90%),PASS WITH RISK,Q9 expected internship-benefits chunk faq-92 missed; Q1 target ranked third.
+Offline retrieval Precision@5,18% (one expected chunk per query; 9 target hits / 50 returned slots),OBSERVED,Single-target precision definition; not production generation accuracy.
+Offline retrieval MRR@5,0.7333,OBSERVED,Reciprocal target ranks averaged over all ten queries; miss contributes zero.
+Local API availability,30/30 requests returned HTTP 200,PASS,"Local TestClient, saved index and MockLLMProvider only."
+Local deterministic repeatability,10/10 query groups returned identical repeated output (100%),PASS,Three repeats per query with deterministic MockLLMProvider.
+Local endpoint latency,Mean 7.75 ms; median 3.98 ms; p95 34.56 ms; min 3.02 ms; max 50.78 ms,OBSERVED,30 local TestClient requests; not production or network latency.
+XICTEK automated tests,"107 passed, 1 failed, 3 warnings",FAIL,One stale test expects index_built=false although ZIP includes 976 chunks and endpoint reports true.
+XICTEK tests excluding stale assertion,"107 passed, 1 deselected",PASS WITH LIMITATION,slowapi and openai unavailable; temporary stubs used. Rate limiting and real provider not tested.
+Index metadata/model consistency,metadata says multilingual sentence-transformers; code and saved vectorizer use TF-IDF,FAIL,Persisted pickle also warns it was built with scikit-learn 1.5.2 but runtime is 1.8.0.
+Production latency/LLM telemetry,Not supplied by live browser transcripts or ZIP,NOT MEASURED,"No production timings, token usage, provider telemetry, or live API trace available."
+Website widget-to-repository integration,README states website widget integration is deferred,NOT VERIFIED,Local repo route is /api/v1/xictek/chat; do not assume it is the production website widget endpoint.

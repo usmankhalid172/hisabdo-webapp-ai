@@ -1,0 +1,11 @@
+﻿Query ID,Expected chunk ID,Rank in returned results,Hit@5,Top returned chunk IDs,Interpretation
+Q1,faq-74,3,YES,faq-79;faq-191;faq-74;faq-195,Current positions
+Q2,faq-75,1,YES,faq-75;faq-74;faq-481;faq-76,Senior Full-Stack skills
+Q3,faq-76,1,YES,faq-76;faq-316;faq-74;faq-5;faq-860,Mobile Developer skills
+Q4,faq-77,1,YES,faq-77;faq-74;faq-46;faq-292,Cloud Architect skills
+Q5,faq-78,1,YES,faq-78;faq-74;faq-552,UI/UX tools
+Q6,faq-89,1,YES,faq-89;faq-292;faq-95;faq-192;faq-98,Internship offer and duration
+Q7,faq-93,2,YES,faq-89;faq-93;faq-98;faq-186;faq-80,Internship eligibility
+Q8,faq-78,1,YES,faq-78;faq-74;faq-552,UI/UX paraphrase retest
+Q9,faq-92,,NO,faq-89;faq-187;faq-94;faq-148;faq-85,Internship benefits
+Q10,faq-94,2,YES,faq-89;faq-94;faq-93;faq-80,Internship roadmap

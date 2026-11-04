@@ -1,0 +1,11 @@
+﻿Query ID,Source URL(s),HTTPS syntax,Domain allow-list,Relevance assessment,Notes
+Q1,https://xicteksystems.com/careers,PASS,PASS,Strong,"All four role names match; student/recent-graduate wording is an internship audience, not a fifth job title."
+Q2,https://xicteksystems.com/blog/full-stack-development-guide,PASS,PASS,Partial,"All four technologies match the role data, but the cited general blog guide is not the role-specific Careers source."
+Q3,https://xicteksystems.com/blog/mobile-app-development-company ; https://xicteksystems.com/blog/flutter-app-development,PASS,PASS,Partial,Technologies match; sources are general mobile-development articles rather than the role listing.
+Q4,https://xicteksystems.com/careers,PASS,PASS,Strong,All four skills match the role data and the official Careers page is appropriate.
+Q5,https://xicteksystems.com/careers,PASS,PASS,Weak for requested detail,"Returns a generic job list and omits Figma, Design Systems, and Prototyping."
+Q6,https://xicteksystems.com/careers/internship,PASS,PASS,Strong,"Correct duration and appropriate source, but does not describe what the program offers."
+Q7,https://xicteksystems.com/careers/internship,PASS,PASS,"Strong source, answer mismatch","The source is appropriate, but the response repeats duration and omits eligibility requirements."
+Q8,https://xicteksystems.com/careers,PASS,PASS,Strong,Correct role-specific skills and relevant Careers source; this paraphrase passed after Q5 failed.
+Q9,https://xicteksystems.com/careers/internship,PASS,PASS,"Strong source, answer mismatch","Repeats duration and omits real projects, mentorship, team culture, and career pathway."
+Q10,https://xicteksystems.com/careers/internship,PASS,PASS,"Strong source, answer mismatch","Repeats duration and omits onboarding, guided development, independent contribution, and capstone/review stages."
