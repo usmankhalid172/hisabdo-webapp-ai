@@ -177,6 +177,7 @@ DOMAIN = re.compile(
     r"loss|sale|tax|business|shop|dukaan|dukan|money|paise|paisa|rupee|pkr|financ|record|entry|entries|transaction|"
     r"statement|credit|debt|loan|qarz|salary|rent|bill|price|cost|app\b|sync|offline|internet|language|currency|"
     r"support|password|staff|stock purchase|inventory|supplier|vendor|bank|reminder|back ?up|data|phone|device|"
+    r"spen[dt]|earn|owe|owed|paid|pay\b|bought|sold|month|week|"
     r"delete|sign ?in|login|android|iphone|ios|"
     r"حساب|کھات|ادھار|خرچ|آمدنی|کاروبار|دکان|پیس|رپورٹ|گاہک|بیک اپ|انٹرنیٹ",
     re.I)

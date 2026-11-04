@@ -52,7 +52,9 @@ THIRD_PARTY_RELATIONSHIP_WORDS = re.compile(
 # Catches probes by identifier instead of relationship, e.g. "user 2's
 # balance", "account #5", "customer 12".
 THIRD_PARTY_ID_REFERENCE = re.compile(
-    r"\b(user|account|customer|client)\s*#?\s*\d+\b", re.IGNORECASE
+    r"\b(user|account|customer|client)\s*#?\s*\d+\b"
+    # Day 7 fix: "user-A's balance", "user_7 ka balance", "user B's" (letter or hyphenated ids)
+    r"|\buser[\s_-]?[a-z0-9]{1,12}('s|\s+(ka|ki|ke))\b", re.IGNORECASE
 )
 
 # Non-person possessives that must NOT trip the bare-name heuristic below.
