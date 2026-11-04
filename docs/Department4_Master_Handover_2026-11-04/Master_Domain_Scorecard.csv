@@ -1,0 +1,8 @@
+﻿Domain,Evidence,Measured result,Readiness,Required follow-up
+Blog & News,24-query scorecard; separate pipeline,Hit@3 100%; MRR 1.0; citations 30/30,Pipeline scorecard says approved; live integration not established,Verify shared deployment/build and release owner approval
+About Us & Core Services,Live final signoff,1/25 scored pass; 2 HTTP 502/47; weak links/tone,Not cleared,Fix live answers/reliability; rerun and sign off
+Careers & Job Openings,Live 10-query package; archive retrieval; separate metrics report,"Live 5 pass, 1 partial, 4 fail; archive Hit@5 9/10; metrics snapshot empty",Not cleared; snapshot mismatch,Reconcile index/build IDs; rebuild; live rerun
+Contact & Locations,Local mock and public widget checks,Mock 15/15 HTTP200; exact URL 6/15; widget 0/3,Not cleared,Fix domain leakage/citations; full public test
+HisabDo Product,6 manual queries of 12 planned,"2 pass, 3 partial, 1 fail",Hold; incomplete,Complete planned set and close failed/partial cases
+Portfolio & Case Studies,12-query offline lexical benchmark; historical 10 timing samples,"Filtered Hit@2 58.3%, MRR .500; historical total mean 3.506s/p95 29.43s",Not cleared; no current live E2E metrics,Rebuild index and execute live relevance/latency/cost evaluation
+System-wide,85-query offline comparison and deployment audit,Answerable retrieval hit 50.7% to 87.3%; 1/11 deployment gates passed,NOT CLEARED,Resolve blockers and obtain release owner signoff

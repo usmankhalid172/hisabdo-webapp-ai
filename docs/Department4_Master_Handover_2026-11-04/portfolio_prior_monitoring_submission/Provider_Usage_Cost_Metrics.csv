@@ -1,0 +1,10 @@
+﻿Metric,Current evidence,Required instrumentation
+Provider name,Not supplied,Capture exact provider identifier only where authorized
+Model identifier,Not supplied,Capture deployed model/version
+Request count,10 timing samples provided,Confirm whether all 10 correspond to billable provider calls
+Input tokens,Not measured,Capture aggregate input tokens per request
+Output tokens,Not measured,Capture aggregate output tokens per request
+Retries,Not measured,Count retries; avoid retaining prompt payloads
+Provider latency,Not isolated,Record provider-side duration separately from end-to-end
+Estimated cost,Not measurable from available data,"Calculate only from verified model, token counts and applicable rate card"
+Currency / rate card version,Not supplied,Record currency and rate-card effective date
