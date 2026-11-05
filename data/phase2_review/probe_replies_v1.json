@@ -1,0 +1,691 @@
+[
+ {
+  "id": "Q01",
+  "lang": "en",
+  "flow": "expense_entry",
+  "text": "I spent 2500 on petrol today",
+  "source": "dialogue",
+  "intent": "add_expense",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Please confirm this expense: PKR 2,500, Transport, 05 Nov 2026. Save it? (yes / no)"
+ },
+ {
+  "id": "Q02",
+  "lang": "roman_ur",
+  "flow": "expense_entry",
+  "text": "kal 1200 ka bijli ka bill diya",
+  "source": "dialogue",
+  "intent": "add_expense",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Yeh kharcha confirm karein: PKR 1,200, Utilities, 04 Nov 2026. Save karun? (haan / nahi)"
+ },
+ {
+  "id": "Q03",
+  "lang": "ur",
+  "flow": "expense_entry",
+  "text": "آج 800 روپے کی سبزی خریدی",
+  "source": "dialogue",
+  "intent": "add_expense",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Yeh kharcha confirm karein: PKR 800, Groceries, 05 Nov 2026. Save karun? (haan / nahi)"
+ },
+ {
+  "id": "Q04",
+  "lang": "en",
+  "flow": "expense_entry",
+  "text": "Add an expense of Rs 3,000 for shop rent",
+  "source": "dialogue",
+  "intent": "add_expense",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Please confirm this expense: PKR 3,000, Housing, 05 Nov 2026. Save it? (yes / no)"
+ },
+ {
+  "id": "Q05",
+  "lang": "en",
+  "flow": "expense_entry",
+  "text": "Paid the supplier 15k for stock",
+  "source": "dialogue",
+  "intent": "add_expense",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [
+   "category"
+  ],
+  "reply": "What was it for? e.g. Utilities, Transport, Groceries, Dining, Entertainment"
+ },
+ {
+  "id": "Q06",
+  "lang": "en",
+  "flow": "expense_entry",
+  "text": "Spent 450 on tea for staff and 300 on snacks",
+  "source": "dialogue",
+  "intent": "add_expense",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [
+   "amount"
+  ],
+  "reply": "How much was it?"
+ },
+ {
+  "id": "Q07",
+  "lang": "en",
+  "flow": "correction",
+  "text": "Change the last expense to 2700",
+  "source": "dialogue",
+  "intent": "correct_transaction",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "I can only change entries confirmed in this chat, and I don't see one yet. Please open the entry in the app to edit it, or tell me the new entry to add."
+ },
+ {
+  "id": "Q08",
+  "lang": "roman_ur",
+  "flow": "correction",
+  "text": "galti ho gayi, 450 nahi 540 tha",
+  "source": "kb_fallback",
+  "intent": "out_of_scope",
+  "answer_status": "out_of_scope",
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "I can help with HisabDo and with bookkeeping for your business, but I don't have reliable information on that. Try asking about a HisabDo feature, such as PDF reports, backup or customer udhar, or contact HisabDo support at hisabdo.app@gmail.com."
+ },
+ {
+  "id": "Q09",
+  "lang": "en",
+  "flow": "correction",
+  "text": "Delete the expense I just added",
+  "source": "dialogue",
+  "intent": "correct_transaction",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "I can only change entries confirmed in this chat, and I don't see one yet. Please open the entry in the app to edit it, or tell me the new entry to add."
+ },
+ {
+  "id": "Q10",
+  "lang": "en",
+  "flow": "income_entry",
+  "text": "Received 7000 from Ahmed for the order",
+  "source": "dialogue",
+  "intent": "add_income",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Please confirm this income: PKR 7,000, Sales, to/from Ahmed, 05 Nov 2026. Save it? (yes / no)"
+ },
+ {
+  "id": "Q11",
+  "lang": "roman_ur",
+  "flow": "income_entry",
+  "text": "Bilal se 3000 wasool hue",
+  "source": "dialogue",
+  "intent": "add_income",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Yeh aamdani confirm karein: PKR 3,000, Customer Payment Received, Bilal, 05 Nov 2026. Save karun? (haan / nahi)"
+ },
+ {
+  "id": "Q12",
+  "lang": "en",
+  "flow": "udhar",
+  "text": "Ali took goods worth 2000 on credit",
+  "source": "dialogue",
+  "intent": "add_expense",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [
+   "direction"
+  ],
+  "reply": "Was this money you spent (expense) or money you received (income)?"
+ },
+ {
+  "id": "Q13",
+  "lang": "roman_ur",
+  "flow": "udhar",
+  "text": "Ali ko 500 udhar diye",
+  "source": "dialogue",
+  "intent": "add_expense",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [
+   "category"
+  ],
+  "reply": "Yeh kharcha kis cheez ka tha? Jaise: Utilities, Transport, Groceries, Dining, Entertainment"
+ },
+ {
+  "id": "Q14",
+  "lang": "en",
+  "flow": "receivables",
+  "text": "How much does Ali owe me?",
+  "source": "backend_financial_api",
+  "intent": "own_financial_data",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Your account (demo data): balance PKR 45,230.50 (as of 05 Nov 2026)."
+ },
+ {
+  "id": "Q15",
+  "lang": "en",
+  "flow": "receivables",
+  "text": "Which customers still owe me money?",
+  "source": "policy_guard",
+  "intent": "declined_third_party",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": null,
+  "reply": "I'm sorry, but I can only provide information about your own account."
+ },
+ {
+  "id": "Q16",
+  "lang": "roman_ur",
+  "flow": "receivables",
+  "text": "Mera kitna udhar baqi hai customers par?",
+  "source": "policy_guard",
+  "intent": "declined_third_party",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": null,
+  "reply": "I'm sorry, but I can only provide information about your own account."
+ },
+ {
+  "id": "Q17",
+  "lang": "en",
+  "flow": "payables",
+  "text": "How much do I owe my suppliers?",
+  "source": "backend_financial_api",
+  "intent": "own_financial_data",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Your account (demo data): balance PKR 45,230.50 (as of 05 Nov 2026)."
+ },
+ {
+  "id": "Q18",
+  "lang": "en",
+  "flow": "balance",
+  "text": "What is my current balance?",
+  "source": "backend_financial_api",
+  "intent": "own_financial_data",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Your account (demo data): balance PKR 45,230.50 (as of 05 Nov 2026)."
+ },
+ {
+  "id": "Q19",
+  "lang": "en",
+  "flow": "report",
+  "text": "How much did I spend this month?",
+  "source": "backend_financial_api",
+  "intent": "report",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Your account (November 2026, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580."
+ },
+ {
+  "id": "Q20",
+  "lang": "en",
+  "flow": "report",
+  "text": "What were my expenses last month?",
+  "source": "backend_financial_api",
+  "intent": "report",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "I can only show the current month's figures right now, not October 2026. Please check older periods in the app."
+ },
+ {
+  "id": "Q21",
+  "lang": "en",
+  "flow": "report",
+  "text": "Show my expenses by category for this month",
+  "source": "backend_financial_api",
+  "intent": "report",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Your account (November 2026, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580."
+ },
+ {
+  "id": "Q22",
+  "lang": "en",
+  "flow": "report",
+  "text": "What was my biggest expense this week?",
+  "source": "backend_financial_api",
+  "intent": "report",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Your account (this week, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580."
+ },
+ {
+  "id": "Q23",
+  "lang": "roman_ur",
+  "flow": "report",
+  "text": "Is hafte kitna kharcha hua?",
+  "source": "backend_financial_api",
+  "intent": "report",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Your account (this week, demo data): aamdani PKR 62,000, kharcha PKR 18,420, net PKR 43,580."
+ },
+ {
+  "id": "Q24",
+  "lang": "ur",
+  "flow": "report",
+  "text": "اس مہینے میرا کل خرچ کتنا ہے؟",
+  "source": "backend_financial_api",
+  "intent": "report",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Your account (November 2026, demo data): aamdani PKR 62,000, kharcha PKR 18,420, net PKR 43,580."
+ },
+ {
+  "id": "Q25",
+  "lang": "en",
+  "flow": "report",
+  "text": "Compare my expenses this month with last month",
+  "source": "backend_financial_api",
+  "intent": "report",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "I can only show the current month's figures right now, not October 2026. Please check older periods in the app."
+ },
+ {
+  "id": "Q26",
+  "lang": "en",
+  "flow": "report",
+  "text": "What is my profit this month?",
+  "source": "backend_financial_api",
+  "intent": "report",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Your account (November 2026, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580."
+ },
+ {
+  "id": "Q27",
+  "lang": "en",
+  "flow": "categorization",
+  "text": "Which category should a phone bill go in?",
+  "source": "dialogue",
+  "intent": "categorize",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "That sounds like the category 'Utilities'."
+ },
+ {
+  "id": "Q28",
+  "lang": "en",
+  "flow": "categorization",
+  "text": "Categorize: 1500 for printer ink",
+  "source": "kb_fallback",
+  "intent": "no_source",
+  "answer_status": "no_source",
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar."
+ },
+ {
+  "id": "Q29",
+  "lang": "en",
+  "flow": "how_to",
+  "text": "How do I add an expense in HisabDo?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-06-005-keep-receipts-and-notes"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "I found this on the related help topic \"Keep Receipts and Notes\": For every significant expense, keep the receipt or at minimum note the vendor, amount and purpose. This documentation is valuable if you ever need to dispute a charge, prepare for tax purposes or review your spending patterns. HisabDo allows you to attach notes to expense entries, making it easy to add context without carrying a folder of paper receipts. [1]\n\nSources:\n[1] Expense Tracking for Small Business › Keep Receipts and Notes: https://hisabdo.app/blog/expense-tracking-for-small-business"
+ },
+ {
+  "id": "Q30",
+  "lang": "en",
+  "flow": "how_to",
+  "text": "How do I edit an expense entry?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-06-011-use-technology-to-reduce-friction"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "I found this on the related help topic \"Use Technology to Reduce Friction\": The biggest barrier to consistent expense tracking is friction — the effort required to record each entry. The easier you make the recording process, the more consistently you will do it. HisabDo's voice entry feature lets you record expenses by speaking, which takes seconds and removes the main reason people skip entries. [1]\n\nSources:\n[1] Expense Tracking for Small Business › Use Technology to Reduce Friction: https://hisabdo.app/blog/expense-tracking-for-small-business"
+ },
+ {
+  "id": "Q31",
+  "lang": "en",
+  "flow": "how_to",
+  "text": "Can I add my own expense categories?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-04-012-creating-your-own-categories"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "I found this on the related help topic \"Creating Your Own Categories\": The categories above are a starting point. Your business may need different or additional categories depending on your industry and operations. Here is how to build a category system that works for you: Start with the standard categories above Add categories for any significant expense type specific to your business Keep the total number of categories manageable — 8 to 15 is usually sufficient Be consistent: use the same category for the same type of expense every time Review and refine your categories every few months as your business evolves In HisabDo, you can create custom expense categories that match your specific business needs. [1]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Creating Your Own Categories: https://hisabdo.app/blog/business-expense-categories"
+ },
+ {
+  "id": "Q32",
+  "lang": "en",
+  "flow": "how_to",
+  "text": "Can I attach a receipt photo to an expense?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-06-005-keep-receipts-and-notes"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "I found this on the related help topic \"Keep Receipts and Notes\": For every significant expense, keep the receipt or at minimum note the vendor, amount and purpose. This documentation is valuable if you ever need to dispute a charge, prepare for tax purposes or review your spending patterns. HisabDo allows you to attach notes to expense entries, making it easy to add context without carrying a folder of paper receipts. [1]\n\nSources:\n[1] Expense Tracking for Small Business › Keep Receipts and Notes: https://hisabdo.app/blog/expense-tracking-for-small-business"
+ },
+ {
+  "id": "Q33",
+  "lang": "en",
+  "flow": "how_to",
+  "text": "How do I export my expenses to Excel?",
+  "source": "backend_financial_api",
+  "intent": "own_financial_data",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Here's what I found: Balance: 45230.5 PKR. Expenses this month: 18420.0 PKR. Revenue this month: 62000.0 PKR. Outstanding receivables: 9000.0 PKR. (In response to: \"How do I export my expenses to Excel?\")"
+ },
+ {
+  "id": "Q34",
+  "lang": "en",
+  "flow": "how_to",
+  "text": "Can I set a monthly budget in the app?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-15-010-review-and-adjust-monthly"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "I found this on the related help topic \"Review and Adjust Monthly\": Your budget should evolve as your life changes. Review it at the start of each month, adjust for any changes in income or expenses and set your priorities for the coming month. A budget that you review and adjust regularly is far more effective than one you set once and forget. [1]\n\nSources:\n[1] Personal Budget Planning: A Practical Guide › Review and Adjust Monthly: https://hisabdo.app/blog/personal-budget-planning"
+ },
+ {
+  "id": "Q35",
+  "lang": "roman_ur",
+  "flow": "how_to",
+  "text": "Kharcha ki category kaise badlun?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-04-017-what-if-an-expense-fits-into-more-than-one-categ"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "HisabDo ke official page ke mutabiq (English mein):\n\nChoose the most appropriate primary category and be consistent. For example, if you buy a phone for business use, you might categorize it as equipment rather than software/subscriptions. The key is consistency — always categorize the same type of expense the same way. [1]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Frequently Asked Questions: https://hisabdo.app/blog/business-expense-categories"
+ },
+ {
+  "id": "Q36",
+  "lang": "ur",
+  "flow": "how_to",
+  "text": "خرچ کی رپورٹ پی ڈی ایف میں کیسے بنائیں؟",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-12-005-expense-reports-what-to-include"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "حساب دو کے آفیشل پیج کے مطابق (انگریزی میں):\n\nA useful expense report should contain: Report period Each expense entry with date, category, description and amount Total expenses for the period Subtotals by category Comparison to previous period or budget (optional) Expense reports organized by category are far more useful than a simple chronological list. Seeing that you spent Rs. 45,000 on transport this month versus Rs. [1]\n\nذرائع:\n[1] PDF Business Reports: What to Include and How to Use Them › Expense Reports: What to Include: https://hisabdo.app/blog/pdf-reports-for-businesses"
+ },
+ {
+  "id": "Q37",
+  "lang": "en",
+  "flow": "how_to",
+  "text": "Does HisabDo support recurring expenses like monthly rent?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-15-016-can-hisabdo-help-with-personal-budgeting"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "I found this on the related help topic \"Can HisabDo help with personal budgeting?\": HisabDo can be used to track personal and household expenses, categorize spending and review monthly totals. While the app is designed with small businesses in mind, its expense tracking features work equally well for personal finance management. [1]\n\nSources:\n[1] Personal Budget Planning: A Practical Guide › Frequently Asked Questions: https://hisabdo.app/blog/personal-budget-planning"
+ },
+ {
+  "id": "Q38",
+  "lang": "en",
+  "flow": "how_to",
+  "text": "Can two staff members record expenses on the same account?",
+  "source": "kb_fallback",
+  "intent": "no_source",
+  "answer_status": "no_source",
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar."
+ },
+ {
+  "id": "Q39",
+  "lang": "en",
+  "flow": "concept",
+  "text": "What is the difference between fixed and variable expenses?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-04-003-fixed-vs-variable-expenses"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "I found this on the related help topic \"Fixed vs Variable Expenses\": Before diving into specific categories, it helps to understand the two fundamental types of business expenses: **Fixed expenses** are costs that remain the same regardless of how much you sell or produce. Rent, loan repayments and fixed salaries are examples. These costs exist whether your business has a good month or a bad one. [1]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Fixed vs Variable Expenses: https://hisabdo.app/blog/business-expense-categories"
+ },
+ {
+  "id": "Q40",
+  "lang": "en",
+  "flow": "concept",
+  "text": "Is petrol a business expense?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-04-007-travel-and-transport",
+   "blog-04-004-operating-expenses"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "I found this on the related help topic \"Travel and Transport\": Transport costs are significant for many small businesses, particularly those that deliver goods or require frequent travel: Fuel Vehicle maintenance and repairs Delivery charges paid to third parties Public transport fares for business travel Parking fees If you use a vehicle for both personal and business purposes, track only the business-related portion of transport costs in your business records. [1]\n\nI found this on the related help topic \"Operating Expenses\": Operating expenses are the day-to-day costs of running your business. They include everything required to keep the business functioning, excluding the direct cost of producing your product or service. Common operating expenses include: Office or shop rent Utilities (electricity, gas, water) Internet and phone Office supplies and stationery Cleaning and maintenance Insurance Professional services (legal, accounting) [2]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Travel and Transport: https://hisabdo.app/blog/business-expense-categories\n[2] Business Expense Categories: The Complete Guide › Operating Expenses: https://hisabdo.app/blog/business-expense-categories"
+ },
+ {
+  "id": "Q41",
+  "lang": "roman_ur",
+  "flow": "concept",
+  "text": "Petty cash ka hisaab kaise rakhein?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-06-010-track-petty-cash-carefully"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "HisabDo ke official page ke mutabiq (English mein):\n\nPetty cash — the small amounts used for day-to-day minor expenses — is one of the most commonly mismanaged areas in small businesses. Keep a dedicated petty cash log and reconcile it weekly. Even small amounts add up, and untracked petty cash is a common source of financial leakage. [1]\n\nSources:\n[1] Expense Tracking for Small Business › Track Petty Cash Carefully: https://hisabdo.app/blog/expense-tracking-for-small-business"
+ },
+ {
+  "id": "Q42",
+  "lang": "en",
+  "flow": "concept",
+  "text": "How much cash reserve should my shop keep?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "answered",
+  "cited": [
+   "blog-02-014-how-much-cash-reserve-should-a-small-business-ke"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "I found this on the related help topic \"How much cash reserve should a small business keep?\": A commonly cited guideline is 1–3 months of operating expenses as a cash reserve. This provides a buffer for slow periods, unexpected costs or delayed customer payments. Building this reserve takes time — start by setting aside a small amount each month until you reach your target. [1]\n\nSources:\n[1] Cash Flow Management for Small Businesses: A Practical Guide › Frequently Asked Questions: https://hisabdo.app/blog/cash-flow-management"
+ },
+ {
+  "id": "Q43",
+  "lang": "en",
+  "flow": "policy",
+  "text": "Are my expense records synced to the cloud?",
+  "source": "backend_financial_api",
+  "intent": "own_financial_data",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Here's what I found: Balance: 45230.5 PKR. Expenses this month: 18420.0 PKR. Revenue this month: 62000.0 PKR. Outstanding receivables: 9000.0 PKR. (In response to: \"Are my expense records synced to the cloud?\")"
+ },
+ {
+  "id": "Q44",
+  "lang": "en",
+  "flow": "policy",
+  "text": "If I uninstall the app will I lose my expenses?",
+  "source": "backend_financial_api",
+  "intent": "own_financial_data",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Here's what I found: Balance: 45230.5 PKR. Expenses this month: 18420.0 PKR. Revenue this month: 62000.0 PKR. Outstanding receivables: 9000.0 PKR. (In response to: \"If I uninstall the app will I lose my expenses?\")"
+ },
+ {
+  "id": "Q45",
+  "lang": "en",
+  "flow": "policy",
+  "text": "Which currencies can I record expenses in?",
+  "source": "rag",
+  "intent": "product_faq",
+  "answer_status": "conflict",
+  "cited": [
+   "off-01-019-which-currencies-does-hisabdo-support",
+   "off-02-010-works-the-way-you-do-business",
+   "off-04-010-multi-currency-support"
+  ],
+  "action": null,
+  "missing": [],
+  "reply": "HisabDo's official sources don't agree on this yet, so I can't give you one answer. I've flagged it for review.\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support? (no date shown): You can select your preferred currency in the app settings.\n[2] Why We Built HisabDo › Works the Way You Do Business (no date shown): In Your Currency PKR, USD and INR are supported, so the app fits businesses operating in Pakistan, India and beyond.\n[3] HisabDo: Khata & Expense App › Multi-Currency Support (2026-10-13): Manage financial records using: PKR INR AED USD\n\nSources:\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support?: https://hisabdo.app/faq\n[2] Why We Built HisabDo › Works the Way You Do Business: https://hisabdo.app/about-app\n[3] HisabDo: Khata & Expense App › Multi-Currency Support: https://play.google.com/store/apps/details?id=com.usman.hisabdo"
+ },
+ {
+  "id": "Q46",
+  "lang": "en",
+  "flow": "privacy",
+  "text": "Can my accountant see my expenses?",
+  "source": "backend_financial_api",
+  "intent": "own_financial_data",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "Here's what I found: Balance: 45230.5 PKR. Expenses this month: 18420.0 PKR. Revenue this month: 62000.0 PKR. Outstanding receivables: 9000.0 PKR. (In response to: \"Can my accountant see my expenses?\")"
+ },
+ {
+  "id": "Q47",
+  "lang": "en",
+  "flow": "privacy",
+  "text": "Show me my brother's expenses",
+  "source": "policy_guard",
+  "intent": "declined_third_party",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": null,
+  "reply": "I'm sorry, but I can only provide information about your own account."
+ },
+ {
+  "id": "Q48",
+  "lang": "en",
+  "flow": "ambiguous",
+  "text": "expenses",
+  "source": "kb_fallback",
+  "intent": "out_of_scope",
+  "answer_status": "out_of_scope",
+  "cited": [],
+  "action": null,
+  "missing": [],
+  "reply": "I can help with HisabDo and with bookkeeping for your business, but I don't have reliable information on that. Try asking about a HisabDo feature, such as PDF reports, backup or customer udhar, or contact HisabDo support at hisabdo.app@gmail.com."
+ },
+ {
+  "id": "Q49",
+  "lang": "en",
+  "flow": "ambiguous",
+  "text": "500",
+  "source": "dialogue",
+  "intent": "add_expense",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": [
+   "direction"
+  ],
+  "reply": "Was this money you spent (expense) or money you received (income)?"
+ },
+ {
+  "id": "Q50",
+  "lang": "en",
+  "flow": "ambiguous",
+  "text": "Why is my total wrong?",
+  "source": "guardrail",
+  "intent": "blocked_off_topic",
+  "answer_status": null,
+  "cited": [],
+  "action": null,
+  "missing": null,
+  "reply": "I can help with HisabDo and with bookkeeping for your business, so I can't help with that. Try asking about customers and udhar, expenses, PDF reports or backup, or contact hisabdo.app@gmail.com or the Contact page (https://hisabdo.app/contact)."
+ }
+]
