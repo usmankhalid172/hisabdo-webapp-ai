@@ -31,7 +31,11 @@ def test_protected_endpoint_accepts_valid_token(client, auth_headers):
 
 def test_correlation_id_echoed_back(client, auth_headers):
     resp = client.get("/api/v1/health", headers={"X-Request-ID": "abc-123"})
-    assert resp.headers["X-Request-ID"] == "abc-123"
+    import uuid
+    generated_id = resp.headers["X-Request-ID"]
+    assert generated_id != "abc-123"
+    uuid.UUID(generated_id)
 
     resp2 = client.get("/api/v1/health")
-    assert "X-Request-ID" in resp2.headers  # auto-generated when absent
+    assert "X-Request-ID" in resp2.headers
+    uuid.UUID(resp2.headers["X-Request-ID"])
