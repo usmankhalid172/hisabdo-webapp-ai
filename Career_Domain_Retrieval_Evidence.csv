@@ -1,0 +1,11 @@
+﻿Query_ID,Query_Type,Expected_Target_Chunk,Target_Rank_in_Local_Top8,Returned_Chunk_IDs_in_Order,Observation
+Q1,Current positions,faq-74,3,faq-79; faq-191; faq-74; faq-195,Cross-domain HisabDo chunk ranked before target
+Q2,Senior Full-Stack skills,faq-75,1,faq-75; faq-74; faq-481; faq-76,Target role FAQ ranked first
+Q3,Mobile App skills,faq-76,1,faq-76; faq-316; faq-74; faq-5; faq-860; faq-75; faq-340; faq-49,Target role FAQ ranked first
+Q4,Cloud Architect skills,faq-77,1,faq-77; faq-74; faq-46; faq-292,Target role FAQ ranked first
+Q5,UI/UX skills,faq-78,1,faq-78; faq-74; faq-552,Target FAQ retrieved; live answer still failed
+Q6,Internship offer + duration,faq-89,1,faq-89; faq-292; faq-95; faq-192; faq-98; faq-80; faq-191; faq-194,Duration dominates; XICTEK benefit FAQ faq-92 is absent
+Q7,Internship eligibility,faq-93,2,faq-89; faq-93; faq-98; faq-186; faq-80; faq-185,Eligibility FAQ retrieved but live answer repeats duration
+Q8,UI/UX paraphrase,faq-78,1,faq-78; faq-74; faq-552,Target FAQ retrieved and live answer passed
+Q9,Internship benefits,faq-92,MISS,faq-89; faq-187; faq-94; faq-148; faq-85; faq-93; faq-80; faq-185,Target benefits chunk not in top 8; HisabDo careers chunk appears
+Q10,Internship roadmap,faq-94,2,faq-89; faq-94; faq-93; faq-80,Roadmap FAQ retrieved but live answer repeats duration
