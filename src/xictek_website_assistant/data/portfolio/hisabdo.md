@@ -1,35 +1,33 @@
-# HisabDo: Offline-First Digital Ledger
+# HisabDo: Public Portfolio Source
 
-## Project overview
+**Last reviewed:** 2026-11-06
+**Source owner:** Unassigned; XICTEK Systems must name the content approver.
 
-HisabDo is XICTEK Systems' flagship product: an offline-first digital ledger for shopkeepers, freelancers, and small businesses. It helps users organize khata (credit and debit records), expenses, customer records, and receivables.
+## Approved public scope
 
-## Challenge
+The current XICTEK Systems portfolio and homepage present HisabDo as the
+company's in-house digital khata and expense-management product. The portfolio
+shows its financial dashboard, digital ledger, voice transaction recognition,
+analytics, transaction categorization, and customer directory.
 
-Daily financial records are often kept in paper registers. HisabDo aims to make those records more practical to manage digitally.
+Use only these product identity and feature descriptions when answering from
+this source. Do not attribute other portfolio case-study results to HisabDo.
+The portfolio does not publish a quantified HisabDo customer or business
+outcome in the HisabDo project section.
 
-## Solution
+## Excluded pending review
 
-The product uses offline-first workflows, clear financial summaries, and a simple interface designed for everyday use. Its core focus is expense tracking, digital khata, and customer balances.
+The portfolio page currently also displays three anonymized client-style case
+studies with quantified results. Their underlying source evidence and client
+authorization for public display have not been recorded in this repository.
+Do not include their project details or results in the knowledge base until
+the content owner records approval and substantiation.
 
-## Technology
+The previous technology-stack and general custom-project statements have been
+removed from this HisabDo source because the current portfolio does not
+attribute those details specifically to HisabDo.
 
-- Flutter
-- Supabase
-- PostgreSQL
+## Sources
 
-## Outcome
-
-HisabDo provides a focused product foundation for managing expenses, digital khata, and customer balances. The public portfolio source does not provide quantified business results, so no performance or customer-impact metrics are stated here.
-
-## Project and portfolio notes
-
-- HisabDo is XICTEK Systems' flagship product.
-- XICTEK Systems shares project work when it can be published responsibly.
-- The portfolio page offers product screenshots of the dashboard, digital ledger, and customer workflows.
-- XICTEK Systems also offers custom software projects using the same product-focused approach.
-
-## Source
-
-- [XICTEK Systems portfolio](https://xicteksystems.com/portfolio)
-
+- [XICTEK Systems portfolio](https://www.xicteksystems.com/portfolio)
+- [XICTEK Systems homepage](https://www.xicteksystems.com/)
