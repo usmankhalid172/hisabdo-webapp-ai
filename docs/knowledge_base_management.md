@@ -1,4 +1,4 @@
-﻿# Knowledge Base Management
+# Knowledge Base Management
 
 ## Current Structure
 The FAQ knowledge base is stored in `data/faq_docs.json`.
@@ -14,7 +14,7 @@ The current file contains 12 documents. Each document uses `id`, `title`, and `t
 
 ## Retrieval Behaviour
 The FAQ retriever uses TF-IDF vectors and cosine similarity.
-Its current relevance threshold is 0.12.
+Its current relevance threshold is 0.30.
 Changes to FAQ content or the threshold may affect search results.
 
 ## Ownership and Change Control
