@@ -1,0 +1,41 @@
+[
+    {
+        "id": "faq-001",
+        "title": "What is HisabDo?",
+        "text": "HisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going.",
+        "section": "Product Overview",
+        "category": "General FAQ",
+        "source_url": null,
+        "language": "en",
+        "last_updated": null,
+        "product_area": "HisabDo",
+        "source_verification": "pending",
+        "product_module": "HisabDo"
+    },
+    {
+        "id": "faq-002",
+        "title": "How do I categorize an expense? How does automatic expense categorization work?",
+        "text": "When you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions. If the model isn't confident, the expense is flagged for you to confirm or correct the category instead of being applied automatically.",
+        "section": "Expense Tracking",
+        "category": "Expense Categorization",
+        "source_url": null,
+        "language": "en",
+        "last_updated": null,
+        "product_area": "HisabDo Expenses",
+        "source_verification": "pending",
+        "product_module": "HisabDo Expenses"
+    },
+    {
+        "id": "faq-003",
+        "title": "Is my financial data used to train the shared AI model?",
+        "text": "No individual user's raw financial data is used as a knowledge source for the chatbot. Chatbot answers about your own balance, expenses, or revenue are always pulled live from your account through the backend, not from any shared knowledge base.",
+        "section": "Privacy and Security",
+        "category": "Data Privacy",
+        "source_url": null,
+        "language": "en",
+        "last_updated": null,
+        "product_area": "HisabDo AI",
+        "source_verification": "pending",
+        "product_module": "HisabDo AI"
+    }
+]
