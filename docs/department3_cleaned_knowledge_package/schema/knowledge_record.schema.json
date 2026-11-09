@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HisabDo Department 3 Knowledge Record",
+  "description": "Standardized record format. Missing source evidence is represented as null; do not infer approval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "section",
+    "category",
+    "source_url",
+    "language",
+    "last_updated",
+    "product_module",
+    "content",
+    "source_reference",
+    "source_verification_status",
+    "content_review_status",
+    "last_reviewed",
+    "version",
+    "ingestion_eligibility"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "section": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "language": {
+      "type": "string",
+      "minLength": 2
+    },
+    "last_updated": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "product_module": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_reference": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_verification_status": {
+      "enum": [
+        "metadata_marked_verified",
+        "unverified"
+      ]
+    },
+    "content_review_status": {
+      "type": "string"
+    },
+    "last_reviewed": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "version": {
+      "type": "string"
+    },
+    "ingestion_eligibility": {
+      "enum": [
+        "hold_pending_independent_owner_approval",
+        "eligible_after_approval"
+      ]
+    }
+  }
+}
