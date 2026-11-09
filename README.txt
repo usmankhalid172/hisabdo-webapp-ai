@@ -1,20 +1,27 @@
-CAREER DOMAIN RETRIEVAL & PROMPT-FAILURE REVIEW
-Owner: Muhammad Daniyal
-Date: 5 November 2026
+Submission: Knowledge Base Ingestion & Update Technical Specification
+Prepared by: Muhammad Daniyal
+Date: 9 November 2026
 
 Files:
-1. Career_Domain_Retrieval_Prompt_Failure_Analysis.docx
-   Main formatted report.
-2. Career_Domain_Retrieval_Prompt_Failure_Analysis.md
-   Editable Markdown copy of the report.
-3. Career_Domain_Issue_Ownership_Log.csv
-   Prioritized issues, proposed functional owner roles, named assignee placeholders, and acceptance criteria.
-4. Career_Domain_Retrieval_Evidence.csv
-   Supporting local top-8 retrieval observations for the ten-query benchmark.
+1. Knowledge_Base_Ingestion_Update_Technical_Specification.docx — formatted handover document.
+2. Knowledge_Base_Ingestion_Update_Technical_Specification.md — editable Markdown source.
+3. metadata_validator.py — standalone reference validator for JSONL, JSON, and CSV metadata.
+4. README.txt — package notes and usage.
 
-Evidence boundaries:
-- The repository review used the latest supplied archive: hisabdo-webapp-ai-main (3).zip.
-- Live chatbot outcomes are from the ten transcripts supplied during the previous Day 7 evaluation; this package does not claim a new production run.
-- Retrieval evidence is reproduced locally from the saved index and repository retrieval code. It is not production telemetry.
-- Named issue assignees were not included in the task brief. Functional owner roles are proposed and names are marked TBD by team lead.
-- No code changes, prompt deployment, or release action were performed.
+Validator usage (from a terminal):
+    python metadata_validator.py path/to/records.jsonl
+    python metadata_validator.py path/to/records.json
+    python metadata_validator.py path/to/records.csv
+
+The validator uses the proposed initial allow-lists in the specification. Product
+owners/team leads must approve the final domains and product-tag taxonomy before
+production use. It is a standalone reference companion and is not integrated
+into the repository's live ingest pipeline.
+
+The specification was grounded in a review of the supplied repository archive:
+src/xictek_website_assistant/ingest.py, chunking.py, vector_store.py,
+config.py, schemas.py, and data/xictek_faq_raw.jsonl / data/index/chunks.json.
+
+It documents current behavior separately from proposed standards. It does not
+claim that the proposed schema, validators, or update workflow have been
+deployed or that a production ingestion run was performed.
