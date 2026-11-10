@@ -1,0 +1,23 @@
+{
+    "semantic": {
+        "precision_at_3": 0.27777777777777773,
+        "recall_at_3": 0.8333333333333334,
+        "mrr": 0.8333333333333334,
+        "ndcg_at_3": 0.8333333333333334,
+        "unrelated_false_returns": 0
+    },
+    "lexical": {
+        "precision_at_3": 0.27777777777777773,
+        "recall_at_3": 0.8333333333333334,
+        "mrr": 0.8333333333333334,
+        "ndcg_at_3": 0.8333333333333334,
+        "unrelated_false_returns": 0
+    },
+    "hybrid": {
+        "precision_at_3": 0.27777777777777773,
+        "recall_at_3": 0.8333333333333334,
+        "mrr": 0.8333333333333334,
+        "ndcg_at_3": 0.8333333333333334,
+        "unrelated_false_returns": 0
+    }
+}

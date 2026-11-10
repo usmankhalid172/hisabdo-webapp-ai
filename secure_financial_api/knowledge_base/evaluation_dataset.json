@@ -1,0 +1,43 @@
+
+{
+  "dataset_name": "HisabDo Retrieval Evaluation",
+  "version": "1.0",
+  "cases": [
+    {
+      "id": "test-001",
+      "query": "What does receivable mean?",
+      "relevant_ids": ["faq-001"],
+      "category": "financial_definition"
+    },
+    {
+      "id": "test-002",
+      "query": "What money do I owe suppliers?",
+      "relevant_ids": ["faq-002"],
+      "category": "financial_definition"
+    },
+    {
+      "id": "test-003",
+      "query": "Explain cash flow for my business",
+      "relevant_ids": ["faq-004"],
+      "category": "financial_definition"
+    },
+    {
+      "id": "test-004",
+      "query": "How should I record a customer payment?",
+      "relevant_ids": ["faq-005"],
+      "category": "accounting_workflow"
+    },
+    {
+      "id": "test-005",
+      "query": "Mere customers ke paas mera kitna paisa baqi hai?",
+      "relevant_ids": ["faq-006"],
+      "category": "roman_urdu"
+    },
+    {
+      "id": "test-006",
+      "query": "What is the weather like on Mars?",
+      "relevant_ids": [],
+      "category": "unrelated_question"
+    }
+  ]
+}
