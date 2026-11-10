@@ -1,0 +1,162 @@
+[
+  {
+    "text": "Title: What is HisabDo?\n\nHisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going.",
+    "chunk_index": 0,
+    "content_type": "faq",
+    "record_id": "faq-001",
+    "title": "What is HisabDo?",
+    "product_module": "HisabDo",
+    "source_url": null,
+    "content_hash": "5de886e635d67e37aa310ea748a53b532abd17ea7fcc79f6d722fb6274a9d4aa"
+  },
+  {
+    "text": "Title: How do I categorize an expense? How does automatic expense categorization work?\n\nWhen you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions. If the model isn't confident, the expense is flagged for you to confirm or correct the category instead of being applied automatically.",
+    "chunk_index": 0,
+    "content_type": "faq",
+    "record_id": "faq-002",
+    "title": "How do I categorize an expense? How does automatic expense categorization work?",
+    "product_module": "HisabDo Expenses",
+    "source_url": null,
+    "content_hash": "4cefbc220274b5c120ec91b044ed74b4e771f976b7923a3db354a3de26bc2a59"
+  },
+  {
+    "text": "Title: Is my financial data used to train the shared AI model?\n\nNo individual user's raw financial data is used as a knowledge source for the chatbot. Chatbot answers about your own balance, expenses, or revenue are always pulled live from your account through the backend, not from any shared knowledge base.",
+    "chunk_index": 0,
+    "content_type": "faq",
+    "record_id": "faq-003",
+    "title": "Is my financial data used to train the shared AI model?",
+    "product_module": "HisabDo AI",
+    "source_url": null,
+    "content_hash": "b7b0e427d118da1a582e939aa2faa2a44be4dc30088d8ba3f2a708aa1bdfe6f5"
+  },
+  {
+    "text": "Title: What is a cash flow statement?\n\nA cash flow statement is a financial report that shows the money moving in and out of a business over a period of time, split into operating, investing, and financing activities. It helps you see whether a business is generating enough cash to sustain itself.",
+    "chunk_index": 0,
+    "content_type": "faq",
+    "record_id": "faq-004",
+    "title": "What is a cash flow statement?",
+    "product_module": "HisabDo Reports",
+    "source_url": null,
+    "content_hash": "4b782236bb4042996181c10d6acc48da10e703c2f6813a3a3a53206ad9dcde15"
+  },
+  {
+    "text": "Title: How do I export my expenses or get my spending data?\n\nTo export your recorded expenses or get your spending data out of HisabDo, open the Reports section and export a CSV or PDF report. You can filter the report by date range, category, or tag.",
+    "chunk_index": 0,
+    "content_type": "faq",
+    "record_id": "faq-005",
+    "title": "How do I export my expenses or get my spending data?",
+    "product_module": "HisabDo Reports",
+    "source_url": null,
+    "content_hash": "4f6aa8f2b2f1140798ab61d619f92f0f01cf38f9a81f13c2f82760630d9d4bbf"
+  },
+  {
+    "text": "Title: What's the difference between profit and cash flow?\n\nProfit is revenue minus expenses over a period, based on accounting rules, while cash flow is the actual movement of money in and out of your accounts. A business can be profitable on paper while still running low on cash if customers haven't paid yet.",
+    "chunk_index": 0,
+    "content_type": "faq",
+    "record_id": "faq-006",
+    "title": "What's the difference between profit and cash flow?",
+    "product_module": "HisabDo Reports",
+    "source_url": null,
+    "content_hash": "86ef4af6210937f6fc1a861dc413f97c777893c2f92b24bf9e9eb5b26240a94b"
+  },
+  {
+    "text": "Title: What is profit? Profit is the amount remaining after expenses are subtracted from revenue.",
+    "chunk_index": 0,
+    "content_type": "documentation",
+    "record_id": "finance_001",
+    "title": "What is profit?",
+    "product_module": "Financial Knowledge",
+    "source_url": null,
+    "content_hash": "9ec908fd3c9d351f35e864096bb60a260953fe23334e1fab11f88712f10f5177"
+  },
+  {
+    "text": "Title: What is revenue? Revenue is the total income generated from business sales or services before expenses are deducted.",
+    "chunk_index": 0,
+    "content_type": "documentation",
+    "record_id": "finance_002",
+    "title": "What is revenue?",
+    "product_module": "Financial Knowledge",
+    "source_url": null,
+    "content_hash": "5cc94bf30e2a8a000e81995fc562c9b670a3d595255cfa7f466100b40294d9f2"
+  },
+  {
+    "text": "Title: What is an expense? An expense is a cost incurred by a business while operating or generating revenue.",
+    "chunk_index": 0,
+    "content_type": "documentation",
+    "record_id": "finance_003",
+    "title": "What is an expense?",
+    "product_module": "Financial Knowledge",
+    "source_url": null,
+    "content_hash": "74942b3e2bfc1ce1d1620305fdb7032f239f03cff193320d3edbedb215cc67b3"
+  },
+  {
+    "text": "Title: What is cash flow? Cash flow represents the movement of money entering and leaving a business during a period.",
+    "chunk_index": 0,
+    "content_type": "documentation",
+    "record_id": "finance_004",
+    "title": "What is cash flow?",
+    "product_module": "Financial Knowledge",
+    "source_url": null,
+    "content_hash": "4eb2364ad08fc7a074c5cf46746b098b9747fd90bfb7d91e66fac8cbfc03fd2b"
+  },
+  {
+    "text": "Title: Why should customer balances be tracked? Tracking customer balances helps a business identify outstanding payments and monitor money owed by customers.",
+    "chunk_index": 0,
+    "content_type": "documentation",
+    "record_id": "finance_005",
+    "title": "Why should customer balances be tracked?",
+    "product_module": "Financial Knowledge",
+    "source_url": null,
+    "content_hash": "1eb3812a9bf96b3cdd6d33cef97b715373e7c76c815286fcbbe92b80805fe426"
+  },
+  {
+    "text": "Title: Why should business expenses be categorized? Categorizing expenses makes financial records easier to analyze and helps identify where business money is being spent.",
+    "chunk_index": 0,
+    "content_type": "documentation",
+    "record_id": "finance_006",
+    "title": "Why should business expenses be categorized?",
+    "product_module": "Financial Knowledge",
+    "source_url": null,
+    "content_hash": "2d7322b662275947f5f07069491bacc42a1cb5fc5c21b2e2ca330b263f71c9a2"
+  },
+  {
+    "text": "Title: What is a balance sheet? A balance sheet summarizes a business's assets, liabilities, and owner's equity at a specific point in time.",
+    "chunk_index": 0,
+    "content_type": "documentation",
+    "record_id": "finance_007",
+    "title": "What is a balance sheet?",
+    "product_module": "Financial Knowledge",
+    "source_url": null,
+    "content_hash": "bf940d3715ec4a9cfdfde46a9fa8c3cb0d1800d37d344e851a3de605549aefb9"
+  },
+  {
+    "text": "Title: What are accounts payable and accounts receivable? Accounts payable is money a business owes to suppliers. Accounts receivable is money customers owe to the business.",
+    "chunk_index": 0,
+    "content_type": "documentation",
+    "record_id": "finance_008",
+    "title": "What are accounts payable and accounts receivable?",
+    "product_module": "Financial Knowledge",
+    "source_url": null,
+    "content_hash": "968960ba6a7fb8b8b2f068d865e90aae0d63a1a6984894ac04575995ed971282"
+  },
+  {
+    "text": "Title: What is a budget? A budget estimates income and expenses over a future period and helps compare planned results with actual results.",
+    "chunk_index": 0,
+    "content_type": "documentation",
+    "record_id": "finance_009",
+    "title": "What is a budget?",
+    "product_module": "Financial Knowledge",
+    "source_url": null,
+    "content_hash": "eb7f0157d7069b1ac6120fb5859bf6c0d0650baa06ac94ba92ba3a9aa098ecfc"
+  },
+  {
+    "text": "Title: What is the break-even point? The break-even point is where total revenue equals total costs, resulting in neither profit nor loss.",
+    "chunk_index": 0,
+    "content_type": "documentation",
+    "record_id": "finance_010",
+    "title": "What is the break-even point?",
+    "product_module": "Financial Knowledge",
+    "source_url": null,
+    "content_hash": "f5f7f0e8a747bd9c21082f122462a13aa498994898f1d3a2dff79883d7b6d5de"
+  }
+]

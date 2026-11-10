@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-11-10T16:22:17.555571+00:00",
+  "source_file": "data/department3_staging_knowledge.json",
+  "input_record_count": 16,
+  "valid_record_count": 16,
+  "chunk_count": 16,
+  "changes": {
+    "added": [
+      "faq-001",
+      "faq-002",
+      "faq-003",
+      "faq-004",
+      "faq-005",
+      "faq-006",
+      "finance_001",
+      "finance_002",
+      "finance_003",
+      "finance_004",
+      "finance_005",
+      "finance_006",
+      "finance_007",
+      "finance_008",
+      "finance_009",
+      "finance_010"
+    ],
+    "modified": [],
+    "deleted": [],
+    "unchanged": []
+  },
+  "duplicate_ids": [],
+  "duplicate_content_record_ids": [],
+  "validation_errors": [],
+  "failed_pages": [],
+  "unresolved_source_urls": [
+    "faq-001",
+    "faq-002",
+    "faq-003",
+    "faq-004",
+    "faq-005",
+    "faq-006",
+    "finance_001",
+    "finance_002",
+    "finance_003",
+    "finance_004",
+    "finance_005",
+    "finance_006",
+    "finance_007",
+    "finance_008",
+    "finance_009",
+    "finance_010"
+  ],
+  "vector_parsing_errors": [],
+  "embedding_generated": false,
+  "notes": [
+    "No source URLs were fetched by this offline staging pipeline.",
+    "Records without source URLs require source-owner verification.",
+    "No production embeddings or vector index were generated."
+  ]
+}

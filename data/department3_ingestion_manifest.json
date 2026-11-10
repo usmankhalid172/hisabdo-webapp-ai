@@ -1,0 +1,26 @@
+{
+  "manifest_version": "1.0",
+  "generated_at": "2026-11-10T16:22:17.555571+00:00",
+  "source_file": "data/department3_staging_knowledge.json",
+  "record_count": 16,
+  "records": {
+    "faq-001": "5de886e635d67e37aa310ea748a53b532abd17ea7fcc79f6d722fb6274a9d4aa",
+    "faq-002": "4cefbc220274b5c120ec91b044ed74b4e771f976b7923a3db354a3de26bc2a59",
+    "faq-003": "b7b0e427d118da1a582e939aa2faa2a44be4dc30088d8ba3f2a708aa1bdfe6f5",
+    "faq-004": "4b782236bb4042996181c10d6acc48da10e703c2f6813a3a3a53206ad9dcde15",
+    "faq-005": "4f6aa8f2b2f1140798ab61d619f92f0f01cf38f9a81f13c2f82760630d9d4bbf",
+    "faq-006": "86ef4af6210937f6fc1a861dc413f97c777893c2f92b24bf9e9eb5b26240a94b",
+    "finance_001": "9ec908fd3c9d351f35e864096bb60a260953fe23334e1fab11f88712f10f5177",
+    "finance_002": "5cc94bf30e2a8a000e81995fc562c9b670a3d595255cfa7f466100b40294d9f2",
+    "finance_003": "74942b3e2bfc1ce1d1620305fdb7032f239f03cff193320d3edbedb215cc67b3",
+    "finance_004": "4eb2364ad08fc7a074c5cf46746b098b9747fd90bfb7d91e66fac8cbfc03fd2b",
+    "finance_005": "1eb3812a9bf96b3cdd6d33cef97b715373e7c76c815286fcbbe92b80805fe426",
+    "finance_006": "2d7322b662275947f5f07069491bacc42a1cb5fc5c21b2e2ca330b263f71c9a2",
+    "finance_007": "bf940d3715ec4a9cfdfde46a9fa8c3cb0d1800d37d344e851a3de605549aefb9",
+    "finance_008": "968960ba6a7fb8b8b2f068d865e90aae0d63a1a6984894ac04575995ed971282",
+    "finance_009": "eb7f0157d7069b1ac6120fb5859bf6c0d0650baa06ac94ba92ba3a9aa098ecfc",
+    "finance_010": "f5f7f0e8a747bd9c21082f122462a13aa498994898f1d3a2dff79883d7b6d5de"
+  },
+  "chunk_count": 16,
+  "embedding_status": "not_generated_by_this_pipeline"
+}
