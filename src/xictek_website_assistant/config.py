@@ -46,6 +46,8 @@ class XictekSettings(BaseSettings):
     embedding_dim: int = 384
     chunk_size_chars: int = 1200
     chunk_overlap_chars: int = 200
+    portfolio_chunk_size_chars: int = 900
+    portfolio_chunk_overlap_chars: int = 180
     top_k: int = 8
     portfolio_top_k: int = 2
     relevance_threshold: float = 0.20

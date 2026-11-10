@@ -1,0 +1,12 @@
+Portfolio ingestion validation log
+Date: 2026-11-10
+Scope: Offline chunking configuration and ingestion parameter routing
+
+INFO  Local source reviewed: data/portfolio/hisabdo.md (1,465 characters, 10 paragraphs).
+INFO  Synthetic evaluation: four project structures; title, summary, technology stack, and metrics markers tested.
+INFO  Selected portfolio parameters: chunk_size_chars=900, chunk_overlap_chars=180.
+INFO  Existing non-portfolio parameters retained: chunk_size_chars=1200, chunk_overlap_chars=200.
+INFO  Public-content gate: unapproved client case-study claims were not ingested or used as validation facts.
+INFO  Offline parsing/chunking test errors observed: 0.
+NOT RUN  Live portfolio crawl, remote source parsing, embedding, and production index rebuild.
+NOT RUN  No conclusion is made about live-site ingestion errors because a live crawl was not run.

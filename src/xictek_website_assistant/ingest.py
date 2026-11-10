@@ -137,6 +137,16 @@ def _discover_links(base_url: str, html: str, allowed_domains: list[str]) -> lis
     return links
 
 
+def _chunking_parameters(page_url: str, settings) -> tuple[int, int]:
+    path = urlparse(page_url).path.rstrip("/")
+    if path == "/portfolio" or path.startswith("/portfolio/"):
+        return (
+            settings.portfolio_chunk_size_chars,
+            settings.portfolio_chunk_overlap_chars,
+        )
+    return settings.chunk_size_chars, settings.chunk_overlap_chars
+
+
 def crawl(seed_urls: list[str], allowed_domains: list[str], max_pages: int, delay_seconds: float) -> list[CrawledPage]:
     visited: set[str] = set()
     queue: deque[str] = deque(seed_urls)
@@ -195,8 +205,9 @@ def build_index(pages: list[CrawledPage]) -> VectorStore:
 
     for page in pages:
         seen_chunk_texts: set[str] = set()
+        chunk_size, chunk_overlap = _chunking_parameters(page.url, settings)
         for i, chunk_body in enumerate(
-            chunk_text(page.text, settings.chunk_size_chars, settings.chunk_overlap_chars)
+            chunk_text(page.text, chunk_size, chunk_overlap)
         ):
             if chunk_body in seen_chunk_texts:
                 continue
