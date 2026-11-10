@@ -1,0 +1,36 @@
+{
+ "schema_version": "1.0",
+ "records": 363,
+ "input_chunks": 364,
+ "purged": [
+  {
+   "record_id": "off-04-016-start-managing-your-finances",
+   "reason": "promotional_filler",
+   "heading": "Start Managing Your Finances"
+  }
+ ],
+ "by_module": {
+  "expenses_income": 76,
+  "customers_udhar": 73,
+  "khata_ledger": 43,
+  "legal_policy": 40,
+  "data_backup_sync": 38,
+  "suppliers_payables": 29,
+  "reports_pdf": 26,
+  "language_currency": 8,
+  "app_platform": 7,
+  "company_support": 6,
+  "general_bookkeeping": 6,
+  "privacy_security": 5,
+  "product_overview": 3,
+  "entry_voice": 3
+ },
+ "expense_management_scope": 256,
+ "by_doc_type": {
+  "feature_faq": 33,
+  "product_documentation": 36,
+  "authorized_reference": 40,
+  "workflow_guide": 254
+ },
+ "earlier_cleaning": "UI navigation, footers, CTAs, bylines, author boxes, related-article lists, stale counters and 2 duplicates were removed when the KB was cleaned (data/kb/approved/cleaning_report.json: 286 blocks)"
+}
