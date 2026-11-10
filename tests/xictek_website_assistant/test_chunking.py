@@ -46,3 +46,35 @@ def test_reconstructs_all_content_across_chunks():
     joined = " ".join(chunks)
     for p in paragraphs:
         assert p in joined
+
+
+def test_keeps_markdown_table_rows_together_when_table_fits():
+    table = "| Feature | Detail |\n| --- | --- |\n| Ledger | Records payments |\n| Reports | Exports PDF |"
+    chunks = chunk_text(table, chunk_size_chars=200, chunk_overlap_chars=20)
+    assert len(chunks) == 1
+    assert chunks[0] == table
+
+
+def test_splits_large_markdown_table_only_between_rows_and_repeats_header():
+    table = "\n".join(
+        ["| Feature | Specification |", "| --- | --- |"]
+        + [f"| Feature {i} | {('detail ' + str(i) + ' ') * 5}|" for i in range(8)]
+    )
+    chunks = chunk_text(table, chunk_size_chars=130, chunk_overlap_chars=20)
+    assert len(chunks) > 1
+    expected_header = ["| Feature | Specification |", "| --- | --- |"]
+    for chunk in chunks:
+        lines = chunk.splitlines()
+        assert lines[:2] == expected_header
+        assert len(lines) >= 3
+        assert all(line.startswith("|") and line.endswith("|") for line in lines)
+    for i in range(8):
+        assert sum(f"| Feature {i} |" in chunk for chunk in chunks) == 1
+
+
+def test_does_not_break_a_single_oversized_table_row():
+    row = "| Voice entry | " + ("technical detail " * 20) + "|"
+    table = "| Feature | Specification |\n| --- | --- |\n" + row
+    chunks = chunk_text(table, chunk_size_chars=80, chunk_overlap_chars=10)
+    assert len(chunks) == 1
+    assert chunks[0].endswith(row)

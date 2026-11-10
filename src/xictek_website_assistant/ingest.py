@@ -47,6 +47,31 @@ USER_AGENT = "XictekWebsiteAssistantIngestBot/1.0 (+internal knowledge-base inde
 _STRIP_TAGS = ["script", "style", "nav", "header", "footer", "noscript", "svg", "form"]
 
 
+def _table_to_markdown(table) -> str:
+    """Convert an HTML table into contiguous Markdown rows for safe chunking."""
+    rows: list[list[str]] = []
+    for tr in table.find_all("tr"):
+        cells = tr.find_all(["th", "td"], recursive=False)
+        if not cells:
+            cells = tr.find_all(["th", "td"])
+        values = [cell.get_text(" ", strip=True).replace("|", "\\|") for cell in cells]
+        if values:
+            rows.append(values)
+
+    if not rows:
+        return table.get_text(" ", strip=True)
+
+    width = max(map(len, rows))
+    rows = [row + [""] * (width - len(row)) for row in rows]
+
+    def format_row(row: list[str]) -> str:
+        return "| " + " | ".join(row) + " |"
+
+    return "\n".join(
+        [format_row(rows[0]), format_row(["---"] * width), *(format_row(row) for row in rows[1:])]
+    )
+
+
 @dataclass
 class CrawledPage:
     url: str
@@ -64,13 +89,37 @@ def _extract_page(url: str, html: str) -> CrawledPage:
     for tag in soup.find_all(_STRIP_TAGS):
         tag.decompose()
 
+    for table in soup.find_all("table"):
+        table.replace_with(soup.new_string(_table_to_markdown(table)))
+
     title = soup.title.get_text(strip=True) if soup.title else url
     main = soup.find("main") or soup.body or soup
     text = main.get_text(separator="\n", strip=True)
-    # Collapse runs of blank lines left behind by stripped tags, while
-    # keeping paragraph breaks chunking.py relies on.
-    lines = [line for line in text.splitlines() if line.strip()]
-    text = "\n\n".join(lines)
+    # Keep table rows contiguous; separate non-table extracted lines so the
+    # chunker can recognize paragraph and table boundaries reliably.
+    lines = [line.strip() for line in text.splitlines()]
+    blocks: list[str] = []
+    i = 0
+    while i < len(lines):
+        if not lines[i]:
+            i += 1
+            continue
+        if (
+            i + 1 < len(lines)
+            and lines[i].count("|") >= 2
+            and lines[i + 1].count("|") >= 2
+            and all(char in "-: |" for char in lines[i + 1])
+        ):
+            table_lines = [lines[i], lines[i + 1]]
+            i += 2
+            while i < len(lines) and lines[i] and lines[i].count("|") >= 2:
+                table_lines.append(lines[i])
+                i += 1
+            blocks.append("\n".join(table_lines))
+            continue
+        blocks.append(lines[i])
+        i += 1
+    text = "\n\n".join(blocks)
     return CrawledPage(url=url, title=title, text=text)
 
 

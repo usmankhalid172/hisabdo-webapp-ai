@@ -11,7 +11,7 @@ from unittest.mock import patch
 
 import numpy as np
 
-from src.xictek_website_assistant.ingest import CrawledPage, build_index
+from src.xictek_website_assistant.ingest import CrawledPage, _extract_page, build_index
 
 
 def _stub_embed(texts):
@@ -66,3 +66,21 @@ def test_no_duplicates_means_no_chunks_dropped():
         store = build_index([CrawledPage(url="https://example.com/x", title="X", text=text)])
 
     assert len(store) == 1  # short enough to pack into one chunk, per chunking.py's defaults
+
+
+def test_extract_page_preserves_html_feature_table_as_markdown():
+    html = """
+    <html><head><title>HisabDo Features</title></head><body>
+      <nav>Home | App | Contact</nav>
+      <main><h1>Feature specifications</h1>
+      <table><thead><tr><th>Feature</th><th>Details</th></tr></thead>
+        <tbody><tr><td>Ledger</td><td>Tracks payments and balances</td></tr>
+        <tr><td>Reports</td><td>Creates PDF statements</td></tr></tbody>
+      </table></main>
+      <footer>Privacy | Terms</footer>
+    </body></html>
+    """
+    page = _extract_page("https://hisabdo.app/features", html)
+    assert "Home | App | Contact" not in page.text
+    assert "Privacy | Terms" not in page.text
+    assert "| Feature | Details |\n| --- | --- |\n| Ledger | Tracks payments and balances |" in page.text
