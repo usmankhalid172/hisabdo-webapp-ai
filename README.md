@@ -1,15 +1,30 @@
-# Day 6 Grounded Generation & Citations — Master Package
+# Automated Ingestion Pipeline & Error Logging Setup
 
-**Coordinator:** Muhammad Daniyal  
-**Date:** 29 October 2026  
-**Current status:** Consolidated review package prepared; final approval pending.
+**Owner:** Muhammad Daniyal
 
-## Start here
-1. Read `Day6_Grounded_Generation_Citations_Master_Specification.docx` for the consolidated prompts and cross-domain rules.
-2. Read `Day6_Grounded_Generation_Citations_Master_Package_Review.docx` for the management-ready review.
-3. Read `MASTER_PACKAGE_REVIEW.md` for detailed domain findings and the action register.
-4. Review `review_evidence/` for actual commands and outcomes reproduced on the supplied files.
-5. Original submissions are preserved in `team_submissions/`.
+This is a focused submission package containing only the files relevant to the Automated Ingestion Pipeline & Error Logging Setup task. It is not a complete application repository.
 
-## Important
-This package is not labelled final-approved because the supplied archive does not contain a dedicated Portfolio & Case Studies submission, the Contact & Locations test suite is missing a required corpus file, and system-wide evaluation has known unanswerable-query misses. These issues are documented with required next steps.
+## Contents
+- `src/xictek_website_assistant/`: ingestion, chunking, TF-IDF embedding, configuration, and vector-store implementation.
+- `src/logging_config.py`: shared application logger used by the vector store.
+- `tests/xictek_website_assistant/`: focused regression tests.
+- `docs/`: task report in Markdown and DOCX formats.
+
+## Apply to the project
+Extract this ZIP into the root of the existing `hisabdo-webapp-ai` repository and allow the included files to merge into their matching folders. The ZIP intentionally excludes the rest of the application, local virtual environments, caches, secrets, and generated index files.
+
+## Run ingestion
+From the full repository root, with project dependencies installed and outbound HTTPS access available:
+
+```bash
+python -m src.xictek_website_assistant.ingest
+```
+
+## Run focused tests
+From the full repository root:
+
+```bash
+python -m pytest tests/xictek_website_assistant/test_ingest_dedup.py tests/xictek_website_assistant/test_ingestion_pipeline.py tests/xictek_website_assistant/test_chunking.py tests/xictek_website_assistant/test_vector_store.py tests/xictek_website_assistant/test_vector_store_mmr.py -q
+```
+
+The report documents the automated validation performed and explicitly distinguishes it from a fresh live crawl.

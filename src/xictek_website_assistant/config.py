@@ -37,13 +37,10 @@ class XictekSettings(BaseSettings):
     groq_api_key: str | None = None
     llm_provider: str | None = None
 
-    # Embeddings. Multilingual (not English-only all-MiniLM-L6-v2) so
-    # queries in Urdu, Hindi, or Arabic still retrieve the right English
-    # site content -- team lead requested EN/UR/HI/AR support. Officially
-    # supports ar/hi/ur/en + 50 more languages. Bigger download (~470MB
-    # vs ~90MB) but same CPU-friendly inference cost at this index size.
-    embedding_model: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-    embedding_dim: int = 384
+    # The current runtime uses scikit-learn TF-IDF, not Sentence Transformers.
+    # The feature dimension is corpus-dependent and is recorded in index metadata.
+    embedding_model: str = "scikit-learn-tfidf-word-bigram-v1"
+    embedding_dim: int | None = None
     chunk_size_chars: int = 1200
     chunk_overlap_chars: int = 200
     top_k: int = 8

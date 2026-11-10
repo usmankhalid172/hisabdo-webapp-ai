@@ -147,23 +147,34 @@ class VectorStore:
         index_dir.mkdir(parents=True, exist_ok=True)
         if self._vectors is None:
             raise ValueError("Cannot save an empty/unbuilt vector store")
-        np.save(index_dir / EMBEDDINGS_FILENAME, self._vectors)
+        if self._vectors.ndim != 2 or self._vectors.shape[0] != len(self.chunks):
+            raise ValueError("Cannot save an invalid chunk/vector matrix")
+        if not np.isfinite(self._vectors).all():
+            raise ValueError("Cannot save vectors containing NaN or infinity")
         payload = [
             {"id": c.chunk_id, "title": c.title, "url": c.url, "text": c.text}
             for c in self.chunks
         ]
-        (index_dir / CHUNKS_FILENAME).write_text(json.dumps(payload, indent=2, ensure_ascii=False))
-        # Records which model built this index. Two different embedding
-        # models can output the same vector dimension (e.g. both
-        # all-MiniLM-L6-v2 and paraphrase-multilingual-MiniLM-L12-v2 are
-        # 384-dim) without their vector spaces being remotely compatible
-        # -- an index built with one and queried with the other would
-        # load without error but return meaningless similarity scores.
-        # This lets load() catch that instead of silently corrupting
-        # results.
-        (index_dir / METADATA_FILENAME).write_text(
-            json.dumps({"embedding_model": get_xictek_settings().embedding_model}, indent=2)
-        )
+        settings = get_xictek_settings()
+        metadata = {
+            "embedding_model": settings.embedding_model,
+            "embedding_backend": "scikit-learn TfidfVectorizer",
+            "vector_shape": list(self._vectors.shape),
+            "chunk_count": len(self.chunks),
+            "dtype": str(self._vectors.dtype),
+        }
+        # Write temporary files first, then replace the persisted files.
+        # This prevents a serialization error from leaving chunks.json empty.
+        vectors_tmp = index_dir / (EMBEDDINGS_FILENAME + ".tmp")
+        with open(vectors_tmp, "wb") as handle:
+            np.save(handle, self._vectors)
+        chunks_tmp = index_dir / (CHUNKS_FILENAME + ".tmp")
+        chunks_tmp.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+        metadata_tmp = index_dir / (METADATA_FILENAME + ".tmp")
+        metadata_tmp.write_text(json.dumps(metadata, indent=2, ensure_ascii=False), encoding="utf-8")
+        vectors_tmp.replace(index_dir / EMBEDDINGS_FILENAME)
+        chunks_tmp.replace(index_dir / CHUNKS_FILENAME)
+        metadata_tmp.replace(index_dir / METADATA_FILENAME)
 
     @classmethod
     def load(cls, index_dir: Optional[Path] = None) -> "VectorStore":
@@ -176,7 +187,7 @@ class VectorStore:
         metadata_path = index_dir / METADATA_FILENAME
         current_model = get_xictek_settings().embedding_model
         if metadata_path.exists():
-            built_with = json.loads(metadata_path.read_text()).get("embedding_model")
+            built_with = json.loads(metadata_path.read_text(encoding="utf-8")).get("embedding_model")
             if built_with and built_with != current_model:
                 logger.warning(
                     "xictek_index_embedding_model_mismatch",
@@ -192,11 +203,15 @@ class VectorStore:
             logger.warning("xictek_index_metadata_missing_cannot_verify_embedding_model")
 
         vectors = np.load(vectors_path)
-        raw_chunks = json.loads(chunks_path.read_text())
+        raw_chunks = json.loads(chunks_path.read_text(encoding="utf-8"))
         chunks = [
             Chunk(chunk_id=c["id"], title=c["title"], url=c.get("url"), text=c["text"])
             for c in raw_chunks
         ]
+        if vectors.ndim != 2 or vectors.shape[0] != len(chunks):
+            raise ValueError(f"Persisted index is inconsistent: {len(chunks)} chunks, vector shape {vectors.shape}")
+        if not np.isfinite(vectors).all():
+            raise ValueError("Persisted index contains NaN or infinite vectors")
         store = cls()
         store.build(chunks, vectors)
         return store

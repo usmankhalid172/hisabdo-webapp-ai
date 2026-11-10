@@ -109,8 +109,11 @@ def embed_texts(texts: list[str]) -> np.ndarray:
     matrix = vectorizer.fit_transform(texts)
     index_dir = get_xictek_settings().index_dir
     index_dir.mkdir(parents=True, exist_ok=True)
-    with open(index_dir / VECTORIZER_FILENAME, "wb") as f:
+    temporary = index_dir / (VECTORIZER_FILENAME + ".tmp")
+    with open(temporary, "wb") as f:
         pickle.dump(vectorizer, f)
+    temporary.replace(index_dir / VECTORIZER_FILENAME)
+    _vectorizer.cache_clear()
     return matrix.toarray().astype(np.float32)
 
 
