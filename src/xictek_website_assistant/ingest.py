@@ -32,7 +32,7 @@ from dataclasses import dataclass
 from urllib.parse import urljoin, urlparse
 
 import httpx
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
 
 from .chunking import chunk_text
 from .config import get_xictek_settings
@@ -45,6 +45,19 @@ USER_AGENT = "XictekWebsiteAssistantIngestBot/1.0 (+internal knowledge-base inde
 # content, and otherwise pollutes every single chunk with the same
 # boilerplate (menu items, footer links) diluting retrieval quality.
 _STRIP_TAGS = ["script", "style", "nav", "header", "footer", "noscript", "svg", "form"]
+_CONTENT_BLOCK_TAGS = {
+    "blockquote",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "ol",
+    "p",
+    "table",
+    "ul",
+}
 
 
 @dataclass
@@ -66,11 +79,51 @@ def _extract_page(url: str, html: str) -> CrawledPage:
 
     title = soup.title.get_text(strip=True) if soup.title else url
     main = soup.find("main") or soup.body or soup
-    text = main.get_text(separator="\n", strip=True)
-    # Collapse runs of blank lines left behind by stripped tags, while
-    # keeping paragraph breaks chunking.py relies on.
-    lines = [line for line in text.splitlines() if line.strip()]
-    text = "\n\n".join(lines)
+    blocks = []
+
+    def add_block(element) -> None:
+        if element.name == "table":
+            rows = []
+            for row in element.find_all("tr"):
+                cells = [
+                    cell.get_text(" ", strip=True)
+                    for cell in row.find_all(["th", "td"])
+                ]
+                if cells:
+                    rows.append(" | ".join(cells))
+            block = "\n".join(rows)
+        elif element.name in {"ul", "ol"}:
+            items = [
+                f"- {item.get_text(' ', strip=True)}"
+                for item in element.find_all("li", recursive=False)
+            ]
+            block = "\n".join(items)
+        else:
+            block = element.get_text(" ", strip=True)
+
+        if block.strip():
+            blocks.append(block.strip())
+
+    def visit(node) -> None:
+        for child in node.children:
+            if isinstance(child, NavigableString):
+                text = str(child).strip()
+                if text:
+                    blocks.append(text)
+            elif child.name in _CONTENT_BLOCK_TAGS:
+                add_block(child)
+            else:
+                visit(child)
+
+    visit(main)
+    if not blocks:
+        blocks = [
+            line.strip()
+            for line in main.get_text(separator="\n", strip=True).splitlines()
+            if line.strip()
+        ]
+
+    text = "\n\n".join(blocks)
     return CrawledPage(url=url, title=title, text=text)
 
 

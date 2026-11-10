@@ -22,6 +22,58 @@ def _hard_split(paragraph: str, chunk_size: int, overlap: int) -> list[str]:
     return [paragraph[i : i + chunk_size] for i in range(0, len(paragraph), step)]
 
 
+def _is_structured_block(lines: list[str]) -> bool:
+    if len(lines) < 2:
+        return False
+    if all("|" in line for line in lines):
+        return True
+    return all(line.startswith(("-", "*")) for line in lines)
+
+
+def _split_structured_block(
+    lines: list[str], chunk_size: int, overlap: int
+) -> list[str]:
+    is_table = all("|" in line for line in lines)
+    header = lines[0] if is_table else None
+    items = lines[1:] if is_table else lines
+    chunks: list[str] = []
+    start = 0
+
+    while start < len(items):
+        prefix = [header] if header else []
+        block = prefix.copy()
+        end = start
+
+        while end < len(items):
+            candidate = block + [items[end]]
+            if len("\n".join(candidate)) > chunk_size:
+                break
+            block = candidate
+            end += 1
+
+        if end == start:
+            chunks.extend(_hard_split(items[start], chunk_size, overlap))
+            start += 1
+            continue
+
+        chunks.append("\n".join(block))
+        if end == len(items):
+            break
+
+        overlap_items: list[str] = []
+        overlap_length = len(header) + 1 if header and end else 0
+        for item in reversed(items[start:end]):
+            added_length = len(item) + (1 if overlap_items or overlap_length else 0)
+            if overlap_length + added_length > overlap:
+                break
+            overlap_items.insert(0, item)
+            overlap_length += added_length
+
+        start = max(start + 1, end - len(overlap_items))
+
+    return chunks
+
+
 def chunk_text(text: str, chunk_size_chars: int = 1200, chunk_overlap_chars: int = 200) -> list[str]:
     paragraphs = _split_paragraphs(text)
     if not paragraphs:
@@ -36,7 +88,15 @@ def chunk_text(text: str, chunk_size_chars: int = 1200, chunk_overlap_chars: int
             if current:
                 chunks.append("\n\n".join(current))
                 current, current_len = [], 0
-            chunks.extend(_hard_split(paragraph, chunk_size_chars, chunk_overlap_chars))
+            lines = [line.strip() for line in paragraph.splitlines() if line.strip()]
+            if _is_structured_block(lines):
+                chunks.extend(
+                    _split_structured_block(
+                        lines, chunk_size_chars, chunk_overlap_chars
+                    )
+                )
+            else:
+                chunks.extend(_hard_split(paragraph, chunk_size_chars, chunk_overlap_chars))
             continue
 
         added_len = len(paragraph) + (2 if current else 0)
