@@ -1,0 +1,22 @@
+{
+  "description": "HELD-OUT set v3 for the release-candidate fixes. Written BEFORE the release fixes and never used to choose cues or rules. v2 was spent in the final tuning round.",
+  "owner": "Fahad Zubairi",
+  "created": "2026-10-22",
+  "cases": [
+    {"id": "H3-KHA-RU-1", "area": "khata", "language": "roman_ur", "text": "Usman ka account khol do", "expect_intent": "account_query"},
+    {"id": "H3-KHA-RU-2", "area": "khata", "language": "roman_ur", "text": "Zubair ka hisab dikha do", "expect_intent": "account_query"},
+    {"id": "H3-KHA-UR-1", "area": "khata", "language": "ur", "text": "زبیر کا حساب دکھا دیں", "expect_intent": "account_query"},
+    {"id": "H3-KHA-EN-1", "area": "khata", "language": "en", "text": "Open the ledger for Usman", "expect_intent": "account_query"},
+    {"id": "H3-UDH-RU-1", "area": "udhar", "language": "roman_ur", "text": "Kitne logon ka udhar reh gaya hai?", "expect_intent": "account_query"},
+    {"id": "H3-UDH-EN-1", "area": "udhar", "language": "en", "text": "Total udhar outstanding right now?", "expect_intent": "account_query"},
+    {"id": "H3-REP-RU-1", "area": "reports", "language": "roman_ur", "text": "Is hafte kitna kharcha hua?", "expect_intent": "report"},
+    {"id": "H3-REP-EN-1", "area": "reports", "language": "en", "text": "How much did we earn last month?", "expect_intent": "report"},
+    {"id": "H3-PDF-RU-1", "area": "pdf", "language": "roman_ur", "text": "Statement ko PDF mein kaise save karte hain?", "expect_intent": "faq"},
+    {"id": "H3-PDF-UR-1", "area": "pdf", "language": "ur", "text": "اسٹیٹمنٹ کو پی ڈی ایف میں کیسے محفوظ کریں؟", "expect_intent": "faq"},
+    {"id": "H3-GEN-RU-1", "area": "offline", "language": "roman_ur", "text": "Kya HisabDo iPhone par chalta hai?", "expect_intent": "faq"},
+    {"id": "H3-GEN-EN-1", "area": "offline", "language": "en", "text": "Is there a desktop version of HisabDo?", "expect_intent": "faq"},
+    {"id": "H3-EXP-UR-1", "area": "expenses", "language": "ur", "text": "بجلی کا بل 3200 بھرا", "expect_intent": "add_expense"},
+    {"id": "H3-INC-RU-1", "area": "income", "language": "roman_ur", "text": "Customer ne 1500 de diye", "expect_intent": "add_income"},
+    {"id": "H3-UDH-RU-2", "area": "udhar", "language": "roman_ur", "text": "Udhar wapis lene ka tareeqa kya hai?", "expect_intent": "faq"}
+  ]
+}

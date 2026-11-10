@@ -1,13 +1,17 @@
 [
   {
     "id": "faq-001",
-    "title": "What is HisabDo?",
-    "text": "HisabDo is a bookkeeping and expense-management app that helps small businesses and individuals track expenses, income, and cash flow, and get an AI-assisted breakdown of where their money is going."
+    "title": "What is HisabDo? What is the HisabDo app?",
+    "text": "HisabDo is a free, offline-first khata and ledger app for Android. It helps shopkeepers, freelancers and small business owners track money given and received, customer balances (udhar), payables and expenses, with PDF statements and reports.",
+    "source": "https://hisabdo.app/faq",
+    "verified_on": "2026-10-22"
   },
   {
     "id": "faq-002",
     "title": "How do I categorize an expense? How does automatic expense categorization work?",
-    "text": "When you add an expense, HisabDo predicts a category using a combination of rule-based matching and a machine learning model trained on past expense descriptions. If the model isn't confident, the expense is flagged for you to confirm or correct the category instead of being applied automatically."
+    "text": "Automatic expense categorization is not described in the official HisabDo documentation, so it should not be treated as an available app feature. You can add a descriptive note to any expense, which makes your records more useful when you review them later.",
+    "source": "https://hisabdo.app/faq (feature list; no categorization feature documented)",
+    "verified_on": "2026-10-22"
   },
   {
     "id": "faq-003",
@@ -22,7 +26,9 @@
   {
     "id": "faq-005",
     "title": "How do I export my expenses?",
-    "text": "You can export your recorded expenses as a CSV or PDF report from the Reports section of the app, filtered by date range, category, or tag."
+    "text": "HisabDo generates PDF statements and reports for any customer account or time period, which you can share via WhatsApp, email or any messaging app. The official documentation does not mention CSV or Excel export.",
+    "source": "https://hisabdo.app/faq; https://hisabdo.app/about-app",
+    "verified_on": "2026-10-22"
   },
   {
     "id": "faq-006",
@@ -58,5 +64,47 @@
     "id": "finance_006",
     "title": "Why should business expenses be categorized?",
     "text": "Categorizing expenses makes financial records easier to analyze and helps identify where business money is being spent."
+  },
+  {
+    "id": "faq-007",
+    "title": "Is HisabDo free to use?",
+    "text": "Yes. HisabDo is free to download and use from Google Play. Core features, including khata management, customer accounts, PDF export and backup, are available at no cost.",
+    "source": "https://hisabdo.app/faq",
+    "verified_on": "2026-10-22"
+  },
+  {
+    "id": "faq-008",
+    "title": "Does HisabDo work without the internet? Offline use",
+    "text": "Yes. HisabDo is offline-first: you can use it as a guest without an account, and guest records stay on your device. If you sign in, supported data can sync with the cloud when you are online.",
+    "source": "https://hisabdo.app/faq",
+    "verified_on": "2026-10-22"
+  },
+  {
+    "id": "faq-009",
+    "title": "How do I back up and restore my records? Changing phones",
+    "text": "HisabDo has a local backup feature that saves your records to the device or supported external storage, and you can restore a backup on any Android device running HisabDo. Create a backup before uninstalling or changing phones, or local records may be lost.",
+    "source": "https://hisabdo.app/faq",
+    "verified_on": "2026-10-22"
+  },
+  {
+    "id": "faq-010",
+    "title": "Is HisabDo available on iPhone (iOS)? Which devices are supported?",
+    "text": "HisabDo is available on Android only, from Google Play, for Android 6.0 and above (8.0 or later recommended). There is no iPhone (iOS) version at the moment.",
+    "source": "https://hisabdo.app/faq",
+    "verified_on": "2026-10-22"
+  },
+  {
+    "id": "faq-011",
+    "title": "Which languages does HisabDo support? Urdu, English, Roman Urdu",
+    "text": "HisabDo supports Urdu, English, Hindi, Arabic and Roman Urdu, and you can switch language in the app settings at any time.",
+    "source": "https://hisabdo.app/faq",
+    "verified_on": "2026-10-22"
+  },
+  {
+    "id": "faq-012",
+    "title": "How do I record udhar and payments in a customer's khata?",
+    "text": "Each customer has a profile with their own transaction history and running balance. Record money given (udhar) or money received (payment) against that customer with the date, amount and an optional note, and the balance updates as you record it. You can share a PDF statement with the customer showing what is owed, what has been paid and the running balance.",
+    "source": "https://hisabdo.app/faq; https://hisabdo.app/about-app; https://hisabdo.app/blog/how-to-manage-daily-khata",
+    "verified_on": "2026-10-22"
   }
 ]

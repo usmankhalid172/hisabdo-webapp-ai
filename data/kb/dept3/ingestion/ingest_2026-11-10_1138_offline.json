@@ -1,0 +1,119 @@
+{
+ "run_at": "2026-11-10T11:37:32+00:00",
+ "mode": "offline",
+ "dry_run": false,
+ "stages": {
+  "sources": {
+   "approved": 23,
+   "added": [],
+   "removed": []
+  },
+  "fetch": {
+   "skipped": "offline, snapshots 2026-10-27",
+   "failed_pages": []
+  },
+  "clean": {
+   "chunks": 366,
+   "parse_errors": [],
+   "meaning_check_failures": []
+  },
+  "dedupe": {
+   "duplicates": [
+    {
+     "removed": "blog-03-013-what-should-i-do-if-a-customer-disputes-a-balanc",
+     "heading": "What should I do if a customer disputes a balance?",
+     "duplicate_of": "blog-08-017-what-should-i-do-if-a-customer-disputes-their-ba",
+     "reason": "same answer reworded (91% word-sequence similarity)"
+    },
+    {
+     "removed": "blog-07-014-what-languages-does-hisabdo-support",
+     "heading": "What languages does HisabDo support?",
+     "duplicate_of": "off-01-017-does-hisabdo-support-urdu",
+     "reason": "100% of its text is in the other chunk"
+    }
+   ],
+   "conflicts": [
+    "supported currencies"
+   ]
+  },
+  "records": {
+   "records": 363,
+   "promotional_purged": [
+    "off-04-016-start-managing-your-finances"
+   ],
+   "schema_errors": [],
+   "carried_forward_from_previous_run": 0
+  },
+  "diff": {
+   "added": [],
+   "deleted": [],
+   "modified": [],
+   "unchanged": 363
+  },
+  "vectors": {
+   "status": "ok",
+   "vectors": 363,
+   "seconds": 34.7,
+   "checksum": "e5e0cb7482e12318",
+   "vector_errors": []
+  }
+ },
+ "published": true,
+ "gate_failures": [],
+ "manifest": {
+  "kb_version": "9822a06e49cc",
+  "records": 363,
+  "snapshot": "2026-10-27",
+  "schema_version": "1.0",
+  "embedding": {
+   "library": "fastembed",
+   "model": "BAAI/bge-small-en-v1.5",
+   "resolved_repo": "qdrant/bge-small-en-v1.5-onnx-q",
+   "onnx_file": "models--qdrant--bge-small-en-v1.5-onnx-q/snapshots/aa8f8b060edb00e03bfdd08813a2949946c8ba55/model_optimized.onnx",
+   "onnx_sha256": "51f1bd0addd6e859e42c2c8021a5e5461385bb676a649f4b269aa445449f2431",
+   "dimensions": 384,
+   "normalisation": "L2",
+   "query_prefix": "Represent this sentence for searching relevant passages: ",
+   "similarity": "cosine (dot product of unit vectors)",
+   "passage_text": "title. heading.\\nbody",
+   "status": "ok",
+   "vectors": 363,
+   "seconds": 34.7,
+   "checksum": "e5e0cb7482e12318"
+  },
+  "lexical": {
+   "algorithm": "BM25",
+   "k1": 1.5,
+   "b": 0.75,
+   "saturation_k": 5.0,
+   "tokenizer": "[a-z0-9]+|Urdu letters, English and Roman Urdu stop words removed"
+  },
+  "retrieval": {
+   "hybrid_alpha": 0.6,
+   "threshold": 0.566273,
+   "top_k": 2,
+   "margin": 0.05,
+   "candidates": 20,
+   "lexical_fallback": {
+    "threshold": 3.857,
+    "top_k": 2,
+    "margin": 2.0
+   }
+  },
+  "chunking": {
+   "faq": "one question and answer per record, never split",
+   "sections": "<= 1500 chars, split at sub-headings then paragraphs, never inside a sentence",
+   "overlap": "none",
+   "short_intros": "sections < 150 chars merged into the next section"
+  },
+  "environment": {
+   "python": "3.13.0",
+   "fastembed": "0.7.3",
+   "onnxruntime": "1.31.1",
+   "numpy": "2.4.4",
+   "tokenizers": "0.23.3",
+   "bs4": "4.15.0"
+  }
+ },
+ "seconds": 44.7
+}

@@ -1,0 +1,72 @@
+{
+ "current": {
+  "pieces": 364,
+  "median_chars": 342.0,
+  "max_chars": 1327,
+  "answer_hit_rate": 0.741,
+  "answerable_questions": 58,
+  "noise_share": 0.11,
+  "context_chars_mean": 667,
+  "hit_rate_by_content_type": {
+   "faq": "24/30",
+   "product_doc": "10/14",
+   "workflow_guide": "9/14"
+  }
+ },
+ "s800": {
+  "pieces": 374,
+  "median_chars": 340.5,
+  "max_chars": 798,
+  "answer_hit_rate": 0.741,
+  "answerable_questions": 58,
+  "noise_share": 0.11,
+  "context_chars_mean": 664,
+  "hit_rate_by_content_type": {
+   "faq": "24/30",
+   "product_doc": "10/14",
+   "workflow_guide": "9/14"
+  }
+ },
+ "s800_ov": {
+  "pieces": 374,
+  "median_chars": 347.0,
+  "max_chars": 942,
+  "answer_hit_rate": 0.759,
+  "answerable_questions": 58,
+  "noise_share": 0.096,
+  "context_chars_mean": 679,
+  "hit_rate_by_content_type": {
+   "faq": "24/30",
+   "product_doc": "10/14",
+   "workflow_guide": "10/14"
+  }
+ },
+ "s500_ov": {
+  "pieces": 467,
+  "median_chars": 341,
+  "max_chars": 942,
+  "answer_hit_rate": 0.759,
+  "answerable_questions": 58,
+  "noise_share": 0.105,
+  "context_chars_mean": 650,
+  "hit_rate_by_content_type": {
+   "faq": "24/30",
+   "product_doc": "10/14",
+   "workflow_guide": "10/14"
+  }
+ },
+ "merge2000": {
+  "pieces": 186,
+  "median_chars": 366.0,
+  "max_chars": 2264,
+  "answer_hit_rate": 0.759,
+  "answerable_questions": 58,
+  "noise_share": 0.073,
+  "context_chars_mean": 1598,
+  "hit_rate_by_content_type": {
+   "faq": "23/30",
+   "product_doc": "9/14",
+   "workflow_guide": "12/14"
+  }
+ }
+}

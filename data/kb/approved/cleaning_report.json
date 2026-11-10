@@ -1,0 +1,644 @@
+{
+  "chunk_count": 364,
+  "sources": [
+    "BLOG-01",
+    "BLOG-02",
+    "BLOG-03",
+    "BLOG-04",
+    "BLOG-05",
+    "BLOG-06",
+    "BLOG-07",
+    "BLOG-08",
+    "BLOG-09",
+    "BLOG-10",
+    "BLOG-11",
+    "BLOG-12",
+    "BLOG-13",
+    "BLOG-14",
+    "BLOG-15",
+    "BLOG-16",
+    "OFF-01",
+    "OFF-02",
+    "OFF-03",
+    "OFF-04",
+    "OFF-06",
+    "OFF-07",
+    "OFF-08"
+  ],
+  "by_category": {
+    "finance_guide": 254,
+    "legal_policy": 40,
+    "product_guide": 37,
+    "product_faq": 33
+  },
+  "by_area": {
+    "Expenses & Income (general practice)": 64,
+    "Customers & Receivables (general practice)": 55,
+    "Legal & Policy": 40,
+    "Khata & Ledger (general practice)": 29,
+    "Data, Backup & Sync": 26,
+    "Suppliers & Payables (general practice)": 25,
+    "Customers & Receivables": 19,
+    "Reports & PDF Export (general practice)": 15,
+    "Khata & Ledger": 14,
+    "Data, Backup & Sync (general practice)": 12,
+    "Expenses & Income": 12,
+    "Reports & PDF Export": 10,
+    "Language & Currency": 8,
+    "Business finance (general)": 6,
+    "Pricing & Download": 4,
+    "Privacy & Security": 4,
+    "Suppliers & Payables": 4,
+    "Company": 3,
+    "Platform & Devices": 3,
+    "Product Overview": 3,
+    "Support": 3,
+    "Voice Entry": 3,
+    "Analytics": 1,
+    "Privacy & Security (general practice)": 1
+  },
+  "by_language": {
+    "en": 364
+  },
+  "needs_confirmation": [
+    "off-01-019-which-currencies-does-hisabdo-support",
+    "off-02-010-works-the-way-you-do-business",
+    "off-04-010-multi-currency-support"
+  ],
+  "duplicates_removed": [
+    {
+      "removed": "blog-03-013-what-should-i-do-if-a-customer-disputes-a-balanc",
+      "heading": "What should I do if a customer disputes a balance?",
+      "duplicate_of": "blog-08-017-what-should-i-do-if-a-customer-disputes-their-ba",
+      "reason": "same answer reworded (91% word-sequence similarity)"
+    },
+    {
+      "removed": "blog-07-014-what-languages-does-hisabdo-support",
+      "heading": "What languages does HisabDo support?",
+      "duplicate_of": "off-01-017-does-hisabdo-support-urdu",
+      "reason": "100% of its text is in the other chunk"
+    }
+  ],
+  "conflicts": [
+    {
+      "fact": "supported currencies",
+      "audit_ref": "C-06",
+      "statements": {
+        "off-01-019-which-currencies-does-hisabdo-support": [
+          "INR",
+          "PKR",
+          "USD"
+        ],
+        "off-02-010-works-the-way-you-do-business": [
+          "INR",
+          "PKR",
+          "USD"
+        ],
+        "off-04-010-multi-currency-support": [
+          "AED",
+          "INR",
+          "PKR",
+          "USD"
+        ]
+      }
+    }
+  ],
+  "per_source": [
+    {
+      "source_id": "OFF-01",
+      "url": "https://hisabdo.app/faq",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of ",
+        "main: Frequently Asked Questions",
+        "main: Everything you need to know about HisabDo — from getting started to advanced features, privacy and support.",
+        "main: 30 questions answered. Can't find what you need? Contact us.",
+        "main: Contact us",
+        "main: Download HisabDo free and start managing your finances smarter today.",
+        "main: Download Free",
+        "main: Contact Support"
+      ],
+      "warnings": [
+        "no last-updated date on the page (audit O-02)",
+        "page says '30 questions answered' but contains 33: page counter is stale"
+      ],
+      "rewrites": [
+        {
+          "heading": "Where can I download HisabDo?",
+          "fixes": [
+            "replaced 'this website' with an explicit link"
+          ]
+        },
+        {
+          "heading": "Does HisabDo share my financial data with third parties?",
+          "fixes": [
+            "linked the Privacy Policy"
+          ]
+        },
+        {
+          "heading": "Does HisabDo collect personal information?",
+          "fixes": [
+            "linked the Privacy Policy"
+          ]
+        },
+        {
+          "heading": "Where can I follow HisabDo for updates?",
+          "fixes": [
+            "replaced 'links in the footer of this website' with a link to hisabdo.app"
+          ]
+        }
+      ],
+      "broken_links": []
+    },
+    {
+      "source_id": "OFF-02",
+      "url": "https://hisabdo.app/about-app",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "The Story Behind HisabDo",
+        "Download App Get Support",
+        "Morning",
+        "Throughout the Day",
+        "When a Customer Asks",
+        "End of Month",
+        "Peace of Mind",
+        "Available on Google Play See It for Yourself Download HisabDo today — free, offline and built around how small businesses actually work. Download Now — Free Read the FAQ"
+      ],
+      "warnings": [
+        "no last-updated date on the page (audit O-02)"
+      ],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "OFF-03",
+      "url": "https://hisabdo.app/",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Smart Offline Financial Management",
+        "Download Free Learn More",
+        "Offline-first • PDF Reports • Guest or Signed-in Options",
+        "5+ Languages Supported 3 Currencies (PKR, USD, INR) Offline-first Built for low-connectivity use",
+        "Built For Modern Businesses",
+        "Explore Features",
+        "Founder & CEO",
+        "View Full Profile",
+        "Read More FAQs",
+        "Read Article",
+        "Read Article",
+        "Read Article",
+        "Available on Google Play Ready To Manage Your Finances Smarter? Download HisabDo today — free, offline-first and built for your business. Download Now — Free",
+        "Community contributors",
+        "Write a Blog Read the Blog",
+        "Company behind HisabDo",
+        "Learn About the Company Visit XICTEK Systems",
+        "irrelevant section: Application Screens",
+        "section without content: Meet The Founder",
+        "irrelevant section: Latest Blog Posts",
+        "section without content: Follow HisabDo",
+        "irrelevant section: Apna business ka tajurba share karein"
+      ],
+      "warnings": [
+        "no last-updated date on the page (audit O-02)"
+      ],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "OFF-04",
+      "url": "https://play.google.com/store/apps/details?id=com.usman.hisabdo",
+      "removed": [
+        "header: About this app | arrow_forward",
+        "keyword list: WHY USE HISABDO? (14 lines)"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "OFF-06",
+      "url": "https://hisabdo.app/privacy-policy",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Privacy & Legal",
+        "1. Information We Collect 2. How We Use It 3. Cloud Storage 4. Local Storage 5. Authentication Community blog submissions 6. Third-Party Services 7. Advertising & Cookies 8. Data Security 9. Data Retention 10. Your Rights 11. Children's Privacy 12. Internet Requirement 13. Data Sharing 14. Changes 15. Contact Us",
+        "Questions About Privacy? We are happy to clarify anything in this policy. Contact Support"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "OFF-07",
+      "url": "https://hisabdo.app/terms",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Legal",
+        "Acceptance Use of App Your Data Intellectual Property Community Content Disclaimer Liability Termination Changes Contact",
+        "Questions About Our Terms? We are happy to clarify anything in this document. Contact Us Privacy Policy"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "OFF-08",
+      "url": "https://hisabdo.app/disclaimer",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Legal",
+        "General Financial Advice Accuracy External Links App Use Professional Advice",
+        "Questions About This Disclaimer? We are happy to clarify anything in this document. Contact Us Terms & Conditions"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-01",
+      "url": "https://hisabdo.app/blog/small-business-financial-management",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Financial Management • HisabDo Blog",
+        "By Mian Usman Khalid • Published: July 20, 2025 • 25 min read",
+        "Financial Management Basics Income Tracking Expense Tracking Customer Receivables Supplier Payables Cash Flow Management Financial Records Expense Categories Monthly Reporting Bookkeeping Digital Record Keeping Common Financial Mistakes Daily, Weekly & Monthly Routine Useful Financial Metrics How HisabDo Fits In FAQ",
+        "Start Managing Your Business Finances with HisabDo Free, offline-first and built for small businesses — download today. Download Free Read FAQs",
+        "See also: How to Track Income and Expenses for a Small Business",
+        "See also: Expense Tracking for Small Business Business Expense Categories",
+        "See also: How to Track Customer Dues and Receivables",
+        "See also: How to Manage Supplier Payments and Business Payables Accounts Receivable vs Accounts Payable Explained",
+        "See also: Cash Flow Management for Small Businesses",
+        "See also: How to Keep Accurate Business Financial Records",
+        "See also: Business Expense Categories: The Complete Guide",
+        "See also: How to Create a Monthly Business Expense Report",
+        "See also: Small Business Bookkeeping: A Beginner's Guide",
+        "See also: Digital Ledger vs Paper Ledger Why Offline Finance Apps Are Better",
+        "See also: Common Expense Tracking Mistakes Small Businesses Make",
+        "See also: How to Build a Simple Daily Financial Record-Keeping Routine",
+        "All Related Articles",
+        "→ Expense Tracking for Small Business",
+        "→ Digital Ledger vs Paper Ledger",
+        "→ How to Track Customer Dues and Receivables",
+        "→ Business Expense Categories",
+        "→ Cash Flow Management for Small Businesses",
+        "→ How to Keep Accurate Business Financial Records",
+        "→ Accounts Receivable vs Accounts Payable Explained",
+        "→ Freelancer Expense Tracking",
+        "→ Bookkeeping Basics",
+        "→ How to Manage Supplier Payments and Payables",
+        "→ Customer Credit Management",
+        "→ PDF Business Reports",
+        "→ Business Finance Tips",
+        "→ Complete Guide to HisabDo",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-02",
+      "url": "https://hisabdo.app/blog/cash-flow-management",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Small Business Finance • HisabDo Blog",
+        "By Mian Usman Khalid • Published: July 14, 2025 • 14 min read",
+        "What Is Cash Flow? Cash Flow vs Profit Why Profitable Businesses Fail Track Money Coming In Track Money Going Out Managing Receivables Managing Payables Monthly Cash Flow Review Cash Flow Forecasting Common Mistakes Practical Example FAQ",
+        "Manage Your Cash Flow with HisabDo Track income, expenses and customer dues — all in one offline-first app. Download Free Read FAQs",
+        "Related Articles",
+        "→ How to Track Customer Dues and Receivables",
+        "→ Bookkeeping Basics",
+        "→ Shopkeeper Accounting Guide",
+        "→ Business Finance Tips",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [
+        {
+          "heading": "Managing Receivables for Better Cash Flow",
+          "fixes": [
+            "link https://hisabdo.app/track-customer-dues (404) -> https://hisabdo.app/blog/track-customer-dues"
+          ]
+        }
+      ],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-03",
+      "url": "https://hisabdo.app/blog/track-customer-dues",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Khata & Ledger • HisabDo Blog",
+        "By Mian Usman Khalid • Published: July 10, 2025 • 12 min read",
+        "What Are Customer Dues? Cash Flow Impact Customer Ledger Recording Transactions Partial Payments Monitoring Balances Follow-Up System Weekly Review Common Mistakes Digital Tracking FAQ",
+        "Track Every Customer Due with HisabDo Download free and use supported local features offline. Download Free Read FAQs",
+        "Related Articles",
+        "→ Cash Flow Management for Small Businesses",
+        "→ How to Keep Accurate Business Financial Records",
+        "→ Accounts Receivable vs Accounts Payable Explained",
+        "→ How to Organize Business Transactions",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-04",
+      "url": "https://hisabdo.app/blog/business-expense-categories",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Expense Management • HisabDo Blog",
+        "By Mian Usman Khalid • Published: July 12, 2025 • 13 min read",
+        "Why Categorization Matters Fixed vs Variable Expenses Operating Expenses Employee Expenses Marketing & Advertising Travel & Transport Utilities & Rent Software & Subscriptions Inventory & Stock Miscellaneous Creating Your Own Categories Mistakes to Avoid FAQ",
+        "Organize Your Expenses with HisabDo Custom categories, instant reports and offline-first design — free to download. Download Free Read FAQs",
+        "Related Articles",
+        "→ Expense Tracking for Small Business",
+        "→ Cash Flow Management for Small Businesses",
+        "→ How to Track Income and Expenses",
+        "→ How to Create a Monthly Business Expense Report",
+        "→ Common Expense Tracking Mistakes",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-05",
+      "url": "https://hisabdo.app/blog/supplier-payments-payables",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Khata & Ledger • HisabDo Blog",
+        "By Mian Usman Khalid • Published: July 16, 2025 • 12 min read",
+        "What Are Supplier Payables? Why Payment Tracking Matters Create Supplier Records Record Purchases Record Partial Payments Outstanding Balances Payment Schedule Avoid Duplicate Payments Monthly Reconciliation Digital Tracking FAQ",
+        "Track Supplier Payments with HisabDo Manage payables and receivables in one offline-first app — free to download. Download Free Read FAQs",
+        "Related Articles",
+        "→ Cash Flow Management for Small Businesses",
+        "→ How to Track Customer Dues and Receivables",
+        "→ Accounts Receivable vs Accounts Payable Explained",
+        "→ How to Keep Accurate Business Financial Records",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-06",
+      "url": "https://hisabdo.app/blog/expense-tracking-for-small-business",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Guide • HisabDo Blog",
+        "By Mian Usman Khalid • 11 min read",
+        "Track Every Expense with HisabDo Download free and use supported local features offline. Download Free Read FAQs",
+        "Related Articles",
+        "→ Business Expense Categories: The Complete Guide",
+        "→ Cash Flow Management for Small Businesses",
+        "→ How to Track Income and Expenses",
+        "→ How to Create a Monthly Business Expense Report",
+        "→ Common Expense Tracking Mistakes to Avoid",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [
+        "no last-updated date on the page (audit O-02)"
+      ],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-07",
+      "url": "https://hisabdo.app/blog/digital-ledger-vs-paper-ledger",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Comparison • HisabDo Blog",
+        "By Mian Usman Khalid • 9 min read",
+        "Ready to Go Digital? Download HisabDo — free, offline and built for everyday business use. Download Free Read FAQs",
+        "Related Articles",
+        "→ How to Track Customer Dues and Receivables",
+        "→ Bookkeeping Basics",
+        "→ Best Khata App in Pakistan",
+        "→ Cash Flow Management for Small Businesses",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [
+        "no last-updated date on the page (audit O-02)"
+      ],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-08",
+      "url": "https://hisabdo.app/blog/how-to-manage-daily-khata",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Guide • HisabDo Blog",
+        "By Mian Usman Khalid • Published: April 1, 2026 • 10 min read",
+        "Start Managing Your Khata Digitally Download HisabDo — free, offline and built for everyday business use. Download Free Read FAQs",
+        "Related Articles",
+        "→ Digital Khata vs Traditional Ledger",
+        "→ Small Business Bookkeeping Basics",
+        "→ How to Track Customer Dues and Receivables",
+        "→ Cash Flow Management for Small Businesses",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-09",
+      "url": "https://hisabdo.app/blog/bookkeeping-basics",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Guide • HisabDo Blog",
+        "By Mian Usman Khalid • Published: April 20, 2026 • 11 min read",
+        "Start Bookkeeping with HisabDo Download free — simple, offline and built for small businesses. Download Free Read FAQs",
+        "Related Articles",
+        "→ How to Track Customer Dues and Receivables",
+        "→ Cash Flow Management for Small Businesses",
+        "→ Accounts Receivable vs Accounts Payable Explained",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-10",
+      "url": "https://hisabdo.app/blog/freelancer-expense-tracking",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Guide • HisabDo Blog",
+        "By Mian Usman Khalid • Published: April 22, 2026 • 10 min read",
+        "Manage Your Freelance Finances with HisabDo Download free and use supported local features offline. Download Free Read FAQs",
+        "Related Articles",
+        "→ Cash Flow Management for Small Businesses",
+        "→ How to Track Customer Dues and Receivables",
+        "→ Business Expense Categories",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-11",
+      "url": "https://hisabdo.app/blog/customer-credit-management",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Guide • HisabDo Blog",
+        "By Mian Usman Khalid • Published: April 28, 2026 • 11 min read",
+        "Manage Customer Credit with HisabDo Download free — track every balance, every payment, every customer. Download Free Read FAQs",
+        "Related Articles",
+        "→ How to Track Customer Dues and Receivables",
+        "→ Receivables vs Payables: A Simple Guide",
+        "→ Cash Flow Management for Small Businesses",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-12",
+      "url": "https://hisabdo.app/blog/pdf-reports-for-businesses",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Guide • HisabDo Blog",
+        "By Mian Usman Khalid • Published: May 1, 2026 • 12 min read",
+        "What Is a Business Report? Common Report Types Income Reports Expense Reports Receivables Reports Payables Reports Monthly Summary What a Useful Report Contains Using Reports for Decisions Common Reporting Mistakes Generating Reports Efficiently FAQ",
+        "Generate Professional Reports with HisabDo Download free — PDF export built in, no extra tools needed. Download Free Read FAQs",
+        "Related Articles",
+        "→ Small Business Bookkeeping Basics",
+        "→ Customer Credit Management",
+        "→ How to Track Customer Dues and Receivables",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-13",
+      "url": "https://hisabdo.app/blog/shopkeeper-accounting-guide",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Guide • HisabDo Blog",
+        "By Mian Usman Khalid • Published: May 5, 2026 • 12 min read",
+        "Built for Shopkeepers Like You Download HisabDo free — offline, fast and designed for retail. Download Free Read FAQs",
+        "Related Articles",
+        "→ How to Manage Daily Khata",
+        "→ Customer Credit Management",
+        "→ How to Manage Supplier Payments and Payables",
+        "→ Cash Flow Management for Small Businesses",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-14",
+      "url": "https://hisabdo.app/blog/receivable-payable-explained",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Guide • HisabDo Blog",
+        "By Mian Usman Khalid • Published: May 8, 2026 • 9 min read",
+        "Track Receivables & Payables with HisabDo Download free — complete AR and AP management in one offline app. Download Free Read FAQs",
+        "Related Articles",
+        "→ How to Track Customer Dues and Receivables",
+        "→ How to Manage Supplier Payments and Payables",
+        "→ Cash Flow Management for Small Businesses",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-15",
+      "url": "https://hisabdo.app/blog/personal-budget-planning",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Guide • HisabDo Blog",
+        "By Mian Usman Khalid • Published: April 10, 2026 • 10 min read",
+        "Manage Your Budget with HisabDo Download free and use supported local features offline. Download Free Read FAQs",
+        "Related Articles",
+        "→ Money Management Tips for Individuals and Families",
+        "→ Freelancer Expense Tracking",
+        "→ Expense Tracking for Small Business",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    },
+    {
+      "source_id": "BLOG-16",
+      "url": "https://hisabdo.app/blog/why-offline-finance-apps-are-better",
+      "removed": [
+        "header: HisabDo | Home | About | App | Company | Founder | Leadership | Blog | Write a Blog | FAQ | Careers | Contact | Privacy Policy | Get App",
+        "footer: HisabDo | Offline-first khata and ledger management for shopkeepers, freelancers and small businesses in Pakistan and beyond. | HisabDo is a product/project of | XICTEK Systems |, a software company f",
+        "Insight • HisabDo Blog",
+        "By Mian Usman Khalid • Published: April 12, 2026 • 10 min read",
+        "Use Supported HisabDo Features Offline Download free from Google Play — core features work without internet. Download Free Read FAQs",
+        "Related Articles",
+        "→ Digital Khata vs Traditional Ledger",
+        "→ About the HisabDo App",
+        "→ Complete Small Business Financial Management Guide",
+        "About the Author",
+        "author biography"
+      ],
+      "warnings": [],
+      "rewrites": [],
+      "broken_links": []
+    }
+  ]
+}

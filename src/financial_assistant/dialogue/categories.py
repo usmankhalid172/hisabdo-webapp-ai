@@ -13,6 +13,7 @@ PROPOSAL (pending team lead / product confirmation). Users can always type
 their own category; it is kept as they wrote it.
 """
 import re
+from functools import lru_cache
 
 from ...expense_categorization.rules import KEYWORD_RULES, rule_based_predict
 
@@ -80,4 +81,9 @@ def category_names(direction: str | None) -> list[str]:
 def _contains_word(haystack: str, word: str) -> bool:
     if re.search(r"[؀-ۿ]", word):
         return word in haystack
-    return re.search(rf"(?<![a-z]){re.escape(word.lower())}(?![a-z])", haystack) is not None
+    return _word_pattern(word.lower()).search(haystack) is not None
+
+
+@lru_cache(maxsize=4096)
+def _word_pattern(word: str) -> "re.Pattern":
+    return re.compile(rf"(?<![a-z]){re.escape(word)}(?![a-z])")

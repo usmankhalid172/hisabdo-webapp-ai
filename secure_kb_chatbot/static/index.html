@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business Assistant</title>
+<style>
+  :root { --bg:#f7f7f5; --panel:#fff; --text:#1d1d1b; --muted:#6b6b66; --border:#e3e2dd;
+          --accent:#2f5bd3; --ok:#1f7a4a; --warn:#a15c00; --bad:#b3261e; --chip:#eef1fb; --sel:#e8edfb; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#151514; --panel:#1f1f1d; --text:#ecebe6; --muted:#a3a29b; --border:#34332f;
+            --accent:#8aa6ff; --ok:#6fd19b; --warn:#f0b35a; --bad:#ff8a80; --chip:#252a3a; --sel:#232a40; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.5 system-ui, sans-serif; }
+  .app { display:grid; grid-template-columns:270px 1fr; height:100vh; }
+  aside { border-right:1px solid var(--border); background:var(--panel); display:flex; flex-direction:column; min-height:0; }
+  aside .top { padding:12px; display:flex; flex-direction:column; gap:8px; border-bottom:1px solid var(--border); }
+  .tabs { display:flex; gap:4px; }
+  .tabs button { flex:1; padding:4px; font-size:13px; }
+  .tabs button[aria-pressed="true"] { background:var(--accent); color:#fff; }
+  #convs { list-style:none; margin:0; padding:6px; overflow-y:auto; flex:1; }
+  #convs li { display:flex; align-items:center; gap:4px; border-radius:8px; padding:6px 8px; cursor:pointer; }
+  #convs li:hover, #convs li.current { background:var(--sel); }
+  #convs .title { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  #convs .when { font-size:11.5px; color:var(--muted); display:block; }
+  #convs .acts { display:flex; gap:2px; opacity:.55; }
+  #convs li:hover .acts, #convs li.current .acts { opacity:1; }
+  #convs .acts button { padding:2px 6px; font-size:12px; background:transparent; color:var(--muted); border:none; }
+  #convs .acts button:hover { color:var(--accent); }
+  .empty { color:var(--muted); font-size:13.5px; padding:12px; }
+  main { padding:16px; display:flex; flex-direction:column; min-height:0; min-width:0; }
+  header { display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding-bottom:12px; }
+  h1 { font-size:18px; margin:0; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  a { color:var(--accent); }
+  select, input, button { font:inherit; color:inherit; background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:8px 10px; }
+  button { cursor:pointer; background:var(--accent); color:#fff; border:none; }
+  button.secondary { background:transparent; color:var(--accent); border:1px solid var(--border); }
+  button:disabled, input:disabled { opacity:.5; cursor:not-allowed; }
+  #log { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:12px; padding:4px 0 12px; }
+  .msg { padding:10px 14px; border-radius:12px; max-width:90%; white-space:pre-wrap; overflow-wrap:anywhere; }
+  .user { align-self:flex-end; background:var(--accent); color:#fff; }
+  .bot { align-self:flex-start; background:var(--panel); border:1px solid var(--border); }
+  .meta { margin-top:8px; font-size:12.5px; color:var(--muted); display:flex; flex-wrap:wrap; gap:6px; align-items:center; white-space:normal; }
+  .chip { background:var(--chip); padding:1px 8px; border-radius:999px; font-family:ui-monospace, monospace; }
+  .badge { padding:1px 8px; border-radius:999px; border:1px solid currentColor; font-weight:600; }
+  .grounded { color:var(--ok); } .partial { color:var(--warn); }
+  .insufficient_data, .refused, .error { color:var(--bad); }
+  .warn { color:var(--warn); width:100%; }
+  #banner { display:none; background:var(--chip); border-radius:8px; padding:8px 12px; margin-bottom:8px; font-size:14px; }
+  form { display:flex; gap:8px; }
+  form input { flex:1; min-width:0; }
+  .examples { display:flex; flex-wrap:wrap; gap:6px; padding-bottom:10px; }
+  .examples button { font-size:13px; padding:4px 10px; }
+  pre { white-space:pre-wrap; font-size:12px; background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:10px; max-height:40vh; overflow:auto; }
+  @media (max-width: 720px) {
+    .app { grid-template-columns:1fr; grid-template-rows:auto 1fr; height:auto; min-height:100vh; }
+    aside { border-right:none; border-bottom:1px solid var(--border); max-height:38vh; }
+    main { height:62vh; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="top">
+      <label>Signed in as <select id="user" style="width:100%"></select></label>
+      <button id="new">+ New conversation</button>
+      <div class="tabs">
+        <button class="secondary" data-status="active" aria-pressed="true">Active</button>
+        <button class="secondary" data-status="archived" aria-pressed="false">Archived</button>
+      </div>
+    </div>
+    <ul id="convs"></ul>
+  </aside>
+  <main>
+    <header>
+      <h1 id="heading">New conversation</h1>
+      <a href="/docs" target="_blank">Data API</a>
+    </header>
+    <div id="banner"></div>
+    <div class="examples" id="examples"></div>
+    <div id="log" aria-live="polite"></div>
+    <form id="form">
+      <input id="q" placeholder="Ask about customers, balances, tasks, notes…" autocomplete="off" required>
+      <button type="submit">Send</button>
+      <button type="button" class="secondary" id="peek" title="Show the context that would be sent">Context</button>
+    </form>
+  </main>
+</div>
+<script>
+const $ = (id) => document.getElementById(id);
+let current = null;          // the open conversation object, or null for a not-yet-started one
+let listStatus = "active";
+
+async function api(path, options = {}) {
+  const r = await fetch(path, {
+    ...options,
+    headers: { "Content-Type": "application/json", "X-User-Id": $("user").value, ...(options.headers || {}) },
+  });
+  if (r.status === 204) return null;
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(typeof data.detail === "string" ? data.detail : (data.detail?.[0]?.msg || r.statusText));
+  return data;
+}
+
+// --- conversation list ---------------------------------------------------------------
+function ago(iso) {
+  const s = (Date.now() - new Date(iso)) / 1000;
+  if (s < 60) return "just now";
+  if (s < 3600) return Math.floor(s / 60) + "m ago";
+  if (s < 86400) return Math.floor(s / 3600) + "h ago";
+  return new Date(iso).toLocaleDateString();
+}
+
+async function loadList() {
+  const { items } = await api(`/api/conversations?status=${listStatus}&limit=100`);
+  const ul = $("convs"); ul.replaceChildren();
+  if (!items.length) {
+    const li = document.createElement("li"); li.className = "empty";
+    li.textContent = listStatus === "active" ? "No conversations yet. Ask a question to start one." : "No archived conversations.";
+    ul.append(li); return;
+  }
+  for (const c of items) {
+    const li = document.createElement("li");
+    if (current && c.id === current.id) li.className = "current";
+    const t = document.createElement("div"); t.className = "title"; t.textContent = c.title;
+    const w = document.createElement("span"); w.className = "when";
+    w.textContent = `${ago(c.last_message_at || c.created_at)} · ${c.message_count / 2} ${c.message_count === 2 ? "question" : "questions"}`;
+    t.append(w);
+    const acts = document.createElement("div"); acts.className = "acts";
+    const act = (label, title, fn) => {
+      const b = document.createElement("button"); b.type = "button"; b.textContent = label; b.title = title;
+      b.onclick = (e) => { e.stopPropagation(); fn().catch(err => alert(err.message)); };
+      acts.append(b);
+    };
+    act("✎", "Rename", () => rename(c));
+    act(c.status === "active" ? "⇩" : "⇧", c.status === "active" ? "Archive" : "Unarchive",
+        () => setStatus(c, c.status === "active" ? "archived" : "active"));
+    act("✕", "Delete", () => remove(c));
+    li.append(t, acts);
+    li.onclick = () => openConversation(c.id).catch(err => alert(err.message));
+    ul.append(li);
+  }
+}
+
+async function rename(c) {
+  const title = prompt("Rename conversation", c.title);
+  if (title === null || !title.trim()) return;
+  const updated = await api(`/api/conversations/${c.id}`, { method: "PATCH", body: JSON.stringify({ title }) });
+  if (current?.id === c.id) setCurrent(updated);
+  await loadList();
+}
+
+async function setStatus(c, status) {
+  const updated = await api(`/api/conversations/${c.id}`, { method: "PATCH", body: JSON.stringify({ status }) });
+  if (current?.id === c.id) setCurrent(updated);
+  await loadList();
+}
+
+async function remove(c) {
+  if (!confirm(`Delete "${c.title}"? This can't be undone.`)) return;
+  await api(`/api/conversations/${c.id}`, { method: "DELETE" });
+  if (current?.id === c.id) startNew();
+  await loadList();
+}
+
+// --- open / new conversation -------------------------------------------------------------
+function setCurrent(c) {
+  current = c;
+  $("heading").textContent = c ? c.title : "New conversation";
+  const archived = c?.status === "archived";
+  $("banner").style.display = archived ? "block" : "none";
+  $("banner").textContent = archived ? "This conversation is archived and read-only. Unarchive it to keep chatting." : "";
+  $("q").disabled = archived;
+  $("form").querySelector("[type=submit]").disabled = archived;
+  $("examples").style.display = c && c.message_count ? "none" : "flex";
+}
+
+function startNew() {
+  setCurrent(null); $("log").replaceChildren(); $("q").focus();
+  document.querySelectorAll("#convs li.current").forEach(li => li.classList.remove("current"));
+}
+
+async function openConversation(id) {
+  const c = await api(`/api/conversations/${id}`);
+  setCurrent(c);
+  $("log").replaceChildren();
+  for (const m of c.messages) {
+    const div = add(m.role === "user" ? "user" : "bot", m.content);
+    if (m.role === "assistant") meta(div, metaParts(m));
+  }
+  await loadList();
+}
+
+// --- messages -----------------------------------------------------------------------------
+function add(cls, text) {
+  const div = document.createElement("div");
+  div.className = `msg ${cls}`; div.textContent = text;
+  $("log").append(div); div.scrollIntoView({ block: "end" });
+  return div;
+}
+function meta(div, parts) {
+  const m = document.createElement("div"); m.className = "meta";
+  for (const [cls, text] of parts) { const s = document.createElement("span"); s.className = cls; s.textContent = text; m.append(s); }
+  div.append(m);
+}
+function metaParts(d) {
+  const parts = [[`badge ${d.grounding}`, (d.grounding || "").replace("_", " ")]];
+  for (const c of d.citations || []) parts.push(["chip", c]);
+  if (d.context) {
+    const inc = d.context.included, tot = d.context.totals;
+    parts.push(["", `context: ${inc.customers.length}/${tot.customers} customers · ${inc.receivables.length}/${tot.receivables} receivables · ${inc.payables.length}/${tot.payables} payables · ${inc.tasks.length}/${tot.tasks} tasks · ${inc.notes.length}/${tot.notes} notes`]);
+  }
+  for (const m of d.missing_information || []) parts.push(["warn", "Missing: " + m]);
+  for (const w of d.warnings || []) parts.push(["warn", "⚠ " + w]);
+  return parts;
+}
+
+$("form").onsubmit = async (e) => {
+  e.preventDefault();
+  const message = $("q").value.trim(); if (!message) return;
+  $("q").value = ""; add("user", message); $("examples").style.display = "none";
+  const pending = add("bot", "Thinking…");
+  try {
+    // First message of a new chat starts the conversation; later ones go to it.
+    const data = current
+      ? await api(`/api/conversations/${current.id}/messages`, { method: "POST", body: JSON.stringify({ message }) })
+      : await api("/api/chat", { method: "POST", body: JSON.stringify({ message }) });
+    setCurrent(data.conversation);
+    pending.textContent = data.answer;
+    meta(pending, metaParts(data));
+    if (listStatus !== "active") selectTab("active"); else await loadList();
+  } catch (err) {
+    pending.textContent = "Error: " + err.message;
+  }
+};
+
+$("peek").onclick = async () => {
+  const q = $("q").value.trim() || "overview";
+  const data = await api("/api/context?q=" + encodeURIComponent(q)).catch(err => ({ context: err.message }));
+  const pre = document.createElement("pre"); pre.textContent = data.context;
+  $("log").append(pre); pre.scrollIntoView({ block: "end" });
+};
+
+// --- wiring ---------------------------------------------------------------------------------
+function selectTab(status) {
+  listStatus = status;
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.status === status));
+  loadList().catch(err => alert(err.message));
+}
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => selectTab(b.dataset.status));
+$("new").onclick = startNew;
+$("user").onchange = () => { startNew(); selectTab("active"); };
+
+const examples = [
+  "How much does Ahmed owe?", "Any tasks for him?", "Who owes us money?",
+  "How much do we owe our suppliers?", "What's overdue?", "What's our credit hold policy?",
+];
+for (const ex of examples) {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "secondary"; b.textContent = ex;
+  b.onclick = () => { $("q").value = ex; $("form").requestSubmit(); };
+  $("examples").append(b);
+}
+
+fetch("/api/demo-users").then(r => r.json()).then(users => {
+  for (const u of users) $("user").append(new Option(`${u.name} — ${u.role}, ${u.business}`, u.id));
+  startNew(); loadList();
+});
+</script>
+</body>
+</html>
