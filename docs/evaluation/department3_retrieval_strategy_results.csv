@@ -1,0 +1,901 @@
+﻿Test_ID,Domain,Question,Query_Type,Source_Status,Verified_Evaluation,Expected_Source_IDs,Strategy,Top_K,Retrieved_Source_IDs,Top_Relevance_Score,Expected_Source_Hit,Reciprocal_Rank,Top_Source_Verified,Metadata_Filter
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,dense_vector,1,faq-001,0.715579,True,1.0,True,none
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,dense_vector,3,faq-001;faq-khata-guidance;faq-005,0.715579,True,1.0,True,none
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,dense_vector,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;finance_003,0.715579,True,1.0,True,none
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,bm25_lexical,1,faq-001,2.496818,True,1.0,True,none
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,bm25_lexical,3,faq-001;faq-khata-guidance;faq-005,2.496818,True,1.0,True,none
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,bm25_lexical,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;finance_007,2.496818,True,1.0,True,none
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,hybrid_rrf,1,faq-001,0.032787,True,1.0,True,none
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,hybrid_rrf,3,faq-001;faq-khata-guidance;faq-005,0.032787,True,1.0,True,none
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,hybrid_rrf,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;finance_003,0.032787,True,1.0,True,none
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,hybrid_metadata,1,faq-001,0.032787,True,1.0,True,product
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,hybrid_metadata,3,faq-001;faq-khata-guidance;faq-005,0.032787,True,1.0,True,product
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,hybrid_metadata,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance,0.032787,True,1.0,True,product
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,hybrid_metadata_rerank,1,faq-001,0.232787,True,1.0,True,product
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,hybrid_metadata_rerank,3,faq-001;faq-khata-guidance;faq-005,0.232787,True,1.0,True,product
+D3-001,App Basics,What is HisabDo?,Common,Verified,True,faq-001,hybrid_metadata_rerank,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance,0.232787,True,1.0,True,product
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,dense_vector,1,faq-001,0.79832,True,1.0,True,none
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,dense_vector,3,faq-001;faq-khata-guidance;faq-005,0.79832,True,1.0,True,none
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,dense_vector,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;finance_002,0.79832,True,1.0,True,none
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,bm25_lexical,1,faq-005,4.555884,False,0.5,True,none
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,bm25_lexical,3,faq-005;faq-001;faq-khata-guidance,4.555884,True,0.5,True,none
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,bm25_lexical,5,faq-005;faq-001;faq-khata-guidance;finance_007;finance_001,4.555884,True,0.5,True,none
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,hybrid_rrf,1,faq-001,0.032522,True,1.0,True,none
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,hybrid_rrf,3,faq-001;faq-005;faq-khata-guidance,0.032522,True,1.0,True,none
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,hybrid_rrf,5,faq-001;faq-005;faq-khata-guidance;faq-udhar-guidance;finance_002,0.032522,True,1.0,True,none
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,hybrid_metadata,1,faq-001,0.032522,True,1.0,True,product
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,hybrid_metadata,3,faq-001;faq-005;faq-khata-guidance,0.032522,True,1.0,True,product
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,hybrid_metadata,5,faq-001;faq-005;faq-khata-guidance;faq-udhar-guidance,0.032522,True,1.0,True,product
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,hybrid_metadata_rerank,1,faq-001,0.112522,True,1.0,True,product
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,hybrid_metadata_rerank,3,faq-001;faq-khata-guidance;faq-005,0.112522,True,1.0,True,product
+D3-002,App Basics,What does the HisabDo app do?,Alternative wording,Verified,True,faq-001,hybrid_metadata_rerank,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance,0.112522,True,1.0,True,product
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,dense_vector,1,faq-001,0.676865,True,1.0,True,none
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,dense_vector,3,faq-001;faq-khata-guidance;faq-005,0.676865,True,1.0,True,none
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,dense_vector,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;finance_003,0.676865,True,1.0,True,none
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,bm25_lexical,1,faq-001,6.264923,True,1.0,True,none
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,bm25_lexical,3,faq-001;faq-khata-guidance;faq-005,6.264923,True,1.0,True,none
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,bm25_lexical,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;finance_007,6.264923,True,1.0,True,none
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,hybrid_rrf,1,faq-001,0.032787,True,1.0,True,none
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,hybrid_rrf,3,faq-001;faq-khata-guidance;faq-005,0.032787,True,1.0,True,none
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,hybrid_rrf,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;finance_003,0.032787,True,1.0,True,none
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,hybrid_metadata,1,faq-001,0.032787,True,1.0,True,product
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,hybrid_metadata,3,faq-001;faq-khata-guidance;faq-005,0.032787,True,1.0,True,product
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,hybrid_metadata,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance,0.032787,True,1.0,True,product
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,hybrid_metadata_rerank,1,faq-001,0.168787,True,1.0,True,product
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,hybrid_metadata_rerank,3,faq-001;faq-khata-guidance;faq-005,0.168787,True,1.0,True,product
+D3-003,App Basics,HisabDo kis kaam aati hai?,Roman Urdu,Verified,True,faq-001,hybrid_metadata_rerank,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance,0.168787,True,1.0,True,product
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,dense_vector,1,faq-001,0.667928,True,1.0,True,none
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,dense_vector,3,faq-001;faq-khata-guidance;faq-005,0.667928,True,1.0,True,none
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,dense_vector,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;finance_007,0.667928,True,1.0,True,none
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,bm25_lexical,1,faq-001,3.560414,True,1.0,True,none
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,bm25_lexical,3,faq-001;faq-khata-guidance;faq-005,3.560414,True,1.0,True,none
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,bm25_lexical,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;faq-004,3.560414,True,1.0,True,none
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,hybrid_rrf,1,faq-001,0.032787,True,1.0,True,none
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,hybrid_rrf,3,faq-001;faq-khata-guidance;faq-005,0.032787,True,1.0,True,none
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,hybrid_rrf,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;faq-006,0.032787,True,1.0,True,none
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,hybrid_metadata,1,faq-001,0.032787,True,1.0,True,product
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,hybrid_metadata,3,faq-001;faq-khata-guidance;faq-005,0.032787,True,1.0,True,product
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,hybrid_metadata,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance,0.032787,True,1.0,True,product
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,hybrid_metadata_rerank,1,faq-001,0.102787,True,1.0,True,product
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,hybrid_metadata_rerank,3,faq-001;faq-khata-guidance;faq-005,0.102787,True,1.0,True,product
+D3-004,App Basics,Does HisabDo work offline?,Feature inquiry,Verified,True,faq-001,hybrid_metadata_rerank,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance,0.102787,True,1.0,True,product
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,dense_vector,1,faq-001,0.80362,True,1.0,True,none
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,dense_vector,3,faq-001;faq-khata-guidance;faq-005,0.80362,True,1.0,True,none
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,dense_vector,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;finance_004,0.80362,True,1.0,True,none
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,bm25_lexical,1,faq-001,5.510332,True,1.0,True,none
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,bm25_lexical,3,faq-001;faq-khata-guidance;faq-udhar-guidance,5.510332,True,1.0,True,none
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,bm25_lexical,5,faq-001;faq-khata-guidance;faq-udhar-guidance;faq-004;finance_003,5.510332,True,1.0,True,none
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_rrf,1,faq-001,0.032787,True,1.0,True,none
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_rrf,3,faq-001;faq-khata-guidance;faq-udhar-guidance,0.032787,True,1.0,True,none
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_rrf,5,faq-001;faq-khata-guidance;faq-udhar-guidance;faq-004;faq-005,0.032787,True,1.0,True,none
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata,1,faq-001,0.032787,True,1.0,True,product
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata,3,faq-001;faq-khata-guidance;faq-udhar-guidance,0.032787,True,1.0,True,product
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata,5,faq-001;faq-khata-guidance;faq-udhar-guidance;faq-005,0.032787,True,1.0,True,product
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata_rerank,1,faq-001,0.144787,True,1.0,True,product
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata_rerank,3,faq-001;faq-khata-guidance;faq-udhar-guidance,0.144787,True,1.0,True,product
+D3-005,App Basics,Is HisabDo a ledger app?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata_rerank,5,faq-001;faq-khata-guidance;faq-udhar-guidance;faq-005,0.144787,True,1.0,True,product
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,dense_vector,1,faq-001,0.577681,True,1.0,True,none
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,dense_vector,3,faq-001;faq-005;faq-khata-guidance,0.577681,True,1.0,True,none
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,dense_vector,5,faq-001;faq-005;faq-khata-guidance;faq-udhar-guidance;finance_008,0.577681,True,1.0,True,none
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,bm25_lexical,1,faq-005,7.614487,False,0.25,True,none
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,bm25_lexical,3,faq-005;faq-udhar-guidance;finance_008,7.614487,False,0.25,True,none
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,bm25_lexical,5,faq-005;faq-udhar-guidance;finance_008;faq-001;faq-006,7.614487,True,0.25,True,none
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,hybrid_rrf,1,faq-005,0.032522,False,0.5,True,none
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,hybrid_rrf,3,faq-005;faq-001;faq-udhar-guidance,0.032522,True,0.5,True,none
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,hybrid_rrf,5,faq-005;faq-001;faq-udhar-guidance;finance_008;faq-khata-guidance,0.032522,True,0.5,True,none
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,hybrid_metadata,1,faq-005,0.032522,False,0.5,True,product
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,hybrid_metadata,3,faq-005;faq-001;faq-udhar-guidance,0.032522,True,0.5,True,product
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,hybrid_metadata,5,faq-005;faq-001;faq-udhar-guidance;faq-khata-guidance,0.032522,True,0.5,True,product
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,hybrid_metadata_rerank,1,faq-005,0.094745,False,0.333333,True,product
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,hybrid_metadata_rerank,3,faq-005;faq-udhar-guidance;faq-001,0.094745,True,0.333333,True,product
+D3-006,App Basics,Can I use HisabDo to maintain my business records?,Common,Verified,True,faq-001,hybrid_metadata_rerank,5,faq-005;faq-udhar-guidance;faq-001;faq-khata-guidance,0.094745,True,0.333333,True,product
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,dense_vector,1,faq-khata-guidance,0.756104,True,1.0,True,none
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,dense_vector,3,faq-khata-guidance;faq-001;faq-udhar-guidance,0.756104,True,1.0,True,none
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,dense_vector,5,faq-khata-guidance;faq-001;faq-udhar-guidance;faq-005;finance_008,0.756104,True,1.0,True,none
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,bm25_lexical,1,faq-khata-guidance,7.97196,True,1.0,True,none
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,bm25_lexical,3,faq-khata-guidance;faq-001;faq-udhar-guidance,7.97196,True,1.0,True,none
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,bm25_lexical,5,faq-khata-guidance;faq-001;faq-udhar-guidance;faq-005;finance_007,7.97196,True,1.0,True,none
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,hybrid_rrf,1,faq-khata-guidance,0.032787,True,1.0,True,none
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,hybrid_rrf,3,faq-khata-guidance;faq-001;faq-udhar-guidance,0.032787,True,1.0,True,none
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,hybrid_rrf,5,faq-khata-guidance;faq-001;faq-udhar-guidance;faq-005;finance_002,0.032787,True,1.0,True,none
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,hybrid_metadata,1,faq-khata-guidance,0.032787,True,1.0,True,product
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,hybrid_metadata,3,faq-khata-guidance;faq-001;faq-udhar-guidance,0.032787,True,1.0,True,product
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,hybrid_metadata,5,faq-khata-guidance;faq-001;faq-udhar-guidance;faq-005,0.032787,True,1.0,True,product
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,hybrid_metadata_rerank,1,faq-khata-guidance,0.147787,True,1.0,True,product
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,hybrid_metadata_rerank,3,faq-khata-guidance;faq-001;faq-udhar-guidance,0.147787,True,1.0,True,product
+D3-007,App Basics,What is Khata in HisabDo?,Concept inquiry,Verified,True,faq-khata-guidance,hybrid_metadata_rerank,5,faq-khata-guidance;faq-001;faq-udhar-guidance;faq-005,0.147787,True,1.0,True,product
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,dense_vector,1,faq-udhar-guidance,0.312538,False,0.142857,True,none
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,dense_vector,3,faq-udhar-guidance;finance_004;finance_008,0.312538,False,0.142857,True,none
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,dense_vector,5,faq-udhar-guidance;finance_004;finance_008;faq-005;faq-001,0.312538,False,0.142857,True,none
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,bm25_lexical,1,faq-udhar-guidance,7.621988,False,0.25,True,none
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,bm25_lexical,3,faq-udhar-guidance;faq-005;faq-001,7.621988,False,0.25,True,none
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,bm25_lexical,5,faq-udhar-guidance;faq-005;faq-001;faq-khata-guidance;finance_008,7.621988,True,0.25,True,none
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,hybrid_rrf,1,faq-udhar-guidance,0.032787,False,0.166667,True,none
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,hybrid_rrf,3,faq-udhar-guidance;faq-005;faq-001,0.032787,False,0.166667,True,none
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,hybrid_rrf,5,faq-udhar-guidance;faq-005;faq-001;finance_008;finance_004,0.032787,False,0.166667,True,none
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,hybrid_metadata,1,faq-udhar-guidance,0.032787,False,0.166667,True,all
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,hybrid_metadata,3,faq-udhar-guidance;faq-005;faq-001,0.032787,False,0.166667,True,all
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,hybrid_metadata,5,faq-udhar-guidance;faq-005;faq-001;finance_008;finance_004,0.032787,False,0.166667,True,all
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,hybrid_metadata_rerank,1,faq-udhar-guidance,0.112787,False,0.5,True,all
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,hybrid_metadata_rerank,3,faq-udhar-guidance;faq-khata-guidance;faq-005,0.112787,True,0.5,True,all
+D3-008,App Basics,Can I track money that I lend and receive?,Common,Verified,True,faq-khata-guidance,hybrid_metadata_rerank,5,faq-udhar-guidance;faq-khata-guidance;faq-005;faq-006;faq-001,0.112787,True,0.5,True,all
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,dense_vector,1,faq-005,0.659806,True,1.0,True,none
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,dense_vector,3,faq-005;faq-001;faq-khata-guidance,0.659806,True,1.0,True,none
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,dense_vector,5,faq-005;faq-001;faq-khata-guidance;faq-udhar-guidance;finance_003,0.659806,True,1.0,True,none
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,bm25_lexical,1,faq-001,5.299891,True,1.0,True,none
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,bm25_lexical,3,faq-001;faq-005;faq-khata-guidance,5.299891,True,1.0,True,none
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,bm25_lexical,5,faq-001;faq-005;faq-khata-guidance;faq-udhar-guidance;faq-004,5.299891,True,1.0,True,none
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,hybrid_rrf,1,faq-001,0.032522,True,1.0,True,none
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,hybrid_rrf,3,faq-001;faq-005;faq-khata-guidance,0.032522,True,1.0,True,none
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,hybrid_rrf,5,faq-001;faq-005;faq-khata-guidance;faq-udhar-guidance;faq-004,0.032522,True,1.0,True,none
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,hybrid_metadata,1,faq-005,0.032522,True,1.0,True,expense_reporting
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,hybrid_metadata,3,faq-005,0.032522,True,1.0,True,expense_reporting
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,hybrid_metadata,5,faq-005,0.032522,True,1.0,True,expense_reporting
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,hybrid_metadata_rerank,1,faq-005,0.080522,True,1.0,True,expense_reporting
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,hybrid_metadata_rerank,3,faq-005,0.080522,True,1.0,True,expense_reporting
+D3-009,App Basics,Does HisabDo provide PDF reports?,Feature inquiry,Verified,True,faq-001;faq-005,hybrid_metadata_rerank,5,faq-005,0.080522,True,1.0,True,expense_reporting
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,dense_vector,1,faq-udhar-guidance,0.531142,False,0.5,True,none
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,dense_vector,3,faq-udhar-guidance;faq-001;faq-khata-guidance,0.531142,True,0.5,True,none
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,dense_vector,5,faq-udhar-guidance;faq-001;faq-khata-guidance;faq-005;finance_008,0.531142,True,0.5,True,none
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,bm25_lexical,1,faq-udhar-guidance,7.395678,False,0.333333,True,none
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,bm25_lexical,3,faq-udhar-guidance;faq-005;faq-001,7.395678,True,0.333333,True,none
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,bm25_lexical,5,faq-udhar-guidance;faq-005;faq-001;faq-khata-guidance;finance_008,7.395678,True,0.333333,True,none
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_rrf,1,faq-udhar-guidance,0.032787,False,0.5,True,none
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_rrf,3,faq-udhar-guidance;faq-001;faq-005,0.032787,True,0.5,True,none
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_rrf,5,faq-udhar-guidance;faq-001;faq-005;faq-khata-guidance;finance_008,0.032787,True,0.5,True,none
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata,1,faq-udhar-guidance,0.032787,False,0.5,True,product
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata,3,faq-udhar-guidance;faq-001;faq-005,0.032787,True,0.5,True,product
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata,5,faq-udhar-guidance;faq-001;faq-005;faq-khata-guidance,0.032787,True,0.5,True,product
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata_rerank,1,faq-udhar-guidance,0.158501,False,0.333333,True,product
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata_rerank,3,faq-udhar-guidance;faq-005;faq-001,0.158501,True,0.333333,True,product
+D3-010,App Basics,Can I manage customer balances in HisabDo?,Common,Verified,True,faq-001;faq-khata-guidance,hybrid_metadata_rerank,5,faq-udhar-guidance;faq-005;faq-001;faq-khata-guidance,0.158501,True,0.333333,True,product
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,dense_vector,1,faq-udhar-guidance,0.285717,True,1.0,True,none
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,dense_vector,3,faq-udhar-guidance;finance_008;finance_004,0.285717,True,1.0,True,none
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,dense_vector,5,faq-udhar-guidance;finance_008;finance_004;faq-004;finance_002,0.285717,True,1.0,True,none
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,bm25_lexical,1,faq-udhar-guidance,1.494424,True,1.0,True,none
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,bm25_lexical,3,faq-udhar-guidance;finance_007;finance_002,1.494424,True,1.0,True,none
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,bm25_lexical,5,faq-udhar-guidance;finance_007;finance_002;finance_003;finance_001,1.494424,True,1.0,True,none
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,hybrid_rrf,1,faq-udhar-guidance,0.032787,True,1.0,True,none
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,hybrid_rrf,3,faq-udhar-guidance;finance_002;finance_004,0.032787,True,1.0,True,none
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,hybrid_rrf,5,faq-udhar-guidance;finance_002;finance_004;finance_003;faq-004,0.032787,True,1.0,True,none
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata,1,finance_002,0.031258,False,0.0,True,finance
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata,3,finance_002;finance_004;finance_003,0.031258,False,0.0,True,finance
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata,5,finance_002;finance_004;finance_003;faq-004;finance_007,0.031258,False,0.0,True,finance
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,1,finance_002,0.081258,False,0.0,True,finance
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,3,finance_002;finance_004;finance_003,0.081258,False,0.0,True,finance
+D3-011,Khata and Udhar,What does receivable mean?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,5,finance_002;finance_004;finance_003;faq-004;finance_007,0.081258,False,0.0,True,finance
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,dense_vector,1,finance_008,0.27368,False,0.333333,True,none
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,dense_vector,3,finance_008;finance_003;faq-udhar-guidance,0.27368,True,0.333333,True,none
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,dense_vector,5,finance_008;finance_003;faq-udhar-guidance;finance_004;finance_002,0.27368,True,0.333333,True,none
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,bm25_lexical,1,faq-udhar-guidance,2.223572,True,1.0,True,none
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,bm25_lexical,3,faq-udhar-guidance;faq-004;finance_003,2.223572,True,1.0,True,none
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,bm25_lexical,5,faq-udhar-guidance;faq-004;finance_003;finance_004;faq-006,2.223572,True,1.0,True,none
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,hybrid_rrf,1,faq-udhar-guidance,0.032266,True,1.0,True,none
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,hybrid_rrf,3,faq-udhar-guidance;finance_003;finance_008,0.032266,True,1.0,True,none
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,hybrid_rrf,5,faq-udhar-guidance;finance_003;finance_008;finance_004;faq-004,0.032266,True,1.0,True,none
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata,1,finance_003,0.032002,False,0.0,True,finance
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata,3,finance_003;finance_008;finance_004,0.032002,False,0.0,True,finance
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata,5,finance_003;finance_008;finance_004;faq-004;finance_002,0.032002,False,0.0,True,finance
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,1,faq-004,0.180835,False,0.0,True,finance
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,3,faq-004;finance_003;finance_004,0.180835,False,0.0,True,finance
+D3-012,Khata and Udhar,What is a payable?,Common,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,5,faq-004;finance_003;finance_004;finance_002;finance_001,0.180835,False,0.0,True,finance
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,dense_vector,1,faq-udhar-guidance,0.307272,True,1.0,True,none
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,dense_vector,3,faq-udhar-guidance;finance_008;finance_004,0.307272,True,1.0,True,none
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,dense_vector,5,faq-udhar-guidance;finance_008;finance_004;faq-006;finance_002,0.307272,True,1.0,True,none
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,bm25_lexical,1,finance_007,7.033216,False,0.333333,True,none
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,bm25_lexical,3,finance_007;faq-006;faq-udhar-guidance,7.033216,True,0.333333,True,none
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,bm25_lexical,5,finance_007;faq-006;faq-udhar-guidance;faq-khata-guidance;finance_004,7.033216,True,0.333333,True,none
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,hybrid_rrf,1,faq-udhar-guidance,0.032266,True,1.0,True,none
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,hybrid_rrf,3,faq-udhar-guidance;faq-006;finance_007,0.032266,True,1.0,True,none
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,hybrid_rrf,5,faq-udhar-guidance;faq-006;finance_007;finance_004;finance_008,0.032266,True,1.0,True,none
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,hybrid_metadata,1,faq-006,0.031754,False,0.0,True,finance
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,hybrid_metadata,3,faq-006;finance_007;finance_004,0.031754,False,0.0,True,finance
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,hybrid_metadata,5,faq-006;finance_007;finance_004;finance_008;finance_002,0.031754,False,0.0,True,finance
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,1,finance_007,0.181545,False,0.0,True,finance
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,3,finance_007;faq-006;finance_004,0.181545,False,0.0,True,finance
+D3-013,Khata and Udhar,What is the difference between payable and receivable?,Comparison,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,5,finance_007;faq-006;finance_004;finance_002;finance_001,0.181545,False,0.0,True,finance
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,dense_vector,1,faq-udhar-guidance,0.529116,True,1.0,True,none
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,dense_vector,3,faq-udhar-guidance;finance_008;finance_004,0.529116,True,1.0,True,none
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,dense_vector,5,faq-udhar-guidance;finance_008;finance_004;finance_002;faq-005,0.529116,True,1.0,True,none
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,bm25_lexical,1,faq-udhar-guidance,9.195521,True,1.0,True,none
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,bm25_lexical,3,faq-udhar-guidance;faq-005;faq-khata-guidance,9.195521,True,1.0,True,none
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,bm25_lexical,5,faq-udhar-guidance;faq-005;faq-khata-guidance;faq-001;finance_004,9.195521,True,1.0,True,none
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_rrf,1,faq-udhar-guidance,0.032787,True,1.0,True,none
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_rrf,3,faq-udhar-guidance;faq-005;finance_004,0.032787,True,1.0,True,none
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_rrf,5,faq-udhar-guidance;faq-005;finance_004;faq-khata-guidance;finance_002,0.032787,True,1.0,True,none
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata,1,faq-udhar-guidance,0.032787,True,1.0,True,all
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata,3,faq-udhar-guidance;faq-005;finance_004,0.032787,True,1.0,True,all
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata,5,faq-udhar-guidance;faq-005;finance_004;faq-khata-guidance;finance_002,0.032787,True,1.0,True,all
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,1,faq-udhar-guidance,0.116787,True,1.0,True,all
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,3,faq-udhar-guidance;faq-005;faq-khata-guidance,0.116787,True,1.0,True,all
+D3-014,Khata and Udhar,Kis customer ne mujhe kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,5,faq-udhar-guidance;faq-005;faq-khata-guidance;faq-001;finance_004,0.116787,True,1.0,True,all
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,dense_vector,1,faq-udhar-guidance,0.475345,True,1.0,True,none
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,dense_vector,3,faq-udhar-guidance;finance_008;finance_004,0.475345,True,1.0,True,none
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,dense_vector,5,faq-udhar-guidance;finance_008;finance_004;faq-khata-guidance;faq-001,0.475345,True,1.0,True,none
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,bm25_lexical,1,faq-udhar-guidance,8.91431,True,1.0,True,none
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,bm25_lexical,3,faq-udhar-guidance;faq-005;finance_004,8.91431,True,1.0,True,none
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,bm25_lexical,5,faq-udhar-guidance;faq-005;finance_004;faq-001;faq-004,8.91431,True,1.0,True,none
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,hybrid_rrf,1,faq-udhar-guidance,0.032787,True,1.0,True,none
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,hybrid_rrf,3,faq-udhar-guidance;finance_004;faq-005,0.032787,True,1.0,True,none
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,hybrid_rrf,5,faq-udhar-guidance;finance_004;faq-005;faq-001;faq-khata-guidance,0.032787,True,1.0,True,none
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,hybrid_metadata,1,finance_004,0.031746,False,0.0,True,finance
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,hybrid_metadata,3,finance_004;finance_008;faq-004,0.031746,False,0.0,True,finance
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,hybrid_metadata,5,finance_004;finance_008;faq-004;finance_003;finance_002,0.031746,False,0.0,True,finance
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,1,finance_004,0.040635,False,0.0,True,finance
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,3,finance_004;faq-004;finance_008,0.040635,False,0.0,True,finance
+D3-015,Khata and Udhar,"Mujhe kis ko paise dene hain, payable ya receivable?",Roman Urdu,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,5,finance_004;faq-004;finance_008;finance_003;finance_002,0.040635,False,0.0,True,finance
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,dense_vector,1,faq-udhar-guidance,0.527738,True,1.0,True,none
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,dense_vector,3,faq-udhar-guidance;finance_008;finance_004,0.527738,True,1.0,True,none
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,dense_vector,5,faq-udhar-guidance;finance_008;finance_004;faq-004;faq-005,0.527738,True,1.0,True,none
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,bm25_lexical,1,faq-005,8.31356,False,0.5,True,none
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,bm25_lexical,3,faq-005;faq-udhar-guidance;faq-khata-guidance,8.31356,True,0.5,True,none
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,bm25_lexical,5,faq-005;faq-udhar-guidance;faq-khata-guidance;faq-001;faq-004,8.31356,True,0.5,True,none
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,hybrid_rrf,1,faq-udhar-guidance,0.032522,True,1.0,True,none
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,hybrid_rrf,3,faq-udhar-guidance;faq-005;faq-004,0.032522,True,1.0,True,none
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,hybrid_rrf,5,faq-udhar-guidance;faq-005;faq-004;faq-khata-guidance;finance_004,0.032522,True,1.0,True,none
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,hybrid_metadata,1,faq-udhar-guidance,0.032522,True,1.0,True,product
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,hybrid_metadata,3,faq-udhar-guidance;faq-005;faq-khata-guidance,0.032522,True,1.0,True,product
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,hybrid_metadata,5,faq-udhar-guidance;faq-005;faq-khata-guidance;faq-001,0.032522,True,1.0,True,product
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,hybrid_metadata_rerank,1,faq-udhar-guidance,0.145856,True,1.0,True,product
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,hybrid_metadata_rerank,3,faq-udhar-guidance;faq-005;faq-khata-guidance,0.145856,True,1.0,True,product
+D3-016,Khata and Udhar,How do I chek custmer balnce?,Misspelling,Verified,True,faq-001;faq-udhar-guidance,hybrid_metadata_rerank,5,faq-udhar-guidance;faq-005;faq-khata-guidance;faq-001,0.145856,True,1.0,True,product
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,dense_vector,1,faq-udhar-guidance,0.616077,True,1.0,True,none
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,dense_vector,3,faq-udhar-guidance;faq-khata-guidance;faq-001,0.616077,True,1.0,True,none
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,dense_vector,5,faq-udhar-guidance;faq-khata-guidance;faq-001;finance_008;finance_004,0.616077,True,1.0,True,none
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,bm25_lexical,1,faq-udhar-guidance,13.558781,True,1.0,True,none
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,bm25_lexical,3,faq-udhar-guidance;finance_004;faq-001,13.558781,True,1.0,True,none
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,bm25_lexical,5,faq-udhar-guidance;finance_004;faq-001;faq-004;faq-khata-guidance,13.558781,True,1.0,True,none
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,hybrid_rrf,1,faq-udhar-guidance,0.032787,True,1.0,True,none
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,hybrid_rrf,3,faq-udhar-guidance;faq-001;finance_004,0.032787,True,1.0,True,none
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,hybrid_rrf,5,faq-udhar-guidance;faq-001;finance_004;faq-khata-guidance;faq-004,0.032787,True,1.0,True,none
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,hybrid_metadata,1,finance_004,0.031514,False,0.0,True,finance
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,hybrid_metadata,3,finance_004;faq-004;finance_008,0.031514,False,0.0,True,finance
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,hybrid_metadata,5,finance_004;faq-004;finance_008;faq-006;finance_001,0.031514,False,0.0,True,finance
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,1,finance_004,0.039514,False,0.0,True,finance
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,3,finance_004;faq-004;finance_008,0.039514,False,0.0,True,finance
+D3-017,Khata and Udhar,Udhar ka hisab kasy check kron?,Roman Urdu; misspelling,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,5,finance_004;faq-004;finance_008;faq-006;finance_001,0.039514,False,0.0,True,finance
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,dense_vector,1,faq-udhar-guidance,0.257358,True,1.0,True,none
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,dense_vector,3,faq-udhar-guidance;faq-005;finance_008,0.257358,True,1.0,True,none
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,dense_vector,5,faq-udhar-guidance;faq-005;finance_008;finance_002;finance_003,0.257358,True,1.0,True,none
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,bm25_lexical,1,faq-005,6.886714,False,0.5,True,none
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,bm25_lexical,3,faq-005;faq-udhar-guidance;faq-khata-guidance,6.886714,True,0.5,True,none
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,bm25_lexical,5,faq-005;faq-udhar-guidance;faq-khata-guidance;faq-001;faq-004,6.886714,True,0.5,True,none
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,hybrid_rrf,1,faq-005,0.032522,False,0.5,True,none
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,hybrid_rrf,3,faq-005;faq-udhar-guidance;faq-001,0.032522,True,0.5,True,none
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,hybrid_rrf,5,faq-005;faq-udhar-guidance;faq-001;finance_002;faq-khata-guidance,0.032522,True,0.5,True,none
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata,1,faq-005,0.032522,False,0.5,True,all
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata,3,faq-005;faq-udhar-guidance;faq-001,0.032522,True,0.5,True,all
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata,5,faq-005;faq-udhar-guidance;faq-001;finance_002;faq-khata-guidance,0.032522,True,0.5,True,all
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,1,faq-005,0.152522,False,0.5,True,all
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,3,faq-005;faq-udhar-guidance;faq-khata-guidance,0.152522,True,0.5,True,all
+D3-018,Khata and Udhar,How much do I owe?,No-answer; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,5,faq-005;faq-udhar-guidance;faq-khata-guidance;faq-001;finance_002,0.152522,True,0.5,True,all
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,dense_vector,1,faq-udhar-guidance,0.495134,False,0.125,True,none
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,dense_vector,3,faq-udhar-guidance;finance_004;finance_008,0.495134,False,0.125,True,none
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,dense_vector,5,faq-udhar-guidance;finance_004;finance_008;faq-005;faq-004,0.495134,False,0.125,True,none
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,bm25_lexical,1,faq-udhar-guidance,13.32528,False,0.5,True,none
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,bm25_lexical,3,faq-udhar-guidance;faq-khata-guidance;finance_008,13.32528,True,0.5,True,none
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,bm25_lexical,5,faq-udhar-guidance;faq-khata-guidance;finance_008;finance_003;faq-005,13.32528,True,0.5,True,none
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,hybrid_rrf,1,faq-udhar-guidance,0.032787,False,0.25,True,none
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,hybrid_rrf,3,faq-udhar-guidance;finance_008;faq-005,0.032787,False,0.25,True,none
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,hybrid_rrf,5,faq-udhar-guidance;finance_008;faq-005;faq-khata-guidance;finance_004,0.032787,True,0.25,True,none
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,hybrid_metadata,1,finance_008,0.031746,False,0.0,True,finance
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,hybrid_metadata,3,finance_008;finance_004;finance_003,0.031746,False,0.0,True,finance
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,hybrid_metadata,5,finance_008;finance_004;finance_003;faq-004;finance_001,0.031746,False,0.0,True,finance
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,hybrid_metadata_rerank,1,finance_008,0.050413,False,0.0,True,finance
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,hybrid_metadata_rerank,3,finance_008;finance_003;finance_004,0.050413,False,0.0,True,finance
+D3-019,Khata and Udhar,Can you show me exact steps to add an Udhar entry?,Workflow; no-answer,Verified,True,faq-khata-guidance,hybrid_metadata_rerank,5,finance_008;finance_003;finance_004;faq-004;finance_001,0.050413,False,0.0,True,finance
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,dense_vector,1,faq-udhar-guidance,0.250005,True,1.0,True,none
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,dense_vector,3,faq-udhar-guidance;faq-005;finance_008,0.250005,True,1.0,True,none
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,dense_vector,5,faq-udhar-guidance;faq-005;finance_008;finance_004;faq-001,0.250005,True,1.0,True,none
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,bm25_lexical,1,faq-005,6.886714,False,0.5,True,none
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,bm25_lexical,3,faq-005;faq-udhar-guidance;faq-khata-guidance,6.886714,True,0.5,True,none
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,bm25_lexical,5,faq-005;faq-udhar-guidance;faq-khata-guidance;finance_004;faq-001,6.886714,True,0.5,True,none
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_rrf,1,faq-005,0.032522,False,0.5,True,none
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_rrf,3,faq-005;faq-udhar-guidance;finance_004,0.032522,True,0.5,True,none
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_rrf,5,faq-005;faq-udhar-guidance;finance_004;faq-khata-guidance;faq-001,0.032522,True,0.5,True,none
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata,1,faq-005,0.032522,False,0.5,True,all
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata,3,faq-005;faq-udhar-guidance;finance_004,0.032522,True,0.5,True,all
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata,5,faq-005;faq-udhar-guidance;finance_004;faq-khata-guidance;faq-001,0.032522,True,0.5,True,all
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,1,faq-005,0.118237,False,0.5,True,all
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,3,faq-005;faq-udhar-guidance;faq-khata-guidance,0.118237,True,0.5,True,all
+D3-020,Khata and Udhar,Maine kitne paise dene hain?,Roman Urdu; account-specific,Verified,True,faq-udhar-guidance,hybrid_metadata_rerank,5,faq-005;faq-udhar-guidance;faq-khata-guidance;finance_004;faq-001,0.118237,True,0.5,True,all
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,dense_vector,1,faq-005,0.766297,True,1.0,True,none
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,dense_vector,3,faq-005;faq-001;faq-khata-guidance,0.766297,True,1.0,True,none
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,dense_vector,5,faq-005;faq-001;faq-khata-guidance;finance_003;finance_002,0.766297,True,1.0,True,none
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,bm25_lexical,1,faq-005,7.366323,True,1.0,True,none
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,bm25_lexical,3,faq-005;faq-udhar-guidance;finance_008,7.366323,True,1.0,True,none
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,bm25_lexical,5,faq-005;faq-udhar-guidance;finance_008;faq-001;finance_002,7.366323,True,1.0,True,none
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,hybrid_rrf,1,faq-005,0.032787,True,1.0,True,none
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,hybrid_rrf,3,faq-005;faq-001;faq-udhar-guidance,0.032787,True,1.0,True,none
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,hybrid_rrf,5,faq-005;faq-001;faq-udhar-guidance;finance_002;finance_008,0.032787,True,1.0,True,none
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,hybrid_metadata,1,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,hybrid_metadata,3,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,hybrid_metadata,5,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,hybrid_metadata_rerank,1,faq-005,0.14612,True,1.0,True,expense_reporting
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,hybrid_metadata_rerank,3,faq-005,0.14612,True,1.0,True,expense_reporting
+D3-021,PDF Reports and Exports,Can I export expenses from HisabDo?,Feature inquiry,Verified,True,faq-005,hybrid_metadata_rerank,5,faq-005,0.14612,True,1.0,True,expense_reporting
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,dense_vector,1,faq-005,0.459389,True,1.0,True,none
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,dense_vector,3,faq-005;faq-001;faq-udhar-guidance,0.459389,True,1.0,True,none
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,dense_vector,5,faq-005;faq-001;faq-udhar-guidance;finance_002;finance_008,0.459389,True,1.0,True,none
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,bm25_lexical,1,faq-005,8.155221,True,1.0,True,none
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,bm25_lexical,3,faq-005;finance_004;faq-udhar-guidance,8.155221,True,1.0,True,none
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,bm25_lexical,5,faq-005;finance_004;faq-udhar-guidance;faq-001;finance_008,8.155221,True,1.0,True,none
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,hybrid_rrf,1,faq-005,0.032787,True,1.0,True,none
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,hybrid_rrf,3,faq-005;faq-001;faq-udhar-guidance,0.032787,True,1.0,True,none
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,hybrid_rrf,5,faq-005;faq-001;faq-udhar-guidance;finance_008;finance_004,0.032787,True,1.0,True,none
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,hybrid_metadata,1,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,hybrid_metadata,3,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,hybrid_metadata,5,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,hybrid_metadata_rerank,1,faq-005,0.102787,True,1.0,True,expense_reporting
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,hybrid_metadata_rerank,3,faq-005,0.102787,True,1.0,True,expense_reporting
+D3-022,PDF Reports and Exports,Can I download a PDF of my records?,Common,Verified,True,faq-005,hybrid_metadata_rerank,5,faq-005,0.102787,True,1.0,True,expense_reporting
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,dense_vector,1,faq-005,0.65572,True,1.0,True,none
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,dense_vector,3,faq-005;faq-001;faq-khata-guidance,0.65572,True,1.0,True,none
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,dense_vector,5,faq-005;faq-001;faq-khata-guidance;faq-udhar-guidance;finance_002,0.65572,True,1.0,True,none
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,bm25_lexical,1,faq-005,7.371685,True,1.0,True,none
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,bm25_lexical,3,faq-005;faq-001;faq-khata-guidance,7.371685,True,1.0,True,none
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,bm25_lexical,5,faq-005;faq-001;faq-khata-guidance;faq-udhar-guidance;faq-004,7.371685,True,1.0,True,none
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,hybrid_rrf,1,faq-005,0.032787,True,1.0,True,none
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,hybrid_rrf,3,faq-005;faq-001;faq-khata-guidance,0.032787,True,1.0,True,none
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,hybrid_rrf,5,faq-005;faq-001;faq-khata-guidance;faq-udhar-guidance;faq-004,0.032787,True,1.0,True,none
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,hybrid_metadata,1,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,hybrid_metadata,3,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,hybrid_metadata,5,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,hybrid_metadata_rerank,1,faq-005,0.104787,True,1.0,True,expense_reporting
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,hybrid_metadata_rerank,3,faq-005,0.104787,True,1.0,True,expense_reporting
+D3-023,PDF Reports and Exports,Does HisabDo support CSV export?,No-answer; feature confirmation,Verified,True,faq-005,hybrid_metadata_rerank,5,faq-005,0.104787,True,1.0,True,expense_reporting
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,dense_vector,1,faq-005,0.432645,True,1.0,True,none
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,dense_vector,3,faq-005;finance_008;faq-udhar-guidance,0.432645,True,1.0,True,none
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,dense_vector,5,faq-005;finance_008;faq-udhar-guidance;faq-001;finance_002,0.432645,True,1.0,True,none
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,bm25_lexical,1,faq-005,5.250769,True,1.0,True,none
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,bm25_lexical,3,faq-005;faq-001;finance_008,5.250769,True,1.0,True,none
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,bm25_lexical,5,faq-005;faq-001;finance_008;faq-udhar-guidance;faq-006,5.250769,True,1.0,True,none
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,hybrid_rrf,1,faq-005,0.032787,True,1.0,True,none
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,hybrid_rrf,3,faq-005;finance_008;faq-001,0.032787,True,1.0,True,none
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,hybrid_rrf,5,faq-005;finance_008;faq-001;faq-udhar-guidance;faq-006,0.032787,True,1.0,True,none
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,hybrid_metadata,1,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,hybrid_metadata,3,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,hybrid_metadata,5,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,hybrid_metadata_rerank,1,faq-005,0.072787,True,1.0,True,expense_reporting
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,hybrid_metadata_rerank,3,faq-005,0.072787,True,1.0,True,expense_reporting
+D3-024,PDF Reports and Exports,Which records can have PDF reports?,Common,Verified,True,faq-005,hybrid_metadata_rerank,5,faq-005,0.072787,True,1.0,True,expense_reporting
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,dense_vector,1,faq-005,0.370033,True,1.0,True,none
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,dense_vector,3,faq-005;finance_002;finance_007,0.370033,True,1.0,True,none
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,dense_vector,5,faq-005;finance_002;finance_007;finance_001;finance_003,0.370033,True,1.0,True,none
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,bm25_lexical,1,faq-005,4.221444,True,1.0,True,none
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,bm25_lexical,3,faq-005;finance_007;finance_001,4.221444,True,1.0,True,none
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,bm25_lexical,5,faq-005;finance_007;finance_001;faq-006;finance_002,4.221444,True,1.0,True,none
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,hybrid_rrf,1,faq-005,0.032787,True,1.0,True,none
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,hybrid_rrf,3,faq-005;finance_007;finance_002,0.032787,True,1.0,True,none
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,hybrid_rrf,5,faq-005;finance_007;finance_002;finance_001;faq-006,0.032787,True,1.0,True,none
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,hybrid_metadata,1,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,hybrid_metadata,3,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,hybrid_metadata,5,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,hybrid_metadata_rerank,1,faq-005,0.104787,True,1.0,True,expense_reporting
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,hybrid_metadata_rerank,3,faq-005,0.104787,True,1.0,True,expense_reporting
+D3-025,PDF Reports and Exports,Where is the export button?,Ambiguous; workflow,Verified,True,faq-005,hybrid_metadata_rerank,5,faq-005,0.104787,True,1.0,True,expense_reporting
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,dense_vector,1,faq-005,0.471884,True,1.0,True,none
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,dense_vector,3,faq-005;finance_003;faq-udhar-guidance,0.471884,True,1.0,True,none
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,dense_vector,5,faq-005;finance_003;faq-udhar-guidance;finance_002;finance_001,0.471884,True,1.0,True,none
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,bm25_lexical,1,faq-001,2.319823,False,0.5,True,none
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,bm25_lexical,3,faq-001;faq-005;faq-006,2.319823,True,0.5,True,none
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,bm25_lexical,5,faq-001;faq-005;faq-006;finance_008;finance_007,2.319823,True,0.5,True,none
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,hybrid_rrf,1,faq-005,0.032522,True,1.0,True,none
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,hybrid_rrf,3,faq-005;faq-001;finance_002,0.032522,True,1.0,True,none
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,hybrid_rrf,5,faq-005;faq-001;finance_002;finance_008;finance_007,0.032522,True,1.0,True,none
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,hybrid_metadata,1,faq-005,0.032522,True,1.0,True,expense_reporting
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,hybrid_metadata,3,faq-005,0.032522,True,1.0,True,expense_reporting
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,hybrid_metadata,5,faq-005,0.032522,True,1.0,True,expense_reporting
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,hybrid_metadata_rerank,1,faq-005,0.072522,True,1.0,True,expense_reporting
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,hybrid_metadata_rerank,3,faq-005,0.072522,True,1.0,True,expense_reporting
+D3-026,PDF Reports and Exports,Expenses ki PDF report mil sakti hai?,Roman Urdu,Verified,True,faq-005,hybrid_metadata_rerank,5,faq-005,0.072522,True,1.0,True,expense_reporting
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,dense_vector,1,faq-005,0.733036,True,1.0,True,none
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,dense_vector,3,faq-005;finance_003;finance_002,0.733036,True,1.0,True,none
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,dense_vector,5,faq-005;finance_003;finance_002;finance_007;finance_001,0.733036,True,1.0,True,none
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,bm25_lexical,1,faq-005,7.454511,True,1.0,True,none
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,bm25_lexical,3,faq-005;faq-udhar-guidance;faq-001,7.454511,True,1.0,True,none
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,bm25_lexical,5,faq-005;faq-udhar-guidance;faq-001;finance_001;faq-khata-guidance,7.454511,True,1.0,True,none
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,hybrid_rrf,1,faq-005,0.032787,True,1.0,True,none
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,hybrid_rrf,3,faq-005;finance_001;faq-udhar-guidance,0.032787,True,1.0,True,none
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,hybrid_rrf,5,faq-005;finance_001;faq-udhar-guidance;finance_002;finance_007,0.032787,True,1.0,True,none
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,hybrid_metadata,1,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,hybrid_metadata,3,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,hybrid_metadata,5,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,hybrid_metadata_rerank,1,faq-005,0.14612,True,1.0,True,expense_reporting
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,hybrid_metadata_rerank,3,faq-005,0.14612,True,1.0,True,expense_reporting
+D3-027,PDF Reports and Exports,How to exprot expences as pdf?,Misspelling,Verified,True,faq-005,hybrid_metadata_rerank,5,faq-005,0.14612,True,1.0,True,expense_reporting
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,dense_vector,1,faq-005,0.496674,True,1.0,True,none
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,dense_vector,3,faq-005;finance_002;faq-001,0.496674,True,1.0,True,none
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,dense_vector,5,faq-005;finance_002;faq-001;finance_003;finance_007,0.496674,True,1.0,True,none
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,bm25_lexical,1,faq-005,8.374404,True,1.0,True,none
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,bm25_lexical,3,faq-005;faq-udhar-guidance;finance_008,8.374404,True,1.0,True,none
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,bm25_lexical,5,faq-005;faq-udhar-guidance;finance_008;faq-001;finance_001,8.374404,True,1.0,True,none
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,hybrid_rrf,1,faq-005,0.032787,True,1.0,True,none
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,hybrid_rrf,3,faq-005;faq-001;faq-udhar-guidance,0.032787,True,1.0,True,none
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,hybrid_rrf,5,faq-005;faq-001;faq-udhar-guidance;finance_002;finance_008,0.032787,True,1.0,True,none
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,hybrid_metadata,1,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,hybrid_metadata,3,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,hybrid_metadata,5,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,hybrid_metadata_rerank,1,faq-005,0.112787,True,1.0,True,expense_reporting
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,hybrid_metadata_rerank,3,faq-005,0.112787,True,1.0,True,expense_reporting
+D3-028,PDF Reports and Exports,Can I export every record to PDF?,Edge case,Verified,True,faq-001;faq-005,hybrid_metadata_rerank,5,faq-005,0.112787,True,1.0,True,expense_reporting
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,dense_vector,1,faq-005,0.482888,True,1.0,True,none
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,dense_vector,3,faq-005;faq-001;faq-khata-guidance,0.482888,True,1.0,True,none
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,dense_vector,5,faq-005;faq-001;faq-khata-guidance;faq-udhar-guidance;finance_002,0.482888,True,1.0,True,none
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,bm25_lexical,1,faq-005,7.631979,True,1.0,True,none
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,bm25_lexical,3,faq-005;faq-khata-guidance;faq-001,7.631979,True,1.0,True,none
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,bm25_lexical,5,faq-005;faq-khata-guidance;faq-001;finance_008;finance_002,7.631979,True,1.0,True,none
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,hybrid_rrf,1,faq-005,0.032787,True,1.0,True,none
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,hybrid_rrf,3,faq-005;faq-khata-guidance;faq-001,0.032787,True,1.0,True,none
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,hybrid_rrf,5,faq-005;faq-khata-guidance;faq-001;finance_002;finance_008,0.032787,True,1.0,True,none
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,hybrid_metadata,1,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,hybrid_metadata,3,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,hybrid_metadata,5,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,hybrid_metadata_rerank,1,faq-005,0.081676,True,1.0,True,expense_reporting
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,hybrid_metadata_rerank,3,faq-005,0.081676,True,1.0,True,expense_reporting
+D3-029,PDF Reports and Exports,Someone told me CSV export is available. Is this confirmed?,Conflicting claim,Verified,True,faq-005,hybrid_metadata_rerank,5,faq-005,0.081676,True,1.0,True,expense_reporting
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,dense_vector,1,faq-005,0.411983,True,1.0,True,none
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,dense_vector,3,faq-005;faq-001;finance_002,0.411983,True,1.0,True,none
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,dense_vector,5,faq-005;faq-001;finance_002;finance_003;faq-udhar-guidance,0.411983,True,1.0,True,none
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,bm25_lexical,1,faq-005,8.729263,True,1.0,True,none
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,bm25_lexical,3,faq-005;faq-udhar-guidance;faq-khata-guidance,8.729263,True,1.0,True,none
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,bm25_lexical,5,faq-005;faq-udhar-guidance;faq-khata-guidance;finance_001;finance_008,8.729263,True,1.0,True,none
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,hybrid_rrf,1,faq-005,0.032787,True,1.0,True,none
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,hybrid_rrf,3,faq-005;faq-udhar-guidance;faq-001,0.032787,True,1.0,True,none
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,hybrid_rrf,5,faq-005;faq-udhar-guidance;faq-001;faq-khata-guidance;finance_001,0.032787,True,1.0,True,none
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,hybrid_metadata,1,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,hybrid_metadata,3,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,hybrid_metadata,5,faq-005,0.032787,True,1.0,True,expense_reporting
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,hybrid_metadata_rerank,1,faq-005,0.084787,True,1.0,True,expense_reporting
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,hybrid_metadata_rerank,3,faq-005,0.084787,True,1.0,True,expense_reporting
+D3-030,PDF Reports and Exports,Give me the exact menu path to export customer activity.,Workflow; no-answer,Verified,True,faq-005,hybrid_metadata_rerank,5,faq-005,0.084787,True,1.0,True,expense_reporting
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,dense_vector,1,finance_002,0.862976,True,1.0,True,none
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,dense_vector,3,finance_002;finance_007;finance_001,0.862976,True,1.0,True,none
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,dense_vector,5,finance_002;finance_007;finance_001;finance_008;finance_003,0.862976,True,1.0,True,none
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,bm25_lexical,1,finance_007,2.047566,False,0.5,True,none
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,bm25_lexical,3,finance_007;finance_002;finance_003,2.047566,True,0.5,True,none
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,bm25_lexical,5,finance_007;finance_002;finance_003;finance_001;faq-006,2.047566,True,0.5,True,none
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,hybrid_rrf,1,finance_002,0.032522,True,1.0,True,none
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,hybrid_rrf,3,finance_002;finance_007;finance_001,0.032522,True,1.0,True,none
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,hybrid_rrf,5,finance_002;finance_007;finance_001;finance_003;faq-006,0.032522,True,1.0,True,none
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,hybrid_metadata,1,finance_002,0.032522,True,1.0,True,finance
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,hybrid_metadata,3,finance_002;finance_007;finance_001,0.032522,True,1.0,True,finance
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,hybrid_metadata,5,finance_002;finance_007;finance_001;finance_003;faq-006,0.032522,True,1.0,True,finance
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,hybrid_metadata_rerank,1,finance_002,0.232522,True,1.0,True,finance
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,hybrid_metadata_rerank,3,finance_002;finance_007;finance_001,0.232522,True,1.0,True,finance
+D3-031,Basic Accounting,What is revenue?,Common,Verified,True,finance_002,hybrid_metadata_rerank,5,finance_002;finance_007;finance_001;finance_003;finance_004,0.232522,True,1.0,True,finance
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,dense_vector,1,finance_001,0.833561,True,1.0,True,none
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,dense_vector,3,finance_001;finance_007;faq-006,0.833561,True,1.0,True,none
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,dense_vector,5,finance_001;finance_007;faq-006;finance_002;finance_008,0.833561,True,1.0,True,none
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,bm25_lexical,1,finance_001,2.708461,True,1.0,True,none
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,bm25_lexical,3,finance_001;finance_007;faq-006,2.708461,True,1.0,True,none
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,bm25_lexical,5,finance_001;finance_007;faq-006;finance_008;finance_002,2.708461,True,1.0,True,none
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,hybrid_rrf,1,finance_001,0.032787,True,1.0,True,none
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,hybrid_rrf,3,finance_001;finance_007;faq-006,0.032787,True,1.0,True,none
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,hybrid_rrf,5,finance_001;finance_007;faq-006;finance_002;finance_008,0.032787,True,1.0,True,none
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,hybrid_metadata,1,finance_001,0.032787,True,1.0,True,finance
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,hybrid_metadata,3,finance_001;finance_007;faq-006,0.032787,True,1.0,True,finance
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,hybrid_metadata,5,finance_001;finance_007;faq-006;finance_002;finance_008,0.032787,True,1.0,True,finance
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,hybrid_metadata_rerank,1,finance_001,0.232787,True,1.0,True,finance
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,hybrid_metadata_rerank,3,finance_001;finance_007;faq-006,0.232787,True,1.0,True,finance
+D3-032,Basic Accounting,What is profit?,Common,Verified,True,finance_001,hybrid_metadata_rerank,5,finance_001;finance_007;faq-006;finance_002;finance_003,0.232787,True,1.0,True,finance
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,dense_vector,1,finance_003,0.868893,True,1.0,True,none
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,dense_vector,3,finance_003;faq-005;finance_002,0.868893,True,1.0,True,none
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,dense_vector,5,finance_003;faq-005;finance_002;finance_001;finance_007,0.868893,True,1.0,True,none
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,bm25_lexical,1,finance_003,6.478224,True,1.0,True,none
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,bm25_lexical,3,finance_003;faq-001;faq-khata-guidance,6.478224,True,1.0,True,none
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,bm25_lexical,5,finance_003;faq-001;faq-khata-guidance;faq-005;finance_007,6.478224,True,1.0,True,none
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,hybrid_rrf,1,finance_003,0.032787,True,1.0,True,none
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,hybrid_rrf,3,finance_003;faq-005;finance_002,0.032787,True,1.0,True,none
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,hybrid_rrf,5,finance_003;faq-005;finance_002;finance_007;finance_001,0.032787,True,1.0,True,none
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,hybrid_metadata,1,finance_003,0.032787,True,1.0,True,all
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,hybrid_metadata,3,finance_003;faq-005;finance_002,0.032787,True,1.0,True,all
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,hybrid_metadata,5,finance_003;faq-005;finance_002;finance_007;finance_001,0.032787,True,1.0,True,all
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,hybrid_metadata_rerank,1,finance_003,0.232787,True,1.0,True,all
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,hybrid_metadata_rerank,3,finance_003;faq-001;faq-khata-guidance,0.232787,True,1.0,True,all
+D3-033,Basic Accounting,What is an expense?,Common,Verified,True,finance_003,hybrid_metadata_rerank,5,finance_003;faq-001;faq-khata-guidance;finance_002;finance_007,0.232787,True,1.0,True,all
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,dense_vector,1,finance_004,0.874265,True,1.0,True,none
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,dense_vector,3,finance_004;faq-004;faq-006,0.874265,True,1.0,True,none
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,dense_vector,5,finance_004;faq-004;faq-006;finance_008;faq-udhar-guidance,0.874265,True,1.0,True,none
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,bm25_lexical,1,finance_004,4.645277,True,1.0,True,none
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,bm25_lexical,3,finance_004;faq-004;faq-006,4.645277,True,1.0,True,none
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,bm25_lexical,5,finance_004;faq-004;faq-006;finance_008;finance_007,4.645277,True,1.0,True,none
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,hybrid_rrf,1,finance_004,0.032787,True,1.0,True,none
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,hybrid_rrf,3,finance_004;faq-004;faq-006,0.032787,True,1.0,True,none
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,hybrid_rrf,5,finance_004;faq-004;faq-006;finance_008;finance_002,0.032787,True,1.0,True,none
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,hybrid_metadata,1,finance_004,0.032787,True,1.0,True,finance
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,hybrid_metadata,3,finance_004;faq-004;faq-006,0.032787,True,1.0,True,finance
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,hybrid_metadata,5,finance_004;faq-004;faq-006;finance_008;finance_002,0.032787,True,1.0,True,finance
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,hybrid_metadata_rerank,1,finance_004,0.232787,True,1.0,True,finance
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,hybrid_metadata_rerank,3,finance_004;faq-004;faq-006,0.232787,True,1.0,True,finance
+D3-034,Basic Accounting,What is cash flow?,Common,Verified,True,finance_004,hybrid_metadata_rerank,5,finance_004;faq-004;faq-006;finance_008;finance_002,0.232787,True,1.0,True,finance
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,dense_vector,1,faq-004,0.837441,True,1.0,True,none
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,dense_vector,3,faq-004;finance_004;faq-006,0.837441,True,1.0,True,none
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,dense_vector,5,faq-004;finance_004;faq-006;finance_008;faq-udhar-guidance,0.837441,True,1.0,True,none
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,bm25_lexical,1,faq-004,9.000249,True,1.0,True,none
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,bm25_lexical,3,faq-004;finance_004;faq-006,9.000249,True,1.0,True,none
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,bm25_lexical,5,faq-004;finance_004;faq-006;finance_008;finance_003,9.000249,True,1.0,True,none
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,hybrid_rrf,1,faq-004,0.032787,True,1.0,True,none
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,hybrid_rrf,3,faq-004;finance_004;faq-006,0.032787,True,1.0,True,none
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,hybrid_rrf,5,faq-004;finance_004;faq-006;finance_008;faq-udhar-guidance,0.032787,True,1.0,True,none
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,hybrid_metadata,1,faq-004,0.032787,True,1.0,True,finance
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,hybrid_metadata,3,faq-004;finance_004;faq-006,0.032787,True,1.0,True,finance
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,hybrid_metadata,5,faq-004;finance_004;faq-006;finance_008;finance_002,0.032787,True,1.0,True,finance
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,hybrid_metadata_rerank,1,faq-004,0.175644,True,1.0,True,finance
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,hybrid_metadata_rerank,3,faq-004;finance_004;faq-006,0.175644,True,1.0,True,finance
+D3-035,Basic Accounting,What does a cash flow statement show?,Common,Verified,True,faq-004,hybrid_metadata_rerank,5,faq-004;finance_004;faq-006;finance_008;finance_002,0.175644,True,1.0,True,finance
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,dense_vector,1,finance_001,0.428139,False,0.333333,True,none
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,dense_vector,3,finance_001;finance_002;finance_007,0.428139,True,0.333333,True,none
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,dense_vector,5,finance_001;finance_002;finance_007;finance_008;faq-udhar-guidance,0.428139,True,0.333333,True,none
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,bm25_lexical,1,finance_007,3.095588,True,1.0,True,none
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,bm25_lexical,3,finance_007;finance_001;faq-006,3.095588,True,1.0,True,none
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,bm25_lexical,5,finance_007;finance_001;faq-006;finance_008;finance_002,3.095588,True,1.0,True,none
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,hybrid_rrf,1,finance_001,0.032522,False,0.5,True,none
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,hybrid_rrf,3,finance_001;finance_007;finance_002,0.032522,True,0.5,True,none
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,hybrid_rrf,5,finance_001;finance_007;finance_002;finance_008;faq-006,0.032522,True,0.5,True,none
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,hybrid_metadata,1,finance_001,0.032522,False,0.5,True,finance
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,hybrid_metadata,3,finance_001;finance_007;finance_002,0.032522,True,0.5,True,finance
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,hybrid_metadata,5,finance_001;finance_007;finance_002;finance_008;faq-006,0.032522,True,0.5,True,finance
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,hybrid_metadata_rerank,1,finance_007,0.089409,True,1.0,True,finance
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,hybrid_metadata_rerank,3,finance_007;finance_001;faq-006,0.089409,True,1.0,True,finance
+D3-036,Basic Accounting,Revenue aur profit mein kya farq hai?,Roman Urdu,Verified,True,finance_007,hybrid_metadata_rerank,5,finance_007;finance_001;faq-006;finance_002;finance_008,0.089409,True,1.0,True,finance
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,dense_vector,1,faq-006,0.886445,True,1.0,True,none
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,dense_vector,3,faq-006;finance_004;finance_008,0.886445,True,1.0,True,none
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,dense_vector,5,faq-006;finance_004;finance_008;finance_001;finance_007,0.886445,True,1.0,True,none
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,bm25_lexical,1,faq-006,11.399839,True,1.0,True,none
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,bm25_lexical,3,faq-006;finance_007;finance_004,11.399839,True,1.0,True,none
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,bm25_lexical,5,faq-006;finance_007;finance_004;faq-004;finance_008,11.399839,True,1.0,True,none
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,hybrid_rrf,1,faq-006,0.032787,True,1.0,True,none
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,hybrid_rrf,3,faq-006;finance_004;finance_007,0.032787,True,1.0,True,none
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,hybrid_rrf,5,faq-006;finance_004;finance_007;finance_008;faq-004,0.032787,True,1.0,True,none
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,hybrid_metadata,1,faq-006,0.032787,True,1.0,True,finance
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,hybrid_metadata,3,faq-006;finance_004;finance_007,0.032787,True,1.0,True,finance
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,hybrid_metadata,5,faq-006;finance_004;finance_007;finance_008;faq-004,0.032787,True,1.0,True,finance
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,hybrid_metadata_rerank,1,faq-006,0.219454,True,1.0,True,finance
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,hybrid_metadata_rerank,3,faq-006;finance_007;finance_004,0.219454,True,1.0,True,finance
+D3-037,Basic Accounting,What is the difference between profit and cash flow?,Comparison,Verified,True,faq-006,hybrid_metadata_rerank,5,faq-006;finance_007;finance_004;faq-004;finance_001,0.219454,True,1.0,True,finance
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,dense_vector,1,finance_008,0.868632,True,1.0,True,none
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,dense_vector,3,finance_008;faq-006;finance_004,0.868632,True,1.0,True,none
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,dense_vector,5,finance_008;faq-006;finance_004;faq-004;finance_002,0.868632,True,1.0,True,none
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,bm25_lexical,1,finance_008,14.952312,True,1.0,True,none
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,bm25_lexical,3,finance_008;faq-006;finance_004,14.952312,True,1.0,True,none
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,bm25_lexical,5,finance_008;faq-006;finance_004;faq-004;faq-udhar-guidance,14.952312,True,1.0,True,none
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,hybrid_rrf,1,finance_008,0.032787,True,1.0,True,none
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,hybrid_rrf,3,finance_008;faq-006;finance_004,0.032787,True,1.0,True,none
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,hybrid_rrf,5,finance_008;faq-006;finance_004;faq-004;finance_002,0.032787,True,1.0,True,none
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,hybrid_metadata,1,finance_008,0.032787,True,1.0,True,finance
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,hybrid_metadata,3,finance_008;faq-006;finance_004,0.032787,True,1.0,True,finance
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,hybrid_metadata,5,finance_008;faq-006;finance_004;faq-004;finance_002,0.032787,True,1.0,True,finance
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,hybrid_metadata_rerank,1,finance_008,0.232787,True,1.0,True,finance
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,hybrid_metadata_rerank,3,finance_008;faq-006;faq-004,0.232787,True,1.0,True,finance
+D3-038,Basic Accounting,Can a profitable business have cash-flow problems?,Edge case,Verified,True,finance_008,hybrid_metadata_rerank,5,finance_008;faq-006;faq-004;finance_004;finance_002,0.232787,True,1.0,True,finance
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,dense_vector,1,finance_008,0.669373,True,1.0,True,none
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,dense_vector,3,finance_008;faq-006;finance_001,0.669373,True,1.0,True,none
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,dense_vector,5,finance_008;faq-006;finance_001;finance_007;finance_002,0.669373,True,1.0,True,none
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,bm25_lexical,1,finance_008,9.808904,True,1.0,True,none
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,bm25_lexical,3,finance_008;faq-006;faq-004,9.808904,True,1.0,True,none
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,bm25_lexical,5,finance_008;faq-006;faq-004;finance_004;finance_001,9.808904,True,1.0,True,none
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,hybrid_rrf,1,finance_008,0.032787,True,1.0,True,none
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,hybrid_rrf,3,finance_008;faq-006;finance_001,0.032787,True,1.0,True,none
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,hybrid_rrf,5,finance_008;faq-006;finance_001;faq-004;finance_007,0.032787,True,1.0,True,none
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,hybrid_metadata,1,finance_008,0.032787,True,1.0,True,finance
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,hybrid_metadata,3,finance_008;faq-006;finance_001,0.032787,True,1.0,True,finance
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,hybrid_metadata,5,finance_008;faq-006;finance_001;faq-004;finance_007,0.032787,True,1.0,True,finance
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,hybrid_metadata_rerank,1,finance_008,0.12006,True,1.0,True,finance
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,hybrid_metadata_rerank,3,finance_008;faq-006;faq-004,0.12006,True,1.0,True,finance
+D3-039,Basic Accounting,Why might a company show profit but have no cash available?,Reasoning,Verified,True,faq-006;finance_008,hybrid_metadata_rerank,5,finance_008;faq-006;faq-004;finance_004;finance_001,0.12006,True,1.0,True,finance
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,dense_vector,1,faq-004,0.898353,True,1.0,True,none
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,dense_vector,3,faq-004;finance_004;faq-006,0.898353,True,1.0,True,none
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,dense_vector,5,faq-004;finance_004;faq-006;finance_008;faq-udhar-guidance,0.898353,True,1.0,True,none
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,bm25_lexical,1,faq-004,9.180847,True,1.0,True,none
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,bm25_lexical,3,faq-004;finance_004;faq-006,9.180847,True,1.0,True,none
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,bm25_lexical,5,faq-004;finance_004;faq-006;finance_008;finance_003,9.180847,True,1.0,True,none
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,hybrid_rrf,1,faq-004,0.032787,True,1.0,True,none
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,hybrid_rrf,3,faq-004;finance_004;faq-006,0.032787,True,1.0,True,none
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,hybrid_rrf,5,faq-004;finance_004;faq-006;finance_008;finance_002,0.032787,True,1.0,True,none
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,hybrid_metadata,1,faq-004,0.032787,True,1.0,True,finance
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,hybrid_metadata,3,faq-004;finance_004;faq-006,0.032787,True,1.0,True,finance
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,hybrid_metadata,5,faq-004;finance_004;faq-006;finance_008;finance_002,0.032787,True,1.0,True,finance
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,hybrid_metadata_rerank,1,faq-004,0.232787,True,1.0,True,finance
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,hybrid_metadata_rerank,3,faq-004;finance_004;faq-006,0.232787,True,1.0,True,finance
+D3-040,Basic Accounting,Wht is a cashflw statment?,Misspelling,Verified,True,faq-004,hybrid_metadata_rerank,5,faq-004;finance_004;faq-006;finance_008;finance_002,0.232787,True,1.0,True,finance
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,dense_vector,1,faq-005,0.624081,,,True,none
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,dense_vector,3,faq-005;finance_003;faq-001,0.624081,,,True,none
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,dense_vector,5,faq-005;finance_003;faq-001;faq-khata-guidance;faq-udhar-guidance,0.624081,,,True,none
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,bm25_lexical,1,faq-005,9.379345,,,True,none
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,bm25_lexical,3,faq-005;finance_003;faq-udhar-guidance,9.379345,,,True,none
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,bm25_lexical,5,faq-005;finance_003;faq-udhar-guidance;faq-khata-guidance;faq-001,9.379345,,,True,none
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,hybrid_rrf,1,faq-005,0.032787,,,True,none
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,hybrid_rrf,3,faq-005;finance_003;faq-001,0.032787,,,True,none
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,hybrid_rrf,5,faq-005;finance_003;faq-001;faq-udhar-guidance;faq-khata-guidance,0.032787,,,True,none
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,hybrid_metadata,1,,0.0,,,False,expense_categorization
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,hybrid_metadata,3,,0.0,,,False,expense_categorization
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,hybrid_metadata,5,,0.0,,,False,expense_categorization
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,1,,0.0,,,False,expense_categorization
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,3,,0.0,,,False,expense_categorization
+D3-041,Expense Management,How do I categorize an expense in HisabDo?,Workflow; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,5,,0.0,,,False,expense_categorization
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,dense_vector,1,faq-005,0.564107,,,True,none
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,dense_vector,3,faq-005;finance_003;faq-001,0.564107,,,True,none
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,dense_vector,5,faq-005;finance_003;faq-001;faq-khata-guidance;faq-udhar-guidance,0.564107,,,True,none
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,bm25_lexical,1,finance_003,3.283259,,,True,none
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,bm25_lexical,3,finance_003;faq-005;faq-001,3.283259,,,True,none
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,bm25_lexical,5,finance_003;faq-005;faq-001;faq-khata-guidance;faq-udhar-guidance,3.283259,,,True,none
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,hybrid_rrf,1,faq-005,0.032522,,,True,none
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,hybrid_rrf,3,faq-005;finance_003;faq-001,0.032522,,,True,none
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,hybrid_rrf,5,faq-005;finance_003;faq-001;faq-khata-guidance;faq-udhar-guidance,0.032522,,,True,none
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,hybrid_metadata,1,,0.0,,,False,expense_categorization
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,hybrid_metadata,3,,0.0,,,False,expense_categorization
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,hybrid_metadata,5,,0.0,,,False,expense_categorization
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,1,,0.0,,,False,expense_categorization
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,3,,0.0,,,False,expense_categorization
+D3-042,Expense Management,Does HisabDo automatically assign expense categories?,Feature inquiry; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,5,,0.0,,,False,expense_categorization
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,dense_vector,1,faq-udhar-guidance,0.346623,,,True,none
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,dense_vector,3,faq-udhar-guidance;finance_003;faq-005,0.346623,,,True,none
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,dense_vector,5,faq-udhar-guidance;finance_003;faq-005;faq-khata-guidance;finance_004,0.346623,,,True,none
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,bm25_lexical,1,finance_003,3.283259,,,True,none
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,bm25_lexical,3,finance_003;faq-005;faq-001,3.283259,,,True,none
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,bm25_lexical,5,finance_003;faq-005;faq-001;faq-004;faq-006,3.283259,,,True,none
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,hybrid_rrf,1,finance_003,0.032522,,,True,none
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,hybrid_rrf,3,finance_003;faq-005;finance_001,0.032522,,,True,none
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,hybrid_rrf,5,finance_003;faq-005;finance_001;faq-udhar-guidance;faq-001,0.032522,,,True,none
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,hybrid_metadata,1,,0.0,,,False,expense_categorization
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,hybrid_metadata,3,,0.0,,,False,expense_categorization
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,hybrid_metadata,5,,0.0,,,False,expense_categorization
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,1,,0.0,,,False,expense_categorization
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,3,,0.0,,,False,expense_categorization
+D3-043,Expense Management,Expense ki category khud select hoti hai ya mujhe karni parti hai?,Roman Urdu; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,5,,0.0,,,False,expense_categorization
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,dense_vector,1,finance_003,0.687312,,,True,none
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,dense_vector,3,finance_003;faq-005;finance_002,0.687312,,,True,none
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,dense_vector,5,finance_003;faq-005;finance_002;finance_001;finance_007,0.687312,,,True,none
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,bm25_lexical,1,faq-005,8.403397,,,True,none
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,bm25_lexical,3,faq-005;finance_003;faq-udhar-guidance,8.403397,,,True,none
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,bm25_lexical,5,faq-005;finance_003;faq-udhar-guidance;faq-khata-guidance;faq-001,8.403397,,,True,none
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,hybrid_rrf,1,faq-005,0.032522,,,True,none
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,hybrid_rrf,3,faq-005;finance_003;faq-udhar-guidance,0.032522,,,True,none
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,hybrid_rrf,5,faq-005;finance_003;faq-udhar-guidance;finance_002;finance_001,0.032522,,,True,none
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,hybrid_metadata,1,,0.0,,,False,expense_categorization
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,hybrid_metadata,3,,0.0,,,False,expense_categorization
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,hybrid_metadata,5,,0.0,,,False,expense_categorization
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,1,,0.0,,,False,expense_categorization
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,3,,0.0,,,False,expense_categorization
+D3-044,Expense Management,How do I catagorize expence?,Misspelling; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,5,,0.0,,,False,expense_categorization
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,dense_vector,1,faq-005,0.60004,,,True,none
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,dense_vector,3,faq-005;finance_003;faq-001,0.60004,,,True,none
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,dense_vector,5,faq-005;finance_003;faq-001;faq-khata-guidance;faq-udhar-guidance,0.60004,,,True,none
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,bm25_lexical,1,faq-001,2.401283,,,True,none
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,bm25_lexical,3,faq-001;finance_001;faq-005,2.401283,,,True,none
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,bm25_lexical,5,faq-001;finance_001;faq-005;faq-udhar-guidance;faq-khata-guidance,2.401283,,,True,none
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,hybrid_rrf,1,faq-001,0.032266,,,True,none
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,hybrid_rrf,3,faq-001;faq-005;faq-khata-guidance,0.032266,,,True,none
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,hybrid_rrf,5,faq-001;faq-005;faq-khata-guidance;faq-udhar-guidance;finance_001,0.032266,,,True,none
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,hybrid_metadata,1,,0.0,,,False,expense_categorization
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,hybrid_metadata,3,,0.0,,,False,expense_categorization
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,hybrid_metadata,5,,0.0,,,False,expense_categorization
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,1,,0.0,,,False,expense_categorization
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,3,,0.0,,,False,expense_categorization
+D3-045,Expense Management,Does HisabDo use machine learning to categorize expenses?,Technical feature; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,5,,0.0,,,False,expense_categorization
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,dense_vector,1,finance_003,0.636067,,,True,none
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,dense_vector,3,finance_003;finance_002;finance_008,0.636067,,,True,none
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,dense_vector,5,finance_003;finance_002;finance_008;faq-005;finance_001,0.636067,,,True,none
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,bm25_lexical,1,finance_008,4.136729,,,True,none
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,bm25_lexical,3,finance_008;finance_002;faq-006,4.136729,,,True,none
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,bm25_lexical,5,finance_008;finance_002;faq-006;finance_003;finance_004,4.136729,,,True,none
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,hybrid_rrf,1,finance_008,0.032266,,,True,none
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,hybrid_rrf,3,finance_008;finance_002;finance_003,0.032266,,,True,none
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,hybrid_rrf,5,finance_008;finance_002;finance_003;faq-006;faq-005,0.032266,,,True,none
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,hybrid_metadata,1,,0.0,,,False,expense_categorization
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,hybrid_metadata,3,,0.0,,,False,expense_categorization
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,hybrid_metadata,5,,0.0,,,False,expense_categorization
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,hybrid_metadata_rerank,1,,0.0,,,False,expense_categorization
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,hybrid_metadata_rerank,3,,0.0,,,False,expense_categorization
+D3-046,Expense Management,Why should business expenses be categorized?,No approved source,Unverified,False,finance_006,hybrid_metadata_rerank,5,,0.0,,,False,expense_categorization
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,dense_vector,1,faq-001,0.520752,,,True,none
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,dense_vector,3,faq-001;faq-khata-guidance;faq-005,0.520752,,,True,none
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,dense_vector,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;finance_002,0.520752,,,True,none
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,bm25_lexical,1,finance_008,3.731973,,,True,none
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,bm25_lexical,3,finance_008;faq-001;faq-udhar-guidance,3.731973,,,True,none
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,bm25_lexical,5,finance_008;faq-001;faq-udhar-guidance;faq-006;faq-005,3.731973,,,True,none
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,hybrid_rrf,1,faq-001,0.032522,,,True,none
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,hybrid_rrf,3,faq-001;faq-udhar-guidance;faq-khata-guidance,0.032522,,,True,none
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,hybrid_rrf,5,faq-001;faq-udhar-guidance;faq-khata-guidance;faq-005;finance_008,0.032522,,,True,none
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,hybrid_metadata,1,,0.0,,,False,expense_categorization
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,hybrid_metadata,3,,0.0,,,False,expense_categorization
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,hybrid_metadata,5,,0.0,,,False,expense_categorization
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,hybrid_metadata_rerank,1,,0.0,,,False,expense_categorization
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,hybrid_metadata_rerank,3,,0.0,,,False,expense_categorization
+D3-047,Expense Management,Can you tell me the categories available in HisabDo?,No-answer; feature details,Unverified,False,faq-002,hybrid_metadata_rerank,5,,0.0,,,False,expense_categorization
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,dense_vector,1,finance_003,0.33037,,,True,none
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,dense_vector,3,finance_003;faq-005;finance_008,0.33037,,,True,none
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,dense_vector,5,finance_003;faq-005;finance_008;faq-udhar-guidance;finance_002,0.33037,,,True,none
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,bm25_lexical,1,finance_003,3.283259,,,True,none
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,bm25_lexical,3,finance_003;faq-khata-guidance;faq-005,3.283259,,,True,none
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,bm25_lexical,5,finance_003;faq-khata-guidance;faq-005;faq-001;finance_007,3.283259,,,True,none
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,hybrid_rrf,1,finance_003,0.032787,,,True,none
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,hybrid_rrf,3,finance_003;faq-005;faq-khata-guidance,0.032787,,,True,none
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,hybrid_rrf,5,finance_003;faq-005;faq-khata-guidance;faq-001;finance_007,0.032787,,,True,none
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,hybrid_metadata,1,,0.0,,,False,expense_categorization
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,hybrid_metadata,3,,0.0,,,False,expense_categorization
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,hybrid_metadata,5,,0.0,,,False,expense_categorization
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,hybrid_metadata_rerank,1,,0.0,,,False,expense_categorization
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,hybrid_metadata_rerank,3,,0.0,,,False,expense_categorization
+D3-048,Expense Management,Does the app automatically correct wrong expense categories?,No-answer; feature inquiry,Unverified,False,faq-002,hybrid_metadata_rerank,5,,0.0,,,False,expense_categorization
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,dense_vector,1,finance_003,0.331823,,,True,none
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,dense_vector,3,finance_003;finance_008;faq-005,0.331823,,,True,none
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,dense_vector,5,finance_003;finance_008;faq-005;finance_001;finance_002,0.331823,,,True,none
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,bm25_lexical,1,finance_003,4.030973,,,True,none
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,bm25_lexical,3,finance_003;faq-006;faq-005,4.030973,,,True,none
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,bm25_lexical,5,finance_003;faq-006;faq-005;finance_007;finance_002,4.030973,,,True,none
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,hybrid_rrf,1,finance_003,0.032787,,,True,none
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,hybrid_rrf,3,finance_003;faq-005;finance_001,0.032787,,,True,none
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,hybrid_rrf,5,finance_003;faq-005;finance_001;finance_007;finance_002,0.032787,,,True,none
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,hybrid_metadata,1,,0.0,,,False,expense_categorization
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,hybrid_metadata,3,,0.0,,,False,expense_categorization
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,hybrid_metadata,5,,0.0,,,False,expense_categorization
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,1,,0.0,,,False,expense_categorization
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,3,,0.0,,,False,expense_categorization
+D3-049,Expense Management,What happens if expense category prediction is uncertain?,Edge case; unverified,Unverified,False,faq-002,hybrid_metadata_rerank,5,,0.0,,,False,expense_categorization
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,dense_vector,1,finance_003,0.571114,,,True,none
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,dense_vector,3,finance_003;finance_002;faq-005,0.571114,,,True,none
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,dense_vector,5,finance_003;finance_002;faq-005;finance_001;finance_007,0.571114,,,True,none
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,bm25_lexical,1,finance_003,4.90612,,,True,none
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,bm25_lexical,3,finance_003;faq-005;faq-udhar-guidance,4.90612,,,True,none
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,bm25_lexical,5,finance_003;faq-005;faq-udhar-guidance;faq-khata-guidance;finance_008,4.90612,,,True,none
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,hybrid_rrf,1,finance_003,0.032787,,,True,none
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,hybrid_rrf,3,finance_003;faq-005;faq-udhar-guidance,0.032787,,,True,none
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,hybrid_rrf,5,finance_003;faq-005;faq-udhar-guidance;finance_002;finance_001,0.032787,,,True,none
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,hybrid_metadata,1,,0.0,,,False,expense_categorization
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,hybrid_metadata,3,,0.0,,,False,expense_categorization
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,hybrid_metadata,5,,0.0,,,False,expense_categorization
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,hybrid_metadata_rerank,1,,0.0,,,False,expense_categorization
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,hybrid_metadata_rerank,3,,0.0,,,False,expense_categorization
+D3-050,Expense Management,Can you explain how expense categorization works step by step?,Workflow; no-answer,Unverified,False,faq-002,hybrid_metadata_rerank,5,,0.0,,,False,expense_categorization
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,dense_vector,1,faq-005,0.284599,,,True,none
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,dense_vector,3,faq-005;finance_008;faq-udhar-guidance,0.284599,,,True,none
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,dense_vector,5,faq-005;finance_008;faq-udhar-guidance;finance_002;finance_003,0.284599,,,True,none
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,bm25_lexical,1,faq-005,3.01724,,,True,none
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,bm25_lexical,3,faq-005;faq-khata-guidance;finance_008,3.01724,,,True,none
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,bm25_lexical,5,faq-005;faq-khata-guidance;finance_008;finance_001;faq-004,3.01724,,,True,none
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,hybrid_rrf,1,faq-005,0.032787,,,True,none
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,hybrid_rrf,3,faq-005;finance_008;faq-khata-guidance,0.032787,,,True,none
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,hybrid_rrf,5,faq-005;finance_008;faq-khata-guidance;faq-udhar-guidance;finance_002,0.032787,,,True,none
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,hybrid_metadata,1,faq-005,0.032787,,,True,all
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,hybrid_metadata,3,faq-005;finance_008;faq-khata-guidance,0.032787,,,True,all
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,hybrid_metadata,5,faq-005;finance_008;faq-khata-guidance;faq-udhar-guidance;finance_002,0.032787,,,True,all
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,hybrid_metadata_rerank,1,faq-khata-guidance,0.067199,,,True,all
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,hybrid_metadata_rerank,3,faq-khata-guidance;faq-004;faq-005,0.067199,,,True,all
+D3-051,Privacy and Safety,Is my financial data used to train a shared AI model?,Privacy; unverified,Unverified,False,faq-003,hybrid_metadata_rerank,5,faq-khata-guidance;faq-004;faq-005;finance_008;finance_002,0.067199,,,True,all
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,dense_vector,1,faq-udhar-guidance,0.340039,,,True,none
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,dense_vector,3,faq-udhar-guidance;faq-004;finance_004,0.340039,,,True,none
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,dense_vector,5,faq-udhar-guidance;faq-004;finance_004;faq-005;faq-khata-guidance,0.340039,,,True,none
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,bm25_lexical,1,faq-udhar-guidance,2.916827,,,True,none
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,bm25_lexical,3,faq-udhar-guidance;faq-005;finance_008,2.916827,,,True,none
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,bm25_lexical,5,faq-udhar-guidance;faq-005;finance_008;faq-006;faq-001,2.916827,,,True,none
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,hybrid_rrf,1,faq-udhar-guidance,0.032787,,,True,none
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,hybrid_rrf,3,faq-udhar-guidance;faq-005;faq-004,0.032787,,,True,none
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,hybrid_rrf,5,faq-udhar-guidance;faq-005;faq-004;finance_008;faq-006,0.032787,,,True,none
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,hybrid_metadata,1,faq-udhar-guidance,0.032787,,,True,all
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,hybrid_metadata,3,faq-udhar-guidance;faq-005;faq-004,0.032787,,,True,all
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,hybrid_metadata,5,faq-udhar-guidance;faq-005;faq-004;finance_008;faq-006,0.032787,,,True,all
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,hybrid_metadata_rerank,1,faq-udhar-guidance,0.067787,,,True,all
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,hybrid_metadata_rerank,3,faq-udhar-guidance;faq-005;finance_008,0.067787,,,True,all
+D3-052,Privacy and Safety,Can you tell me my current account balance?,Account-specific; no-answer,Unverified,False,product_002,hybrid_metadata_rerank,5,faq-udhar-guidance;faq-005;finance_008;faq-006;faq-004,0.067787,,,True,all
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,dense_vector,1,faq-khata-guidance,0.129492,,,True,none
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,dense_vector,3,faq-khata-guidance;faq-001;finance_008,0.129492,,,True,none
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,dense_vector,5,faq-khata-guidance;faq-001;finance_008;faq-udhar-guidance;faq-006,0.129492,,,True,none
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,bm25_lexical,1,faq-005,3.579936,,,True,none
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,bm25_lexical,3,faq-005;faq-khata-guidance;faq-001,3.579936,,,True,none
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,bm25_lexical,5,faq-005;faq-khata-guidance;faq-001;finance_003;faq-004,3.579936,,,True,none
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,hybrid_rrf,1,faq-khata-guidance,0.032522,,,True,none
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,hybrid_rrf,3,faq-khata-guidance;faq-001;finance_007,0.032522,,,True,none
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,hybrid_rrf,5,faq-khata-guidance;faq-001;finance_007;faq-005;faq-006,0.032522,,,True,none
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,hybrid_metadata,1,faq-khata-guidance,0.032522,,,True,all
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,hybrid_metadata,3,faq-khata-guidance;faq-001;finance_007,0.032522,,,True,all
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,hybrid_metadata,5,faq-khata-guidance;faq-001;finance_007;faq-005;faq-006,0.032522,,,True,all
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,hybrid_metadata_rerank,1,faq-khata-guidance,0.083432,,,True,all
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,hybrid_metadata_rerank,3,faq-khata-guidance;finance_007;faq-006,0.083432,,,True,all
+D3-053,Privacy and Safety,What should the chatbot do when it cannot find an answer?,Safe fallback; policy test,Unverified,False,product_003,hybrid_metadata_rerank,5,faq-khata-guidance;finance_007;faq-006;finance_003;faq-001,0.083432,,,True,all
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,dense_vector,1,faq-005,0.237466,,,True,none
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,dense_vector,3,faq-005;faq-udhar-guidance;finance_008,0.237466,,,True,none
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,dense_vector,5,faq-005;faq-udhar-guidance;finance_008;faq-004;faq-001,0.237466,,,True,none
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,bm25_lexical,1,finance_008,4.485547,,,True,none
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,bm25_lexical,3,finance_008;faq-khata-guidance;faq-udhar-guidance,4.485547,,,True,none
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,bm25_lexical,5,finance_008;faq-khata-guidance;faq-udhar-guidance;faq-006;faq-005,4.485547,,,True,none
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,hybrid_rrf,1,finance_008,0.032266,,,True,none
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,hybrid_rrf,3,finance_008;faq-udhar-guidance;faq-005,0.032266,,,True,none
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,hybrid_rrf,5,finance_008;faq-udhar-guidance;faq-005;faq-khata-guidance;faq-004,0.032266,,,True,none
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,hybrid_metadata,1,finance_008,0.032266,,,True,all
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,hybrid_metadata,3,finance_008;faq-udhar-guidance;faq-005,0.032266,,,True,all
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,hybrid_metadata,5,finance_008;faq-udhar-guidance;faq-005;faq-khata-guidance;faq-004,0.032266,,,True,all
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,hybrid_metadata_rerank,1,faq-udhar-guidance,0.064502,,,True,all
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,hybrid_metadata_rerank,3,faq-udhar-guidance;finance_008;faq-khata-guidance,0.064502,,,True,all
+D3-054,Privacy and Safety,A draft says raw financial data is not used for AI training. Can you guarantee that?,Conflicting/privacy claim,Unverified,False,faq-003,hybrid_metadata_rerank,5,faq-udhar-guidance;finance_008;faq-khata-guidance;faq-004;faq-006,0.064502,,,True,all
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,dense_vector,1,faq-001,0.204908,,,True,none
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,dense_vector,3,faq-001;faq-khata-guidance;faq-005,0.204908,,,True,none
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,dense_vector,5,faq-001;faq-khata-guidance;faq-005;faq-004;finance_008,0.204908,,,True,none
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,bm25_lexical,1,faq-005,5.096618,,,True,none
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,bm25_lexical,3,faq-005;faq-001;finance_001,5.096618,,,True,none
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,bm25_lexical,5,faq-005;faq-001;finance_001;finance_007;finance_002,5.096618,,,True,none
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,hybrid_rrf,1,faq-001,0.032522,,,True,none
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,hybrid_rrf,3,faq-001;faq-005;faq-004,0.032522,,,True,none
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,hybrid_rrf,5,faq-001;faq-005;faq-004;faq-khata-guidance;finance_004,0.032522,,,True,none
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,hybrid_metadata,1,faq-001,0.032522,,,True,all
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,hybrid_metadata,3,faq-001;faq-005;faq-004,0.032522,,,True,all
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,hybrid_metadata,5,faq-001;faq-005;faq-004;faq-khata-guidance;finance_004,0.032522,,,True,all
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,hybrid_metadata_rerank,1,faq-005,0.072266,,,True,all
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,hybrid_metadata_rerank,3,faq-005;finance_007;faq-006,0.072266,,,True,all
+D3-055,Privacy and Safety,Does the chatbot securely access my personal financial records?,Security; unverified,Unverified,False,product_002,hybrid_metadata_rerank,5,faq-005;finance_007;faq-006;faq-001;faq-khata-guidance,0.072266,,,True,all
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,dense_vector,1,faq-001,0.585365,,,True,none
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,dense_vector,3,faq-001;faq-khata-guidance;faq-005,0.585365,,,True,none
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,dense_vector,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance;faq-004,0.585365,,,True,none
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,bm25_lexical,1,faq-005,4.726784,,,True,none
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,bm25_lexical,3,faq-005;faq-001;faq-khata-guidance,4.726784,,,True,none
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,bm25_lexical,5,faq-005;faq-001;faq-khata-guidance;faq-udhar-guidance;finance_007,4.726784,,,True,none
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,hybrid_rrf,1,faq-001,0.032522,,,True,none
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,hybrid_rrf,3,faq-001;faq-005;faq-khata-guidance,0.032522,,,True,none
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,hybrid_rrf,5,faq-001;faq-005;faq-khata-guidance;faq-udhar-guidance;finance_007,0.032522,,,True,none
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,hybrid_metadata,1,faq-001,0.032522,,,True,product
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,hybrid_metadata,3,faq-001;faq-005;faq-khata-guidance,0.032522,,,True,product
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,hybrid_metadata,5,faq-001;faq-005;faq-khata-guidance;faq-udhar-guidance,0.032522,,,True,product
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,hybrid_metadata_rerank,1,faq-001,0.107522,,,True,product
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,hybrid_metadata_rerank,3,faq-001;faq-khata-guidance;faq-005,0.107522,,,True,product
+D3-056,Privacy and Safety,What is the official HisabDo support phone number?,No-answer; contact details,No verified source,False,None,hybrid_metadata_rerank,5,faq-001;faq-khata-guidance;faq-005;faq-udhar-guidance,0.107522,,,True,product
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,dense_vector,1,faq-udhar-guidance,0.469018,,,True,none
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,dense_vector,3,faq-udhar-guidance;finance_008;finance_004,0.469018,,,True,none
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,dense_vector,5,faq-udhar-guidance;finance_008;finance_004;faq-004;faq-khata-guidance,0.469018,,,True,none
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,bm25_lexical,1,faq-udhar-guidance,3.342082,,,True,none
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,bm25_lexical,3,faq-udhar-guidance;faq-khata-guidance;faq-006,3.342082,,,True,none
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,bm25_lexical,5,faq-udhar-guidance;faq-khata-guidance;faq-006;finance_002;faq-005,3.342082,,,True,none
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,hybrid_rrf,1,faq-udhar-guidance,0.032787,,,True,none
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,hybrid_rrf,3,faq-udhar-guidance;faq-khata-guidance;faq-006,0.032787,,,True,none
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,hybrid_rrf,5,faq-udhar-guidance;faq-khata-guidance;faq-006;faq-004;finance_002,0.032787,,,True,none
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,hybrid_metadata,1,faq-udhar-guidance,0.032787,,,True,all
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,hybrid_metadata,3,faq-udhar-guidance;faq-khata-guidance;faq-006,0.032787,,,True,all
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,hybrid_metadata,5,faq-udhar-guidance;faq-khata-guidance;faq-006;faq-004;finance_002,0.032787,,,True,all
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,hybrid_metadata_rerank,1,faq-udhar-guidance,0.072787,,,True,all
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,hybrid_metadata_rerank,3,faq-udhar-guidance;faq-006;faq-khata-guidance,0.072787,,,True,all
+D3-057,Privacy and Safety,Give me another customer's outstanding balance.,Private data request,No verified source,False,None,hybrid_metadata_rerank,5,faq-udhar-guidance;faq-006;faq-khata-guidance;finance_002;faq-005,0.072787,,,True,all
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,dense_vector,1,finance_002,0.478523,True,1.0,True,none
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,dense_vector,3,finance_002;finance_001;finance_007,0.478523,True,1.0,True,none
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,dense_vector,5,finance_002;finance_001;finance_007;finance_008;faq-006,0.478523,True,1.0,True,none
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,bm25_lexical,1,faq-005,5.921692,False,0.2,True,none
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,bm25_lexical,3,faq-005;finance_008;faq-006,5.921692,False,0.2,True,none
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,bm25_lexical,5,faq-005;finance_008;faq-006;finance_007;finance_001,5.921692,True,0.2,True,none
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,hybrid_rrf,1,finance_008,0.031754,False,0.5,True,none
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,hybrid_rrf,3,finance_008;finance_001;finance_007,0.031754,True,0.5,True,none
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,hybrid_rrf,5,finance_008;finance_001;finance_007;faq-005;finance_002,0.031754,True,0.5,True,none
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,hybrid_metadata,1,finance_008,0.031754,False,0.5,True,finance
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,hybrid_metadata,3,finance_008;finance_001;finance_007,0.031754,True,0.5,True,finance
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,hybrid_metadata,5,finance_008;finance_001;finance_007;finance_002;faq-006,0.031754,True,0.5,True,finance
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,hybrid_metadata_rerank,1,finance_007,0.091498,False,0.5,True,finance
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,hybrid_metadata_rerank,3,finance_007;finance_001;faq-006,0.091498,True,0.5,True,finance
+D3-058,Privacy and Safety,"My revenue is PKR 250,000. Can you confirm my profit?",Synthetic data; insufficient information,Verified,True,finance_001;finance_002,hybrid_metadata_rerank,5,finance_007;finance_001;faq-006;finance_002;finance_008,0.091498,True,0.5,True,finance
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,dense_vector,1,faq-udhar-guidance,0.227366,,,True,none
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,dense_vector,3,faq-udhar-guidance;faq-001;faq-khata-guidance,0.227366,,,True,none
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,dense_vector,5,faq-udhar-guidance;faq-001;faq-khata-guidance;faq-005;finance_008,0.227366,,,True,none
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,bm25_lexical,1,faq-udhar-guidance,2.916827,,,True,none
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,bm25_lexical,3,faq-udhar-guidance;faq-005;finance_008,2.916827,,,True,none
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,bm25_lexical,5,faq-udhar-guidance;faq-005;finance_008;faq-006;faq-001,2.916827,,,True,none
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,hybrid_rrf,1,faq-udhar-guidance,0.032787,,,True,none
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,hybrid_rrf,3,faq-udhar-guidance;faq-005;faq-001,0.032787,,,True,none
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,hybrid_rrf,5,faq-udhar-guidance;faq-005;faq-001;finance_008;faq-004,0.032787,,,True,none
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,hybrid_metadata,1,faq-udhar-guidance,0.032787,,,True,all
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,hybrid_metadata,3,faq-udhar-guidance;faq-005;faq-001,0.032787,,,True,all
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,hybrid_metadata,5,faq-udhar-guidance;faq-005;faq-001;finance_008;faq-004,0.032787,,,True,all
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,hybrid_metadata_rerank,1,faq-udhar-guidance,0.088787,,,True,all
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,hybrid_metadata_rerank,3,faq-udhar-guidance;faq-005;finance_008,0.088787,,,True,all
+D3-059,Privacy and Safety,Can you check my data?,Ambiguous; account-specific,Unverified,False,product_002,hybrid_metadata_rerank,5,faq-udhar-guidance;faq-005;finance_008;faq-006;faq-001,0.088787,,,True,all
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,dense_vector,1,finance_008,0.116477,,,True,none
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,dense_vector,3,finance_008;faq-udhar-guidance;faq-001,0.116477,,,True,none
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,dense_vector,5,finance_008;faq-udhar-guidance;faq-001;faq-khata-guidance;faq-006,0.116477,,,True,none
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,bm25_lexical,1,faq-005,3.193353,,,True,none
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,bm25_lexical,3,faq-005;faq-udhar-guidance;faq-001,3.193353,,,True,none
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,bm25_lexical,5,faq-005;faq-udhar-guidance;faq-001;faq-004;faq-006,3.193353,,,True,none
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,hybrid_rrf,1,faq-udhar-guidance,0.032258,,,True,none
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,hybrid_rrf,3,faq-udhar-guidance;faq-001;faq-005,0.032258,,,True,none
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,hybrid_rrf,5,faq-udhar-guidance;faq-001;faq-005;finance_008;faq-006,0.032258,,,True,none
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,hybrid_metadata,1,faq-udhar-guidance,0.032258,,,True,all
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,hybrid_metadata,3,faq-udhar-guidance;faq-001;faq-005,0.032258,,,True,all
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,hybrid_metadata,5,faq-udhar-guidance;faq-001;faq-005;finance_008;faq-006,0.032258,,,True,all
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,hybrid_metadata_rerank,1,faq-udhar-guidance,0.055591,,,True,all
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,hybrid_metadata_rerank,3,faq-udhar-guidance;faq-005;finance_008,0.055591,,,True,all
+D3-060,Privacy and Safety,Two product drafts disagree about a workflow. Which one should I trust?,Conflicting-source case,Unverified,False,faq-002;faq-003;product_002;product_003,hybrid_metadata_rerank,5,faq-udhar-guidance;faq-005;finance_008;faq-004;faq-006,0.055591,,,True,all

@@ -1,0 +1,16 @@
+﻿Strategy,Top_K,Verified_Questions,Expected_Source_Hits,Hit_Rate_Percent,MRR,Unverified_Questions_Excluded
+dense_vector,1,41,36,87.8,0.913,19
+dense_vector,3,41,39,95.12,0.913,19
+dense_vector,5,41,39,95.12,0.913,19
+bm25_lexical,1,41,29,70.73,0.826,19
+bm25_lexical,3,41,38,92.68,0.826,19
+bm25_lexical,5,41,41,100.0,0.826,19
+hybrid_rrf,1,41,33,80.49,0.8882,19
+hybrid_rrf,3,41,39,95.12,0.8882,19
+hybrid_rrf,5,41,40,97.56,0.8882,19
+hybrid_metadata,1,41,28,68.29,0.7602,19
+hybrid_metadata,3,41,34,82.93,0.7602,19
+hybrid_metadata,5,41,34,82.93,0.7602,19
+hybrid_metadata_rerank,1,41,29,70.73,0.7724,19
+hybrid_metadata_rerank,3,41,35,85.37,0.7724,19
+hybrid_metadata_rerank,5,41,35,85.37,0.7724,19
