@@ -1,0 +1,61 @@
+config,category,query,expected_keyword,rank,top_similarity,source_ok,status,top_chunk_preview
+A,direct,What is your company mission?,mission,-,0.454,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+A,direct,What is your company vision?,vision,-,0.496,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+A,paraphrase,What does your company stand for?,mission,-,0.362,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+A,paraphrase,What are your core values?,values,1,0.612,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+A,keyword,mission,mission,-,0.139,Yes,FAIL,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+A,keyword,about company,about,2,0.414,Yes,PARTIAL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+A,short,who are you,about,1,0.084,Yes,PASS,## 4. Leadership Mian Usman Khalid — Founder & CEO He founded XICTEK Systems and
+A,short,team,team,1,0.155,Yes,PASS,"## 2. Our Approach The company focuses on understanding business needs, making p"
+A,long,Can you tell me a bit about how your company started and what you do?,founded,2,0.406,Yes,PARTIAL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+A,long,I want to know who runs the company and what experience they have,team,2,0.406,Yes,PARTIAL,## 4. Leadership Mian Usman Khalid — Founder & CEO He founded XICTEK Systems and
+A,typo_case,abuot us,about,2,0.174,Yes,PARTIAL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+A,typo_case,COMPANY VISION,vision,-,0.443,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+A,related,founders,found,1,0.477,Yes,PASS,## 4. Leadership Mian Usman Khalid — Founder & CEO He founded XICTEK Systems and
+A,related,company history,history,-,0.359,Yes,FAIL,## 4. Leadership Mian Usman Khalid — Founder & CEO He founded XICTEK Systems and
+A,related,years of experience,experience,1,0.189,Yes,PASS,"## 2. Our Approach The company focuses on understanding business needs, making p"
+B,direct,What is your company mission?,mission,-,0.454,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+B,direct,What is your company vision?,vision,-,0.496,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+B,paraphrase,What does your company stand for?,mission,-,0.362,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+B,paraphrase,What are your core values?,values,1,0.426,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+B,keyword,mission,mission,-,0.138,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+B,keyword,about company,about,2,0.414,Yes,PARTIAL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+B,short,who are you,about,1,0.091,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+B,short,team,team,1,0.155,Yes,PASS,"## 2. Our Approach The company focuses on understanding business needs, making p"
+B,long,Can you tell me a bit about how your company started and what you do?,founded,2,0.406,Yes,PARTIAL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+B,long,I want to know who runs the company and what experience they have,team,2,0.346,Yes,PARTIAL,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+B,typo_case,abuot us,about,2,0.174,Yes,PARTIAL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+B,typo_case,COMPANY VISION,vision,-,0.443,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+B,related,founders,found,1,0.385,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+B,related,company history,history,-,0.298,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+B,related,years of experience,experience,1,0.189,Yes,PASS,"## 2. Our Approach The company focuses on understanding business needs, making p"
+C,direct,What is your company mission?,mission,-,0.375,Yes,FAIL,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+C,direct,What is your company vision?,vision,-,0.38,Yes,FAIL,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+C,paraphrase,What does your company stand for?,mission,-,0.293,Yes,FAIL,## XICTEK Systems — About Us  ## 1. Company Overview XICTEK Systems is a product
+C,paraphrase,What are your core values?,values,1,0.426,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+C,keyword,mission,mission,-,0.115,Yes,FAIL,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+C,keyword,about company,about,1,0.32,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+C,short,who are you,about,1,0.091,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+C,short,team,team,1,0.134,Yes,PASS,## XICTEK Systems — About Us  ## 1. Company Overview XICTEK Systems is a product
+C,long,Can you tell me a bit about how your company started and what you do?,founded,1,0.361,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+C,long,I want to know who runs the company and what experience they have,team,2,0.346,Yes,PARTIAL,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+C,typo_case,abuot us,about,1,0.076,Yes,PASS,## XICTEK Systems — About Us  ## 1. Company Overview XICTEK Systems is a product
+C,typo_case,COMPANY VISION,vision,-,0.369,Yes,FAIL,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+C,related,founders,found,1,0.385,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+C,related,company history,history,-,0.283,Yes,FAIL,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+C,related,years of experience,experience,2,0.173,Yes,PARTIAL,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+D,direct,What is your company mission?,mission,-,0.454,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+D,direct,What is your company vision?,vision,-,0.496,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+D,paraphrase,What does your company stand for?,mission,-,0.362,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+D,paraphrase,What are your core values?,values,1,0.426,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+D,keyword,mission,mission,-,0.138,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+D,keyword,about company,about,2,0.414,Yes,PARTIAL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+D,short,who are you,about,1,0.091,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+D,short,team,team,1,0.155,Yes,PASS,"## 2. Our Approach The company focuses on understanding business needs, making p"
+D,long,Can you tell me a bit about how your company started and what you do?,founded,2,0.406,Yes,PARTIAL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+D,long,I want to know who runs the company and what experience they have,team,2,0.346,Yes,PARTIAL,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+D,typo_case,abuot us,about,2,0.174,Yes,PARTIAL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+D,typo_case,COMPANY VISION,vision,-,0.443,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+D,related,founders,found,1,0.385,Yes,PASS,## 3. Core Values Practical Thinking Focus on useful products and clear solution
+D,related,company history,history,-,0.298,Yes,FAIL,"## 2. Our Approach The company focuses on understanding business needs, making p"
+D,related,years of experience,experience,1,0.189,Yes,PASS,"## 2. Our Approach The company focuses on understanding business needs, making p"

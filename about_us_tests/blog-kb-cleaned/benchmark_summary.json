@@ -1,0 +1,45 @@
+{
+ "sem_method": "minilm",
+ "best": {
+  "tfidf_cosine": {
+   "threshold": 0.15,
+   "answered_correct": 21.0,
+   "answered_wrong": 1.0,
+   "false_accept_neg": "2/10",
+   "wrongly_refused": 8,
+   "precision": 0.875,
+   "recall": 0.7,
+   "f1": 0.778
+  },
+  "vector_cosine": {
+   "threshold": 0.35,
+   "answered_correct": 24.0,
+   "answered_wrong": 0.0,
+   "false_accept_neg": "1/10",
+   "wrongly_refused": 6,
+   "precision": 0.96,
+   "recall": 0.8,
+   "f1": 0.873
+  }
+ },
+ "filters": {
+  "no filter": {
+   "hit": 0.9666666666666667,
+   "recall": 0.85,
+   "prec": 0.5111111111111111,
+   "mrr": 0.8944444444444445
+  },
+  "predicted category": {
+   "hit": 0.9,
+   "recall": 0.7055555555555555,
+   "prec": 0.41111111111111115,
+   "mrr": 0.8611111111111112
+  },
+  "oracle category (upper bound)": {
+   "hit": 1.0,
+   "recall": 0.7833333333333333,
+   "prec": 0.4555555555555556,
+   "mrr": 0.9777777777777779
+  }
+ }
+}

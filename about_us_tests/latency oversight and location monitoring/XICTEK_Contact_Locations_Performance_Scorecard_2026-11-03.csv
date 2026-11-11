@@ -1,0 +1,17 @@
+﻿metric,value,interpretation,measurement_window,status
+Live boundary probes,5,Small sample; not representative load testing,2026-11-02,Observed
+Known latency observations,4,Values: 1.999 0.712 0.710 0.729 seconds,2026-11-02,Observed
+Mean known latency,1.038 s,Computed over four exact values only,2026-11-02,Observed
+Median known latency,0.721 s,Computed over four exact values only,2026-11-02,Observed
+Maximum known latency,1.999 s,Contact email response,2026-11-02,Observed
+Censored latency observations,1,Pending at 30-second browser polling cap; exact response time unknown,2026-11-02,Unresolved
+Answer quality PASS,1/5,20 percent,2026-11-02,Observed
+Answer quality PARTIAL,2/5,40 percent,2026-11-02,Observed
+Answer quality FAIL,2/5,40 percent,2026-11-02,Observed
+Fully relevant citation sets,0/4,All four citation-bearing answers had irrelevant or cross-domain citations,2026-11-02,Observed
+Unsupported SLA/date claims,1/5,Assistant stated a publication date without relevant XICTEK evidence,2026-11-02,Observed
+Private/unverified detail leakage,0/5,No disclosure observed in this limited probe set; not a guarantee,2026-11-02,Observed
+Proposed contact correctness target,>=95%,Team target pending approval,Future evaluation window,Proposed
+Proposed citation precision target,100%,Only relevant official source pages,Future evaluation window,Proposed
+Proposed normal-contact latency target,p95 <= 2 seconds,Requires at least 100 representative requests per window,Future evaluation window,Proposed
+Proposed upstream error alert,>2% in 5 minutes,Confirm with service owner before production alerting,Future evaluation window,Proposed

@@ -1,0 +1,10 @@
+﻿question,link,status,http_code,own_domain,final_url,reply
+What job openings do you have?,-,ERROR,-,-,-,HTTP 404
+How can I apply for a job at XICTEK Systems?,-,ERROR,-,-,-,HTTP 404
+Do you have any internship positions?,-,ERROR,-,-,-,HTTP 404
+What are the requirements for the open positions?,-,ERROR,-,-,-,HTTP 404
+Where can I send my CV?,-,ERROR,-,-,-,HTTP 404
+Can you check if I am eligible for a job?,-,ERROR,-,-,-,HTTP 404
+What happens to my CV after I apply?,-,ERROR,-,-,-,HTTP 404
+Aap ke han kaun si jobs available hain?,-,ERROR,-,-,-,HTTP 404
+(direct check),https://www.xicteksystems.com/careers,OK,200,Yes,https://www.xicteksystems.com/careers,
