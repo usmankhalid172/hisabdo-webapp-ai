@@ -1,0 +1,19 @@
+# Tuned relevance settings - Blog & News retrieval (MiniLM run, 30 answerable + 10 unanswerable queries)
+retrieval:
+  method: hybrid                  # MiniLM + BM25/lexical, min-max blend
+  hybrid_alpha: 0.7               # semantic weight; 0.5 is equivalent on this sample
+  top_k: 3
+  abstain_gate:
+    score: minilm_cosine_top1     # gate on raw MiniLM cosine of the top-1 article, NOT the blended score
+    min_score: 0.35               # max F1 = 0.873 (precision 0.96, recall 0.80)
+    alternatives:
+      favor_recall: 0.30          # F1 0.867, recall 0.867, 1/10 unanswerable accepted
+      favor_precision: 0.50       # 0/10 unanswerable accepted, but refuses 14/30 valid queries
+  lexical_only_fallback_min_tfidf_cosine: 0.15   # only if MiniLM is unavailable (F1 0.778)
+  metadata_filter:
+    category: disabled            # predicted category lowered Hit@3 0.967 -> 0.900
+    date: disabled                # untestable: all 47 articles share published_date 2026-09-07
+  index:
+    include_all_47_articles: true # the 33 "duplicates" are not real (max cosine 0.53)
+  caveats:
+    - tuned on a small sample (40 queries); revalidate on the real retriever and more unanswerable queries

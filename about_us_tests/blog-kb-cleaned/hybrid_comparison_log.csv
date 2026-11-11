@@ -1,0 +1,28 @@
+method,filter,k,hit,recall,precision,mrr
+tfidf,none,1,0.767,0.472,0.767,0.767
+tfidf,none,3,0.867,0.756,0.467,0.817
+tfidf,none,5,0.933,0.833,0.307,0.83
+tfidf,none,10,0.967,0.878,0.163,0.833
+bm25,none,1,0.7,0.444,0.7,0.7
+bm25,none,3,0.9,0.722,0.444,0.783
+bm25,none,5,0.933,0.817,0.3,0.79
+bm25,none,10,0.933,0.844,0.157,0.79
+vector,none,1,0.9,0.572,0.9,0.9
+vector,none,3,0.9,0.778,0.456,0.9
+vector,none,5,0.967,0.878,0.32,0.917
+vector,none,10,0.967,0.95,0.177,0.917
+hybrid_a0.5,none,1,0.833,0.522,0.833,0.833
+hybrid_a0.5,none,3,0.967,0.85,0.511,0.894
+hybrid_a0.5,none,5,0.967,0.861,0.313,0.894
+hybrid_a0.5,none,10,1.0,0.933,0.173,0.899
+hybrid_a0.7,none,1,0.867,0.556,0.867,0.867
+hybrid_a0.7,none,3,0.967,0.839,0.5,0.911
+hybrid_a0.7,none,5,0.967,0.861,0.313,0.911
+hybrid_a0.7,none,10,1.0,0.95,0.177,0.914
+hybrid_rrf,none,1,0.867,0.522,0.867,0.867
+hybrid_rrf,none,3,0.933,0.789,0.478,0.9
+hybrid_rrf,none,5,0.967,0.861,0.32,0.908
+hybrid_rrf,none,10,1.0,0.922,0.17,0.912
+hybrid_a0.5,no filter,3,0.967,0.85,0.511,0.894
+hybrid_a0.5,predicted category,3,0.9,0.706,0.411,0.861
+hybrid_a0.5,oracle category (upper bound),3,1.0,0.783,0.456,0.978
