@@ -1,0 +1,64 @@
+{
+  "generated_at": "2026-11-11T01:35:02.675221+00:00",
+  "records": {
+    "data/faq_docs.json:faq-001": "a535d5236dea8d261a8ff6c6c264a7bc3dd01a1d56e6994c008e655a519fe9ed",
+    "data/faq_docs.json:faq-002": "44a64e4d1bf202295c689f40da39d2d4eda978d22bb69e02a2634f244ae13a64",
+    "data/faq_docs.json:faq-003": "5ced1ca158681a6dfef3c4e0e76f6be508224cea8f348532464365e57408b530",
+    "data/faq_docs.json:faq-004": "399245708f407e56155f8267d483eb8a10f4fca5edcb52582a448ac4e3c018fa",
+    "data/faq_docs.json:faq-005": "e751595f6d28091effb201ce906b60dfad8f81edba01bb4fdeb3b5f9d13e306f",
+    "data/faq_docs.json:faq-006": "4a777f27307e1595649c4521fa7ed6efdfb66db1ba73ebcb606e77660af2d998",
+    "data/faq_docs.json:finance_001": "94a7c5e585137d1b4b49318d389788e4e32058282ddf99ecf3f2c1f805e3f298",
+    "data/faq_docs.json:finance_002": "b4dbd08a78463dfc9c11df8e39a2ed3dd71b31a682bc3a6023e11c88d53a094c",
+    "data/faq_docs.json:finance_003": "87c5589b68fc29dc2e9f4854306ffa05f702cf0e2d3acb90a499b295e38b3685",
+    "data/faq_docs.json:finance_004": "caa15fd7ca9e087746fe8ae0c8d3dfc95002daa3f5ed07ec2b6e6cec78f2ece1",
+    "data/faq_docs.json:finance_005": "02d62d73eded9136dbc58ffd0dbe89d93d038d74faa8ff6a51087938ef7edb25",
+    "data/faq_docs.json:finance_006": "ac0984879517b3f188cbf7e2e4273b5fb880c1445b86ef53ce3a29ffbdef2dc6",
+    "data/sample_financial_knowledge.json:finance_001": "ab46cecc0b6d4f6fc8994fed0b8271c17b0453fd402412566f0f3d2ebb1b5712",
+    "data/sample_financial_knowledge.json:finance_002": "bdb7c245732aa5de6293c9f5927b093ad1cb076086b713a42d6a58e55b4d1319",
+    "data/sample_financial_knowledge.json:finance_003": "16dbdcec2ec18d20a80e9725490e70cd9e84ba8f58b29802384fddf2a64a054d",
+    "data/sample_financial_knowledge.json:finance_004": "6d8288d5b56094fe39ecbc042c41c05ce438edcb57e8538d1a1cf6553461348b",
+    "data/sample_financial_knowledge.json:finance_005": "879992f94df2a17460c03e1bef396dd4b254f2e7e2ee9b2cbdda44c3874aea62",
+    "data/sample_financial_knowledge.json:finance_006": "f7a973267241c1522e40432d6038b3608ff97efc682c8ec72b6a6c1c90b81120"
+  },
+  "sources": [
+    "data/faq_docs.json",
+    "data/sample_financial_knowledge.json"
+  ],
+  "configuration": {
+    "chunking_unit": "characters",
+    "faq": {
+      "strategy": "one_complete_record",
+      "max_size": 0,
+      "overlap": 0
+    },
+    "financial_concept": {
+      "strategy": "question_answer_keywords_together",
+      "max_size": 0,
+      "overlap": 0
+    },
+    "feature_table": {
+      "strategy": "header_and_related_rows",
+      "max_size": 1000,
+      "overlap": 0
+    },
+    "workflow_guidelines": {
+      "strategy": "paragraph_boundary",
+      "max_size": 1000,
+      "overlap": 120
+    },
+    "long_documentation": {
+      "strategy": "heading_and_paragraph_boundary",
+      "max_size": 1500,
+      "overlap": 180
+    },
+    "current_retrieval": {
+      "vectorizer": "sklearn.feature_extraction.text.TfidfVectorizer",
+      "scikit_learn_version": "1.5.2",
+      "stop_words": "english",
+      "similarity": "cosine",
+      "relevance_threshold": 0.3,
+      "neural_embedding_model": null,
+      "external_vector_index": null
+    }
+  }
+}
