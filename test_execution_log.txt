@@ -1,0 +1,74 @@
+AUTOMATED RETRIEVAL TEST BENCH — EXECUTION LOG
+Date: 2026-11-11
+Working directory: retrieval_test_bench_submission
+Input: domain_evaluation_dataset.jsonl (built from uploaded blog-kb-cleaned.zip)
+
+1) Archive inspection
+Command/action:
+- Extracted uploaded ZIP.
+- Extracted nested Careers, Contact & Locations, and HisabDo ZIPs.
+- Inspected DOCX text/tables, XLSX sheets, CSV headers/rows, JSON, YAML, Markdown and Python scripts.
+Result:
+- 47 Blog articles.
+- 30 Blog explicit gold-labeled queries.
+- 28 Careers query rows in workbook (audit DOCX separately claims 31).
+- 8 Contact & Locations queries.
+- 6 HisabDo proxy queries.
+- Portfolio report references 12 historical queries but raw query list/corpus absent.
+- Nine corporate domain configurations listed.
+- Only Blog corpus supplied as document text.
+
+2) Actual benchmark command
+python retrieval_test_bench.py --dataset domain_evaluation_dataset.jsonl --out-dir .
+
+Captured stdout:
+records loaded; newly executed per-query configuration rows=150
+Blog & News: executed (queries=30, corpus=47)
+Careers & Job Openings: not_executed_missing_corpus (queries=28, corpus=0)
+Contact & Locations: not_executed_missing_corpus (queries=8, corpus=0)
+HisabDo: not_executed_missing_corpus (queries=6, corpus=0)
+dense_neural=NOT_RUN; vector_proxy=LSA; reranker=heuristic_fallback
+
+Result:
+- 30 queries × 5 configurations = 150 actual query/configuration runs.
+- No retrieval errors recorded in per_query_results.csv.
+- Output files generated: per_query_results.csv, cross_domain_metrics.csv, cross_configuration_metrics.json.
+- LSA is a proxy, not a neural dense embedding.
+- Reranker is a lexical heuristic, not a cross-encoder.
+
+3) Automated unit/regression tests
+Command:
+python -m pytest -q
+
+Captured stdout:
+.........                                                                [100%]
+9 passed in 0.80s
+
+Result:
+PASS — 9 tests.
+Coverage includes dataset loading, malformed JSONL, vector proxy, BM25, RRF fusion, duplicate ID handling, reranker ordering/provenance, metric calculations, empty results, missing labels, cross-domain skipping and report generation.
+The test fixture uses mocked/synthetic documents for isolated unit tests. It is not counted as actual corpus benchmark data.
+
+4) Model availability
+- sentence_transformers package: not installed at execution time.
+- rank_bm25 package: not installed; BM25 implementation is self-contained.
+- Neural dense retrieval: NOT RUN.
+- Pretrained cross-encoder reranking: NOT RUN.
+- LSA vector proxy and BM25: executed.
+- Heuristic fallback reranker: executed.
+
+5) Known archive limitations
+- Missing corpus for Careers, Contact, HisabDo, Portfolio and other corporate domains.
+- Career workbook/audit query-count discrepancy: 28 rows extracted vs 31 stated in audit.
+- Portfolio raw query records and labels not supplied.
+- HisabDo submission references an index/chunk corpus not present in the ZIP.
+- Historical scores were kept separate from newly executed results.
+
+6) Final rerun after separating candidate pools
+Command:
+python retrieval_test_bench.py --dataset domain_evaluation_dataset.jsonl --out-dir .
+Result:
+Exit code 0; 150 rows regenerated. `hybrid_rerank` uses 25 candidates and `reranked_topk` uses 12 candidates, so those two configurations are distinct. Final metrics are the ones in cross_domain_metrics.csv.
+
+7) Test runner environment note
+Python startup emitted a non-fatal spreadsheet runtime warmup warning from the environment's artifact/spreadsheet integration. The benchmark and pytest commands nevertheless exited successfully (benchmark generated outputs; pytest exit code 0).

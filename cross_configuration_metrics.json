@@ -1,0 +1,129 @@
+{
+  "domain_status": {
+    "Blog & News": {
+      "status": "executed",
+      "query_records": 30,
+      "labeled_query_records": 30,
+      "runnable_queries": 30,
+      "corpus_documents": 47
+    },
+    "Careers & Job Openings": {
+      "status": "not_executed_missing_corpus",
+      "query_records": 28,
+      "labeled_query_records": 28,
+      "corpus_documents": 0
+    },
+    "Contact & Locations": {
+      "status": "not_executed_missing_corpus",
+      "query_records": 8,
+      "labeled_query_records": 8,
+      "corpus_documents": 0
+    },
+    "HisabDo": {
+      "status": "not_executed_missing_corpus",
+      "query_records": 6,
+      "labeled_query_records": 0,
+      "corpus_documents": 0
+    }
+  },
+  "configurations": [
+    {
+      "id": "vector_proxy",
+      "description": "LSA vector proxy (not neural dense)"
+    },
+    {
+      "id": "bm25",
+      "description": "Okapi BM25"
+    },
+    {
+      "id": "hybrid_rrf",
+      "description": "RRF fusion of LSA proxy + BM25"
+    },
+    {
+      "id": "hybrid_rerank",
+      "description": "RRF candidates + lexical heuristic reranker"
+    },
+    {
+      "id": "reranked_topk",
+      "description": "RRF candidate pool + heuristic reranker top-k"
+    }
+  ],
+  "aggregate_metrics": {
+    "Blog & News::vector_proxy": {
+      "query_count": 30,
+      "labeled_query_count": 30,
+      "Recall@1": 0.4388888888888889,
+      "Precision@1": 0.7,
+      "HitRate@1": 0.7,
+      "Recall@3": 0.7277777777777777,
+      "Precision@3": 0.4444444444444444,
+      "HitRate@3": 0.9,
+      "Recall@5": 0.8333333333333334,
+      "Precision@5": 0.3066666666666667,
+      "HitRate@5": 0.9333333333333333,
+      "MRR": 0.7972222222222223
+    },
+    "Blog & News::bm25": {
+      "query_count": 30,
+      "labeled_query_count": 30,
+      "Recall@1": 0.4444444444444445,
+      "Precision@1": 0.7,
+      "HitRate@1": 0.7,
+      "Recall@3": 0.7222222222222222,
+      "Precision@3": 0.4444444444444444,
+      "HitRate@3": 0.9,
+      "Recall@5": 0.8166666666666667,
+      "Precision@5": 0.3,
+      "HitRate@5": 0.9333333333333333,
+      "MRR": 0.7899999999999999
+    },
+    "Blog & News::hybrid_rrf": {
+      "query_count": 30,
+      "labeled_query_count": 30,
+      "Recall@1": 0.4388888888888889,
+      "Precision@1": 0.7,
+      "HitRate@1": 0.7,
+      "Recall@3": 0.7277777777777777,
+      "Precision@3": 0.4444444444444444,
+      "HitRate@3": 0.9,
+      "Recall@5": 0.8333333333333334,
+      "Precision@5": 0.3066666666666667,
+      "HitRate@5": 0.9333333333333333,
+      "MRR": 0.8066666666666666
+    },
+    "Blog & News::hybrid_rerank": {
+      "query_count": 30,
+      "labeled_query_count": 30,
+      "Recall@1": 0.4388888888888889,
+      "Precision@1": 0.7333333333333333,
+      "HitRate@1": 0.7333333333333333,
+      "Recall@3": 0.6888888888888889,
+      "Precision@3": 0.43333333333333335,
+      "HitRate@3": 0.8333333333333334,
+      "Recall@5": 0.8,
+      "Precision@5": 0.3,
+      "HitRate@5": 0.8666666666666667,
+      "MRR": 0.7844444444444445
+    },
+    "Blog & News::reranked_topk": {
+      "query_count": 30,
+      "labeled_query_count": 30,
+      "Recall@1": 0.4388888888888889,
+      "Precision@1": 0.7333333333333333,
+      "HitRate@1": 0.7333333333333333,
+      "Recall@3": 0.6888888888888889,
+      "Precision@3": 0.43333333333333335,
+      "HitRate@3": 0.8333333333333334,
+      "Recall@5": 0.8166666666666667,
+      "Precision@5": 0.3066666666666667,
+      "HitRate@5": 0.9,
+      "MRR": 0.7911111111111111
+    }
+  },
+  "execution_notes": {
+    "dense_neural": "NOT RUN: sentence-transformers package/model unavailable in this environment; LSA proxy is separately labelled",
+    "reranker": "heuristic lexical reranker fallback; NOT a cross-encoder",
+    "corpus_scope": "only Blog & News corpus was supplied as actual document text; other domains retained in dataset but skipped",
+    "historical_results": "not merged into newly executed metrics"
+  }
+}

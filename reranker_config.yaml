@@ -1,0 +1,23 @@
+# Reproducible benchmark configuration
+top_k: 5
+candidate_k: 25
+reranked_topk_candidate_k: 12
+rrf_k: 60
+bm25:
+  k1: 1.5
+  b: 0.75
+vector:
+  method: lsa_proxy
+  random_state: 17
+  note: "Not a neural dense embedding; neural model unavailable during execution."
+hybrid:
+  fusion: reciprocal_rank_fusion
+  inputs: [lsa_vector_proxy, bm25]
+reranker:
+  requested_method: heuristic_fallback
+  cross_encoder_model: null
+  note: "No pretrained cross-encoder was loaded; lexical overlap heuristic only."
+evaluation:
+  ks: [1, 3, 5]
+  precision_denominator: fixed_k
+  aggregation: macro_average_per_query
