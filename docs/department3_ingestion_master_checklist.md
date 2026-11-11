@@ -50,3 +50,16 @@
 - `requirements-lock-current.txt` captures the current installed environment using `pip freeze`, and `python -m pip check` reports no broken requirements. This is an environment snapshot, not yet a verified project-only or cross-platform lockfile. The embedding model commit SHA remains unpinned.
 - Feature-table and workflow-specific content types are supported by the staging classifier, but the current FAQ JSON does not establish that these content types are populated with approved examples.
 - The staging script does not crawl external pages. Source acquisition/HTTP page crawling must remain a separate approved-source process with URL allowlisting, retries, status-code checks, and page-level failure capture.
+
+## Final validation update — 2026-11-11
+
+- [x] Deterministic ingestion procedure implemented.
+- [x] Approved-source staging generated.
+- [x] Pinned embedding model revision used for build.
+- [x] Embedding matrix shape, dtype, finite values and normalization validated.
+- [x] Dedicated ingestion test suite passed (20 tests).
+- [x] Fresh 60-question staged retrieval evaluation executed.
+- [x] Separate evaluation CSV and Markdown report generated.
+- [ ] Empirical chunk optimization across all four requested content types.
+- [ ] Representative approved accounting-table, workflow and long-document samples obtained.
+- [ ] Independent source-owner approval for production promotion.

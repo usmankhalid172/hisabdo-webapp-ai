@@ -51,3 +51,51 @@ Keep the live verified-only filter. Retain the existing 0.40 threshold and top_k
 ## 5. Required next measurements
 
 Build a representative, approved evaluation set with relevance labels for each content type. Compare candidate chunk sizes/overlaps using recall@k, precision@k, MRR, irrelevant-context rate, chunk count, embedding latency, and index build time. Select settings based on those results rather than intuition alone.
+
+## Final validation update — 2026-11-11
+
+### Actual staged data
+- Source records: 20
+- Approved staged documents: 12
+- Excluded unverified/unapproved records: 8
+- Current staged content types: FAQ only (12 chunks)
+- FAQ chunk text length: 97–450 characters
+- Configured FAQ chunk size/overlap: 250 / 30
+- Embedding model: sentence-transformers/all-MiniLM-L6-v2
+- Model revision: 1110a243fdf4706b3f48f1d95db1a4f5529b4d41
+- Vector matrix: 12 x 384, float32
+- Normalization: L2; all vectors finite, non-zero and normalized
+- Similarity: cosine
+- Staging index: flat exact matrix
+- Embedding build: successful
+
+### Chunking optimization limitation
+The current approved source set contains FAQs only. Accounting feature tables, workflow guidelines and long-form user documentation were not represented in the approved staged sample. Their proposed chunk sizes and overlaps remain provisional and must not be described as empirically optimized. A representative approved sample and labeled retrieval evaluation are required before finalizing those content-type settings.
+
+### Fresh staged retrieval evaluation
+- Dataset: 60 questions from docs/evaluation/retrieval_results_v1.0.csv
+- MATCH: 28
+- MISS: 13
+- REVIEW: 8
+- SAFE_ABSTENTION: 11
+- In-scope expected-source match rate: 68.29% (28/41)
+- Detailed results: docs/evaluation/department3_staged_retrieval_results_v1.0.csv
+- Evaluation report: docs/evaluation/department3_staged_retrieval_report_v1.0.md
+
+This is a separate staged-vector benchmark. It is not directly comparable to the historical live FaqRetriever result of 73.17%, and it does not measure chatbot answer accuracy.
+
+### Remaining approval and validation
+- Obtain representative approved accounting-table, workflow and long-document samples.
+- Tune and compare chunk size/overlap using those samples and labeled retrieval cases.
+- Complete independent source-owner approval before promoting staged content to the live knowledge base.
+
+## Corpus-based chunk validation — 2026-11-11
+
+- Current approved staged corpus: 12 documents, all classified as FAQ.
+- Configured FAQ chunk parameters: 250 tokens with 30-token overlap.
+- Observed chunk text lengths: 97–450 characters.
+- All 12 staged chunks currently use the FAQ configuration.
+- No approved accounting feature tables, workflow guidelines or long-form documentation were available for empirical testing.
+- The 350/40, 450/60 and 600/80 settings remain proposed initial configurations for their respective content types, not empirically validated optimal values.
+- Chunk optimization across all four content types remains pending representative approved samples and retrieval evaluation.
+- The token-count implementation uses a whitespace-based proxy; it should not be described as exact model-token counting.

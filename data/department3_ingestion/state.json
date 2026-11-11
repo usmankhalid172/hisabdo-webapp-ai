@@ -198,14 +198,14 @@
   },
   "embedding": {
     "model_id": "sentence-transformers/all-MiniLM-L6-v2",
-    "model_revision": "UNPINNED_NOT_BUILT",
+    "model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
     "dimension": 384,
     "normalization": "L2",
     "similarity": "cosine",
     "index_type": "flat_exact_staging",
     "dtype": "float32",
-    "status": "not_requested",
-    "vector_count": 0
+    "status": "built",
+    "vector_count": 12
   },
-  "last_successful_metadata_ingestion_utc": "2026-11-11T05:42:21.334692+00:00"
+  "last_successful_metadata_ingestion_utc": "2026-11-11T11:23:51.949151+00:00"
 }
