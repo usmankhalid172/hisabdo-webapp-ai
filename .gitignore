@@ -77,3 +77,13 @@ ai_context.md
 *.bak
 pytest-failures.txt
 test-results.txt
+
+# Department 3 temporary backup files
+*.backup
+*.task-backup
+*.metadata-backup
+*.audit-backup
+*.test-backup
+*.bak*
+
+*.backup.*
