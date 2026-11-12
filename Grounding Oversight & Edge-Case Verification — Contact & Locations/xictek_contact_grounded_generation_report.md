@@ -1,0 +1,31 @@
+# XICTEK Contact Us & Locations — Grounded Generation & Citations Report
+
+**Queries Evaluated:** 15  
+**Citation Accuracy:** 100.0%  
+**Fallback Safety Compliance:** 100.0%  
+**Overall Grounding Score:** 100.0%  
+
+## Grounded Responses and Verification Audit
+
+| ID | Query | Source Chunk | Fallback Required? | Valid Citation? | Grounded & Safe? | Generated Response |
+|:---|:---|:---|:---:|:---:|:---:|:---|
+| Q01 | How do I get in touch with XICTEK about a project? | `contact_general` | No | ✅ | ✅ | You can contact XICTEK Systems regarding a project, product idea, consultation, or operational challenge through their official [Contact Us](https://www.xicteksystems.com/contact) page. |
+| Q02 | Where can I send my product idea? | `contact_general` | No | ✅ | ✅ | You can contact XICTEK Systems regarding a project, product idea, consultation, or operational challenge through their official [Contact Us](https://www.xicteksystems.com/contact) page. |
+| Q03 | What is the contact form asking me to fill in? | `contact_form` | Yes | ✅ | ✅ | The official XICTEK website directs inquiries to its contact form, but the reviewed page text does not specify or publish visible field labels, required fields, or submission confirmation messages in advance. Please visit the [Contact Us](https://www.xicteksystems.com/contact) page directly to complete your submission. |
+| Q04 | Which fields are required on the inquiry form? | `contact_form` | Yes | ✅ | ✅ | The official XICTEK website directs inquiries to its contact form, but the reviewed page text does not specify or publish visible field labels, required fields, or submission confirmation messages in advance. Please visit the [Contact Us](https://www.xicteksystems.com/contact) page directly to complete your submission. |
+| Q05 | Does the contact page confirm my submission? | `contact_form` | Yes | ✅ | ✅ | The official XICTEK website directs inquiries to its contact form, but the reviewed page text does not specify or publish visible field labels, required fields, or submission confirmation messages in advance. Please visit the [Contact Us](https://www.xicteksystems.com/contact) page directly to complete your submission. |
+| Q06 | Where is the XICTEK office located? | `office_location` | Yes | ✅ | ✅ | XICTEK Systems does not publish a physical street address, city, country, or office map on its reviewed official website. To connect or inquire about meetings, please submit an inquiry through the [Contact Us](https://www.xicteksystems.com/contact) page. |
+| Q07 | What is the company's street address and city? | `office_location` | Yes | ✅ | ✅ | XICTEK Systems does not publish a physical street address, city, country, or office map on its reviewed official website. To connect or inquire about meetings, please submit an inquiry through the [Contact Us](https://www.xicteksystems.com/contact) page. |
+| Q08 | What are the office opening hours? | `office_hours_phone` | Yes | ✅ | ✅ | The official XICTEK website does not state office opening hours or a direct telephone number. All business inquiries should be submitted through the official [Contact Us](https://www.xicteksystems.com/contact) page. |
+| Q09 | What phone number should I call? | `office_hours_phone` | Yes | ✅ | ✅ | The official XICTEK website does not state office opening hours or a direct telephone number. All business inquiries should be submitted through the official [Contact Us](https://www.xicteksystems.com/contact) page. |
+| Q10 | Can I visit your office? Please share the map. | `office_location` | Yes | ✅ | ✅ | XICTEK Systems does not publish a physical street address, city, country, or office map on its reviewed official website. To connect or inquire about meetings, please submit an inquiry through the [Contact Us](https://www.xicteksystems.com/contact) page. |
+| Q11 | Do you provide support after launch? | `post_launch_support` | No | ✅ | ✅ | Yes, XICTEK Systems offers ongoing maintenance, support, and enhancement packages after launch. You can discuss support options through their [Contact Us](https://www.xicteksystems.com/contact) page. |
+| Q12 | What are your maintenance response times and support hours? | `post_launch_support` | Yes | ✅ | ✅ | XICTEK provides ongoing post-launch maintenance, support, and enhancement packages, but the official site does not publish specific support hours, response times, or SLA guarantees. You can request support terms via the [Contact Us](https://www.xicteksystems.com/contact) page. |
+| Q13 | Can I get a quote or project estimate? | `contact_general` | No | ✅ | ✅ | Project estimates and pricing are tailored to your scope and established during discovery. You can request an estimate by getting in touch via the official [Contact Us](https://www.xicteksystems.com/contact) page. |
+| Q14 | How long could my web application take to build? | `project_faq` | No | ✅ | ✅ | Project timelines depend on scope: a simple web application may take 4 to 8 weeks, while complex enterprise systems typically take 3 to 6 months. Detailed schedules are established during discovery via the [Contact Us](https://www.xicteksystems.com/contact) page. |
+| Q15 | Do you work with startups and what is your process? | `project_faq` | No | ✅ | ✅ | XICTEK Systems works with startups, SMEs, and enterprises using an agile methodology with regular sprints, demos, and feedback loops. To begin a project, reach out on the [Contact Us](https://www.xicteksystems.com/contact) page. |
+
+## Quality & Safety Safeguards
+1. **Zero Hallucination of Contact Details:** Physical office addresses, cities, phone numbers, and arbitrary SLA guarantees were systematically withheld whenever absent in the verified source text.
+2. **Official Citations Standard:** 100% of responses direct visitors explicitly to `https://www.xicteksystems.com/contact`.
+3. **Domain Alignment:** Form boundaries, post-launch maintenance terms, and project discovery guidelines align exactly with the approved knowledge blocks in `xictek_contact_locations_cleaned_blocks.md`.
