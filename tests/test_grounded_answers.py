@@ -228,3 +228,57 @@ def test_measured_answer_quality_is_recorded():
         held = r["totals"]["heldout.json"]
         assert sum(held.values()) == 120
         assert r["totals"]["dev"].get("wrong_citation", 0) == 0  # no Day 1 question cites an unrelated source
+
+
+# Rulebook R10-R12 (docs/dept3-grounded-rulebook.md) -------------------------------------------------------------
+
+def test_r10_expense_only_message_gets_one_clarifying_question(answerer):
+    for msg in ("expenses", "kharcha", "my expenses?"):
+        r = answerer.answer(msg)
+        assert r.status == "clarify" and r.citations == [] and r.reply.count("?") == 1
+
+
+def test_r11_conflict_resolved_only_when_one_source_is_most_authoritative_and_newest():
+    from src.financial_assistant.grounding.answer import resolve
+    from src.financial_assistant.grounding.retrieval import load_kb, to_passage
+    kb = {c["id"][:10]: c for c in load_kb()}
+    faq, page = (to_passage(kb[k]) for k in ("off-01-019", "off-04-010"))
+    assert resolve([faq, page]) is None                                   # live KB: no dates -> show both
+    newer_faq = to_passage({**kb["off-01-019"], "last_updated": "2026-11-01"})
+    older_page = to_passage({**kb["off-04-010"], "last_updated": "2026-06-01"})
+    newer_page = to_passage({**kb["off-04-010"], "last_updated": "2026-12-01"})
+    assert resolve([older_page, newer_faq]) is newer_faq                  # FAQ is newest and most authoritative
+    assert resolve([newer_faq, newer_page]) is None                       # newest is the less authoritative one
+
+
+def test_r12_invented_links_and_their_sentences_never_reach_the_user(answerer):
+    model = FakeModel("HisabDo is free to download and use from Google Play [1]. "
+                      "Compare plans at https://hisabdo.app/pricing-plans [1].")
+    r = answerer.answer("Is HisabDo free to use?", provider=model)
+    assert "pricing-plans" not in r.reply and "Compare plans" not in r.reply
+    assert all(c.url == "https://hisabdo.app/faq" for c in r.citations)
+
+
+def test_r12_citations_only_from_the_kb_and_only_when_used(answerer):
+    from src.financial_assistant.grounding.answer import Citation, GroundedAnswer
+    fake = GroundedAnswer(reply="HisabDo is free [1]. It has a web app [2].\n\nSources:\n[1] x\n[2] y",
+                          status="answered", citations=[
+                              Citation(1, "off-01-002-is-hisabdo-free-to-use", answerer.by_id[
+                                  "off-01-002-is-hisabdo-free-to-use"].label, "https://hisabdo.app/faq", None),
+                              Citation(2, "made-up-chunk", "Web app", "https://hisabdo.app/web", None)])
+    r = answerer.audit(fake)
+    assert [c.n for c in r.citations] == [1] and "[2]" not in r.reply and "hisabdo.app/web" not in r.reply
+
+
+def test_r4b_neighbouring_topic_needs_the_questions_rare_word(answerer):
+    r = answerer.answer("Can I connect HisabDo to my bank account?")
+    assert r.status == "no_source" and r.citations == []
+
+
+def test_transcripts_are_all_verified():
+    import json
+    from pathlib import Path
+    d = json.loads((Path(__file__).resolve().parents[1] / "data" / "dept3_grounded" / "transcripts.json")
+                   .read_text(encoding="utf-8"))
+    assert d["transcripts"] == d["verified"] == 19
+    assert {r["section"][0] for r in d["rows"]} == set("ABCDEF")

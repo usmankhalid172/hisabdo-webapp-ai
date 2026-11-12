@@ -62,11 +62,13 @@ variance flagged during Day 17 use-case validation):
 
 # Sent with the numbered sources on the knowledge route when grounded answers are on
 # (grounding/answer.py checks the reply against these rules before it is returned).
-GROUNDING_RULES = """Answer ONLY from the numbered sources below.
+GROUNDING_RULES = """Answer ONLY from the numbered sources below. They are HisabDo's verified documentation.
 - After each fact, cite the source that states it as [n]. Cite a source only if it states that fact.
-- Do not add facts, steps, button names or numbers that the sources do not contain.
+- Do not add facts, steps, button names, links, page names or numbers that the sources do not contain.
+- Do not write links or source titles yourself; they are added below your answer from the sources you cite.
 - If the sources do not answer the question, say you could not find it in HisabDo's official help pages and
   suggest contacting HisabDo support at hisabdo.app@gmail.com. Do not guess.
 - If two sources disagree, say so, give both with their source numbers, and do not choose one.
+- If the question could mean more than one thing, ask one short clarifying question instead of answering.
 - A source marked "legal page" is quoted with its section, never turned into advice.
 - Do not list the sources yourself; they are added below your answer."""

@@ -16,6 +16,14 @@ Rules (docs/grounded-answer-rules.md):
       leading "Yes" / "No" is dropped and the reply names the help topic the text comes from.
   R9  One source unless needed: a second passage is cited only when the first leaves over half the question
       uncovered and the second covers at least half of it.
+  R10 Ambiguous expense question: a message whose only topic is "expenses" / "kharcha" (no action, period or
+      feature) gets one short question offering the three things it can mean, before any route is chosen.
+  R11 Deterministic conflicts: versions are ordered by source authority (FAQ > feature page > legal > blog), then
+      id. A conflict is resolved only when one version is both the most authoritative and the only one with the
+      newest page date; the other versions are still shown. Otherwise every version is shown (R3).
+  R12 Citation audit: before any reply leaves, every [n] must point to a listed source, every listed source must
+      be a KB passage with its own link and title, every source must be used, and links not belonging to a cited
+      source are removed. Model drafts are checked sentence by sentence (R4) first.
   R7  Urdu and Roman Urdu: the frame (intro, question, fallback) is in the user's language; the evidence is the
       English source text quoted verbatim, because a translated answer cannot be checked against its source.
 """
@@ -34,6 +42,7 @@ log = logging.getLogger("hisabdo.ai.grounding")
 SUPPORT_MIN = 0.5          # share of a sentence's content words that must appear in the cited passage
 SWITCH_MARGIN = 0.2        # cite a different retrieved source when it supports the sentence this much better
 MAX_SENTENCES_PER_PASSAGE = 3
+RARE_DF = 10               # R4b: a word in at most this many KB passages is distinctive for the question
 
 ROMAN_URDU_CUES = {"kya", "hai", "hain", "kaise", "kaisay", "mein", "karun", "karte", "kar", "sakta", "sakti",
                    "hota", "hoti", "nahi", "aur", "ko", "se", "ka", "ki", "ke", "batao", "chahiye", "kyun", "kab"}
@@ -45,10 +54,14 @@ QUESTION_ONLY = {"how", "what", "why", "when", "where", "which", "who", "help", 
                  # verbs and function words that say nothing about the topic
                  "have", "has", "had", "get", "got", "can", "could", "need", "want", "make", "give", "there", "any",
                  "using", "used", "find", "know", "should", "would", "will", "may", "might", "must", "also", "way",
-                 "like", "much", "many", "some", "one", "possible", "able", "ok", "okay", "yes", "no"}
+                 "like", "much", "many", "some", "one", "possible", "able", "ok", "okay", "yes", "no",
+                 "mean", "means", "meaning", "matlab", "definition"}
 
 TEMPLATES = {
     "en": {
+        "clarify_expense": 'Do you want to add an expense, see your expense totals, or learn how expense tracking works in HisabDo?',
+        "resolved": 'The most authoritative and most recently dated source says:',
+        "resolved_other": 'Another source says:',
         "sources": "Sources:",
         "fallback": ("I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support "
                      "at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to "
@@ -68,6 +81,9 @@ TEMPLATES = {
         "evidence": "",
     },
     "roman_ur": {
+        "clarify_expense": 'Kya aap kharcha add karna chahte hain, apne kharchon ka total dekhna chahte hain, ya yeh jaanna chahte hain ke HisabDo mein expense tracking kaise kaam karti hai?',
+        "resolved": 'Sab se mustanad aur sab se nayi tareekh wala source kehta hai:',
+        "resolved_other": 'Ek aur source kehta hai:',
         "sources": "Sources:",
         "fallback": ("Mujhe yeh HisabDo ke official help pages mein nahi mila, is liye main andaza nahi lagaunga. Aap "
                      "HisabDo support se hisabdo.app@gmail.com par ya Contact page (https://hisabdo.app/contact) se "
@@ -87,6 +103,9 @@ TEMPLATES = {
         "evidence": "HisabDo ke official page ke mutabiq (English mein):",
     },
     "ur": {
+        "clarify_expense": 'کیا آپ خرچہ شامل کرنا چاہتے ہیں، اپنے خرچوں کا ٹوٹل دیکھنا چاہتے ہیں، یا یہ جاننا چاہتے ہیں کہ حساب دو میں خرچوں کا حساب کیسے رکھا جاتا ہے؟',
+        "resolved": 'سب سے مستند اور سب سے نئی تاریخ والا ذریعہ کہتا ہے:',
+        "resolved_other": 'ایک اور ذریعہ کہتا ہے:',
         "sources": "ذرائع:",
         "fallback": ("مجھے یہ حساب دو کے آفیشل ہیلپ پیجز میں نہیں ملا، اس لیے میں اندازہ نہیں لگاؤں گا۔ آپ حساب دو سپورٹ سے "
                      "hisabdo.app@gmail.com پر یا Contact page (https://hisabdo.app/contact) سے رابطہ کر سکتے ہیں؛ وہ "
@@ -109,6 +128,15 @@ TEMPLATES = {
 # "What is HisabDo?" names its topic: the app itself. (HisabDo / app are not topic words for the relevance check,
 # because nearly every passage contains them.)
 PRODUCT_NAME = re.compile(r"hisab\s*do|\bapp\b|حساب\s*دو|ہساب\s*دو", re.I)
+
+# R10: an expense message with no action, period, amount or feature in it.
+EXPENSE_ONLY = {"expense", "expenses", "expence", "expences", "kharcha", "kharchay", "kharche", "kharchon", "kharch",
+                "spending", "spend", "خرچ", "خرچہ", "خرچے", "خرچوں", "my", "mera", "mere", "meray", "about"}
+FILLER = {"my", "mera", "mere", "meray", "about"}
+# R11: source authority (audit register priority: 1 FAQ, 2 feature page, 3 legal, 4 general guide)
+AUTHORITY = {"product_faq": 1, "product_guide": 2, "legal_policy": 3, "finance_guide": 4}
+URL = re.compile(r"https?://[^\s)\]>\"']+")
+CONTACT_URL = "https://hisabdo.app/contact"
 
 ADVICE_WORDS = re.compile(r"\b(tax|taxes|fbr|legal|lawyer|loan|invest\w*|zakat|audit)\b", re.I)
 
@@ -198,6 +226,18 @@ def excerpt(p: Passage, focus: set[str] | None = None, limit: int = MAX_SENTENCE
 # ------------------------------------------------------------------------------------ the answerer
 
 
+def pre_clarify(message: str) -> tuple[str, str] | None:
+    """R1 + R10 before any route is chosen: (clarifying question, language) for a message with no topic, or whose
+    only topic is "expenses"; None otherwise."""
+    lang = detect_language(message)
+    words = set(normalise(URDU_PUNCTUATION.sub(" ", message)).replace("?", " ").split())
+    if words and words <= EXPENSE_ONLY and words - FILLER:
+        return TEMPLATES[lang]["clarify_expense"], lang
+    if not topic_words(message) and not PRODUCT_NAME.search(message):
+        return TEMPLATES[lang]["clarify_open"], lang
+    return None
+
+
 class GroundedAnswerer:
     def __init__(self, retriever, kb_chunks: list[dict] | None = None):
         self.retriever = retriever
@@ -206,6 +246,11 @@ class GroundedAnswerer:
         # Words that occur anywhere in the KB: a topic word outside it (a Roman Urdu verb, say) cannot appear in any
         # heading, so R8 ignores it when deciding whether a source answers this question or a neighbouring one.
         self.vocab = {w for c in chunks for w in content_words(f"{c['heading']} {c['body']}")}
+        self.by_id = {c["id"]: to_passage(c) for c in chunks}
+        self.df: dict[str, int] = {}
+        for c in chunks:
+            for w in content_words(f"{c['heading']} {c['body']}"):
+                self.df[w] = self.df.get(w, 0) + 1
         self.conflict_groups: dict[str, list[Passage]] = {}
         for c in chunks:
             if c.get("status") == "needs_confirmation" and c.get("notes"):
@@ -234,13 +279,26 @@ class GroundedAnswerer:
         flagged = next((p for p in passages if p.status == "needs_confirmation" and p.notes), None)
         if not flagged:
             return None
-        group = self.conflict_groups.get(flagged.notes[0], [flagged])
-        lines, cites = [TEMPLATES[lang]["conflict"]], []
+        group = sorted(self.conflict_groups.get(flagged.notes[0], [flagged]),
+                       key=lambda p: (AUTHORITY.get(p.category, 9), p.chunk_id))
+        reason = flagged.notes[0]
+        t = TEMPLATES[lang]
+        winner = resolve(group)
+        if winner is not None:   # R11: resolved, and the other versions stay visible
+            ordered = [winner] + [p for p in group if p is not winner]
+            lines = [f"{t['resolved']} {excerpt(winner, focus)} [1]"]
+            lines += [f"{t['resolved_other']} [{n}] {p.label} ({p.last_updated or 'no date shown'}): "
+                      f"{excerpt(p, focus)}" for n, p in enumerate(ordered[1:], 2)]
+            cites = [Citation(n, p.chunk_id, p.label, p.source_url, p.last_updated) for n, p in enumerate(ordered, 1)]
+            log.warning("kb_conflict_resolved", extra={"chunks": [c.chunk_id for c in cites]})
+            return GroundedAnswer(reply=self._with_sources("\n".join(lines), cites, lang), status="answered",
+                                  citations=cites, needs_review=True, review_reason=f"resolved: {reason}",
+                                  language=lang)
+        lines, cites = [t["conflict"]], []
         for n, p in enumerate(group, 1):
             date = p.last_updated or "no date shown"
             lines.append(f"[{n}] {p.label} ({date}): {excerpt(p, focus)}")
             cites.append(Citation(n, p.chunk_id, p.label, p.source_url, p.last_updated))
-        reason = flagged.notes[0]
         log.warning("kb_conflict", extra={"chunks": [c.chunk_id for c in cites]})  # ids only, never user text
         return GroundedAnswer(reply=self._with_sources("\n".join(lines), cites, lang), status="conflict",
                               citations=cites, needs_review=True, review_reason=reason, language=lang)
@@ -278,9 +336,13 @@ class GroundedAnswerer:
         """Keep a model's draft only where the passages support it (R4). None = nothing supported."""
         kept, used = [], {}
         draft = re.sub(r"\n*Sources?:.*", "", draft, flags=re.S)
+        allowed = {p.source_url.rstrip("/") for p in passages}
         # "fact. [2] Next fact." -> "fact [2]. Next fact.": a marker after the full stop belongs to that sentence
         draft = re.sub(r"([.!?])\s*((?:\[\d+\]\s*)+)", lambda m: f" {m.group(2).strip()}{m.group(1)} ", draft)
         for s in sentences(draft):
+            if any(u.rstrip("/.") not in allowed for u in URL.findall(s)):   # R12: an invented link voids the sentence
+                log.info("grounding_dropped_sentence", extra={"reason": "foreign_link"})
+                continue
             if not content_words(re.sub(r"\[\d+\]", " ", s)):
                 continue  # a marker or punctuation left on its own carries no claim
             marks = [int(m) for m in re.findall(r"\[(\d+)\]", s) if 1 <= int(m) <= len(passages)]
@@ -307,9 +369,13 @@ class GroundedAnswerer:
     # ---------------------------------------------------------------------------------------------------------
     def answer(self, message: str, provider=None, history: list[dict] | None = None,
                kb_allowed: bool = True) -> GroundedAnswer:
+        return self.audit(self._answer(message, provider, history, kb_allowed))
+
+    def _answer(self, message: str, provider=None, history: list[dict] | None = None,
+                kb_allowed: bool = True) -> GroundedAnswer:
         lang = detect_language(message)
-        if not topic_words(message) and not PRODUCT_NAME.search(message):
-            return GroundedAnswer(reply=TEMPLATES[lang]["clarify_open"], status="clarify", language=lang)
+        if (q := pre_clarify(message)) is not None:   # R1 / R10
+            return GroundedAnswer(reply=q[0], status="clarify", language=q[1])
         if not kb_allowed:
             return self.fallback(message, lang, out_of_scope=True)
         # Latin-script words only: the KB is English, so Urdu-script words are represented by their glossary terms.
@@ -319,7 +385,13 @@ class GroundedAnswerer:
         retrieved = self.retriever.retrieve(message)
         info = {"retrieved_ids": [p.chunk_id for p in retrieved],
                 "retrieval_ms": round((_time.perf_counter() - t0) * 1000, 1)}
-        passages = [p for p in retrieved if not topic or relevant(topic, p)]
+        # R4b: a passage from a neighbouring help topic (its heading does not name what was asked) must contain at
+        # least one of the question's rare words (in <= RARE_DF passages), if the question has any: "bank" in
+        # "connect to my bank account" cannot be answered from a sign-in page that only shares "account".
+        rare = {w for w in topic_words(message) if 0 < self.df.get(w, 0) <= RARE_DF}
+        passages = [p for p in retrieved if not topic or (relevant(topic, p) and (
+            not rare or coverage(rare, p)
+            or coverage(topic_words(message), Passage(**{**p.__dict__, "body": ""}))))]
         question = self.clarify(message, passages, lang)
         if question:
             return GroundedAnswer(reply=question, status="clarify", language=lang, **info)
@@ -340,12 +412,50 @@ class GroundedAnswerer:
             return _with(ans, info)
         return _with(self.verify(draft, passages, lang) or self.fallback(message, lang), info)
 
+    # R12 ----------------------------------------------------------------------------------------------------
+    def audit(self, ans: GroundedAnswer) -> GroundedAnswer:
+        """Last check before a reply leaves: citations must be real KB sources with their own link and title, every
+        [n] must point to a listed source, every listed source must be used, and no other link may appear."""
+        if not ans.citations:
+            ans.reply = URL.sub(lambda m: m.group(0) if m.group(0).rstrip("/.") == CONTACT_URL else "", ans.reply)
+            return ans
+        body = ans.reply.split(f"\n\n{TEMPLATES[ans.language]['sources']}\n")[0]
+        good = [c for c in ans.citations if (p := self.by_id.get(c.chunk_id)) is not None
+                and c.url == p.source_url and c.label == p.label and f"[{c.n}]" in body]
+        allowed = {c.url.rstrip("/") for c in good} | {CONTACT_URL}
+        body = URL.sub(lambda m: m.group(0) if m.group(0).rstrip("/.") in allowed else "", body)
+        valid = {c.n for c in good}
+        body = re.sub(r"\s?\[(\d+)\]", lambda m: m.group(0) if int(m.group(1)) in valid else "", body)
+        if len(good) != len(ans.citations):
+            log.warning("citation_audit_removed", extra={"removed": len(ans.citations) - len(good)})
+        if not good:
+            return self.fallback("", ans.language)
+        ans.citations = good
+        ans.reply = self._with_sources(body, good, ans.language)
+        return ans
+
     @staticmethod
     def _with_sources(body: str, cites: list[Citation], lang: str) -> str:
         if not cites:
             return body
         lines = [f"[{c.n}] {c.label}: {c.url}" for c in cites]
         return f"{body}\n\n{TEMPLATES[lang]['sources']}\n" + "\n".join(lines)
+
+
+def resolve(group: list[Passage]) -> Passage | None:
+    """R11. The single version that is both the most authoritative and the only one with the newest page date;
+    None when no version wins on both (then every version is shown)."""
+    if len(group) < 2:
+        return None
+    top = min(AUTHORITY.get(p.category, 9) for p in group)
+    dated = [p for p in group if p.last_updated]
+    if not dated:
+        return None
+    newest = max(p.last_updated for p in dated)
+    best = [p for p in dated if p.last_updated == newest]
+    if len(best) == 1 and AUTHORITY.get(best[0].category, 9) == top:
+        return best[0]
+    return None
 
 
 def numbered_context(passages: list[Passage]) -> str:

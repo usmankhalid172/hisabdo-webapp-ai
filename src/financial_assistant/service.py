@@ -25,6 +25,7 @@ from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
 from .grounding import GroundedAnswerer, KbRetriever
 from . import guardrails, telemetry
+from .grounding.answer import pre_clarify
 from .grounding.retrieval import KB_PATH, validate_kb
 
 # Deliberately simple keyword intent check — good enough for a POC boundary
@@ -103,9 +104,14 @@ def _mentions_third_party(message: str) -> bool:
     return False
 
 
+# "How do I export my expenses to Excel?" asks about the app, not for the user's figures (D3-10).
+PRODUCT_HOW_TO = re.compile(r"\b(how (do|can|to)|can i|export|excel|pdf|sync\w*|backup|uninstall|attach|"
+                            r"categor\w*|accountant|cloud|tax|zakat)\b")
+
+
 def _is_own_financial_data_query(message: str) -> bool:
     text = message.lower()
-    if _mentions_third_party(message):
+    if _mentions_third_party(message) or (PRODUCT_HOW_TO.search(text) and get_settings().grounded_answers_enabled):
         return False
     return any(re.search(pattern, text) for pattern in OWN_FINANCIAL_DATA_PATTERNS)
 
@@ -343,6 +349,12 @@ def _guarded_chat(request: ChatbotRequest) -> ChatbotResponse:
     """Guardrails wrap the whole flow: input checks first, output checks on every reply."""
     if get_settings().guardrails_enabled:
         verdict = guardrails.check_input(request.message)
+        if verdict is None and get_settings().grounded_answers_enabled and not request.history \
+                and not _classify_small_talk(request.message) and (q := pre_clarify(request.message)) is not None:
+            # Rulebook R1 / R10: a topic-less or expense-only message gets one clarifying question, not a refusal
+            _note(language=q[1])
+            return ChatbotResponse(reply=q[0], conversation_id=request.conversation_id, intent="clarify",
+                                   tokens_used=0, source="clarification", answer_status="clarify")
         if verdict is None and not _classify_small_talk(request.message):
             verdict = guardrails.check_off_topic_question(request.message, _recent_history(request))
         if verdict is not None:

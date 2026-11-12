@@ -1,0 +1,491 @@
+{
+ "transcripts": 19,
+ "verified": 19,
+ "rows": [
+  {
+   "section": "A Standard grounded answer",
+   "id": "A1",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "Is HisabDo free to use?",
+   "assistant": "Yes. HisabDo is free to download and use from Google Play. Core features including khata management, customer accounts, PDF export and backup are available at no cost. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › Is HisabDo free to use?: https://hisabdo.app/faq",
+   "answer_status": "answered",
+   "source": "rag",
+   "needs_review": false,
+   "citations": [
+    {
+     "n": 1,
+     "title": "HisabDo Help Center FAQ › Is HisabDo free to use?",
+     "url": "https://hisabdo.app/faq",
+     "chunk_id": "off-01-002-is-hisabdo-free-to-use",
+     "last_updated": null
+    }
+   ],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "A Standard grounded answer",
+   "id": "A2",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "Can I export PDF reports?",
+   "assistant": "I found this on the related help topic \"Can I export reports?\": You can generate PDF reports for transactions, balances and customer activity when you need a professional record. [1]\n\nSources:\n[1] HisabDo: Khata & Ledger › Frequently Asked Questions: https://hisabdo.app/",
+   "answer_status": "answered",
+   "source": "rag",
+   "needs_review": false,
+   "citations": [
+    {
+     "n": 1,
+     "title": "HisabDo: Khata & Ledger › Frequently Asked Questions",
+     "url": "https://hisabdo.app/",
+     "chunk_id": "off-03-009-can-i-export-reports",
+     "last_updated": null
+    }
+   ],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "A Standard grounded answer",
+   "id": "A3",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "What happens to my data if I uninstall the app?",
+   "assistant": "If you uninstall HisabDo without creating a backup first, your local data may be lost. We strongly recommend creating a backup before uninstalling or changing devices. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › What happens to my data if I uninstall the app?: https://hisabdo.app/faq",
+   "answer_status": "answered",
+   "source": "rag",
+   "needs_review": false,
+   "citations": [
+    {
+     "n": 1,
+     "title": "HisabDo Help Center FAQ › What happens to my data if I uninstall the app?",
+     "url": "https://hisabdo.app/faq",
+     "chunk_id": "off-01-023-what-happens-to-my-data-if-i-uninstall-the-app",
+     "last_updated": null
+    }
+   ],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "A Standard grounded answer",
+   "id": "A4",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "Does HisabDo work without the internet?",
+   "assistant": "Yes. HisabDo is offline-first. Guest users can use supported local/offline features without internet access. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › Does HisabDo work without the internet?: https://hisabdo.app/faq",
+   "answer_status": "answered",
+   "source": "rag",
+   "needs_review": false,
+   "citations": [
+    {
+     "n": 1,
+     "title": "HisabDo Help Center FAQ › Does HisabDo work without the internet?",
+     "url": "https://hisabdo.app/faq",
+     "chunk_id": "off-01-008-does-hisabdo-work-without-the-internet",
+     "last_updated": null
+    }
+   ],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "A Standard grounded answer",
+   "id": "A5",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "What is the difference between fixed and variable expenses?",
+   "assistant": "I found this on the related help topic \"Fixed vs Variable Expenses\": Before diving into specific categories, it helps to understand the two fundamental types of business expenses: **Fixed expenses** are costs that remain the same regardless of how much you sell or produce. Rent, loan repayments and fixed salaries are examples. These costs exist whether your business has a good month or a bad one. [1]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Fixed vs Variable Expenses: https://hisabdo.app/blog/business-expense-categories",
+   "answer_status": "answered",
+   "source": "rag",
+   "needs_review": false,
+   "citations": [
+    {
+     "n": 1,
+     "title": "Business Expense Categories: The Complete Guide › Fixed vs Variable Expenses",
+     "url": "https://hisabdo.app/blog/business-expense-categories",
+     "chunk_id": "blog-04-003-fixed-vs-variable-expenses",
+     "last_updated": "2025-07-12"
+    }
+   ],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "A Standard grounded answer",
+   "id": "A6",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "Does HisabDo share my financial data with third parties?",
+   "assistant": "HisabDo can be used as a guest with supported records stored locally on the device. When you sign in, supported data can synchronize with cloud infrastructure through Supabase. See our [Privacy Policy]() for full details about account, app and service data handling. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › Does HisabDo share my financial data with third parties?: https://hisabdo.app/faq",
+   "answer_status": "answered",
+   "source": "rag",
+   "needs_review": false,
+   "citations": [
+    {
+     "n": 1,
+     "title": "HisabDo Help Center FAQ › Does HisabDo share my financial data with third parties?",
+     "url": "https://hisabdo.app/faq",
+     "chunk_id": "off-01-025-does-hisabdo-share-my-financial-data-with-third",
+     "last_updated": null
+    }
+   ],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "C Source conflict",
+   "id": "C1",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "Which currencies does HisabDo support?",
+   "assistant": "HisabDo's official sources don't agree on this yet, so I can't give you one answer. I've flagged it for review.\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support? (no date shown): HisabDo supports Pakistani Rupee (PKR), US Dollar (USD) and Indian Rupee (INR). You can select your preferred currency in the app settings.\n[2] Why We Built HisabDo › Works the Way You Do Business (no date shown): In Your Currency PKR, USD and INR are supported, so the app fits businesses operating in Pakistan, India and beyond.\n[3] HisabDo: Khata & Expense App › Multi-Currency Support (2026-10-13): Manage financial records using: PKR INR AED USD\n\nSources:\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support?: https://hisabdo.app/faq\n[2] Why We Built HisabDo › Works the Way You Do Business: https://hisabdo.app/about-app\n[3] HisabDo: Khata & Expense App › Multi-Currency Support: https://play.google.com/store/apps/details?id=com.usman.hisabdo",
+   "answer_status": "conflict",
+   "source": "rag",
+   "needs_review": true,
+   "citations": [
+    {
+     "n": 1,
+     "title": "HisabDo Help Center FAQ › Which currencies does HisabDo support?",
+     "url": "https://hisabdo.app/faq",
+     "chunk_id": "off-01-019-which-currencies-does-hisabdo-support",
+     "last_updated": null
+    },
+    {
+     "n": 2,
+     "title": "Why We Built HisabDo › Works the Way You Do Business",
+     "url": "https://hisabdo.app/about-app",
+     "chunk_id": "off-02-010-works-the-way-you-do-business",
+     "last_updated": null
+    },
+    {
+     "n": 3,
+     "title": "HisabDo: Khata & Expense App › Multi-Currency Support",
+     "url": "https://play.google.com/store/apps/details?id=com.usman.hisabdo",
+     "chunk_id": "off-04-010-multi-currency-support",
+     "last_updated": "2026-10-13"
+    }
+   ],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "D Ambiguity",
+   "id": "D1",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "expenses",
+   "assistant": "Do you want to add an expense, see your expense totals, or learn how expense tracking works in HisabDo?",
+   "answer_status": "clarify",
+   "source": "clarification",
+   "needs_review": false,
+   "citations": [],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "D Ambiguity",
+   "id": "D2",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "kharcha",
+   "assistant": "Do you want to add an expense, see your expense totals, or learn how expense tracking works in HisabDo?",
+   "answer_status": "clarify",
+   "source": "clarification",
+   "needs_review": false,
+   "citations": [],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "D Ambiguity",
+   "id": "D3",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "how?",
+   "assistant": "Which part of HisabDo do you need help with? For example: customers and udhar, expenses, PDF reports, backup, or using the app without internet.",
+   "answer_status": "clarify",
+   "source": "clarification",
+   "needs_review": false,
+   "citations": [],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "D Ambiguity",
+   "id": "D4",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "kaise?",
+   "assistant": "Which part of HisabDo do you need help with? For example: customers and udhar, expenses, PDF reports, backup, or using the app without internet.",
+   "answer_status": "clarify",
+   "source": "clarification",
+   "needs_review": false,
+   "citations": [],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "E No-answer fallback",
+   "id": "E1",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "Can I connect HisabDo to my bank account?",
+   "assistant": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar.",
+   "answer_status": "no_source",
+   "source": "kb_fallback",
+   "needs_review": false,
+   "citations": [],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "E No-answer fallback",
+   "id": "E2",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "How do I export my expenses to Excel?",
+   "assistant": "I found this on the related help topic \"Can I export reports?\": You can generate PDF reports for transactions, balances and customer activity when you need a professional record. [1]\n\nSources:\n[1] HisabDo: Khata & Ledger › Frequently Asked Questions: https://hisabdo.app/",
+   "answer_status": "answered",
+   "source": "rag",
+   "needs_review": false,
+   "citations": [
+    {
+     "n": 1,
+     "title": "HisabDo: Khata & Ledger › Frequently Asked Questions",
+     "url": "https://hisabdo.app/",
+     "chunk_id": "off-03-009-can-i-export-reports",
+     "last_updated": null
+    }
+   ],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "E No-answer fallback",
+   "id": "E3",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "Can two staff members record expenses on the same account?",
+   "assistant": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar.",
+   "answer_status": "no_source",
+   "source": "kb_fallback",
+   "needs_review": false,
+   "citations": [],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "E No-answer fallback",
+   "id": "E4",
+   "path": "API /api/v1/chatbot (mock model)",
+   "user": "Can HisabDo file my FBR tax return?",
+   "assistant": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar. For advice specific to your business, please consult a qualified accountant.",
+   "answer_status": "no_source",
+   "source": "kb_fallback",
+   "needs_review": false,
+   "citations": [],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "B Citations (model draft checked)",
+   "id": "B1",
+   "path": "GroundedAnswerer + scripted model draft",
+   "user": "Is HisabDo free to use?",
+   "model_draft": "HisabDo is free to download and use from Google Play [1]. Core features including PDF export and backup are available at no cost [1].",
+   "assistant": "HisabDo is free to download and use from Google Play. [1] Core features including PDF export and backup are available at no cost. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › Is HisabDo free to use?: https://hisabdo.app/faq",
+   "answer_status": "answered",
+   "citations": [
+    {
+     "n": 1,
+     "chunk_id": "off-01-002-is-hisabdo-free-to-use",
+     "label": "HisabDo Help Center FAQ › Is HisabDo free to use?",
+     "url": "https://hisabdo.app/faq",
+     "last_updated": null
+    }
+   ],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "B Citations (model draft checked)",
+   "id": "B2",
+   "path": "GroundedAnswerer + scripted model draft",
+   "user": "Is HisabDo free to use?",
+   "model_draft": "HisabDo is free to download and use from Google Play [2]. Premium unlocks unlimited exports for Rs. 499 a month [1]. See https://hisabdo.app/pricing-plans for details.",
+   "assistant": "HisabDo is free to download and use from Google Play. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › Is HisabDo free to use?: https://hisabdo.app/faq",
+   "answer_status": "answered",
+   "citations": [
+    {
+     "n": 1,
+     "chunk_id": "off-01-002-is-hisabdo-free-to-use",
+     "label": "HisabDo Help Center FAQ › Is HisabDo free to use?",
+     "url": "https://hisabdo.app/faq",
+     "last_updated": null
+    }
+   ],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "B Citations (model draft checked)",
+   "id": "B3",
+   "path": "GroundedAnswerer + scripted model draft",
+   "user": "Is HisabDo free to use?",
+   "model_draft": "HisabDo Gold costs Rs. 499 per month and includes a desktop version. Download it at https://hisabdo.example.com.",
+   "assistant": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar.",
+   "answer_status": "no_source",
+   "citations": [],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  },
+  {
+   "section": "F Conflict resolved deterministically (synthetic dates)",
+   "id": "F1",
+   "path": "GroundedAnswerer, synthetic KB: FAQ dated 2026-11-01, feature page dated 2026-06-01",
+   "user": "Which currencies does HisabDo support?",
+   "assistant": "The most authoritative and most recently dated source says: HisabDo supports Pakistani Rupee (PKR), US Dollar (USD) and Indian Rupee (INR). You can select your preferred currency in the app settings. [1]\nAnother source says: [2] HisabDo: Khata & Expense App › Multi-Currency Support (2026-06-01): Manage financial records using: PKR INR AED USD\n\nSources:\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support?: https://hisabdo.app/faq\n[2] HisabDo: Khata & Expense App › Multi-Currency Support: https://play.google.com/store/apps/details?id=com.usman.hisabdo",
+   "answer_status": "answered",
+   "needs_review": true,
+   "citations": [
+    {
+     "n": 1,
+     "chunk_id": "off-01-019-which-currencies-does-hisabdo-support",
+     "label": "HisabDo Help Center FAQ › Which currencies does HisabDo support?",
+     "url": "https://hisabdo.app/faq",
+     "last_updated": "2026-11-01"
+    },
+    {
+     "n": 2,
+     "chunk_id": "off-04-010-multi-currency-support",
+     "label": "HisabDo: Khata & Expense App › Multi-Currency Support",
+     "url": "https://play.google.com/store/apps/details?id=com.usman.hisabdo",
+     "last_updated": "2026-06-01"
+    }
+   ],
+   "checks": {
+    "status": true,
+    "citations": true,
+    "links": true,
+    "support": true,
+    "sources": true,
+    "forbidden": true
+   },
+   "verified": true
+  }
+ ]
+}
