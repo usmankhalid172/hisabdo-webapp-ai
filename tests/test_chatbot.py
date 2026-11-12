@@ -170,3 +170,56 @@ def test_index_refresh_failure_keeps_previous_index(tmp_path):
 
     assert retriever.refresh() is False
     assert retriever.retrieve("How to categorize an expense")
+
+def test_bare_expense_query_requests_clarification():
+    request = ChatbotRequest(
+        user_id="user-1",
+        message="expense",
+        conversation_id="clarify-1",
+    )
+    response = handle_chat(request)
+
+    assert response.intent == "clarification_required"
+    assert response.source == "clarification"
+    assert "record an expense" in response.reply.lower()
+
+
+def test_conflicting_sources_without_priority_are_not_resolved():
+    from src.financial_assistant.service import _resolve_source_conflicts
+
+    sources = [
+        {"id": "a", "conflict_group": "expense-policy", "text": "Rule A"},
+        {"id": "b", "conflict_group": "expense-policy", "text": "Rule B"},
+    ]
+
+    assert _resolve_source_conflicts(sources) is None
+
+
+def test_conflicting_sources_use_unique_highest_priority():
+    from src.financial_assistant.service import _resolve_source_conflicts
+
+    sources = [
+        {"id": "a", "conflict_group": "expense-policy", "source_priority": 1},
+        {"id": "b", "conflict_group": "expense-policy", "source_priority": 2},
+    ]
+
+    resolved = _resolve_source_conflicts(sources)
+    assert [item["id"] for item in resolved] == ["b"]
+
+
+def test_citation_requires_direct_source_word_support():
+    from src.financial_assistant.service import _citation_supports_reply
+
+    source = {
+        "title": "Expense categorization",
+        "text": "HisabDo predicts an expense category using rule based matching and a machine learning model.",
+    }
+
+    assert _citation_supports_reply(
+        "HisabDo predicts an expense category using rule based matching.",
+        source,
+    )
+    assert not _citation_supports_reply(
+        "You can export reports from the dashboard every Friday.",
+        source,
+    )

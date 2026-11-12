@@ -160,6 +160,57 @@ def _is_prompt_injection(message: str) -> bool:
 
 
 
+def _is_ambiguous_expense_query(message: str) -> bool:
+    normalized = re.sub(r"[^a-z ]", "", message.lower()).strip()
+    return normalized in {"expense", "expenses", "show expense", "show expenses"}
+
+
+def _resolve_source_conflicts(matches: list[dict]) -> list[dict] | None:
+    """Resolve explicitly grouped conflicts only when priority has one winner."""
+    groups = {}
+    for item in matches:
+        group = item.get("conflict_group")
+        if group:
+            groups.setdefault(group, []).append(item)
+
+    excluded_ids = set()
+    for items in groups.values():
+        if len(items) < 2:
+            continue
+        priorities = [item.get("source_priority") for item in items]
+        if any(not isinstance(value, (int, float)) for value in priorities):
+            return None
+        highest = max(priorities)
+        winners = [item for item in items if item.get("source_priority") == highest]
+        if len(winners) != 1:
+            return None
+        excluded_ids.update(id(item) for item in items if item is not winners[0])
+
+    return [item for item in matches if id(item) not in excluded_ids]
+
+
+def _citation_supports_reply(reply: str, source: dict) -> bool:
+    """Conservative lexical check before exposing source metadata as a citation."""
+    stop_words = {
+        "about", "after", "also", "and", "are", "can", "does", "for",
+        "from", "how", "into", "is", "its", "not", "that", "the",
+        "their", "this", "through", "was", "what", "when", "where",
+        "which", "with", "you", "your"
+    }
+    source_text = f"{source.get('title', '')} {source.get('text', '')}".lower()
+    reply_words = {
+        word for word in re.findall(r"[a-z0-9]+", reply.lower())
+        if len(word) > 2 and word not in stop_words
+    }
+    source_words = {
+        word for word in re.findall(r"[a-z0-9]+", source_text)
+        if len(word) > 2 and word not in stop_words
+    }
+    if not reply_words:
+        return False
+    return len(reply_words & source_words) / len(reply_words) >= 0.20
+
+
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     request_start = time.perf_counter()
     if _is_prompt_injection(request.message):
@@ -274,12 +325,35 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="backend_financial_api",
         )
 
+    if _is_ambiguous_expense_query(request.message):
+        return ChatbotResponse(
+            reply="Are you asking what an expense means, or how to record an expense in HisabDo?",
+            conversation_id=request.conversation_id,
+            intent="clarification_required",
+            tokens_used=0,
+            source="clarification",
+        )
+
     retrieval_start = time.perf_counter()
-    matches = get_retriever().retrieve(request.message, top_k=1)
+    matches = get_retriever().retrieve(request.message, top_k=3)
     retrieval_duration = timed_ms(retrieval_start)
     logger.info("retrieval_completed", extra={"event": "retrieval_completed", "intent": "product_faq", "outcome": "success" if matches else "empty", "source": "rag", "source_ids": [item.get("id") for item in matches], "retrieval_duration_ms": retrieval_duration})
     if matches:
-        context = matches[0]["text"]
+        matches = _resolve_source_conflicts(matches)
+        if matches is None:
+            return ChatbotResponse(
+                reply="The available HisabDo documents contain conflicting guidance on this topic. I can't confirm which entry is current. Please contact support for an approved answer.",
+                conversation_id=request.conversation_id,
+                intent="source_conflict",
+                tokens_used=0,
+                source="rag_conflict",
+            )
+        context = "\\n\\n".join(
+            f"Source title: {item.get('title', 'FAQ')}\\n"
+            f"Section: {item.get('section', 'Not provided')}\\n"
+            f"Evidence: {item['text']}"
+            for item in matches
+        )
         try:
             provider = get_llm_provider()
             provider_start = time.perf_counter()
@@ -313,11 +387,18 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="rag",
             citations=[
                 ChatbotCitation(
-                    title=matches[0].get("title", "FAQ"),
-                    section=matches[0].get("section"),
-                    source_url=matches[0].get("source_url"),
-                    source_id=matches[0].get("id"),
+                    title=item["title"],
+                    section=item.get("section"),
+                    source_url=(
+                        item.get("source_url")
+                        if isinstance(item.get("source_url"), str)
+                        and item["source_url"].startswith(("https://", "http://"))
+                        else None
+                    ),
+                    source_id=item.get("id"),
                 )
+                for item in matches
+                if item.get("title") and _citation_supports_reply(reply, item)
             ],
         )
 
