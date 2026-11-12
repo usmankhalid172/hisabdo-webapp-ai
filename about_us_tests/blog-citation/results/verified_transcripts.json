@@ -1,0 +1,888 @@
+{
+  "generated_at": "2026-11-12T06:48:24.018553Z",
+  "total_transcripts": 10,
+  "positive_count": 7,
+  "negative_count": 3,
+  "positive_passed": 7,
+  "negative_failed": 3,
+  "overall_pass": true,
+  "transcripts": [
+    {
+      "id": "T1",
+      "type": "positive",
+      "query": "how much does custom software cost in pakistan",
+      "scenario": "Normal citation \u2014 should retrieve cost article and cite [1]",
+      "timestamp": "2026-11-12T06:48:10.580233Z",
+      "retrieved_articles": [
+        {
+          "index": 1,
+          "slug": "software-development-cost-pakistan",
+          "title": "Software Development Cost in Pakistan: What Shapes the Budget",
+          "score": 0.4521,
+          "publish_date": "2026-09-07",
+          "category": "SOFTWARE DEVELOPMENT"
+        },
+        {
+          "index": 2,
+          "slug": "software-development-company-pakistan",
+          "title": "How to Choose a Software Development Company in Pakistan",
+          "score": 0.317,
+          "publish_date": "2026-09-07",
+          "category": "SOFTWARE DEVELOPMENT"
+        },
+        {
+          "index": 3,
+          "slug": "custom-software-development",
+          "title": "Custom Software Development: When Bespoke Software Makes Sense",
+          "score": 0.2942,
+          "publish_date": "2026-09-07",
+          "category": "SOFTWARE DEVELOPMENT"
+        }
+      ],
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "response": "Based on the Software Development Cost in Pakistan: What Shapes the Budget article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].\n\n**Sources:**\n[1] Software Development Cost in Pakistan: What Shapes the Budget \u2014 https://www.xicteksystems.com/blog/software-development-cost-pakistan\n",
+      "validation": {
+        "overall_pass": true,
+        "errors": [],
+        "warnings": [
+          "CHECK 5 \u2014 no verbatim quotes detected in body (informational; not a failure)."
+        ],
+        "checks": {
+          "check_1_orphan_markers": {
+            "passed": true,
+            "markers_in_body": [
+              1
+            ],
+            "source_indices": [
+              1
+            ],
+            "orphan_markers": []
+          },
+          "check_2_padded_sources": {
+            "passed": true,
+            "source_indices": [
+              1
+            ],
+            "markers_in_body": [
+              1
+            ],
+            "padded_sources": []
+          },
+          "check_3_fabricated_index": {
+            "passed": true,
+            "n_retrieved": 3,
+            "all_cited_indices": [
+              1
+            ],
+            "fabricated_indices": []
+          },
+          "check_4_url_allowlist": {
+            "passed": true,
+            "checked_urls": [
+              "https://www.xicteksystems.com/blog/software-development-cost-pakistan"
+            ],
+            "violations": []
+          },
+          "check_5_verbatim_quotes": {
+            "passed": true,
+            "quotes_found": 0,
+            "ungrounded": []
+          }
+        },
+        "markers_in_body": [
+          1
+        ],
+        "sources_entries": [
+          {
+            "index": 1,
+            "title": "Software Development Cost in Pakistan: What Shapes the Budget",
+            "url": "https://www.xicteksystems.com/blog/software-development-cost-pakistan",
+            "section": null,
+            "raw": "[1] Software Development Cost in Pakistan: What Shapes the Budget \u2014 https://www.xicteksystems.com/blog/software-development-cost-pakistan"
+          }
+        ]
+      },
+      "expected_pass": true
+    },
+    {
+      "id": "T2",
+      "type": "positive",
+      "query": "custom software development guide",
+      "scenario": "Multi-source synthesis \u2014 top-2 scores likely trigger synthesis",
+      "timestamp": "2026-11-12T06:48:13.209726Z",
+      "retrieved_articles": [
+        {
+          "index": 1,
+          "slug": "custom-software-development-guide",
+          "title": "Custom Software Development Guide for Growing Businesses",
+          "score": 0.5052,
+          "publish_date": "2026-09-07",
+          "category": "SOFTWARE DEVELOPMENT"
+        },
+        {
+          "index": 2,
+          "slug": "custom-software-development",
+          "title": "Custom Software Development: When Bespoke Software Makes Sense",
+          "score": 0.4309,
+          "publish_date": "2026-09-07",
+          "category": "SOFTWARE DEVELOPMENT"
+        },
+        {
+          "index": 3,
+          "slug": "software-development-process",
+          "title": "The Software Development Process: A Practical Guide",
+          "score": 0.3126,
+          "publish_date": "2026-09-07",
+          "category": "SOFTWARE DEVELOPMENT"
+        }
+      ],
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "response": "Based on the Custom Software Development Guide for Growing Businesses article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].\n\n**Sources:**\n[1] Custom Software Development Guide for Growing Businesses \u2014 https://www.xicteksystems.com/blog/custom-software-development-guide\n",
+      "validation": {
+        "overall_pass": true,
+        "errors": [],
+        "warnings": [
+          "CHECK 5 \u2014 no verbatim quotes detected in body (informational; not a failure)."
+        ],
+        "checks": {
+          "check_1_orphan_markers": {
+            "passed": true,
+            "markers_in_body": [
+              1
+            ],
+            "source_indices": [
+              1
+            ],
+            "orphan_markers": []
+          },
+          "check_2_padded_sources": {
+            "passed": true,
+            "source_indices": [
+              1
+            ],
+            "markers_in_body": [
+              1
+            ],
+            "padded_sources": []
+          },
+          "check_3_fabricated_index": {
+            "passed": true,
+            "n_retrieved": 3,
+            "all_cited_indices": [
+              1
+            ],
+            "fabricated_indices": []
+          },
+          "check_4_url_allowlist": {
+            "passed": true,
+            "checked_urls": [
+              "https://www.xicteksystems.com/blog/custom-software-development-guide"
+            ],
+            "violations": []
+          },
+          "check_5_verbatim_quotes": {
+            "passed": true,
+            "quotes_found": 0,
+            "ungrounded": []
+          }
+        },
+        "markers_in_body": [
+          1
+        ],
+        "sources_entries": [
+          {
+            "index": 1,
+            "title": "Custom Software Development Guide for Growing Businesses",
+            "url": "https://www.xicteksystems.com/blog/custom-software-development-guide",
+            "section": null,
+            "raw": "[1] Custom Software Development Guide for Growing Businesses \u2014 https://www.xicteksystems.com/blog/custom-software-development-guide"
+          }
+        ]
+      },
+      "expected_pass": true
+    },
+    {
+      "id": "T3",
+      "type": "positive",
+      "query": "what is the agile software development process",
+      "scenario": "Normal citation \u2014 agile process article",
+      "timestamp": "2026-11-12T06:48:15.996968Z",
+      "retrieved_articles": [
+        {
+          "index": 1,
+          "slug": "agile-software-development",
+          "title": "Agile Software Development Without Losing Direction",
+          "score": 0.429,
+          "publish_date": "2026-09-07",
+          "category": "SOFTWARE DEVELOPMENT"
+        },
+        {
+          "index": 2,
+          "slug": "software-development-process",
+          "title": "The Software Development Process: A Practical Guide",
+          "score": 0.363,
+          "publish_date": "2026-09-07",
+          "category": "SOFTWARE DEVELOPMENT"
+        },
+        {
+          "index": 3,
+          "slug": "software-development-company-pakistan",
+          "title": "How to Choose a Software Development Company in Pakistan",
+          "score": 0.2555,
+          "publish_date": "2026-09-07",
+          "category": "SOFTWARE DEVELOPMENT"
+        }
+      ],
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "response": "Based on the Agile Software Development Without Losing Direction article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].\n\n**Sources:**\n[1] Agile Software Development Without Losing Direction \u2014 https://www.xicteksystems.com/blog/agile-software-development\n",
+      "validation": {
+        "overall_pass": true,
+        "errors": [],
+        "warnings": [
+          "CHECK 5 \u2014 no verbatim quotes detected in body (informational; not a failure)."
+        ],
+        "checks": {
+          "check_1_orphan_markers": {
+            "passed": true,
+            "markers_in_body": [
+              1
+            ],
+            "source_indices": [
+              1
+            ],
+            "orphan_markers": []
+          },
+          "check_2_padded_sources": {
+            "passed": true,
+            "source_indices": [
+              1
+            ],
+            "markers_in_body": [
+              1
+            ],
+            "padded_sources": []
+          },
+          "check_3_fabricated_index": {
+            "passed": true,
+            "n_retrieved": 3,
+            "all_cited_indices": [
+              1
+            ],
+            "fabricated_indices": []
+          },
+          "check_4_url_allowlist": {
+            "passed": true,
+            "checked_urls": [
+              "https://www.xicteksystems.com/blog/agile-software-development"
+            ],
+            "violations": []
+          },
+          "check_5_verbatim_quotes": {
+            "passed": true,
+            "quotes_found": 0,
+            "ungrounded": []
+          }
+        },
+        "markers_in_body": [
+          1
+        ],
+        "sources_entries": [
+          {
+            "index": 1,
+            "title": "Agile Software Development Without Losing Direction",
+            "url": "https://www.xicteksystems.com/blog/agile-software-development",
+            "section": null,
+            "raw": "[1] Agile Software Development Without Losing Direction \u2014 https://www.xicteksystems.com/blog/agile-software-development"
+          }
+        ]
+      },
+      "expected_pass": true
+    },
+    {
+      "id": "T4",
+      "type": "positive",
+      "query": "tell me about ai chatbot development",
+      "scenario": "Normal citation \u2014 chatbot article",
+      "timestamp": "2026-11-12T06:48:18.698922Z",
+      "retrieved_articles": [
+        {
+          "index": 1,
+          "slug": "ai-chatbot-development",
+          "title": "AI Chatbot Development for Useful Customer Conversations",
+          "score": 0.419,
+          "publish_date": "2026-09-07",
+          "category": "AI AND AUTOMATION"
+        },
+        {
+          "index": 2,
+          "slug": "ai-development-company-pakistan",
+          "title": "What to Expect from an AI Development Company in Pakistan",
+          "score": 0.2912,
+          "publish_date": "2026-09-07",
+          "category": "ARTIFICIAL INTELLIGENCE"
+        },
+        {
+          "index": 3,
+          "slug": "future-of-ai-in-business",
+          "title": "The Future of AI in Business: Preparing for Useful Change",
+          "score": 0.2124,
+          "publish_date": "2026-09-07",
+          "category": "AI AND AUTOMATION"
+        }
+      ],
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "response": "Based on the AI Chatbot Development for Useful Customer Conversations article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].\n\n**Sources:**\n[1] AI Chatbot Development for Useful Customer Conversations \u2014 https://www.xicteksystems.com/blog/ai-chatbot-development\n",
+      "validation": {
+        "overall_pass": true,
+        "errors": [],
+        "warnings": [
+          "CHECK 5 \u2014 no verbatim quotes detected in body (informational; not a failure)."
+        ],
+        "checks": {
+          "check_1_orphan_markers": {
+            "passed": true,
+            "markers_in_body": [
+              1
+            ],
+            "source_indices": [
+              1
+            ],
+            "orphan_markers": []
+          },
+          "check_2_padded_sources": {
+            "passed": true,
+            "source_indices": [
+              1
+            ],
+            "markers_in_body": [
+              1
+            ],
+            "padded_sources": []
+          },
+          "check_3_fabricated_index": {
+            "passed": true,
+            "n_retrieved": 3,
+            "all_cited_indices": [
+              1
+            ],
+            "fabricated_indices": []
+          },
+          "check_4_url_allowlist": {
+            "passed": true,
+            "checked_urls": [
+              "https://www.xicteksystems.com/blog/ai-chatbot-development"
+            ],
+            "violations": []
+          },
+          "check_5_verbatim_quotes": {
+            "passed": true,
+            "quotes_found": 0,
+            "ungrounded": []
+          }
+        },
+        "markers_in_body": [
+          1
+        ],
+        "sources_entries": [
+          {
+            "index": 1,
+            "title": "AI Chatbot Development for Useful Customer Conversations",
+            "url": "https://www.xicteksystems.com/blog/ai-chatbot-development",
+            "section": null,
+            "raw": "[1] AI Chatbot Development for Useful Customer Conversations \u2014 https://www.xicteksystems.com/blog/ai-chatbot-development"
+          }
+        ]
+      },
+      "expected_pass": true
+    },
+    {
+      "id": "T5",
+      "type": "positive",
+      "query": "explain progressive web apps",
+      "scenario": "Normal citation \u2014 PWA article",
+      "timestamp": "2026-11-12T06:48:21.371539Z",
+      "retrieved_articles": [
+        {
+          "index": 1,
+          "slug": "progressive-web-apps",
+          "title": "Progressive Web Apps: When the Browser Can Be the Product",
+          "score": 0.4114,
+          "publish_date": "2026-09-07",
+          "category": "WEB DEVELOPMENT"
+        },
+        {
+          "index": 2,
+          "slug": "ai-development-company-pakistan",
+          "title": "What to Expect from an AI Development Company in Pakistan",
+          "score": 0.2371,
+          "publish_date": "2026-09-07",
+          "category": "ARTIFICIAL INTELLIGENCE"
+        },
+        {
+          "index": 3,
+          "slug": "generative-ai-applications",
+          "title": "Generative AI Applications for Real Business Workflows",
+          "score": 0.23,
+          "publish_date": "2026-09-07",
+          "category": "AI AND AUTOMATION"
+        }
+      ],
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "response": "Based on the Progressive Web Apps: When the Browser Can Be the Product article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].\n\n**Sources:**\n[1] Progressive Web Apps: When the Browser Can Be the Product \u2014 https://www.xicteksystems.com/blog/progressive-web-apps\n",
+      "validation": {
+        "overall_pass": true,
+        "errors": [],
+        "warnings": [
+          "CHECK 5 \u2014 no verbatim quotes detected in body (informational; not a failure)."
+        ],
+        "checks": {
+          "check_1_orphan_markers": {
+            "passed": true,
+            "markers_in_body": [
+              1
+            ],
+            "source_indices": [
+              1
+            ],
+            "orphan_markers": []
+          },
+          "check_2_padded_sources": {
+            "passed": true,
+            "source_indices": [
+              1
+            ],
+            "markers_in_body": [
+              1
+            ],
+            "padded_sources": []
+          },
+          "check_3_fabricated_index": {
+            "passed": true,
+            "n_retrieved": 3,
+            "all_cited_indices": [
+              1
+            ],
+            "fabricated_indices": []
+          },
+          "check_4_url_allowlist": {
+            "passed": true,
+            "checked_urls": [
+              "https://www.xicteksystems.com/blog/progressive-web-apps"
+            ],
+            "violations": []
+          },
+          "check_5_verbatim_quotes": {
+            "passed": true,
+            "quotes_found": 0,
+            "ungrounded": []
+          }
+        },
+        "markers_in_body": [
+          1
+        ],
+        "sources_entries": [
+          {
+            "index": 1,
+            "title": "Progressive Web Apps: When the Browser Can Be the Product",
+            "url": "https://www.xicteksystems.com/blog/progressive-web-apps",
+            "section": null,
+            "raw": "[1] Progressive Web Apps: When the Browser Can Be the Product \u2014 https://www.xicteksystems.com/blog/progressive-web-apps"
+          }
+        ]
+      },
+      "expected_pass": true
+    },
+    {
+      "id": "T6",
+      "type": "positive",
+      "query": "how much do you charge for software development services",
+      "scenario": "Out-of-domain \u2014 should trigger Fallback 5.2 (deflect to /services)",
+      "timestamp": "2026-11-12T06:48:21.371623Z",
+      "retrieved_articles": [],
+      "fallbacks_triggered": [
+        "5.2_OUT_OF_DOMAIN"
+      ],
+      "scope_violations_blocked": [],
+      "response": "That question is best answered on our [Services](https://www.xicteksystems.com/services) or [Contact](https://www.xicteksystems.com/contact) page rather than in the blog. I'd suggest starting there \u2014 or if you'd like, I can answer a related question from our blog articles.",
+      "validation": {
+        "overall_pass": true,
+        "errors": [],
+        "warnings": [
+          "CHECK 5 \u2014 no verbatim quotes detected in body (informational; not a failure)."
+        ],
+        "checks": {
+          "check_1_orphan_markers": {
+            "passed": true,
+            "markers_in_body": [],
+            "source_indices": [],
+            "orphan_markers": []
+          },
+          "check_2_padded_sources": {
+            "passed": true,
+            "source_indices": [],
+            "markers_in_body": [],
+            "padded_sources": []
+          },
+          "check_3_fabricated_index": {
+            "passed": true,
+            "n_retrieved": 0,
+            "all_cited_indices": [],
+            "fabricated_indices": []
+          },
+          "check_4_url_allowlist": {
+            "passed": true,
+            "checked_urls": [],
+            "violations": []
+          },
+          "check_5_verbatim_quotes": {
+            "passed": true,
+            "quotes_found": 0,
+            "ungrounded": []
+          }
+        },
+        "markers_in_body": [],
+        "sources_entries": []
+      },
+      "expected_pass": true
+    },
+    {
+      "id": "T7",
+      "type": "positive",
+      "query": "best recipe for chicken biryani",
+      "scenario": "Off-topic \u2014 should trigger Fallback 5.1 (no source above threshold)",
+      "timestamp": "2026-11-12T06:48:24.018081Z",
+      "retrieved_articles": [],
+      "fallbacks_triggered": [
+        "5.1_NO_SOURCE"
+      ],
+      "scope_violations_blocked": [],
+      "response": "I don't have a blog article that addresses that. For specific questions, please contact XICTEK Systems at xicteksystems@gmail.com or visit [/contact](https://www.xicteksystems.com/contact).",
+      "validation": {
+        "overall_pass": true,
+        "errors": [],
+        "warnings": [
+          "CHECK 5 \u2014 no verbatim quotes detected in body (informational; not a failure)."
+        ],
+        "checks": {
+          "check_1_orphan_markers": {
+            "passed": true,
+            "markers_in_body": [],
+            "source_indices": [],
+            "orphan_markers": []
+          },
+          "check_2_padded_sources": {
+            "passed": true,
+            "source_indices": [],
+            "markers_in_body": [],
+            "padded_sources": []
+          },
+          "check_3_fabricated_index": {
+            "passed": true,
+            "n_retrieved": 0,
+            "all_cited_indices": [],
+            "fabricated_indices": []
+          },
+          "check_4_url_allowlist": {
+            "passed": true,
+            "checked_urls": [],
+            "violations": []
+          },
+          "check_5_verbatim_quotes": {
+            "passed": true,
+            "quotes_found": 0,
+            "ungrounded": []
+          }
+        },
+        "markers_in_body": [],
+        "sources_entries": []
+      },
+      "expected_pass": true
+    },
+    {
+      "id": "T8",
+      "type": "negative_control",
+      "query": "custom software development cost",
+      "scenario": "NEGATIVE CONTROL \u2014 orphan marker [3] in body with no Sources entry",
+      "timestamp": "2026-11-12T06:48:24.018193Z",
+      "retrieved_articles": [
+        {
+          "index": 1,
+          "slug": "custom-software-development-guide",
+          "title": "Custom Software Development Guide"
+        },
+        {
+          "index": 2,
+          "slug": "software-development-cost-pakistan",
+          "title": "Software Development Cost in Pakistan"
+        }
+      ],
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "response": "Custom software development cost depends on scope and complexity [1]. The article also mentions team composition as a factor [3].\n\n**Sources:**\n[1] Custom Software Development Guide \u2014 https://www.xicteksystems.com/blog/custom-software-development-guide\n",
+      "validation": {
+        "overall_pass": false,
+        "errors": [
+          "CHECK 1 FAIL \u2014 markers [3] appear in body but have no Sources entry (orphan citations).",
+          "CHECK 3 FAIL \u2014 indices [3] are cited but only 2 articles were retrieved (fabricated citations)."
+        ],
+        "warnings": [
+          "CHECK 5 \u2014 no verbatim quotes detected in body (informational; not a failure)."
+        ],
+        "checks": {
+          "check_1_orphan_markers": {
+            "passed": false,
+            "markers_in_body": [
+              1,
+              3
+            ],
+            "source_indices": [
+              1
+            ],
+            "orphan_markers": [
+              3
+            ]
+          },
+          "check_2_padded_sources": {
+            "passed": true,
+            "source_indices": [
+              1
+            ],
+            "markers_in_body": [
+              1,
+              3
+            ],
+            "padded_sources": []
+          },
+          "check_3_fabricated_index": {
+            "passed": false,
+            "n_retrieved": 2,
+            "all_cited_indices": [
+              1,
+              3
+            ],
+            "fabricated_indices": [
+              3
+            ]
+          },
+          "check_4_url_allowlist": {
+            "passed": true,
+            "checked_urls": [
+              "https://www.xicteksystems.com/blog/custom-software-development-guide"
+            ],
+            "violations": []
+          },
+          "check_5_verbatim_quotes": {
+            "passed": true,
+            "quotes_found": 0,
+            "ungrounded": []
+          }
+        },
+        "markers_in_body": [
+          1,
+          3
+        ],
+        "sources_entries": [
+          {
+            "index": 1,
+            "title": "Custom Software Development Guide",
+            "url": "https://www.xicteksystems.com/blog/custom-software-development-guide",
+            "section": null,
+            "raw": "[1] Custom Software Development Guide \u2014 https://www.xicteksystems.com/blog/custom-software-development-guide"
+          }
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "T9",
+      "type": "negative_control",
+      "query": "custom software development cost",
+      "scenario": "NEGATIVE CONTROL \u2014 padded Sources entry [2] never cited in body",
+      "timestamp": "2026-11-12T06:48:24.018263Z",
+      "retrieved_articles": [
+        {
+          "index": 1,
+          "slug": "custom-software-development-guide",
+          "title": "Custom Software Development Guide"
+        },
+        {
+          "index": 2,
+          "slug": "software-development-cost-pakistan",
+          "title": "Software Development Cost in Pakistan"
+        }
+      ],
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "response": "Custom software development cost depends on scope and complexity [1].\n\n**Sources:**\n[1] Custom Software Development Guide \u2014 https://www.xicteksystems.com/blog/custom-software-development-guide\n[2] Software Development Cost in Pakistan \u2014 https://www.xicteksystems.com/blog/software-development-cost-pakistan\n",
+      "validation": {
+        "overall_pass": false,
+        "errors": [
+          "CHECK 2 FAIL \u2014 Sources entries [2] are listed but never cited in body (padding the Sources list)."
+        ],
+        "warnings": [
+          "CHECK 5 \u2014 no verbatim quotes detected in body (informational; not a failure)."
+        ],
+        "checks": {
+          "check_1_orphan_markers": {
+            "passed": true,
+            "markers_in_body": [
+              1
+            ],
+            "source_indices": [
+              1,
+              2
+            ],
+            "orphan_markers": []
+          },
+          "check_2_padded_sources": {
+            "passed": false,
+            "source_indices": [
+              1,
+              2
+            ],
+            "markers_in_body": [
+              1
+            ],
+            "padded_sources": [
+              2
+            ]
+          },
+          "check_3_fabricated_index": {
+            "passed": true,
+            "n_retrieved": 2,
+            "all_cited_indices": [
+              1,
+              2
+            ],
+            "fabricated_indices": []
+          },
+          "check_4_url_allowlist": {
+            "passed": true,
+            "checked_urls": [
+              "https://www.xicteksystems.com/blog/custom-software-development-guide",
+              "https://www.xicteksystems.com/blog/software-development-cost-pakistan"
+            ],
+            "violations": []
+          },
+          "check_5_verbatim_quotes": {
+            "passed": true,
+            "quotes_found": 0,
+            "ungrounded": []
+          }
+        },
+        "markers_in_body": [
+          1
+        ],
+        "sources_entries": [
+          {
+            "index": 1,
+            "title": "Custom Software Development Guide",
+            "url": "https://www.xicteksystems.com/blog/custom-software-development-guide",
+            "section": null,
+            "raw": "[1] Custom Software Development Guide \u2014 https://www.xicteksystems.com/blog/custom-software-development-guide"
+          },
+          {
+            "index": 2,
+            "title": "Software Development Cost in Pakistan",
+            "url": "https://www.xicteksystems.com/blog/software-development-cost-pakistan",
+            "section": null,
+            "raw": "[2] Software Development Cost in Pakistan \u2014 https://www.xicteksystems.com/blog/software-development-cost-pakistan"
+          }
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "T10",
+      "type": "negative_control",
+      "query": "tell me about hisabdo expense management app",
+      "scenario": "NEGATIVE CONTROL \u2014 non-blog URL in Sources (scope violation)",
+      "timestamp": "2026-11-12T06:48:24.018307Z",
+      "retrieved_articles": [
+        {
+          "index": 1,
+          "slug": "hisabdo-features",
+          "title": "Hisabdo Features"
+        }
+      ],
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "response": "Hisabdo is an expense management application [1].\n\n**Sources:**\n[1] Hisabdo Features \u2014 https://hisabdo.app/features\n",
+      "validation": {
+        "overall_pass": false,
+        "errors": [
+          "CHECK 4 FAIL \u2014 1 URL(s) failed the blog allowlist: [{'index': 1, 'url': 'https://hisabdo.app/features', 'reason': 'not on /blog/ allowlist'}]"
+        ],
+        "warnings": [
+          "CHECK 5 \u2014 no verbatim quotes detected in body (informational; not a failure)."
+        ],
+        "checks": {
+          "check_1_orphan_markers": {
+            "passed": true,
+            "markers_in_body": [
+              1
+            ],
+            "source_indices": [
+              1
+            ],
+            "orphan_markers": []
+          },
+          "check_2_padded_sources": {
+            "passed": true,
+            "source_indices": [
+              1
+            ],
+            "markers_in_body": [
+              1
+            ],
+            "padded_sources": []
+          },
+          "check_3_fabricated_index": {
+            "passed": true,
+            "n_retrieved": 1,
+            "all_cited_indices": [
+              1
+            ],
+            "fabricated_indices": []
+          },
+          "check_4_url_allowlist": {
+            "passed": false,
+            "checked_urls": [
+              "https://hisabdo.app/features"
+            ],
+            "violations": [
+              {
+                "index": 1,
+                "url": "https://hisabdo.app/features",
+                "reason": "not on /blog/ allowlist"
+              }
+            ]
+          },
+          "check_5_verbatim_quotes": {
+            "passed": true,
+            "quotes_found": 0,
+            "ungrounded": []
+          }
+        },
+        "markers_in_body": [
+          1
+        ],
+        "sources_entries": [
+          {
+            "index": 1,
+            "title": "Hisabdo Features",
+            "url": "https://hisabdo.app/features",
+            "section": null,
+            "raw": "[1] Hisabdo Features \u2014 https://hisabdo.app/features"
+          }
+        ]
+      },
+      "expected_pass": false
+    }
+  ]
+}
