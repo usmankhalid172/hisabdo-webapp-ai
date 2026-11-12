@@ -109,6 +109,45 @@ def _day1_allowed_document_ids(query: str) -> set[str] | None:
     return None
 
 
+def _day1_allowed_document_types(query: str) -> set[str] | None:
+    """Separate HisabDo product evidence from general finance evidence."""
+    normalized = " ".join(query.lower().split())
+
+    product_patterns = (
+        r"\bhisabdo\b",
+        r"\bin the app\b",
+        r"\bthis app\b",
+        r"\bapp feature\b",
+        r"\bkhata\b",
+        r"\budhar\b",
+        r"\bpdf report",
+        r"\bexport\b",
+        r"\bdownload\b",
+        r"\bdashboard\b",
+        r"\bcustomer balance",
+        r"\bhow do i (use|track|add|record|export|download|view|manage)\b",
+        r"\bhow can i (use|track|add|record|export|download|view|manage)\b",
+    )
+    if any(re.search(pattern, normalized) for pattern in product_patterns):
+        return {"product_faq", "product_documentation"}
+
+    finance_patterns = (
+        r"\bprofit\b",
+        r"\brevenue\b",
+        r"\bcash flow\b",
+        r"\bwhat is an? expense\b",
+        r"\bwhat are expenses\b",
+        r"\bfinancial statement\b",
+        r"\baccounting\b",
+        r"\bpayables?\b",
+        r"\breceivables?\b",
+    )
+    if any(re.search(pattern, normalized) for pattern in finance_patterns):
+        return {"finance_faq"}
+
+    return None
+
+
 class FaqRetriever:
     """Retrieve relevant verified and safe FAQ documents."""
 
@@ -186,7 +225,10 @@ class FaqRetriever:
                 "verified": True,
             }
 
-            for field in ("url", "source_url", "section"):
+            for field in (
+                "url", "source_url", "section",
+                "conflict_key", "conflict_value",
+            ):
                 value = item.get(field)
                 if isinstance(value, str) and value.strip():
                     metadata[field] = value.strip()
@@ -350,6 +392,10 @@ class FaqRetriever:
         if targeted_udhar_query:
             allowed_ids = {"faq-udhar-guidance"}
 
+        allowed_types = None
+        if self._uses_default_knowledge_base and allowed_ids is None:
+            allowed_types = _day1_allowed_document_types(query)
+
         if (
             self._uses_default_knowledge_base
             and allowed_ids == set()
@@ -364,7 +410,7 @@ class FaqRetriever:
 
         search_k = (
             len(self.documents)
-            if allowed_ids is not None
+            if allowed_ids is not None or allowed_types is not None
             else top_k
         )
 
@@ -381,6 +427,12 @@ class FaqRetriever:
             if (
                 allowed_ids is not None
                 and metadata["id"] not in allowed_ids
+            ):
+                continue
+
+            if (
+                allowed_types is not None
+                and metadata.get("type") not in allowed_types
             ):
                 continue
 
@@ -414,7 +466,10 @@ class FaqRetriever:
                 "score": round(score, 4),
             }
 
-            for field in ("url", "source_url", "section", "page"):
+            for field in (
+                "url", "source_url", "section", "page",
+                "conflict_key", "conflict_value",
+            ):
                 value = metadata.get(field)
                 if value is not None:
                     result[field] = value

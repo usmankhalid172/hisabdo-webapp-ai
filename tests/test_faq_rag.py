@@ -1,7 +1,54 @@
 
+import hashlib
 import json
+import math
+import re
 
 from src.financial_assistant.faq_rag import FaqRetriever
+
+
+class FakeEmbeddings:
+    """Lightweight deterministic embeddings for isolated tests."""
+
+    DIMENSIONS = 256
+
+    @staticmethod
+    def _embed(text):
+        vector = [0.0] * FakeEmbeddings.DIMENSIONS
+
+        tokens = re.findall(r"[a-z0-9]+", text.lower())
+
+        for token in tokens:
+            token_hash = hashlib.sha256(
+                token.encode("utf-8")
+            ).hexdigest()
+
+            index = int(token_hash[:8], 16) % FakeEmbeddings.DIMENSIONS
+            vector[index] += 1.0
+
+        magnitude = math.sqrt(sum(value * value for value in vector))
+
+        if magnitude:
+            vector = [value / magnitude for value in vector]
+
+        return vector
+
+    def embed_documents(self, texts):
+        return [self._embed(text) for text in texts]
+
+    def embed_query(self, text):
+        return self._embed(text)
+
+
+def install_fake_embeddings(monkeypatch):
+    """Prevent tests from loading the real PyTorch embedding model."""
+    from src.financial_assistant import faq_rag
+
+    monkeypatch.setattr(
+        faq_rag,
+        "HuggingFaceEmbeddings",
+        lambda **kwargs: FakeEmbeddings(),
+    )
 
 
 def write_kb(tmp_path, documents):
@@ -14,7 +61,12 @@ def write_kb(tmp_path, documents):
     return path
 
 
-def test_unverified_documents_are_not_retrieved(tmp_path):
+def test_unverified_documents_are_not_retrieved(
+    tmp_path,
+    monkeypatch,
+):
+    install_fake_embeddings(monkeypatch)
+
     path = write_kb(
         tmp_path,
         [
@@ -36,7 +88,12 @@ def test_unverified_documents_are_not_retrieved(tmp_path):
     assert retriever.retrieve("What is HisabDo?") == []
 
 
-def test_verified_document_includes_source_and_version(tmp_path):
+def test_verified_document_includes_source_and_version(
+    tmp_path,
+    monkeypatch,
+):
+    install_fake_embeddings(monkeypatch)
+
     path = write_kb(
         tmp_path,
         [

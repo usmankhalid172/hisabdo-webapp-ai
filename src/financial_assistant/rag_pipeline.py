@@ -32,6 +32,11 @@ class ContextChunk:
     text: str
     source: Optional[str] = None
     score: Optional[float] = None
+    document_id: Optional[str] = None
+    title: Optional[str] = None
+    source_url: Optional[str] = None
+    section: Optional[str] = None
+    verified: bool = False
 
 
 RawChunk = Union[ContextChunk, dict]
@@ -58,11 +63,21 @@ def _to_context_chunk(raw: RawChunk) -> Optional[ContextChunk]:
         text = raw.text
         source = raw.source
         score = raw.score
+        document_id = raw.document_id
+        title = raw.title
+        source_url = raw.source_url
+        section = raw.section
+        verified = raw.verified
 
     elif isinstance(raw, dict):
         text = raw.get("text")
         source = raw.get("source")
         score = raw.get("score")
+        document_id = raw.get("id")
+        title = raw.get("title")
+        source_url = raw.get("source_url") or raw.get("url")
+        section = raw.get("section")
+        verified = raw.get("verified", False)
 
     else:
         logger.warning(
@@ -91,6 +106,11 @@ def _to_context_chunk(raw: RawChunk) -> Optional[ContextChunk]:
         text=text.strip(),
         source=source,
         score=score,
+        document_id=document_id if isinstance(document_id, str) else None,
+        title=title.strip() if isinstance(title, str) and title.strip() else None,
+        source_url=source_url.strip() if isinstance(source_url, str) and source_url.strip() else None,
+        section=section.strip() if isinstance(section, str) and section.strip() else None,
+        verified=verified is True,
     )
 
 
@@ -141,6 +161,11 @@ def prepare_context(
                     text=chunk.text[: remaining - 1].rstrip() + "…",
                     source=chunk.source,
                     score=chunk.score,
+                    document_id=chunk.document_id,
+                    title=chunk.title,
+                    source_url=chunk.source_url,
+                    section=chunk.section,
+                    verified=chunk.verified,
                 )
             )
             break
@@ -157,12 +182,25 @@ def format_context_block(chunks: list[ContextChunk]) -> str:
     lines = ["Relevant financial data:"]
 
     for index, chunk in enumerate(chunks, start=1):
-        if chunk.source:
-            lines.append(
-                f"[{index}] ({chunk.source}) {chunk.text}"
-            )
-        else:
-            lines.append(f"[{index}] {chunk.text}")
+        evidence = f"[{index}]"
+
+        if chunk.verified is True and chunk.document_id:
+            evidence += f" [evidence_id={chunk.document_id}] [verified=true]"
+
+            source_title = chunk.title or chunk.source
+            if source_title:
+                evidence += f" [source={source_title}]"
+
+            if chunk.section:
+                evidence += f" [section={chunk.section}]"
+
+            if chunk.source_url:
+                evidence += f" [source_url={chunk.source_url}]"
+
+        elif chunk.source:
+            evidence += f" ({chunk.source})"
+
+        lines.append(f"{evidence} {chunk.text}")
 
     return "\n".join(lines)
 

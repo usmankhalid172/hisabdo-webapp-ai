@@ -1,11 +1,56 @@
 
+import hashlib
 import json
+import math
+import re
 
 import pytest
 
 from src.errors import ServiceError
 from src.financial_assistant.service import handle_chat
 from src.schemas import ChatbotRequest
+
+
+class FakeEmbeddings:
+    """Lightweight deterministic embeddings for isolated tests."""
+
+    DIMENSIONS = 256
+
+    @staticmethod
+    def _embed(text):
+        vector = [0.0] * FakeEmbeddings.DIMENSIONS
+
+        tokens = re.findall(r"[a-z0-9]+", text.lower())
+
+        for token in tokens:
+            token_hash = hashlib.sha256(
+                token.encode("utf-8")
+            ).hexdigest()
+
+            index = int(token_hash[:8], 16) % FakeEmbeddings.DIMENSIONS
+            vector[index] += 1.0
+
+        magnitude = math.sqrt(sum(value * value for value in vector))
+
+        if magnitude:
+            vector = [value / magnitude for value in vector]
+
+        return vector
+
+    def embed_documents(self, texts):
+        return [self._embed(text) for text in texts]
+
+    def embed_query(self, text):
+        return self._embed(text)
+
+
+def _install_fake_embeddings(monkeypatch, faq_rag):
+    """Prevent tests from loading the real PyTorch embedding model."""
+    monkeypatch.setattr(
+        faq_rag,
+        "HuggingFaceEmbeddings",
+        lambda **kwargs: FakeEmbeddings(),
+    )
 
 
 def _verified_faq(
@@ -192,11 +237,17 @@ def test_mock_provider_does_not_mislabel_financial_data_as_docs():
     assert "docs" not in reply.lower()
 
 
-def test_weak_rag_match_falls_back_to_general_instead_of_wrong_answer():
+def test_weak_rag_match_falls_back_to_general_instead_of_wrong_answer(
+    monkeypatch,
+):
     """Ensure weak FAQ matches do not produce irrelevant answers."""
-    from src.financial_assistant.faq_rag import get_retriever
+    from src.financial_assistant import faq_rag
 
-    matches = get_retriever().retrieve(
+    _install_fake_embeddings(monkeypatch, faq_rag)
+
+    retriever = faq_rag.FaqRetriever()
+
+    matches = retriever.retrieve(
         "How can I get my spending data out of the app?",
         top_k=1,
     )
@@ -210,6 +261,8 @@ def test_strong_rag_match_still_retrieves(
 ):
     """Verify semantic retrieval using a test-only verified FAQ."""
     from src.financial_assistant import faq_rag
+
+    _install_fake_embeddings(monkeypatch, faq_rag)
 
     test_docs = [
         {
@@ -238,8 +291,6 @@ def test_strong_rag_match_still_retrieves(
         docs_path,
     )
 
-    # Pass the temporary path explicitly because the constructor's
-    # default docs_path was evaluated when the class was defined.
     retriever = faq_rag.FaqRetriever(
         docs_path=docs_path,
     )
@@ -264,3 +315,98 @@ def test_system_prompt_warns_against_inventing_product_details():
         "hisabdo product" in SYSTEM_PROMPT.lower()
         or "api endpoints" in SYSTEM_PROMPT.lower()
     )
+
+# Department 3: grounded response rulebook tests
+
+def test_verified_source_conflict_is_detected_deterministically():
+    from src.financial_assistant.service import (
+        _find_verified_source_conflicts,
+    )
+
+    matches = [
+        {
+            **_verified_faq("faq-b", "Source B", "Evidence B"),
+            "conflict_key": "PDF availability",
+            "conflict_value": "Available",
+        },
+        {
+            **_verified_faq("faq-a", "Source A", "Evidence A"),
+            "conflict_key": "pdf availability",
+            "conflict_value": "Unavailable",
+        },
+    ]
+
+    result = _find_verified_source_conflicts(matches)
+
+    assert result is not None
+    key, entries = result
+    assert key == "pdf availability"
+    assert [entry["title"] for entry in entries] == [
+        "Source A",
+        "Source B",
+    ]
+
+
+def test_unverified_sources_do_not_trigger_conflict():
+    from src.financial_assistant.service import (
+        _find_verified_source_conflicts,
+    )
+
+    matches = [
+        {
+            **_verified_faq("faq-a"),
+            "conflict_key": "feature",
+            "conflict_value": "Available",
+        },
+        {
+            **_verified_faq("faq-b"),
+            "verified": False,
+            "conflict_key": "feature",
+            "conflict_value": "Unavailable",
+        },
+    ]
+
+    assert _find_verified_source_conflicts(matches) is None
+
+
+@pytest.mark.parametrize(
+    "message",
+    [
+        "I spent 500 on groceries",
+        "We just paid 1200 for transport",
+        "Maine 500 kharch kiye",
+    ],
+)
+def test_ambiguous_first_person_expense_is_identified(message):
+    from src.financial_assistant.service import (
+        _ambiguous_expense_statement,
+    )
+
+    assert _ambiguous_expense_statement(message) is True
+
+
+def test_explicit_expense_recording_is_not_ambiguous():
+    from src.financial_assistant.service import (
+        _ambiguous_expense_statement,
+    )
+
+    assert (
+        _ambiguous_expense_statement(
+            "Please record expense 500 groceries"
+        )
+        is False
+    )
+
+
+def test_expense_clarification_response_is_respectful_and_non_saving():
+    from src.financial_assistant.service import (
+        _expense_clarification_response,
+    )
+
+    response = _expense_clarification_response("test-conversation")
+
+    assert response.conversation_id == "test-conversation"
+    assert response.intent == "expense_clarification"
+    assert response.source == "intent_router"
+    assert "record this as an expense" in response.reply.lower()
+    assert "just mentioning it" in response.reply.lower()

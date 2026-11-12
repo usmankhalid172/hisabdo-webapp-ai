@@ -261,6 +261,51 @@ def _guard_generated_reply(reply: str) -> str:
     return reply
 
 
+def _filter_inline_citations(
+    reply: str,
+    matches: list,
+    allowed_document_ids: set[str] | None = None,
+) -> str:
+    """Keep inline citations only when exact labels exist in verified context."""
+    allowed_labels = set()
+
+    for match in matches:
+        if not isinstance(match, dict):
+            continue
+        if match.get("verified") is not True:
+            continue
+
+        document_id = match.get("id")
+        if allowed_document_ids is not None and document_id not in allowed_document_ids:
+            continue
+
+        content = match.get("text")
+        title = match.get("title")
+        section = match.get("section")
+
+        if not isinstance(content, str) or not content.strip():
+            continue
+        if not isinstance(title, str) or not title.strip():
+            continue
+
+        title = title.strip()
+        if isinstance(section, str) and section.strip():
+            allowed_labels.add(f"{title} ? {section.strip()}")
+        else:
+            allowed_labels.add(title)
+
+    citation_pattern = re.compile(r"\[Source:\s*([^\]]+?)\s*\]")
+
+    def keep_only_verified_label(match):
+        label = match.group(1).strip()
+        if label in allowed_labels:
+            return f"[Source: {label}]"
+        logger.warning("Unsupported inline citation label removed.")
+        return ""
+
+    return citation_pattern.sub(keep_only_verified_label, reply)
+
+
 def _general_response(
     request: ChatbotRequest,
     provider,
@@ -405,7 +450,10 @@ def _handle_transaction_intent(
     )
 
 
-def _build_verified_citations(matches: list) -> list[ChatbotCitation]:
+def _build_verified_citations(
+    matches: list,
+    allowed_document_ids: set[str] | None = None,
+) -> list[ChatbotCitation]:
     """
     Build citations only from retrieved documents with usable source URLs.
 
@@ -419,11 +467,23 @@ def _build_verified_citations(matches: list) -> list[ChatbotCitation]:
         if not isinstance(match, dict):
             continue
 
+        # Only explicitly verified documents may provide citations.
+        if match.get("verified") is not True:
+            continue
+
+        document_id = match.get("id")
+        if allowed_document_ids is not None:
+            if not isinstance(document_id, str) or document_id not in allowed_document_ids:
+                continue
+
         content = match.get("text")
         if not isinstance(content, str) or not content.strip():
             continue
 
-        title = match.get("title") or match.get("source") or "HisabDo Knowledge Base"
+        title = match.get("title") or match.get("source")
+        if not isinstance(title, str) or not title.strip():
+            continue
+
         source_url = match.get("source_url") or match.get("url")
         section = match.get("section")
 
@@ -433,7 +493,14 @@ def _build_verified_citations(matches: list) -> list[ChatbotCitation]:
 
         source_url = source_url.strip()
 
-        if not source_url.startswith(("https://", "http://")):
+        from urllib.parse import urlparse
+
+        parsed_url = urlparse(source_url)
+        if (
+            parsed_url.scheme not in ("https", "http")
+            or not parsed_url.netloc
+            or any(character.isspace() for character in source_url)
+        ):
             continue
 
         section = (
@@ -459,6 +526,68 @@ def _build_verified_citations(matches: list) -> list[ChatbotCitation]:
 
     return citations
 
+
+
+def _find_verified_source_conflicts(matches: list) -> tuple[str, list] | None:
+    """Detect conflicts only when verified entries share an explicit conflict key."""
+    grouped = {}
+
+    for match in matches:
+        if not isinstance(match, dict) or match.get("verified") is not True:
+            continue
+
+        key = match.get("conflict_key")
+        value = match.get("conflict_value")
+
+        if not isinstance(key, str) or not key.strip():
+            continue
+        if not isinstance(value, str) or not value.strip():
+            continue
+
+        normalized_key = key.strip().casefold()
+        grouped.setdefault(normalized_key, []).append(match)
+
+    for key in sorted(grouped):
+        entries = grouped[key]
+        distinct_values = {
+            entry["conflict_value"].strip()
+            for entry in entries
+        }
+        if len(distinct_values) > 1:
+            return key, sorted(
+                entries,
+                key=lambda item: (
+                    str(item.get("title") or item.get("source") or ""),
+                    str(item.get("id") or ""),
+                ),
+            )
+
+    return None
+
+
+def _ambiguous_expense_statement(message: str) -> bool:
+    """Identify first-person expense statements that need intent clarification."""
+    normalized = " ".join(message.lower().split())
+    patterns = (
+        r"\b(?:i|we)\s+(?:just\s+)?(?:spent|paid|bought|purchased)\b",
+        r"\b(?:maine|humne)\b.*\b(?:kharch|kharcha|ada|kharida)\b",
+    )
+    return any(re.search(pattern, normalized) for pattern in patterns)
+
+
+def _expense_clarification_response(
+    conversation_id: str,
+) -> ChatbotResponse:
+    return ChatbotResponse(
+        reply=(
+            "Are you asking me to record this as an expense, "
+            "or are you just mentioning it?"
+        ),
+        conversation_id=conversation_id,
+        intent="expense_clarification",
+        tokens_used=0,
+        source="intent_router",
+    )
 
 def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
     """Handle a chatbot request while preserving financial data boundaries."""
@@ -537,6 +666,10 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
     if transaction_response:
         return transaction_response
 
+    # Confirm intent before treating a first-person expense statement as a transaction.
+    if _ambiguous_expense_statement(request.message):
+        return _expense_clarification_response(request.conversation_id)
+
     # 5. Personal financial figures must come from the backend API.
     if _is_own_financial_data_query(request.message):
         try:
@@ -585,13 +718,18 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
     except Exception:
         logger.error("FAQ semantic retrieval failed; details withheld from logs.")
 
-        return ChatbotResponse(
-            reply=FAQ_RETRIEVAL_ERROR_REPLY,
-            conversation_id=request.conversation_id,
-            intent="product_faq",
-            tokens_used=0,
-            source="rag_error",
-        )
+        # Product-specific questions must not receive unsupported LLM answers.
+        if _is_product_specific_query(request.message):
+            return ChatbotResponse(
+                reply=FAQ_RETRIEVAL_ERROR_REPLY,
+                conversation_id=request.conversation_id,
+                intent="product_faq",
+                tokens_used=0,
+                source="rag_error",
+            )
+
+        # General questions can safely continue through the general LLM flow.
+        return _general_response(request, provider, history)
 
     # 7. No retrieved matches: avoid guessing about product-specific features.
     if not matches:
@@ -599,6 +737,39 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
             return _no_verified_faq_response(request)
 
         return _general_response(request, provider, history)
+
+    # Surface conflicts only when verified entries explicitly share a conflict key.
+    conflict = _find_verified_source_conflicts(matches)
+    if conflict:
+        conflict_key, conflict_entries = conflict
+        conflict_values = sorted({
+            entry["conflict_value"].strip()
+            for entry in conflict_entries
+        })
+        source_titles = sorted({
+            str(entry.get("title") or entry.get("source") or "Untitled source")
+            for entry in conflict_entries
+        })
+        conflict_ids = {
+            entry.get("id")
+            for entry in conflict_entries
+            if entry.get("id")
+        }
+        reply = (
+            f"The verified sources contain conflicting entries for "
+            f"'{conflict_key}'. Recorded values: "
+            f"{'; '.join(conflict_values)}. Sources: "
+            f"{'; '.join(source_titles)}. I can't determine which value "
+            f"is current. Please contact HisabDo support for confirmation."
+        )
+        return ChatbotResponse(
+            reply=reply,
+            conversation_id=request.conversation_id,
+            intent="product_faq",
+            tokens_used=0,
+            source="rag_conflict",
+            citations=_build_verified_citations(matches, conflict_ids),
+        )
 
     # 8. Normalize retrieved documents and build source-labelled context.
     context_chunks = []
@@ -616,8 +787,13 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
         context_chunks.append(
             {
                 "text": content,
+                "id": match.get("id"),
+                "title": title,
                 "source": match.get("source") or title,
                 "score": match.get("score"),
+                "source_url": match.get("source_url") or match.get("url"),
+                "section": match.get("section"),
+                "verified": match.get("verified") is True,
             }
         )
 
@@ -639,8 +815,25 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
     )
     reply = _guard_generated_reply(reply)
 
+    # Remove inline citation labels that do not exactly match verified context.
+    allowed_document_ids = {
+        chunk.document_id
+        for chunk in prepared_context
+        if chunk.verified is True and chunk.document_id
+    }
+    reply = _filter_inline_citations(
+        reply,
+        matches,
+        allowed_document_ids,
+    )
+
     # 11. Return only citations backed by retrieved source metadata.
-    citations = _build_verified_citations(matches)
+    allowed_document_ids = {
+        chunk.document_id
+        for chunk in prepared_context
+        if chunk.verified is True and chunk.document_id
+    }
+    citations = _build_verified_citations(matches, allowed_document_ids)
 
     return ChatbotResponse(
         reply=reply,
@@ -651,6 +844,7 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
         citations=citations,
     )
 
+
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     """Monitor the complete Department 3 request without logging user data."""
 
@@ -660,7 +854,12 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     try:
         response = _handle_chat_impl(request)
 
-        if response.source in {"rag_error", "backend_unavailable"}:
+        if response.source in {
+            "rag_error",
+            "rag_no_match",
+            "rag_conflict",
+            "backend_unavailable",
+        }:
             outcome = "fallback"
             monitoring_counters.increment("fallback")
         elif response.source == "policy_guard":
