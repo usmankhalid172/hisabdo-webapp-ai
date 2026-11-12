@@ -1,83 +1,95 @@
-import re
 
-# Configuration
-CHUNK_SIZE = 800
-CHUNK_OVERLAP = 100
-MIN_CHUNK_SIZE = 50
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+import tiktoken
 
 
-def chunk_text(text, document_id="doc_1", page_number=None):
+# Tokenizer configuration
+ENCODING_NAME = "cl100k_base"
+encoding = tiktoken.get_encoding(ENCODING_NAME)
+
+
+# Initial chunk configurations for HisabDo
+CHUNK_CONFIGS = {
+    "faq": {
+        "chunk_size": 300,
+        "chunk_overlap": 30,
+        "separators": ["\n\n", "\n", "? ", ". ", " ", ""],
+    },
+
+    "accounting_table": {
+        "chunk_size": 400,
+        "chunk_overlap": 40,
+        "separators": ["\n", " | ", " ", ""],
+    },
+
+    "workflow": {
+        "chunk_size": 500,
+        "chunk_overlap": 75,
+        "separators": ["\n\n", "\n", ". ", "; ", " ", ""],
+    },
+
+    "long_form": {
+        "chunk_size": 800,
+        "chunk_overlap": 120,
+        "separators": ["\n\n", "\n", ". ", " ", ""],
+    },
+}
+
+
+# Default configuration (long-form documentation)
+CHUNK_SIZE = CHUNK_CONFIGS["long_form"]["chunk_size"]
+CHUNK_OVERLAP = CHUNK_CONFIGS["long_form"]["chunk_overlap"]
+MIN_CHUNK_SIZE = 1
+
+
+def chunk_text(
+    text,
+    document_id="doc_1",
+    page_number=None,
+    content_type="long_form",
+):
+    """
+    Split text into token-based chunks.
+
+    Supported content types:
+    faq
+    accounting_table
+    workflow
+    long_form
+    """
+
     if not text or not text.strip():
         return []
 
-    # Split at sentence and paragraph boundaries
-    sentences = re.split(
-        r'(?<=[.!?])\s+|\n+',
-        text.strip()
+    if content_type not in CHUNK_CONFIGS:
+        raise ValueError(
+            f"Unsupported content type: {content_type}"
+        )
+
+    config = CHUNK_CONFIGS[content_type]
+
+    splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
+        encoding_name=ENCODING_NAME,
+        chunk_size=config["chunk_size"],
+        chunk_overlap=config["chunk_overlap"],
+        separators=config["separators"],
     )
 
-    # Split exceptionally long sentences at word boundaries
-    units = []
-    for sentence in sentences:
-        words = sentence.split()
-        current = ""
+    text_chunks = splitter.split_text(text.strip())
 
-        for word in words:
-            candidate = f"{current} {word}".strip()
+    results = []
 
-            if len(candidate) > CHUNK_SIZE:
-                if current:
-                    units.append(current)
-                current = word
-            else:
-                current = candidate
-
-        if current:
-            units.append(current)
-
-    chunks = []
-    current = ""
-
-    for unit in units:
-        candidate = f"{current} {unit}".strip()
-
-        if len(candidate) <= CHUNK_SIZE:
-            current = candidate
+    for index, chunk in enumerate(text_chunks):
+        if not chunk.strip():
             continue
 
-        if len(current) >= MIN_CHUNK_SIZE:
-            chunks.append(current)
-
-        # Start the next chunk with a word-boundary overlap
-        words = current.split()
-        overlap_words = []
-        overlap_length = 0
-
-        for word in reversed(words):
-            extra = len(word) + (1 if overlap_words else 0)
-
-            if overlap_length + extra > CHUNK_OVERLAP:
-                break
-
-            overlap_words.insert(0, word)
-            overlap_length += extra
-
-        current = " ".join(overlap_words)
-        current = f"{current} {unit}".strip()
-
-        # Safety fallback if overlap plus unit exceeds the limit
-        if len(current) > CHUNK_SIZE:
-            current = unit
-
-    if current and len(current) >= MIN_CHUNK_SIZE:
-        chunks.append(current)
-
-    return [
-        {
+        results.append({
             "document_id": document_id,
-            "chunk_index": index,
+            "chunk_index": len(results),
             "page_number": page_number,
+            "content_type": content_type,
+            "token_count": len(encoding.encode(chunk)),
             "text": chunk,
-        }
-        for index, chunk in enumerate(chunks)
-    ]
+        })
+
+    return results
