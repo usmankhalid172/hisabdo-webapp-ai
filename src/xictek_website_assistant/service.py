@@ -29,6 +29,7 @@ from .service_queries import (
     is_careers_query,
     is_core_services_query,
     is_personal_application_status_query,
+    is_portfolio_query,
 )
 from .vector_store import VectorStore
 
@@ -36,6 +37,11 @@ CAREERS_SOURCE_URL = "https://xicteksystems.com/careers"
 CAREERS_UNVERIFIED_REPLY = (
     "I couldn't verify that recruitment detail from the available Careers content. "
     "Please check the official XICTEK Careers page for current information [1]."
+)
+PORTFOLIO_SOURCE_URL = "https://xicteksystems.com/portfolio"
+PORTFOLIO_UNVERIFIED_REPLY = (
+    "I couldn't verify that project detail from the available Portfolio content. "
+    f"Please check [Our Work | XICTEK Systems]({PORTFOLIO_SOURCE_URL}) for the published information."
 )
 
 
@@ -55,6 +61,19 @@ def _source_context(matches) -> str | None:
 def _citations_are_valid(reply: str, source_count: int) -> bool:
     cited = [int(value) for value in re.findall(r"\[(\d+)\]", reply)]
     return bool(cited) and all(1 <= number <= source_count for number in cited)
+
+
+def _portfolio_citations_are_valid(reply: str, matches) -> bool:
+    """Require inline markdown links to exactly match retrieved portfolio sources."""
+    citations = re.findall(r"\[([^\]]+)\]\((https?://[^)]+)\)", reply)
+    if not citations:
+        return False
+    valid = {
+        (match.chunk.title, match.chunk.url)
+        for match in matches
+        if match.chunk.url
+    }
+    return all(citation in valid for citation in citations)
 
 
 _CURRENT_OPENING_CLAIM = re.compile(
@@ -214,7 +233,8 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
         return _careers_fallback_response(request)
 
     careers_query = is_careers_query(message)
-    core_services_query = not careers_query and is_core_services_query(message)
+    portfolio_query = not careers_query and is_portfolio_query(message)
+    core_services_query = not careers_query and not portfolio_query and is_core_services_query(message)
     store = _load_store()
     matches = []
     if len(store) > 0:
@@ -223,18 +243,20 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
             query_vector,
             top_k=(
                 settings.careers_top_k if careers_query
+                else settings.top_k if portfolio_query
                 else settings.core_services_top_k if core_services_query
                 else settings.top_k
             ),
             relevance_threshold=(
                 settings.careers_relevance_threshold if careers_query
+                else settings.relevance_threshold if portfolio_query
                 else settings.core_services_relevance_threshold if core_services_query
                 else settings.relevance_threshold
             ),
             url_path_prefix=(
-                "/careers" if careers_query else "/services" if core_services_query else None
+                "/careers" if careers_query else "/portfolio" if portfolio_query else "/services" if core_services_query else None
             ),
-            url_host="xicteksystems.com" if careers_query else None,
+            url_host="xicteksystems.com" if careers_query or portfolio_query else None,
         )
 
     context = _source_context(matches)
@@ -242,6 +264,14 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
 
     if careers_query and not matches:
         return _careers_fallback_response(request)
+    if portfolio_query and not matches:
+        return XictekChatResponse(
+            reply=PORTFOLIO_UNVERIFIED_REPLY,
+            conversation_id=request.conversation_id,
+            sources=[SourceRef(title="Our Work | XICTEK Systems", url=PORTFOLIO_SOURCE_URL, score=0.0)],
+            intent="general",
+            tokens_used=0,
+        )
 
     provider = get_llm_provider()
     try:
@@ -258,6 +288,15 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
 
     if careers_query and not _citations_are_valid(reply, len(matches)):
         return _careers_fallback_response(request)
+
+    if portfolio_query and not _portfolio_citations_are_valid(reply, matches):
+        return XictekChatResponse(
+            reply=PORTFOLIO_UNVERIFIED_REPLY,
+            conversation_id=request.conversation_id,
+            sources=[SourceRef(title="Our Work | XICTEK Systems", url=PORTFOLIO_SOURCE_URL, score=0.0)],
+            intent="general",
+            tokens_used=0,
+        )
 
     # A page that once listed a vacancy is not proof that it is open now.
     # Until ingestion exposes freshness metadata, only a recent explicit

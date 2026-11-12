@@ -1,4 +1,4 @@
-"""Shared helpers for identifying questions about Core Services."""
+"""Shared helpers for identifying website section questions."""
 from __future__ import annotations
 
 import re
@@ -22,6 +22,13 @@ CAREERS_QUERY_TERMS = (
     "job offer", "position",
     "positions", "opening", "openings", "role", "roles", "resume", "cv",
     "interview", "salary", "compensation", "eligibility", "benefits",
+)
+
+PORTFOLIO_QUERY_TERMS = (
+    "portfolio", "case study", "case studies", "our work", "past project",
+    "past projects", "project outcome", "project outcomes", "project result",
+    "project results", "hisabdo", "flagship product", "technology stack",
+    "tech stack", "built with", "screenshots", "digital ledger",
 )
 
 PERSONAL_APPLICATION_STATUS_TERMS = (
@@ -50,6 +57,15 @@ def is_careers_query(message: str) -> bool:
     return any(
         f" {normalize_service_query_text(term)} " in normalized
         for term in CAREERS_QUERY_TERMS
+    )
+
+
+def is_portfolio_query(message: str) -> bool:
+    """Identify portfolio and project-summary questions for the portfolio route."""
+    normalized = f" {normalize_service_query_text(message)} "
+    return any(
+        f" {normalize_service_query_text(term)} " in normalized
+        for term in PORTFOLIO_QUERY_TERMS
     )
 
 
