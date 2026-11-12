@@ -1,3 +1,2 @@
-numpy
-scikit-learn
-pytest
+# Core code uses the Python standard library only (Python 3.9+).
+# Optional: pytest>=7 to run tests with pytest instead of unittest.
