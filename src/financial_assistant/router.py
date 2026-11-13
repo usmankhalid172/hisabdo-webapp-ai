@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Header
 
 from ..schemas import ChatbotRequest, ChatbotResponse
 from ..security import require_customer_access, require_internal_token
-from .service import _is_own_financial_data_query, handle_chat
+from .service import _is_own_financial_data_query, _is_financial_followup, handle_chat
 
 router = APIRouter(
     prefix="/api/v1",
@@ -25,7 +25,12 @@ def chatbot(
         "pdf mein", "pdf me", "report pdf"
     ))
 
-    if pdf_requested and _is_own_financial_data_query(payload.message):
+    financial_context = (
+        _is_own_financial_data_query(payload.message)
+        or _is_financial_followup(payload.message, payload.history)
+    )
+
+    if pdf_requested and financial_context:
         require_customer_access(payload.user_id, authenticated_user_id)
         response = handle_chat(payload)
         response.reply = "Your financial summary PDF is ready to download."
@@ -34,7 +39,7 @@ def chatbot(
         )
         return response
 
-    if _is_own_financial_data_query(payload.message):
+    if financial_context:
         require_customer_access(payload.user_id, authenticated_user_id)
     return handle_chat(payload)
 

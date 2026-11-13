@@ -1,4 +1,4 @@
-from src.financial_assistant.service import handle_chat
+﻿from src.financial_assistant.service import handle_chat
 from src.schemas import ChatbotRequest
 
 
@@ -51,7 +51,7 @@ def test_chatbot_endpoint_returns_valid_shape(client, auth_headers):
 
 
 def test_history_is_passed_to_llm_provider(monkeypatch):
-    """service.py must forward request.history into generate_reply —
+    """service.py must forward request.history into generate_reply â€”
     regression guard for the bug where history was silently dropped."""
     captured = {}
 
@@ -223,3 +223,60 @@ def test_citation_requires_direct_source_word_support():
         "You can export reports from the dashboard every Friday.",
         source,
     )
+
+
+
+def test_financial_followup_requires_authenticated_customer(client, auth_headers):
+    headers = {
+        key: value
+        for key, value in auth_headers.items()
+        if key.lower() != "x-authenticated-user-id"
+    }
+
+    response = client.post(
+        "/api/v1/chatbot",
+        json={
+            "user_id": "user-42",
+            "message": "What about last month?",
+            "conversation_id": "financial-followup-1",
+            "history": [
+                {"role": "user", "content": "What is my balance?"},
+                {"role": "assistant", "content": "Your balance is 5000 PKR."},
+            ],
+        },
+        headers=headers,
+    )
+
+    assert response.status_code == 401
+    assert response.json()["error_code"] == "UNAUTHENTICATED_CUSTOMER"
+
+def test_multiturn_followup_preserves_conversation_history(monkeypatch):
+    captured = {}
+
+    class SpyProvider:
+        def generate_reply(self, message, context=None, history=None):
+            captured["message"] = message
+            captured["history"] = history
+            return "Your requested summary is not available.", 10
+
+    monkeypatch.setattr(
+        "src.financial_assistant.service.get_llm_provider",
+        lambda: SpyProvider(),
+    )
+
+    history = [
+        {"role": "user", "content": "How do I categorize an expense?"},
+        {"role": "assistant", "content": "HisabDo provides expense categorization."},
+    ]
+
+    request = ChatbotRequest(
+        user_id="user-1",
+        message="How do I categorize an expense?",
+        conversation_id="multiturn-context-test",
+        history=history,
+    )
+
+    handle_chat(request)
+
+    assert captured["message"] == "How do I categorize an expense?"
+    assert captured["history"] == history

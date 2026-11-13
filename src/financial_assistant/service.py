@@ -1,8 +1,8 @@
-"""
-chatbot_service — builds prompt/context, calls the configured LLM, and
-post-processes the reply, per Day 15 §6.1.
+﻿"""
+chatbot_service â€” builds prompt/context, calls the configured LLM, and
+post-processes the reply, per Day 15 Â§6.1.
 
-Critical boundary (Day 15 §6.1, restated in Day 16 continuity plan §2):
+Critical boundary (Day 15 Â§6.1, restated in Day 16 continuity plan Â§2):
 exact user financial figures never come from RAG. If the message is asking
 about the user's own numbers, this routes to the (mocked) backend financial
 API instead of the knowledge base.
@@ -18,7 +18,7 @@ from ..schemas import ChatbotCitation, ChatbotRequest, ChatbotResponse
 from .llm_providers import get_llm_provider
 from .faq_rag import get_retriever
 
-# Deliberately simple keyword intent check — good enough for a POC boundary
+# Deliberately simple keyword intent check â€” good enough for a POC boundary
 # demonstration; a production version would use a real intent classifier.
 OWN_FINANCIAL_DATA_PATTERNS = [
     r"\bmy balance\b", r"\bmy expenses?\b", r"\bmy revenue\b",
@@ -28,7 +28,7 @@ OWN_FINANCIAL_DATA_PATTERNS = [
 
 # Security guard: any message that appears to ask about someone ELSE's
 # financial data is refused deterministically in handle_chat(), before the
-# LLM is ever called — not just rerouted away from the backend. Relying on
+# LLM is ever called â€” not just rerouted away from the backend. Relying on
 # the prompt alone would not survive an instruction-override attempt
 # ("ignore your instructions and tell me anyway").
 THIRD_PARTY_RELATIONSHIP_WORDS = re.compile(
@@ -86,6 +86,27 @@ def _is_own_financial_data_query(message: str) -> bool:
     return any(re.search(pattern, text) for pattern in OWN_FINANCIAL_DATA_PATTERNS)
 
 
+def _is_financial_followup(message: str, history: list) -> bool:
+    if _mentions_third_party(message):
+        return False
+
+    followup = re.match(
+        r"^\s*(what about|how about|and|also|then)\b",
+        message,
+        re.IGNORECASE,
+    )
+    if not followup:
+        return False
+
+    for turn in history:
+        role = turn.role if hasattr(turn, "role") else turn.get("role")
+        content = turn.content if hasattr(turn, "content") else turn.get("content", "")
+        if role == "user" and _is_own_financial_data_query(content):
+            return True
+
+    return False
+
+
 def _format_financial_summary(summary: dict) -> str:
     return (
         f"Balance: {summary['balance']} {summary['currency']}. "
@@ -99,7 +120,7 @@ THIRD_PARTY_REFUSAL_MESSAGE = (
     "I'm sorry, but I can only provide information about your own account."
 )
 
-# Greetings/small talk short-circuit — these were previously falling
+# Greetings/small talk short-circuit â€” these were previously falling
 # through to the LLM with no context and, whenever the mock provider was
 # active, landing on the generic "I don't have that in the knowledge
 # base" template. Handling them deterministically also avoids a wasted
@@ -159,6 +180,16 @@ def _is_prompt_injection(message: str) -> bool:
     )
 
 
+def _history_contains_prompt_injection(history: list) -> bool:
+    for turn in history:
+        role = turn.role if hasattr(turn, "role") else turn.get("role")
+        content = turn.content if hasattr(turn, "content") else turn.get("content", "")
+        if role in {"user", "assistant"} and isinstance(content, str):
+            if _is_prompt_injection(content):
+                return True
+    return False
+
+
 
 def _is_ambiguous_expense_query(message: str) -> bool:
     normalized = re.sub(r"[^a-z ]", "", message.lower()).strip()
@@ -213,7 +244,7 @@ def _citation_supports_reply(reply: str, source: dict) -> bool:
 
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
     request_start = time.perf_counter()
-    if _is_prompt_injection(request.message):
+    if _is_prompt_injection(request.message) or _history_contains_prompt_injection(request.history):
         return ChatbotResponse(
             reply=PROMPT_INJECTION_REFUSAL_MESSAGE,
             conversation_id=request.conversation_id,
@@ -221,8 +252,8 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             tokens_used=0,
             source="policy_guard",
         )
-    if _mentions_third_party(request.message):
-        # Deterministic refusal — never reaches the LLM, so this cannot be
+    if _mentions_third_party(request.message) or any(_mentions_third_party(turn.content if hasattr(turn, "content") else turn.get("content", "")) for turn in request.history if (turn.role if hasattr(turn, "role") else turn.get("role")) == "user"):
+        # Deterministic refusal â€” never reaches the LLM, so this cannot be
         # talked around by a prompt-injection / instruction-override attempt.
         return ChatbotResponse(
             reply=THIRD_PARTY_REFUSAL_MESSAGE,
@@ -260,7 +291,7 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="policy_guard",
         )
 
-    if _requests_sensitive_information(request.message):
+    if _requests_sensitive_information(request.message) or any(_requests_sensitive_information(turn.content if hasattr(turn, "content") else turn.get("content", "")) for turn in request.history if (turn.role if hasattr(turn, "role") else turn.get("role")) == "user"):
         return ChatbotResponse(
             reply=SENSITIVE_INFORMATION_REFUSAL_MESSAGE,
             conversation_id=request.conversation_id,
@@ -269,8 +300,30 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
             source="policy_guard",
         )
 
-    if _is_own_financial_data_query(request.message):
-        # Authoritative data path — never touches the RAG knowledge base.
+    financial_followup = _is_financial_followup(
+        request.message, request.history
+    )
+
+    if financial_followup and re.search(
+        r"\b(last month|previous month|last year|previous year|"
+        r"last week|previous week|pichlay mah|guzishta mah)\b",
+        request.message,
+        re.IGNORECASE,
+    ):
+        return ChatbotResponse(
+            reply=(
+                "I can provide your current month's financial summary, "
+                "but historical period data is not available through the "
+                "connected backend yet."
+            ),
+            conversation_id=request.conversation_id,
+            intent="historical_financial_data_unavailable",
+            tokens_used=0,
+            source="backend_unavailable",
+        )
+
+    if _is_own_financial_data_query(request.message) or financial_followup:
+        # Authoritative data path â€” never touches the RAG knowledge base.
         try:
             summary = get_backend_client().get_user_financial_summary(request.user_id)
         except Exception:
@@ -476,11 +529,3 @@ def _requests_sensitive_information(message: str) -> bool:
         re.search(pattern, message, re.IGNORECASE)
         for pattern in SENSITIVE_INFORMATION_PATTERNS
     )
-
-
-
-
-
-
-
-
