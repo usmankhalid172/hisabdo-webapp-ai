@@ -25,6 +25,7 @@ from .llm_providers import get_llm_provider
 from .guardrails import (
     get_input_guardrail,
     get_history_guardrail,
+    history_has_prompt_injection,
     contains_sensitive_output,
     wrap_untrusted_context,
     INJECTION_REPLY,
@@ -93,7 +94,10 @@ SMALL_TALK_REPLIES = {
 
 FAQ_NO_MATCH_REPLY = (
     "I couldn't find relevant verified information in the HisabDo "
-    "documentation or FAQs. Please contact HisabDo support for confirmation."
+    "documentation or FAQs, so I can't confirm this detail. "
+    "This chat does not have a verified support contact or ticket handoff, "
+    "so I can't submit a request. Please ask the HisabDo product owner "
+    "for the approved support route."
 )
 
 FAQ_RETRIEVAL_ERROR_REPLY = (
@@ -116,6 +120,22 @@ PDF_REQUEST_TERMS = re.compile(
     r"\b(report|statement)\b.{0,50}\b(download|export|generate|create|pdf|share)\b|"
     r"\u067e\u06cc\s*\u0688\s*\u06cc\s*\u0627\u06cc\u0641|"
     r"\u0631\u067e\u0648\u0631\u0679\s*(\u0688\u0627\u0624\u0646\s*\u0644\u0648\u0688|\u0628\u0646\u0627|\u0686\u0627\u06c1\u06cc\u06d2|\u0686\u0627\u06c1\u06cc\u0626\u06d2|\u0628\u06be\u06cc\u062c)",
+    re.IGNORECASE,
+)
+
+ACCOUNT_SUPPORT_PATTERN = re.compile(
+    r"\b("
+    r"can't log in|cant log in|cannot log in|cannot login|can't login|"
+    r"login problem|login issue|unable to log in|"
+    r"locked out|account locked|account is locked|locked account|"
+    r"account disabled|account suspended|"
+    r"reset my password|password reset|forgot my password|"
+    r"change my email|change email address|change my phone|"
+    r"change phone number|change account details|"
+    r"delete my account|close my account|"
+    r"account access|access my account|"
+    r"verification code|account verification"
+    r")\b",
     re.IGNORECASE,
 )
 
@@ -153,6 +173,68 @@ def _is_pdf_request(message: str) -> bool:
 def _is_product_specific_query(message: str) -> bool:
     """Identify questions about HisabDo features and app-specific steps."""
     return bool(PRODUCT_SPECIFIC_TERMS.search(message))
+
+
+# Detect short follow-up questions that depend on the previous product question.
+FAQ_FOLLOW_UP_PATTERN = re.compile(
+    r"^\s*(?:"
+    r"what about|how about|and what about|"
+    r"what if|how does that work|"
+    r"can i do that|does it also|"
+    r"what about that|and this|"
+    r"what about this|"
+    r"how about this"
+    r")\b",
+    re.IGNORECASE,
+)
+
+
+def _build_faq_retrieval_query(
+    message: str,
+    history: list[dict],
+) -> str:
+    """
+    Resolve short product follow-ups using the latest relevant user question.
+
+    Previous assistant replies are never used as retrieval evidence.
+    """
+    current_message = message.strip()
+
+    if not FAQ_FOLLOW_UP_PATTERN.search(current_message):
+        return current_message
+
+    previous_user_message = next(
+        (
+            turn.get("content", "").strip()
+            for turn in reversed(history)
+            if (
+                turn.get("role") == "user"
+                and isinstance(turn.get("content"), str)
+                and turn.get("content", "").strip()
+            )
+        ),
+        "",
+    )
+
+    if not previous_user_message:
+        return current_message
+
+    # Do not carry forward third-party financial requests.
+    if _mentions_third_party(previous_user_message):
+        return current_message
+
+    # Do not use personal financial questions as product FAQ context.
+    if _is_own_financial_data_query(previous_user_message):
+        return current_message
+
+    # Reuse context only when the previous user question was product-specific.
+    if not _is_product_specific_query(previous_user_message):
+        return current_message
+
+    return (
+        f"{previous_user_message}\n"
+        f"Follow-up: {current_message}"
+    )
 
 
 def _no_verified_faq_response(
@@ -527,7 +609,6 @@ def _build_verified_citations(
     return citations
 
 
-
 def _find_verified_source_conflicts(matches: list) -> tuple[str, list] | None:
     """Detect conflicts only when verified entries share an explicit conflict key."""
     grouped = {}
@@ -589,6 +670,7 @@ def _expense_clarification_response(
         source="intent_router",
     )
 
+
 def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
     """Handle a chatbot request while preserving financial data boundaries."""
 
@@ -600,6 +682,16 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
             reply=INVALID_INPUT_REPLY,
             conversation_id=request.conversation_id,
             intent="invalid_history",
+            tokens_used=0,
+            source="policy_guard",
+        )
+
+    if history_has_prompt_injection(history):
+        logger.warning("Conversation history blocked by prompt-injection guardrail")
+        return ChatbotResponse(
+            reply=INJECTION_REPLY,
+            conversation_id=request.conversation_id,
+            intent="prompt_injection",
             tokens_used=0,
             source="policy_guard",
         )
@@ -631,7 +723,26 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
             source="policy_guard",
         )
 
-    # 2. Handle greetings without retrieval or LLM calls.
+    # 2. Account-level intervention requires an authorized human review.
+    # No verified support channel or ticket handoff is configured here.
+    if ACCOUNT_SUPPORT_PATTERN.search(request.message):
+        return ChatbotResponse(
+            reply=(
+                "This account issue needs an authorized HisabDo support "
+                "review. I can't access or change account settings, submit "
+                "a support ticket, or connect you to a human agent from "
+                "this chat. A verified support contact or handoff is not "
+                "configured here, so please ask the HisabDo product owner "
+                "for the approved support route. Never share your password, "
+                "PIN, or OTP in this chat."
+            ),
+            conversation_id=request.conversation_id,
+            intent="account_support",
+            tokens_used=0,
+            source="support_handoff_unavailable",
+        )
+
+    # 3. Handle greetings without retrieval or LLM calls.
     small_talk = _classify_small_talk(request.message)
 
     if small_talk:
@@ -710,16 +821,23 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
         )
 
     # 6. Retrieve FAQ and product documentation.
+    # Short product follow-ups may reuse the latest relevant user question.
+    # Previous assistant responses are never used to construct retrieval evidence.
+    faq_query = _build_faq_retrieval_query(
+        request.message,
+        history,
+    )
+
     try:
         matches = get_retriever().retrieve(
-            request.message,
+            faq_query,
             top_k=3,
         )
     except Exception:
         logger.error("FAQ semantic retrieval failed; details withheld from logs.")
 
         # Product-specific questions must not receive unsupported LLM answers.
-        if _is_product_specific_query(request.message):
+        if _is_product_specific_query(faq_query):
             return ChatbotResponse(
                 reply=FAQ_RETRIEVAL_ERROR_REPLY,
                 conversation_id=request.conversation_id,
@@ -733,7 +851,7 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
 
     # 7. No retrieved matches: avoid guessing about product-specific features.
     if not matches:
-        if _is_product_specific_query(request.message):
+        if _is_product_specific_query(faq_query):
             return _no_verified_faq_response(request)
 
         return _general_response(request, provider, history)
@@ -760,7 +878,9 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
             f"'{conflict_key}'. Recorded values: "
             f"{'; '.join(conflict_values)}. Sources: "
             f"{'; '.join(source_titles)}. I can't determine which value "
-            f"is current. Please contact HisabDo support for confirmation."
+            f"is current. This chat has no verified support contact or "
+            f"ticket handoff, so I can't submit a request. Please ask the "
+            f"HisabDo product owner for the approved support route."
         )
         return ChatbotResponse(
             reply=reply,
@@ -802,12 +922,13 @@ def _handle_chat_impl(request: ChatbotRequest) -> ChatbotResponse:
 
     # 9. Invalid or empty retrieved content must not trigger invented instructions.
     if not context:
-        if _is_product_specific_query(request.message):
+        if _is_product_specific_query(faq_query):
             return _no_verified_faq_response(request)
 
         return _general_response(request, provider, history)
 
     # 10. Generate an answer using retrieved context.
+    # Keep the actual current user message unchanged for the answer generation.
     reply, tokens = provider.generate_reply(
         request.message,
         context=context,

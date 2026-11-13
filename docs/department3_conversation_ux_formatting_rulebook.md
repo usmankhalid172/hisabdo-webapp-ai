@@ -1,4 +1,4 @@
-﻿# Department 3 — Conversation UX & Formatting Rulebook
+# Department 3 — Conversation UX & Formatting Rulebook
 
 **Project:** HisabDo
 **Department:** 3
@@ -65,3 +65,11 @@ Escalate account-level or unresolved product issues only through an officially v
 
 ## 9. Verification boundaries
 Focused chatbot/security and intent-router tests passed on 2026-11-13. This does not establish production backend readiness, real-account isolation, live support availability, or complete budget-summary multi-turn behavior. These require separate verification.
+
+## 10. Final verification update — 2026-11-13
+
+**Implementation and automated verification status:** Full project test suite passed: 453 passed, 4 skipped, 0 failed.
+
+The additional tests cover conversation-history injection detection, account-support safe fallback, third-party account-support routing priority, and product FAQ follow-up context selection.
+
+The four skipped tests remain blocked by unavailable grounded financial-data integrations. Human-support handoff is not implemented or independently verified. Production backend identity, isolation and secret configuration still require deployment-level verification.

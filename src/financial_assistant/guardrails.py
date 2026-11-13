@@ -109,6 +109,27 @@ def get_history_guardrail(history: list[dict]) -> bool:
     return total_chars <= MAX_HISTORY_TOTAL_CHARS
 
 
+def history_has_prompt_injection(history: list[dict]) -> bool:
+    """Detect prompt injection in prior user messages, not assistant replies.
+
+    Call after get_history_guardrail() has validated the history structure.
+    """
+    if not isinstance(history, list):
+        return False
+
+    for turn in history:
+        if not isinstance(turn, dict) or turn.get("role") != "user":
+            continue
+
+        content = turn.get("content")
+        if isinstance(content, str) and any(
+            pattern.search(content) for pattern in _COMPILED_INJECTION
+        ):
+            return True
+
+    return False
+
+
 def contains_sensitive_output(reply: str) -> bool:
     """Detect obvious credential/token disclosure in generated output."""
     if not isinstance(reply, str):
