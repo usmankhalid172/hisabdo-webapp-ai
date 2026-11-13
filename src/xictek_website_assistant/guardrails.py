@@ -73,6 +73,10 @@ _PRIVATE_COMPANY_DATA_PATTERNS = [
     r"\b(private|confidential|internal|nonpublic)\b.{0,50}\b(contact|phone|email|address|salary|records?|details)\b.{0,40}\b(employees?|staff|candidates?|applicants?)\b",
     r"\b(employee|staff|candidate|applicant)\b.{0,35}\b(personal|private|contact details|address|phone|email|salary|record|data)\b",
     r"\b(list|give|show|reveal|provide|share)\b.{0,35}\b(employee|candidate|applicant)\b.{0,35}\b(phone|email|address|salary|record|data)\b",
+    r"\b(confidential|private|internal|nonpublic)\b.{0,45}\b(metrics?|revenue|sales|profit|savings|roi|conversion|growth|kpis?|financial results|business results)\b",
+    r"\b(confidential|private|internal|nonpublic)\b.{0,30}\b(case study|case studies|portfolio|project)\b.{0,35}\b(metrics?|revenue|sales|profit|savings|roi|results?)\b",
+    r"\b(personal|private)\b.{0,30}\b(email|phone number|address|contact details)\b.{0,30}\b(employees?|staff|candidates?|applicants?)\b",
+    r"\b(personal|private)\b.{0,35}\b(phone numbers?|emails?|addresses?|contact details)\b.{0,35}\b(employees?|staff|candidates?|applicants?)\b",
 ]
 
 _ALL_INJECTION_PATTERNS = [
@@ -85,9 +89,26 @@ _ALL_INJECTION_PATTERNS = [
     )
 ]
 
+# High-confidence harmful requests unrelated to the public company assistant.
+# Keep these narrow to avoid blocking defensive security discussions.
+_OFF_TOPIC_ABUSE_PATTERNS = [
+    r"\b(write|create|make|build|send|deploy)\b.{0,35}\b(malware|ransomware|phishing|credential theft|keylogger)\b",
+    r"\b(steal|exfiltrate|harvest)\b.{0,35}\b(passwords?|credentials?|personal data|accounts?)\b",
+    r"\b(doxx|dox)\b.{0,35}\b(person|employee|private|address|phone|email)\b",
+    r"\b(build|make|instructions? for)\b.{0,35}\b(bomb|explosive|weapon)\b",
+]
+_ALL_OFF_TOPIC_ABUSE_PATTERNS = [
+    re.compile(pattern, re.IGNORECASE) for pattern in _OFF_TOPIC_ABUSE_PATTERNS
+]
+
 INJECTION_REFUSAL_MESSAGE = (
     "I can only help with questions about XICTEK Systems and HisabDo — "
     "I'm not able to share internal instructions, system details, or act outside that scope."
+)
+
+OFF_TOPIC_ABUSE_REFUSAL_MESSAGE = (
+    "I can't help create malware, steal data, expose private information, or plan harm. "
+    "I can help with public information about XICTEK Systems and HisabDo."
 )
 
 OUT_OF_SCOPE_HINT = (
@@ -98,6 +119,11 @@ OUT_OF_SCOPE_HINT = (
 
 def looks_like_injection_or_extraction(message: str) -> bool:
     return any(pattern.search(message) for pattern in _ALL_INJECTION_PATTERNS)
+
+
+def looks_like_off_topic_abuse(message: str) -> bool:
+    """Catch a narrow set of explicit harmful requests before retrieval/LLM."""
+    return any(pattern.search(message) for pattern in _ALL_OFF_TOPIC_ABUSE_PATTERNS)
 
 
 def exceeds_length_limit(message: str, max_chars: int) -> bool:

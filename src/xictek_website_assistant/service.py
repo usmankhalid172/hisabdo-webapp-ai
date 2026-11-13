@@ -20,8 +20,10 @@ from .embeddings import embed_query
 from .formatting import format_core_services_output
 from .guardrails import (
     INJECTION_REFUSAL_MESSAGE,
+    OFF_TOPIC_ABUSE_REFUSAL_MESSAGE,
     exceeds_length_limit,
     looks_like_injection_or_extraction,
+    looks_like_off_topic_abuse,
 )
 from .llm_client import get_llm_provider
 from .schemas import IndexStatsResponse, SourceRef, XictekChatRequest, XictekChatResponse
@@ -203,11 +205,20 @@ def handle_chat(request: XictekChatRequest) -> XictekChatResponse:
             intent="declined_prompt_injection",
         )
 
+    if looks_like_off_topic_abuse(message):
+        return XictekChatResponse(
+            reply=OFF_TOPIC_ABUSE_REFUSAL_MESSAGE,
+            conversation_id=request.conversation_id,
+            intent="declined_out_of_scope",
+            tokens_used=0,
+        )
+
     # History (including role labels) is client-supplied on every call.
     # Scan every turn because a caller could label an attacker-controlled
     # instruction as an assistant turn to bypass a user-role-only check.
     if any(
         looks_like_injection_or_extraction(turn.content)
+        or looks_like_off_topic_abuse(turn.content)
         for turn in request.history
     ):
         return XictekChatResponse(

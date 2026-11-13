@@ -27,8 +27,14 @@ CAREERS_QUERY_TERMS = (
 PORTFOLIO_QUERY_TERMS = (
     "portfolio", "case study", "case studies", "our work", "past project",
     "past projects", "project outcome", "project outcomes", "project result",
-    "project results", "hisabdo", "flagship product", "technology stack",
-    "tech stack", "built with", "screenshots", "digital ledger",
+    "project results", "flagship product", "technology stack", "tech stack",
+    "built with", "screenshots",
+)
+
+HISABDO_PROJECT_DETAIL_TERMS = (
+    "technology", "technologies", "stack", "outcome", "outcomes", "challenge",
+    "approach", "built with", "screenshots", "flagship", "result", "results",
+    "measurable",
 )
 
 PERSONAL_APPLICATION_STATUS_TERMS = (
@@ -63,10 +69,17 @@ def is_careers_query(message: str) -> bool:
 def is_portfolio_query(message: str) -> bool:
     """Identify portfolio and project-summary questions for the portfolio route."""
     normalized = f" {normalize_service_query_text(message)} "
-    return any(
+    if any(
         f" {normalize_service_query_text(term)} " in normalized
         for term in PORTFOLIO_QUERY_TERMS
+    ):
+        return True
+    has_hisabdo = " hisabdo " in normalized
+    asks_project_detail = any(
+        f" {normalize_service_query_text(term)} " in normalized
+        for term in HISABDO_PROJECT_DETAIL_TERMS
     )
+    return has_hisabdo and asks_project_detail
 
 
 def is_personal_application_status_query(message: str) -> bool:

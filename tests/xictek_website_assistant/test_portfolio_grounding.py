@@ -8,7 +8,7 @@ from src.xictek_website_assistant.service_queries import is_portfolio_query
 from src.xictek_website_assistant.vector_store import Chunk, VectorStore
 
 
-PORTFOLIO_URL = "https://www.xicteksystems.com/portfolio"
+PORTFOLIO_URL = "https://xicteksystems.com/portfolio"
 PORTFOLIO_TITLE = "Our Work | XICTEK Systems"
 
 
