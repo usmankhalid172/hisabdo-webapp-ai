@@ -26,6 +26,7 @@ from .faq_rag import get_retriever
 from .grounding import GroundedAnswerer, KbRetriever
 from . import guardrails, telemetry
 from .grounding.answer import pre_clarify
+from . import conversation
 from .grounding.retrieval import KB_PATH, validate_kb
 
 # Deliberately simple keyword intent check — good enough for a POC boundary
@@ -290,7 +291,8 @@ _ROUTE_BY_SOURCE = {"guardrail": "guard", "output_guard": "guard", "policy_guard
                     "backend_financial_api": "account_data", "backend_unavailable": "account_data",
                     "dialogue": "transaction", "rag": "knowledge", "kb_fallback": "knowledge",
                     "clarification": "knowledge", "kb_unavailable": "knowledge", "llm_general": "general",
-                    "llm_unavailable": "general", "greeting_fastpath": "general", "service_fallback": "error"}
+                    "llm_unavailable": "general", "greeting_fastpath": "general", "service_fallback": "error",
+                    "escalation": "support"}
 
 
 def _note(**kv) -> None:
@@ -345,10 +347,33 @@ def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
         _TURN.reset(token)
 
 
+_REPEAT_KIND = {"kb_fallback": "fallback", "guardrail": "boundary", "escalation": "escalation"}
+
+
 def _guarded_chat(request: ChatbotRequest) -> ChatbotResponse:
+    """Conversation UX rules (U4-U6, docs/dept3-conversation-ux-rulebook.md) around the guarded flow."""
+    last = next((h.content for h in reversed(request.history) if h.role == "assistant"), None)
+    if (mapped := conversation.follow_up(request.message, last)) is not None:   # U6
+        request = request.model_copy(update={"message": mapped})
+    response = _guarded_core(request)
+    kind = _REPEAT_KIND.get(response.source or "")
+    if kind and not response.citations and request.history:   # U5: never the same paragraph twice
+        if kind == "fallback" and response.answer_status == "out_of_scope":
+            kind = "boundary"
+        earlier = [h.content for h in request.history if h.role == "assistant"]
+        response.reply = conversation.dedupe(response.reply, kind, earlier, request.message)
+    return response
+
+
+def _guarded_core(request: ChatbotRequest) -> ChatbotResponse:
     """Guardrails wrap the whole flow: input checks first, output checks on every reply."""
     if get_settings().guardrails_enabled:
         verdict = guardrails.check_input(request.message)
+        if verdict is None and (esc := conversation.escalation(request.message)) is not None:
+            # U4: account-level problems go to human support, never to demo figures or an entry flow
+            log.info("support_escalation")   # no user text
+            return ChatbotResponse(reply=esc, conversation_id=request.conversation_id, intent="escalate_support",
+                                   tokens_used=0, source="escalation")
         if verdict is None and get_settings().grounded_answers_enabled and not request.history \
                 and not _classify_small_talk(request.message) and (q := pre_clarify(request.message)) is not None:
             # Rulebook R1 / R10: a topic-less or expense-only message gets one clarifying question, not a refusal

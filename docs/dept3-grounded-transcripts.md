@@ -73,7 +73,7 @@ Sources:
 **Assistant:**
 
 ```text
-I found this on the related help topic "Fixed vs Variable Expenses": Before diving into specific categories, it helps to understand the two fundamental types of business expenses: **Fixed expenses** are costs that remain the same regardless of how much you sell or produce. Rent, loan repayments and fixed salaries are examples. These costs exist whether your business has a good month or a bad one. [1]
+I found this on the related help topic "Fixed vs Variable Expenses": Before diving into specific categories, it helps to understand the two fundamental types of business expenses: **Fixed expenses** are costs that remain the same regardless of how much you sell or produce. Rent, loan repayments and fixed salaries are examples. [1]
 
 Sources:
 [1] Business Expense Categories: The Complete Guide › Fixed vs Variable Expenses: https://hisabdo.app/blog/business-expense-categories

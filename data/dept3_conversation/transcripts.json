@@ -1,0 +1,433 @@
+{
+ "journeys": [
+  {
+   "journey": "J1 Expense entry with a follow-up correction",
+   "turns": [
+    {
+     "user": "I spent 2500 on petrol today",
+     "assistant": "Please confirm this expense: PKR 2,500, Transport, 13 Nov 2026. Save it? (yes / no)",
+     "source": "dialogue",
+     "answer_status": null,
+     "intent": "add_expense",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true,
+      "expected": true
+     },
+     "ok": true
+    },
+    {
+     "user": "actually it was 2700",
+     "assistant": "Please confirm this expense: PKR 2,700, Transport, 13 Nov 2026. Save it? (yes / no)",
+     "source": "dialogue",
+     "answer_status": null,
+     "intent": "add_expense",
+     "checks": {
+      "context": true,
+      "context_not": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    },
+    {
+     "user": "yes",
+     "assistant": "Done: PKR 2,700, Transport, 13 Nov 2026. It is ready for the app to save to your records.",
+     "source": "dialogue",
+     "answer_status": null,
+     "intent": "add_expense",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "journey": "J2 Expense entry in Roman Urdu with a missing amount",
+   "turns": [
+    {
+     "user": "aaj bijli ka bill diya",
+     "assistant": "Kitne paise the?",
+     "source": "dialogue",
+     "answer_status": null,
+     "intent": "add_expense",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    },
+    {
+     "user": "3200",
+     "assistant": "Yeh kharcha confirm karein: PKR 3,200, Utilities, 13 Nov 2026. Save karun? (haan / nahi)",
+     "source": "dialogue",
+     "answer_status": null,
+     "intent": "add_expense",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    },
+    {
+     "user": "haan",
+     "assistant": "Ho gaya: PKR 3,200, Utilities, 13 Nov 2026. Yeh entry app ko aap ke record mein save karne ke liye bhej di gayi hai.",
+     "source": "dialogue",
+     "answer_status": null,
+     "intent": "add_expense",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "journey": "J3 Monthly summary with follow-ups",
+   "turns": [
+    {
+     "user": "How much did I spend this month?",
+     "assistant": "Your account (November 2026, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580.",
+     "source": "backend_financial_api",
+     "answer_status": null,
+     "intent": "report",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    },
+    {
+     "user": "and my balance?",
+     "assistant": "Your account (demo data): balance PKR 45,230.50 (as of 13 Nov 2026).",
+     "source": "backend_financial_api",
+     "answer_status": null,
+     "intent": "own_financial_data",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    },
+    {
+     "user": "thanks",
+     "assistant": "You're welcome! Let me know if there's anything else I can help with.",
+     "source": "greeting_fastpath",
+     "answer_status": null,
+     "intent": "general",
+     "checks": {
+      "context_not": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "journey": "J4 Budget question then product help",
+   "turns": [
+    {
+     "user": "Can I set a monthly budget in the app?",
+     "assistant": "I found this on the related help topic \"Review and Adjust Monthly\": Your budget should evolve as your life changes. Review it at the start of each month, adjust for any changes in income or expenses and set your priorities for the coming month. [1]\n\nSources:\n[1] Personal Budget Planning: A Practical Guide › Review and Adjust Monthly: https://hisabdo.app/blog/personal-budget-planning",
+     "source": "rag",
+     "answer_status": "answered",
+     "intent": "product_faq",
+     "checks": {
+      "context_not": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    },
+    {
+     "user": "ok, how do I export a report then?",
+     "assistant": "Yes. You can generate PDF reports for transactions, balances and customer activity when you need a professional record. [1]\n\nSources:\n[1] HisabDo: Khata & Ledger › Frequently Asked Questions: https://hisabdo.app/",
+     "source": "rag",
+     "answer_status": "answered",
+     "intent": "product_faq",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    },
+    {
+     "user": "can I send it on WhatsApp?",
+     "assistant": "I found this on the related help topic \"Hand Them a Real Statement\": Instead of reading numbers off a register, generate a clean PDF statement showing exactly what's owed, what's been paid, and the running balance — something you can send over WhatsApp in seconds. [1]\n\nSources:\n[1] Why We Built HisabDo › Hand Them a Real Statement: https://hisabdo.app/about-app",
+     "source": "rag",
+     "answer_status": "answered",
+     "intent": "product_faq",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "journey": "J5 Product help with a topic switch",
+   "turns": [
+    {
+     "user": "Does HisabDo work without the internet?",
+     "assistant": "Yes. HisabDo is offline-first. Guest users can use supported local/offline features without internet access. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › Does HisabDo work without the internet?: https://hisabdo.app/faq",
+     "source": "rag",
+     "answer_status": "answered",
+     "intent": "product_faq",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    },
+    {
+     "user": "what about backup?",
+     "assistant": "Do you mean \"Can I restore a backup\" or \"Can I backup my data\"?",
+     "source": "clarification",
+     "answer_status": "clarify",
+     "intent": "clarify",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    },
+    {
+     "user": "and if I uninstall the app?",
+     "assistant": "If you uninstall HisabDo without creating a backup first, your local data may be lost. We strongly recommend creating a backup before uninstalling or changing devices. [1]\n\nSources:\n[1] HisabDo Help Center FAQ › What happens to my data if I uninstall the app?: https://hisabdo.app/faq",
+     "source": "rag",
+     "answer_status": "answered",
+     "intent": "product_faq",
+     "checks": {
+      "context": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "journey": "J6 Ambiguous start, then clarified",
+   "turns": [
+    {
+     "user": "expenses",
+     "assistant": "Do you want to add an expense, see your expense totals, or learn how expense tracking works in HisabDo?",
+     "source": "clarification",
+     "answer_status": "clarify",
+     "intent": "clarify",
+     "checks": {
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true,
+      "expected": true
+     },
+     "ok": true
+    },
+    {
+     "user": "how expense tracking works",
+     "assistant": "Record and organize daily expenses with a simple interface. Track business expenses, personal expenses and spending patterns. Whether you need a Daily Expense Tracker or an Expense Management solution, HisabDo helps keep your financial records organized. [1]\n\nSources:\n[1] HisabDo: Khata & Expense App › Expense Tracker: https://play.google.com/store/apps/details?id=com.usman.hisabdo",
+     "source": "rag",
+     "answer_status": "answered",
+     "intent": "product_faq",
+     "checks": {
+      "context": true,
+      "context_not": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "journey": "J7 Account-level problem: human support escalation",
+   "turns": [
+    {
+     "user": "I can't log in to my account and my records are gone",
+     "assistant": "This needs HisabDo's support team, because I can't see or change your account. Please email hisabdo.app@gmail.com or use https://hisabdo.app/contact, with the email or phone number you signed up with and a short description of what happened. Never share your password or a one-time code with anyone, including support. They aim to reply within 48 hours.",
+     "source": "escalation",
+     "answer_status": null,
+     "intent": "escalate_support",
+     "checks": {
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true,
+      "expected": true
+     },
+     "ok": true
+    },
+    {
+     "user": "please delete my account and all my data",
+     "assistant": "Support at hisabdo.app@gmail.com is the right place for this too.",
+     "source": "escalation",
+     "answer_status": null,
+     "intent": "escalate_support",
+     "checks": {
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true,
+      "expected": true
+     },
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "journey": "J8 Fallbacks in one conversation do not repeat",
+   "turns": [
+    {
+     "user": "Can I connect HisabDo to my bank account?",
+     "assistant": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar.",
+     "source": "kb_fallback",
+     "answer_status": "no_source",
+     "intent": "no_source",
+     "checks": {
+      "context_not": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    },
+    {
+     "user": "Can two staff members use one account?",
+     "assistant": "That one isn't in HisabDo's help pages either. Support at hisabdo.app@gmail.com can help with anything the pages don't cover.",
+     "source": "kb_fallback",
+     "answer_status": "no_source",
+     "intent": "no_source",
+     "checks": {
+      "context_not": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    },
+    {
+     "user": "Does it support recurring expenses?",
+     "assistant": "I found this on the related help topic \"15. How HisabDo Fits Into Your Financial Workflow\": HisabDo is designed to support the financial management practices described throughout this guide. Here is how the app maps to each area: **Income tracking:** Record income entries with categories, dates and notes **Expense tracking:** Record expenses with custom categories and voice entry support **Customer receivables:** Customer profiles with complete transaction history and running balances **Supplier payables:** Supplier profiles with … [1]\n\nSources:\n[1] The Complete Small Business Financial Management Guide › 15. How HisabDo Fits Into Your Financial Workflow: https://hisabdo.app/blog/small-business-financial-management",
+     "source": "rag",
+     "answer_status": "answered",
+     "intent": "product_faq",
+     "checks": {
+      "context_not": true,
+      "no_repeat": true,
+      "no_robotic": true,
+      "concise": true,
+      "one_question": true,
+      "no_leak": true,
+      "no_pii_echo": true
+     },
+     "ok": true
+    }
+   ],
+   "verified": true
+  }
+ ],
+ "journeys_verified": 8,
+ "turns": 22,
+ "attacks": 18,
+ "attacks_held": 18
+}

@@ -42,7 +42,9 @@ log = logging.getLogger("hisabdo.ai.grounding")
 SUPPORT_MIN = 0.5          # share of a sentence's content words that must appear in the cited passage
 SWITCH_MARGIN = 0.2        # cite a different retrieved source when it supports the sentence this much better
 MAX_SENTENCES_PER_PASSAGE = 3
-RARE_DF = 10               # R4b: a word in at most this many KB passages is distinctive for the question
+MAX_EXCERPT_CHARS = 450    # U2: longest quoted excerpt; cut at a word boundary and marked with "…"
+RELATED_SENTENCES = 2     # U2: a neighbouring-topic answer is background, so it stays short
+RARE_DF = 10              # R4b: a word in at most this many KB passages is distinctive for the question
 
 ROMAN_URDU_CUES = {"kya", "hai", "hain", "kaise", "kaisay", "mein", "karun", "karte", "kar", "sakta", "sakti",
                    "hota", "hoti", "nahi", "aur", "ko", "se", "ka", "ki", "ke", "batao", "chahiye", "kyun", "kab"}
@@ -220,7 +222,10 @@ def excerpt(p: Passage, focus: set[str] | None = None, limit: int = MAX_SENTENCE
     if focus:
         hits = [x for x in parts if coverage(focus, Passage(**{**p.__dict__, "heading": "", "body": x}))]
         parts = hits or parts
-    return " ".join(parts[:limit])
+    text = " ".join(parts[:limit])
+    if len(text) > MAX_EXCERPT_CHARS:   # U2: a list without full stops reads as one endless sentence
+        text = text[:MAX_EXCERPT_CHARS].rsplit(" ", 1)[0].rstrip(",;:*") + " …"
+    return text
 
 
 # ------------------------------------------------------------------------------------ the answerer
@@ -324,7 +329,7 @@ class GroundedAnswerer:
                   and coverage(asked, Passage(**{**p.__dict__, "body": ""})) != asked):
                 # R8: the source answers a neighbouring question. Its "Yes." / "No." is not an answer to this one,
                 # so drop it and say which help topic the text is from.
-                text = re.sub(r"^(yes|no)\b[.,!]?\s*", "", text, flags=re.I)
+                text = re.sub(r"^(yes|no)\b[.,!]?\s*", "", excerpt(p, limit=RELATED_SENTENCES), flags=re.I)
                 parts.append(f'{t["related"].format(heading=p.heading)} {text} [{n}]')
             else:
                 parts.append(f"{text} [{n}]")
@@ -391,7 +396,10 @@ class GroundedAnswerer:
         rare = {w for w in topic_words(message) if 0 < self.df.get(w, 0) <= RARE_DF}
         passages = [p for p in retrieved if not topic or (relevant(topic, p) and (
             not rare or coverage(rare, p)
-            or coverage(topic_words(message), Passage(**{**p.__dict__, "body": ""}))))]
+            or coverage(topic_words(message), Passage(**{**p.__dict__, "body": ""})))
+            # a conflicted passage (sources disagree) is only used when it covers at least half the question, so a
+            # shared word ("support") cannot turn an unrelated question into a conflict notice
+            and (p.status != "needs_confirmation" or len(coverage(topic, p)) >= len(topic) / 2))]
         question = self.clarify(message, passages, lang)
         if question:
             return GroundedAnswer(reply=question, status="clarify", language=lang, **info)
