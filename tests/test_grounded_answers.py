@@ -282,3 +282,29 @@ def test_transcripts_are_all_verified():
                    .read_text(encoding="utf-8"))
     assert d["transcripts"] == d["verified"] == 19
     assert {r["section"][0] for r in d["rows"]} == set("ABCDEF")
+
+
+# End-to-end regression fixes (docs/dept3-e2e-regression-report.md) ------------------------------------------------
+
+def test_conflict_survives_the_half_coverage_rule_when_the_rare_word_is_covered(answerer):
+    r = answerer.answer("Which currencies can I record expenses in?")
+    assert r.status == "conflict" and len(r.citations) == 3          # Q45: 13 Nov change had dropped this
+
+
+def test_unrelated_question_does_not_become_a_conflict_notice(answerer):
+    for msg in ("Does it support recurring expenses?", "Can two staff members use one account?"):
+        assert answerer.answer(msg).status != "conflict", msg
+
+
+def test_urdu_pdf_statement_and_my_total_questions_are_in_domain():
+    from src.financial_assistant import guardrails
+    for msg in ("اسٹیٹمنٹ کو پی ڈی ایف میں کیسے محفوظ کریں؟", "Why is my total wrong?"):
+        assert guardrails.check_off_topic_question(msg) is None, msg
+    assert guardrails.check_off_topic_question("Who won the cricket world cup?") is not None
+
+
+def test_definition_question_is_answered_not_clarified_even_in_lexical_mode():
+    from src.financial_assistant.grounding import GroundedAnswerer, KbRetriever
+    a = GroundedAnswerer(KbRetriever(mode="lexical"))
+    for msg in ("What does udhar mean?", "Udhar ka matlab kya hai?"):
+        assert a.answer(msg).status == "answered", msg

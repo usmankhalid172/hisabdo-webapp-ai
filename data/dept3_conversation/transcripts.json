@@ -5,7 +5,7 @@
    "turns": [
     {
      "user": "I spent 2500 on petrol today",
-     "assistant": "Please confirm this expense: PKR 2,500, Transport, 13 Nov 2026. Save it? (yes / no)",
+     "assistant": "Please confirm this expense: PKR 2,500, Transport, 16 Nov 2026. Save it? (yes / no)",
      "source": "dialogue",
      "answer_status": null,
      "intent": "add_expense",
@@ -23,7 +23,7 @@
     },
     {
      "user": "actually it was 2700",
-     "assistant": "Please confirm this expense: PKR 2,700, Transport, 13 Nov 2026. Save it? (yes / no)",
+     "assistant": "Please confirm this expense: PKR 2,700, Transport, 16 Nov 2026. Save it? (yes / no)",
      "source": "dialogue",
      "answer_status": null,
      "intent": "add_expense",
@@ -41,7 +41,7 @@
     },
     {
      "user": "yes",
-     "assistant": "Done: PKR 2,700, Transport, 13 Nov 2026. It is ready for the app to save to your records.",
+     "assistant": "Done: PKR 2,700, Transport, 16 Nov 2026. It is ready for the app to save to your records.",
      "source": "dialogue",
      "answer_status": null,
      "intent": "add_expense",
@@ -81,7 +81,7 @@
     },
     {
      "user": "3200",
-     "assistant": "Yeh kharcha confirm karein: PKR 3,200, Utilities, 13 Nov 2026. Save karun? (haan / nahi)",
+     "assistant": "Yeh kharcha confirm karein: PKR 3,200, Utilities, 16 Nov 2026. Save karun? (haan / nahi)",
      "source": "dialogue",
      "answer_status": null,
      "intent": "add_expense",
@@ -98,7 +98,7 @@
     },
     {
      "user": "haan",
-     "assistant": "Ho gaya: PKR 3,200, Utilities, 13 Nov 2026. Yeh entry app ko aap ke record mein save karne ke liye bhej di gayi hai.",
+     "assistant": "Ho gaya: PKR 3,200, Utilities, 16 Nov 2026. Yeh entry app ko aap ke record mein save karne ke liye bhej di gayi hai.",
      "source": "dialogue",
      "answer_status": null,
      "intent": "add_expense",
@@ -138,7 +138,7 @@
     },
     {
      "user": "and my balance?",
-     "assistant": "Your account (demo data): balance PKR 45,230.50 (as of 13 Nov 2026).",
+     "assistant": "Your account (demo data): balance PKR 45,230.50 (as of 16 Nov 2026).",
      "source": "backend_financial_api",
      "answer_status": null,
      "intent": "own_financial_data",

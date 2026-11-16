@@ -139,6 +139,7 @@ FILLER = {"my", "mera", "mere", "meray", "about"}
 AUTHORITY = {"product_faq": 1, "product_guide": 2, "legal_policy": 3, "finance_guide": 4}
 URL = re.compile(r"https?://[^\s)\]>\"']+")
 CONTACT_URL = "https://hisabdo.app/contact"
+DEFINITION = re.compile(r"(?i)\b(mean|means|meaning|matlab|define|definition)\b|مطلب|کیا ہوتا")
 
 ADVICE_WORDS = re.compile(r"\b(tax|taxes|fbr|legal|lawyer|loan|invest\w*|zakat|audit)\b", re.I)
 
@@ -266,7 +267,9 @@ class GroundedAnswerer:
         topic = topic_words(message)
         if not topic:
             return None if PRODUCT_NAME.search(message) else TEMPLATES[lang]["clarify_open"]
-        if len(topic) == 1 and len(passages) >= 2 and passages[0].heading != passages[1].heading:
+        # A definition question ("What does udhar mean?") names its topic: answer it, do not ask which section.
+        if len(topic) == 1 and len(passages) >= 2 and passages[0].heading != passages[1].heading \
+                and not DEFINITION.search(message):
             a, b = (p.heading.rstrip("?") for p in passages[:2])
             return TEMPLATES[lang]["clarify_pick"].format(a=a, b=b)
         return None
@@ -397,9 +400,11 @@ class GroundedAnswerer:
         passages = [p for p in retrieved if not topic or (relevant(topic, p) and (
             not rare or coverage(rare, p)
             or coverage(topic_words(message), Passage(**{**p.__dict__, "body": ""})))
-            # a conflicted passage (sources disagree) is only used when it covers at least half the question, so a
-            # shared word ("support") cannot turn an unrelated question into a conflict notice
-            and (p.status != "needs_confirmation" or len(coverage(topic, p)) >= len(topic) / 2))]
+            # a conflicted passage (sources disagree) needs the question's rare word ("currencies"); with no rare
+            # word it must cover at least half the question, so a shared word ("support") cannot turn an unrelated
+            # question into a conflict notice
+            and (p.status != "needs_confirmation" or (coverage(rare, p) if rare
+                                                       else len(coverage(topic, p)) >= len(topic) / 2)))]
         question = self.clarify(message, passages, lang)
         if question:
             return GroundedAnswer(reply=question, status="clarify", language=lang, **info)

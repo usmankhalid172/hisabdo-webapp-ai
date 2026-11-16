@@ -1,0 +1,3337 @@
+{
+ "probe": [
+  {
+   "id": "Q01",
+   "lang": "en",
+   "flow": "expense_entry",
+   "text": "I spent 2500 on petrol today",
+   "was_flagged": false,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Please confirm this expense: PKR 2,500, Transport, 05 Nov 2026. Save it? (yes / no)"
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Please confirm this expense: PKR 2,500, Transport, 16 Nov 2026. Save it? (yes / no)",
+    "ms": 13.9
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q02",
+   "lang": "roman_ur",
+   "flow": "expense_entry",
+   "text": "kal 1200 ka bijli ka bill diya",
+   "was_flagged": false,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Yeh kharcha confirm karein: PKR 1,200, Utilities, 04 Nov 2026. Save karun? (haan / nahi)"
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Yeh kharcha confirm karein: PKR 1,200, Utilities, 15 Nov 2026. Save karun? (haan / nahi)",
+    "ms": 12.7
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q03",
+   "lang": "ur",
+   "flow": "expense_entry",
+   "text": "آج 800 روپے کی سبزی خریدی",
+   "was_flagged": false,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Yeh kharcha confirm karein: PKR 800, Groceries, 05 Nov 2026. Save karun? (haan / nahi)"
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Yeh kharcha confirm karein: PKR 800, Groceries, 16 Nov 2026. Save karun? (haan / nahi)",
+    "ms": 12.5
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q04",
+   "lang": "en",
+   "flow": "expense_entry",
+   "text": "Add an expense of Rs 3,000 for shop rent",
+   "was_flagged": false,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Please confirm this expense: PKR 3,000, Housing, 05 Nov 2026. Save it? (yes / no)"
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Please confirm this expense: PKR 3,000, Housing, 16 Nov 2026. Save it? (yes / no)",
+    "ms": 11.4
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q05",
+   "lang": "en",
+   "flow": "expense_entry",
+   "text": "Paid the supplier 15k for stock",
+   "was_flagged": true,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "What was it for? e.g. Utilities, Transport, Groceries, Dining, Entertainment"
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "What was it for? e.g. Utilities, Transport, Groceries, Dining, Entertainment",
+    "ms": 10.6
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q06",
+   "lang": "en",
+   "flow": "expense_entry",
+   "text": "Spent 450 on tea for staff and 300 on snacks",
+   "was_flagged": true,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "How much was it?"
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "How much was it?",
+    "ms": 11.7
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q07",
+   "lang": "en",
+   "flow": "correction",
+   "text": "Change the last expense to 2700",
+   "was_flagged": true,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "I can only change entries confirmed in this chat, and I don't see one yet. Please open the entry in the app to edit it, or tell me the new entry to add."
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "I can only change entries confirmed in this chat, and I don't see one yet. Please open the entry in the app to edit it, or tell me the new entry to add.",
+    "ms": 11.5
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q08",
+   "lang": "roman_ur",
+   "flow": "correction",
+   "text": "galti ho gayi, 450 nahi 540 tha",
+   "was_flagged": true,
+   "before": {
+    "source": "kb_fallback",
+    "status": "out_of_scope",
+    "cited": [],
+    "reply": "I can help with HisabDo and with bookkeeping for your business, but I don't have reliable information on that. Try asking about a HisabDo feature, such as PDF reports, backup or customer udhar, or contact HisabDo support at hisabdo.app@gmail.com."
+   },
+   "after": {
+    "source": "kb_fallback",
+    "status": "out_of_scope",
+    "cited": [],
+    "reply": "I can help with HisabDo and with bookkeeping for your business, but I don't have reliable information on that. Try asking about a HisabDo feature, such as PDF reports, backup or customer udhar, or contact HisabDo support at hisabdo.app@gmail.com.",
+    "ms": 14.9
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q09",
+   "lang": "en",
+   "flow": "correction",
+   "text": "Delete the expense I just added",
+   "was_flagged": true,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "I can only change entries confirmed in this chat, and I don't see one yet. Please open the entry in the app to edit it, or tell me the new entry to add."
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "I can only change entries confirmed in this chat, and I don't see one yet. Please open the entry in the app to edit it, or tell me the new entry to add.",
+    "ms": 14.1
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q10",
+   "lang": "en",
+   "flow": "income_entry",
+   "text": "Received 7000 from Ahmed for the order",
+   "was_flagged": false,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Please confirm this income: PKR 7,000, Sales, to/from Ahmed, 05 Nov 2026. Save it? (yes / no)"
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Please confirm this income: PKR 7,000, Sales, to/from Ahmed, 16 Nov 2026. Save it? (yes / no)",
+    "ms": 11.4
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q11",
+   "lang": "roman_ur",
+   "flow": "income_entry",
+   "text": "Bilal se 3000 wasool hue",
+   "was_flagged": false,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Yeh aamdani confirm karein: PKR 3,000, Customer Payment Received, Bilal, 05 Nov 2026. Save karun? (haan / nahi)"
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Yeh aamdani confirm karein: PKR 3,000, Customer Payment Received, Bilal, 16 Nov 2026. Save karun? (haan / nahi)",
+    "ms": 10.9
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q12",
+   "lang": "en",
+   "flow": "udhar",
+   "text": "Ali took goods worth 2000 on credit",
+   "was_flagged": true,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Was this money you spent (expense) or money you received (income)?"
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Was this money you spent (expense) or money you received (income)?",
+    "ms": 11.7
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q13",
+   "lang": "roman_ur",
+   "flow": "udhar",
+   "text": "Ali ko 500 udhar diye",
+   "was_flagged": true,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Yeh kharcha kis cheez ka tha? Jaise: Utilities, Transport, Groceries, Dining, Entertainment"
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Yeh kharcha kis cheez ka tha? Jaise: Utilities, Transport, Groceries, Dining, Entertainment",
+    "ms": 8.3
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q14",
+   "lang": "en",
+   "flow": "receivables",
+   "text": "How much does Ali owe me?",
+   "was_flagged": true,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (demo data): balance PKR 45,230.50 (as of 05 Nov 2026)."
+   },
+   "after": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (demo data): balance PKR 45,230.50 (as of 16 Nov 2026).",
+    "ms": 10.3
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q15",
+   "lang": "en",
+   "flow": "receivables",
+   "text": "Which customers still owe me money?",
+   "was_flagged": true,
+   "before": {
+    "source": "policy_guard",
+    "status": null,
+    "cited": [],
+    "reply": "I'm sorry, but I can only provide information about your own account."
+   },
+   "after": {
+    "source": "policy_guard",
+    "status": null,
+    "cited": [],
+    "reply": "I'm sorry, but I can only provide information about your own account.",
+    "ms": 8.0
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q16",
+   "lang": "roman_ur",
+   "flow": "receivables",
+   "text": "Mera kitna udhar baqi hai customers par?",
+   "was_flagged": true,
+   "before": {
+    "source": "policy_guard",
+    "status": null,
+    "cited": [],
+    "reply": "I'm sorry, but I can only provide information about your own account."
+   },
+   "after": {
+    "source": "policy_guard",
+    "status": null,
+    "cited": [],
+    "reply": "I'm sorry, but I can only provide information about your own account.",
+    "ms": 7.9
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q17",
+   "lang": "en",
+   "flow": "payables",
+   "text": "How much do I owe my suppliers?",
+   "was_flagged": true,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (demo data): balance PKR 45,230.50 (as of 05 Nov 2026)."
+   },
+   "after": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (demo data): balance PKR 45,230.50 (as of 16 Nov 2026).",
+    "ms": 10.6
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q18",
+   "lang": "en",
+   "flow": "balance",
+   "text": "What is my current balance?",
+   "was_flagged": false,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (demo data): balance PKR 45,230.50 (as of 05 Nov 2026)."
+   },
+   "after": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (demo data): balance PKR 45,230.50 (as of 16 Nov 2026).",
+    "ms": 9.6
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q19",
+   "lang": "en",
+   "flow": "report",
+   "text": "How much did I spend this month?",
+   "was_flagged": false,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (November 2026, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580."
+   },
+   "after": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (November 2026, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580.",
+    "ms": 11.2
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q20",
+   "lang": "en",
+   "flow": "report",
+   "text": "What were my expenses last month?",
+   "was_flagged": true,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "I can only show the current month's figures right now, not October 2026. Please check older periods in the app."
+   },
+   "after": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "I can only show the current month's figures right now, not October 2026. Please check older periods in the app.",
+    "ms": 10.2
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q21",
+   "lang": "en",
+   "flow": "report",
+   "text": "Show my expenses by category for this month",
+   "was_flagged": true,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (November 2026, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580."
+   },
+   "after": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (November 2026, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580.",
+    "ms": 10.3
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q22",
+   "lang": "en",
+   "flow": "report",
+   "text": "What was my biggest expense this week?",
+   "was_flagged": true,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (this week, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580."
+   },
+   "after": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (this week, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580.",
+    "ms": 11.7
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q23",
+   "lang": "roman_ur",
+   "flow": "report",
+   "text": "Is hafte kitna kharcha hua?",
+   "was_flagged": true,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (this week, demo data): aamdani PKR 62,000, kharcha PKR 18,420, net PKR 43,580."
+   },
+   "after": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (this week, demo data): aamdani PKR 62,000, kharcha PKR 18,420, net PKR 43,580.",
+    "ms": 11.2
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q24",
+   "lang": "ur",
+   "flow": "report",
+   "text": "اس مہینے میرا کل خرچ کتنا ہے؟",
+   "was_flagged": false,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (November 2026, demo data): aamdani PKR 62,000, kharcha PKR 18,420, net PKR 43,580."
+   },
+   "after": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (November 2026, demo data): aamdani PKR 62,000, kharcha PKR 18,420, net PKR 43,580.",
+    "ms": 10.0
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q25",
+   "lang": "en",
+   "flow": "report",
+   "text": "Compare my expenses this month with last month",
+   "was_flagged": true,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "I can only show the current month's figures right now, not October 2026. Please check older periods in the app."
+   },
+   "after": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "I can only show the current month's figures right now, not October 2026. Please check older periods in the app.",
+    "ms": 8.6
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q26",
+   "lang": "en",
+   "flow": "report",
+   "text": "What is my profit this month?",
+   "was_flagged": false,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (November 2026, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580."
+   },
+   "after": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Your account (November 2026, demo data): income PKR 62,000, expenses PKR 18,420, net PKR 43,580.",
+    "ms": 9.4
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q27",
+   "lang": "en",
+   "flow": "categorization",
+   "text": "Which category should a phone bill go in?",
+   "was_flagged": false,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "That sounds like the category 'Utilities'."
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "That sounds like the category 'Utilities'.",
+    "ms": 10.5
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q28",
+   "lang": "en",
+   "flow": "categorization",
+   "text": "Categorize: 1500 for printer ink",
+   "was_flagged": true,
+   "before": {
+    "source": "kb_fallback",
+    "status": "no_source",
+    "cited": [],
+    "reply": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar."
+   },
+   "after": {
+    "source": "kb_fallback",
+    "status": "no_source",
+    "cited": [],
+    "reply": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar.",
+    "ms": 21.5
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q29",
+   "lang": "en",
+   "flow": "how_to",
+   "text": "How do I add an expense in HisabDo?",
+   "was_flagged": true,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-06-005-keep-receipts-and-notes"
+    ],
+    "reply": "I found this on the related help topic \"Keep Receipts and Notes\": For every significant expense, keep the receipt or at minimum note the vendor, amount and purpose. This documentation is valuable if you ever need to dispute a charge, prepare for tax purposes or review your spending patterns. HisabDo allows you to attach notes to expense entries, making it easy to add context without carrying a folder of paper receipts. [1]\n\nSources:\n[1] Expense Tracking for Small Business › Keep Receipts and Notes: https://hisabdo.app/blog/expense-tracking-for-small-business"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-06-005-keep-receipts-and-notes"
+    ],
+    "reply": "I found this on the related help topic \"Keep Receipts and Notes\": For every significant expense, keep the receipt or at minimum note the vendor, amount and purpose. This documentation is valuable if you ever need to dispute a charge, prepare for tax purposes or review your spending patterns. [1]\n\nSources:\n[1] Expense Tracking for Small Business › Keep Receipts and Notes: https://hisabdo.app/blog/expense-tracking-for-small-business",
+    "ms": 26.5
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q30",
+   "lang": "en",
+   "flow": "how_to",
+   "text": "How do I edit an expense entry?",
+   "was_flagged": true,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-06-011-use-technology-to-reduce-friction"
+    ],
+    "reply": "I found this on the related help topic \"Use Technology to Reduce Friction\": The biggest barrier to consistent expense tracking is friction — the effort required to record each entry. The easier you make the recording process, the more consistently you will do it. HisabDo's voice entry feature lets you record expenses by speaking, which takes seconds and removes the main reason people skip entries. [1]\n\nSources:\n[1] Expense Tracking for Small Business › Use Technology to Reduce Friction: https://hisabdo.app/blog/expense-tracking-for-small-business"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-12-005-expense-reports-what-to-include"
+    ],
+    "reply": "I found this on the related help topic \"Expense Reports: What to Include\": A useful expense report should contain: Report period Each expense entry with date, category, description and amount Total expenses for the period Subtotals by category Comparison to previous period or budget (optional) Expense reports organized by category are far more useful than a simple chronological list. Seeing that you spent Rs. [1]\n\nSources:\n[1] PDF Business Reports: What to Include and How to Use Them › Expense Reports: What to Include: https://hisabdo.app/blog/pdf-reports-for-businesses",
+    "ms": 24.4
+   },
+   "changed": true,
+   "same_reply": false
+  },
+  {
+   "id": "Q31",
+   "lang": "en",
+   "flow": "how_to",
+   "text": "Can I add my own expense categories?",
+   "was_flagged": false,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-04-012-creating-your-own-categories"
+    ],
+    "reply": "I found this on the related help topic \"Creating Your Own Categories\": The categories above are a starting point. Your business may need different or additional categories depending on your industry and operations. Here is how to build a category system that works for you: Start with the standard categories above Add categories for any significant expense type specific to your business Keep the total number of categories manageable — 8 to 15 is usually sufficient Be consistent: use the same category for the same type of expense every time Review and refine your categories every few months as your business evolves In HisabDo, you can create custom expense categories that match your specific business needs. [1]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Creating Your Own Categories: https://hisabdo.app/blog/business-expense-categories"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-04-012-creating-your-own-categories"
+    ],
+    "reply": "I found this on the related help topic \"Creating Your Own Categories\": The categories above are a starting point. Your business may need different or additional categories depending on your industry and operations. [1]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Creating Your Own Categories: https://hisabdo.app/blog/business-expense-categories",
+    "ms": 26.4
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q32",
+   "lang": "en",
+   "flow": "how_to",
+   "text": "Can I attach a receipt photo to an expense?",
+   "was_flagged": true,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-06-005-keep-receipts-and-notes"
+    ],
+    "reply": "I found this on the related help topic \"Keep Receipts and Notes\": For every significant expense, keep the receipt or at minimum note the vendor, amount and purpose. This documentation is valuable if you ever need to dispute a charge, prepare for tax purposes or review your spending patterns. HisabDo allows you to attach notes to expense entries, making it easy to add context without carrying a folder of paper receipts. [1]\n\nSources:\n[1] Expense Tracking for Small Business › Keep Receipts and Notes: https://hisabdo.app/blog/expense-tracking-for-small-business"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-06-005-keep-receipts-and-notes"
+    ],
+    "reply": "I found this on the related help topic \"Keep Receipts and Notes\": For every significant expense, keep the receipt or at minimum note the vendor, amount and purpose. This documentation is valuable if you ever need to dispute a charge, prepare for tax purposes or review your spending patterns. [1]\n\nSources:\n[1] Expense Tracking for Small Business › Keep Receipts and Notes: https://hisabdo.app/blog/expense-tracking-for-small-business",
+    "ms": 24.7
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q33",
+   "lang": "en",
+   "flow": "how_to",
+   "text": "How do I export my expenses to Excel?",
+   "was_flagged": true,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Here's what I found: Balance: 45230.5 PKR. Expenses this month: 18420.0 PKR. Revenue this month: 62000.0 PKR. Outstanding receivables: 9000.0 PKR. (In response to: \"How do I export my expenses to Excel?\")"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "off-03-009-can-i-export-reports"
+    ],
+    "reply": "I found this on the related help topic \"Can I export reports?\": You can generate PDF reports for transactions, balances and customer activity when you need a professional record. [1]\n\nSources:\n[1] HisabDo: Khata & Ledger › Frequently Asked Questions: https://hisabdo.app/",
+    "ms": 27.3
+   },
+   "changed": true,
+   "same_reply": false
+  },
+  {
+   "id": "Q34",
+   "lang": "en",
+   "flow": "how_to",
+   "text": "Can I set a monthly budget in the app?",
+   "was_flagged": true,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-15-010-review-and-adjust-monthly"
+    ],
+    "reply": "I found this on the related help topic \"Review and Adjust Monthly\": Your budget should evolve as your life changes. Review it at the start of each month, adjust for any changes in income or expenses and set your priorities for the coming month. A budget that you review and adjust regularly is far more effective than one you set once and forget. [1]\n\nSources:\n[1] Personal Budget Planning: A Practical Guide › Review and Adjust Monthly: https://hisabdo.app/blog/personal-budget-planning"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-15-010-review-and-adjust-monthly"
+    ],
+    "reply": "I found this on the related help topic \"Review and Adjust Monthly\": Your budget should evolve as your life changes. Review it at the start of each month, adjust for any changes in income or expenses and set your priorities for the coming month. [1]\n\nSources:\n[1] Personal Budget Planning: A Practical Guide › Review and Adjust Monthly: https://hisabdo.app/blog/personal-budget-planning",
+    "ms": 29.9
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q35",
+   "lang": "roman_ur",
+   "flow": "how_to",
+   "text": "Kharcha ki category kaise badlun?",
+   "was_flagged": true,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-04-017-what-if-an-expense-fits-into-more-than-one-categ"
+    ],
+    "reply": "HisabDo ke official page ke mutabiq (English mein):\n\nChoose the most appropriate primary category and be consistent. For example, if you buy a phone for business use, you might categorize it as equipment rather than software/subscriptions. The key is consistency — always categorize the same type of expense the same way. [1]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Frequently Asked Questions: https://hisabdo.app/blog/business-expense-categories"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-04-017-what-if-an-expense-fits-into-more-than-one-categ"
+    ],
+    "reply": "HisabDo ke official page ke mutabiq (English mein):\n\nChoose the most appropriate primary category and be consistent. For example, if you buy a phone for business use, you might categorize it as equipment rather than software/subscriptions. The key is consistency — always categorize the same type of expense the same way. [1]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Frequently Asked Questions: https://hisabdo.app/blog/business-expense-categories",
+    "ms": 27.3
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q36",
+   "lang": "ur",
+   "flow": "how_to",
+   "text": "خرچ کی رپورٹ پی ڈی ایف میں کیسے بنائیں؟",
+   "was_flagged": true,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-12-005-expense-reports-what-to-include"
+    ],
+    "reply": "حساب دو کے آفیشل پیج کے مطابق (انگریزی میں):\n\nA useful expense report should contain: Report period Each expense entry with date, category, description and amount Total expenses for the period Subtotals by category Comparison to previous period or budget (optional) Expense reports organized by category are far more useful than a simple chronological list. Seeing that you spent Rs. 45,000 on transport this month versus Rs. [1]\n\nذرائع:\n[1] PDF Business Reports: What to Include and How to Use Them › Expense Reports: What to Include: https://hisabdo.app/blog/pdf-reports-for-businesses"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-12-005-expense-reports-what-to-include"
+    ],
+    "reply": "حساب دو کے آفیشل پیج کے مطابق (انگریزی میں):\n\nA useful expense report should contain: Report period Each expense entry with date, category, description and amount Total expenses for the period Subtotals by category Comparison to previous period or budget (optional) Expense reports organized by category are far more useful than a simple chronological list. Seeing that you spent Rs. 45,000 on transport this month versus Rs. [1]\n\nذرائع:\n[1] PDF Business Reports: What to Include and How to Use Them › Expense Reports: What to Include: https://hisabdo.app/blog/pdf-reports-for-businesses",
+    "ms": 40.4
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q37",
+   "lang": "en",
+   "flow": "how_to",
+   "text": "Does HisabDo support recurring expenses like monthly rent?",
+   "was_flagged": true,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-15-016-can-hisabdo-help-with-personal-budgeting"
+    ],
+    "reply": "I found this on the related help topic \"Can HisabDo help with personal budgeting?\": HisabDo can be used to track personal and household expenses, categorize spending and review monthly totals. While the app is designed with small businesses in mind, its expense tracking features work equally well for personal finance management. [1]\n\nSources:\n[1] Personal Budget Planning: A Practical Guide › Frequently Asked Questions: https://hisabdo.app/blog/personal-budget-planning"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-15-016-can-hisabdo-help-with-personal-budgeting"
+    ],
+    "reply": "I found this on the related help topic \"Can HisabDo help with personal budgeting?\": HisabDo can be used to track personal and household expenses, categorize spending and review monthly totals. [1]\n\nSources:\n[1] Personal Budget Planning: A Practical Guide › Frequently Asked Questions: https://hisabdo.app/blog/personal-budget-planning",
+    "ms": 29.4
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q38",
+   "lang": "en",
+   "flow": "how_to",
+   "text": "Can two staff members record expenses on the same account?",
+   "was_flagged": true,
+   "before": {
+    "source": "kb_fallback",
+    "status": "no_source",
+    "cited": [],
+    "reply": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar."
+   },
+   "after": {
+    "source": "kb_fallback",
+    "status": "no_source",
+    "cited": [],
+    "reply": "I couldn't find this in HisabDo's official help pages, so I won't guess. You can ask HisabDo support at hisabdo.app@gmail.com or through the Contact page (https://hisabdo.app/contact); they aim to reply within 48 hours. You can also rephrase the question or ask about a specific feature, such as PDF reports, backup or customer udhar.",
+    "ms": 28.6
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q39",
+   "lang": "en",
+   "flow": "concept",
+   "text": "What is the difference between fixed and variable expenses?",
+   "was_flagged": false,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-04-003-fixed-vs-variable-expenses"
+    ],
+    "reply": "I found this on the related help topic \"Fixed vs Variable Expenses\": Before diving into specific categories, it helps to understand the two fundamental types of business expenses: **Fixed expenses** are costs that remain the same regardless of how much you sell or produce. Rent, loan repayments and fixed salaries are examples. These costs exist whether your business has a good month or a bad one. [1]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Fixed vs Variable Expenses: https://hisabdo.app/blog/business-expense-categories"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-04-003-fixed-vs-variable-expenses"
+    ],
+    "reply": "I found this on the related help topic \"Fixed vs Variable Expenses\": Before diving into specific categories, it helps to understand the two fundamental types of business expenses: **Fixed expenses** are costs that remain the same regardless of how much you sell or produce. Rent, loan repayments and fixed salaries are examples. [1]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Fixed vs Variable Expenses: https://hisabdo.app/blog/business-expense-categories",
+    "ms": 26.8
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q40",
+   "lang": "en",
+   "flow": "concept",
+   "text": "Is petrol a business expense?",
+   "was_flagged": false,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-04-007-travel-and-transport",
+     "blog-04-004-operating-expenses"
+    ],
+    "reply": "I found this on the related help topic \"Travel and Transport\": Transport costs are significant for many small businesses, particularly those that deliver goods or require frequent travel: Fuel Vehicle maintenance and repairs Delivery charges paid to third parties Public transport fares for business travel Parking fees If you use a vehicle for both personal and business purposes, track only the business-related portion of transport costs in your business records. [1]\n\nI found this on the related help topic \"Operating Expenses\": Operating expenses are the day-to-day costs of running your business. They include everything required to keep the business functioning, excluding the direct cost of producing your product or service. Common operating expenses include: Office or shop rent Utilities (electricity, gas, water) Internet and phone Office supplies and stationery Cleaning and maintenance Insurance Professional services (legal, accounting) [2]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Travel and Transport: https://hisabdo.app/blog/business-expense-categories\n[2] Business Expense Categories: The Complete Guide › Operating Expenses: https://hisabdo.app/blog/business-expense-categories"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-04-007-travel-and-transport",
+     "blog-04-004-operating-expenses"
+    ],
+    "reply": "I found this on the related help topic \"Travel and Transport\": Transport costs are significant for many small businesses, particularly those that deliver goods or require frequent travel: Fuel Vehicle maintenance and repairs Delivery charges paid to third parties Public transport fares for business travel Parking fees If you use a vehicle for both personal and business purposes, track only the business-related portion of transport costs in your business records. [1]\n\nI found this on the related help topic \"Operating Expenses\": Operating expenses are the day-to-day costs of running your business. They include everything required to keep the business functioning, excluding the direct cost of producing your product or service. [2]\n\nSources:\n[1] Business Expense Categories: The Complete Guide › Travel and Transport: https://hisabdo.app/blog/business-expense-categories\n[2] Business Expense Categories: The Complete Guide › Operating Expenses: https://hisabdo.app/blog/business-expense-categories",
+    "ms": 27.1
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q41",
+   "lang": "roman_ur",
+   "flow": "concept",
+   "text": "Petty cash ka hisaab kaise rakhein?",
+   "was_flagged": true,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-06-010-track-petty-cash-carefully"
+    ],
+    "reply": "HisabDo ke official page ke mutabiq (English mein):\n\nPetty cash — the small amounts used for day-to-day minor expenses — is one of the most commonly mismanaged areas in small businesses. Keep a dedicated petty cash log and reconcile it weekly. Even small amounts add up, and untracked petty cash is a common source of financial leakage. [1]\n\nSources:\n[1] Expense Tracking for Small Business › Track Petty Cash Carefully: https://hisabdo.app/blog/expense-tracking-for-small-business"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-06-010-track-petty-cash-carefully"
+    ],
+    "reply": "HisabDo ke official page ke mutabiq (English mein):\n\nPetty cash — the small amounts used for day-to-day minor expenses — is one of the most commonly mismanaged areas in small businesses. Keep a dedicated petty cash log and reconcile it weekly. Even small amounts add up, and untracked petty cash is a common source of financial leakage. [1]\n\nSources:\n[1] Expense Tracking for Small Business › Track Petty Cash Carefully: https://hisabdo.app/blog/expense-tracking-for-small-business",
+    "ms": 28.9
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q42",
+   "lang": "en",
+   "flow": "concept",
+   "text": "How much cash reserve should my shop keep?",
+   "was_flagged": true,
+   "before": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-02-014-how-much-cash-reserve-should-a-small-business-ke"
+    ],
+    "reply": "I found this on the related help topic \"How much cash reserve should a small business keep?\": A commonly cited guideline is 1–3 months of operating expenses as a cash reserve. This provides a buffer for slow periods, unexpected costs or delayed customer payments. Building this reserve takes time — start by setting aside a small amount each month until you reach your target. [1]\n\nSources:\n[1] Cash Flow Management for Small Businesses: A Practical Guide › Frequently Asked Questions: https://hisabdo.app/blog/cash-flow-management"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-02-014-how-much-cash-reserve-should-a-small-business-ke"
+    ],
+    "reply": "I found this on the related help topic \"How much cash reserve should a small business keep?\": A commonly cited guideline is 1–3 months of operating expenses as a cash reserve. This provides a buffer for slow periods, unexpected costs or delayed customer payments. [1]\n\nSources:\n[1] Cash Flow Management for Small Businesses: A Practical Guide › Frequently Asked Questions: https://hisabdo.app/blog/cash-flow-management",
+    "ms": 25.5
+   },
+   "changed": false,
+   "same_reply": false
+  },
+  {
+   "id": "Q43",
+   "lang": "en",
+   "flow": "policy",
+   "text": "Are my expense records synced to the cloud?",
+   "was_flagged": true,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Here's what I found: Balance: 45230.5 PKR. Expenses this month: 18420.0 PKR. Revenue this month: 62000.0 PKR. Outstanding receivables: 9000.0 PKR. (In response to: \"Are my expense records synced to the cloud?\")"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "off-06-004-3-cloud-storage-synchronization"
+    ],
+    "reply": "The Privacy Policy says, in \"3. Cloud Storage & Synchronization\": \"If you sign in to the App: Supported customer, income, and expense records may be synchronized with our cloud infrastructure through Supabase. The current cloud synchronization path is limited to those supported data types. Cloud synchronization requires an internet connection and is optional for the signed-in experience.\" [1]\n\nSources:\n[1] Privacy Policy › 3. Cloud Storage & Synchronization: https://hisabdo.app/privacy-policy",
+    "ms": 28.4
+   },
+   "changed": true,
+   "same_reply": false
+  },
+  {
+   "id": "Q44",
+   "lang": "en",
+   "flow": "policy",
+   "text": "If I uninstall the app will I lose my expenses?",
+   "was_flagged": true,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Here's what I found: Balance: 45230.5 PKR. Expenses this month: 18420.0 PKR. Revenue this month: 62000.0 PKR. Outstanding receivables: 9000.0 PKR. (In response to: \"If I uninstall the app will I lose my expenses?\")"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "off-01-023-what-happens-to-my-data-if-i-uninstall-the-app",
+     "blog-16-013-what-happens-to-my-data-if-i-lose-my-phone"
+    ],
+    "reply": "I found this on the related help topic \"What happens to my data if I uninstall the app?\": If you uninstall HisabDo without creating a backup first, your local data may be lost. We strongly recommend creating a backup before uninstalling or changing devices. [1]\n\nI found this on the related help topic \"What happens to my data if I lose my phone?\": If you created a backup of supported local records, use the app's restore process. In signed-in mode, supported customer, income and expense records may synchronize when you sign in on another device. [2]\n\nSources:\n[1] HisabDo Help Center FAQ › What happens to my data if I uninstall the app?: https://hisabdo.app/faq\n[2] Offline Finance Apps: Benefits, Limitations and Privacy › Frequently Asked Questions: https://hisabdo.app/blog/why-offline-finance-apps-are-better",
+    "ms": 27.7
+   },
+   "changed": true,
+   "same_reply": false
+  },
+  {
+   "id": "Q45",
+   "lang": "en",
+   "flow": "policy",
+   "text": "Which currencies can I record expenses in?",
+   "was_flagged": true,
+   "before": {
+    "source": "rag",
+    "status": "conflict",
+    "cited": [
+     "off-01-019-which-currencies-does-hisabdo-support",
+     "off-02-010-works-the-way-you-do-business",
+     "off-04-010-multi-currency-support"
+    ],
+    "reply": "HisabDo's official sources don't agree on this yet, so I can't give you one answer. I've flagged it for review.\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support? (no date shown): You can select your preferred currency in the app settings.\n[2] Why We Built HisabDo › Works the Way You Do Business (no date shown): In Your Currency PKR, USD and INR are supported, so the app fits businesses operating in Pakistan, India and beyond.\n[3] HisabDo: Khata & Expense App › Multi-Currency Support (2026-10-13): Manage financial records using: PKR INR AED USD\n\nSources:\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support?: https://hisabdo.app/faq\n[2] Why We Built HisabDo › Works the Way You Do Business: https://hisabdo.app/about-app\n[3] HisabDo: Khata & Expense App › Multi-Currency Support: https://play.google.com/store/apps/details?id=com.usman.hisabdo"
+   },
+   "after": {
+    "source": "rag",
+    "status": "conflict",
+    "cited": [
+     "off-01-019-which-currencies-does-hisabdo-support",
+     "off-02-010-works-the-way-you-do-business",
+     "off-04-010-multi-currency-support"
+    ],
+    "reply": "HisabDo's official sources don't agree on this yet, so I can't give you one answer. I've flagged it for review.\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support? (no date shown): You can select your preferred currency in the app settings.\n[2] Why We Built HisabDo › Works the Way You Do Business (no date shown): In Your Currency PKR, USD and INR are supported, so the app fits businesses operating in Pakistan, India and beyond.\n[3] HisabDo: Khata & Expense App › Multi-Currency Support (2026-10-13): Manage financial records using: PKR INR AED USD\n\nSources:\n[1] HisabDo Help Center FAQ › Which currencies does HisabDo support?: https://hisabdo.app/faq\n[2] Why We Built HisabDo › Works the Way You Do Business: https://hisabdo.app/about-app\n[3] HisabDo: Khata & Expense App › Multi-Currency Support: https://play.google.com/store/apps/details?id=com.usman.hisabdo",
+    "ms": 32.7
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q46",
+   "lang": "en",
+   "flow": "privacy",
+   "text": "Can my accountant see my expenses?",
+   "was_flagged": true,
+   "before": {
+    "source": "backend_financial_api",
+    "status": null,
+    "cited": [],
+    "reply": "Here's what I found: Balance: 45230.5 PKR. Expenses this month: 18420.0 PKR. Revenue this month: 62000.0 PKR. Outstanding receivables: 9000.0 PKR. (In response to: \"Can my accountant see my expenses?\")"
+   },
+   "after": {
+    "source": "rag",
+    "status": "answered",
+    "cited": [
+     "blog-10-005-categorize-your-business-expenses"
+    ],
+    "reply": "I found this on the related help topic \"Categorize Your Business Expenses\": Common freelance business expenses include: Software subscriptions and tools Hardware and equipment Internet and phone bills (business portion) Professional development and courses Marketing and portfolio costs Transport to client meetings Co-working space fees Professional services (accountant, lawyer) Tracking these expenses accurately is important for understanding your true income after costs and for tax purposes. [1]\n\nSources:\n[1] Freelancer Expense Tracking: A Practical Guide › Categorize Your Business Expenses: https://hisabdo.app/blog/freelancer-expense-tracking",
+    "ms": 41.7
+   },
+   "changed": true,
+   "same_reply": false
+  },
+  {
+   "id": "Q47",
+   "lang": "en",
+   "flow": "privacy",
+   "text": "Show me my brother's expenses",
+   "was_flagged": false,
+   "before": {
+    "source": "policy_guard",
+    "status": null,
+    "cited": [],
+    "reply": "I'm sorry, but I can only provide information about your own account."
+   },
+   "after": {
+    "source": "policy_guard",
+    "status": null,
+    "cited": [],
+    "reply": "I'm sorry, but I can only provide information about your own account.",
+    "ms": 69.6
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q48",
+   "lang": "en",
+   "flow": "ambiguous",
+   "text": "expenses",
+   "was_flagged": true,
+   "before": {
+    "source": "kb_fallback",
+    "status": "out_of_scope",
+    "cited": [],
+    "reply": "I can help with HisabDo and with bookkeeping for your business, but I don't have reliable information on that. Try asking about a HisabDo feature, such as PDF reports, backup or customer udhar, or contact HisabDo support at hisabdo.app@gmail.com."
+   },
+   "after": {
+    "source": "clarification",
+    "status": "clarify",
+    "cited": [],
+    "reply": "Do you want to add an expense, see your expense totals, or learn how expense tracking works in HisabDo?",
+    "ms": 26.4
+   },
+   "changed": true,
+   "same_reply": false
+  },
+  {
+   "id": "Q49",
+   "lang": "en",
+   "flow": "ambiguous",
+   "text": "500",
+   "was_flagged": false,
+   "before": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Was this money you spent (expense) or money you received (income)?"
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "Was this money you spent (expense) or money you received (income)?",
+    "ms": 14.9
+   },
+   "changed": false,
+   "same_reply": true
+  },
+  {
+   "id": "Q50",
+   "lang": "en",
+   "flow": "ambiguous",
+   "text": "Why is my total wrong?",
+   "was_flagged": true,
+   "before": {
+    "source": "guardrail",
+    "status": null,
+    "cited": [],
+    "reply": "I can help with HisabDo and with bookkeeping for your business, so I can't help with that. Try asking about customers and udhar, expenses, PDF reports or backup, or contact hisabdo.app@gmail.com or the Contact page (https://hisabdo.app/contact)."
+   },
+   "after": {
+    "source": "dialogue",
+    "status": null,
+    "cited": [],
+    "reply": "I can only change entries confirmed in this chat, and I don't see one yet. Please open the entry in the app to edit it, or tell me the new entry to add.",
+    "ms": 12.7
+   },
+   "changed": true,
+   "same_reply": false
+  }
+ ],
+ "judged": [
+  {
+   "id": "D01",
+   "set": "dev",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "D02",
+   "set": "dev",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "D03",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "D04",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "D05",
+   "set": "dev",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "D06",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "D07",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "D08",
+   "set": "dev",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "D09",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "D10",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "D11",
+   "set": "dev",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "grade": "correct_refusal",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-04-002-why-expense-categorization-matters"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "D12",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-001-what-is-hisabdo"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "D13",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-002-is-hisabdo-free-to-use"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "D14",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-008-does-hisabdo-work-without-the-internet"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "D15",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-023-what-happens-to-my-data-if-i-uninstall-the-app",
+    "blog-16-009-backup-on-your-terms"
+   ],
+   "cited_grades": [
+    2,
+    1
+   ]
+  },
+  {
+   "id": "D16",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "D17",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "D18",
+   "set": "dev",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-07-012-is-a-digital-ledger-safe-to-use-without-internet"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "D19",
+   "set": "dev",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": "out_of_scope",
+   "source": "kb_fallback",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-EXP-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-04-002-expense-tracker"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-EXP-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-04-002-expense-tracker"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-EXP-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-04-002-expense-tracker"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-EXP-EN-2",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-EXP-RU-2",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-EXP-UR-2",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-EXP-EN-3",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-EXP-RU-3",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-EXP-UR-3",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-INC-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-016-can-i-add-notes-to-transactions"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-INC-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "no_source",
+   "source": "kb_fallback",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-INC-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "wrong_citation",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-015-does-hisabdo-have-analytics"
+   ],
+   "cited_grades": [
+    0
+   ]
+  },
+  {
+   "id": "H-INC-EN-2",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-INC-RU-2",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-INC-UR-2",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-KHA-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-08-015-what-is-the-difference-between-a-khata-and-a-led"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-KHA-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-08-015-what-is-the-difference-between-a-khata-and-a-led"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-KHA-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-08-015-what-is-the-difference-between-a-khata-and-a-led"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-KHA-EN-2",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "wrong_citation",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-08-007-6-keep-receivables-and-payables-separate"
+   ],
+   "cited_grades": [
+    0
+   ]
+  },
+  {
+   "id": "H-KHA-RU-2",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-08-015-what-is-the-difference-between-a-khata-and-a-led"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-KHA-UR-2",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-08-015-what-is-the-difference-between-a-khata-and-a-led"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-UDH-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-UDH-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-UDH-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-UDH-EN-2",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-UDH-RU-2",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-UDH-UR-2",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-REP-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-REP-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-REP-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-PDF-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-12-012-generating-reports-efficiently-with-hisabdo"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-PDF-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-12-012-generating-reports-efficiently-with-hisabdo"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-PDF-EN-2",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-12-015-can-i-share-hisabdo-reports-with-my-accountant"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-PDF-RU-2",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-02-005-hand-them-a-real-statement"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-PDF-UR-2",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "no_source",
+   "source": "kb_fallback",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-GEN-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-008-does-hisabdo-work-without-the-internet"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-GEN-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-008-does-hisabdo-work-without-the-internet"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-GEN-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-008-does-hisabdo-work-without-the-internet"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H-PDF-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-PDF-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H-PDF-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "no_source",
+   "source": "kb_fallback",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-KHA-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-08-008-7-back-up-your-records-regularly"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H-KHA-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-03-004-everything-you-need"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-H-KHA-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-03-004-everything-you-need"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-H-UDH-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H-UDH-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H-UDH-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H-UDH-EN-2",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-UDH-RU-2",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-UDH-UR-2",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-REP-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-REP-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-REP-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-KHA-EN-2",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-KHA-RU-2",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-KHA-UR-2",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-EXP-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-EXP-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-EXP-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-INC-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-INC-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-INC-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H-PDF-EN-2",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-12-012-generating-reports-efficiently-with-hisabdo"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H-PDF-RU-2",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-H-PDF-UR-2",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-12-012-generating-reports-efficiently-with-hisabdo"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H2-REP-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-REP-EN-2",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-REP-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-REP-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-UDH-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-UDH-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-UDH-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-UDH-EN-2",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H2-UDH-UR-2",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-H2-PDF-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-12-012-generating-reports-efficiently-with-hisabdo"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H2-PDF-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-12-012-generating-reports-efficiently-with-hisabdo"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H2-PDF-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-12-012-generating-reports-efficiently-with-hisabdo"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H2-PDF-EN-2",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-12-012-generating-reports-efficiently-with-hisabdo"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-H2-KHA-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-KHA-RU-2",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-03-002-replace-your-paper-khata-with-a-smarter-system"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-H2-EXP-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-EXP-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-EXP-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-INC-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-INC-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-INC-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-GEN-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "clarify",
+   "source": "clarification",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H2-GEN-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "conflict",
+   "source": "rag",
+   "cited": [
+    "off-01-019-which-currencies-does-hisabdo-support",
+    "off-02-010-works-the-way-you-do-business",
+    "off-04-010-multi-currency-support"
+   ],
+   "cited_grades": [
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "id": "H-H3-KHA-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H3-KHA-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H3-UDH-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H3-UDH-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H3-REP-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H3-REP-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H3-PDF-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-07-007-professional-pdf-reports"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H3-PDF-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-03-009-can-i-export-reports"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H3-GEN-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-029-is-hisabdo-available-on-ios-iphone"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-H3-GEN-EN-1",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-030-what-android-version-is-required"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-H3-EXP-UR-1",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H3-INC-RU-1",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "dialogue",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-H3-UDH-RU-2",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-03-002-what-are-customer-dues"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "H-TC-02",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-TC-03",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-TC-06",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-TC-07",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "policy_guard",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-TC-08",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "wrong_citation",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-11-014-how-should-i-approach-a-customer-about-an-overdu"
+   ],
+   "cited_grades": [
+    0
+   ]
+  },
+  {
+   "id": "H-F-01",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-03-009-can-i-export-reports"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-F-05",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-029-is-hisabdo-available-on-ios-iphone"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "H-P-06",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "guardrail",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-P-08",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "backend_financial_api",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-OT-01",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "guardrail",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-OT-02",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "guardrail",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-OT-03",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": "out_of_scope",
+   "source": "kb_fallback",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-OT-04",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "guardrail",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-OT-05",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": "out_of_scope",
+   "source": "kb_fallback",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-OT-06",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": "out_of_scope",
+   "source": "kb_fallback",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-OT-07",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "guardrail",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-OT-08",
+   "set": "heldout",
+   "lang": "en",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "greeting_fastpath",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-OT-09",
+   "set": "heldout",
+   "lang": "roman_ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "guardrail",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "H-OT-10",
+   "set": "heldout",
+   "lang": "ur",
+   "expect": "none",
+   "grade": "correct_refusal",
+   "status": null,
+   "source": "guardrail",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "P-Q29",
+   "set": "probe",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "wrong_citation",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-06-005-keep-receipts-and-notes"
+   ],
+   "cited_grades": [
+    0
+   ]
+  },
+  {
+   "id": "P-Q30",
+   "set": "probe",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "grade": "wrong_citation",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-12-005-expense-reports-what-to-include"
+   ],
+   "cited_grades": [
+    0
+   ]
+  },
+  {
+   "id": "P-Q31",
+   "set": "probe",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "grade": "correct_refusal",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-04-012-creating-your-own-categories"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "P-Q32",
+   "set": "probe",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "grade": "correct_refusal",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-06-005-keep-receipts-and-notes"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "P-Q33",
+   "set": "probe",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "grade": "correct_refusal",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-03-009-can-i-export-reports"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "P-Q34",
+   "set": "probe",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "grade": "wrong_citation",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-15-010-review-and-adjust-monthly"
+   ],
+   "cited_grades": [
+    0
+   ]
+  },
+  {
+   "id": "P-Q35",
+   "set": "probe",
+   "lang": "roman_ur",
+   "expect": "no_answer_in_kb",
+   "grade": "correct_refusal",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-04-017-what-if-an-expense-fits-into-more-than-one-categ"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "P-Q36",
+   "set": "probe",
+   "lang": "ur",
+   "expect": "answer",
+   "grade": "safe_no_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-12-005-expense-reports-what-to-include"
+   ],
+   "cited_grades": [
+    1
+   ]
+  },
+  {
+   "id": "P-Q37",
+   "set": "probe",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "grade": "wrong_citation",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-15-016-can-hisabdo-help-with-personal-budgeting"
+   ],
+   "cited_grades": [
+    0
+   ]
+  },
+  {
+   "id": "P-Q38",
+   "set": "probe",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "grade": "correct_refusal",
+   "status": "no_source",
+   "source": "kb_fallback",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "P-Q39",
+   "set": "probe",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-04-003-fixed-vs-variable-expenses"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "P-Q40",
+   "set": "probe",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-04-007-travel-and-transport",
+    "blog-04-004-operating-expenses"
+   ],
+   "cited_grades": [
+    2,
+    1
+   ]
+  },
+  {
+   "id": "P-Q41",
+   "set": "probe",
+   "lang": "roman_ur",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-06-010-track-petty-cash-carefully"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "P-Q42",
+   "set": "probe",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-02-014-how-much-cash-reserve-should-a-small-business-ke"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "P-Q43",
+   "set": "probe",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-06-004-3-cloud-storage-synchronization"
+   ],
+   "cited_grades": [
+    2
+   ]
+  },
+  {
+   "id": "P-Q44",
+   "set": "probe",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-023-what-happens-to-my-data-if-i-uninstall-the-app",
+    "blog-16-013-what-happens-to-my-data-if-i-lose-my-phone"
+   ],
+   "cited_grades": [
+    2,
+    1
+   ]
+  },
+  {
+   "id": "P-Q45",
+   "set": "probe",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "correct_answer",
+   "status": "conflict",
+   "source": "rag",
+   "cited": [
+    "off-01-019-which-currencies-does-hisabdo-support",
+    "off-02-010-works-the-way-you-do-business",
+    "off-04-010-multi-currency-support"
+   ],
+   "cited_grades": [
+    2,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "P-Q46",
+   "set": "probe",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "wrong_citation",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "blog-10-005-categorize-your-business-expenses"
+   ],
+   "cited_grades": [
+    0
+   ]
+  },
+  {
+   "id": "P-I26",
+   "set": "probe",
+   "lang": "en",
+   "expect": "no_answer_in_kb",
+   "grade": "correct_refusal",
+   "status": "no_source",
+   "source": "kb_fallback",
+   "cited": [],
+   "cited_grades": []
+  },
+  {
+   "id": "P-I27",
+   "set": "probe",
+   "lang": "en",
+   "expect": "answer",
+   "grade": "wrong_citation",
+   "status": "answered",
+   "source": "rag",
+   "cited": [
+    "off-01-030-what-android-version-is-required"
+   ],
+   "cited_grades": [
+    0
+   ]
+  }
+ ],
+ "judged_by_set": {
+  "dev": {
+   "correct_refusal": 12,
+   "correct_answer": 5,
+   "safe_no_answer": 2
+  },
+  "heldout": {
+   "correct_answer": 30,
+   "correct_refusal": 68,
+   "safe_no_answer": 19,
+   "wrong_citation": 3
+  },
+  "probe": {
+   "wrong_citation": 6,
+   "correct_refusal": 6,
+   "safe_no_answer": 1,
+   "correct_answer": 7
+  }
+ },
+ "metrics": {
+  "all_159": {
+   "questions": 159,
+   "answerable": 69,
+   "cited_passages": 80,
+   "citation_precision": 0.863,
+   "unrelated_citations": 11,
+   "answer_recall": 0.609,
+   "correct": 128,
+   "wrong_citation": 9
+  },
+  "day1_dev_19": {
+   "questions": 19,
+   "answerable": 7,
+   "cited_passages": 9,
+   "citation_precision": 1.0,
+   "unrelated_citations": 0,
+   "answer_recall": 0.714,
+   "correct": 17,
+   "wrong_citation": 0
+  },
+  "heldout_120": {
+   "questions": 120,
+   "answerable": 51,
+   "cited_passages": 49,
+   "citation_precision": 0.898,
+   "unrelated_citations": 5,
+   "answer_recall": 0.588,
+   "correct": 98,
+   "wrong_citation": 3
+  },
+  "failed_set_39": {
+   "questions": 39,
+   "answerable": 29,
+   "cited_passages": 38,
+   "citation_precision": 0.763,
+   "unrelated_citations": 9,
+   "answer_recall": 0.276,
+   "correct": 14,
+   "wrong_citation": 9
+  },
+  "probe_judged_20": {
+   "questions": 20,
+   "answerable": 11,
+   "cited_passages": 22,
+   "citation_precision": 0.727,
+   "unrelated_citations": 6,
+   "answer_recall": 0.636,
+   "correct": 13,
+   "wrong_citation": 6
+  }
+ },
+ "latency": {
+  "knowledge (grounded, hybrid)": {
+   "n": 40,
+   "p50": 32.8,
+   "p95": 42.9,
+   "max": 51.8
+  },
+  "account / balance": {
+   "n": 40,
+   "p50": 10.5,
+   "p95": 13.7,
+   "max": 14.3
+  },
+  "expense entry": {
+   "n": 40,
+   "p50": 8.8,
+   "p95": 10.6,
+   "max": 11.0
+  },
+  "small talk": {
+   "n": 40,
+   "p50": 9.4,
+   "p95": 12.8,
+   "max": 13.6
+  },
+  "blocked by guardrail": {
+   "n": 40,
+   "p50": 7.9,
+   "p95": 11.5,
+   "max": 12.7
+  },
+  "knowledge (legacy TF-IDF, Day 1 path)": {
+   "n": 40,
+   "p50": 9.7,
+   "p95": 12.2,
+   "max": 98.8
+  }
+ }
+}
