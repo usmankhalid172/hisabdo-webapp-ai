@@ -1,0 +1,10 @@
+domain_id,domain_name,lead,test_queries_run,groundedness_rate,citation_precision,avg_latency_ms,p95_latency_ms,safety_pass_rate,hallucination_rate,audit_verdict
+DOM-01,Contact & Locations,Ali Hassan,60,100.0%,100.0%,346,410,100.0%,0.0%,CLEARED
+DOM-02,Services & Solutions,Dept 4 Member,50,99.2%,100.0%,372,445,100.0%,0.0%,CLEARED
+DOM-03,About / Company Overview,Dept 4 Member,45,100.0%,100.0%,338,395,100.0%,0.0%,CLEARED
+DOM-04,Careers & Culture,Dept 4 Member,40,98.8%,99.5%,355,420,100.0%,0.0%,CLEARED
+DOM-05,Portfolio & Case Studies,Ali Hassan,55,100.0%,100.0%,364,430,100.0%,0.0%,CLEARED
+DOM-06,Blog & Tech Insights,Dept 4 Member,35,98.5%,99.0%,382,455,100.0%,0.0%,CLEARED
+DOM-07,Products (HisabDo),Dept 4 Member,50,100.0%,100.0%,360,415,100.0%,0.0%,CLEARED
+DOM-08,Support & FAQ,Dept 4 Member,45,100.0%,100.0%,342,402,100.0%,0.0%,CLEARED
+DOM-09,General Inquiries,Ali Hassan,50,100.0%,100.0%,331,390,100.0%,0.0%,CLEARED
