@@ -8,7 +8,14 @@ outside this sandbox's network access — see README.md "Testing" section).
 """
 
 
-def test_index_status_reports_unbuilt_index_by_default(client, auth_headers):
+def test_index_status_reports_unbuilt_index_when_store_is_empty(client, auth_headers, monkeypatch):
+    from src.xictek_website_assistant import service
+    from src.xictek_website_assistant.vector_store import VectorStore
+
+    # The repository now carries a built index; make the test independent of
+    # that integrated artifact by explicitly simulating an empty store.
+    service._load_store.cache_clear()
+    monkeypatch.setattr(service, "_load_store", lambda: VectorStore())
     resp = client.get("/api/v1/xictek/index-status", headers=auth_headers)
     assert resp.status_code == 200
     body = resp.json()

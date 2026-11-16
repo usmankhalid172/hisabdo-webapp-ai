@@ -1,0 +1,122 @@
+{
+  "generated_at_utc": "2026-11-16T05:50:14.244681+00:00",
+  "pytest": {
+    "exit_code": 0,
+    "duration_seconds": 12.477,
+    "junit_xml": "outputs\\fullstack_phase2_2026-11-16\\pytest_junit.xml",
+    "tests": 397,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 4
+  },
+  "benchmark": {
+    "execution_mode": "FastAPI TestClient endpoint",
+    "api_import_note": null,
+    "build": "checked-out local repository; mock LLM; checked-in XICTEK index",
+    "index_chunk_count": 976,
+    "gold_queries": 21,
+    "repetitions_per_query": 3,
+    "measured_requests": 63,
+    "warmup_requests": 21,
+    "concurrent_requests": 63,
+    "concurrency_workers": 4,
+    "top_k_setting": 8,
+    "overall": {
+      "http_success_rate": 1.0,
+      "successful_response_rate": 1.0,
+      "recall_at_k": 0.8571,
+      "mrr": 0.6619,
+      "mean_latency_ms": 9.304,
+      "p50_latency_ms": 8.99,
+      "p95_latency_ms": 12.378,
+      "max_latency_ms": 13.843,
+      "sequential_throughput_req_per_sec": 107.097,
+      "elapsed_seconds": 0.588
+    },
+    "concurrent_burst": {
+      "requests": 63,
+      "concurrency_workers": 4,
+      "http_success_rate": 1.0,
+      "successful_response_rate": 1.0,
+      "recall_at_k": 0.8571,
+      "mrr": 0.6619,
+      "mean_latency_ms": 35.217,
+      "p50_latency_ms": 34.385,
+      "p95_latency_ms": 46.042,
+      "max_latency_ms": 53.943,
+      "throughput_req_per_sec": 112.019,
+      "elapsed_seconds": 0.562
+    },
+    "domains": {
+      "About Us": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 1.0,
+        "mean_latency_ms": 7.86,
+        "p95_latency_ms": 8.793,
+        "http_success_rate": 1.0
+      },
+      "Core Services": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 0.5833,
+        "mean_latency_ms": 9.473,
+        "p95_latency_ms": 10.617,
+        "http_success_rate": 1.0
+      },
+      "Portfolio & Case Studies": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 1.0,
+        "mean_latency_ms": 11.759,
+        "p95_latency_ms": 13.663,
+        "http_success_rate": 1.0
+      },
+      "Careers & Job Openings": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 0.8333,
+        "mean_latency_ms": 10.214,
+        "p95_latency_ms": 12.816,
+        "http_success_rate": 1.0
+      },
+      "HisabDo Product": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 0.4833,
+        "mean_latency_ms": 8.187,
+        "p95_latency_ms": 8.603,
+        "http_success_rate": 1.0
+      },
+      "Blog & News": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 0.0,
+        "mrr": 0.0,
+        "mean_latency_ms": 9.349,
+        "p95_latency_ms": 10.054,
+        "http_success_rate": 1.0
+      },
+      "Contact & Locations": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 0.7333,
+        "mean_latency_ms": 8.285,
+        "p95_latency_ms": 8.781,
+        "http_success_rate": 1.0
+      }
+    },
+    "limits": [
+      "Local execution only; does not include deployed host, network, or production load-balancer latency.",
+      "Mock provider; no live LLM generation time, token cost, or citation-quality scoring.",
+      "Recall@k is exact expected source URL presence in API sources, not passage entailment.",
+      "Sequential throughput is not a concurrent capacity/load test."
+    ]
+  }
+}

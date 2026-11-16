@@ -1,0 +1,9 @@
+Metric,Archived baseline,Archived optimized result,Current Phase 2 local run,Raw numerical delta vs archived optimized,Comparison status / note
+Retrieval expected-source hit@k,50.7% (85-query archived offline suite),87.3% (same archived suite),85.7% (21 new golden queries; Hit@8),-1.6 percentage points,Directional only; query set and measurement protocol differ; not an apples-to-apples delta
+MRR,0.41 (85-query archived offline suite),0.83 (same archived suite),0.6619 (21 new golden queries; MRR@8),-0.1681,Directional only; new set and rank cutoff differ; not an apples-to-apples delta
+Context precision,28.3% (85-query archived offline suite),57.3% (same archived suite),Not measured,,Current evaluation checks expected source URL presence, not passage-level context precision
+Day 1 exact golden dataset,Not present in repository,Not available,21-case Phase 2 query set created for this benchmark,,No exact Day 1 matched-set comparison can be calculated
+Full test suite,No matching archived suite count available,,397 collected; 393 passed; 4 skipped; 0 failed,,Local repository pytest run; four existing data-dependent skips
+Sequential local API latency,,,,,Current run: mean 9.304 ms; p50 8.990 ms; p95 12.378 ms; TestClient + mock LLM
+Four-worker local throughput,,,,,Current burst: 63 requests; 107.097 requests/s sequential; 112.019 requests/s four-worker local burst; not production capacity
+HTTP success rate,,,,,100% across 63 sequential and 63 concurrent FastAPI TestClient requests
