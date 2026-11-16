@@ -1,0 +1,899 @@
+{
+  "generated_at": "2026-11-16T06:12:27.266858+00:00",
+  "golden_set_size": 24,
+  "baseline_day1": {
+    "failed_queries_total": 17,
+    "failed_queries_passing_day1": 0,
+    "failed_queries_failing_day1": 17,
+    "url_validity_rate_day1": 0.0,
+    "citation_accuracy_rate_day1": 0.0,
+    "source": "blog-retrieval-evaluation.md \u00a73 + blog-grounded-generation-spec.md \u00a75.3"
+  },
+  "baseline_day8": {
+    "url_validity_rate": 1.0,
+    "citation_accuracy_rate": 1.0,
+    "orphan_inline_rate": 0.0,
+    "orphan_sources_rate": 0.0,
+    "multi_turn_status": "PASS",
+    "conflict_status": "PASS",
+    "source": "blog-news-pipeline/results/e2e_test_summary.json (2026-10-30)"
+  },
+  "aggregate": {
+    "total_queries": 24,
+    "failed_subset_size": 17,
+    "passed_subset_size": 7,
+    "retrieval": {
+      "hit_at_3": 1.0,
+      "mrr_at_3": 1.0,
+      "precision_at_3": 0.4444,
+      "recall_at_3": 0.8542,
+      "failed_subset_hit_at_3": 1.0,
+      "passed_subset_hit_at_3": 1.0
+    },
+    "citation": {
+      "pass_rate": 1.0,
+      "errors_total": 0
+    },
+    "url_safety": {
+      "url_validity_rate": 1.0,
+      "scope_violations_leaked_total": 0,
+      "queries_with_scope_leak": 0
+    },
+    "latency": {
+      "avg_ms": 2823.61,
+      "max_ms": 3081.51,
+      "min_ms": 2778.82,
+      "p95_ms": 2856.64
+    },
+    "regression": {
+      "pass_count": 24,
+      "fail_count": 0,
+      "failed_queries_now_passing": 17,
+      "passed_queries_still_passing": 7,
+      "new_regressions": 0,
+      "overall_verdict": "PASS"
+    }
+  },
+  "per_query": [
+    {
+      "id": "F1",
+      "query": "how much does custom software cost in Pakistan",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Returned /services URL instead of /blog/software-development-cost-pakistan",
+      "relevant_slugs": [
+        "custom-software-development-guide",
+        "software-development-cost-pakistan"
+      ],
+      "retrieved_top3_slugs": [
+        "software-development-cost-pakistan",
+        "software-development-company-pakistan",
+        "custom-software-development"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 0.5
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2795.8,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "F2",
+      "query": "what is the cost to build a mobile app",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Returned hisabdo.app URL (out-of-domain) instead of /blog/mobile-app-cost-guide",
+      "relevant_slugs": [
+        "mobile-app-cost-guide",
+        "startup-mobile-apps"
+      ],
+      "retrieved_top3_slugs": [
+        "mobile-app-cost-guide",
+        "software-development-cost-pakistan",
+        "mobile-app-development-company"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 0.5
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2778.82,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "F3",
+      "query": "best AI chatbot for customer support",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Returned /services URL instead of /blog/ai-chatbot-development",
+      "relevant_slugs": [
+        "ai-chatbot-development",
+        "ai-customer-support"
+      ],
+      "retrieved_top3_slugs": [
+        "ai-chatbot-development",
+        "ai-customer-support",
+        "ai-development-company-pakistan"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.6667,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2815.09,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "F4",
+      "query": "azure vs aws which is better",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Returned generic /services page; AWS article doesn't exist separately",
+      "relevant_slugs": [
+        "azure-development-services"
+      ],
+      "retrieved_top3_slugs": [
+        "azure-development-services",
+        "saas-development-services",
+        "dotnet-development-services"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2805.48,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "F5",
+      "query": "how to choose software development company",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Returned /services URL with no role identifier",
+      "relevant_slugs": [
+        "software-development-company-pakistan",
+        "web-development-company-pakistan"
+      ],
+      "retrieved_top3_slugs": [
+        "software-development-company-pakistan",
+        "web-development-company-pakistan",
+        "mobile-app-development-company"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.6667,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2797.93,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "N1",
+      "query": "How Do I Build A ChatBot??",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Case/punctuation noise defeated the chatbot's keyword match",
+      "relevant_slugs": [
+        "ai-chatbot-development"
+      ],
+      "retrieved_top3_slugs": [
+        "ai-chatbot-development"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2874.21,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "N2",
+      "query": "ios iphone app development",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Synonym 'iphone' not in article title",
+      "relevant_slugs": [
+        "ios-app-development"
+      ],
+      "retrieved_top3_slugs": [
+        "ios-app-development",
+        "mobile-app-development-company",
+        "android-app-development"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2807.09,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "N4",
+      "query": "ERP system automation",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Synonym mismatch \u2014 'system' vs 'software', 'automation' vs 'development'",
+      "relevant_slugs": [
+        "ai-in-erp-systems",
+        "business-process-automation",
+        "erp-software-development"
+      ],
+      "retrieved_top3_slugs": [
+        "erp-software-development",
+        "ai-in-erp-systems",
+        "business-process-automation"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 1.0,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 2,
+        "valid_blog_urls_count": 2,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2794.19,
+      "fallbacks_triggered": [
+        "5.5_MULTIPLE_EQUAL"
+      ],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "A1",
+      "query": "ai for small business",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "'SME' synonym for 'small business' not recognized",
+      "relevant_slugs": [
+        "ai-for-smes"
+      ],
+      "retrieved_top3_slugs": [
+        "ai-for-smes",
+        "ai-development-company-pakistan",
+        "ai-saas-platforms"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 2,
+        "valid_blog_urls_count": 2,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2818.94,
+      "fallbacks_triggered": [
+        "5.5_MULTIPLE_EQUAL"
+      ],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "H1",
+      "query": "we need to put our internal tools online so employees can use them from anywhere",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Concept-level description; no keyword overlap with article titles",
+      "relevant_slugs": [
+        "enterprise-web-applications",
+        "portal-development"
+      ],
+      "retrieved_top3_slugs": [
+        "enterprise-web-applications",
+        "portal-development",
+        "custom-web-application-development"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.6667,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 2,
+        "valid_blog_urls_count": 2,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 3081.51,
+      "fallbacks_triggered": [
+        "5.5_MULTIPLE_EQUAL"
+      ],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "H2",
+      "query": "our checkout flow is slow on mobile and people abandon carts",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Concept-level description; 'checkout' and 'abandon carts' not in article titles",
+      "relevant_slugs": [
+        "ecommerce-development",
+        "website-performance-optimization"
+      ],
+      "retrieved_top3_slugs": [
+        "ecommerce-development",
+        "business-mobile-applications",
+        "startup-mobile-apps"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 0.5
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2797.15,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "H3",
+      "query": "we want to add a smart assistant that answers questions from our documentation",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Paraphrased \u2014 'smart assistant' vs 'chatbot', 'answers questions' vs 'customer support'",
+      "relevant_slugs": [
+        "ai-chatbot-development",
+        "ai-customer-support",
+        "generative-ai-applications"
+      ],
+      "retrieved_top3_slugs": [
+        "ai-chatbot-development",
+        "ai-workflow-automation",
+        "ai-development-company-pakistan"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 0.3333
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2820.5,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "H4",
+      "query": "how do we make sure our app doesn't get hacked",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Paraphrased \u2014 'doesn't get hacked' vs 'security'",
+      "relevant_slugs": [
+        "mobile-app-security"
+      ],
+      "retrieved_top3_slugs": [
+        "mobile-app-security",
+        "app-maintenance-services",
+        "android-app-development"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2803.4,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "H5",
+      "query": "we have an old system that nobody understands and we want to modernize it",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Concept-level description; no keyword overlap with article titles",
+      "relevant_slugs": [
+        "digital-transformation-services",
+        "software-maintenance-services"
+      ],
+      "retrieved_top3_slugs": [
+        "software-maintenance-services",
+        "digital-transformation-services",
+        "full-stack-development-guide"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.6667,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2792.03,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "H6",
+      "query": "subscribe users monthly and charge them recurring fees",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Concept-level description; 'subscribe monthly' vs 'SaaS subscription'",
+      "relevant_slugs": [
+        "saas-development-services",
+        "saas-product-development"
+      ],
+      "retrieved_top3_slugs": [
+        "saas-development-services"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 0.5
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2815.29,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "H7",
+      "query": "continuous deployment pipeline with automated tests",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Paraphrased \u2014 'continuous deployment pipeline' vs 'DevOps' / 'agile process'",
+      "relevant_slugs": [
+        "agile-software-development",
+        "software-development-process"
+      ],
+      "retrieved_top3_slugs": [
+        "agile-software-development",
+        "software-development-process",
+        "erp-software-development"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.6667,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 2,
+        "valid_blog_urls_count": 2,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2856.64,
+      "fallbacks_triggered": [
+        "5.5_MULTIPLE_EQUAL"
+      ],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "H8",
+      "query": "what does it take to launch a startup product quickly",
+      "day1_status": "FAILED",
+      "day1_failure_reason": "Paraphrased \u2014 'launch quickly' vs 'MVP' / 'startup'",
+      "relevant_slugs": [
+        "mvp-development-guide",
+        "startup-mobile-apps",
+        "startup-software-development"
+      ],
+      "retrieved_top3_slugs": [
+        "startup-software-development",
+        "startup-mobile-apps",
+        "digital-product-development"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.6667,
+        "recall_at_3": 0.6667
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 2,
+        "valid_blog_urls_count": 2,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2791.65,
+      "fallbacks_triggered": [
+        "5.5_MULTIPLE_EQUAL"
+      ],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "P1",
+      "query": "ai chatbot development",
+      "day1_status": "PASSED",
+      "day1_failure_reason": "",
+      "relevant_slugs": [
+        "ai-chatbot-development"
+      ],
+      "retrieved_top3_slugs": [
+        "ai-chatbot-development",
+        "ai-development-company-pakistan",
+        "future-of-ai-in-business"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2824.89,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "P2",
+      "query": "custom software development",
+      "day1_status": "PASSED",
+      "day1_failure_reason": "",
+      "relevant_slugs": [
+        "custom-software-development"
+      ],
+      "retrieved_top3_slugs": [
+        "custom-software-development",
+        "custom-software-development-guide",
+        "custom-web-application-development"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2824.62,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "P3",
+      "query": "agile software development",
+      "day1_status": "PASSED",
+      "day1_failure_reason": "",
+      "relevant_slugs": [
+        "agile-software-development"
+      ],
+      "retrieved_top3_slugs": [
+        "agile-software-development",
+        "software-development-process",
+        "startup-software-development"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2800.58,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "P4",
+      "query": "saas development services",
+      "day1_status": "PASSED",
+      "day1_failure_reason": "",
+      "relevant_slugs": [
+        "saas-development-services"
+      ],
+      "retrieved_top3_slugs": [
+        "saas-development-services",
+        "saas-product-development",
+        "dotnet-development-services"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2816.11,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "P5",
+      "query": "mobile app development company",
+      "day1_status": "PASSED",
+      "day1_failure_reason": "",
+      "relevant_slugs": [
+        "mobile-app-development-company"
+      ],
+      "retrieved_top3_slugs": [
+        "mobile-app-development-company",
+        "ios-app-development",
+        "mobile-app-cost-guide"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2781.02,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "P6",
+      "query": "ecommerce development",
+      "day1_status": "PASSED",
+      "day1_failure_reason": "",
+      "relevant_slugs": [
+        "ecommerce-development"
+      ],
+      "retrieved_top3_slugs": [
+        "ecommerce-development",
+        "digital-product-development",
+        "web-development-company-pakistan"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 1.0
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 1,
+        "valid_blog_urls_count": 1,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2823.3,
+      "fallbacks_triggered": [],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    },
+    {
+      "id": "P7",
+      "query": "devops services",
+      "day1_status": "PASSED",
+      "day1_failure_reason": "",
+      "relevant_slugs": [
+        "azure-development-services",
+        "software-development-process"
+      ],
+      "retrieved_top3_slugs": [
+        "azure-development-services",
+        "dotnet-development-services",
+        "software-maintenance-services"
+      ],
+      "retrieval": {
+        "hit_at_3": 1,
+        "mrr_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "recall_at_3": 0.5
+      },
+      "citation": {
+        "pass": true,
+        "errors": []
+      },
+      "url_safety": {
+        "urls_in_response_count": 2,
+        "valid_blog_urls_count": 2,
+        "scope_violations_leaked": [],
+        "url_validity_rate": 1.0
+      },
+      "latency_ms": 2850.47,
+      "fallbacks_triggered": [
+        "5.5_MULTIPLE_EQUAL"
+      ],
+      "scope_violations_blocked": [],
+      "regression_verdict": "PASS"
+    }
+  ]
+}
