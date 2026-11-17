@@ -10,10 +10,10 @@
 - Verified questions measured: 41
 - Retrieval success: 35
 - Empty retrievals: 6
-- Average latency: 18.47 ms
-- Median latency (p50): 18.47 ms
-- p95 latency: 21.07 ms
-- Maximum latency: 21.37 ms
+- Average latency: 21.23 ms
+- Median latency (p50): 21.18 ms
+- p95 latency: 24.39 ms
+- Maximum latency: 25.83 ms
 - Questions with at least one expected source matched: 30/41
 
 ## Limitations

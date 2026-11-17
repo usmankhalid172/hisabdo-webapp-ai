@@ -28,14 +28,3 @@
 ## Calibration status
 
 No calibrated universal relevance threshold has been established. The 0.40 dense threshold is provisional only. Validate score distributions against false positives, verified relevance and safe abstention before deployment.
-
-## Empirical threshold calibration
-
-Selected candidate configuration: dense vector retrieval, top-k=3, provisional cosine-score threshold=0.40.
-
-On the 41 verified evaluation questions, using the benchmark's expected-source-hit proxy:
-- Top-k=3, threshold 0.40: 33 TP, 1 FP, 6 FN; precision 97.1%, recall 84.6%.
-- Top-k=3, threshold 0.50: 24 TP, 0 FP, 15 FN; precision 100%, recall 61.5%.
-- Top-k=1, threshold 0.40: 31 TP, 3 FP, 5 FN; precision 91.2%, recall 86.1%.
-
-The 0.40 threshold is a provisional operating point, not a universal relevance guarantee. Apply verified-source and intent-eligibility checks before retrieval results can support an answer. Abstain when eligible verified evidence is unavailable. Do not treat cosine score or expected-source match alone as proof that a passage supports an answer.

@@ -31,7 +31,3 @@ Unverified questions excluded from positive relevance scoring: 19.
 | hybrid_metadata_rerank | 1 | 70.73% | 0.7724 |
 | hybrid_metadata_rerank | 3 | 85.37% | 0.7724 |
 | hybrid_metadata_rerank | 5 | 85.37% | 0.7724 |
-
-## Calibrated operating point
-
-The threshold sweep favors dense-vector top-k=3 with a provisional threshold of 0.40: 33 TP, 1 FP, 6 FN, 97.1% precision and 84.6% recall across 41 verified questions, measured by expected-source hit. At threshold 0.50, precision reached 100% in this sample but recall fell to 61.5% (24 TP, 0 FP, 15 FN). Therefore 0.40 is the selected candidate for balanced retrieval; it is not a universal relevance guarantee. Verified-source eligibility, intent restrictions and safe abstention remain required. These are source-hit metrics, not passage-level answer-correctness metrics.

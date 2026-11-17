@@ -1,0 +1,25 @@
+﻿Metric,Day1_Baseline,Latest_Available_Evidence,Comparison_Status,Notes
+Exploratory chatbot questions,19,Not freshly rerun,NOT_COMPARABLE,"Historical baseline: 11 pass; 6 retrieval issues; 1 partial; 1 backend limitation"
+Full automated test suite,"351 passed 4 skipped","453 passed 4 skipped 0 failed",DIFFERENT_TEST_POPULATIONS,"Fresh full suite; no direct Day 1 comparison"
+Chatbot tests,Not established,"28 passed 0 failed",LATEST_PASS,"Dedicated chatbot test file"
+Security/API/isolation tests,Not established,"54 passed 0 failed",LATEST_PASS,"Automated tests; synthetic/mock isolation does not prove production isolation"
+Adversarial/multilingual/retrieval/use-case tests,Not established,"34 passed 4 skipped 0 failed",LATEST_PASS_WITH_SKIPS,"Four data-dependent use cases skipped"
+Golden question set,Day 1 exploratory baseline 19 questions,"60 staged questions: 28 MATCH; 13 MISS; 8 REVIEW; 11 SAFE_ABSTENTION",PARTIAL_NOT_COMPARABLE,"Staged retrieval benchmark; not full chatbot answer validation"
+Verified expected-source match,Not established as same dataset,"30/41 (73.17%)",HISTORICAL_RETRIEVAL_EVIDENCE,"Existing live FAQ retrieval result; separate evaluation"
+Staged retrieval match,Not available,"28/41 (68.29%)",NOT_COMPARABLE,"Separate staged-vector benchmark; 60 questions total"
+Hybrid RRF top-5,Not available,"40/41 (97.56%)",SAVED_BENCHMARK_ONLY,"Existing strategy output; not freshly rerun"
+Local retrieval average latency,Not available,"18.47 ms",HISTORICAL_ONLY,"Local FAQ retrieval; not end-to-end"
+Local retrieval p95 latency,Not available,"21.07 ms",HISTORICAL_ONLY,"Local FAQ retrieval; not end-to-end"
+Full chatbot response latency,Not measured,Not measured,NOT_MEASURED,"Requires integrated service and provider/backend"
+Inline citation accuracy,Not scored,Not freshly scored,NOT_MEASURED,"Answer-level source attribution accuracy not independently scored"
+Multi-turn financial flows,Previously blocked,Not independently rerun,NOT_VERIFIED,"No dedicated multi-turn test file found; four data-dependent use cases skipped"
+Adversarial privacy probes,Historical targeted tests,"Targeted tests passed; production isolation unverified",PARTIAL,"Automated probes do not establish live end-to-end privacy boundary"
+Production cross-user isolation,Not established,Not established,BLOCKED,"Synthetic isolation is not production proof"
+
+Chatbot rerun,17-Nov-2026,28 passed / 0 failed,16.08 seconds test-suite duration,Not end-to-end latency,Verified FAQ and follow-up tests passed,Inline citation accuracy pending
+
+Chatbot FAQ RAG Pipeline Rerun,17-Nov-2026,54 passed / 0 failed,34.72 seconds test-suite duration,Not end-to-end latency,Verified source filtering and grounded context tests passed,Inline citation accuracy not independently verified
+
+Fresh FAQ retrieval benchmark,17-Nov-2026,30/41 expected-source matches (73.17%),Average 21.23 ms; p95 24.39 ms; max 25.83 ms,Local FAQ retrieval only,41 verified questions; 35 retrieval successes; 6 empty retrievals,No end-to-end chatbot latency measured
+
+Fresh five-strategy retrieval benchmark,17-Nov-2026,60 questions; 41 verified; 19 excluded,Dense Top-3 95.12%; BM25 92.68%; Hybrid RRF 95.12%; Metadata 82.93%; Metadata+Rerank 85.37%,Retrieval expected-source hit rate and MRR only,12 staged chunks loaded; historical baseline MISS rows 11,Not chatbot answer accuracy or end-to-end latency
