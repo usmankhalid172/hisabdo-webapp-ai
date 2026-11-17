@@ -9,6 +9,7 @@ It measures local FastAPI/TestClient latency, not deployed network/provider late
 from __future__ import annotations
 
 import csv
+import argparse
 import json
 import os
 import statistics
@@ -64,12 +65,29 @@ def percentile(values: list[float], p: float) -> float | None:
     return ordered[lo] + (ordered[hi] - ordered[lo]) * (pos - lo)
 
 
-def run_full_pytest() -> dict:
+def run_full_pytest(timeout_seconds: int = 120) -> dict:
     OUT.mkdir(parents=True, exist_ok=True)
     junit = OUT / "pytest_junit.xml"
     command = [sys.executable, "-m", "pytest", "-q", "tests", f"--junitxml={junit}"]
     started = time.perf_counter()
-    completed = subprocess.run(command, cwd=ROOT, text=True, capture_output=True)
+    try:
+        completed = subprocess.run(
+            command, cwd=ROOT, text=True, capture_output=True, timeout=timeout_seconds
+        )
+    except subprocess.TimeoutExpired as exc:
+        stdout = exc.stdout or ""
+        stderr = exc.stderr or ""
+        if isinstance(stdout, bytes):
+            stdout = stdout.decode("utf-8", errors="replace")
+        if isinstance(stderr, bytes):
+            stderr = stderr.decode("utf-8", errors="replace")
+        (OUT / "pytest_stdout.txt").write_text(stdout, encoding="utf-8")
+        (OUT / "pytest_stderr.txt").write_text(stderr, encoding="utf-8")
+        return {
+            "status": "TIMED_OUT",
+            "timeout_seconds": timeout_seconds,
+            "junit_xml": str(junit.relative_to(ROOT)),
+        }
     elapsed = time.perf_counter() - started
     (OUT / "pytest_stdout.txt").write_text(completed.stdout, encoding="utf-8")
     (OUT / "pytest_stderr.txt").write_text(completed.stderr, encoding="utf-8")
@@ -103,6 +121,8 @@ def run_api_benchmark() -> tuple[list[dict], dict]:
     api_mode = False
     api_import_note = None
     try:
+        if os.getenv("PHASE2_HANDLER_ONLY") == "1":
+            raise ModuleNotFoundError("HTTP mode disabled by PHASE2_HANDLER_ONLY")
         from fastapi.testclient import TestClient
         from src.main import app
         client = TestClient(app)
@@ -183,7 +203,7 @@ def run_api_benchmark() -> tuple[list[dict], dict]:
             "mrr": round(sum(r["reciprocal_rank"] for r in domain_rows) / len(domain_rows), 4),
             "mean_latency_ms": round(statistics.mean(r["latency_ms"] for r in domain_rows), 3),
             "p95_latency_ms": round(percentile([r["latency_ms"] for r in domain_rows], 0.95), 3),
-            "http_success_rate": round(sum(r["http_status"] == 200 for r in domain_rows) / len(domain_rows), 4),
+            "http_success_rate": round(sum(r["http_status"] == 200 for r in domain_rows) / len(domain_rows), 4) if api_mode else None,
         }
     summary = {
         "execution_mode": "FastAPI TestClient endpoint" if api_mode else "direct chat service handler; HTTP layer unavailable",
@@ -232,8 +252,46 @@ def run_api_benchmark() -> tuple[list[dict], dict]:
 
 
 def main() -> int:
+    global OUT
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=OUT,
+        help="Directory for JUnit, latency, and benchmark output (default: prior Phase 2 output folder).",
+    )
+    parser.add_argument(
+        "--benchmark-only",
+        action="store_true",
+        help="Skip repository pytest and run only the domain query/latency benchmark.",
+    )
+    parser.add_argument(
+        "--handler-only",
+        action="store_true",
+        help="Benchmark the local chat handler directly instead of the HTTP TestClient layer.",
+    )
+    parser.add_argument(
+        "--pytest-timeout-seconds",
+        type=int,
+        default=120,
+        help="Maximum seconds allowed for the full pytest suite before the benchmark continues (default: 120).",
+    )
+    parser.add_argument(
+        "--min-recall-at-k",
+        type=float,
+        default=1.0,
+        help="Minimum expected-source Recall@k required for a successful exit (default: 1.0).",
+    )
+    args = parser.parse_args()
+    OUT = args.output_dir if args.output_dir.is_absolute() else ROOT / args.output_dir
     OUT.mkdir(parents=True, exist_ok=True)
-    pytest = run_full_pytest()
+    if args.handler_only:
+        os.environ["PHASE2_HANDLER_ONLY"] = "1"
+    pytest = (
+        {"status": "SKIPPED_BY_OPTION"}
+        if args.benchmark_only
+        else run_full_pytest(timeout_seconds=args.pytest_timeout_seconds)
+    )
     rows, benchmark = run_api_benchmark()
     with (OUT / "e2e_latency_source_recall.csv").open("w", newline="", encoding="utf-8-sig") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
@@ -246,7 +304,9 @@ def main() -> int:
     }, indent=2), encoding="utf-8")
     print(json.dumps({"pytest": pytest, "benchmark": benchmark}, indent=2))
     success_rate = benchmark["overall"]["successful_response_rate"]
-    return 0 if pytest.get("exit_code") == 0 and success_rate == 1.0 else 1
+    recall_at_k = benchmark["overall"]["recall_at_k"]
+    pytest_ok = args.benchmark_only or pytest.get("exit_code") == 0
+    return 0 if pytest_ok and success_rate == 1.0 and recall_at_k >= args.min_recall_at_k else 1
 
 
 if __name__ == "__main__":

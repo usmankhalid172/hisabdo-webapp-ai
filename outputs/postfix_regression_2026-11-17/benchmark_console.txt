@@ -1,0 +1,122 @@
+C:\Users\Dell\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\base.py:442: InconsistentVersionWarning: Trying to unpickle estimator TfidfTransformer from version 1.5.2 when using version 1.7.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+C:\Users\Dell\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\base.py:442: InconsistentVersionWarning: Trying to unpickle estimator TfidfVectorizer from version 1.5.2 when using version 1.7.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+{
+  "pytest": {
+    "status": "SKIPPED_BY_OPTION"
+  },
+  "benchmark": {
+    "execution_mode": "direct chat service handler; HTTP layer unavailable",
+    "api_import_note": "HTTP API benchmark unavailable: HTTP mode disabled by PHASE2_HANDLER_ONLY",
+    "build": "checked-out local repository; mock LLM; checked-in XICTEK index",
+    "index_chunk_count": 976,
+    "gold_queries": 21,
+    "repetitions_per_query": 3,
+    "measured_requests": 63,
+    "warmup_requests": 21,
+    "concurrent_requests": 63,
+    "concurrency_workers": 4,
+    "top_k_setting": 8,
+    "overall": {
+      "http_success_rate": null,
+      "successful_response_rate": 1.0,
+      "recall_at_k": 0.8571,
+      "mrr": 0.6619,
+      "mean_latency_ms": 2.803,
+      "p50_latency_ms": 2.875,
+      "p95_latency_ms": 4.542,
+      "max_latency_ms": 4.759,
+      "sequential_throughput_req_per_sec": 353.389,
+      "elapsed_seconds": 0.178
+    },
+    "concurrent_burst": {
+      "requests": 63,
+      "concurrency_workers": 4,
+      "http_success_rate": null,
+      "successful_response_rate": 1.0,
+      "recall_at_k": 0.8571,
+      "mrr": 0.6619,
+      "mean_latency_ms": 13.989,
+      "p50_latency_ms": 13.079,
+      "p95_latency_ms": 28.152,
+      "max_latency_ms": 34.82,
+      "throughput_req_per_sec": 276.829,
+      "elapsed_seconds": 0.228
+    },
+    "domains": {
+      "About Us": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 1.0,
+        "mean_latency_ms": 1.557,
+        "p95_latency_ms": 2.073,
+        "http_success_rate": null
+      },
+      "Core Services": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 0.5833,
+        "mean_latency_ms": 3.141,
+        "p95_latency_ms": 3.613,
+        "http_success_rate": null
+      },
+      "Portfolio & Case Studies": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 1.0,
+        "mean_latency_ms": 4.268,
+        "p95_latency_ms": 4.484,
+        "http_success_rate": null
+      },
+      "Careers & Job Openings": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 0.8333,
+        "mean_latency_ms": 3.366,
+        "p95_latency_ms": 4.714,
+        "http_success_rate": null
+      },
+      "HisabDo Product": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 0.4833,
+        "mean_latency_ms": 1.853,
+        "p95_latency_ms": 2.074,
+        "http_success_rate": null
+      },
+      "Blog & News": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 0.0,
+        "mrr": 0.0,
+        "mean_latency_ms": 3.132,
+        "p95_latency_ms": 3.39,
+        "http_success_rate": null
+      },
+      "Contact & Locations": {
+        "cases": 3,
+        "requests": 9,
+        "recall_at_k": 1.0,
+        "mrr": 0.7333,
+        "mean_latency_ms": 2.304,
+        "p95_latency_ms": 2.925,
+        "http_success_rate": null
+      }
+    },
+    "limits": [
+      "Local execution only; does not include deployed host, network, or production load-balancer latency.",
+      "Mock provider; no live LLM generation time, token cost, or citation-quality scoring.",
+      "Recall@k is exact expected source URL presence in API sources, not passage entailment.",
+      "Sequential throughput is not a concurrent capacity/load test."
+    ]
+  }
+}
+Benchmark process exit code: 1
