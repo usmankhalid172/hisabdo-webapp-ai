@@ -17,7 +17,8 @@ class JsonFormatter(logging.Formatter):
             "message": record.getMessage(),
         }
         # request-scoped fields attached via `extra={...}`
-        for key in ("request_id", "path", "method", "status_code", "duration_ms"):
+        for key in ("request_id", "path", "method", "status_code", "duration_ms",
+                    "turn", "category", "findings", "chunks", "error_type", "reasons", "kb"):
             value = getattr(record, key, None)
             if value is not None:
                 payload[key] = value

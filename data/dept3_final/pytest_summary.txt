@@ -1,0 +1,27 @@
+26 failed, 781 passed, 4 skipped, 2 warnings in 55.85s
+FAILED tests/xictek_website_assistant/test_endpoint.py::test_index_status_reports_unbuilt_index_by_default
+FAILED tests/xictek_website_assistant/test_endpoint.py::test_chat_returns_valid_response_shape
+FAILED tests/xictek_website_assistant/test_endpoint.py::test_chat_accepts_prior_history
+FAILED tests/xictek_website_assistant/test_multilingual.py::test_chat_endpoint_accepts_non_english_message
+FAILED tests/xictek_website_assistant/test_multilingual.py::test_chat_endpoint_accepts_arabic_message
+FAILED tests/xictek_website_assistant/test_multilingual.py::test_chat_endpoint_accepts_hindi_message
+FAILED tests/xictek_website_assistant/test_multilingual.py::test_chat_endpoint_accepts_roman_urdu_message
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[What services does XICTEK Systems offer?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[What technologies does your team specialize in?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[Can you tell me about the HisabDo app?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[Is HisabDo available for iOS and Android?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[What internship or careers opportunities do you have open?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[How can I get in touch with XICTEK Systems?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[Do you have any recent blog posts about AI?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[What industries do you build software for?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[What makes XICTEK different from other dev agencies?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[Can you walk me through your portfolio or past projects?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[Does HisabDo support automatic expense categorization?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[What's XICTEK's approach to AI/RAG-based products?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[Where is XICTEK Systems based?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[Do you offer freelance or contract engagements?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[What's the pricing for HisabDo?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[Can I book a demo of HisabDo?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[What's your typical project timeline for a client?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_content_question_gets_a_safe_non_crashing_reply[Who founded XICTEK Systems?]
+FAILED tests/xictek_website_assistant/test_qa_checklist.py::test_llm_failure_degrades_to_a_friendly_reply

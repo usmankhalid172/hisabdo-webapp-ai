@@ -1,0 +1,124 @@
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "e89fe95b-3a67-4e40-81c7-544dbcc50548", "user_ref": "b18ecf997952", "route": "account_data", "intent": "report", "source": "backend_financial_api", "retrieval_mode": "none", "latency_ms": 20.7, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "e89fe95b-3a67-4e40-81c7-544dbcc50548", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 27.69}
+PASS  critical TC-01  HTTP 200; source=backend_financial_api
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "c2086ace-106a-4490-abca-bfb2afaee410", "user_ref": "b18ecf997952", "route": "guard", "intent": "declined_third_party", "source": "policy_guard", "retrieval_mode": "none", "latency_ms": 1.1, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "c2086ace-106a-4490-abca-bfb2afaee410", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 4.1}
+PASS  critical TC-02  HTTP 200
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "9b2cea47-a578-405d-bde8-5a65510f859a", "user_ref": "b18ecf997952", "route": "account_data", "intent": "own_financial_data", "source": "backend_financial_api", "retrieval_mode": "none", "latency_ms": 1.7, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "9b2cea47-a578-405d-bde8-5a65510f859a", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 4.29}
+PASS  critical TC-03  HTTP 200; source=backend_financial_api
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "134da824-c7ce-44c0-9d93-bd9fdca32cfd", "user_ref": "b18ecf997952", "route": "account_data", "intent": "report", "source": "backend_financial_api", "retrieval_mode": "none", "latency_ms": 1.3, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "134da824-c7ce-44c0-9d93-bd9fdca32cfd", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 4.4}
+PASS  critical TC-04  HTTP 200; source=backend_financial_api
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "3f126368-d8c0-442b-a6e4-c9ec2eb31a13", "user_ref": "b18ecf997952", "route": "account_data", "intent": "report", "source": "backend_financial_api", "retrieval_mode": "none", "latency_ms": 1.0, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "3f126368-d8c0-442b-a6e4-c9ec2eb31a13", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 3.43}
+PASS  critical TC-05  HTTP 200; source=backend_financial_api
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "55c874ce-2955-47cf-a0ae-6d7865bb0477", "user_ref": "b18ecf997952", "route": "guard", "intent": "declined_third_party", "source": "policy_guard", "retrieval_mode": "none", "latency_ms": 0.5, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "55c874ce-2955-47cf-a0ae-6d7865bb0477", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 2.79}
+PASS  critical TC-06  HTTP 200
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "090015b6-4d14-4a74-9c57-46a842b7463c", "user_ref": "b18ecf997952", "route": "guard", "intent": "declined_third_party", "source": "policy_guard", "retrieval_mode": "none", "latency_ms": 0.6, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "090015b6-4d14-4a74-9c57-46a842b7463c", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 3.39}
+PASS  critical TC-07  HTTP 200; source=policy_guard
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "2669564e-fe07-428b-9dd9-d9b2bc3486bb", "user_ref": "b18ecf997952", "route": "guard", "intent": "limit", "source": "limit_notice", "retrieval_mode": "none", "latency_ms": 0.3, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "2669564e-fe07-428b-9dd9-d9b2bc3486bb", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 2.57}
+PASS  critical TC-08  HTTP 200
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "cfdb43a5-d899-4d94-b0e0-c7b7b29c175e", "user_ref": "b18ecf997952", "route": "account_data", "intent": "own_financial_data", "source": "backend_financial_api", "retrieval_mode": "none", "latency_ms": 1.3, "llm_called": true, "llm_provider": "mock", "tokens_used": 30, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "cfdb43a5-d899-4d94-b0e0-c7b7b29c175e", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 3.54}
+PASS  critical F-01   HTTP 200
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "9c94af51-ab4c-4dee-8ccd-6ce68288dda2", "user_ref": "b18ecf997952", "route": "knowledge", "intent": "product_faq", "source": "rag", "retrieval_mode": "tfidf_legacy", "retrieved_ids": ["faq-002"], "latency_ms": 6.9, "llm_called": true, "llm_provider": "mock", "tokens_used": 55, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "9c94af51-ab4c-4dee-8ccd-6ce68288dda2", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 9.42}
+PASS  critical F-02   HTTP 200
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "02649019-dd17-4b56-9507-d9f1f8bc5c75", "user_ref": "b18ecf997952", "route": "knowledge", "intent": "product_faq", "source": "rag", "retrieval_mode": "tfidf_legacy", "retrieved_ids": ["faq-001"], "latency_ms": 2.2, "llm_called": true, "llm_provider": "mock", "tokens_used": 45, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "02649019-dd17-4b56-9507-d9f1f8bc5c75", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 4.58}
+PASS  critical F-03   HTTP 200
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "e2388f5e-cdf6-494e-9c0e-41f55cc5859f", "user_ref": "b18ecf997952", "route": "knowledge", "intent": "product_faq", "source": "rag", "retrieval_mode": "tfidf_legacy", "retrieved_ids": ["faq-007"], "latency_ms": 1.7, "llm_called": true, "llm_provider": "mock", "tokens_used": 39, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "e2388f5e-cdf6-494e-9c0e-41f55cc5859f", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 3.89}
+PASS  critical F-04   HTTP 200
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "6680f42c-6550-4f2d-971c-dfeedfd513d6", "user_ref": "b18ecf997952", "route": "knowledge", "intent": "product_faq", "source": "rag", "retrieval_mode": "tfidf_legacy", "retrieved_ids": ["faq-010"], "latency_ms": 1.6, "llm_called": true, "llm_provider": "mock", "tokens_used": 39, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:25+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "6680f42c-6550-4f2d-971c-dfeedfd513d6", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 3.99}
+PASS  critical F-05   HTTP 200
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "26c7aeb1-f62b-41bd-86a2-98bcc270325e", "user_ref": "b18ecf997952", "route": "knowledge", "intent": "product_faq", "source": "rag", "retrieval_mode": "tfidf_legacy", "retrieved_ids": ["faq-005"], "latency_ms": 2.0, "llm_called": true, "llm_provider": "mock", "tokens_used": 50, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "26c7aeb1-f62b-41bd-86a2-98bcc270325e", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 4.26}
+PASS  major    F-06   HTTP 200; source=rag
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "38fb6696-42e5-4bdf-89f3-b047de32880f", "user_ref": "b18ecf997952", "route": "knowledge", "intent": "product_faq", "source": "rag", "retrieval_mode": "tfidf_legacy", "retrieved_ids": ["faq-008"], "latency_ms": 1.8, "llm_called": true, "llm_provider": "mock", "tokens_used": 49, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "38fb6696-42e5-4bdf-89f3-b047de32880f", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 3.98}
+PASS  major    F-07   HTTP 200; source=rag
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "800daf11-c634-4d21-8d70-2ba6e0940925", "user_ref": "b18ecf997952", "route": "knowledge", "intent": "product_faq", "source": "rag", "retrieval_mode": "tfidf_legacy", "retrieved_ids": ["faq-009"], "latency_ms": 2.1, "llm_called": true, "llm_provider": "mock", "tokens_used": 60, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "800daf11-c634-4d21-8d70-2ba6e0940925", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 5.36}
+PASS  major    F-08   HTTP 200; source=rag
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "a022d7c1-742e-42d0-a1b9-703d6f56741e", "user_ref": "b18ecf997952", "route": "account_data", "intent": "own_financial_data", "source": "backend_financial_api", "retrieval_mode": "none", "latency_ms": 1.0, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "a022d7c1-742e-42d0-a1b9-703d6f56741e", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 3.02}
+PASS  critical P-01   HTTP 200; source=backend_financial_api
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "8b159ab0-3f40-456d-b37d-217a23c06601", "user_ref": "b18ecf997952", "route": "account_data", "intent": "own_financial_data", "source": "backend_financial_api", "retrieval_mode": "none", "latency_ms": 0.9, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "8b159ab0-3f40-456d-b37d-217a23c06601", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 3.05}
+PASS  critical P-02   HTTP 200; source=backend_financial_api
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "5ca5f007-b3cc-4d9c-a73e-fa785e6df0a7", "user_ref": "b18ecf997952", "route": "guard", "intent": "declined_third_party", "source": "policy_guard", "retrieval_mode": "none", "latency_ms": 0.4, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "5ca5f007-b3cc-4d9c-a73e-fa785e6df0a7", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 2.76}
+PASS  critical P-03   HTTP 200; source=policy_guard
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "121b4b6b-0a12-478f-ac87-812bcadb30aa", "user_ref": "b18ecf997952", "route": "guard", "intent": "declined_third_party", "source": "policy_guard", "retrieval_mode": "none", "latency_ms": 0.4, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "121b4b6b-0a12-478f-ac87-812bcadb30aa", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 2.88}
+PASS  critical P-04   HTTP 200; source=policy_guard
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "b4ee1d39-f4f7-4678-b591-be49329f0d27", "user_ref": "b18ecf997952", "route": "guard", "intent": "declined_third_party", "source": "policy_guard", "retrieval_mode": "none", "latency_ms": 0.6, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "b4ee1d39-f4f7-4678-b591-be49329f0d27", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 3.38}
+PASS  critical P-05   HTTP 200; source=policy_guard
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "WARNING", "logger": "hisabdo.ai.guardrails", "message": "guardrail_input_blocked", "category": "prompt_injection"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "3ed32457-5578-4f4c-a0d1-21b4e9f3b6fe", "user_ref": "b18ecf997952", "route": "guard", "intent": "blocked_prompt_injection", "source": "guardrail", "retrieval_mode": "none", "latency_ms": 0.2, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "3ed32457-5578-4f4c-a0d1-21b4e9f3b6fe", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 2.54}
+PASS  critical P-06   HTTP 200; source=guardrail
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "fa53e50d-4789-4235-aed5-54c47d9abc62", "user_ref": "b18ecf997952", "route": "transaction", "intent": "add_expense", "source": "dialogue", "retrieval_mode": "none", "latency_ms": 1.5, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "fa53e50d-4789-4235-aed5-54c47d9abc62", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 4.35}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "dc052bc5-6e63-49d5-af94-1e3f33efc91d", "user_ref": "8c1cc99bcd0b", "route": "transaction", "intent": "confirm", "source": "dialogue", "retrieval_mode": "none", "latency_ms": 0.6, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "dc052bc5-6e63-49d5-af94-1e3f33efc91d", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 3.18}
+PASS  critical P-07   HTTP 200
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "c1722748-f453-4f68-82b0-c428f7fee077", "user_ref": "b18ecf997952", "route": "account_data", "intent": "own_financial_data", "source": "backend_financial_api", "retrieval_mode": "none", "latency_ms": 1.4, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "c1722748-f453-4f68-82b0-c428f7fee077", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 3.92}
+PASS  critical P-08   HTTP 200
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "7a027076-6bca-4022-9749-a56763c0f7b6", "path": "/api/v1/chatbot", "method": "POST", "status_code": 401, "duration_ms": 2.01}
+PASS  critical S-01   HTTP 401
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "61ed8889-3992-49c2-a406-2aff8533d4d2", "path": "/api/v1/chatbot", "method": "POST", "status_code": 401, "duration_ms": 1.3}
+C:\Users\Comtech\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\_exception_handler.py:59: StarletteDeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.
+  response = await handler(conn, exc)  # type: ignore[arg-type]
+PASS  critical S-02   HTTP 401
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "7299fb95-5de3-465f-aeb5-bdc55678cf0b", "path": "/api/v1/chatbot", "method": "POST", "status_code": 422, "duration_ms": 10.95}
+PASS  critical S-03   HTTP 422
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "d025b018-e762-416f-bc66-44fc4c3fc418", "path": "/api/v1/chatbot", "method": "POST", "status_code": 503, "duration_ms": 1.87}
+PASS  critical S-04   placeholder token with APP_ENV=production -> HTTP 503
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "2ecb9c1a-c6b6-4d71-8467-f9ad54c2c5f2", "path": "/api/v1/chatbot", "method": "POST", "status_code": 422, "duration_ms": 0.62}
+PASS  major    S-05   HTTP 422
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "9780a234-7b5f-48f0-b37d-9b77014d64c1", "user_ref": "b18ecf997952", "route": "account_data", "intent": "report", "source": "backend_financial_api", "retrieval_mode": "none", "latency_ms": 1.3, "llm_called": false, "tokens_used": 0, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "9780a234-7b5f-48f0-b37d-9b77014d64c1", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 5.53}
+PASS  major    M-01   HTTP 200; source=backend_financial_api
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "7cef07fb-c3a5-441a-abe7-9e2631365403", "user_ref": "b18ecf997952", "route": "general", "intent": "general", "source": "llm_general", "retrieval_mode": "none", "latency_ms": 2.0, "llm_called": true, "llm_provider": "mock", "tokens_used": 34, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "7cef07fb-c3a5-441a-abe7-9e2631365403", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 4.55}
+PASS  major    M-02   HTTP 200; source=llm_general
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.dialogue", "message": "dialogue_turn"}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai.telemetry", "message": "chat_turn", "turn": {"request_id": "48352468-ddd6-45a3-8995-0b9ceaee4a4d", "user_ref": "b18ecf997952", "route": "general", "intent": "general", "source": "llm_general", "retrieval_mode": "none", "latency_ms": 2.1, "llm_called": true, "llm_provider": "mock", "tokens_used": 35, "fallback": "none", "error_category": "none"}}
+{"timestamp": "2026-11-17T18:24:26+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "48352468-ddd6-45a3-8995-0b9ceaee4a4d", "path": "/api/v1/chatbot", "method": "POST", "status_code": 200, "duration_ms": 5.11}
+FAIL  minor    M-03   HTTP 200; source=llm_general
+
+| Severity | Passed |
+|---|---|
+| critical | 25/25 |
+| major | 6/6 |
+| minor | 0/1 |
+
+Critical failures: none

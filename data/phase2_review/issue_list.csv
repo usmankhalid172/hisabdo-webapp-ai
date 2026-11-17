@@ -1,0 +1,33 @@
+id,root_cause,priority,query_or_finding,what_happens,owner_proposed
+D3-01,API integration errors,P0,All account flows,"`BackendClient` is a mock: every user gets the same demo figures (balance 45,230.50). No real authenticated backend API is connected",Hassan Hussain (core services)
+D3-02,API integration errors,P0,"Q14 ""How much does Ali owe me?""",Returns the overall balance as if it were Ali's debt. The backend contract has no per-customer receivables,Hassan Hussain + Saba Talat
+D3-03,API integration errors,P0,"Q17 ""How much do I owe my suppliers?""",Returns the overall balance. No payables in the contract,Hassan Hussain + Saba Talat
+D3-04,API integration errors,P0,"Q22 ""biggest expense this week"", Q23 ""Is hafte kitna kharcha hua?""","Shows the **month's** totals labelled ""this week""",Saba Talat (period handling)
+D3-05,API integration errors,P1,"Q21 ""expenses by category""",Returns totals only; the contract has no category breakdown,Hassan Hussain
+D3-06,API integration errors,P1,"Q20, Q25 last month / compare months","""Only the current month"" (honest), but blocks a core use case",Hassan Hussain
+D3-07,API integration errors,P1,"Q28 ""Categorize: 1500 for printer ink""",Goes to the KB fallback; the `/api/v1/categorize` service is never called from chat,Saba Talat + categorization owner
+D3-08,API integration errors,P2,"Q05 ""Paid the supplier 15k for stock""",Asks a category from a list without Inventory / Stock; a supplier payment (payables) is treated as a plain expense,Saba Talat
+D3-09,API integration errors,P2,"Q12, Q13 udhar given (""Ali ko 500 udhar diye"")","Treated as an expense (asks its category) or ""expense or income?""; the action contract has no udhar / receivable entry type",Hassan Hussain + Saba Talat
+D3-10,Answer-generation issues,P0,"Q33, Q43, Q44, Q46 (""export my expenses to Excel"", ""are my expense records synced"", ""uninstall… lose my expenses"", ""can my accountant see my expenses"")","Product / privacy questions containing ""my expenses"" go to the own-figures route; the reply is the balance, and the mock **echoes the question** (""Here's what I found: Balance… (In response to …)"")",Saba Talat (router) + Muhammad Hamza Nawaz (mock provider echo)
+D3-11,Answer-generation issues,P1,"Q06 ""Spent 450 on tea for staff and 300 on snacks""","Two amounts in one message: asks ""How much was it?""",Saba Talat
+D3-12,Answer-generation issues,P1,"Q08 ""galti ho gayi, 450 nahi 540 tha""",Correction not recognised (open since Phase 1),Saba Talat
+D3-13,Answer-generation issues,P2,"Q48 ""expenses""","Out-of-scope fallback instead of a clarifying question (router sends one-word topics to `general`, where R1 is not reached)",Fahad Zubairi
+D3-14,Answer-generation issues,P2,"H-TC-08 ""Have you sent the payment to my customer?""",Routed `faq` since the 3 Nov fix; cites an overdue-balance article,Saba Talat
+D3-15,Answer-generation issues,P2,"Q07, Q09 edit / delete last expense","Only entries confirmed in the same chat can be changed; others redirect to the app (safe, limited)",Saba Talat
+D3-16,Answer-generation issues,P3,Real model provider not enabled,All English answers are extractive; no wording quality measured with a real model,Muhammad Hamza Nawaz
+D3-17,Answer-generation issues,P3,Hindi / Arabic,"App supports them; no rewrite glossary, router cues or guard patterns",Fahad Zubairi + Saba Talat
+D3-18,Missing sources,P1,"Q29 ""How do I add an expense?"", Q30 ""edit an expense"", Q35 ""change category""",No official how-to page: cites general blog advice (labelled related topic),Mian Usman Khalid (content) + Fahad Zubairi (ingest)
+D3-19,Missing sources,P1,Q32 receipt photo · Q34 monthly budget · Q37 recurring expenses · Q38 two staff on one account,"Feature questions with no official answer (cites neighbouring topics, or no source)",Mian Usman Khalid
+D3-20,Missing sources,P1,Q45 currencies (audit C-06),Sources disagree (AED); conflict shown and flagged,Mian Usman Khalid
+D3-21,Missing sources,P2,`/delete-data` and 5 other sitemap pages,"Not audited, so not in the KB",Fahad Zubairi
+D3-22,Missing sources,P2,Website,"95 broken blog links, stale ""30 questions"", 5 undated pages",Website owner (Mian Usman Khalid to assign)
+D3-23,Missing sources,P3,"Q41 petty cash, Q42 cash reserve (Roman Urdu / English)",Answered from blogs only; no product guidance,Mian Usman Khalid
+D3-24,Incorrect sources,P1,"Q36 ""خرچ کی رپورٹ پی ڈی ایف میں کیسے بنائیں؟""","Cites ""Expense Reports: What to Include"" instead of the PDF export FAQ",Fahad Zubairi
+D3-25,Incorrect sources,P1,Held-out: 3 unrelated citations remain (H-KHA-EN-2 and 2 others),Unrelated passage cited,Fahad Zubairi
+D3-26,Incorrect sources,P2,"""Can I connect HisabDo to my bank account?""","Answered from ""What happens when I sign in?""",Fahad Zubairi
+D3-27,Incorrect sources,P2,"""Does HisabDo have a web version?""",Answered with the Android version requirement,Fahad Zubairi
+D3-28,Safety / privacy,P0,"Q15 ""Which customers still owe me money?"", Q16 ""Mera kitna udhar baqi hai customers par?""",Refused as another person's data; these are the user's own receivables,Fahad Zubairi (guard) + Saba Talat
+D3-29,Safety / privacy,P1,"Q50 ""Why is my total wrong?""","Blocked as off-topic (""total"" not a domain word)",Fahad Zubairi
+D3-30,Safety / privacy,P3,Guardrails pattern-based; same author for rules and attacks,Red-team suite v1.2 by another member,Syeda Isma Nazir (QA)
+D3-31,Retrieval misses,P1,Urdu-script questions,"Weakest language (glossary-based rewrite, English-only embeddings)",Fahad Zubairi
+D3-32,Retrieval misses,P2,Lexical fallback mode,8 unrelated citations vs 3 in hybrid; servers without fastembed are weaker,Fahad Zubairi + Platform

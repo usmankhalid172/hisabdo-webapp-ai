@@ -1,0 +1,64 @@
+........................................................................ [  8%]
+........................................................................ [ 17%]
+........................................................................ [ 25%]
+........................................................................ [ 34%]
+........................................................................ [ 42%]
+........................................................................ [ 51%]
+........................................................................ [ 59%]
+.................................................................F...... [ 68%]
+........................................................................ [ 76%]
+..................................................................ssss.. [ 85%]
+...............................F........................................ [ 93%]
+.....................................................                    [100%]
+================================== FAILURES ===================================
+____________________ test_judged_passages_exist_in_the_kb _____________________
+
+    def test_judged_passages_exist_in_the_kb():
+        ids = {c["id"] for c in R.load_chunks()}
+        for q, judged in R.load_qrels().items():
+>           assert set(judged) <= ids, q
+E           AssertionError: D16
+E           assert {'blog-03-002...alances', ...} <= {'blog-01-001...ayables', ...}
+E             
+E             Extra items in the left set:
+E             'off-04-016-start-managing-your-finances'
+
+tests\test_retrieval_eval.py:80: AssertionError
+_____________ test_index_status_reports_unbuilt_index_by_default ______________
+
+client = <starlette.testclient.TestClient object at 0x000002AEDE56F770>
+auth_headers = {'X-Internal-Token': 'test-token'}
+
+    def test_index_status_reports_unbuilt_index_by_default(client, auth_headers):
+        resp = client.get("/api/v1/xictek/index-status", headers=auth_headers)
+        assert resp.status_code == 200
+        body = resp.json()
+>       assert body["index_built"] is False
+E       assert True is False
+
+tests\xictek_website_assistant\test_endpoint.py:15: AssertionError
+---------------------------- Captured stdout call -----------------------------
+{"timestamp": "2026-11-17T18:32:24+0000", "level": "INFO", "logger": "hisabdo.ai", "message": "request_handled", "request_id": "f16e1286-33e4-4494-8d9c-02f812ff97fa", "path": "/api/v1/xictek/index-status", "method": "GET", "status_code": 200, "duration_ms": 41.33}
+------------------------------ Captured log call ------------------------------
+INFO     hisabdo.ai:middleware.py:35 request_handled
+============================== warnings summary ===============================
+tests/test_integration_api.py::test_error_format_is_consistent_on_validation_failure
+tests/xictek_website_assistant/test_endpoint.py::test_chat_rejects_message_over_length_cap
+  C:\Users\Comtech\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\_exception_handler.py:59: StarletteDeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.
+    response = await handler(conn, exc)  # type: ignore[arg-type]
+
+tests/xictek_website_assistant/test_endpoint.py::test_chat_returns_valid_response_shape
+  C:\Users\Comtech\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\base.py:463: InconsistentVersionWarning: Trying to unpickle estimator TfidfTransformer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+  https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+    warnings.warn(
+
+tests/xictek_website_assistant/test_endpoint.py::test_chat_returns_valid_response_shape
+  C:\Users\Comtech\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\base.py:463: InconsistentVersionWarning: Trying to unpickle estimator TfidfVectorizer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+  https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_retrieval_eval.py::test_judged_passages_exist_in_the_kb - A...
+FAILED tests/xictek_website_assistant/test_endpoint.py::test_index_status_reports_unbuilt_index_by_default
+2 failed, 839 passed, 4 skipped, 4 warnings in 60.12s (0:01:00)

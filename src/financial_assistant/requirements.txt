@@ -12,3 +12,6 @@
 
 openai>=3.0,<4.0
 pytest>=7.0
+# Optional: hybrid retrieval for grounded answers (grounding/retrieval.py, KB_RETRIEVER_MODE=auto|hybrid).
+# Without it the knowledge route runs lexical only. Local ONNX model, no API key.
+# fastembed==0.7.3

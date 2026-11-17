@@ -34,7 +34,8 @@ class HistoryTurn(BaseModel):
 
 class ChatbotRequest(BaseModel):
     user_id: str
-    message: str = Field(min_length=1)
+    # max_length: release fix - unbounded messages were accepted (cost and abuse risk).
+    message: str = Field(min_length=1, max_length=4000)
     conversation_id: str
     history: list[HistoryTurn] = Field(default_factory=list)
 
@@ -72,6 +73,15 @@ class TransactionActionOut(BaseModel):
     requires_client_execution: bool = True
 
 
+class Citation(BaseModel):
+    """A source the reply is based on; only present when that source supports the reply."""
+    n: int
+    title: str            # page title > section, as shown in the reply
+    url: str
+    chunk_id: str
+    last_updated: Optional[str] = None
+
+
 class ChatbotResponse(BaseModel):
     reply: str
     conversation_id: str
@@ -81,6 +91,10 @@ class ChatbotResponse(BaseModel):
     # Added for the intent router (optional, backwards compatible): None when the router did not run.
     dialogue: Optional[DialogueInfo] = None
     action: Optional[TransactionActionOut] = None
+    # Grounded answers (optional, backwards compatible): None when grounded answers are off.
+    answer_status: Optional[str] = None   # answered | conflict | no_source | out_of_scope | clarify
+    citations: list[Citation] = Field(default_factory=list)
+    needs_review: bool = False             # true when official sources conflict; the turn is logged for review
 
 
 # ---------- §6.2 Expense categorization ----------

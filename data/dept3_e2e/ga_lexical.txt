@@ -1,0 +1,43 @@
+{
+ "mode": "lexical",
+ "totals": {
+  "dev": {
+   "correct_refusal": 12,
+   "safe_no_answer": 3,
+   "correct_answer": 4
+  },
+  "heldout.json": {
+   "correct_answer": 27,
+   "correct_refusal": 68,
+   "safe_no_answer": 20,
+   "wrong_citation": 5
+  }
+ },
+ "answerable_by_language": {
+  "en:correct_answer": 15,
+  "en:safe_no_answer": 9,
+  "roman_ur:correct_answer": 9,
+  "roman_ur:safe_no_answer": 8,
+  "roman_ur:wrong_citation": 1,
+  "ur:correct_answer": 7,
+  "ur:safe_no_answer": 6,
+  "ur:wrong_citation": 3
+ },
+ "statuses": {
+  "routed:report": 18,
+  "routed:account_query": 29,
+  "answered": 52,
+  "no_source": 6,
+  "routed:correct_transaction": 1,
+  "routed:add_expense": 16,
+  "routed:add_income": 4,
+  "clarify": 2,
+  "out_of_scope": 10,
+  "routed:greeting": 1
+ }
+}
+WRONG H-INC-RU-1 answered ['blog-15-006-step-5-balance-the-budget']
+WRONG H-INC-UR-1 answered ['off-01-015-does-hisabdo-have-analytics']
+WRONG H-H-KHA-UR-1 answered ['blog-07-006-backup-and-recovery', 'blog-08-015-what-is-the-difference-between-a-khata-and-a-led']
+WRONG H-H3-PDF-UR-1 answered ['blog-07-006-backup-and-recovery']
+WRONG H-TC-08 answered ['blog-05-008-maintain-a-payment-schedule']

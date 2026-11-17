@@ -1,0 +1,398 @@
+{
+ "sample_size": 28,
+ "passed": 28,
+ "records": [
+  {
+   "record_id": "off-01-002-is-hisabdo-free-to-use",
+   "product_module": "app_platform",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-005-where-can-i-download-hisabdo",
+   "product_module": "app_platform",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-003-who-created-hisabdo",
+   "product_module": "company_support",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-031-how-do-i-contact-hisabdo-support",
+   "product_module": "company_support",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-010-can-i-manage-customers-in-hisabdo",
+   "product_module": "customers_udhar",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-011-can-i-track-receivables-money-owed-to-me",
+   "product_module": "customers_udhar",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-006-can-i-use-hisabdo-without-creating-an-account",
+   "product_module": "data_backup_sync",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-007-what-happens-when-i-sign-in",
+   "product_module": "data_backup_sync",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-014-does-hisabdo-support-voice-entry",
+   "product_module": "entry_voice",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-02-004-record-as-you-go-even-by-voice",
+   "product_module": "entry_voice",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-02-006-understand-the-bigger-picture",
+   "product_module": "expenses_income",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-03-006-practical-tools-for-shopkeepers-freelancers-smal",
+   "product_module": "expenses_income",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "blog-01-018-how-much-time-should-i-spend-on-financial-manage",
+   "product_module": "general_bookkeeping",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "blog-02-001-overview",
+   "product_module": "general_bookkeeping",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-016-can-i-add-notes-to-transactions",
+   "product_module": "khata_ledger",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-02-002-the-problem-with-paper-khata",
+   "product_module": "khata_ledger",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-017-does-hisabdo-support-urdu",
+   "product_module": "language_currency",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-018-does-hisabdo-support-english",
+   "product_module": "language_currency",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-06-001-overview",
+   "product_module": "legal_policy",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-06-002-1-information-we-collect",
+   "product_module": "legal_policy",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-024-how-secure-is-my-data-in-hisabdo",
+   "product_module": "privacy_security",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-025-does-hisabdo-share-my-financial-data-with-third",
+   "product_module": "privacy_security",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-001-what-is-hisabdo",
+   "product_module": "product_overview",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-004-who-is-hisabdo-designed-for",
+   "product_module": "product_overview",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-013-can-i-export-pdf-reports",
+   "product_module": "reports_pdf",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-015-does-hisabdo-have-analytics",
+   "product_module": "reports_pdf",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "off-01-012-can-i-track-payables-money-i-owe",
+   "product_module": "suppliers_payables",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  },
+  {
+   "record_id": "blog-01-002-1-financial-management-basics",
+   "product_module": "suppliers_payables",
+   "checks": {
+    "schema_valid": true,
+    "hash_matches_content": true,
+    "every_sentence_on_source_page": true,
+    "source_url_https": true,
+    "no_promotional_filler": true,
+    "module_assigned": true
+   },
+   "passed": true,
+   "unsupported_sentences": []
+  }
+ ]
+}

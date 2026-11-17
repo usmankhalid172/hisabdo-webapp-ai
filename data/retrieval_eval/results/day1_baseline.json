@@ -1,0 +1,29 @@
+{
+ "name": "C0 Day 1 production",
+ "setup": "src/financial_assistant/faq_rag.py as on main: sklearn TF-IDF (English stop words) over data/faq_docs.json on origin/main (12 hand-written entries), top-1, threshold 0.30. Reproduced 2026-10-28 on the Day 1 questions.",
+ "correct": 9,
+ "n": 19,
+ "answerable_correct": 1,
+ "answerable": 7,
+ "rows": [
+  {"id": "D01", "score": 0.51, "returned": "finance_002 What is revenue?", "ok": false, "why": "own-figures question got a KB definition"},
+  {"id": "D02", "score": 0.33, "returned": "finance_006 Why should business expenses be categorized?", "ok": false, "why": "unrelated passage in context"},
+  {"id": "D03", "score": 0.51, "returned": "finance_002 What is revenue?", "ok": false, "why": "own-figures question got a KB definition"},
+  {"id": "D04", "score": 0.17, "returned": null, "ok": true, "why": "empty, but only because no query word is in the 12 documents"},
+  {"id": "D05", "score": 0.00, "returned": null, "ok": true, "why": "empty (Urdu script has no TF-IDF terms)"},
+  {"id": "D06", "score": 0.17, "returned": null, "ok": true, "why": "empty by vocabulary, not by design"},
+  {"id": "D07", "score": 0.00, "returned": null, "ok": true, "why": "empty by vocabulary"},
+  {"id": "D08", "score": 0.00, "returned": null, "ok": true, "why": "empty by vocabulary"},
+  {"id": "D09", "score": 0.17, "returned": null, "ok": true, "why": "empty by vocabulary"},
+  {"id": "D10", "score": 0.00, "returned": null, "ok": true, "why": "empty by vocabulary"},
+  {"id": "D11", "score": 0.48, "returned": "faq-002 automatic categorization (unverified claim, audit C-02)", "ok": false, "why": "false claim served as fact"},
+  {"id": "D12", "score": 0.42, "returned": "faq-001 What is HisabDo? (old text: 'AI-assisted breakdown', no khata/ledger)", "ok": false, "why": "inaccurate source text"},
+  {"id": "D13", "score": 0.42, "returned": "faq-001 What is HisabDo?", "ok": false, "why": "does not answer 'is it free'"},
+  {"id": "D14", "score": 0.24, "returned": null, "ok": false, "why": "no answer retrieved"},
+  {"id": "D15", "score": 0.33, "returned": "faq-003 Is my financial data used to train the shared AI model?", "ok": false, "why": "unrelated passage"},
+  {"id": "D16", "score": 0.00, "returned": null, "ok": false, "why": "Roman Urdu concept question not matched"},
+  {"id": "D17", "score": 0.37, "returned": "faq-005 How do I export my expenses?", "ok": true, "why": "right topic (Day 1: 'right document'); its CSV claim was later corrected"},
+  {"id": "D18", "score": 0.00, "returned": null, "ok": false, "why": "no answer retrieved"},
+  {"id": "D19", "score": 0.00, "returned": null, "ok": true, "why": "empty by vocabulary"}
+ ]
+}

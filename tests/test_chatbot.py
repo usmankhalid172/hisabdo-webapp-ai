@@ -22,13 +22,24 @@ def test_product_faq_query_uses_rag():
     assert resp.intent == "product_faq"
 
 
-def test_unrelated_query_falls_back_to_general():
+def test_unrelated_query_falls_back_to_general(monkeypatch):
+    """With guardrails off the old behaviour stands; with them on (default) the domain boundary answers instead
+    of free model generation (docs/safety-guardrails.md)."""
+    from src.config import get_settings
     req = ChatbotRequest(
         user_id="user-1", message="asdkjhasd unrelated gibberish zzz", conversation_id="c3"
     )
     resp = handle_chat(req)
-    assert resp.source == "llm_general"
-    assert resp.intent == "general"
+    assert resp.source == "guardrail" and resp.intent == "blocked_off_topic"
+    monkeypatch.setenv("GUARDRAILS_ENABLED", "false")
+    get_settings.cache_clear()
+    try:
+        resp = handle_chat(req)
+        assert resp.source == "llm_general"
+        assert resp.intent == "general"
+    finally:
+        monkeypatch.delenv("GUARDRAILS_ENABLED")
+        get_settings.cache_clear()
 
 
 def test_chatbot_endpoint_returns_valid_shape(client, auth_headers):

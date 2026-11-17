@@ -1,0 +1,20 @@
+{
+ "grounded_on_hybrid": {
+  "n": 120,
+  "p50": 22.5,
+  "p95": 31.9,
+  "max": 38.4
+ },
+ "legacy_tfidf_grounded_off": {
+  "n": 120,
+  "p50": 7.0,
+  "p95": 9.9,
+  "max": 13.8
+ },
+ "grounded_on_again": {
+  "n": 120,
+  "p50": 34.0,
+  "p95": 47.8,
+  "max": 53.0
+ }
+}

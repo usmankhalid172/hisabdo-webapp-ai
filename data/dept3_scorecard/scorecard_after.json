@@ -1,0 +1,153 @@
+{
+ "label": "after",
+ "router": {
+  "labelled_sets": {
+   "intent_eval_cases.json": "60/60",
+   "intent_eval_cases_heldout.json": "29/33",
+   "multilingual_product_test_cases.json": "39/39",
+   "multilingual_product_test_cases_heldout.json": "25/27",
+   "multilingual_product_test_cases_heldout_v2.json": "24/27",
+   "multilingual_product_test_cases_heldout_v3.json": "14/15"
+  },
+  "known_misroutes": {
+   "R-1": {
+    "intent": "faq",
+    "ok": true
+   },
+   "R-2": {
+    "intent": "faq",
+    "ok": true
+   },
+   "R-2u": {
+    "intent": "faq",
+    "ok": true
+   },
+   "R-3a": {
+    "intent": "general",
+    "ok": true
+   },
+   "R-3b": {
+    "intent": "general",
+    "ok": true
+   },
+   "R-3c": {
+    "intent": "general",
+    "ok": true
+   },
+   "R-3d": {
+    "intent": "account_query",
+    "ok": true
+   },
+   "R-4": {
+    "intent": "faq",
+    "ok": true
+   },
+   "R-5": {
+    "intent": "faq",
+    "ok": true
+   },
+   "R-6": {
+    "intent": "general",
+    "ok": true
+   }
+  },
+  "known_misroutes_fixed": "10/10"
+ },
+ "answers_hybrid": {
+  "dev": {
+   "correct_refusal": 12,
+   "correct_answer": 5,
+   "safe_no_answer": 2
+  },
+  "heldout": {
+   "correct_answer": 31,
+   "correct_refusal": 68,
+   "safe_no_answer": 18,
+   "wrong_citation": 3
+  }
+ },
+ "answers_lexical": {
+  "dev": {
+   "correct_refusal": 12,
+   "safe_no_answer": 3,
+   "correct_answer": 4
+  },
+  "heldout": {
+   "correct_answer": 27,
+   "correct_refusal": 68,
+   "wrong_citation": 8,
+   "safe_no_answer": 17
+  }
+ },
+ "latency_hybrid": {
+  "retriever_mode": "hybrid",
+  "index_build_ms": 94661,
+  "flows": {
+   "knowledge_answer": {
+    "n": 40,
+    "p50_ms": 65.7,
+    "p95_ms": 70.6,
+    "max_ms": 187.5,
+    "sources": {
+     "rag": 40
+    }
+   },
+   "knowledge_no_source": {
+    "n": 40,
+    "p50_ms": 65.2,
+    "p95_ms": 72.2,
+    "max_ms": 77.1,
+    "sources": {
+     "kb_fallback": 40
+    }
+   },
+   "balance_account": {
+    "n": 40,
+    "p50_ms": 25.3,
+    "p95_ms": 34.7,
+    "max_ms": 35.7,
+    "sources": {
+     "backend_financial_api": 40
+    }
+   },
+   "expense_entry": {
+    "n": 40,
+    "p50_ms": 24.6,
+    "p95_ms": 33.6,
+    "max_ms": 36.8,
+    "sources": {
+     "dialogue": 40
+    }
+   },
+   "guard_blocked": {
+    "n": 40,
+    "p50_ms": 22.1,
+    "p95_ms": 29.6,
+    "max_ms": 31.7,
+    "sources": {
+     "guardrail": 40
+    }
+   },
+   "off_topic": {
+    "n": 40,
+    "p50_ms": 21.9,
+    "p95_ms": 25.9,
+    "max_ms": 30.0,
+    "sources": {
+     "guardrail": 40
+    }
+   }
+  },
+  "retrieval_only": {
+   "p50_ms": 30.7,
+   "p95_ms": 34.9
+  },
+  "usage": {
+   "embedding_calls_per_knowledge_request": 1,
+   "embedding_api_cost": "0 (local ONNX model, no API)",
+   "llm_calls_per_knowledge_request_mock_or_non_english": 0,
+   "prompt_tokens_per_knowledge_request_real_provider_est": 1509,
+   "token_estimate_method": "characters / 4"
+  }
+ }
+}
