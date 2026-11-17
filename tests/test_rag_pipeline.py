@@ -257,4 +257,58 @@ def test_grounded_call_never_shrinks_a_larger_caller_supplied_limit():
         "Q?", raw_context_chunks=chunks, llm_config=generous_config, client=client
     )
     # No assertion beyond "didn't raise" — a shrink would surface as
-    # this call failing validation, which it doesn't.
+    # this call failing validation, which it doesn't.from src.financial_assistant import rag_pipeline
+
+
+def test_faq_grounded_response_preserves_citation_metadata(monkeypatch):
+    retrieved_document = {
+        "id": "faq-001",
+        "title": "Official HisabDo FAQ",
+        "text": "HisabDo provides bookkeeping features.",
+        "source": "Official FAQ",
+        "score": 0.91,
+        "source_url": "https://hisabdo.app/faq",
+        "section": "Overview",
+        "verified": True,
+    }
+
+    captured = {}
+
+    class FakeRetriever:
+        def retrieve(self, query, top_k):
+            assert query == "What is HisabDo?"
+            assert top_k == 3
+            return [retrieved_document]
+
+    monkeypatch.setattr(
+        "src.financial_assistant.faq_rag.get_retriever",
+        lambda: FakeRetriever(),
+    )
+
+    def fake_grounded_response(user_question, raw_context_chunks):
+        captured["question"] = user_question
+        captured["chunks"] = raw_context_chunks
+        return "Grounded test response."
+
+    monkeypatch.setattr(
+        rag_pipeline,
+        "get_grounded_financial_assistant_response",
+        fake_grounded_response,
+    )
+
+    result = rag_pipeline.get_faq_grounded_response(
+        "What is HisabDo?"
+    )
+
+    assert result == "Grounded test response."
+    assert captured["question"] == "What is HisabDo?"
+
+    chunk = captured["chunks"][0]
+
+    assert chunk["id"] == "faq-001"
+    assert chunk["title"] == "Official HisabDo FAQ"
+    assert chunk["source_url"] == "https://hisabdo.app/faq"
+    assert chunk["section"] == "Overview"
+    assert chunk["verified"] is True
+
+from src.financial_assistant import rag_pipeline

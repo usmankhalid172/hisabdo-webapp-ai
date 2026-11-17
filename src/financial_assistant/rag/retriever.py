@@ -1,4 +1,5 @@
 import json
+import math
 from functools import lru_cache
 from pathlib import Path
 from typing import List, Dict
@@ -33,6 +34,12 @@ class FaqRetriever:
 
     def retrieve(self, query: str, top_k: int = 1) -> list:
         if not isinstance(query, str) or not query.strip():
+            return []
+        if (
+            not isinstance(top_k, int)
+            or isinstance(top_k, bool)
+            or top_k < 1
+        ):
             return []
         if self._matrix is None or self._vectorizer is None:
             return []
@@ -90,7 +97,22 @@ class FinancialRetriever:
         min_score: float = 0.0
     ) -> List[Dict]:
 
-        if not query.strip():
+        if not isinstance(query, str) or not query.strip():
+            return []
+
+        if (
+            not isinstance(top_k, int)
+            or isinstance(top_k, bool)
+            or top_k < 1
+        ):
+            return []
+
+        if (
+            not isinstance(min_score, (int, float))
+            or isinstance(min_score, bool)
+            or not math.isfinite(min_score)
+            or not 0.0 <= min_score <= 1.0
+        ):
             return []
 
         query_vector = self.vectorizer.transform([query])

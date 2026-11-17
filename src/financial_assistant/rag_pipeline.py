@@ -335,8 +335,13 @@ def get_faq_grounded_response(
         context_chunks.append(
             {
                 "text": content,
+                "id": document.get("id"),
+                "title": title,
                 "source": source,
                 "score": document.get("score"),
+                "source_url": document.get("source_url") or document.get("url"),
+                "section": document.get("section"),
+                "verified": document.get("verified") is True,
             }
         )
 
