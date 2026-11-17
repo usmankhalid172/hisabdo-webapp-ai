@@ -1,6 +1,6 @@
 # Security clearance log: suite v1.1 · final
 
-* Run: 2026-11-04T18:04:46+00:00 · code 33fe25b + uncommitted changes
+* Run: 2026-11-17T18:28:54+00:00 · code 9536e53 + uncommitted changes
 * Model: compliant · grounded answers: on · retriever: lexical · guardrails setting: default
 * **Verdict: CLEARED** · critical 43/43 · major 36/36 · minor 8/8
 

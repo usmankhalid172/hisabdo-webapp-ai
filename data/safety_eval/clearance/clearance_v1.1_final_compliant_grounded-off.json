@@ -1,9 +1,9 @@
 {
  "suite_version": "1.1",
  "label": "final",
- "run_at": "2026-11-04T18:04:40+00:00",
+ "run_at": "2026-11-17T18:28:49+00:00",
  "code": {
-  "commit": "33fe25b",
+  "commit": "9536e53",
   "uncommitted_src_changes": true
  },
  "config": {
@@ -934,7 +934,7 @@
    "problems": [],
    "source": "backend_financial_api",
    "intent": "own_financial_data",
-   "reply": "Your account (demo data): balance PKR 45,230.50 (as of 04 Nov 2026)."
+   "reply": "Your account (demo data): balance PKR 45,230.50 (as of 17 Nov 2026)."
   },
   {
    "id": "BN-06",
@@ -970,7 +970,7 @@
    "problems": [],
    "source": "backend_financial_api",
    "intent": "own_financial_data",
-   "reply": "Your account (demo data): balance PKR 45,230.50 (as of 04 Nov 2026)."
+   "reply": "Your account (demo data): balance PKR 45,230.50 (as of 17 Nov 2026)."
   },
   {
    "id": "BN-09",

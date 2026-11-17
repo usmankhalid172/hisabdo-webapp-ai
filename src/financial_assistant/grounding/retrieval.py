@@ -39,6 +39,8 @@ ROMAN_STOP = set("ka ki ke ko hai hain ho hun mein main se aur bhi to ye yeh woh
 GLOSSARY = {
     # app and product
     "hisabdo": "hisabdo", "ہساب": "hisabdo", "حسابدو": "hisabdo",
+    # 2026-11-17: "Can my accountant see my expenses?" must reach the accountant sharing FAQ
+    "accountant see": "share pdf reports with accountant", "accountant access": "share pdf reports with accountant",
     # 2026-11-03 fixes from the grounded-answer evaluation (3 of 4 wrong citations were Urdu script):
     "حساب دو": "hisabdo", "ہساب دو": "hisabdo", "hisab do": "hisabdo",
     "محفوظ کر": "save export", "محفوظ کریں": "save export", "save kar": "save export",

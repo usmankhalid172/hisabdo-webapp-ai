@@ -118,9 +118,38 @@ ROWS = [
      FAHAD, "Update the OFF-01 cleaner, content owner reviews the 21 new sections, then publish with `ingest_dept3.py --fetch`"],
     ["E2E-08", "P3", "New-open", "Test suite", "26 failures in tests/xictek_website_assistant", "Same 26 fail on the commit before Phase 2 work; "
      "separate module", "XICTEK assistant owner", "Out of scope for this branch"],
+    ["E2E-10", "P2", "New-fixed", "Knowledge base", "Promotional block \"Start Managing Your Finances\" was still in the retrieval index (364 chunks vs 363 records)",
+     "It reached the context as an unrelated passage for 14 judged questions; removed in the cleaner (PROMO), KB, set and manifest rebuilt, vector checksum unchanged", FAHAD, "Closed"],
+    ["E2E-11", "P2", "New-fixed", "Operations", "`ingest_dept3.py --offline` rebuilt from the newest snapshot folder, which can be an unreviewed one",
+     "Found when the 10 Nov live snapshot was rebuilt by mistake (caught by the sample check, reverted); offline now uses the approved snapshot in the manifest", FAHAD, "Closed"],
     ["E2E-09", "P2", "New-open", "Dialogue", "\"Why is my total wrong?\" is handled as a correction request",
      "Q50: \"I can only change entries confirmed in this chat\"", SABA, "A clarifying question: which total, which period"],
 ]
+
+# ---- Closure pass, 17 Nov: status, evidence and next step after the closure fixes -------------------------------
+CLOSURE = {
+    "D3-02": ("Fixed", "Q14 now returns the limit notice, never the overall balance as Ali's debt (U7); the capability itself is D3-01", "Closed; per-customer figures need D3-01"),
+    "D3-03": ("Fixed", "Q17 now returns the limit notice (U7)", "Closed; payables need D3-01"),
+    "D3-04": ("Fixed", "Q22 and Q23 now say only the current month is available (U7); no month figures labelled \"this week\"", "Closed; week figures need D3-01"),
+    "D3-05": ("Fixed", "Q21 now says expenses cannot be broken down by category yet (U7)", "Closed; breakdown needs D3-01"),
+    "D3-06": ("Accepted", "Q20 and Q25 return the honest \"current month only\" message", "Keep until the backend takes a month parameter (D3-01)"),
+    "D3-07": ("Fixed", "Q28 now returns \"That sounds like the category 'Shopping'.\" (office supplies words added)", "Closed"),
+    "D3-12": ("Fixed", "Q08 is recognised as a correction (galti, ghalti added) and gets the safe limited reply", "Closed; editing older entries is D3-15"),
+    "D3-14": ("Fixed", "H-TC-08 and all \"have you sent\" questions get an honest \"I can't send or check\" reply (U7)", "Closed"),
+    "D3-25": ("Partial", "Held-out unrelated citations 3 -> 1 end to end (2 in the harness); the one left is Urdu (H-INC-UR-1, D3-31)", "Closes with D3-31"),
+    "D3-27": ("Fixed", "P-I27 \"web version\" is now a no-source reply (R13: a word the documentation never mentions)", "Closed"),
+    "D3-28": ("Fixed", "Q15 and Q16 now get the limit notice instead of a third-party refusal; the privacy guard is unchanged", "Closed; per-customer figures need D3-01"),
+    "D3-29": ("Fixed", "Q50 now asks which total and which period (one question)", "Closed"),
+    "D3-32": ("Accepted", "Lexical fallback: 27 correct, 6 unrelated (was 8); hybrid 31 and 2. `/api/v1/health` reports `degraded`; alert in the runbook; fastembed is a required install", "Operational control, not code"),
+    "E2E-03": ("New-fixed", "H-H-PDF-EN-1 \"send a customer their statement as a PDF\" now answered; exemption is narrow (customers only, no relatives, ids or figures), test `test_product_capability_exemption_is_narrow`", "Closed"),
+    "E2E-04": ("Partial", "Unrelated citations on the 20 judged probe questions 6 -> 2 (R13); the 2 left (Q29 add an expense, Q37 recurring) need the missing pages", "Closes with D3-18 and D3-19"),
+    "E2E-05": ("New-fixed", "Q46 now cites \"Can I share HisabDo reports with my accountant?\" (glossary entry)", "Closed"),
+    "E2E-08": ("New-fixed", "26 XICTEK test failures were a Windows encoding bug (files read as cp1252): fixed, 107 of 108 pass; the last test expects an unbuilt index but the repository ships a built one", "Owner updates that one test to use a temporary index folder"),
+    "E2E-09": ("New-fixed", "Same fix as D3-29", "Closed"),
+}
+for r in ROWS:
+    if r[0] in CLOSURE:
+        r[2], r[5], r[7] = CLOSURE[r[0]][0], CLOSURE[r[0]][1], CLOSURE[r[0]][2]
 
 
 def main() -> int:
@@ -133,20 +162,20 @@ def main() -> int:
     st, pr = Counter(r[2] for r in ROWS), Counter((r[1], r[2]) for r in ROWS)
     open_by_p = {p: sum(1 for r in ROWS if r[1] == p and r[2] in ("Open", "New-open", "Partial")) for p in ("P0", "P1", "P2", "P3")}
     md = ["# Department 3 Final Defect Triage Log", "",
-          "**Author:** Fahad Zubairi (AI intern) · **Date:** 2026-11-16 · **Branch:** `FahadZubairi_AI`",
+          "**Author:** Fahad Zubairi (AI intern) · **Date:** 2026-11-17 · **Branch:** `FahadZubairi_AI`",
           "**Data:** `data/dept3_e2e/defect_triage.csv` (generated by `scripts/build_defect_triage.py`) · "
           "**Evidence:** [dept3-e2e-regression-report.md](dept3-e2e-regression-report.md)", "",
-          "Scope: the 32 items of the Phase 2 Day 1 review (`data/phase2_review/issue_list.csv`) re-tested on 16 Nov, plus "
+          "Scope: the 32 items of the Phase 2 Day 1 review (`data/phase2_review/issue_list.csv`) re-tested on 16 Nov and closed on 17 Nov, plus "
           "the 9 defects the end-to-end run itself found.", "",
           "## 1. Summary", "",
           "| Status | Count |", "|---|---|",
           *[f"| {k} | {v} |" for k, v in sorted(st.items())], "",
           "| Open by priority (Open, New-open, Partial) | Count |", "|---|---|",
           *[f"| {p} | {n} |" for p, n in open_by_p.items()], "",
-          "**Release view.** No open defect leaks data or states an unsupported fact as an answer. The 4 open P0 items "
-          "(D3-01 to D3-04) and D3-28 are backend-contract or false-refusal items outside this branch; the chatbot labels the "
-          "figures \"demo data\" and refuses rather than guesses. They block a production release with real users, not the "
-          "knowledge pipeline.", "",
+          "**Release view.** No open defect leaks data or states an unsupported fact as an answer. The one open P0 item "
+          "(D3-01, the mock backend) and the open P1/P2 items need a backend contract, official help pages or an owner outside "
+          "this branch. Until then the chatbot labels figures \"demo data\" and states each limit instead of guessing. They block "
+          "a production release with real users, not the knowledge pipeline.", "",
           "Status meanings: **Fixed** verified by a test and by this run · **Partial** improved, not closed · **Open** needs "
           "an owner or content outside this branch · **Accepted** works as designed · **New-fixed** found and fixed by this run "
           "· **New-open** found by this run, triaged.", "",

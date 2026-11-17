@@ -143,7 +143,10 @@ def run(fetch: bool, dry_run: bool, snapshots_root: Path = C.SNAPSHOTS, out_root
                                "fallback": f"stale snapshot {prev.parent.name}" if prev else "none: source skipped"})
         rep["stages"]["fetch"] = {"fetched": len(sources) - len(failed), "failed_pages": failed}
     else:
-        snap_dir = sorted(d for d in snapshots_root.iterdir() if d.is_dir())[-1]
+        # Offline rebuilds use the APPROVED snapshot recorded in the last manifest, never a newer unreviewed one.
+        mf = out_root / "dept3" / "index_manifest.json"
+        approved = json.loads(mf.read_text(encoding="utf-8")).get("snapshot") if mf.exists() else None
+        snap_dir = snapshots_root / approved if approved and (snapshots_root / approved).is_dir()             else sorted(d for d in snapshots_root.iterdir() if d.is_dir())[-1]
         rep["stages"]["fetch"] = {"skipped": f"offline, snapshots {snap_dir.name}", "failed_pages": []}
     retrieved_on = date.fromisoformat(snap_dir.name)
 

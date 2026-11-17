@@ -34,7 +34,7 @@ CUES: dict[Intent, list[str]] = {
         "wasool", "wasooli", "jama", "deposit", "add income", "آمدنی", "ملے", "ملا", "وصول", "بیچا",
     ],
     Intent.CORRECT_TRANSACTION: [
-        "galat", "ghalat", "wrong", "mistake", "correct", "correction", "change", "badal", "badlo", "update",
+        "galat", "ghalat", "galti", "ghalti", "wrong", "mistake", "correct", "correction", "change", "badal", "badlo", "update",
         "edit", "theek karo", "thik karo", "theek kar do", "fix", "delete", "hata do", "hatao", "remove",
         "nahi tha", "nahi thi", "instead", "last entry", "last wali", "pichli entry", "pichhli entry",
         "previous entry", "wali entry", "entry ko", "entry mein", "pichli wali", "غلط", "تبدیل", "ہٹا",

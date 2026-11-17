@@ -1,0 +1,118 @@
+{
+ "freeze_version": "1.0",
+ "retrieval": {
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "query_prefix": "Represent this sentence for searching relevant passages: ",
+  "max_query_chars": 512,
+  "hybrid_alpha_dense": 0.6,
+  "hybrid_alpha_lexical": 0.4,
+  "relevance_threshold": 0.566273,
+  "top_k": 2,
+  "margin": 0.05,
+  "candidates": 20,
+  "lexical_fallback": {
+   "threshold": 3.857,
+   "top_k": 2,
+   "margin": 2.0
+  },
+  "bm25": {
+   "k1": 1.5,
+   "b": 0.75,
+   "score_saturation_k": 5.0
+  },
+  "metadata_filter": "off",
+  "reranker": "off",
+  "router_gate": "intent faq only reaches the knowledge base"
+ },
+ "vector_index": {
+  "type": "in-memory exact search (NumPy matrix, no ANN index: no HNSW or IVF parameters)",
+  "dimensions": 384,
+  "normalisation": "L2",
+  "similarity": "cosine (dot product of unit vectors)",
+  "passage_text": "title. heading.\\nbody",
+  "model_repo": "qdrant/bge-small-en-v1.5-onnx-q",
+  "model_file": "models--qdrant--bge-small-en-v1.5-onnx-q/snapshots/aa8f8b060edb00e03bfdd08813a2949946c8ba55/model_optimized.onnx",
+  "model_file_sha256": "51f1bd0addd6e859e42c2c8021a5e5461385bb676a649f4b269aa445449f2431",
+  "vector_checksum": "e5e0cb7482e12318",
+  "records": 363,
+  "kb_version_index_manifest": "9822a06e49cc"
+ },
+ "chunking": {
+  "faq": "one question and answer per chunk, never split",
+  "section_max_chars": 1500,
+  "overlap": "none",
+  "short_intro_merge_below_chars": 150
+ },
+ "grounding": {
+  "support_min": 0.5,
+  "switch_margin": 0.2,
+  "max_sentences_per_passage": 3,
+  "max_excerpt_chars": 450,
+  "related_sentences": 2,
+  "rare_word_max_df": 10,
+  "source_authority": {
+   "product_faq": 1,
+   "product_guide": 2,
+   "legal_policy": 3,
+   "finance_guide": 4
+  }
+ },
+ "settings_required_in_production": {
+  "GROUNDED_ANSWERS_ENABLED": "true",
+  "GUARDRAILS_ENABLED": "true",
+  "KB_RETRIEVER_MODE": "hybrid",
+  "DIALOGUE_ENABLED": "true",
+  "LLM_PROVIDER": "mock until a provider passes the same gates",
+  "INTERNAL_SERVICE_TOKEN": "32+ characters, from the secret store, never in the repository",
+  "FASTEMBED_CACHE_PATH": "a fixed folder, so the verified model file is reused"
+ },
+ "settings_defaults_in_code": {
+  "grounded_answers_enabled": false,
+  "guardrails_enabled": true,
+  "kb_retriever_mode": "auto"
+ },
+ "prompts": {
+  "system_prompt_sha256": "354369810097aca19245891d7ec6fbf0e339bab00817c3df9312f373a3eb9232",
+  "grounding_rules_sha256": "beb020d21033ed714d4c75685d45a102488fd3132e7a22de8bd6ce8388676c7b",
+  "reply_templates_sha256": "2bb3ec0c24871e9fa71e40c8f32b5d8a24f756f2cdbf4c9c06d4c73866e9c9b9"
+ },
+ "rule_files_sha256": {
+  "src/financial_assistant/prompts.py": "044b0124c0234d6221d28bb6010d38b639f4adf6c760cbd22a97008c43df2d23",
+  "src/financial_assistant/guardrails.py": "0c40fae8930e69b5397a5c2e5294f4088530b54e1afd9a068533b3e39edebd31",
+  "src/financial_assistant/conversation.py": "93afba83fb29732ac982568190ea8f5ca55ed74d4d31309ede30d9f727e5fa56",
+  "src/financial_assistant/grounding/answer.py": "b39cd0e659ee50eed6ff9ef26609fd318f7324dd05262a5d18098c8c57401aac",
+  "src/financial_assistant/grounding/retrieval.py": "88656db209a39138ecf91af292501f7eb55ca3f19844d3f6e5747bff3d769a6e",
+  "src/financial_assistant/service.py": "be5351b0fad6a0e9dacdbc74f6b9da2560e859d833fb67f28f089ce004ccf54f",
+  "src/financial_assistant/dialogue/recognizer.py": "b623a622a952456cc6d98a4f8467ad2ce813bf9fff6aacc6373e3962665f8d9d",
+  "data/knowledge_source_audit.csv": "8c2b17f79dfa388bc91dcc7935426efa0d3d59789d7c92c803e9498c7f848134"
+ },
+ "knowledge_base": {
+  "approved_chunks_file": "data/kb/approved/kb_chunks.jsonl",
+  "sha256": "ff1f749d37ccc35935f12f7c0aa404a79c323e589f65c3e1928e0124c05f8e2c",
+  "chunks": 363,
+  "sources": 23,
+  "kb_version": "25b177334ef6",
+  "knowledge_set_sha256": "7336af41a7b9e5418be81e6edb8c397adf5b0c45a5cb7f54e6f0b0fb4078f4b6",
+  "snapshot": "2026-10-27"
+ },
+ "release_gates": {
+  "acceptance_critical": "25/25",
+  "acceptance_major": "6/6",
+  "safety_suite_v1.1": "CLEARED x4",
+  "conversation_journeys": "8/8",
+  "adversarial_cases": "18/18",
+  "grounded_transcripts": "19/19",
+  "retrieval_correct_139": ">= 120",
+  "knowledge_p95_ms": "< 250",
+  "account_p95_ms": "< 150"
+ },
+ "environment_informational": {
+  "python": "3.13.0",
+  "fastembed": "0.7.3",
+  "onnxruntime": "1.31.1",
+  "numpy": "2.4.4",
+  "tokenizers": "0.23.3",
+  "bs4": "4.15.0",
+  "platform": "Windows-11-10.0.26300-SP0"
+ }
+}

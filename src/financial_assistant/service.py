@@ -94,6 +94,11 @@ THIRD_PARTY_RELATIONSHIP_URDU = re.compile(
 
 def _mentions_third_party(message: str) -> bool:
     text = message.lower()
+    if (conversation.is_product_capability(message) and "customer" in text   # "send a customer their statement"
+            and not THIRD_PARTY_ID_REFERENCE.search(text) and not THIRD_PARTY_RELATIONSHIP_URDU.search(text)
+            and not re.search(r"\b(brother|sister|friend|colleague|coworker|wife|husband|spouse|partner|boss|mother|"
+                              r"father|mom|dad|someone|another|other)\b", text)):
+        return False
     if THIRD_PARTY_RELATIONSHIP_WORDS.search(text):
         return True
     if THIRD_PARTY_RELATIONSHIP_URDU.search(text):
@@ -292,7 +297,7 @@ _ROUTE_BY_SOURCE = {"guardrail": "guard", "output_guard": "guard", "policy_guard
                     "dialogue": "transaction", "rag": "knowledge", "kb_fallback": "knowledge",
                     "clarification": "knowledge", "kb_unavailable": "knowledge", "llm_general": "general",
                     "llm_unavailable": "general", "greeting_fastpath": "general", "service_fallback": "error",
-                    "escalation": "support"}
+                    "escalation": "support", "limit_notice": "guard"}
 
 
 def _note(**kv) -> None:
@@ -369,6 +374,10 @@ def _guarded_core(request: ChatbotRequest) -> ChatbotResponse:
     """Guardrails wrap the whole flow: input checks first, output checks on every reply."""
     if get_settings().guardrails_enabled:
         verdict = guardrails.check_input(request.message)
+        if verdict is None and (lim := conversation.honest_limit(request.message)) is not None:   # U7
+            return ChatbotResponse(reply=lim, conversation_id=request.conversation_id, intent="limit",
+                                   tokens_used=0, source="clarification" if conversation.TOTAL_WRONG.search(
+                                       request.message) else "limit_notice")
         if verdict is None and (esc := conversation.escalation(request.message)) is not None:
             # U4: account-level problems go to human support, never to demo figures or an entry flow
             log.info("support_escalation")   # no user text

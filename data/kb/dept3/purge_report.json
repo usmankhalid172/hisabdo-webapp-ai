@@ -1,14 +1,8 @@
 {
  "schema_version": "1.0",
  "records": 363,
- "input_chunks": 364,
- "purged": [
-  {
-   "record_id": "off-04-016-start-managing-your-finances",
-   "reason": "promotional_filler",
-   "heading": "Start Managing Your Finances"
-  }
- ],
+ "input_chunks": 363,
+ "purged": [],
  "by_module": {
   "expenses_income": 76,
   "customers_udhar": 73,

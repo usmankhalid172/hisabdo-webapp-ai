@@ -57,6 +57,7 @@ CATEGORIES = {
     "Policy/legal": ("legal_policy", 3),
     "Workflow/practice guide (general)": ("finance_guide", 4),
 }
+PROMO = re.compile(r"download hisabdo today|smart accounting, simplified|^start managing your finances$", re.I)
 REVIEW_DAYS = {"P-FAQ": 30, "P-LEGAL": 182, "P-CONCEPT": 365}
 
 # Blocks that are UI, not knowledge. Matched on CSS class.
@@ -519,6 +520,9 @@ def clean_source(source: Source, page: str, retrieved_on: date,
     due = (retrieved_on + timedelta(days=REVIEW_DAYS.get(source.review_policy, 30))).isoformat()
     chunks = []
     for n, r in enumerate(raw, 1):
+        if PROMO.search(r["heading"]) or PROMO.search(r["body"]):   # a call to action carries no information
+            removed.append(f"promotional: {r['heading']}")
+            continue
         body, fixes = contextualise(r["body"])
         body, link_fixes = fix_links(body, known_pages, report)
         fixes += link_fixes

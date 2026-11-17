@@ -139,6 +139,7 @@ FILLER = {"my", "mera", "mere", "meray", "about"}
 AUTHORITY = {"product_faq": 1, "product_guide": 2, "legal_policy": 3, "finance_guide": 4}
 URL = re.compile(r"https?://[^\s)\]>\"']+")
 CONTACT_URL = "https://hisabdo.app/contact"
+APP_QUESTION = re.compile(r"(?i)\b(hisabdo|the app|in the app|can i|can we|how do i|does it|is there|do you|does hisabdo)\b")
 DEFINITION = re.compile(r"(?i)\b(mean|means|meaning|matlab|define|definition)\b|مطلب|کیا ہوتا")
 
 ADVICE_WORDS = re.compile(r"\b(tax|taxes|fbr|legal|lawyer|loan|invest\w*|zakat|audit)\b", re.I)
@@ -261,6 +262,27 @@ class GroundedAnswerer:
         for c in chunks:
             if c.get("status") == "needs_confirmation" and c.get("notes"):
                 self.conflict_groups.setdefault(c["notes"][0], []).append(to_passage(c))
+
+    # R13 ----------------------------------------------------------------------------------------------------
+    def app_evidence(self, message: str, passages: list[Passage], lang: str) -> list[Passage]:
+        """A question about the app's own features ("Can I...", "Does HisabDo...", "How do I...") is answered only
+        from passages about the app. A neighbouring-topic passage (its heading does not name what was asked) is
+        dropped when (a) it is general bookkeeping advice that never mentions HisabDo, or (b) the question names
+        a thing the documentation never mentions at all ("web version", "recurring"): the reply is then R2."""
+        if lang != "en" or not APP_QUESTION.search(message):
+            return passages
+        words = {w for w in topic_words(message) if re.fullmatch(r"[a-z]{3,}", w)}
+        known = {w for w in words if matches(w, self.vocab)}
+        unknown = words - known
+        keep = []
+        for p in passages:
+            neighbour = known and coverage(known, Passage(**{**p.__dict__, "body": ""})) != known
+            generic = p.category == "finance_guide" and "hisabdo" not in f"{p.heading} {p.body}".lower()
+            if unknown or (neighbour and generic):
+                log.info("grounding_dropped_passage", extra={"reason": "app_evidence"})
+                continue
+            keep.append(p)
+        return keep
 
     # R1 -----------------------------------------------------------------------------------------------------
     def clarify(self, message: str, passages: list[Passage], lang: str) -> str | None:
@@ -405,6 +427,7 @@ class GroundedAnswerer:
             # question into a conflict notice
             and (p.status != "needs_confirmation" or (coverage(rare, p) if rare
                                                        else len(coverage(topic, p)) >= len(topic) / 2)))]
+        passages = self.app_evidence(message, passages, lang)   # R13
         question = self.clarify(message, passages, lang)
         if question:
             return GroundedAnswer(reply=question, status="clarify", language=lang, **info)

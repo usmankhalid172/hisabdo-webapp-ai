@@ -78,7 +78,6 @@
   "D16": {
    "off-04-004-udhar-management": 1,
    "blog-08-004-3-use-clear-labels-for-each-entry": 2,
-   "off-04-016-start-managing-your-finances": 0,
    "blog-11-008-offer-payment-plans-for-large-balances": 0,
    "blog-11-014-how-should-i-approach-a-customer-about-an-overdu": 0,
    "blog-05-002-what-are-supplier-payables": 0,
@@ -159,7 +158,6 @@
    "off-04-009-multi-language-support": 0,
    "off-03-011-hisabdo-is-a-product-of-xictek-systems": 0,
    "off-04-012-for-shopkeepers": 0,
-   "off-04-016-start-managing-your-finances": 0,
    "off-04-002-expense-tracker": 2,
    "off-04-007-daily-expense-management": 2,
    "off-04-004-udhar-management": 0
@@ -181,7 +179,6 @@
    "blog-10-005-categorize-your-business-expenses": 0,
    "blog-12-005-expense-reports-what-to-include": 0,
    "off-04-005-customer-ledger": 0,
-   "off-04-016-start-managing-your-finances": 0,
    "off-04-001-overview": 1,
    "blog-06-006-separate-business-and-personal-expenses": 0,
    "blog-08-015-what-is-the-difference-between-a-khata-and-a-led": 0,
@@ -206,7 +203,6 @@
    "blog-03-016-can-hisabdo-send-payment-reminders-to-customers": 0,
    "blog-14-009-using-hisabdo-for-ar-and-ap-management": 0,
    "off-04-014-for-small-businesses": 0,
-   "off-04-016-start-managing-your-finances": 0,
    "off-08-003-2-not-financial-advice": 0,
    "off-04-013-for-freelancers": 0,
    "off-01-015-does-hisabdo-have-analytics": 1,
@@ -353,8 +349,7 @@
    "off-04-010-multi-currency-support": 0,
    "blog-08-002-1-record-every-transaction-the-same-day": 0,
    "off-03-004-everything-you-need": 1,
-   "off-03-001-overview": 1,
-   "off-04-016-start-managing-your-finances": 0
+   "off-03-001-overview": 1
   },
   "H-KHA-UR-2": {
    "off-01-001-what-is-hisabdo": 1,
@@ -373,7 +368,6 @@
    "blog-08-003-2-separate-customer-accounts": 1,
    "blog-08-015-what-is-the-difference-between-a-khata-and-a-led": 1,
    "off-04-005-customer-ledger": 2,
-   "off-04-016-start-managing-your-finances": 0,
    "off-03-001-overview": 1,
    "off-03-004-everything-you-need": 1,
    "off-03-006-practical-tools-for-shopkeepers-freelancers-smal": 1,
@@ -383,7 +377,6 @@
   "H-UDH-EN-1": {
    "off-04-004-udhar-management": 2,
    "blog-08-004-3-use-clear-labels-for-each-entry": 2,
-   "off-04-016-start-managing-your-finances": 0,
    "off-04-012-for-shopkeepers": 1,
    "blog-03-002-what-are-customer-dues": 1,
    "off-04-003-digital-khata-book": 1,
@@ -398,7 +391,6 @@
   },
   "H-UDH-RU-1": {
    "off-04-004-udhar-management": 2,
-   "off-04-016-start-managing-your-finances": 0,
    "blog-03-002-what-are-customer-dues": 1,
    "off-04-012-for-shopkeepers": 1,
    "off-04-001-overview": 1,
@@ -689,7 +681,6 @@
   },
   "H-H-UDH-EN-1": {
    "off-04-004-udhar-management": 1,
-   "off-04-016-start-managing-your-finances": 0,
    "off-03-001-overview": 0,
    "off-01-009-does-hisabdo-store-data-in-the-cloud": 0,
    "off-04-012-for-shopkeepers": 1,
@@ -708,7 +699,6 @@
   },
   "H-H-UDH-RU-1": {
    "off-04-004-udhar-management": 1,
-   "off-04-016-start-managing-your-finances": 0,
    "off-03-001-overview": 0,
    "off-04-012-for-shopkeepers": 1,
    "off-02-001-overview": 1,
@@ -810,7 +800,6 @@
    "off-04-003-digital-khata-book": 1,
    "off-03-001-overview": 0,
    "off-04-012-for-shopkeepers": 1,
-   "off-04-016-start-managing-your-finances": 0,
    "blog-08-004-3-use-clear-labels-for-each-entry": 2,
    "off-04-001-overview": 0,
    "off-03-011-hisabdo-is-a-product-of-xictek-systems": 0,
@@ -926,7 +915,6 @@
    "off-03-001-overview": 0,
    "blog-08-012-why-digital-khata-management-wins": 0,
    "off-03-002-replace-your-paper-khata-with-a-smarter-system": 1,
-   "off-04-016-start-managing-your-finances": 0,
    "off-04-005-customer-ledger": 0,
    "off-04-001-overview": 0,
    "off-01-001-what-is-hisabdo": 0,
@@ -1017,7 +1005,6 @@
    "off-01-033-where-can-i-follow-hisabdo-for-updates": 0,
    "off-06-017-15-contact-us": 0,
    "off-01-031-how-do-i-contact-hisabdo-support": 0,
-   "off-04-016-start-managing-your-finances": 0,
    "off-01-001-what-is-hisabdo": 1,
    "off-04-014-for-small-businesses": 0,
    "off-04-001-overview": 0,
@@ -1044,7 +1031,6 @@
   },
   "H-H3-UDH-RU-2": {
    "off-04-004-udhar-management": 1,
-   "off-04-016-start-managing-your-finances": 0,
    "off-03-001-overview": 0,
    "off-04-012-for-shopkeepers": 1,
    "off-02-001-overview": 0,

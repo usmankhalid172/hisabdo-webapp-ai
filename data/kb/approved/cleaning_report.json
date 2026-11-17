@@ -1,5 +1,5 @@
 {
-  "chunk_count": 364,
+  "chunk_count": 363,
   "sources": [
     "BLOG-01",
     "BLOG-02",
@@ -28,7 +28,7 @@
   "by_category": {
     "finance_guide": 254,
     "legal_policy": 40,
-    "product_guide": 37,
+    "product_guide": 36,
     "product_faq": 33
   },
   "by_area": {
@@ -38,7 +38,7 @@
     "Khata & Ledger (general practice)": 29,
     "Data, Backup & Sync": 26,
     "Suppliers & Payables (general practice)": 25,
-    "Customers & Receivables": 19,
+    "Customers & Receivables": 18,
     "Reports & PDF Export (general practice)": 15,
     "Khata & Ledger": 14,
     "Data, Backup & Sync (general practice)": 12,
@@ -58,7 +58,7 @@
     "Privacy & Security (general practice)": 1
   },
   "by_language": {
-    "en": 364
+    "en": 363
   },
   "needs_confirmation": [
     "off-01-019-which-currencies-does-hisabdo-support",
@@ -211,7 +211,8 @@
       "url": "https://play.google.com/store/apps/details?id=com.usman.hisabdo",
       "removed": [
         "header: About this app | arrow_forward",
-        "keyword list: WHY USE HISABDO? (14 lines)"
+        "keyword list: WHY USE HISABDO? (14 lines)",
+        "promotional: Start Managing Your Finances"
       ],
       "warnings": [],
       "rewrites": [],

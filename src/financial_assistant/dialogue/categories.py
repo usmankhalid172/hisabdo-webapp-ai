@@ -30,7 +30,7 @@ EXPENSE_WORDS_UR: dict[str, list[str]] = {
     "Health": ["dawai", "dawa", "doctor", "hospital", "dawakhana", "دوائی", "ڈاکٹر"],
     "Education": ["school", "fees", "fee", "tuition", "kitaben", "اسکول", "فیس"],
     "Housing": ["rent", "kiraya", "kiraye", "makaan", "furniture", "marammat", "کرایہ"],
-    "Shopping": ["kapray", "kapde", "joote", "shopping", "کپڑے"],
+    "Shopping": ["kapray", "kapde", "joote", "shopping", "کپڑے", "printer", "ink", "toner", "stationery", "pens", "notebook"],
     "Entertainment": ["movie", "film", "cinema", "netflix", "فلم"],
 }
 

@@ -9,14 +9,13 @@
   "heldout.json": {
    "correct_answer": 31,
    "correct_refusal": 68,
-   "safe_no_answer": 18,
-   "wrong_citation": 3
+   "safe_no_answer": 19,
+   "wrong_citation": 2
   }
  },
  "answerable_by_language": {
   "en:correct_answer": 17,
-  "en:safe_no_answer": 6,
-  "en:wrong_citation": 1,
+  "en:safe_no_answer": 7,
   "roman_ur:correct_answer": 10,
   "roman_ur:safe_no_answer": 8,
   "ur:correct_answer": 9,
@@ -26,13 +25,14 @@
  "statuses": {
   "routed:report": 18,
   "routed:account_query": 29,
-  "answered": 55,
-  "out_of_scope": 11,
+  "answered": 52,
+  "routed:correct_transaction": 1,
   "routed:add_expense": 16,
-  "no_source": 3,
+  "no_source": 6,
   "routed:add_income": 4,
   "clarify": 1,
   "conflict": 1,
+  "out_of_scope": 10,
   "routed:greeting": 1
  },
  "rows": [
@@ -178,8 +178,7 @@
    "status": "answered",
    "grade": "correct_answer",
    "cited": [
-    "off-01-023-what-happens-to-my-data-if-i-uninstall-the-app",
-    "blog-16-009-backup-on-your-terms"
+    "off-01-023-what-happens-to-my-data-if-i-uninstall-the-app"
    ]
   },
   {
@@ -220,7 +219,7 @@
    "set": "dev",
    "lang": "roman_ur",
    "expect": "none",
-   "status": "out_of_scope",
+   "status": "routed:correct_transaction",
    "grade": "correct_refusal",
    "cited": []
   },
@@ -408,9 +407,9 @@
    "lang": "en",
    "expect": "answer",
    "status": "answered",
-   "grade": "wrong_citation",
+   "grade": "correct_answer",
    "cited": [
-    "blog-08-007-6-keep-receivables-and-payables-separate"
+    "blog-08-016-can-i-manage-multiple-customers-in-one-khata"
    ]
   },
   {
@@ -440,11 +439,9 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "answer",
-   "status": "answered",
+   "status": "no_source",
    "grade": "safe_no_answer",
-   "cited": [
-    "blog-03-002-what-are-customer-dues"
-   ]
+   "cited": []
   },
   {
    "id": "H-UDH-RU-1",
@@ -644,11 +641,9 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "answer",
-   "status": "answered",
-   "grade": "correct_answer",
-   "cited": [
-    "blog-08-008-7-back-up-your-records-regularly"
-   ]
+   "status": "no_source",
+   "grade": "safe_no_answer",
+   "cited": []
   },
   {
    "id": "H-H-KHA-RU-1",
@@ -1190,11 +1185,9 @@
    "set": "heldout.json",
    "lang": "en",
    "expect": "answer",
-   "status": "answered",
+   "status": "no_source",
    "grade": "safe_no_answer",
-   "cited": [
-    "off-01-030-what-android-version-is-required"
-   ]
+   "cited": []
   },
   {
    "id": "H-H3-EXP-UR-1",

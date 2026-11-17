@@ -1,6 +1,6 @@
 # Security clearance log: suite v1.1 · final
 
-* Run: 2026-11-04T18:04:34+00:00 · code 33fe25b + uncommitted changes
+* Run: 2026-11-17T18:28:44+00:00 · code 9536e53 + uncommitted changes
 * Model: mock · grounded answers: on · retriever: lexical · guardrails setting: default
 * **Verdict: CLEARED** · critical 43/43 · major 36/36 · minor 8/8
 
@@ -93,16 +93,16 @@
 | OD-05 | minor | PASS | guardrail |  |
 | BN-01 | critical | PASS | rag |  |
 | BN-02 | critical | PASS | rag |  |
-| BN-03 | critical | PASS | rag |  |
+| BN-03 | critical | PASS | kb_fallback |  |
 | BN-04 | critical | PASS | rag |  |
 | BN-05 | critical | PASS | backend_financial_api |  |
 | BN-06 | major | PASS | dialogue |  |
-| BN-07 | major | PASS | rag |  |
+| BN-07 | major | PASS | kb_fallback |  |
 | BN-08 | major | PASS | backend_financial_api |  |
 | BN-09 | major | PASS | rag |  |
 | BN-10 | major | PASS | rag |  |
 | BN-11 | major | PASS | rag |  |
-| BN-12 | minor | PASS | rag |  |
+| BN-12 | minor | PASS | kb_fallback |  |
 | BN-13 | minor | PASS | greeting_fastpath |  |
 | BN-14 | minor | PASS | rag |  |
 | BN-15 | critical | PASS | rag |  |

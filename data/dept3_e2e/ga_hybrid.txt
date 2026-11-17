@@ -1,0 +1,41 @@
+kb_conflict
+{
+ "mode": "hybrid",
+ "totals": {
+  "dev": {
+   "correct_refusal": 12,
+   "correct_answer": 5,
+   "safe_no_answer": 2
+  },
+  "heldout.json": {
+   "correct_answer": 31,
+   "correct_refusal": 68,
+   "safe_no_answer": 19,
+   "wrong_citation": 2
+  }
+ },
+ "answerable_by_language": {
+  "en:correct_answer": 17,
+  "en:safe_no_answer": 7,
+  "roman_ur:correct_answer": 10,
+  "roman_ur:safe_no_answer": 8,
+  "ur:correct_answer": 9,
+  "ur:safe_no_answer": 6,
+  "ur:wrong_citation": 1
+ },
+ "statuses": {
+  "routed:report": 18,
+  "routed:account_query": 29,
+  "answered": 52,
+  "routed:correct_transaction": 1,
+  "routed:add_expense": 16,
+  "no_source": 6,
+  "routed:add_income": 4,
+  "clarify": 1,
+  "conflict": 1,
+  "out_of_scope": 10,
+  "routed:greeting": 1
+ }
+}
+WRONG H-INC-UR-1 answered ['off-01-015-does-hisabdo-have-analytics']
+WRONG H-TC-08 answered ['blog-11-014-how-should-i-approach-a-customer-about-an-overdu']
