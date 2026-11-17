@@ -1,0 +1,8 @@
+metric_name,target_baseline,warning_threshold,critical_alert,telemetry_source,automated_action
+End-to-End Response Latency (P50),< 350 ms,> 450 ms for 3 consecutive mins,> 600 ms for 2 consecutive mins,Prometheus / OpenTelemetry API Middleware,Auto-scale API worker instances; alert on-call engineer
+End-to-End Response Latency (P95),< 450 ms,> 550 ms,> 750 ms,APM Gateway Tracing (Jaeger/Datadog),Enable semantic cache aggressive TTL; log slow vector retrievals
+Groundedness & Hallucination Rate,0.0% Hallucinations,> 0.5% ungrounded claims in 100 queries,> 1.5% ungrounded claims (Immediate P1),Async RAG Triad Evaluator (TruLens/Ragas Daemon),Switch domain to Strict Negative Fallback Mode; trigger rollback review
+Citation Precision & Authenticity,>= 99.5%,< 98.5%,< 95.0% or any 404 broken citation,Automated URL Validator & Citation Auditor,Fallback citation router engaged; notify Department 4 Lead
+Prompt-Injection / Jailbreak Attack Velocity,0 breached vectors,> 10 blocked attacks / min from single IP,Any bypass detected or > 50 attacks / min,WAF & LLM Guardrail Middleware,Rate-limit client IP; block session; alert security on-call
+Retrieval Similarity Score Floor,Cosine Sim >= 0.72,Mean Top-1 Sim < 0.68,Mean Top-1 Sim < 0.60 across active traffic,FAISS / Chroma Vector Store Logs,Trigger automated lexical rerank boost; fall back to safe domain FAQ
+Cross-Product Quarantine Leakage,0 leaks,Any HisabDo query misrouted to XICTEK,Any account PII leaked across domains,Domain Classifier & Output Boundary Filter,Quarantine session; trigger automated rollback to Day 8 frozen checkpoint
