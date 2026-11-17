@@ -280,3 +280,57 @@ def test_multiturn_followup_preserves_conversation_history(monkeypatch):
 
     assert captured["message"] == "How do I categorize an expense?"
     assert captured["history"] == history
+def test_cash_flow_response_includes_relevant_finance_citation(monkeypatch):
+    from src.financial_assistant.service import handle_chat
+    from src.schemas import ChatbotRequest
+
+    sources = [
+        {
+            "id": "faq-004",
+            "title": "Cash flow statement",
+            "text": "A cash flow statement explains money movement.",
+        },
+        {
+            "id": "finance_004",
+            "title": "What is cash flow?",
+            "text": "Cash flow represents the movement of money entering and leaving a business during a period.",
+        },
+        {
+            "id": "faq-006",
+            "title": "Financial reporting",
+            "text": "Financial reports help review business performance.",
+        },
+    ]
+
+    class FakeRetriever:
+        def retrieve(self, query, top_k=3):
+            return sources[:top_k]
+
+    class FakeProvider:
+        def generate_reply(self, message, context=None, history=None):
+            return (
+                "Cash flow represents the movement of money entering and "
+                "leaving a business during a period. A cash flow statement "
+                "shows operating, investing, and financing activities.",
+                10,
+            )
+
+    monkeypatch.setattr(
+        "src.financial_assistant.service.get_retriever",
+        lambda: FakeRetriever(),
+    )
+    monkeypatch.setattr(
+        "src.financial_assistant.service.get_llm_provider",
+        lambda: FakeProvider(),
+    )
+
+    response = handle_chat(
+        ChatbotRequest(
+            user_id="user-1",
+            message="What is a cash flow statement?",
+            conversation_id="cash-flow-citation-test",
+        )
+    )
+
+    citation_ids = [citation.source_id for citation in response.citations]
+    assert "finance_004" in citation_ids

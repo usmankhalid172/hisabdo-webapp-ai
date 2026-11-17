@@ -1,4 +1,4 @@
-﻿from src.financial_assistant.service import (
+from src.financial_assistant.service import (
     _is_ambiguous_expense_query,
     _resolve_source_conflicts,
     _citation_supports_reply,
@@ -56,3 +56,17 @@ def test_unrelated_reply_does_not_receive_source_citation():
         "You can change your account password in settings.",
         source,
     )
+
+def test_relevant_short_source_is_cited_in_multi_source_reply():
+    source = {
+        "title": "What is cash flow?",
+        "text": "Cash flow represents movement of money entering and leaving a business during a period.",
+    }
+    reply = (
+        "Here is the combined answer. "
+        "Operating activities describe daily business operations. "
+        "Investing activities describe asset purchases. "
+        "Cash flow represents movement of money entering and leaving a business during a period. "
+        "Other financial details follow."
+    )
+    assert _citation_supports_reply(reply, source)

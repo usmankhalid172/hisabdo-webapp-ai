@@ -42,6 +42,15 @@ def test_own_queries_still_route_to_backend(message):
 
 
 @pytest.mark.parametrize("message", [
+    "How do I export my expenses?",
+    "How do I download my expense report?",
+    "How can I export my expenses?",
+])
+def test_expense_export_instructions_do_not_route_to_backend(message):
+    assert _is_own_financial_data_query(message) is False
+
+
+@pytest.mark.parametrize("message", [
     "What is Ali's balance?",
     "What is my wife's balance?",
     "What is my husband's expenses?",

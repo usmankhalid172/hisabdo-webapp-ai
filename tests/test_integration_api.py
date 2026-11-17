@@ -44,6 +44,9 @@ def test_full_flow_chatbot_then_categorize(client, auth_headers):
         headers=auth_headers,
     )
     assert chat_resp.status_code == 200
+    chat_body = chat_resp.json()
+    assert chat_body["source"] == "rag"
+    assert chat_body["intent"] != "own_financial_data"
 
     cat_resp = client.post(
         "/api/v1/categorize",

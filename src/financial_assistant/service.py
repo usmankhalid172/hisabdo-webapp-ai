@@ -1,4 +1,4 @@
-﻿"""
+"""
 chatbot_service â€” builds prompt/context, calls the configured LLM, and
 post-processes the reply, per Day 15 Â§6.1.
 
@@ -83,6 +83,15 @@ def _is_own_financial_data_query(message: str) -> bool:
     text = message.lower()
     if _mentions_third_party(message):
         return False
+
+    # Procedural export/download questions ask how to use the product,
+    # not for the requester's actual financial figures.
+    if re.search(
+        r"\bhow\s+(?:do|can)\s+i\b.*\b(export|download)\b.*\b(expenses?|expense reports?)\b",
+        text,
+    ):
+        return False
+
     return any(re.search(pattern, text) for pattern in OWN_FINANCIAL_DATA_PATTERNS)
 
 
@@ -163,7 +172,6 @@ PROMPT_INJECTION_PATTERNS = [
     r"\breveal\s+(the\s+)?(system|developer)\s+prompt\b",
     r"\bshow\s+(me\s+)?(your\s+)?(system|hidden)\s+prompt\b",
     r"\bshow\s+(me\s+)?(your\s+)?hidden\s+system\s+prompt\b",
-    r"\bshow\s+(me\s+)?(your\s+)?hidden\s+system\s+prompt\b",
     r"\bdeveloper\s+mode\b",
     r"\bignore\s+your\s+rules\b",
 ]
@@ -237,9 +245,9 @@ def _citation_supports_reply(reply: str, source: dict) -> bool:
         word for word in re.findall(r"[a-z0-9]+", source_text)
         if len(word) > 2 and word not in stop_words
     }
-    if not reply_words:
+    if not reply_words or not source_words:
         return False
-    return len(reply_words & source_words) / len(reply_words) >= 0.20
+    return len(reply_words & source_words) / len(source_words) >= 0.20
 
 
 def handle_chat(request: ChatbotRequest) -> ChatbotResponse:
