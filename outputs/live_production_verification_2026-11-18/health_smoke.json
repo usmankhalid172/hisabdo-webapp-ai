@@ -1,0 +1,15 @@
+{
+  "checked_at_utc": "2026-11-18T12:13:20.193354+00:00",
+  "target": "https://hisabdo-ai-api.hisabdo.app",
+  "mode": "health_only",
+  "passed": true,
+  "checks": [
+    {
+      "name": "API health",
+      "passed": true,
+      "status_code": 200,
+      "latency_ms": 1373.07,
+      "detail": "HTTP 200; status=ok"
+    }
+  ]
+}

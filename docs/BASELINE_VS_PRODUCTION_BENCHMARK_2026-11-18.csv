@@ -1,0 +1,22 @@
+metric,domain,baseline_date,baseline_environment,baseline_value,production_value,delta,status,notes
+health_endpoint,all,2026-11-18,production API,NOT MEASURED,HTTP 200; status=ok,Not calculable,VERIFIED,One health-only smoke sample; response latency 1373.07 ms; no agreed latency SLO
+openapi_route_registration,all,not measured,production API,NOT MEASURED,health + XICTEK index-status + chat paths present,N/A,VERIFIED,OpenAPI schema returned successfully; route registration is not a functional endpoint check
+authenticated_index_status,all,not measured,production API,NOT MEASURED,NOT VERIFIED,N/A,BLOCKED,Requires authorized service token; no token sent
+authenticated_chat_response_success,all,2026-11-16,local FastAPI TestClient with mock LLM,100% (63/63),NOT VERIFIED,N/A,BLOCKED,Unauthenticated request returned 401; no authenticated production behavior measured
+expected_source_recall_at_8,all,2026-11-16,local FastAPI TestClient with mock LLM,85.71% (54/63),NOT RUN,N/A,BLOCKED,Same 21-query evaluation set required for comparison
+mean_latency_ms,sequential,2026-11-16,local FastAPI TestClient with mock LLM,9.304,NOT MEASURED,N/A,BLOCKED,Production network and authenticated chat latency not measured
+p50_latency_ms,sequential,2026-11-16,local FastAPI TestClient with mock LLM,8.990,NOT MEASURED,N/A,BLOCKED,Production network and deployment latency not measured
+p95_latency_ms,sequential,2026-11-16,local FastAPI TestClient with mock LLM,12.378,NOT MEASURED,N/A,BLOCKED,Production network and deployment latency not measured
+mean_latency_ms,4-worker burst,2026-11-16,local FastAPI TestClient with mock LLM,35.217,NOT MEASURED,N/A,BLOCKED,Not a production load-capacity result
+p95_latency_ms,4-worker burst,2026-11-16,local FastAPI TestClient with mock LLM,46.042,NOT MEASURED,N/A,BLOCKED,Not a production load-capacity result
+throughput_requests_per_second,sequential,2026-11-16,local FastAPI TestClient with mock LLM,107.097,NOT MEASURED,N/A,BLOCKED,Production throughput not measured
+throughput_requests_per_second,4-worker burst,2026-11-16,local FastAPI TestClient with mock LLM,112.019,NOT MEASURED,N/A,BLOCKED,Production throughput not measured
+expected_source_recall_at_8,About Us,2026-11-16,local FastAPI TestClient with mock LLM,100% (9/9),NOT VERIFIED,N/A,BLOCKED,Three golden queries repeated three times; production chat requires token
+expected_source_recall_at_8,Core Services,2026-11-16,local FastAPI TestClient with mock LLM,100% (9/9),NOT VERIFIED,N/A,BLOCKED,Three golden queries repeated three times; production chat requires token
+expected_source_recall_at_8,Portfolio & Case Studies,2026-11-16,local FastAPI TestClient with mock LLM,100% (9/9),NOT VERIFIED,N/A,BLOCKED,Three golden queries repeated three times; production chat requires token
+expected_source_recall_at_8,Careers & Job Openings,2026-11-16,local FastAPI TestClient with mock LLM,100% (9/9),NOT VERIFIED,N/A,BLOCKED,Three golden queries repeated three times; production chat requires token
+expected_source_recall_at_8,HisabDo Product,2026-11-16,local FastAPI TestClient with mock LLM,100% (9/9),NOT VERIFIED,N/A,BLOCKED,Three golden queries repeated three times; production chat requires token
+expected_source_recall_at_8,Blog & News,2026-11-16,local FastAPI TestClient with mock LLM,0% (0/9),NOT VERIFIED,N/A,BLOCKED,Known unresolved retrieval issue; review before release
+expected_source_recall_at_8,Contact & Locations,2026-11-16,local FastAPI TestClient with mock LLM,100% (9/9),NOT VERIFIED,N/A,BLOCKED,Three golden queries repeated three times; production chat requires token
+guardrail_regression_suite,all,2026-11-16,local pytest,393 passed; 4 skipped; 0 failed,NOT VERIFIED,N/A,BLOCKED,Prior local suite result; production guardrail behavior is not established
+guardrail_smoke,all,2026-11-18,production API,NOT MEASURED,NOT VERIFIED,N/A,BLOCKED,Unauthenticated probes returned 401 before the guardrail handler; authorized token required
