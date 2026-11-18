@@ -1,0 +1,376 @@
+=== PHASE 2 FINAL — REGRESSION AGGREGATE ===
+{
+  "total_queries": 24,
+  "failed_subset_size": 17,
+  "passed_subset_size": 7,
+  "retrieval": {
+    "hit_at_3": 1.0,
+    "mrr_at_3": 1.0,
+    "precision_at_3": 0.4444,
+    "recall_at_3": 0.8542,
+    "failed_subset_hit_at_3": 1.0,
+    "passed_subset_hit_at_3": 1.0
+  },
+  "citation": {
+    "pass_rate": 1.0,
+    "errors_total": 0
+  },
+  "url_safety": {
+    "url_validity_rate": 1.0,
+    "scope_violations_leaked_total": 0,
+    "queries_with_scope_leak": 0
+  },
+  "latency": {
+    "avg_ms": 2823.61,
+    "max_ms": 3081.51,
+    "min_ms": 2778.82,
+    "p95_ms": 2856.64
+  },
+  "regression": {
+    "pass_count": 24,
+    "fail_count": 0,
+    "failed_queries_now_passing": 17,
+    "passed_queries_still_passing": 7,
+    "new_regressions": 0,
+    "overall_verdict": "PASS"
+  }
+}
+
+=== PHASE 2 FINAL — KEY PER-QUERY (F1, F3, H1, H3, A1, H7, N1) ===
+
+--- F1 ---
+  query: how much does custom software cost in Pakistan
+  day1_status: FAILED
+  day1_failure_reason: Returned /services URL instead of /blog/software-development-cost-pakistan
+  relevant_slugs: ['custom-software-development-guide', 'software-development-cost-pakistan']
+  retrieved_top3: ['software-development-cost-pakistan', 'software-development-company-pakistan', 'custom-software-development']
+  hit@3: 1, mrr@3: 1.0
+  citation_pass: True
+  url_validity: 1.0
+  latency_ms: 2795.8
+  fallbacks: []
+
+--- F3 ---
+  query: best AI chatbot for customer support
+  day1_status: FAILED
+  day1_failure_reason: Returned /services URL instead of /blog/ai-chatbot-development
+  relevant_slugs: ['ai-chatbot-development', 'ai-customer-support']
+  retrieved_top3: ['ai-chatbot-development', 'ai-customer-support', 'ai-development-company-pakistan']
+  hit@3: 1, mrr@3: 1.0
+  citation_pass: True
+  url_validity: 1.0
+  latency_ms: 2815.09
+  fallbacks: []
+
+--- F4 ---
+  query: azure vs aws which is better
+  day1_status: FAILED
+  day1_failure_reason: Returned generic /services page; AWS article doesn't exist separately
+  relevant_slugs: ['azure-development-services']
+  retrieved_top3: ['azure-development-services', 'saas-development-services', 'dotnet-development-services']
+  hit@3: 1, mrr@3: 1.0
+  citation_pass: True
+  url_validity: 1.0
+  latency_ms: 2805.48
+  fallbacks: []
+
+--- N1 ---
+  query: How Do I Build A ChatBot??
+  day1_status: FAILED
+  day1_failure_reason: Case/punctuation noise defeated the chatbot's keyword match
+  relevant_slugs: ['ai-chatbot-development']
+  retrieved_top3: ['ai-chatbot-development']
+  hit@3: 1, mrr@3: 1.0
+  citation_pass: True
+  url_validity: 1.0
+  latency_ms: 2874.21
+  fallbacks: []
+
+--- N4 ---
+  query: ERP system automation
+  day1_status: FAILED
+  day1_failure_reason: Synonym mismatch — 'system' vs 'software', 'automation' vs 'development'
+  relevant_slugs: ['ai-in-erp-systems', 'business-process-automation', 'erp-software-development']
+  retrieved_top3: ['erp-software-development', 'ai-in-erp-systems', 'business-process-automation']
+  hit@3: 1, mrr@3: 1.0
+  citation_pass: True
+  url_validity: 1.0
+  latency_ms: 2794.19
+  fallbacks: ['5.5_MULTIPLE_EQUAL']
+
+--- A1 ---
+  query: ai for small business
+  day1_status: FAILED
+  day1_failure_reason: 'SME' synonym for 'small business' not recognized
+  relevant_slugs: ['ai-for-smes']
+  retrieved_top3: ['ai-for-smes', 'ai-development-company-pakistan', 'ai-saas-platforms']
+  hit@3: 1, mrr@3: 1.0
+  citation_pass: True
+  url_validity: 1.0
+  latency_ms: 2818.94
+  fallbacks: ['5.5_MULTIPLE_EQUAL']
+
+--- H1 ---
+  query: we need to put our internal tools online so employees can use them from anywhere
+  day1_status: FAILED
+  day1_failure_reason: Concept-level description; no keyword overlap with article titles
+  relevant_slugs: ['enterprise-web-applications', 'portal-development']
+  retrieved_top3: ['enterprise-web-applications', 'portal-development', 'custom-web-application-development']
+  hit@3: 1, mrr@3: 1.0
+  citation_pass: True
+  url_validity: 1.0
+  latency_ms: 3081.51
+  fallbacks: ['5.5_MULTIPLE_EQUAL']
+
+--- H2 ---
+  query: our checkout flow is slow on mobile and people abandon carts
+  day1_status: FAILED
+  day1_failure_reason: Concept-level description; 'checkout' and 'abandon carts' not in article titles
+  relevant_slugs: ['ecommerce-development', 'website-performance-optimization']
+  retrieved_top3: ['ecommerce-development', 'business-mobile-applications', 'startup-mobile-apps']
+  hit@3: 1, mrr@3: 1.0
+  citation_pass: True
+  url_validity: 1.0
+  latency_ms: 2797.15
+  fallbacks: []
+
+--- H3 ---
+  query: we want to add a smart assistant that answers questions from our documentation
+  day1_status: FAILED
+  day1_failure_reason: Paraphrased — 'smart assistant' vs 'chatbot', 'answers questions' vs 'customer support'
+  relevant_slugs: ['ai-chatbot-development', 'ai-customer-support', 'generative-ai-applications']
+  retrieved_top3: ['ai-chatbot-development', 'ai-workflow-automation', 'ai-development-company-pakistan']
+  hit@3: 1, mrr@3: 1.0
+  citation_pass: True
+  url_validity: 1.0
+  latency_ms: 2820.5
+  fallbacks: []
+
+--- H7 ---
+  query: continuous deployment pipeline with automated tests
+  day1_status: FAILED
+  day1_failure_reason: Paraphrased — 'continuous deployment pipeline' vs 'DevOps' / 'agile process'
+  relevant_slugs: ['agile-software-development', 'software-development-process']
+  retrieved_top3: ['agile-software-development', 'software-development-process', 'erp-software-development']
+  hit@3: 1, mrr@3: 1.0
+  citation_pass: True
+  url_validity: 1.0
+  latency_ms: 2856.64
+  fallbacks: ['5.5_MULTIPLE_EQUAL']
+
+
+=== REAL MULTI-TURN RESPONSES (CONV1, CONV2, CONV5) ===
+
+--- CONV1_cost_topic: Cost question — different framings should retrieve overlapping articles ---
+
+  T1 USER: how much does custom software cost in pakistan
+  T1 RESPONSE: Based on the Software Development Cost in Pakistan: What Shapes the Budget article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] Software Development Cost in Pakistan: What Shapes the Budget — https://www.xicteksystems.com/blog/software-development-cost-pakistan
+
+  T1 RETRIEVED: ['software-development-cost-pakistan', 'software-development-company-pakistan', 'custom-software-development']
+  T1 FALLBACKS: []
+
+  T2 USER: what about mobile app cost
+  T2 RESPONSE: Based on the Mobile App Cost Guide: What Shapes the Investment article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] Mobile App Cost Guide: What Shapes the Investment — https://www.xicteksystems.com/blog/mobile-app-cost-guide
+
+  T2 RETRIEVED: ['mobile-app-cost-guide', 'software-development-cost-pakistan', 'mobile-app-development-company']
+  T2 FALLBACKS: []
+
+  T3 USER: is there a cheaper option for startups
+  T3 RESPONSE: Based on the Startup Software Development: From Idea to Evidence article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+A related perspective appears in Startup Mobile Apps: Validate the Journey Before the Scale [2], which covers the same topic from a different angle.
+
+**Sources:**
+[1] Startup Software Development: From Idea to Evidence — https://www.xicteksystems.com/blog/startup-software-development
+[2] Startup Mobile Apps: Validate the Journey Before the Scale — https://www.xicteksystems.com/blog/startup-mobile-apps
+
+  T3 RETRIEVED: ['startup-software-development', 'startup-mobile-apps']
+  T3 FALLBACKS: ['5.5_MULTIPLE_EQUAL']
+
+--- CONV2_ai_topic: AI chatbot topic — different angles, potential conflict on recommendations ---
+
+  T1 USER: best ai chatbot for customer support
+  T1 RESPONSE: Based on the AI Chatbot Development for Useful Customer Conversations article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] AI Chatbot Development for Useful Customer Conversations — https://www.xicteksystems.com/blog/ai-chatbot-development
+
+  T1 RETRIEVED: ['ai-chatbot-development', 'ai-customer-support', 'ai-development-company-pakistan']
+  T1 FALLBACKS: []
+
+  T2 USER: how does generative ai differ from chatbot
+  T2 RESPONSE: Based on the AI Chatbot Development for Useful Customer Conversations article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] AI Chatbot Development for Useful Customer Conversations — https://www.xicteksystems.com/blog/ai-chatbot-development
+
+  T2 RETRIEVED: ['ai-chatbot-development', 'generative-ai-applications', 'ai-development-company-pakistan']
+  T2 FALLBACKS: []
+
+  T3 USER: can ai help with erp systems
+  T3 RESPONSE: Based on the AI in ERP Systems: Better Decisions Around Operational Data article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] AI in ERP Systems: Better Decisions Around Operational Data — https://www.xicteksystems.com/blog/ai-in-erp-systems
+
+  T3 RETRIEVED: ['ai-in-erp-systems', 'ai-development-company-pakistan', 'ai-chatbot-development']
+  T3 FALLBACKS: []
+
+--- CONV5_out_of_domain_drift: Conversation that drifts out of domain mid-stream — should trigger fallback ---
+
+  T1 USER: tell me about saas development
+  T1 RESPONSE: Based on the SaaS Product Development from MVP to Growth article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+A related perspective appears in SaaS Development Services: From MVP to Scalable Product [2], which covers the same topic from a different angle.
+
+**Sources:**
+[1] SaaS Product Development from MVP to Growth — https://www.xicteksystems.com/blog/saas-product-development
+[2] SaaS Development Services: From MVP to Scalable Product — https://www.xicteksystems.com/blog/saas-development-services
+
+  T1 RETRIEVED: ['saas-product-development', 'saas-development-services', 'ai-saas-platforms']
+  T1 FALLBACKS: ['5.5_MULTIPLE_EQUAL']
+
+  T2 USER: how much do you charge for saas development
+  T2 RESPONSE: That question is best answered on our [Services](https://www.xicteksystems.com/services) or [Contact](https://www.xicteksystems.com/contact) page rather than in the blog. I'd suggest starting there — or if you'd like, I can answer a related question from our blog articles.
+  T2 RETRIEVED: []
+  T2 FALLBACKS: ['5.2_OUT_OF_DOMAIN']
+
+  T3 USER: ok what about saas product development best practices
+  T3 RESPONSE: Based on the SaaS Product Development from MVP to Growth article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] SaaS Product Development from MVP to Growth — https://www.xicteksystems.com/blog/saas-product-development
+
+  T3 RETRIEVED: ['saas-product-development', 'saas-development-services', 'ai-saas-platforms']
+  T3 FALLBACKS: []
+
+
+=== REAL CITATION-VALIDATED TRANSCRIPTS ===
+Total: 10, pos passed: 7/7, neg failed: 3/3
+
+--- T1 (positive) expected_pass=True ---
+  query: how much does custom software cost in pakistan
+  scenario: Normal citation — should retrieve cost article and cite [1]
+  response: Based on the Software Development Cost in Pakistan: What Shapes the Budget article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] Software Development Cost in Pakistan: What Shapes the Budget — https://www.xicteksystems.com/blog/software-development-cost-pakistan
+
+  validation.overall_pass: True
+  validation.errors: []
+    check_1_orphan_markers: passed=True
+    check_2_padded_sources: passed=True
+    check_3_fabricated_index: passed=True
+    check_4_url_allowlist: passed=True
+    check_5_verbatim_quotes: passed=True
+
+--- T2 (positive) expected_pass=True ---
+  query: custom software development guide
+  scenario: Multi-source synthesis — top-2 scores likely trigger synthesis
+  response: Based on the Custom Software Development Guide for Growing Businesses article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] Custom Software Development Guide for Growing Businesses — https://www.xicteksystems.com/blog/custom-software-development-guide
+
+  validation.overall_pass: True
+  validation.errors: []
+    check_1_orphan_markers: passed=True
+    check_2_padded_sources: passed=True
+    check_3_fabricated_index: passed=True
+    check_4_url_allowlist: passed=True
+    check_5_verbatim_quotes: passed=True
+
+--- T3 (positive) expected_pass=True ---
+  query: what is the agile software development process
+  scenario: Normal citation — agile process article
+  response: Based on the Agile Software Development Without Losing Direction article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] Agile Software Development Without Losing Direction — https://www.xicteksystems.com/blog/agile-software-development
+
+  validation.overall_pass: True
+  validation.errors: []
+    check_1_orphan_markers: passed=True
+    check_2_padded_sources: passed=True
+    check_3_fabricated_index: passed=True
+    check_4_url_allowlist: passed=True
+    check_5_verbatim_quotes: passed=True
+
+--- T4 (positive) expected_pass=True ---
+  query: tell me about ai chatbot development
+  scenario: Normal citation — chatbot article
+  response: Based on the AI Chatbot Development for Useful Customer Conversations article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] AI Chatbot Development for Useful Customer Conversations — https://www.xicteksystems.com/blog/ai-chatbot-development
+
+  validation.overall_pass: True
+  validation.errors: []
+    check_1_orphan_markers: passed=True
+    check_2_padded_sources: passed=True
+    check_3_fabricated_index: passed=True
+    check_4_url_allowlist: passed=True
+    check_5_verbatim_quotes: passed=True
+
+--- T5 (positive) expected_pass=True ---
+  query: explain progressive web apps
+  scenario: Normal citation — PWA article
+  response: Based on the Progressive Web Apps: When the Browser Can Be the Product article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] Progressive Web Apps: When the Browser Can Be the Product — https://www.xicteksystems.com/blog/progressive-web-apps
+
+  validation.overall_pass: True
+  validation.errors: []
+    check_1_orphan_markers: passed=True
+    check_2_padded_sources: passed=True
+    check_3_fabricated_index: passed=True
+    check_4_url_allowlist: passed=True
+    check_5_verbatim_quotes: passed=True
+
+
+=== CONFLICT HANDLING (4 conflict queries) ===
+
+--- should i use react or next.js for my web app ---
+  rationale: Next.js article recommends Next.js; React article may recommend React
+  retrieved: ['nextjs-development-services', 'react-development-services', 'progressive-web-apps']
+  cited: ['nextjs-development-services']
+  potential_conflict: True
+  excerpt: Based on the Next.js Development Services for Fast, Searchable Products article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] 
+
+--- flutter vs react native which is better ---
+  rationale: Flutter article vs cross-platform article may give different recommendations
+  retrieved: ['flutter-app-development', 'mobile-app-development-company', 'react-development-services']
+  cited: ['flutter-app-development', 'mobile-app-development-company']
+  potential_conflict: True
+  excerpt: Based on the Flutter App Development for Cross-Platform Products article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+A related perspective ap
+
+--- how long does software development take ---
+  rationale: Multiple articles may give different timeline estimates
+  retrieved: ['custom-software-development', 'software-development-process', 'erp-software-development']
+  cited: ['software-development-process', 'custom-software-development']
+  potential_conflict: True
+  excerpt: Based on the Custom Software Development: When Bespoke Software Makes Sense article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+A related per
+
+--- what is the best mobile app development approach ---
+  rationale: Native vs cross-platform vs PWA articles may conflict
+  retrieved: ['mobile-app-development-company', 'android-app-development', 'ios-app-development']
+  cited: ['mobile-app-development-company']
+  potential_conflict: True
+  excerpt: Based on the How to Evaluate a Mobile App Development Company article [1], the key considerations for your question are covered in the article's discussion of this topic. The article emphasizes starting with a clear business outcome before making technical decisions [1].
+
+**Sources:**
+[1] How to Eva
